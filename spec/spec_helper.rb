@@ -25,9 +25,9 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.include SpecHelpers, :example_group => {
-    :file_path => config.escaped_path(%w[spec (requests|features)])
-  }
+  #config.include SpecHelpers, :example_group => {
+  #  :file_path => config.escaped_path(%w[spec (requests|features)])
+  #}
 
   config.include FactoryGirl::Syntax::Methods
 end
