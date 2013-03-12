@@ -1,5 +1,4 @@
 require 'simplecov'
-
 SimpleCov.start "rails" if ENV["COVERAGE"]
 
 ENV["RAILS_ENV"] ||= 'test'
@@ -30,4 +29,6 @@ RSpec.configure do |config|
   #}
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.include Capybara::DSL
 end

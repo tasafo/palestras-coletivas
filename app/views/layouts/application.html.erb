@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Palestrascoletivas</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="<%= I18n.locale %>" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Palestras Coletivas</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render "shared/header" %>
+    <%= yield %>
 
-<%= yield %>
-
-</body>
+  </body>
 </html>

@@ -1,0 +1,5 @@
+pt-BR:
+  signup:
+    about_html:
+      Preencha os campos abaixo para que possamos criar sua conta no Palestras Coletivas.
+      Se você já for cadastrado então <a href="%{url}">faça o login</a>
