@@ -1,3 +1,7 @@
 pt-BR:
-  signup:
-    new: "Me cadastre!"
+  titles:
+    signup:
+      new: "Me cadastre!"
+
+    login:
+      new: "Acesse sua conta!"

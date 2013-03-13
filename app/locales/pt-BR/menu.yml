@@ -1,3 +1,5 @@
 pt-BR:
   menu:
     signup: "Me cadastrar"
+    login: "Acessar minha conta"
+    logout: "Sair"

@@ -1,0 +1,3 @@
+pt-BR:
+  user:
+    greeting: "Olá, %{name}"

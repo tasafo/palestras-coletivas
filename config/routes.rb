@@ -5,4 +5,6 @@ Palestrascoletivas::Application.routes.draw do
   post "/signup", :to => "signup#create"
 
   get "/login", :to => "login#new"
+  post "/login", :to => "login#create"
+  get "/logout", :to => "login#destroy"
 end

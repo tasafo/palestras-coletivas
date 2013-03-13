@@ -1,0 +1,8 @@
+pt-BR:
+  flash:
+    must_be_logged: "Você precisa estar logado para acessar esta página."
+    unauthorized_access: "Você não tem permissão para acessar esta página."
+
+    login:
+      create:
+        alert: "E-mail/senha inválidos."
