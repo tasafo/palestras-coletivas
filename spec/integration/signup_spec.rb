@@ -18,5 +18,21 @@ describe "Signup" do
     it "redirects to the the login page" do
       expect(current_path).to eql(login_path)
     end
+
+    it "displays sucess message" do
+      expect(page).to have_content("Seu cadastro foi realizado com sucesso")
+    end
+  end
+
+  context "with invalid data" do
+    before do
+      visit root_path
+      click_link "Me cadastrar"
+      click_button "Me cadastre"
+    end
+
+    it "displays error messages" do
+      expect(page).to have_content("Verifique o formulário antes de continuar:")
+    end
   end
 end
