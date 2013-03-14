@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class TalksController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create]
+  before_filter :require_logged_user, :only => [:index, :new, :create]
 
   def index 
     @talks = current_user.talks.entries

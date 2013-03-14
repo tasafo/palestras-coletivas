@@ -44,15 +44,4 @@ describe "Create talk", :js => false do
       expect(page).to have_content("Verifique o formulário antes de continuar:")
     end
   end
-
-  context "when unlogged" do
-    before do
-      visit root_path
-      click_link "Adicionar palestra"
-    end
-
-    it "redirects to login page" do
-      expect(current_path).to eql(login_path)
-    end
-  end
 end
