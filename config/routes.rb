@@ -1,5 +1,5 @@
 Palestrascoletivas::Application.routes.draw do
-  root :to => "talks#index"
+  root :to => "home#index"
 
   get "/signup", :to => "users#new", :as => :new_user
   post "/signup", :to => "users#create", :as => false
@@ -9,6 +9,7 @@ Palestrascoletivas::Application.routes.draw do
   post "/login", :to => "login#create"
   get "/logout", :to => "login#destroy"
 
+  get "/talks", :to => "talks#index"
   get "/talks/new", :to => "talks#new", :as => :new_talk
   post "/talks/new", :to => "talks#create", :as => false
   get "/talks/:id", :to => "talks#show", :as => :talk

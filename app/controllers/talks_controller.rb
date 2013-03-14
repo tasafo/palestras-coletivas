@@ -5,7 +5,7 @@ class TalksController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create]
 
   def index 
-    @talks = Talk.all.entries
+    @talks = current_user.talks.entries
   end
 
   def new
