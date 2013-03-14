@@ -3,3 +3,6 @@ pt-BR:
     submit:
       user:
         create: "Me cadastre"
+
+      talk:
+        create: "Adicionar palestra"

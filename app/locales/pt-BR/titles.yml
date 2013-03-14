@@ -5,3 +5,6 @@ pt-BR:
 
     login:
       new: "Acesse sua conta!"
+
+    talks:
+      new: "Adicionar palestra"

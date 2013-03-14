@@ -1,0 +1,37 @@
+<h1><%= t("titles.talks.new") %></h1>
+
+<%= form_for @talk, :url => new_talk_path do |form| %>
+  <%= render "shared/error_messages", :record => @talk %>
+
+  <p>
+    <%= form.label :presentation_url, t("labels.talk.presentation_url") %>
+    <%= form.url_field :presentation_url %>
+  </p>
+
+  <p>
+    <%= form.label :title, t("labels.talk.title") %>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :description, t("labels.talk.description") %>
+    <%= form.text_area :description %>
+  </p>
+
+  <p>
+    <%= form.label :tags, t("labels.talk.tags") %>
+    <%= form.text_field :tags %>
+  </p>
+
+  <p>
+    <%= form.label :to_public, t("labels.talk.to_public") %>
+    <%= form.check_box :to_public %>
+  </p>
+
+  <p>
+    <%= form.hidden_field :thumbnail %>
+    <%= form.hidden_field :code %>
+    <%= form.submit %>
+    <%= link_to t("actions.back"), root_path %>
+  </p>
+<% end %>

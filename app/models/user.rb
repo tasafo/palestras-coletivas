@@ -1,9 +1,12 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   field :name, type: String
   field :email, type: String
   field :password_hash, type: String
+
+  has_many :talks
 
   attr_reader :password
 
@@ -23,14 +26,14 @@ class User
     @password = password
   end
 
-private
-  def erase_password
-    @password = nil
-    @password_confirmation = nil
-    @validate_password = true
-  end
+  private
+    def erase_password
+      @password = nil
+      @password_confirmation = nil
+      @validate_password = true
+    end
 
-  def require_password?
-    new_record? || @validate_password
-  end
+    def require_password?
+      new_record? || @validate_password
+    end
 end

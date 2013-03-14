@@ -3,6 +3,14 @@ pt-BR:
     must_be_logged: "Você precisa estar logado para acessar esta página."
     unauthorized_access: "Você não tem permissão para acessar esta página."
 
+    signup:
+      create:
+        notice: "Seu cadastro foi realizado com sucesso!"
+        
     login:
       create:
         alert: "E-mail/senha inválidos."
+
+    talks:
+      create:
+        notice: "Sua palestra foi adicionada!"

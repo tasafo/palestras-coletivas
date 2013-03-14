@@ -1,6 +1,10 @@
 <header>
+  <%= link_to image_tag("logo.png", :alt => "Palestras Coletivas"), root_path %>
   <nav>
     <ul>
+      <li>
+        <%= link_to t("menu.new_talk"), new_talk_path %>
+      </li>
       <% if logged_in? %>
         <li class="account-info">
           <%= t("user.greeting", :name => current_user.name) %>
@@ -13,7 +17,7 @@
           <%= link_to t("menu.login"), login_path %>
         </li>
         <li>
-          <%= link_to t("menu.signup"), signup_path %>
+          <%= link_to t("menu.signup"), new_user_path %>
         </li>
       <% end %>
     </ul>

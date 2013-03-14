@@ -5,3 +5,12 @@ pt-BR:
       email: "Seu e-mail"
       password: "Sua senha"
       password_confirmation: "Confirme sua senha"
+
+    talk:
+      presentation_url: "Link do slideshare"
+      title: "Titulo"
+      description: "Descrição"
+      tags: "Tags"
+      thumbnail: "Miniatura"
+      code: "Código"
+      to_public: "Publicar"
