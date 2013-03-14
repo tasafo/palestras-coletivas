@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @talks = Talk.all.entries
+    @talks = Talk.where(:to_public => true).order_by(:created_at => "DESC").entries
   end
 end

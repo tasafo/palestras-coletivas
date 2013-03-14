@@ -5,7 +5,7 @@ class TalksController < ApplicationController
   before_filter :require_logged_user, :only => [:index, :new, :create]
 
   def index 
-    @talks = current_user.talks.entries
+    @talks = current_user.talks.order_by(:created_at => "DESC").entries
   end
 
   def new
