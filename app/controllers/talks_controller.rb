@@ -23,7 +23,19 @@ class TalksController < ApplicationController
   end
 
   def show
-    @talk = Talk.find(params[:id])
+    begin
+      @talk = Talk.find(params[:id])
+
+      unless @talk.to_public
+        if logged_in?
+          @talk = nil if @talk.user.id != current_user.id
+        else
+          @talk = nil
+        end
+      end
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to root_path
+    end
   end
 
   def get_info_url

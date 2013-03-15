@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "See talks", :js => false do
+describe "See talks" do
   let!(:talk) { create(:talk) }
   let(:user) { talk.user }
 
