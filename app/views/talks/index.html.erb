@@ -1,5 +1,5 @@
 <% unless @talks.empty? %>
-  <h1><%= t("index.talk.my_talks") %></h1>
+  <h1><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h1>
 
   <% @talks.each do |talk| %>
     <article class="talk">
