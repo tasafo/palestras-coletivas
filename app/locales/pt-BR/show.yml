@@ -7,3 +7,6 @@ pt-BR:
       _yes: "Sim"
       _no: "Não"
       not_public: "A palestra ainda não está publicada"
+
+    user:
+      profile: "Veja o perfil completo em"

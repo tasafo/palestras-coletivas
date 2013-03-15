@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 class UsersController < ApplicationController
   def new
     @user = User.new
@@ -15,6 +18,24 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+    begin
+      @user = User.find(params[:id])
+      @talks = @user.talks.where(:to_public => true).order_by(:created_at => "DESC").entries
+
+      profile = Gravatar.profile(@user.email)
+
+      begin
+        xml = Nokogiri::XML(open("#{profile}.xml"))
+
+        @profile_url = xml.xpath("//profileUrl").text
+        @about_me = xml.xpath("//aboutMe").text
+        @current_location = xml.xpath("//currentLocation").text
+        @emails = xml.xpath("//emails/value")
+      rescue OpenURI::HTTPError
+        redirect_to root_path  
+      end
+    rescue Mongoid::Errors::DocumentNotFound
+      redirect_to root_path
+    end
   end
 end

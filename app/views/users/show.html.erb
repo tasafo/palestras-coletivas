@@ -1,1 +1,27 @@
-<h1><%= current_user.name %></h1>
+<%= gravatar_image(@user.email, @user.name) %>
+<h1><%= @user.name %></h1>
+<p>
+  <%= @about_me %>
+</p>
+<p>
+  <%= @current_location %>
+</p>
+<p>
+  <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
+</p>
+
+<% unless @talks.empty? %>
+  <h1><%= t("index.talk.my_talks") %></h1>
+
+  <% @talks.each do |talk| %>
+    <article class="talk">
+      <h2><%= link_to talk.title, talk_path(talk), :target => "_blank" %></h2>
+      
+      <ul class="meta">
+        <div>
+          <%= image_tag talk.thumbnail %>
+        </div>
+      </ul>
+    </article>
+  <% end %>
+<% end %>
