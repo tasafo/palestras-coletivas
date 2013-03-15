@@ -2,7 +2,7 @@
 
 <% @talks.each do |talk| %>
   <article class="talk">
-    <h2><%= link_to talk.title, talk_path(talk) %></h2>
+    <h2><%= link_to talk.title, talk_path(talk), :target => "_blank" %></h2>
 
     <ul class="meta">
       <li class="who">
@@ -10,7 +10,9 @@
         <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %>
       </li>
       <div>
-        <%= image_tag talk.thumbnail %>
+        <a href="<%= talk_path(talk) %>" target="_blank">
+          <%= image_tag talk.thumbnail %>
+        </a>
       </div>
     </ul>
   </article>

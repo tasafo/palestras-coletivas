@@ -9,8 +9,8 @@ describe "Signup" do
 
       fill_in "Seu nome", :with => "Paul Young"
       fill_in "Seu e-mail", :with => "paul@example.org"
-      fill_in "Sua senha", :with => "test"
-      fill_in "Confirme sua senha", :with => "test"
+      fill_in "Sua senha", :with => "testdrive"
+      fill_in "Confirme sua senha", :with => "testdrive"
 
       click_button "Me cadastre"
     end

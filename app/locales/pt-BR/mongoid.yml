@@ -1,0 +1,20 @@
+pt-BR:
+  mongoid:
+    models:
+      user: "Usuário"
+      talk: "Palestra"
+
+    attributes:
+      user:
+        name: "Nome"
+        email: "E-mail"
+        password: "Senha"
+
+      talk:
+        presentation_url: "Endereço da apresentação"
+        title: "Título"
+        description: "Descrição"
+        tags: "Marcadores"
+        thumbnail: "Miniatura"
+        code: "Código"
+        to_public: "Público"

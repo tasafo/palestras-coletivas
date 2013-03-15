@@ -5,8 +5,8 @@ describe User, "validations" do
     user = User.new({
       :name => "Luiz Sanches",
       :email => "luiz@example.org",
-      :password => "teste",
-      :password_confirmation => "teste"
+      :password => "testdrive",
+      :password_confirmation => "testdrive"
     })
 
     expect(user).to be_valid
@@ -15,7 +15,7 @@ describe User, "validations" do
   it "requires name" do
     user = User.create(:name => nil)
 
-    expect(user).to have(1).error_on(:name)
+    expect(user).to have(2).error_on(:name)
   end
 
   it "requires email" do
@@ -41,20 +41,20 @@ describe User, "validations" do
   it "requires password" do
     user = User.new(:password => nil)
 
-    expect(user).to have(1).error_on(:password)
+    expect(user).to have(2).error_on(:password)
   end
 
   it "requires password confirmation" do
     user = User.new(
-      :password => "teste",
-      :password_confirmation => "invalid"
+      :password => "testdrive",
+      :password_confirmation => "invalid!"
     )
 
     expect(user).to have(1).error_on(:password)
   end
 
   it "set password hash when setting password" do
-    user = User.new(:password => "teste")
+    user = User.new(:password => "testdrive")
     expect(user.password_hash).not_to be_blank
   end
 

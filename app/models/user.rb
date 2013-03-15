@@ -12,6 +12,8 @@ class User
 
   validates_presence_of :name
 
+  validates_length_of :name, minimum: 3
+
   validates_uniqueness_of :name, :email
 
   validates :email, :format => { :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i }
@@ -19,6 +21,8 @@ class User
   validates_presence_of :password, :if => :require_password?
 
   validates_confirmation_of :password, :if => :require_password?
+
+  validates_length_of :password, minimum: 8
 
   after_save :erase_password
 

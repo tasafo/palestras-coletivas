@@ -5,8 +5,8 @@ describe User, "password" do
     User.new({
       :name => "Paul Young",
       :email => "paul@example.org",
-      :password => "test",
-      :password_confirmation => "test"
+      :password => "testdrive",
+      :password_confirmation => "testdrive"
     })
   }
 
