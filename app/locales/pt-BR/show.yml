@@ -1,0 +1,9 @@
+pt-BR:
+  show:
+    talk:
+      tags: "Marcadores"
+      to_public: "Pública"
+      description: "Descrição"
+      _yes: "Sim"
+      _no: "Não"
+      not_public: "A palestra ainda não está publicada"
