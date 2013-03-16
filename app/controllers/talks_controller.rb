@@ -38,19 +38,25 @@ class TalksController < ApplicationController
     end
   end
 
-  def get_info_url
+  def info_url
     url = params[:link]
 
-    xml = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{url}&format=xml"))
+    begin
+      xml = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{url}&format=xml"))
 
-    unless xml.nil?
-      title = xml.xpath("//title").text
-      code = xml.xpath("//slideshow-id").text
-      thumbnail = xml.xpath("//thumbnail").text
+      unless xml.nil?
+        title = xml.xpath("//title").text
+        code = xml.xpath("//slideshow-id").text
+        thumbnail = xml.xpath("//thumbnail").text
 
-      respond_to do |format|
-        format.json { render :json => {:title => title, :code => code, :thumbnail => thumbnail} }
+        respond_to do |format|
+          format.json { render :json => {:error => false, :title => title, :code => code, :thumbnail => thumbnail} }
+        end
       end
+    rescue OpenURI::HTTPError
+      respond_to do |format|
+        format.json { render :json => {:error => true} }
+      end      
     end
   end
 end

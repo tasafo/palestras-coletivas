@@ -1,0 +1,5 @@
+pt-BR:
+  new:
+    talk:
+      not_found: "Palestra não encontrada"
+      searching: "Procurando palestra..."
