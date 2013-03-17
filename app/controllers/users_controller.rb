@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class UsersController < ApplicationController
-  before_filter :require_logged_user, :only => [:edit, :update]
+  before_filter :require_logged_user, :only => [:edit, :update, :change_password]
 
   def new
     @user = User.new
@@ -58,5 +58,13 @@ class UsersController < ApplicationController
     else
       render :edit
     end 
+  end
+
+  def change_password
+    @user = User.find(params[:id])
+
+    if @user.id != current_user.id
+      redirect_to talks_path, :notice => t("flash.unauthorized_access")
+    end
   end
 end

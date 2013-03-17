@@ -1,19 +1,21 @@
 <%= form_for @user, :url => url do |f| %>
   <%= render "shared/error_messages", :record => @user %>
   
-  <div class="control-group">
-    <%= f.label :name, t("labels.user.name"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name %>
+  <% if operation == "new" || operation == "edit" %>
+    <div class="control-group">
+      <%= f.label :name, t("labels.user.name"), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
     </div>
-  </div>
 
-  <div class="control-group">
-    <%= f.label :email, t("labels.user.email"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.email_field :email, :class => "span6" %>
+    <div class="control-group">
+      <%= f.label :email, t("labels.user.email"), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.email_field :email, :class => "span6" %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <% if operation == "new" || operation == "change_password" %>
     <div class="control-group">

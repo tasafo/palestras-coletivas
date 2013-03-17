@@ -6,6 +6,7 @@ Palestrascoletivas::Application.routes.draw do
   get "/users/:id", :to => "users#show", :as => :user
   get "/users/:id/edit", :to => "users#edit", :as => :edit_user
   put "/users/:id/edit", :to => "users#update", :as => false
+  get "/users/:id/change_password", :to => "users#change_password", :as => :change_password
 
   get "/login", :to => "login#new"
   post "/login", :to => "login#create"
