@@ -1,8 +1,10 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
 
   field :name, type: String
+  slug :name
   field :email, type: String
   field :password_hash, type: String
 
@@ -22,7 +24,7 @@ class User
 
   validates_confirmation_of :password, :if => :require_password?
 
-  validates_length_of :password, minimum: 8
+  validates_length_of :password, minimum: 8, :if => :require_password?
 
   after_save :erase_password
 
@@ -36,7 +38,7 @@ class User
     def erase_password
       @password = nil
       @password_confirmation = nil
-      @validate_password = true
+      @validate_password = false
     end
 
     def require_password?

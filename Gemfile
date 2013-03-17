@@ -8,7 +8,7 @@ gem 'rails-i18n'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'nokogiri', :require => false
 gem 'jquery-rails'
-gem 'simple_form'
+gem 'mongoid_slug'
 
 group :assets do
   gem 'sass-rails'
