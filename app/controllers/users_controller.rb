@@ -31,11 +31,12 @@ class UsersController < ApplicationController
         @about_me = xml.xpath("//aboutMe").text
         @current_location = xml.xpath("//currentLocation").text
         @emails = xml.xpath("//emails/value")
+        @tem_perfil_no_gravatar = true
       rescue OpenURI::HTTPError
-        redirect_to root_path  
+        @tem_perfil_no_gravatar = false
       end
     rescue Mongoid::Errors::DocumentNotFound
-      redirect_to root_path
+      redirect_to root_path, :notice => t("flash.user_not_found")
     end
   end
 end

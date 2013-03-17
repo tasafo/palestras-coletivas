@@ -1,11 +1,13 @@
 <div class="featurette">
   <%= gravatar_image(@user.email, @user.name) %>
   <h3 class="featurette-heading"><%= @user.name %></h3>
-  <p class="lead">
-    <%= @about_me %><br/>
-    <%= @current_location %><br/>
-    <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
-  </p>
+  <% if @tem_perfil_no_gravatar %>
+    <p class="lead">
+      <%= @about_me %><br/>
+      <%= @current_location %><br/>
+      <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
+    </p>
+  <% end %>
 </div>
 
 <hr class="featurette-divider">

@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 
 class TalksController < ApplicationController
-  before_filter :require_logged_user, :only => [:index, :new, :create]
+  before_filter :require_logged_user, :only => [:index, :new, :create, :edit, :update]
 
   def index 
     @talks = current_user.talks.order_by(:created_at => "DESC").entries
@@ -62,6 +62,10 @@ class TalksController < ApplicationController
 
   def edit
     @talk = Talk.find(params[:id])
+
+    if @talk.user.id != current_user.id
+      redirect_to talks_path, :notice => t("flash.the_talk_is_not_his")
+    end
   end
 
   def update

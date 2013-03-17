@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Show user profile" do
   let!(:user) { create(:user, :email => "luizgrsanches@gmail.com") }
-  let!(:user_no_gravatar) { create(:user, :name => "Billy Paul") }
+  let!(:other_user) { create(:other_user) }
 
   context "when user valid" do
     before do
@@ -28,16 +28,24 @@ describe "Show user profile" do
     it "redirects to the home page" do
       expect(current_path).to eql(root_path)
     end
+
+    it "displays error message" do
+      expect(page).to have_content("Usuário não cadastrado.")
+    end
   end
 
   context "when the user does not have e-mail at Gravatar" do
     before do
       visit root_path
-      visit user_path(user_no_gravatar)
+      visit user_path(other_user)
     end
 
     it "redirects to the show user profile page" do
-      expect(current_path).to eql(root_path)
+      expect(current_path).to eql(user_path(other_user))
+    end
+
+    it "displays user profile" do
+      expect(page).to have_content("Billy Paul")
     end
   end
 end

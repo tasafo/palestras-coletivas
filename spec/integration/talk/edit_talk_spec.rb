@@ -3,8 +3,9 @@ require "spec_helper"
 describe "Edit talk" do
   let!(:talk) { create(:talk) }
   let(:user) { talk.user }
+  let!(:other_user) { create(:other_user) }
 
-  context "wiht valid data" do
+  context "with valid data" do
     before do
       login_as(user)
       visit root_path
@@ -46,6 +47,17 @@ describe "Edit talk" do
 
     it "displays error messages" do
       expect(page).to have_content("Verifique o formulário antes de continuar:")
+    end
+  end
+
+  context "when the talk is not user" do
+    before do
+      login_as(other_user)
+      visit edit_talk_path(talk)
+    end
+
+    it "redirects to the talks page" do
+      expect(current_path).to eql(talks_path)
     end
   end
 end

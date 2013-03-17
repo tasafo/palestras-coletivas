@@ -4,6 +4,11 @@ FactoryGirl.define do
     email "paul@example.org"
     password "testdrive"
     password_confirmation "testdrive"
+
+    factory :other_user do
+      name "Billy Paul"
+      email "billy@example.org"
+    end
   end
 
   factory :talk do
