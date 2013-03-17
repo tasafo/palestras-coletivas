@@ -1,0 +1,7 @@
+pt-BR:
+  placeholder:
+    talks:
+      presentation_url: "Exemplo: http://slideshare.net/usuario/link-da-palestra"
+      title: "Exemplo: Ruby on Rails"
+      description: "Exemplo: A palestra fala sobre a linguagem de programação Ruby e o framework de desenvolvimento web Rails"
+      tags: "Exemplo: ruby, rails"

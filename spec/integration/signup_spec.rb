@@ -5,14 +5,14 @@ describe "Signup" do
     before do
       visit root_path
 
-      click_link "Me cadastrar"
+      click_link "Cadastre-se"
 
-      fill_in "Seu nome", :with => "Paul Young"
+      fill_in "Seu primeiro e último nome", :with => "Paul Young"
       fill_in "Seu e-mail", :with => "paul@example.org"
       fill_in "Sua senha", :with => "testdrive"
       fill_in "Confirme sua senha", :with => "testdrive"
 
-      click_button "Me cadastre"
+      click_button "Cadastre-me"
     end
 
     it "redirects to the the login page" do
@@ -27,8 +27,8 @@ describe "Signup" do
   context "with invalid data" do
     before do
       visit root_path
-      click_link "Me cadastrar"
-      click_button "Me cadastre"
+      click_link "Cadastre-se"
+      click_button "Cadastre-me"
     end
 
     it "displays error messages" do

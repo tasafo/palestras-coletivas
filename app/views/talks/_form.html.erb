@@ -1,0 +1,51 @@
+<%= form_for(@talk, :url => new_talk_path, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= render "shared/error_messages", :record => @talk %>
+
+  <div class="control-group">
+    <%= f.label :presentation_url, t("labels.talk.presentation_url"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :presentation_url, :placeholder => t("placeholder.talks.presentation_url"), :class => "span8" %>
+      <span class="help-block"><%= t("new.talk.help.presentation_url") %></span>
+      <span id="searching_talk" class="text-info"><%= t("new.talk.searching") %></span>
+      <span id="talk_not_found" class="text-error"><%= t("new.talk.not_found") %></span>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :title, t("labels.talk.title"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :placeholder => t("placeholder.talks.title"), :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :description, t("labels.talk.description"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :placeholder => t("placeholder.talks.description"), :rows => 5, :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :tags, t("labels.talk.tags"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :tags, :placeholder => t("placeholder.talks.tags"), :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :to_public, t("labels.talk.to_public"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :to_public %>
+      <span class="help-inline"><%= t("new.talk.help.to_public") %></span>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+          talks_path, :class => 'btn' %>
+  </div>
+
+  <%= f.hidden_field :thumbnail %>
+  <%= f.hidden_field :code %>
+<% end %>

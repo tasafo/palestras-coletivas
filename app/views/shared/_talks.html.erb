@@ -1,0 +1,26 @@
+  <% @talks.each do |talk| %>
+    <hr class="featurette-divider">
+
+    <div class="featurette">
+      <% thumb = talk.thumbnail.empty? ? "without_presentation.jpg" : talk.thumbnail %>
+
+      <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
+
+      <h3 class="featurette-heading"><%= link_to talk.title, talk_path(talk) %></h3>
+      
+      <p class="lead">
+        <% if show_user %>
+          <%= render "shared/user", :user => talk.user %><br/>
+        <% end %>
+
+        <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
+        
+        <strong>Tags:</strong> <%= talk.tags %>
+        
+        <% if talk.thumbnail.empty? %>
+          <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
+        <% end %>
+      </p>
+    </div>
+    <br/>
+  <% end %>

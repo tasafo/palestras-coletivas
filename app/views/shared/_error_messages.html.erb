@@ -1,13 +1,8 @@
 <% if record.errors.any? %>
-  <div class="form-erros">
-    <p><%= t("form.errors") %></p>
-
-    <ul>
-      <% record.errors.full_messages.each do |message| %>
-        <li>
-          <%= message %>
-        </li>
-      <% end %>
-    </ul>
+  <div>
+    <p class="text-warning"><%= t("form.errors") %></p>
+    <% record.errors.full_messages.each do |message| %>
+      <p class="text-error"><%= message %></p>
+    <% end %>
   </div>
 <% end %>

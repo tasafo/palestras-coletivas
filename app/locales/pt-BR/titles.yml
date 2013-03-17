@@ -1,10 +1,13 @@
 pt-BR:
   titles:
     signup:
-      new: "Me cadastre!"
+      new: "Cadastre-se"
 
     login:
-      new: "Acesse sua conta!"
+      new: "Acesse sua conta"
 
     talks:
       new: "Adicionar palestra"
+
+    home:
+      index: "Veja as últimas palestras adicionadas"

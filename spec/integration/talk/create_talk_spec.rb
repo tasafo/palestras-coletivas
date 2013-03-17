@@ -14,7 +14,7 @@ describe "Create talk", :js => false do
       fill_in "Titulo", :with => "Compartilhe!"
       fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
       fill_in "Tags", :with => "conhecimento, compartilhamento"
-      page.check("Publicar")
+      page.check("Quero publicar")
 
       click_button "Adicionar palestra"
     end

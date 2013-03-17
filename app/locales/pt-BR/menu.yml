@@ -1,6 +1,7 @@
 pt-BR:
   menu:
-    signup: "Me cadastrar"
+    start: "Início"
+    signup: "Cadastre-se"
     login: "Acessar minha conta"
     logout: "Sair"
     new_talk: "Adicionar palestra"

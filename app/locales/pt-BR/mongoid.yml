@@ -14,7 +14,7 @@ pt-BR:
         presentation_url: "Endereço da apresentação"
         title: "Título"
         description: "Descrição"
-        tags: "Marcadores"
+        tags: "Tags"
         thumbnail: "Miniatura"
         code: "Código"
         to_public: "Público"

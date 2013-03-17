@@ -1,20 +1,31 @@
-<div class="talk-details">
+<div>
   <% if @talk %>
-    <h1><%= @talk.title %></h1>
+    <h2><%= @talk.title %></h2>
+    
+    <%= gravatar_image(@talk.user.email, @talk.user.name) %>
+    <h4><%= link_to @talk.user.name, user_path(@talk.user) %></h4>
 
-    <iframe src="http://www.slideshare.net/slideshow/embed_code/<%= @talk.code %>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="<%= @talk.presentation_url %>" title="<%= @talk.title %>" target="_blank">Compartilhe!</a> </strong> from <strong><a href="<%= @talk.presentation_url %>" target="_blank"><%= @talk.user.name %></a></strong> </div>
-
+    <% unless @talk.code.empty? %>
+      <iframe src="http://www.slideshare.net/slideshow/embed_code/<%= @talk.code %>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="<%= @talk.presentation_url %>" title="<%= @talk.title %>" target="_blank">Compartilhe!</a> </strong> from <strong><a href="<%= @talk.presentation_url %>" target="_blank"><%= @talk.user.name %></a></strong> </div>
+    <% else %>
+      <br/>
+      <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
+      <br/>
+    <% end %>
+    
     <p>
-      <%= t("show.talk.tags") %>: <%= @talk.tags %>
+      <strong><%= t("show.talk.tags") %>:</strong> <%= @talk.tags %>
     </p>
 
+    <% if logged_in? %>
     <p>
-      <%= t("show.talk.to_public") %>: <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
+      <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
     </p>
+    <% end %>
 
     <p>
-      <%= t("show.talk.description") %><br/>
-      <%= simple_format @talk.description %>
+      <strong><%= t("show.talk.description") %></strong><br/>
+      <p class="text-info"><%= simple_format @talk.description %></p>
     </p>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>  

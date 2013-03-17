@@ -2,4 +2,3 @@ pt-BR:
   login:
     about_html: |
       Informe seus dados para fazer o login.
-      Caso não seja cadastrado <a href="%{url}">crie sua conta aqui</a>

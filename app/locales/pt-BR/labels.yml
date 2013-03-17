@@ -1,7 +1,7 @@
 pt-BR:
   labels:
     user:
-      name: "Seu nome"
+      name: "Seu primeiro e último nome"
       email: "Seu e-mail"
       password: "Sua senha"
       password_confirmation: "Confirme sua senha"
@@ -13,4 +13,4 @@ pt-BR:
       tags: "Tags"
       thumbnail: "Miniatura"
       code: "Código"
-      to_public: "Publicar"
+      to_public: "Quero publicar"

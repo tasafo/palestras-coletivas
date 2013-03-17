@@ -3,3 +3,7 @@ pt-BR:
     talk:
       not_found: "Palestra não encontrada"
       searching: "Procurando palestra..."
+
+      help:
+        presentation_url: "Quando sua palestra estiver no slideshare, você poderá editar esse registro e atualizar o campo."
+        to_public: "Marque para que as pessoas vejam sua palestra"

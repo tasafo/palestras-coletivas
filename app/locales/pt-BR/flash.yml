@@ -6,7 +6,7 @@ pt-BR:
     signup:
       create:
         notice: "Seu cadastro foi realizado com sucesso!"
-        
+
     login:
       create:
         alert: "E-mail/senha inválidos."

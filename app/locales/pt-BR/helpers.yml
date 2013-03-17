@@ -2,7 +2,7 @@ pt-BR:
   helpers:
     submit:
       user:
-        create: "Me cadastre"
+        create: "Cadastre-me"
 
       talk:
         create: "Adicionar palestra"

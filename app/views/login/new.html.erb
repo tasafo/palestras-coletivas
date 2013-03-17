@@ -1,21 +1,24 @@
 <h1><%= t("titles.login.new") %></h1>
-<p>
+<p class="text-warning">
   <%= t("login.about_html", :url => new_user_path) %>
 </p>
 
-<%= form_tag login_path do %>
-  <p>
-    <%= label_tag :email, t("labels.user.email") %>
-    <%= email_field_tag :email %>
-  </p>
+<%= form_tag login_path, :html => {:class => 'form-signin' } do %>
+  <div class="control-group">
+    <%= label_tag :email, t("labels.user.email"), :class => 'control-label' %>
+    <div class="controls">
+      <%= email_field_tag :email %>
+    </div>
+  </div>
 
-  <p>
-    <%= label_tag :password, t("labels.user.password") %>
-    <%= password_field_tag :password %>
-  </p>
+  <div class="control-group">
+    <%= label_tag :password, t("labels.user.password"), :class => 'control-label' %>
+    <div class="controls">
+      <%= password_field_tag :password %>
+    </div>
+  </div>
 
-  <p>
-    <%= submit_tag t("form.submit.login") %>
-    <%= link_to t("actions.back"), root_path %>
-  </p>
+  <div class="form-actions">
+    <%= submit_tag t("form.submit.login"), :class => 'btn btn-primary' %>
+  </div>
 <% end %>

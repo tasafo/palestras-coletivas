@@ -1,12 +1,13 @@
 pt-BR:
   show:
     talk:
-      tags: "Marcadores"
+      tags: "Tags"
       to_public: "Pública"
       description: "Descrição"
       _yes: "Sim"
       _no: "Não"
       not_public: "A palestra ainda não está publicada"
+      without_presentation: "O palestrante está preparando os slides para publicá-los"
 
     user:
       profile: "Veja o perfil completo em"

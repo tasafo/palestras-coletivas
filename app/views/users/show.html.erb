@@ -1,27 +1,17 @@
-<%= gravatar_image(@user.email, @user.name) %>
-<h1><%= @user.name %></h1>
-<p>
-  <%= @about_me %>
-</p>
-<p>
-  <%= @current_location %>
-</p>
-<p>
-  <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
-</p>
+<div class="featurette">
+  <%= gravatar_image(@user.email, @user.name) %>
+  <h3 class="featurette-heading"><%= @user.name %></h3>
+  <p class="lead">
+    <%= @about_me %><br/>
+    <%= @current_location %><br/>
+    <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
+  </p>
+</div>
+
+<hr class="featurette-divider">
 
 <% unless @talks.empty? %>
-  <h1><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h1>
+  <h3><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h3>
 
-  <% @talks.each do |talk| %>
-    <article class="talk">
-      <h2><%= link_to talk.title, talk_path(talk), :target => "_blank" %></h2>
-      
-      <ul class="meta">
-        <div>
-          <%= image_tag talk.thumbnail %>
-        </div>
-      </ul>
-    </article>
-  <% end %>
+  <%= render "shared/talks", :show_user => false %>
 <% end %>
