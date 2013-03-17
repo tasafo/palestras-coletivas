@@ -41,7 +41,7 @@ describe User, "validations" do
   it "requires password" do
     user = User.new(:password => nil)
 
-    expect(user).to have(2).error_on(:password)
+    expect(user).to have(1).error_on(:password)
   end
 
   it "requires password confirmation" do

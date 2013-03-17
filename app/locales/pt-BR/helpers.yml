@@ -3,6 +3,7 @@ pt-BR:
     submit:
       user:
         create: "Cadastre-me"
+        update: "Atualizar dados"
 
       talk:
         create: "Adicionar palestra"

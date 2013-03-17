@@ -12,3 +12,6 @@ pt-BR:
 
     home:
       index: "Veja as últimas palestras adicionadas"
+
+    user:
+      edit: "Editar meus dados"

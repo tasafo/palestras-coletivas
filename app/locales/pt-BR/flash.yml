@@ -18,3 +18,7 @@ pt-BR:
         notice: "Sua palestra foi adicionada!"
       update:
         notice: "Sua palestra foi atualizada!"
+
+    users:
+      update:
+        notice: "Seus dados foram atualizados!"

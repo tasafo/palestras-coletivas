@@ -4,6 +4,8 @@ Palestrascoletivas::Application.routes.draw do
   get "/signup", :to => "users#new", :as => :new_user
   post "/signup", :to => "users#create", :as => false
   get "/users/:id", :to => "users#show", :as => :user
+  get "/users/:id/edit", :to => "users#edit", :as => :edit_user
+  put "/users/:id/edit", :to => "users#update", :as => false
 
   get "/login", :to => "login#new"
   post "/login", :to => "login#create"

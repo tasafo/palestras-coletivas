@@ -1,0 +1,37 @@
+<%= form_for @user, :url => url do |f| %>
+  <%= render "shared/error_messages", :record => @user %>
+  
+  <div class="control-group">
+    <%= f.label :name, t("labels.user.name"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :email, t("labels.user.email"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.email_field :email, :class => "span6" %>
+    </div>
+  </div>
+
+  <% if operation == "new" || operation == "change_password" %>
+    <div class="control-group">
+      <%= f.label :password, t("labels.user.password"), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :password_confirmation, t("labels.user.password_confirmation"), :class => 'control-label' %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+  </div>
+<% end %>

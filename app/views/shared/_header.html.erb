@@ -31,6 +31,9 @@
           <li class="<%= request.fullpath == talks_path ? 'active' : '' %>">
             <%= link_to t("menu.my_talks"), talks_path %>
           </li>
+          <li class="<%= request.fullpath == edit_user_path(current_user) ? 'active' : '' %>">
+            <%= link_to t("menu.my_data"), edit_user_path(current_user) %>
+          </li>
           <li class="">
             <%= link_to t("menu.logout"), logout_path %>
           </li>

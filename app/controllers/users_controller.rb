@@ -2,6 +2,8 @@ require 'nokogiri'
 require 'open-uri'
 
 class UsersController < ApplicationController
+  before_filter :require_logged_user, :only => [:edit, :update]
+
   def new
     @user = User.new
   end
@@ -38,5 +40,23 @@ class UsersController < ApplicationController
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path, :notice => t("flash.user_not_found")
     end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+
+    if @user.id != current_user.id
+      redirect_to talks_path, :notice => t("flash.unauthorized_access")
+    end
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(params[:user])
+      redirect_to user_path(@user), :notice => t("flash.users.update.notice")
+    else
+      render :edit
+    end 
   end
 end

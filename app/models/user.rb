@@ -24,8 +24,6 @@ class User
 
   validates_confirmation_of :password, :if => :require_password?
 
-  validates_length_of :password, minimum: 8, :if => :require_password?
-
   after_save :erase_password
 
   def password=(password)

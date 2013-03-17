@@ -64,7 +64,7 @@ class TalksController < ApplicationController
     @talk = Talk.find(params[:id])
 
     if @talk.user.id != current_user.id
-      redirect_to talks_path, :notice => t("flash.the_talk_is_not_his")
+      redirect_to talks_path, :notice => t("flash.unauthorized_access")
     end
   end
 

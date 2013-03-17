@@ -59,5 +59,9 @@ describe "Edit talk" do
     it "redirects to the talks page" do
       expect(current_path).to eql(talks_path)
     end
+
+    it "displays error messages" do
+      expect(page).to have_content("Você não tem permissão para acessar esta página.")
+    end
   end
 end
