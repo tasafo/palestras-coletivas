@@ -11,8 +11,8 @@ describe "Logout" do
       click_link "Sair"
     end
 
-    it "redirects to login page" do
-      expect(current_path).to eql(login_path)
+    it "redirects to home page" do
+      expect(current_path).to eql(root_path)
     end
 
     it "doesn't render name" do
@@ -25,8 +25,8 @@ describe "Logout" do
       visit logout_path
     end
 
-    it "redirects to login page" do
-      expect(current_path).to eql(login_path)
+    it "redirects to home page" do
+      expect(current_path).to eql(root_path)
     end
   end
 end

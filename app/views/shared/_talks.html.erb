@@ -16,7 +16,12 @@
         <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
         
         <strong>Tags:</strong> <%= talk.tags %>
-        
+
+        <% if logged_in? && talk.user == current_user %>
+          <br/>
+          <%= link_to t("actions.edit"), edit_talk_path(talk), :id => "talk_id_#{talk.id}" %>
+        <% end %>
+
         <% if talk.thumbnail.empty? %>
           <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
         <% end %>

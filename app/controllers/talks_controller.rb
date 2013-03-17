@@ -59,4 +59,18 @@ class TalksController < ApplicationController
       end      
     end
   end
+
+  def edit
+    @talk = Talk.find(params[:id])
+  end
+
+  def update
+    @talk = Talk.find(params[:id])
+
+    if @talk.update_attributes(params[:talk])
+      redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
+    else
+      render :edit
+    end 
+  end
 end

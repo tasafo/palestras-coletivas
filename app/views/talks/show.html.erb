@@ -27,6 +27,11 @@
       <strong><%= t("show.talk.description") %></strong><br/>
       <p class="text-info"><%= simple_format @talk.description %></p>
     </p>
+
+    <% if logged_in? && @talk.user == current_user %>
+      <br/>
+      <%= link_to t("actions.edit"), edit_talk_path(@talk), :id => "talk_id_#{@talk.id}" %>
+    <% end %>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>  
   <% end %>

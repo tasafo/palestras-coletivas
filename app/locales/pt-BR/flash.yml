@@ -14,3 +14,5 @@ pt-BR:
     talks:
       create:
         notice: "Sua palestra foi adicionada!"
+      update:
+        notice: "Sua palestra foi atualizada!"

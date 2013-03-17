@@ -8,6 +8,7 @@ pt-BR:
 
     talks:
       new: "Adicionar palestra"
+      edit: "Editar palestra"
 
     home:
       index: "Veja as últimas palestras adicionadas"

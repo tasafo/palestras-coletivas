@@ -19,7 +19,7 @@ describe "Create talk", :js => false do
       click_button "Adicionar palestra"
     end
 
-    it "redirects to the question page" do
+    it "redirects to the talk page" do
       expect(current_path).to match(%r[/talks/\w+])
     end
 

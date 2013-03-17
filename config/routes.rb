@@ -11,7 +11,9 @@ Palestrascoletivas::Application.routes.draw do
 
   get "/talks", :to => "talks#index"
   get "/talks/new", :to => "talks#new", :as => :new_talk
+  get "/talks/:id/edit", :to => "talks#edit", :as => :edit_talk
   post "/talks/new", :to => "talks#create", :as => false
+  put "/talks/:id/edit", :to => "talks#update", :as => false
   get "/talks/:id", :to => "talks#show", :as => :talk
   post "/talks/info-url" => "talks#info_url"
 end
