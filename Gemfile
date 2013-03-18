@@ -10,6 +10,7 @@ gem 'nokogiri', :require => false
 gem 'jquery-rails'
 gem 'mongoid_slug'
 gem 'kaminari'
+gem 'mongoid_fulltext'
 
 group :assets do
   gem 'sass-rails'

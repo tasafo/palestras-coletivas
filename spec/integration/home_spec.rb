@@ -1,7 +1,10 @@
 require "spec_helper"
 
 describe "Home page" do
-  context "with some talks" do
+  let!(:talk) { create(:talk) }
+  let(:user) { talk.user }
+  
+  context "without seeking" do
     before do
       visit root_path
     end
@@ -12,6 +15,38 @@ describe "Home page" do
 
     it "displays access my account" do
       expect(page).to have_content("Acessar minha conta")
+    end
+  end
+
+  context "when the search is successful" do
+    before do
+      visit root_path
+      fill_in :talk_search, :with => "compartilhe"
+      click_button "Buscar"
+    end
+
+    it "redirects to home page" do
+      expect(current_path).to eql(root_path)
+    end
+
+    it "shows talks found" do
+      expect(page).to have_content("Compartilhe")
+    end
+  end
+
+  context "when the search is not successful" do
+    before do
+      visit root_path
+      fill_in :talk_search, :with => "noob"
+      click_button "Buscar"
+    end
+
+    it "redirects to home page" do
+      expect(current_path).to eql(root_path)
+    end
+
+    it "not show talks" do
+      expect(page).not_to have_content("Compartilhe")
     end
   end
 end

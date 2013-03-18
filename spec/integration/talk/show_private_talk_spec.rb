@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe "Show private talk" do
-  let!(:talk) { create(:talk, :to_public => false) }
-  let(:user) { talk.user }
+  let!(:other_talk) { create(:other_talk) }
+  let(:user) { other_talk.user }
 
   context "when logged" do
     before do
@@ -13,7 +13,7 @@ describe "Show private talk" do
     end
 
     it "redirects to the show page" do
-      expect(current_path).to eql(talk_path(talk))
+      expect(current_path).to eql(talk_path(other_talk))
     end
 
     it "displays detail talk" do
@@ -24,11 +24,11 @@ describe "Show private talk" do
   context "when unlogged" do
     before do
       visit root_path
-      visit talk_path(talk)
+      visit talk_path(other_talk)
     end
 
     it "redirects to the show page" do
-      expect(current_path).to eql(talk_path(talk))
+      expect(current_path).to eql(talk_path(other_talk))
     end
 
     it "displays error message" do

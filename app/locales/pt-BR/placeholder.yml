@@ -5,3 +5,6 @@ pt-BR:
       title: "Exemplo: Ruby on Rails"
       description: "Exemplo: A palestra fala sobre a linguagem de programação Ruby e o framework de desenvolvimento web Rails"
       tags: "Exemplo: ruby, rails"
+
+    index:
+      search: "busca por título e tags"

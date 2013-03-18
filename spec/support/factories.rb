@@ -20,5 +20,10 @@ FactoryGirl.define do
     thumbnail "//cdn.slidesharecdn.com/ss_thumbnails/compartilhe-130219192210-phpapp02-thumbnail.jpg?1361323471"
     code "16635025"
     user
+
+    factory :other_talk do
+      presentation_url "http://www.slideshare.net/luizsanches/ruby-praticamente-falando"
+      to_public false
+    end
   end
 end

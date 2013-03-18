@@ -1,5 +1,6 @@
 class Talk
   include Mongoid::Document
+  include Mongoid::FullTextSearch
   include Mongoid::Timestamps
   include Mongoid::Slug
 
@@ -15,4 +16,10 @@ class Talk
   belongs_to :user
 
   validates_presence_of :title, :description, :tags, :user
+
+  fulltext_search_in :title, :tags,
+    :index_name => 'fulltext_index_title_tags',
+    :filters => {
+      :published => lambda { |talk| talk.to_public }
+    }
 end

@@ -1,5 +1,12 @@
 <% if @talks %>
-  <h1><%= t("titles.home.index") %></h1>
+  <h1><%= t("titles.home.index") %> (<%= @talks.count %>)</h1>
+
+  <%= form_for @talk, :html => { :class => 'form-search' }, :url => root_path, :method => "get" do |f| %>
+    <div class="input-append">
+      <input type="text" class="span12 search-query" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.index.search") %>">
+      <button type="submit" class="btn"><%= t("form.submit.search") %></button>
+    </div>
+  <% end %>
   
   <%= render "shared/talks", :show_user => true %>
 <% end %>
