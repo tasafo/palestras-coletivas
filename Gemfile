@@ -9,6 +9,7 @@ gem "bcrypt-ruby", :require => "bcrypt"
 gem 'nokogiri', :require => false
 gem 'jquery-rails'
 gem 'mongoid_slug'
+gem 'kaminari'
 
 group :assets do
   gem 'sass-rails'

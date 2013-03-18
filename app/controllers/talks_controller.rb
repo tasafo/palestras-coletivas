@@ -5,7 +5,7 @@ class TalksController < ApplicationController
   before_filter :require_logged_user, :only => [:index, :new, :create, :edit, :update]
 
   def index 
-    @talks = current_user.talks.order_by(:created_at => "DESC").entries
+    @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc)
   end
 
   def new

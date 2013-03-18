@@ -13,7 +13,7 @@
 <hr class="featurette-divider">
 
 <% unless @talks.empty? %>
-  <h3><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h3>
+  <h3><%= t("show.talk.my_talks_published") %> (<%= @talks.count %>)</h3>
 
   <%= render "shared/talks", :show_user => false %>
 <% end %>

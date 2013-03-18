@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def show
     begin
       @user = User.find(params[:id])
-      @talks = @user.talks.where(:to_public => true).order_by(:created_at => "DESC").entries
+      @talks = @user.talks.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
 
       profile = Gravatar.profile(@user.email)
 

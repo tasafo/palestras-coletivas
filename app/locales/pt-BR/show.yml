@@ -8,6 +8,7 @@ pt-BR:
       _no: "Não"
       not_public: "A palestra ainda não está publicada"
       without_presentation: "O palestrante está preparando os slides para publicá-los"
+      my_talks_published: "Minhas palestras publicadas"
 
     user:
       profile: "Veja o perfil completo em"

@@ -1,3 +1,6 @@
+<% if @talks %>
+  <%= paginate @talks %>
+
   <% @talks.each do |talk| %>
     <hr class="featurette-divider">
 
@@ -29,3 +32,8 @@
     </div>
     <br/>
   <% end %>
+
+  <hr class="featurette-divider">
+
+  <%= paginate @talks %>
+<% end %>
