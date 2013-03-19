@@ -11,7 +11,7 @@ class HomeController < ApplicationController
       if @search.empty?
         @talks = all_public_talks
       else
-        @talks = Kaminari.paginate_array(Talk.fulltext_search(@search, :index => 'fulltext_index_title_tags', :published => [ true ], :max_results => Talk.all.size)).page(params[:page]).per(5)
+        @talks = Kaminari.paginate_array(Talk.fulltext_search(@search, :index => 'fulltext_index_title_tags', :published => [ true ])).page(params[:page]).per(5)
       end
     end
   end
