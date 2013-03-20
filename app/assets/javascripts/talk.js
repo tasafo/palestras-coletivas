@@ -46,18 +46,20 @@ function add_author() {
     user_id = $("#user_id").val();
     user_desc = $("#user_id").find("option:selected").text();
 
-    found = false
-    $('#table_authors tbody tr').each(function() {
-    if ( $(this).attr('id') == "row_" + user_id ) {
-        alert($("#autor_in_the_list").text());
-        found = true;
-    }
-    });
+    if (user_desc != "") {
+        found = false
+        $('#table_authors tbody tr').each(function() {
+        if ( $(this).attr('id') == "row_" + user_id ) {
+            alert($("#autor_in_the_list").text());
+            found = true;
+        }
+        });
 
-    if (!found) {
-        $('#table_authors > tbody:last').append(
-            '<tr id="row_' + user_id + '"><td>' + user_desc + '<input type="hidden" name="authors[]" value="' + user_id + '" /></td><td><a onclick="remove_author(\'' + user_id + '\')">' + $("#remove_author").text() + '</a></td></tr>'
-        );
+        if (!found) {
+            $('#table_authors > tbody:last').append(
+                '<tr id="row_' + user_id + '"><td>' + user_desc + '<input type="hidden" name="authors[]" value="' + user_id + '" /></td><td><a onclick="remove_author(\'' + user_id + '\')">' + $("#remove_author").text() + '</a></td></tr>'
+            );
+        }
     }
 }
 
