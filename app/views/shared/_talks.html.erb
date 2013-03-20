@@ -4,7 +4,7 @@
   <hr class="featurette-divider">
 
   <div class="featurette">
-    <% thumb = talk.thumbnail.empty? ? "without_presentation.jpg" : talk.thumbnail %>
+    <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
 
     <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
 
@@ -12,20 +12,23 @@
     
     <p class="lead">
       <% if show_user %>
-        <%= render "shared/user", :user => talk.user %><br/>
+        <% talk.users.each do |user| %>
+          <%= render "shared/user", :user => user %><br/>
+        <% end %>
       <% end %>
 
       <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
       
       <strong>Tags:</strong> <%= talk.tags %>
 
-      <% if logged_in? && talk.user == current_user %>
-        <br/>
-        <strong><%= t("show.talk.to_public") %>:</strong> <%= talk.to_public ? t("show.talk._yes") : t("show.talk._no") %><br/>
-        <%= link_to t("actions.edit"), edit_talk_path(talk), :id => "talk_id_#{talk.id}" %>
+      <% talk.users.each do |user| %>
+        <% if logged_in? && user.id == current_user.id %>
+          <br/>
+          <strong><%= t("show.talk.to_public") %>:</strong> <%= talk.to_public ? t("show.talk._yes") : t("show.talk._no") %><br/>
+        <% end %>
       <% end %>
 
-      <% if talk.thumbnail.empty? %>
+      <% if talk.thumbnail.blank? %>
         <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
       <% end %>
     </p>

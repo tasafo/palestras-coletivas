@@ -1,4 +1,4 @@
-<% unless @talks.empty? %>
+<% unless @talks.blank? %>
   <h1><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h1>
   
   <%= render "shared/talks", :show_user => false %>

@@ -1,6 +1,9 @@
 pt-BR:
   show:
     talk:
+      authors:
+        one: Autor
+        other: Autores
       tags: "Tags"
       to_public: "Pública"
       description: "Descrição"

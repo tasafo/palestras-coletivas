@@ -1,15 +1,12 @@
 require "spec_helper"
 
 describe User, "validations" do
-  it "accepts valid attribuites" do
-    user = User.new({
-      :name => "Luiz Sanches",
-      :email => "luiz@example.org",
-      :password => "testdrive",
-      :password_confirmation => "testdrive"
-    })
-
-    expect(user).to be_valid
+  context "when valid data" do
+    let!(:user) { create(:user, :paul) }
+    
+    it "accepts valid attribuites" do
+      expect(user).to be_valid
+    end
   end
 
   it "requires name" do
@@ -59,7 +56,7 @@ describe User, "validations" do
   end
 
   context "when updating attributes" do
-    let!(:user) { build(:user) }
+    let!(:user) { build(:user, :paul) }
 
     it "validates password when password has been set" do
       user.password = nil

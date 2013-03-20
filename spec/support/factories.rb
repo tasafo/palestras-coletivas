@@ -1,13 +1,24 @@
 FactoryGirl.define do
   factory :user do
-    name "Paul Young"
-    email "paul@example.org"
-    password "testdrive"
-    password_confirmation "testdrive"
+    trait :paul do
+      name "Paul Young"
+      email "paul@example.org"
+      password "testdrive"
+      password_confirmation "testdrive"
+    end
 
-    factory :other_user do
+    trait :billy do
       name "Billy Paul"
       email "billy@example.org"
+      password "testdrive"
+      password_confirmation "testdrive"
+    end
+
+    trait :luis do
+      name "Luis Miguel"
+      email "luizgrsanches@gmail.com"
+      password "testdrive"
+      password_confirmation "testdrive"
     end
   end
 
@@ -19,7 +30,6 @@ FactoryGirl.define do
     to_public true
     thumbnail "//cdn.slidesharecdn.com/ss_thumbnails/compartilhe-130219192210-phpapp02-thumbnail.jpg?1361323471"
     code "16635025"
-    user
 
     factory :other_talk do
       presentation_url "http://www.slideshare.net/luizsanches/ruby-praticamente-falando"

@@ -8,7 +8,7 @@ class User
   field :email, type: String
   field :password_hash, type: String
 
-  has_many :talks
+  has_and_belongs_to_many :talks
 
   attr_reader :password
 

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Login" do
   context "with valids credential" do
-    let!(:user) { create(:user) }
+    let!(:user) { create(:user, :paul) }
 
     before do
       visit root_path

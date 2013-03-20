@@ -1,14 +1,7 @@
 require "spec_helper"
 
 describe User, "password" do
-  subject(:user) {
-    User.new({
-      :name => "Paul Young",
-      :email => "paul@example.org",
-      :password => "testdrive",
-      :password_confirmation => "testdrive"
-    })
-  }
+  subject(:user) { create(:user, :paul) }
 
   it "cleans password after saving user" do
     user.save!

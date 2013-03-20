@@ -10,12 +10,22 @@ class TalksController < ApplicationController
 
   def new
     @talk = Talk.new
+    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
   end
 
   def create
-    @talk = current_user.talks.new(params[:talk])
+    @talk = Talk.new(params[:talk])
+    @talk.owner = current_user.id
+    @talk.users << current_user
 
     if @talk.save
+      if params[:authors]
+        params[:authors].each do |a|
+          user = User.find(a)
+          @talk.users << [user] if user
+        end
+      end
+
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
       render :new
@@ -28,7 +38,9 @@ class TalksController < ApplicationController
 
       unless @talk.to_public
         if logged_in?
-          @talk = nil if @talk.user.id != current_user.id
+          @talk.users.each do |user|
+            @talk = nil if user.id != current_user.id
+          end
         else
           @talk = nil
         end
@@ -62,16 +74,25 @@ class TalksController < ApplicationController
 
   def edit
     @talk = Talk.find(params[:id])
+    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
 
-    if @talk.user.id != current_user.id
-      redirect_to talks_path, :notice => t("flash.unauthorized_access")
-    end
+    unauthorized = @talk.owner == current_user.id.to_s ? false : true
+
+    redirect_to talks_path, :notice => t("flash.unauthorized_access") if unauthorized
   end
 
   def update
     @talk = Talk.find(params[:id])
 
     if @talk.update_attributes(params[:talk])
+      @talk.users = nil
+      @talk.users << current_user
+      if params[:authors]
+        params[:authors].each do |a|
+          user = User.find(a)
+          @talk.users << [user] if user
+        end
+      end
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
     else
       render :edit

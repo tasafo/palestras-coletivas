@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe "Home page" do
-  let!(:talk) { create(:talk) }
-  let(:user) { talk.user }
+  let!(:user) { create(:user, :paul) }
+  let!(:talk) { create(:talk, :users => [ user ]) }
   
   context "without seeking" do
     before do

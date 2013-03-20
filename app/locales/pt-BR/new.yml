@@ -3,6 +3,16 @@ pt-BR:
     talk:
       not_found: "Palestra não encontrada"
       searching: "Procurando palestra..."
+      invite_authors: "Convidar autores"
+      add_author: "Adicionar"
+
+      table:
+        author: "Autor"
+        operation: "Operação"
+
+      js:
+        the_author_is_already_in_the_list: "O autor já está adicionado"
+        remove_author: "Remover"
 
       help:
         presentation_url: "Quando sua palestra estiver no slideshare, você poderá editar esse registro e atualizar o campo."

@@ -1,18 +1,21 @@
 <div>
   <% if @talk %>
     <h2><%= @talk.title %></h2>
-    
-    <%= gravatar_image(@talk.user.email, @talk.user.name) %>
-    <h4><%= link_to @talk.user.name, user_path(@talk.user) %></h4>
 
     <% unless @talk.code.empty? %>
-      <iframe src="http://www.slideshare.net/slideshow/embed_code/<%= @talk.code %>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="<%= @talk.presentation_url %>" title="<%= @talk.title %>" target="_blank">Compartilhe!</a> </strong> from <strong><a href="<%= @talk.presentation_url %>" target="_blank"><%= @talk.user.name %></a></strong> </div>
+      <iframe src="http://www.slideshare.net/slideshow/embed_code/<%= @talk.code %>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>
     <% else %>
       <br/>
       <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
-      <br/>
     <% end %>
+
+    <br/>
     
+    <p>
+      <strong><%= t("show.talk.description") %></strong><br/>
+      <p class="text-info"><%= simple_format @talk.description %></p>
+    </p>
+
     <p>
       <strong><%= t("show.talk.tags") %>:</strong> <%= @talk.tags %>
     </p>
@@ -23,14 +26,17 @@
     </p>
     <% end %>
 
-    <p>
-      <strong><%= t("show.talk.description") %></strong><br/>
-      <p class="text-info"><%= simple_format @talk.description %></p>
-    </p>
+    <% author = t("show.talk.authors") %>
+    <strong><%= @talk.users.count > 1 ? author[:other] : author[:one] %></strong><br/>
 
-    <% if logged_in? && @talk.user == current_user %>
-      <br/>
-      <%= link_to t("actions.edit"), edit_talk_path(@talk), :id => "talk_id_#{@talk.id}" %>
+    <% @talk.users.each do |user| %>
+      <%= render "shared/user", :user => user %><br/><br/>
+    <% end %>
+
+    <% @talk.users.each do |user| %>
+      <% if logged_in? && current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
+        <%= link_to t("actions.edit"), edit_talk_path(@talk), :id => "talk_id_#{@talk.id}", :class => "btn btn-primary" %>
+      <% end %>
     <% end %>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>  

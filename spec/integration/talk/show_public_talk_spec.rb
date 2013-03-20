@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe "Show public talk" do
-  let!(:talk) { create(:talk) }
-  let(:user) { talk.user }
+  let!(:user) { create(:user, :paul) }
+  let!(:talk) { create(:talk, :users => [ user ]) }
 
   context "when logged" do
     before do

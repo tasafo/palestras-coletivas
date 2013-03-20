@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe "Show user profile" do
-  let!(:user) { create(:user, :email => "luizgrsanches@gmail.com") }
-  let!(:other_user) { create(:other_user) }
+  let!(:user) { create(:user, :luis) }
+  let!(:other_user) { create(:user, :billy) }
 
   context "when user valid" do
     before do
@@ -15,7 +15,7 @@ describe "Show user profile" do
     end
 
     it "displays user profile" do
-      expect(page).to have_content("Paul Young")
+      expect(page).to have_content("Luis Miguel")
     end
   end
 

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Logout" do
   context "when logged in" do
-    let!(:user) { create(:user) }
+    let!(:user) { create(:user, :paul) }
 
     before do
       login_as user

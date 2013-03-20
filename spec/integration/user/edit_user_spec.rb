@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe "Edit user" do
-  let!(:user) { create(:user) }
-  let!(:other_user) { create(:other_user) }
+  let!(:user) { create(:user, :paul) }
+  let!(:other_user) { create(:user, :billy) }
 
   context "with valid data" do
     before do

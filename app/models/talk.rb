@@ -12,10 +12,11 @@ class Talk
   field :thumbnail, type: String
   field :code, type: String
   field :to_public, type: Boolean, :default => false
+  field :owner, type: String
 
-  belongs_to :user
+  has_and_belongs_to_many :users
 
-  validates_presence_of :title, :description, :tags, :user
+  validates_presence_of :title, :description, :tags, :users
 
   fulltext_search_in :title, :tags,
     :index_name => 'fulltext_index_title_tags',

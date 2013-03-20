@@ -1,16 +1,16 @@
 require "spec_helper"
 
 describe "Edit talk" do
-  let!(:talk) { create(:talk) }
-  let(:user) { talk.user }
-  let!(:other_user) { create(:other_user) }
+  let!(:user) { create(:user, :paul) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:other_user) { create(:user, :billy) }
 
   context "with valid data" do
     before do
       login_as(user)
       visit root_path
       click_link "Minhas palestras"
-      click_link "talk_id_#{talk.id}"
+      visit edit_talk_path(talk)
 
       fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/ruby-praticamente-falando"
       fill_in "Titulo", :with => "Ruby praticamente falando"
@@ -34,7 +34,7 @@ describe "Edit talk" do
       login_as(user)
       visit root_path
       click_link "Minhas palestras"
-      click_link "talk_id_#{talk.id}"
+      visit edit_talk_path(talk)
 
       fill_in "Titulo", :with => ""
 

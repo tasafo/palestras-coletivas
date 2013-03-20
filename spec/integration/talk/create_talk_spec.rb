@@ -1,7 +1,10 @@
 require "spec_helper"
 
-describe "Create talk", :js => false do
-  let!(:user) { create(:user) }
+describe "Create talk", :js => true do
+  let!(:user) { create(:user, :paul) }
+  let!(:other_user) { create(:user, :billy) }
+  let!(:another_user) { create(:user, :luis) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
 
   context "with valid data" do
     before do
@@ -14,7 +17,33 @@ describe "Create talk", :js => false do
       fill_in "Titulo", :with => "Compartilhe!"
       fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
       fill_in "Tags", :with => "conhecimento, compartilhamento"
+      check("Quero publicar")
+
+      click_button "Adicionar palestra"
+    end
+
+    it "redirects to the talk page" do
+      expect(current_path).to match(%r[/talks/\w+])
+    end
+
+    it "displays success message" do
+      expect(page).to have_content("Sua palestra foi adicionada!")
+    end
+  end
+
+  context "when authors add" do
+    before do
+      login_as(user)
+      visit root_path
+      click_link "Adicionar palestra"
+
+      fill_in "Titulo", :with => "Compartilhe!"
+      fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
+      fill_in "Tags", :with => "conhecimento, compartilhamento"
       page.check("Quero publicar")
+
+      select other_user.name, :from => "user_id"
+      click_button :add_author
 
       click_button "Adicionar palestra"
     end
