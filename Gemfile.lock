@@ -94,7 +94,7 @@ GEM
       stringex (~> 1.4)
     moped (1.4.3)
     multi_json (1.7.1)
-    nokogiri (1.5.7)
+    nokogiri (1.5.8)
     origin (1.0.11)
     polyglot (0.3.3)
     pry (0.9.12)

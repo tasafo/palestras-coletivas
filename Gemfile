@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'mongoid_slug'
 gem 'kaminari'
 gem 'mongoid_fulltext'
+gem 'thin'
 
 group :assets do
   gem 'sass-rails'
@@ -21,7 +22,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem 'thin'
   gem 'pry'
   gem 'rspec-rails'
   gem 'mongoid-rspec'
