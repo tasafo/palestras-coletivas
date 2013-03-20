@@ -18,6 +18,22 @@ describe "Home page" do
     end
   end
 
+  context "with empty search" do
+    before do
+      visit root_path
+      fill_in :talk_search, :with => ""
+      click_button "Buscar"
+    end
+
+    it "redirects to home page" do
+      expect(current_path).to eql(root_path)
+    end
+
+    it "displays access my account" do
+      expect(page).to have_content("Acessar minha conta")
+    end
+  end
+
   context "when the search is successful" do
     before do
       visit root_path

@@ -25,7 +25,8 @@ $(function() {
                 dataType : "json",
                 success : function(result) {
                     if (result.error) {
-                        alert($("#talk_not_found").text());
+                        $("#searching_talk").hide();
+                        $("#talk_not_found").show();
                         $("#talk_presentation_url").val("");
                         $("#talk_presentation_url").focus();
                     } else {
@@ -49,10 +50,10 @@ function add_author() {
     if (user_desc != "") {
         found = false
         $('#table_authors tbody tr').each(function() {
-        if ( $(this).attr('id') == "row_" + user_id ) {
-            alert($("#autor_in_the_list").text());
-            found = true;
-        }
+            if ( $(this).attr('id') == "row_" + user_id ) {
+                alert($("#autor_in_the_list").text());
+                found = true;
+            }
         });
 
         if (!found) {

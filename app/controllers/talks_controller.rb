@@ -68,7 +68,7 @@ class TalksController < ApplicationController
     rescue OpenURI::HTTPError
       respond_to do |format|
         format.json { render :json => {:error => true} }
-      end      
+      end
     end
   end
 

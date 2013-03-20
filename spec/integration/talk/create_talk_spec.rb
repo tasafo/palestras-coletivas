@@ -14,7 +14,6 @@ describe "Create talk", :js => true do
       click_link "Adicionar palestra"
 
       fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/compartilhe"
-      fill_in "Titulo", :with => "Compartilhe!"
       fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
       fill_in "Tags", :with => "conhecimento, compartilhamento"
       check("Quero publicar")
@@ -71,6 +70,22 @@ describe "Create talk", :js => true do
 
     it "displays error messages" do
       expect(page).to have_content("Verifique o formulário antes de continuar:")
+    end
+  end
+
+  context "when the slides are not found" do
+    before do
+      login_as(user)
+      visit root_path
+
+      click_link "Adicionar palestra"
+
+      fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/invalid"
+      fill_in "Titulo", :with => "Compartilhe!"
+    end
+
+    it "displays error message" do
+      expect(page).to have_content("Palestra não encontrada")
     end
   end
 end
