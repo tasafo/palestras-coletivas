@@ -3,7 +3,7 @@ require "spec_helper"
 describe Talk, "validations" do
   context "when valid data" do
     let!(:user) { create(:user, :paul) }
-    let!(:talk) { create(:talk, :users => [ user ]) }
+    let!(:talk) { create(:talk, :users => [ user ], :owner => user.id.to_s) }
 
     it "accepts valid attributes" do
       expect(talk).to be_valid
@@ -32,5 +32,11 @@ describe Talk, "validations" do
     talk = Talk.create(:users => nil)
 
     expect(talk).to have(1).error_on(:users)
+  end
+
+  it "requires owner" do
+    talk = Talk.create(:owner => nil)
+
+    expect(talk).to have(1).error_on(:owner)
   end
 end

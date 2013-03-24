@@ -16,7 +16,7 @@ class Talk
 
   has_and_belongs_to_many :users
 
-  validates_presence_of :title, :description, :tags, :users
+  validates_presence_of :title, :description, :tags, :users, :owner
 
   fulltext_search_in :title, :tags,
     :index_name => 'fulltext_index_title_tags',
