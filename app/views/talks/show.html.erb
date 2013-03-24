@@ -35,7 +35,7 @@
 
     <% @talk.users.each do |user| %>
       <% if logged_in? && current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
-        <%= link_to t("actions.edit"), edit_talk_path(@talk), :id => "talk_id_#{@talk.id}", :class => "btn btn-primary" %>
+        <%= link_to t("actions.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
       <% end %>
     <% end %>
   <% else %>

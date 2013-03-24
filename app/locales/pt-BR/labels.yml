@@ -14,3 +14,9 @@ pt-BR:
       thumbnail: "Miniatura"
       code: "Código"
       to_public: "Quero publicar"
+
+    group:
+      gravatar_url: "Url do gravatar"
+      name: "Nome"
+      tags: "Tags"
+      thumbnail_url: "Miniatura"

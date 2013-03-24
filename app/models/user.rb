@@ -10,6 +10,8 @@ class User
 
   has_and_belongs_to_many :talks
 
+  has_and_belongs_to_many :groups
+
   attr_reader :password
 
   validates_presence_of :name

@@ -10,8 +10,10 @@ describe "Edit talk", :js => true do
     before do
       login_as(user)
       visit root_path
+
       click_link "Minhas palestras"
-      visit edit_talk_path(talk)
+      click_link "Compartilhe"
+      click_link "Editar"
 
       fill_in "Titulo", :with => "Ruby praticamente falando"
       fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
@@ -33,8 +35,10 @@ describe "Edit talk", :js => true do
     before do
       login_as(user)
       visit root_path
+
       click_link "Minhas palestras"
-      visit edit_talk_path(talk)
+      click_link "Compartilhe"
+      click_link "Editar"
 
       fill_in "Titulo", :with => "Ruby praticamente falando"
       fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
@@ -59,8 +63,10 @@ describe "Edit talk", :js => true do
     before do
       login_as(user)
       visit root_path
+
       click_link "Minhas palestras"
-      visit edit_talk_path(talk)
+      click_link "Compartilhe"
+      click_link "Editar"
 
       fill_in "Titulo", :with => ""
 

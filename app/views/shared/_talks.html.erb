@@ -19,7 +19,7 @@
 
       <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
       
-      <strong>Tags:</strong> <%= talk.tags %>
+      <strong><%= t("show.talk.tags") %>:</strong> <%= talk.tags %>
 
       <% talk.users.each do |user| %>
         <% if logged_in? && user.id == current_user.id %>

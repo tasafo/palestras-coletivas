@@ -1,0 +1,30 @@
+<div>
+  <% if @group %>
+    <% thumb = @group.thumbnail_url.blank? ? "without_avatar.jpg" : @group.thumbnail_url %>
+
+    <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
+
+    <h2><%= @group.name %></h2>
+
+    <p>
+      <strong><%= t("show.talk.tags") %>:</strong> <%= @group.tags %>
+    </p>
+
+    <br/>
+
+    <% member = t("show.group.members") %>
+    <strong><%= @group.users.count > 1 ? member[:other] : member[:one] %></strong><br/>
+
+    <% @group.users.each do |user| %>
+      <%= render "shared/user", :user => user %><br/><br/>
+    <% end %>
+
+    <br/>
+
+    <% if logged_in? && current_user.id.to_s == @group.owner.to_s %>
+      <%= link_to t("actions.edit"), edit_group_path(@group), :class => "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <h1><%= t("show.group.not_found") %></h1>  
+  <% end %>
+</div>

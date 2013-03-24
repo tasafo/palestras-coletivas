@@ -36,4 +36,18 @@ FactoryGirl.define do
       to_public false
     end
   end
+
+  factory :group do
+    trait :tasafo do
+      gravatar_url "http://gravatar.com/tasafo"
+      name "Tá safo!"
+      tags "agilidade, gestão de projetos, engenharia de software"
+      thumbnail_url "http://0.gravatar.com/avatar/c1bcd79fb1d8d4f148e3b77cc7c2c130"
+    end
+
+    trait :gurupa do
+      name "GURU-PA"
+      tags "ruby, rails"
+    end
+  end
 end

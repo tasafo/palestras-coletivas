@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Home page" do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ]) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
   
   context "without seeking" do
     before do

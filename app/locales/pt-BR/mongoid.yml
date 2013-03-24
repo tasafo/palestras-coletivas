@@ -3,6 +3,7 @@ pt-BR:
     models:
       user: "Usuário"
       talk: "Palestra"
+      group: "Grupo"
 
     attributes:
       user:
@@ -18,3 +19,11 @@ pt-BR:
         thumbnail: "Miniatura"
         code: "Código"
         to_public: "Pública"
+        owner: "Criador"
+
+      group:
+        gravatar_url: "Endereço do avatar"
+        name: "Nome"
+        tags: "Tags"
+        thumbnail_url: "Miniatura"
+        owner: "Criador"

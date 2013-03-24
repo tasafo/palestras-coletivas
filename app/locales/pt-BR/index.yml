@@ -3,3 +3,6 @@ pt-BR:
     talk:
       my_talks: "Minhas palestras"
       no_talks: "Você ainda não possui palestras"
+
+    group:
+      no_groups: "Você ainda não possui grupos"

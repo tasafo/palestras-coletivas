@@ -2,3 +2,4 @@ pt-BR:
   actions:
     back: "Voltar"
     edit: "Editar"
+    new: "Criar"

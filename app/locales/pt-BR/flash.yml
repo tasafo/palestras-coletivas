@@ -21,3 +21,9 @@ pt-BR:
     users:
       update:
         notice: "Seus dados foram atualizados!"
+
+    groups:
+      create:
+        notice: "Seu grupo foi adicionado!"
+      update:
+        notice: "Seu grupo foi atualizado!"

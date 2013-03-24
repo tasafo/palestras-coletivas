@@ -8,3 +8,7 @@ pt-BR:
       talk:
         create: "Adicionar palestra"
         update: "Atualizar palestra"
+
+      group:
+        create: "Adicionar grupo"
+        update: "Atualizar grupo"

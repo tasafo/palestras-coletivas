@@ -1,3 +1,8 @@
+<% if logged_in? %>
+  <%= link_to t("actions.new"), new_talk_path, :class => "btn btn-primary" %>
+  <br />
+<% end %>
+
 <% unless @talks.blank? %>
   <h1><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h1>
   

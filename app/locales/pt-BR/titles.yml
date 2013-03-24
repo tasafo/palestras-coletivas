@@ -16,3 +16,8 @@ pt-BR:
     user:
       edit: "Editar meus dados"
       change_password: "Trocar senha"
+
+    groups:
+      index: "Grupos"
+      new: "Adicionar grupo"
+      edit: "Editar grupo"

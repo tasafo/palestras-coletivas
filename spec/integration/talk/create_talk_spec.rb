@@ -4,14 +4,14 @@ describe "Create talk", :js => true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
 
   context "with valid data" do
     before do
       login_as(user)
       visit root_path
 
-      click_link "Adicionar palestra"
+      click_link "Minhas palestras"
+      click_link "Criar"
 
       fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/compartilhe"
       fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
@@ -34,7 +34,9 @@ describe "Create talk", :js => true do
     before do
       login_as(user)
       visit root_path
-      click_link "Adicionar palestra"
+
+      click_link "Minhas palestras"
+      click_link "Criar"
 
       fill_in "Titulo", :with => "Compartilhe!"
       fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
@@ -60,7 +62,10 @@ describe "Create talk", :js => true do
     before do
       login_as(user)
       visit root_path
-      click_link "Adicionar palestra"
+
+      click_link "Minhas palestras"
+      click_link "Criar"
+      
       click_button "Adicionar palestra"
     end
 
@@ -78,7 +83,8 @@ describe "Create talk", :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Adicionar palestra"
+      click_link "Minhas palestras"
+      click_link "Criar"
 
       fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/invalid"
       fill_in "Titulo", :with => "Compartilhe!"

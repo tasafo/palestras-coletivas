@@ -15,3 +15,10 @@ pt-BR:
 
     user:
       profile: "Veja o perfil completo em"
+
+    group:
+      members:
+        one: Membro
+        other: Membros
+      tags: "Tags"
+      not_found: "Grupo não encontrado"
