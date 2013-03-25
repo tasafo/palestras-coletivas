@@ -9,7 +9,6 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
       <% else %>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -39,9 +38,6 @@
           </li>
           <li class="<%= request.fullpath == edit_user_path(current_user) ? 'active' : '' %>">
             <%= link_to t("menu.my_data"), edit_user_path(current_user) %>
-          </li>
-          <li class="<%= request.fullpath == change_password_path(current_user) ? 'active' : '' %>">
-            <%= link_to t("menu.change_password"), change_password_path(current_user) %>
           </li>
           <li class="">
             <%= link_to t("menu.logout"), logout_path %>

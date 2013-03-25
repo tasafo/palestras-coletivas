@@ -58,4 +58,46 @@ describe "Edit user" do
       expect(page).to have_content("Você não tem permissão para acessar esta página.")
     end
   end
+
+  context "with valid password" do
+    before do
+      login_as user
+      visit root_path
+      click_link "Meus dados"
+
+      fill_in "Sua senha", :with => "newpassword"
+      fill_in "Confirme sua senha", :with => "newpassword"
+
+      click_button "Atualizar dados"
+    end
+
+    it "redirects to the user show page" do
+      expect(current_path).to match(%r[/users/\w+])
+    end
+
+    it "displays success message" do
+      expect(page).to have_content("Seus dados foram atualizados!")
+    end
+  end
+
+  context "with invalid password" do
+    before do
+      login_as user
+      visit root_path
+      click_link "Meus dados"
+
+      fill_in "Sua senha", :with => "newpassword"
+      fill_in "Confirme sua senha", :with => "otherpassword"
+
+      click_button "Atualizar dados"
+    end
+
+    it "renders form page" do
+      expect(current_path).to eql(edit_user_path(user))
+    end
+
+    it "displays error messages" do
+      expect(page).to have_content("Verifique o formulário antes de continuar:")
+    end
+  end
 end

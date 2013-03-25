@@ -52,6 +52,7 @@ describe User, "validations" do
 
   it "set password hash when setting password" do
     user = User.new(:password => "testdrive")
+
     expect(user.password_hash).not_to be_blank
   end
 
@@ -59,7 +60,7 @@ describe User, "validations" do
     let!(:user) { build(:user, :paul) }
 
     it "validates password when password has been set" do
-      user.password = nil
+      user.password = "test"
       user.valid?
 
       expect(user).to have_at_least(1).error_on(:password)
