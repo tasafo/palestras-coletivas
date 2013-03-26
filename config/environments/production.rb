@@ -63,14 +63,14 @@ Palestrascoletivas::Application.configure do
 
   config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.delivery_method = :smtp
 
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.gmail.com",
     :enable_starttls_auto => true,
     :port => 587,
     :authentication => :plain,
-    :user_name => "palestrascoletivas@gmail.com",
+    :user_name => "palestrascoletivas",
     :password => 'pc159gl753'
   }
 
