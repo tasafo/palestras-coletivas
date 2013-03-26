@@ -21,3 +21,6 @@ pt-BR:
       index: "Grupos"
       new: "Adicionar grupo"
       edit: "Editar grupo"
+
+    reset_password:
+      new: "Redefinir senha"

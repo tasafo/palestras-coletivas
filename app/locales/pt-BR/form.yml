@@ -5,3 +5,5 @@ pt-BR:
     submit:
       login: "Acessar minha conta"
       search: "Buscar"
+      reset_password: "Redefinir senha"
+      update_password: "Atualizar senha"

@@ -1,0 +1,14 @@
+<h1><%= t("titles.reset_password.new") %></h1>
+
+<%= form_tag password_resets_path, :method => :post do %>
+  <div class="control-group">
+    <%= label_tag :email, t("labels.user.email"), :class => 'control-label' %>
+    <div class="controls">
+      <%= email_field_tag :email, params[:email] %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= submit_tag t("form.submit.reset_password"), :class => 'btn btn-primary' %>
+  </div>
+<% end %>

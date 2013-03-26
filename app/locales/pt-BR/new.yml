@@ -34,3 +34,6 @@ pt-BR:
 
       help:
         gravatar_url: "Utilize ou crie o perfil do grupo do Gravatar, você poderá editar esse registro e atualizar o campo a qualquer momento."
+
+    user:
+      forgotten_password: "Esqueceu a senha?"

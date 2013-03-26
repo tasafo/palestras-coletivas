@@ -7,6 +7,9 @@ class User
   slug :name
   field :email, type: String
   field :password_hash, type: String
+  field :auth_token, type: String
+  field :password_reset_token, type: String
+  field :password_reset_sent_at, type: DateTime
 
   has_and_belongs_to_many :talks
 
@@ -28,6 +31,8 @@ class User
 
   after_save :erase_password
 
+  before_create { generate_token(:auth_token) }
+
   def password=(password)
     if password.blank?
       @validate_password = false
@@ -36,6 +41,19 @@ class User
       @validate_password = true
       @password = password
     end
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.where(column => self[column]).exists?
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver
   end
 
   private

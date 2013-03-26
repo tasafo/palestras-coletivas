@@ -27,3 +27,11 @@ pt-BR:
         notice: "Seu grupo foi adicionado!"
       update:
         notice: "Seu grupo foi atualizado!"
+
+    reset_password:
+      create:
+        notice: "E-mail enviado com as instruções de redefinição de senha."
+        alert: "E-mail não encontrado."
+      update:
+        alert: "A redefinição de senha expirou."
+        notice: "A senha foi redefinida."

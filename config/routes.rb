@@ -26,4 +26,6 @@ Palestrascoletivas::Application.routes.draw do
   put "/groups/:id/edit", :to => "groups#update", :as => false
   get "/groups/:id", :to => "groups#show", :as => :group
   post "/groups/info-url" => "groups#info_url"  
+
+  resources :password_resets
 end

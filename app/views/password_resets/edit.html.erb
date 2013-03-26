@@ -1,0 +1,21 @@
+<h1><%= t("titles.reset_password.new") %></h1>
+
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  <div class="control-group">
+    <%= f.label :password, t("labels.user.password"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :password_confirmation, t("labels.user.password_confirmation"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= submit_tag t("form.submit.update_password"), :class => 'btn btn-primary' %>
+  </div>
+<% end %>

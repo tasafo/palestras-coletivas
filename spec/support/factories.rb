@@ -5,6 +5,8 @@ FactoryGirl.define do
       email "paul@example.org"
       password "testdrive"
       password_confirmation "testdrive"
+      password_reset_token SecureRandom.urlsafe_base64
+      password_reset_sent_at Time.zone.now
     end
 
     trait :billy do
@@ -12,6 +14,8 @@ FactoryGirl.define do
       email "billy@example.org"
       password "testdrive"
       password_confirmation "testdrive"
+      password_reset_token SecureRandom.urlsafe_base64
+      password_reset_sent_at Time.zone.now
     end
 
     trait :luis do
@@ -19,6 +23,8 @@ FactoryGirl.define do
       email "luizgrsanches@gmail.com"
       password "testdrive"
       password_confirmation "testdrive"
+      password_reset_token SecureRandom.urlsafe_base64
+      password_reset_sent_at Time.zone.now
     end
   end
 
