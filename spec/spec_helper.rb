@@ -29,4 +29,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   config.include Capybara::DSL
+
+  Capybara.javascript_driver = :webkit
 end
