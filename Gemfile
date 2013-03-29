@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'mongoid_slug'
 gem 'kaminari'
 gem 'mongoid_fulltext'
+gem 'geocoder'
 gem 'thin'
 
 group :assets do

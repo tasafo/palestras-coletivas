@@ -23,7 +23,7 @@ pt-BR:
         to_public: "Marque para que as pessoas vejam o evento"
 
     invite:
-      authors: "Convidar autores"
+      author: "Convidar autores"
       organizer: "Convidar organizadores"
       member: "Convidar membros"
       group: "Convidar grupos"

@@ -46,6 +46,19 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @unauthorized = unauthorized
 
+      unless @event.to_public
+        if logged_in?
+          can_see = false
+          
+          @event.users.each do |user|
+            can_see = true if user.id == current_user.id
+          end
+          
+          @event = nil unless can_see
+        else
+          @event = nil
+        end
+      end
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path
     end

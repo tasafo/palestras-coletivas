@@ -4,9 +4,7 @@ pt-BR:
       authors:
         one: Autor
         other: Autores
-      tags: "Tags"
       to_public: "Pública"
-      description: "Descrição"
       _yes: "Sim"
       _no: "Não"
       not_public: "A palestra ainda não está publicada"
@@ -20,12 +18,13 @@ pt-BR:
       members:
         one: Membro
         other: Membros
-      tags: "Tags"
       not_found: "Grupo não encontrado"
 
     event:
       organizers:
         one: Organizador
         other: Organizadores
-      tags: "Tags"
+      groups:
+        one: Grupo
+        other: Grupos
       not_found: "Evento não encontrado"

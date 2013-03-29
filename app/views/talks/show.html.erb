@@ -12,12 +12,12 @@
     <br/>
     
     <p>
-      <strong><%= t("show.talk.description") %></strong><br/>
+      <strong><%= t("labels.talk.description") %></strong><br/>
       <p class="text-info"><%= simple_format @talk.description %></p>
     </p>
 
     <p>
-      <strong><%= t("show.talk.tags") %>:</strong> <%= @talk.tags %>
+      <strong><%= t("labels.talk.tags") %>:</strong> <%= @talk.tags %>
     </p>
 
     <% if logged_in? %>
