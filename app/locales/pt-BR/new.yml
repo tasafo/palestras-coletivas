@@ -39,4 +39,4 @@ pt-BR:
       js:
         the_user_is_already_in_the_list: "O usuário já está adicionado"
         the_group_is_already_in_the_list: "O grupo já está adicionado"
-        remove_user: "Remover"
+        remove: "Remover"

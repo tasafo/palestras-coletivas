@@ -1,6 +1,6 @@
 $(function() {
     $("#group_in_the_list").hide();
-    $("#remove_group").hide();
+    $("#remove").hide();
 
     $("#add_group").click(add_group);
 });
@@ -20,7 +20,7 @@ function add_group() {
 
         if (!found) {
             $('#table_groups > tbody:last').append(
-                '<tr id="row_' + group_id + '"><td>' + group_desc + '<input type="hidden" name="groups[]" value="' + group_id + '" /></td><td><a onclick="remove_group(\'' + group_id + '\')">' + $("#remove_group").text() + '</a></td></tr>'
+                '<tr id="row_' + group_id + '"><td>' + group_desc + '<input type="hidden" name="groups[]" value="' + group_id + '" /></td><td><a onclick="remove_group(\'' + group_id + '\')">' + $("#remove").text() + '</a></td></tr>'
             );
         }
     }

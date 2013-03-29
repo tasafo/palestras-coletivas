@@ -25,14 +25,14 @@
   <div class="control-group">
     <%= f.label :start_date, t("labels.event.start_date"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :start_date, :class => "span4" %>
+      <%= f.text_field :start_date, :class => "span2 date" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :end_date, t("labels.event.end_date"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :end_date, :class => "span4" %>
+      <%= f.text_field :end_date, :class => "span2 date" %>
     </div>
   </div>
 
@@ -76,5 +76,5 @@
   </div>
   
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
-  <span id="remove_user"><%= t("new.invite.js.remove_user") %></span>
+  <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>

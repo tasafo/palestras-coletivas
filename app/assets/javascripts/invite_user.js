@@ -1,6 +1,6 @@
 $(function() {
     $("#user_in_the_list").hide();
-    $("#remove_user").hide();
+    $("#remove").hide();
 
     $("#add_user").click(add_user);
 });
@@ -20,7 +20,7 @@ function add_user() {
 
         if (!found) {
             $('#table_users > tbody:last').append(
-                '<tr id="row_' + user_id + '"><td>' + user_desc + '<input type="hidden" name="users[]" value="' + user_id + '" /></td><td><a onclick="remove_user(\'' + user_id + '\')">' + $("#remove_user").text() + '</a></td></tr>'
+                '<tr id="row_' + user_id + '"><td>' + user_desc + '<input type="hidden" name="users[]" value="' + user_id + '" /></td><td><a onclick="remove_user(\'' + user_id + '\')">' + $("#remove").text() + '</a></td></tr>'
             );
         }
     }

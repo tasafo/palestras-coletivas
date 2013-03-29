@@ -23,7 +23,7 @@
             <% model.groups.each do |g| %>
               <tr id="row_<%= g.id %>">
                 <td><%= g.name %><input type="hidden" name="groups[]" value="<%= g.id %>" /></td>
-                <td><a onclick="remove_group('<%= g.id %>')"><%= t("new.invite.js.remove_group") %> </a></td>
+                <td><a onclick="remove_group('<%= g.id %>')"><%= t("new.invite.js.remove") %> </a></td>
               </tr>
             <% end %>
           <% end %>
