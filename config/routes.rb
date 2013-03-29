@@ -25,7 +25,14 @@ Palestrascoletivas::Application.routes.draw do
   post "/groups/new", :to => "groups#create", :as => false
   put "/groups/:id/edit", :to => "groups#update", :as => false
   get "/groups/:id", :to => "groups#show", :as => :group
-  post "/groups/info-url" => "groups#info_url"  
+  post "/groups/info-url" => "groups#info_url"
+
+  get "/events", :to => "events#index"
+  get "/events/new", :to => "events#new", :as => :new_event
+  get "/events/:id/edit", :to => "events#edit", :as => :edit_event
+  post "/events/new", :to => "events#create", :as => false
+  put "/events/:id/edit", :to => "events#update", :as => false
+  get "/events/:id", :to => "events#show", :as => :event
 
   resources :password_resets
 end

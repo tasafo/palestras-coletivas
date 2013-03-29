@@ -22,3 +22,10 @@ pt-BR:
         other: Membros
       tags: "Tags"
       not_found: "Grupo não encontrado"
+
+    event:
+      organizers:
+        one: Organizador
+        other: Organizadores
+      tags: "Tags"
+      not_found: "Evento não encontrado"

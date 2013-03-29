@@ -24,9 +24,9 @@ pt-BR:
 
     groups:
       create:
-        notice: "Seu grupo foi adicionado!"
+        notice: "O grupo foi adicionado!"
       update:
-        notice: "Seu grupo foi atualizado!"
+        notice: "O grupo foi atualizado!"
 
     reset_password:
       create:
@@ -35,3 +35,9 @@ pt-BR:
       update:
         alert: "A redefinição de senha expirou."
         notice: "A senha foi redefinida."
+
+    events:
+      create:
+        notice: "O evento foi adicionado!"
+      update:
+        notice: "O evento foi atualizado!"

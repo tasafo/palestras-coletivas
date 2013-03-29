@@ -1,0 +1,26 @@
+<div>
+  <% if @event %>
+    <h2><%= @event.name %> - <%= @event.edition %></h2>
+
+    <p>
+      <strong><%= t("show.event.tags") %>:</strong> <%= @event.tags %>
+    </p>
+
+    <br/>
+
+    <% organizer = t("show.event.organizers") %>
+    <strong><%= @event.users.count > 1 ? organizer[:other] : organizer[:one] %></strong><br/>
+
+    <% @event.users.each do |user| %>
+      <%= render "shared/user", :user => user %><br/><br/>
+    <% end %>
+
+    <br/>
+
+    <% unless @unauthorized %>
+      <%= link_to t("actions.edit"), edit_event_path(@event), :class => "btn btn-primary" %>
+    <% end %>
+  <% else %>
+    <h1><%= t("show.event.not_found") %></h1>
+  <% end %>
+</div>

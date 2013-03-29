@@ -19,8 +19,8 @@ class TalksController < ApplicationController
     @talk.users << current_user
 
     if @talk.save
-      if params[:authors]
-        params[:authors].each do |a|
+      if params[:users]
+        params[:users].each do |a|
           user = User.find(a)
           @talk.users << [user] if user
         end
@@ -87,8 +87,8 @@ class TalksController < ApplicationController
     if @talk.update_attributes(params[:talk])
       @talk.users = nil
       @talk.users << current_user
-      if params[:authors]
-        params[:authors].each do |a|
+      if params[:users]
+        params[:users].each do |a|
           user = User.find(a)
           @talk.users << [user] if user
         end

@@ -1,0 +1,35 @@
+  <fieldset>
+    <legend><%= t("new.invite.#{key}") %></legend>
+    <select id="user_id">
+      <% if users %>
+        <% users.each do |u| %>
+          <option value="<%= u.id %>"><%= u.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+    
+    <input type="button" id="add_user" class="btn" value="<%= t("new.invite.add") %> "/>
+    
+    <div id="users">
+      <table id="table_users" class="table table-striped">
+        <thead>
+          <tr>
+            <th width="50%"><%= t("new.invite.table.#{key}") %></th>
+            <th width="50%"><%= t("new.invite.table.operation") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if model.users %>
+            <% model.users.each do |u| %>
+              <% if u.id.to_s != model.owner %>
+                <tr id="row_<%= u.id %>">
+                  <td><%= u.name %><input type="hidden" name="users[]" value="<%= u.id %>" /></td>
+                  <td><a onclick="remove_user('<%= u.id %>')"><%= t("new.invite.js.remove_user") %> </a></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>

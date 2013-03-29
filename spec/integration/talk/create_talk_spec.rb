@@ -18,33 +18,8 @@ describe "Create talk", :js => true do
       fill_in "Tags", :with => "conhecimento, compartilhamento"
       check("Quero publicar")
 
-      click_button "Adicionar palestra"
-    end
-
-    it "redirects to the talk page" do
-      expect(current_path).to match(%r[/talks/\w+])
-    end
-
-    it "displays success message" do
-      expect(page).to have_content("Sua palestra foi adicionada!")
-    end
-  end
-
-  context "when authors add" do
-    before do
-      login_as(user)
-      visit root_path
-
-      click_link "Minhas palestras"
-      click_link "Criar"
-
-      fill_in "Titulo", :with => "Compartilhe!"
-      fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
-      fill_in "Tags", :with => "conhecimento, compartilhamento"
-      page.check("Quero publicar")
-
       select other_user.name, :from => "user_id"
-      click_button :add_author
+      click_button :add_user
 
       click_button "Adicionar palestra"
     end

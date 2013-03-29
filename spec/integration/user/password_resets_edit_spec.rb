@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Edit password resets" do
   let!(:user) { create(:user, :paul) }
-  let!(:other_user) { create(:user, :billy, :password_reset_sent_at => 3.hours.ago) }
+  let!(:other_user) { create(:user, :billy) }
 
   context "when valid data" do
     before do

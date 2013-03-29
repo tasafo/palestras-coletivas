@@ -27,3 +27,17 @@ pt-BR:
         tags: "Tags"
         thumbnail_url: "Miniatura"
         owner: "Criador"
+
+      event:
+        name: "Nome"
+        edition: "Edição"
+        description: "Descrição"
+        tags: "Tags"
+        start_date: "Data de início"
+        end_date: "Data de término"
+        place: "Local"
+        address: "Endereço"
+        to_public: "Público"
+        owner: "Criador"
+        links: "Links"
+        environments: "Ambientes"

@@ -17,32 +17,8 @@ describe "Create group", :js => true do
       fill_in "Nome", :with => "Tá safo!"
       fill_in "Tags", :with => "agilidade, gestão de projetos, engenharia de software"
 
-      click_button "Adicionar grupo"
-    end
-
-    it "redirects to the group page" do
-      expect(current_path).to match(%r[/groups/\w+])
-    end
-
-    it "displays success message" do
-      expect(page).to have_content("Seu grupo foi adicionado!")
-    end
-  end
-
-  context "when members add" do
-    before do
-      login_as(user)
-      visit root_path
-
-      click_link "Grupos"
-      click_link "Criar"
-
-      fill_in "Url do gravatar", :with => "http://gravatar.com/tasafo"
-      fill_in "Nome", :with => "Tá safo!"
-      fill_in "Tags", :with => "agilidade, gestão de projetos, engenharia de software"
-
       select other_user.name, :from => "user_id"
-      click_button :add_member
+      click_button :add_user
 
       click_button "Adicionar grupo"
     end
@@ -52,7 +28,7 @@ describe "Create group", :js => true do
     end
 
     it "displays success message" do
-      expect(page).to have_content("Seu grupo foi adicionado!")
+      expect(page).to have_content("O grupo foi adicionado!")
     end
   end
 

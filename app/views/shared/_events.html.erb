@@ -1,0 +1,16 @@
+<% @events.each do |event| %>
+  <hr class="featurette-divider">
+
+  <div class="featurette">
+    <h3 class="featurette-heading"><%= link_to event.name, event_path(event) %></h3>
+    
+    <p class="lead">
+      <%= t("event.created_time", :time => time_ago_in_words(event.created_at)) %><br/>
+      
+      <strong><%= t("show.event.tags") %>:</strong> <%= event.tags %>
+    </p>
+  </div>
+  <br/>
+<% end %>
+
+<hr class="featurette-divider">

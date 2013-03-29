@@ -19,33 +19,8 @@ describe "Edit talk", :js => true do
       fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
       fill_in "Tags", :with => "ruby, programação"
 
-      click_button "Atualizar palestra"
-    end
-
-    it "redirects to the talk page" do
-      expect(current_path).to match(%r[/talks/\w+])
-    end
-
-    it "displays success message" do
-      expect(page).to have_content("Sua palestra foi atualizada!")
-    end
-  end
-
-  context "when authors add" do
-    before do
-      login_as(user)
-      visit root_path
-
-      click_link "Minhas palestras"
-      click_link "Compartilhe"
-      click_link "Editar"
-
-      fill_in "Titulo", :with => "Ruby praticamente falando"
-      fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
-      fill_in "Tags", :with => "ruby, programação"
-
       select other_user.name, :from => "user_id"
-      click_button :add_author
+      click_button :add_user
 
       click_button "Atualizar palestra"
     end

@@ -40,41 +40,7 @@
     </div>
   </div>
 
-  <fieldset>
-    <legend><%= t("new.talk.invite_authors") %></legend>
-    <select id="user_id">
-      <% if @authors %>
-        <% @authors.each do |a| %>
-          <option value="<%= a.id %>"><%= a.name %></option>
-        <% end %>
-      <% end %>
-    </select>
-    
-    <input type="button" id="add_author" class="btn" value="<%= t("new.talk.add_author") %> "/>
-    
-    <div id="authors">
-      <table id="table_authors" class="table table-striped">
-        <thead>
-          <tr>
-            <th width="50%"><%= t("new.talk.table.author") %></th>
-            <th width="50%"><%= t("new.talk.table.operation") %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if @talk.users %>
-            <% @talk.users.each do |u| %>
-              <% if u.id.to_s != @talk.owner %>
-                <tr id="row_<%= u.id %>">
-                  <td><%= u.name %><input type="hidden" name="authors[]" value="<%= u.id %>" /></td>
-                  <td><a onclick="remove_author('<%= u.id %>')"><%= t("new.talk.js.remove_author") %> </a></td>
-                </tr>
-              <% end %>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </fieldset>
+  <%= render "shared/invite_user", :model => @talk, :users => @authors, :key => "author" %>
 
   <div class="form-actions">
     <%= f.submit :class => 'btn btn-primary' %>
@@ -85,6 +51,6 @@
   <%= f.hidden_field :thumbnail %>
   <%= f.hidden_field :code %>
   
-  <span id="autor_in_the_list"><%= t("new.talk.js.the_author_is_already_in_the_list") %></span>
-  <span id="remove_author"><%= t("new.talk.js.remove_author") %></span>
+  <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
+  <span id="remove_user"><%= t("new.invite.js.remove_user") %></span>
 <% end %>

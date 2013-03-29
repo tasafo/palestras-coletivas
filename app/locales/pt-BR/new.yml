@@ -1,18 +1,11 @@
 pt-BR:
   new:
+    user:
+      forgotten_password: "Esqueceu a senha?"
+
     talk:
       not_found: "Palestra não encontrada"
       searching: "Procurando palestra..."
-      invite_authors: "Convidar autores"
-      add_author: "Adicionar"
-
-      table:
-        author: "Autor"
-        operation: "Operação"
-
-      js:
-        the_author_is_already_in_the_list: "O autor já está adicionado"
-        remove_author: "Remover"
 
       help:
         presentation_url: "Quando sua palestra estiver no slideshare, você poderá editar esse registro e atualizar o campo."
@@ -21,19 +14,29 @@ pt-BR:
     group:
       not_found: "Avatar não encontrado"
       searching: "Procurando grupo..."
-      invite_members: "Convidar membros"
-      add_member: "Adicionar"
-
-      table:
-        member: "Membro"
-        operation: "Operação"
-
-      js:
-        the_member_is_already_in_the_list: "O membro já está adicionado"
-        remove_member: "Remover"
 
       help:
         gravatar_url: "Utilize ou crie o perfil do grupo do Gravatar, você poderá editar esse registro e atualizar o campo a qualquer momento."
 
-    user:
-      forgotten_password: "Esqueceu a senha?"
+    event:
+      help:
+        to_public: "Marque para que as pessoas vejam o evento"
+
+    invite:
+      authors: "Convidar autores"
+      organizer: "Convidar organizadores"
+      member: "Convidar membros"
+      group: "Convidar grupos"
+      add: "Adicionar"
+
+      table:
+        author: "Autor"
+        organizer: "Organizador"
+        member: "Membro"
+        group: "Grupo"
+        operation: "Operação"
+
+      js:
+        the_user_is_already_in_the_list: "O usuário já está adicionado"
+        the_group_is_already_in_the_list: "O grupo já está adicionado"
+        remove_user: "Remover"

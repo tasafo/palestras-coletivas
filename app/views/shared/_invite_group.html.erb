@@ -1,0 +1,33 @@
+  <fieldset>
+    <legend><%= t("new.invite.group") %></legend>
+    <select id="group_id">
+      <% if groups %>
+        <% groups.each do |g| %>
+          <option value="<%= g.id %>"><%= g.name %></option>
+        <% end %>
+      <% end %>
+    </select>
+    
+    <input type="button" id="add_group" class="btn" value="<%= t("new.invite.add") %> "/>
+    
+    <div id="groups">
+      <table id="table_groups" class="table table-striped">
+        <thead>
+          <tr>
+            <th width="50%"><%= t("new.invite.table.group") %></th>
+            <th width="50%"><%= t("new.invite.table.operation") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if model.groups %>
+            <% model.groups.each do |g| %>
+              <tr id="row_<%= g.id %>">
+                <td><%= g.name %><input type="hidden" name="groups[]" value="<%= g.id %>" /></td>
+                <td><a onclick="remove_group('<%= g.id %>')"><%= t("new.invite.js.remove_group") %> </a></td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>

@@ -20,3 +20,14 @@ pt-BR:
       name: "Nome"
       tags: "Tags"
       thumbnail_url: "Miniatura"
+
+    event:
+      name: "Nome"
+      edition: "Edição"
+      description: "Descrição"
+      tags: "Tags"
+      start_date: "Data de início"
+      end_date: "Data de término"
+      place: "Local"
+      address: "Endereço"
+      to_public: "Quero publicar"

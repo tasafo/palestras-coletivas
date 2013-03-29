@@ -23,8 +23,8 @@ class GroupsController < ApplicationController
     @group.users << current_user
 
     if @group.save
-      if params[:members]
-        params[:members].each do |m|
+      if params[:users]
+        params[:users].each do |m|
           user = User.find(m)
           @group.users << [user] if user
         end
@@ -80,8 +80,8 @@ class GroupsController < ApplicationController
     if @group.update_attributes(params[:group])
       @group.users = nil
       @group.users << current_user
-      if params[:members]
-        params[:members].each do |m|
+      if params[:users]
+        params[:users].each do |m|
           user = User.find(m)
           @group.users << [user] if user
         end
@@ -89,6 +89,6 @@ class GroupsController < ApplicationController
       redirect_to group_path(@group), :notice => t("flash.groups.update.notice")
     else
       render :edit
-    end 
+    end
   end
 end

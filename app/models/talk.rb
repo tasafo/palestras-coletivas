@@ -19,7 +19,7 @@ class Talk
   validates_presence_of :title, :description, :tags, :users, :owner
 
   fulltext_search_in :title, :tags,
-    :index_name => 'fulltext_index_title_tags',
+    :index_name => 'fulltext_index_talks',
     :filters => {
       :published => lambda { |talk| talk.to_public }
     }

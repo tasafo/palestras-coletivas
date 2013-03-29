@@ -12,3 +12,7 @@ pt-BR:
       group:
         create: "Adicionar grupo"
         update: "Atualizar grupo"
+
+      event:
+        create: "Adicionar evento"
+        update: "Atualizar evento"

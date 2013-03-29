@@ -24,3 +24,8 @@ pt-BR:
 
     reset_password:
       new: "Redefinir senha"
+
+    events:
+      index: "Eventos"
+      new: "Adicionar evento"
+      edit: "Editar evento"

@@ -1,30 +1,25 @@
 FactoryGirl.define do
   factory :user do
+    password "testdrive"
+    password_confirmation "testdrive"
+    password_reset_token SecureRandom.urlsafe_base64
+    password_reset_sent_at Time.zone.now
+
     trait :paul do
       name "Paul Young"
       email "paul@example.org"
-      password "testdrive"
-      password_confirmation "testdrive"
-      password_reset_token SecureRandom.urlsafe_base64
-      password_reset_sent_at Time.zone.now
     end
 
     trait :billy do
       name "Billy Paul"
       email "billy@example.org"
-      password "testdrive"
-      password_confirmation "testdrive"
       password_reset_token SecureRandom.urlsafe_base64
-      password_reset_sent_at Time.zone.now
+      password_reset_sent_at 5.hours.ago
     end
 
     trait :luis do
       name "Luis Miguel"
       email "luizgrsanches@gmail.com"
-      password "testdrive"
-      password_confirmation "testdrive"
-      password_reset_token SecureRandom.urlsafe_base64
-      password_reset_sent_at Time.zone.now
     end
   end
 
@@ -54,6 +49,20 @@ FactoryGirl.define do
     trait :gurupa do
       name "GURU-PA"
       tags "ruby, rails"
+    end
+  end
+
+  factory :event do
+    trait :tasafoconf do
+      name "Tá Safo Conf"
+      edition "2012"
+      description "Evento de tecnologia que vem com sua 1ª edição na região"
+      tags "tecnologia, agilidade, gestão"
+      start_date "05/06/2012"
+      end_date "06/06/2012"
+      place "Centro de Convenções do Jurunas"
+      address "Rua dos Tamoios, 300, Jurunas, Belém - Pará, Brasil"
+      to_public true
     end
   end
 end

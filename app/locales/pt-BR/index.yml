@@ -6,3 +6,6 @@ pt-BR:
 
     group:
       no_groups: "Nenhum grupo adicionado"
+
+    event:
+      no_events: "Nenhum evento adicionado"

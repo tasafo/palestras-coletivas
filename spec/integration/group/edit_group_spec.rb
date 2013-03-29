@@ -18,6 +18,9 @@ describe "Edit group", :js => true do
       fill_in "Nome", :with => "Tá safo!"
       fill_in "Tags", :with => "agilidade"
 
+      select other_user.name, :from => "user_id"
+      click_button :add_user
+
       click_button "Atualizar grupo"
     end
 
@@ -26,34 +29,7 @@ describe "Edit group", :js => true do
     end
 
     it "displays success message" do
-      expect(page).to have_content("Seu grupo foi atualizado!")
-    end
-  end
-
-  context "when members add" do
-    before do
-      login_as(user)
-      visit root_path
-
-      click_link "Grupos"
-      click_link "Tá safo!"
-      click_link "Editar"
-
-      fill_in "Nome", :with => "Tá safo!"
-      fill_in "Tags", :with => "agilidade"
-
-      select other_user.name, :from => "user_id"
-      click_button :add_member
-
-      click_button "Atualizar grupo"
-    end
-
-    it "redirects to the talk page" do
-      expect(current_path).to match(%r[/groups/\w+])
-    end
-
-    it "displays success message" do
-      expect(page).to have_content("Seu grupo foi atualizado!")
+      expect(page).to have_content("O grupo foi atualizado!")
     end
   end
 
