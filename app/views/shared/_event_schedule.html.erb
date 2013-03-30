@@ -1,0 +1,47 @@
+    <hr>
+
+    <% if @authorized %>
+      <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "btn btn-primary" %>
+
+        <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "btn" %>
+      <br />
+    <% else %>
+      <h2><%= t("titles.schedules.index") %></h2>
+    <% end %>
+    <hr>
+
+    <% if @event.schedules? %>
+      <div id="schedules">
+        <table id="table_schedules" class="table table-striped">
+          <thead>
+            <tr>
+              <th width="25%"><%= t("new.schedule.table.time") %></th>
+              <th width="50%"><%= t("new.schedule.table.session") %></th>
+              <% if @authorized %>
+                <th width="25%"><%= t("new.schedule.table.operation") %></th>
+              <% end %>
+            </tr>
+          </thead>
+
+          <tbody>
+          <% @dates.each do |date| %>
+            <tr class="info">
+              <td colspan="3"><center><h4><%= l date, :format => :custom %></h4></center></td>
+            </tr>
+            <% @event.schedules.by_date(date).each do |s| %>
+              <tr id="row_<%= s.id %>">
+                <td><%= s.time %></td>
+                <td><%= s.session.description %></td>
+                <% if @authorized %>
+                  <td><%= link_to t("actions.edit"), edit_schedule_path(@event, s), :class => "btn", :id => "schedule_id_#{s.id}" %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+
+        </table>
+      </div>
+    <% end %>
+
+    <hr>

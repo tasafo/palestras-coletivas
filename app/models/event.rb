@@ -3,6 +3,7 @@ class Event
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::FullTextSearch
+  include Geocoder::Model::Mongoid
 
   field :name, type: String
   field :edition, type: String
@@ -14,6 +15,7 @@ class Event
   field :to_public, type: Boolean, :default => false
   field :place, type: String
   field :address, type: String
+  field :coordinates, type: Array
   field :owner, type: String
   field :links, type: Hash # {description, url}
   field :environments, type: Hash # {description, order}
@@ -22,11 +24,15 @@ class Event
 
   has_and_belongs_to_many :groups
 
-  #has_and_belongs_to_many :schedules, inverse_of: nil
+  has_many :schedules
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :place, :address, :owner
 
   validates_length_of :description, maximum: 200
+
+  geocoded_by :address
+
+  after_validation :geocode, :if => :address_changed?
 
   fulltext_search_in :name, :edition, :tags, :address,
     :index_name => 'fulltext_index_events',

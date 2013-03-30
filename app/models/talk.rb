@@ -15,7 +15,9 @@ class Talk
   field :owner, type: String
 
   has_and_belongs_to_many :users
-
+  
+  has_many :schedules
+  
   validates_presence_of :title, :description, :tags, :users, :owner
 
   fulltext_search_in :title, :tags,

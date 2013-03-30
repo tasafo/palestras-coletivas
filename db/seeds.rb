@@ -1,7 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+I18n.locale = "pt-BR"
+Session.create(:type => "talk", :description => "Trabalho", :order => 1)
+Session.create(:type => "interval", :description => "A definir", :order => 2)
+Session.create(:type => "interval", :description => "Credenciamento", :order => 3)
+Session.create(:type => "interval", :description => "Abertura", :order => 4)
+Session.create(:type => "interval", :description => "Intervalo", :order => 5)
+Session.create(:type => "interval", :description => "Lanche", :order => 6)
+Session.create(:type => "interval", :description => "Almoço", :order => 7)
+Session.create(:type => "interval", :description => "Encerramento", :order => 8)

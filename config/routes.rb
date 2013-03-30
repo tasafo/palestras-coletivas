@@ -34,5 +34,10 @@ Palestrascoletivas::Application.routes.draw do
   put "/events/:id/edit", :to => "events#update", :as => false
   get "/events/:id", :to => "events#show", :as => :event
 
+  get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
+  get "/schedules/:event_id/:id/edit", :to => "schedules#edit", :as => :edit_schedule
+  post "/schedules/:event_id/new", :to => "schedules#create", :as => false
+  put "/schedules/:event_id/:id/edit", :to => "schedules#update", :as => false
+
   resources :password_resets
 end

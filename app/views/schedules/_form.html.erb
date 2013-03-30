@@ -1,0 +1,34 @@
+<h2><%= "#{@event.name} - #{@event.edition}" %></h2>
+
+<%= form_for(@schedule, :url => url, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= render "shared/error_messages", :record => @schedule %>
+
+  <div class="control-group">
+    <%= f.label :date, t("labels.schedule.date"), :class => 'control-label' %>
+    <div class="controls">
+      <%= select_tag("schedule[date]", options_for_select(@dates)) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :time, t("labels.schedule.time"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :time, :class => "input-mini hour" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :session, t("labels.schedule.session"), :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:schedule, :session_id, @sessions, :id, :description) %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :event_id, :value => @event.id %>
+
+  <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+          event_path(@event), :class => 'btn' %>
+  </div>
+<% end %>
