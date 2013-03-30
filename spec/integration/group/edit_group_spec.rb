@@ -13,7 +13,7 @@ describe "Edit group", :js => true do
 
       click_link "Grupos"
       click_link "Tá safo!"
-      click_link "Editar"
+      click_link "Editar grupo"
 
       fill_in "Nome", :with => "Tá safo!"
       fill_in "Tags", :with => "agilidade"
@@ -40,7 +40,7 @@ describe "Edit group", :js => true do
 
       click_link "Grupos"
       click_link "Tá safo!"
-      click_link "Editar"
+      click_link "Editar grupo"
 
       fill_in "Nome", :with => ""
 

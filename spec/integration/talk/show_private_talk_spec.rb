@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Show private talk" do
+describe "Show private talk", :js => true do
   let!(:user) { create(:user, :paul) }
   let!(:other_talk) { create(:other_talk, :users => [ user ], :owner => user.id) }
 
@@ -8,7 +8,8 @@ describe "Show private talk" do
     before do
       login_as(user)
       visit root_path
-      click_link "Minhas palestras"
+      click_link "Trabalhos"
+      click_link "Meus trabalhos"
       click_link "Compartilhe"
     end
 
@@ -32,7 +33,7 @@ describe "Show private talk" do
     end
 
     it "displays error message" do
-      expect(page).to have_content("A palestra ainda não está publicada")
+      expect(page).to have_content("O trabalho ainda não está publicado")
     end
   end
 end

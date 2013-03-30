@@ -14,4 +14,18 @@ private
   def logged_in?
     session[:user_id] && current_user
   end
+
+  def authorized_access?(model)
+    authorized = false
+
+    if logged_in? 
+      model.users.each do |o|
+        if current_user.id == o.id
+          authorized = true
+        end
+      end
+    end
+
+    authorized
+  end
 end

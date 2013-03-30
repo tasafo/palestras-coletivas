@@ -15,8 +15,8 @@ describe "Login" do
       click_button "Acessar minha conta"
     end
 
-    it "redirects to talks page" do
-      expect(current_path).to eql(talks_path)
+    it "redirects to home page" do
+      expect(current_path).to eql(root_path)
     end
 
     it "displays greeting message" do

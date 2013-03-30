@@ -1,12 +1,14 @@
+<% unless @groups.blank? %>
+  <h1><%= t("titles.groups.index") %> (<%= @groups.count %>)</h1>
+<% end %>
+
 <% if logged_in? %>
-  <%= link_to t("actions.new"), new_group_path, :class => "btn btn-primary" %>
+  <%= link_to t("titles.groups.new"), new_group_path, :class => "btn btn-primary" %>
   <br />
 <% end %>
 
 <% unless @groups.blank? %>
-  <h1><%= t("titles.groups.index") %> (<%= @groups.count %>)</h1>
-  
   <%= render "shared/groups" %>
 <% else %>
-  <h1><%= t("index.group.no_groups") %></h1>
+  <h1><%= t("titles.groups.no_groups") %></h1>
 <% end %>

@@ -7,20 +7,23 @@ pt-BR:
       new: "Acesse sua conta"
 
     talks:
-      new: "Adicionar palestra"
-      edit: "Editar palestra"
+      index: "Trabalhos"
+      new: "Adicionar trabalho"
+      edit: "Editar trabalho"
+      my: "Meus trabalhos"
+      no_talks: "Nenhum trabalho adicionado"
 
     home:
-      index: "Palestras publicadas"
+      index: "Trabalhos publicados"
 
     user:
       edit: "Editar meus dados"
-      change_password: "Trocar senha"
 
     groups:
       index: "Grupos"
       new: "Adicionar grupo"
       edit: "Editar grupo"
+      no_groups: "Nenhum grupo adicionado"
 
     reset_password:
       new: "Redefinir senha"
@@ -29,3 +32,9 @@ pt-BR:
       index: "Eventos"
       new: "Adicionar evento"
       edit: "Editar evento"
+      no_events: "Nenhum evento adicionado"
+
+    schedules:
+      index: "Programação"
+      new: "Adicionar programação"
+      edit: "Editar programação"

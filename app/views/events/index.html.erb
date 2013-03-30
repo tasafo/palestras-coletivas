@@ -1,12 +1,14 @@
+<% unless @events.blank? %>
+  <h1><%= t("titles.events.index") %> (<%= @events.count %>)</h1>
+<% end %>
+
 <% if logged_in? %>
-  <%= link_to t("actions.new"), new_event_path, :class => "btn btn-primary" %>
+  <%= link_to t("titles.events.new"), new_event_path, :class => "btn btn-primary" %>
   <br />
 <% end %>
 
 <% unless @events.blank? %>
-  <h1><%= t("titles.events.index") %> (<%= @events.count %>)</h1>
-  
   <%= render "shared/events" %>
 <% else %>
-  <h1><%= t("index.event.no_events") %></h1>
+  <h1><%= t("titles.events.no_events") %></h1>
 <% end %>

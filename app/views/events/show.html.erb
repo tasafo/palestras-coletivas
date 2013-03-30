@@ -7,6 +7,10 @@
     </p>
 
     <p>
+      <strong><%= t("labels.event.tags") %>:</strong> <%= @event.tags %>
+    </p>
+
+    <p>
       <strong><%= t("labels.event.place") %>:</strong> <%= @event.place %>
     </p>
 
@@ -15,16 +19,12 @@
     </p>
 
     <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x200&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => 'thumbnail', :height => "100" %>
-    <br/>
 
-    <p>
-      <strong><%= t("labels.event.tags") %>:</strong> <%= @event.tags %>
-    </p>
-    <br/>
+    <%= render "shared/event_schedule" %>
 
     <% unless @event.users.blank? %>
       <% organizer = t("show.event.organizers") %>
-      <strong><%= @event.users.count > 1 ? organizer[:other] : organizer[:one] %></strong><br/>
+      <strong><%= organizer[@event.users.count > 1 ? :other : :one] %></strong><br/>
 
       <% @event.users.each do |user| %>
         <%= render "shared/user", :user => user %><br/><br/>
@@ -34,16 +34,12 @@
 
     <% unless @event.groups.blank? %>
       <% group = t("show.event.groups") %>
-      <strong><%= @event.groups.count > 1 ? group[:other] : group[:one] %></strong><br/>
+      <strong><%= group[@event.groups.count > 1 ? :other : :one] %></strong><br/>
 
       <% @event.groups.each do |group| %>
         <%= render "shared/group", :group => group %><br/><br/>
       <% end %>
       <br/>
-    <% end %>
-
-    <% unless @unauthorized %>
-      <%= link_to t("actions.edit"), edit_event_path(@event), :class => "btn btn-primary" %>
     <% end %>
   <% else %>
     <h1><%= t("show.event.not_found") %></h1>

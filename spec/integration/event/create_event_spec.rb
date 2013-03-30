@@ -13,7 +13,7 @@ describe "Create event", :js => true do
       visit root_path
 
       click_link "Eventos"
-      click_link "Criar"
+      click_link "Adicionar evento"
 
       fill_in "Nome", :with => "Tá Safo Conf"
       fill_in "Edição", :with => "2012"
@@ -51,7 +51,7 @@ describe "Create event", :js => true do
       login_as(user)
       visit root_path
       click_link "Eventos"
-      click_link "Criar"
+      click_link "Adicionar evento"
       click_button "Adicionar evento"
     end
 

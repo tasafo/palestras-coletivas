@@ -1,13 +1,23 @@
+<% unless @talks.blank? %>
+  <h1><%= t("titles.talks.index") %> (<%= @talks.count %>)</h1>
+<% end %>
+
 <% if logged_in? %>
-  <%= link_to t("actions.new"), new_talk_path, :class => "btn btn-primary" %>
+  <%= link_to t("titles.talks.new"), new_talk_path, :class => "btn btn-primary" %>
+  <%= link_to t("titles.talks.my"), "/talks?my=true", :class => "btn" %>
   <br />
 <% end %>
 
 <% unless @talks.blank? %>
-  <h1><%= t("index.talk.my_talks") %> (<%= @talks.count %>)</h1>
-  
-  <%= render "shared/talks", :show_user => false %>
+  <br />
+  <%= form_for @talk, :html => { :class => 'form-search' }, :url => talks_path, :method => "get" do |f| %>
+    <div class="input-append">
+      <input type="text" class="span12 search-query" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.index.search") %>">
+      <button type="submit" class="btn"><%= t("form.submit.search") %></button>
+    </div>
+  <% end %>
 
+  <%= render "shared/talks", :show_user => true %>
 <% else %>
-  <h1><%= t("index.talk.no_talks") %></h1>
+  <h1><%= t("titles.talks.no_talks") %></h1>
 <% end %>

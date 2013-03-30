@@ -8,7 +8,7 @@ describe "See talks" do
     before do
       login_as(user)
       visit root_path
-      click_link "Minhas palestras"
+      click_link "Trabalhos"
     end
 
     it "redirects to the home page" do

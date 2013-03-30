@@ -65,4 +65,50 @@ FactoryGirl.define do
       to_public true
     end
   end
+
+  factory :session do
+    trait :palestra do
+      type "talk"
+      description "Palestra / Curso"
+      order 1
+    end
+
+    trait :abertura do
+      type "interval"
+      description "Abertura"
+      order 2
+    end    
+
+    trait :intervalo do
+      type "interval"
+      description "Intervalo"
+      order 3
+    end
+
+    trait :lanche do
+      type "interval"
+      description "Lanche"
+      order 4
+    end
+  end
+
+  factory :schedule do
+    trait :abertura do
+      date "05/06/2012"
+      time "08:00"
+      session { create(:session, :abertura) }
+    end
+
+    trait :palestra do
+      date "05/06/2012"
+      time "09:00"
+      session { create(:session, :palestra) }
+    end
+
+    trait :intervalo do
+      date "05/06/2012"
+      time "10:00"
+      session { create(:session, :intervalo) }
+    end
+  end
 end

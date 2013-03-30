@@ -2,10 +2,27 @@ require 'nokogiri'
 require 'open-uri'
 
 class TalksController < ApplicationController
-  before_filter :require_logged_user, :only => [:index, :new, :create, :edit, :update]
+  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
 
-  def index 
-    @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc)
+  def index
+    @talk = Talk.new
+    @search = ""
+
+    if params[:my].nil?
+      if params[:talk].nil?
+        @talks = all_public_talks
+      else
+        @search = params[:talk][:search]
+
+        if @search.empty?
+          @talks = all_public_talks
+        else
+          @talks = Kaminari.paginate_array(Talk.fulltext_search(@search, :index => 'fulltext_index_talks', :published => [ true ])).page(params[:page]).per(5)
+        end
+      end
+    else
+      @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc) if logged_in?
+    end
   end
 
   def new
@@ -35,15 +52,10 @@ class TalksController < ApplicationController
   def show
     begin
       @talk = Talk.find(params[:id])
+      @authorized = authorized_access?(@talk)
 
       unless @talk.to_public
-        if logged_in?
-          @talk.users.each do |user|
-            @talk = nil if user.id != current_user.id
-          end
-        else
-          @talk = nil
-        end
+        @talk = nil unless @authorized
       end
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path
@@ -96,6 +108,11 @@ class TalksController < ApplicationController
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
     else
       render :edit
-    end 
+    end
+  end
+
+private
+  def all_public_talks
+    Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
   end
 end

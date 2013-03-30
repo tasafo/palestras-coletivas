@@ -15,7 +15,7 @@ describe "Edit event", :js => true do
 
       click_link "Eventos"
       click_link "Tá Safo Conf"
-      click_link "Editar"
+      click_link "Editar evento"
 
       fill_in "Nome", :with => "Confraternização do Tá safo!"
       fill_in "Tags", :with => "agilidade, gestão"
@@ -45,7 +45,7 @@ describe "Edit event", :js => true do
 
       click_link "Eventos"
       click_link "Tá Safo Conf"
-      click_link "Editar"
+      click_link "Editar evento"
 
       fill_in "Nome", :with => ""
 

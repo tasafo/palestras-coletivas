@@ -8,7 +8,7 @@ describe "Show public talk" do
     before do
       login_as(user)
       visit root_path
-      click_link "Minhas palestras"
+      click_link "Trabalhos"
       click_link "Compartilhe"
     end
 

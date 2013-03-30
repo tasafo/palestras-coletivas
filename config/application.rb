@@ -21,7 +21,5 @@ module Palestrascoletivas
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
-
-    Date::DATE_FORMATS[:default] = '%d/%m/%Y'
   end
 end

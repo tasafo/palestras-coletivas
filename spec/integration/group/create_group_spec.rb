@@ -11,7 +11,7 @@ describe "Create group", :js => true do
       visit root_path
 
       click_link "Grupos"
-      click_link "Criar"
+      click_link "Adicionar grupo"
 
       fill_in "Url do gravatar", :with => "http://gravatar.com/tasafo"
       fill_in "Nome", :with => "Tá safo!"
@@ -37,7 +37,7 @@ describe "Create group", :js => true do
       login_as(user)
       visit root_path
       click_link "Grupos"
-      click_link "Criar"
+      click_link "Adicionar grupo"
       click_button "Adicionar grupo"
     end
 
@@ -56,7 +56,7 @@ describe "Create group", :js => true do
       visit root_path
 
       click_link "Grupos"
-      click_link "Criar"
+      click_link "Adicionar grupo"
 
       fill_in "Url do gravatar", :with => "http://gravatar.com/00109blamrin"
       fill_in "Nome", :with => "Tá safo!"

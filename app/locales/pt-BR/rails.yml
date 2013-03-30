@@ -35,3 +35,6 @@ pt-BR:
       x_seconds:
         one: 1 segundo
         other: ! '%{count} segundos'
+  date:
+    formats:
+      custom: ! '%A, %d de %B de %Y'

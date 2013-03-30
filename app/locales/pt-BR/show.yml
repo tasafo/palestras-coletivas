@@ -4,12 +4,12 @@ pt-BR:
       authors:
         one: Autor
         other: Autores
-      to_public: "Pública"
+      to_public: "Público"
       _yes: "Sim"
       _no: "Não"
-      not_public: "A palestra ainda não está publicada"
-      without_presentation: "O palestrante está preparando os slides para publicá-los"
-      my_talks_published: "Minhas palestras publicadas"
+      not_public: "O trabalho ainda não está publicado"
+      without_presentation: "O palestrante está preparando o material para publicá-lo"
+      my_talks_published: "Meus trabalhos publicados"
 
     user:
       profile: "Veja o perfil completo em"

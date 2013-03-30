@@ -24,7 +24,7 @@ describe Event, "validations" do
     expect(event).to have(1).error_on(:name)
   end
 
-  it "requires edittion" do
+  it "requires edition" do
     event = Event.create(:edition => nil)
 
     expect(event).to have(1).error_on(:edition)

@@ -27,7 +27,7 @@
     <% end %>
 
     <% author = t("show.talk.authors") %>
-    <strong><%= @talk.users.count > 1 ? author[:other] : author[:one] %></strong><br/>
+    <strong><%= author[@talk.users.count > 1 ? :other : :one] %></strong><br/>
 
     <% @talk.users.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
@@ -35,10 +35,10 @@
 
     <% @talk.users.each do |user| %>
       <% if logged_in? && current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
-        <%= link_to t("actions.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
+        <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
       <% end %>
     <% end %>
   <% else %>
-    <h1><%= t("show.talk.not_public") %></h1>  
+    <h1><%= t("show.talk.not_public") %></h1>
   <% end %>
 </div>

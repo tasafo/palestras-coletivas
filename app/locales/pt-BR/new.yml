@@ -4,12 +4,12 @@ pt-BR:
       forgotten_password: "Esqueceu a senha?"
 
     talk:
-      not_found: "Palestra não encontrada"
-      searching: "Procurando palestra..."
+      not_found: "Trabalho não encontrado"
+      searching: "Procurando trabalho..."
 
       help:
-        presentation_url: "Quando sua palestra estiver no slideshare, você poderá editar esse registro e atualizar o campo."
-        to_public: "Marque para que as pessoas vejam sua palestra"
+        presentation_url: "Quando seu trabalho estiver no slideshare, você poderá editar esse registro e atualizar o campo posteriormente."
+        to_public: "Marque para que as pessoas vejam seu trabalho"
 
     group:
       not_found: "Avatar não encontrado"
@@ -21,6 +21,12 @@ pt-BR:
     event:
       help:
         to_public: "Marque para que as pessoas vejam o evento"
+
+    schedule:
+      table:
+        time: "Hora"
+        session: "Sessão"
+        operation: "Operação"
 
     invite:
       author: "Convidar autores"

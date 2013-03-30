@@ -13,7 +13,7 @@
     <br/>
 
     <% member = t("show.group.members") %>
-    <strong><%= @group.users.count > 1 ? member[:other] : member[:one] %></strong><br/>
+    <strong><%= member[@group.users.count > 1 ? :other : :one] %></strong><br/>
 
     <% @group.users.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
@@ -22,7 +22,7 @@
     <br/>
 
     <% if logged_in? && current_user.id.to_s == @group.owner.to_s %>
-      <%= link_to t("actions.edit"), edit_group_path(@group), :class => "btn btn-primary" %>
+      <%= link_to t("titles.groups.edit"), edit_group_path(@group), :class => "btn btn-primary" %>
     <% end %>
   <% else %>
     <h1><%= t("show.group.not_found") %></h1>

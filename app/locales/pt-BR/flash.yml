@@ -14,9 +14,9 @@ pt-BR:
 
     talks:
       create:
-        notice: "Sua palestra foi adicionada!"
+        notice: "O trabalho foi adicionado!"
       update:
-        notice: "Sua palestra foi atualizada!"
+        notice: "O trabalho foi atualizado!"
 
     users:
       update:
@@ -41,3 +41,9 @@ pt-BR:
         notice: "O evento foi adicionado!"
       update:
         notice: "O evento foi atualizado!"
+
+    schedules:
+      create:
+        notice: "A programação foi adicionada!"
+      update:
+        notice: "A programação foi atualizada!"

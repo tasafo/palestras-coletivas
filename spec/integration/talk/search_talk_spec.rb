@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Home page" do
+describe "Search talk" do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
   
@@ -14,35 +14,37 @@ describe "Home page" do
     end
 
     it "displays access my account" do
-      expect(page).to have_content("Acessar minha conta")
+      expect(page).to have_content("Trabalhos")
     end
   end
 
   context "with empty search" do
     before do
       visit root_path
+      click_link "Trabalhos"
       fill_in :talk_search, :with => ""
       click_button "Buscar"
     end
 
-    it "redirects to home page" do
-      expect(current_path).to eql(root_path)
+    it "redirects to talks page" do
+      expect(current_path).to eql(talks_path)
     end
 
     it "displays access my account" do
-      expect(page).to have_content("Acessar minha conta")
+      expect(page).to have_content("Trabalhos")
     end
   end
 
   context "when the search is successful" do
     before do
       visit root_path
+      click_link "Trabalhos"
       fill_in :talk_search, :with => "compartilhe"
       click_button "Buscar"
     end
 
-    it "redirects to home page" do
-      expect(current_path).to eql(root_path)
+    it "redirects to talks page" do
+      expect(current_path).to eql(talks_path)
     end
 
     it "shows talks found" do
@@ -53,12 +55,13 @@ describe "Home page" do
   context "when the search is not successful" do
     before do
       visit root_path
+      click_link "Trabalhos"
       fill_in :talk_search, :with => "noob"
       click_button "Buscar"
     end
 
-    it "redirects to home page" do
-      expect(current_path).to eql(root_path)
+    it "redirects to talks page" do
+      expect(current_path).to eql(talks_path)
     end
 
     it "not show talks" do

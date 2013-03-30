@@ -44,20 +44,11 @@ class EventsController < ApplicationController
   def show
     begin
       @event = Event.find(params[:id])
-      @unauthorized = unauthorized
+      @dates = (@event.start_date..@event.end_date).to_a
+      @authorized = authorized_access?(@event)
 
       unless @event.to_public
-        if logged_in?
-          can_see = false
-          
-          @event.users.each do |user|
-            can_see = true if user.id == current_user.id
-          end
-          
-          @event = nil unless can_see
-        else
-          @event = nil
-        end
+        @event = nil unless @authorized
       end
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path
@@ -69,7 +60,7 @@ class EventsController < ApplicationController
     @organizers = organizers
     @groups = groups
 
-    redirect_to events_path, :notice => t("flash.unauthorized_access") if unauthorized
+    redirect_to events_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
 
   def update
@@ -107,20 +98,6 @@ private
 
   def groups
     Group.order_by(:name => :asc)
-  end
-
-  def unauthorized
-    unauthorized = true
-
-    if logged_in? 
-      @event.users.each do |o|
-        if current_user.id == o.id
-          unauthorized = false
-        end
-      end
-    end
-
-    unauthorized
   end
 
   def all_public_events

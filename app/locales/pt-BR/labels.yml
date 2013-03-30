@@ -31,3 +31,10 @@ pt-BR:
       place: "Local"
       address: "Endereço"
       to_public: "Quero publicar"
+
+    schedule:
+      date: "Data"
+      time: "Hora"
+      environment: "Ambiente"
+      session: "Sessão"
+      talk: "Palestra/Workshop"

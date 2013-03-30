@@ -10,8 +10,8 @@ describe "Create talk", :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Minhas palestras"
-      click_link "Criar"
+      click_link "Trabalhos"
+      click_link "Adicionar trabalho"
 
       fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/compartilhe"
       fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
@@ -21,7 +21,7 @@ describe "Create talk", :js => true do
       select other_user.name, :from => "user_id"
       click_button :add_user
 
-      click_button "Adicionar palestra"
+      click_button "Adicionar trabalho"
     end
 
     it "redirects to the talk page" do
@@ -29,7 +29,7 @@ describe "Create talk", :js => true do
     end
 
     it "displays success message" do
-      expect(page).to have_content("Sua palestra foi adicionada!")
+      expect(page).to have_content("O trabalho foi adicionado!")
     end
   end
 
@@ -38,10 +38,10 @@ describe "Create talk", :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Minhas palestras"
-      click_link "Criar"
+      click_link "Trabalhos"
+      click_link "Adicionar trabalho"
       
-      click_button "Adicionar palestra"
+      click_button "Adicionar trabalho"
     end
 
     it "renders form page" do
@@ -58,15 +58,15 @@ describe "Create talk", :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Minhas palestras"
-      click_link "Criar"
+      click_link "Trabalhos"
+      click_link "Adicionar trabalho"
 
       fill_in "Link do slideshare", :with => "http://www.slideshare.net/luizsanches/invalid"
       fill_in "Titulo", :with => "Compartilhe!"
     end
 
     it "displays error message" do
-      expect(page).to have_content("Palestra não encontrada")
+      expect(page).to have_content("Trabalho não encontrado")
     end
   end
 end

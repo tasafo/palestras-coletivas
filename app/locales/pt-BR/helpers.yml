@@ -6,8 +6,8 @@ pt-BR:
         update: "Atualizar dados"
 
       talk:
-        create: "Adicionar palestra"
-        update: "Atualizar palestra"
+        create: "Adicionar trabalho"
+        update: "Atualizar trabalho"
 
       group:
         create: "Adicionar grupo"
@@ -16,3 +16,7 @@ pt-BR:
       event:
         create: "Adicionar evento"
         update: "Atualizar evento"
+
+      schedule:
+        create: "Adicionar programação"
+        update: "Atualizar programação"

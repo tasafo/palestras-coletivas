@@ -2,8 +2,10 @@ pt-BR:
   mongoid:
     models:
       user: "Usuário"
-      talk: "Palestra"
+      talk: "Trabalho"
       group: "Grupo"
+      event: "Evento"
+      schedule: "Programação"
 
     attributes:
       user:
@@ -41,3 +43,9 @@ pt-BR:
         owner: "Criador"
         links: "Links"
         environments: "Ambientes"
+
+      schedule:
+        date: "Data"
+        time: "Hora"
+        environment: "Ambiente"
+        session: "Sessão"
