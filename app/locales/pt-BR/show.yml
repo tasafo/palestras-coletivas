@@ -28,3 +28,5 @@ pt-BR:
         one: Grupo
         other: Grupos
       not_found: "Evento não encontrado"
+      of: "De"
+      to: "até"

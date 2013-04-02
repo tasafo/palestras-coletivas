@@ -1,4 +1,4 @@
-<h2><%= "#{@event.name} - #{@event.edition}" %></h2>
+<h2 class="text-info"><%= "#{@event.name} - #{@event.edition}" %></h2>
 
 <%= form_for(@schedule, :url => url, :html => {:class => 'form-horizontal' }) do |f| %>
   <%= render "shared/error_messages", :record => @schedule %>
@@ -6,14 +6,14 @@
   <div class="control-group">
     <%= f.label :date, t("labels.schedule.date"), :class => 'control-label' %>
     <div class="controls">
-      <%= select_tag("schedule[date]", options_for_select(@dates)) %>
+      <%= select_tag("schedule[date]", @dates.html_safe) %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :time, t("labels.schedule.time"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :time, :class => "input-mini hour" %>
+      <%= f.text_field :time, :class => "input-mini" %>
     </div>
   </div>
 
@@ -24,11 +24,27 @@
     </div>
   </div>
 
+  <div id="div_talk" class="control-group" style="display:<%= @display %>">
+    <label class="control-label"><%= t("labels.talk.title") %></label>
+    <div class="controls">
+      <span id="talk_title" class="input-xlarge uneditable-input"><%= @talk_title %></span>
+    </div>
+  </div>  
+
   <%= f.hidden_field :event_id, :value => @event.id %>
+  <%= f.hidden_field :talk_id, :value => @schedule.talk_id %>
 
   <div class="form-actions">
     <%= f.submit :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
           event_path(@event), :class => 'btn' %>
   </div>
+
+  <div class="input-append" id="search_talks" style="display:none">
+    <h3 class="text-info"><%= t("titles.talks.search") %></h3>
+    <input class="span12" id="search_text" type="text" placeholder="<%= t("placeholder.index.search") %> ">
+    <button id="search_button" class="btn btn-info" type="button"><%= t("form.submit.search") %></button>
+  </div>
+
+  <div id="search_result"></div>
 <% end %>

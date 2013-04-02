@@ -28,7 +28,7 @@ class Event
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :place, :address, :owner
 
-  validates_length_of :description, maximum: 200
+  validates_length_of :description, maximum: 500
 
   geocoded_by :address
 

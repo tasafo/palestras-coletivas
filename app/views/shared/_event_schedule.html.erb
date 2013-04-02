@@ -1,9 +1,9 @@
     <hr>
 
     <% if @authorized %>
-      <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "btn btn-primary" %>
+      <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "btn btn-primary" %>
 
-        <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "btn" %>
+      <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "btn btn-success" %>
       <br />
     <% else %>
       <h2><%= t("titles.schedules.index") %></h2>
@@ -15,10 +15,16 @@
         <table id="table_schedules" class="table table-striped">
           <thead>
             <tr>
-              <th width="25%"><%= t("new.schedule.table.time") %></th>
-              <th width="50%"><%= t("new.schedule.table.session") %></th>
+              <th width="10%">
+                <p class="text-center"><%= t("new.schedule.table.time") %></p>
+              </th>
+              <th width="80%">
+                <p class="text-center"><%= t("new.schedule.table.session") %></p>
+              </th>
               <% if @authorized %>
-                <th width="25%"><%= t("new.schedule.table.operation") %></th>
+                <th width="10%">
+                  <p class="text-left"><%= t("new.schedule.table.operation") %></p>
+                </th>
               <% end %>
             </tr>
           </thead>
@@ -26,14 +32,32 @@
           <tbody>
           <% @dates.each do |date| %>
             <tr class="info">
-              <td colspan="3"><center><h4><%= l date, :format => :custom %></h4></center></td>
+              <% unless @authorized %>
+                <td></td>
+              <% end %>
+              <td colspan="3">
+                <h4><p class="text-center"><%= l date, :format => :custom %></h4></p>
+              </td>
             </tr>
-            <% @event.schedules.by_date(date).each do |s| %>
-              <tr id="row_<%= s.id %>">
-                <td><%= s.time %></td>
-                <td><%= s.session.description %></td>
+            <% @event.schedules.by_date(date).each do |schedule| %>
+              <tr id="row_<%= schedule.id %>">
+                <td><p class="text-center"><%= schedule.time %></p></td>
+
+                <% if schedule.talk? %>
+                  <td>
+                    <p class="text-center">
+                      <%= link_to schedule.talk.title, talk_path(schedule.talk), :target => "_blank" %><br/>
+                      (<% schedule.talk.users.each do |user| %>
+                        <%= link_to user.name, user_path(user), :target => "_blank" %>
+                      <% end %>)
+                    </p>
+                  </td>
+                <% else %>
+                  <td><p class="text-center"><%= schedule.session.description %></p></td>
+                <% end %>
+
                 <% if @authorized %>
-                  <td><%= link_to t("actions.edit"), edit_schedule_path(@event, s), :class => "btn", :id => "schedule_id_#{s.id}" %></td>
+                  <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "btn", :id => "schedule_id_#{schedule.id}" %></td>
                 <% end %>
               </tr>
             <% end %>

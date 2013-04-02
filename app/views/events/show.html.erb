@@ -1,6 +1,15 @@
 <div>
   <% if @event %>
-    <h2><%= @event.name %> - <%= @event.edition %></h2>
+    <h2 class="text-info"><%= @event.name %> - <%= @event.edition %></h2>
+
+    <% if @event.start_date == @event.end_date %>
+      <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
+    <% else %>
+      <h4 class="text-success">
+        <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %> 
+        <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
+      </h4>
+    <% end %>
 
     <p>
       <strong><%= t("labels.event.description") %>:</strong> <%= @event.description %>
@@ -18,7 +27,9 @@
       <strong><%= t("labels.event.address") %>:</strong> <%= @event.address %>
     </p>
 
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x200&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => 'thumbnail', :height => "100" %>
+    <% if Rails.env != 'test' %>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => "img-polaroid" %>
+    <% end %>
 
     <%= render "shared/event_schedule" %>
 

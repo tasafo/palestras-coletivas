@@ -11,6 +11,8 @@ pt-BR:
       new: "Adicionar trabalho"
       edit: "Editar trabalho"
       my: "Meus trabalhos"
+      search: "Buscar trabalho"
+      select: "Selecionar trabalho"
       no_talks: "Nenhum trabalho adicionado"
 
     home:

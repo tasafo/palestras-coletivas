@@ -10,7 +10,7 @@ describe "Show private talk", :js => true do
       visit root_path
       click_link "Trabalhos"
       click_link "Meus trabalhos"
-      click_link "Compartilhe"
+      click_link "Ruby praticamente falando"
     end
 
     it "redirects to the show page" do
@@ -18,7 +18,7 @@ describe "Show private talk", :js => true do
     end
 
     it "displays detail talk" do
-      expect(page).to have_content("Compartilhe")
+      expect(page).to have_content("Ruby praticamente falando")
     end
   end
 

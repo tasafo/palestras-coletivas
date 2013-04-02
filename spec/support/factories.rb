@@ -26,16 +26,30 @@ FactoryGirl.define do
   factory :talk do
     presentation_url "http://www.slideshare.net/luizsanches/compartilhe"
     title "Compartilhe"
-    description "This is more a talk"
-    tags "tecnology, computer, programming"
+    description "Essa palestra fala sobre compartilhamento de informações"
+    tags "tecnologia, compartilhamento, informação"
     to_public true
     thumbnail "//cdn.slidesharecdn.com/ss_thumbnails/compartilhe-130219192210-phpapp02-thumbnail.jpg?1361323471"
     code "16635025"
 
     factory :other_talk do
       presentation_url "http://www.slideshare.net/luizsanches/ruby-praticamente-falando"
+      title "Ruby praticamente falando"
+      description "Fala sobre ruby e rails"
+      thumbnail "//cdn.slidesharecdn.com/ss_thumbnails/ruby-praticamente-falando-v1-1-110706064112-phpapp01-thumbnail.jpg?1309952602"
+      code "8521445"
+      tags "ruby, rails"
       to_public false
     end
+
+    factory :another_talk do
+      title "A história da informática"
+      description "Um história comovente da era da informática"
+      tags "tecnologia, informática"
+      thumbnail ""
+      code ""
+      to_public true
+    end    
   end
 
   factory :group do
@@ -61,7 +75,7 @@ FactoryGirl.define do
       start_date "05/06/2012"
       end_date "06/06/2012"
       place "Centro de Convenções do Jurunas"
-      address "Rua dos Tamoios, 300, Jurunas, Belém - Pará, Brasil"
+      address "New York, NY"
       to_public true
     end
   end
@@ -69,7 +83,7 @@ FactoryGirl.define do
   factory :session do
     trait :palestra do
       type "talk"
-      description "Palestra / Curso"
+      description "Trabalho"
       order 1
     end
 

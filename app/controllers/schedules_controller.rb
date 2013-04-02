@@ -41,10 +41,43 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def search_talks
+    result = nil
+    search = params[:search]
+    
+    unless search.blank?
+      @talks = Talk.fulltext_search(search, :index => 'fulltext_index_talks', :published => [ true ])
+
+      result = render_to_string(
+        :partial => "shared/talks_found",
+        :layout => false
+      )
+    end
+
+    respond_to do |format|
+      format.json { render :json => { :result => result } }
+    end
+  end
+
 private
   def auxiliary_objetcs
     @event = Event.find(params[:event_id])
+    
     @sessions = Session.all.order_by(:order => :asc)
-    @dates = (@event.start_date..@event.end_date).to_a
+
+    event_dates = (@event.start_date..@event.end_date).to_a
+
+    @dates = ""
+    event_dates.each do |date|
+      if @schedule.date? && @schedule.date == date
+        selected = "selected='selected'"
+      end
+
+      @dates += "<option #{selected}>#{date}</option>"
+    end
+
+    @talk_title = @schedule.talk? ? @schedule.talk.title : ""
+
+    @display = @schedule.talk? ? "block" : "none"
   end
 end

@@ -21,8 +21,8 @@ describe "Create event", :js => true do
       fill_in "Tags", :with => "tecnologia, agilidade, gestão"
       fill_in "Data de início", :with => "05/06/2012"
       fill_in "Data de término", :with => "06/06/2012"
-      fill_in "Local", :with => "Centro de Convenções do Jurunas"
-      fill_in "Endereço", :with => "Rua dos Tamoios, 300, Jurunas, Belém - Pará, Brasil"
+      fill_in "Local", :with => "Centro de Convenções New York"
+      fill_in "Endereço", :with => "New York, NY"
       check("Quero publicar")
 
       select other_user.name, :from => "user_id"

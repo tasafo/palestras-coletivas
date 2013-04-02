@@ -1,0 +1,31 @@
+<% @talks.each do |talk| %>
+  <hr class="featurette-divider">
+
+  <div id="div_<%= talk.id %>" class="featurette">
+    <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
+
+    <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
+
+    <h3 class="featurette-heading"><%= link_to talk.title, talk_path(talk), :target => "_blank" %></h3>
+    
+    <p class="lead">
+      <strong><%= t("labels.talk.description") %></strong><br/>
+      <%= talk.description %><br/>
+
+      <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
+      
+      <strong><%= t("show.talk.tags") %>:</strong> <%= talk.tags %><br/>
+
+      <% author = t("show.talk.authors") %>
+      <strong><%= author[talk.users.count > 1 ? :other : :one] %></strong><br/>
+
+      <% talk.users.each do |user| %>
+        <%= render "shared/user", :user => user, :target_blank => true %><br/>
+      <% end %>
+
+      <br/>
+      <a id="talk_<%= talk.id %>" onclick="select_talk('<%= talk.id %>', '<%= talk.title %>')" class="btn btn-success"><%= t("titles.talks.select") %></a>
+    </p>
+  </div>
+<% end %>
+<hr class="featurette-divider">

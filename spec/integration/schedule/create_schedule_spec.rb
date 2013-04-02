@@ -1,8 +1,13 @@
 require "spec_helper"
 
-describe "Create schedule" do
+describe "Create schedule", :js => true do
   let!(:user) { create(:user, :paul) }
+  
   let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
+  
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }
+  
   let!(:session_abertura) { create(:session, :abertura) }
   let!(:session_palestra) { create(:session, :palestra) }
   let!(:session_intervalo) { create(:session, :intervalo) }
@@ -52,4 +57,37 @@ describe "Create schedule" do
       expect(page).to have_content("Verifique o formulário antes de continuar:")
     end
   end
+
+  context "with valid talk" do
+    before do
+      login_as(user)
+      visit root_path
+
+      click_link "Eventos"
+      click_link "Tá Safo Conf"
+      click_link "Adicionar programação"
+
+      select "05/06/2012", :from => "schedule_date"
+
+      fill_in "Hora", :with => "08:00"
+
+      select session_palestra.description, :from => "schedule_session_id"
+
+      fill_in :search_text, :with => "tecnologia"
+
+      click_button "Buscar"
+
+      click_link "talk_#{talk.id}"
+
+      click_button "Adicionar programação"
+    end
+
+    xit "redirects to the event page" do
+      expect(current_path).to match(%r[/events/\w+])
+    end
+
+    xit "displays success message" do
+      expect(page).to have_content("A programação foi adicionada!")
+    end
+  end  
 end

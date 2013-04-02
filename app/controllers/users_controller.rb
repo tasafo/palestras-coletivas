@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         @current_location = xml.xpath("//currentLocation").text
         @emails = xml.xpath("//emails/value")
         @tem_perfil_no_gravatar = true
-      rescue OpenURI::HTTPError
+      rescue OpenURI::HTTPError, SocketError
         @tem_perfil_no_gravatar = false
       end
     rescue Mongoid::Errors::DocumentNotFound

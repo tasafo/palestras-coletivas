@@ -24,7 +24,7 @@
               <% if u.id.to_s != model.owner %>
                 <tr id="row_<%= u.id %>">
                   <td><%= u.name %><input type="hidden" name="users[]" value="<%= u.id %>" /></td>
-                  <td><a onclick="remove_user('<%= u.id %>')"><%= t("new.invite.js.remove") %> </a></td>
+                  <td><a class="btn" onclick="remove_user('<%= u.id %>')"><%= t("new.invite.js.remove") %></a></td>
                 </tr>
               <% end %>
             <% end %>
