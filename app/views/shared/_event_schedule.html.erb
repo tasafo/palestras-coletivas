@@ -19,7 +19,7 @@
                 <p class="text-center"><%= t("new.schedule.table.time") %></p>
               </th>
               <th width="80%">
-                <p class="text-center"><%= t("new.schedule.table.session") %></p>
+                <p class="text-center"><%= t("new.schedule.table.activity") %></p>
               </th>
               <% if @authorized %>
                 <th width="10%">
@@ -53,7 +53,7 @@
                     </p>
                   </td>
                 <% else %>
-                  <td><p class="text-center"><%= schedule.session.description %></p></td>
+                  <td><p class="text-center"><%= schedule.activity.description %></p></td>
                 <% end %>
 
                 <% if @authorized %>

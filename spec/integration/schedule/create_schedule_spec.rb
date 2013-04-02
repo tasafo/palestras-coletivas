@@ -8,9 +8,9 @@ describe "Create schedule", :js => true do
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
   let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }
   
-  let!(:session_abertura) { create(:session, :abertura) }
-  let!(:session_palestra) { create(:session, :palestra) }
-  let!(:session_intervalo) { create(:session, :intervalo) }
+  let!(:activity_abertura) { create(:activity, :abertura) }
+  let!(:activity_palestra) { create(:activity, :palestra) }
+  let!(:activity_intervalo) { create(:activity, :intervalo) }
 
   context "with valid interval" do
     before do
@@ -25,7 +25,7 @@ describe "Create schedule", :js => true do
 
       fill_in "Hora", :with => "08:00"
 
-      select session_abertura.description, :from => "schedule_session_id"
+      select activity_abertura.description, :from => "schedule_activity_id"
 
       click_button "Adicionar programação"
     end
@@ -71,7 +71,7 @@ describe "Create schedule", :js => true do
 
       fill_in "Hora", :with => "08:00"
 
-      select session_palestra.description, :from => "schedule_session_id"
+      select activity_palestra.description, :from => "schedule_activity_id"
 
       fill_in :search_text, :with => "tecnologia"
 

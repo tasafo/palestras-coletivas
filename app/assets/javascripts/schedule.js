@@ -1,13 +1,13 @@
 $(function() {
-    $("#schedule_session_id").change(function() {
-        session_id = $("#schedule_session_id").val();
-        session_desc = $("#schedule_session_id").find("option:selected").text();
+    $("#schedule_activity_id").change(function() {
+        activity_id = $("#schedule_activity_id").val();
+        activity_desc = $("#schedule_activity_id").find("option:selected").text();
         
-        if (session_id) {
+        if (activity_id) {
             $.ajax({
-                url : "/sessions/get-type/",
+                url : "/activities/get-type/",
                 data : {
-                    id : session_id
+                    id : activity_id
                 },
                 async : false,
                 type : "post",
@@ -17,7 +17,7 @@ $(function() {
                 dataType : "json",
                 success : function(result) {
                     if (!result.error) {
-                        if (result.session_type == "talk") {
+                        if (result.type_activity == "talk") {
                             $("#search_talks").show();
                             $("#search_text").focus();
                         } else {
@@ -43,7 +43,7 @@ $(function() {
         }
     });
 
-    $("#schedule_session_id").trigger("change");
+    $("#schedule_activity_id").trigger("change");
     $("#schedule_date").focus();
 });
 

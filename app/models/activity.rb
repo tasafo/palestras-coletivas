@@ -1,4 +1,4 @@
-class Session
+class Activity
   include Mongoid::Document
 
   field :type, type: String

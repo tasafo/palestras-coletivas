@@ -30,7 +30,7 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
 
-  #Capybara.javascript_driver = :webkit
+  Capybara.javascript_driver = :webkit
 
   Geocoder.configure(:lookup => :test)
 

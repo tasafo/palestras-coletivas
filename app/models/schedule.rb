@@ -8,11 +8,11 @@ class Schedule
 
   belongs_to :event
 
-  belongs_to :session
+  belongs_to :activity
 
   belongs_to :talk
 
-  validates_presence_of :date, :time, :event, :session
+  validates_presence_of :date, :time, :event, :activity
 
   scope :by_date, lambda { |date| where(:date => date).order_by(:time => :asc) }
 end

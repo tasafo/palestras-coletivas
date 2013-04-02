@@ -30,8 +30,8 @@ describe Schedule, "validations" do
   end
 
   it "requires session" do
-    schedule = Schedule.create(:session => nil)
+    schedule = Schedule.create(:activity => nil)
 
-    expect(schedule).to have(1).error_on(:session)
+    expect(schedule).to have(1).error_on(:activity)
   end
 end

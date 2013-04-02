@@ -80,7 +80,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :session do
+  factory :activity do
     trait :palestra do
       type "talk"
       description "Trabalho"
@@ -110,19 +110,19 @@ FactoryGirl.define do
     trait :abertura do
       date "05/06/2012"
       time "08:00"
-      session { create(:session, :abertura) }
+      activity { create(:activity, :abertura) }
     end
 
     trait :palestra do
       date "05/06/2012"
       time "09:00"
-      session { create(:session, :palestra) }
+      activity { create(:activity, :palestra) }
     end
 
     trait :intervalo do
       date "05/06/2012"
       time "10:00"
-      session { create(:session, :intervalo) }
+      activity { create(:activity, :intervalo) }
     end
   end
 end

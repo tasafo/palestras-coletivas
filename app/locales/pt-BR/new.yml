@@ -24,8 +24,8 @@ pt-BR:
 
     schedule:
       table:
-        time: "Hora"
-        session: "Sessão"
+        time: "Horário"
+        activity: "Atividade"
         operation: "Operação"
 
     invite:

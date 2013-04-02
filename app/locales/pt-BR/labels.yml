@@ -36,5 +36,5 @@ pt-BR:
       date: "Data"
       time: "Hora"
       environment: "Ambiente"
-      session: "Sessão"
-      talk: "Palestra/Workshop"
+      activity: "Atividade"
+      talk: "Trabalho"

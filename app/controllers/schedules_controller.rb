@@ -63,7 +63,7 @@ private
   def auxiliary_objetcs
     @event = Event.find(params[:event_id])
     
-    @sessions = Session.all.order_by(:order => :asc)
+    @activities = Activity.all.order_by(:order => :asc)
 
     event_dates = (@event.start_date..@event.end_date).to_a
 

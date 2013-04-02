@@ -40,7 +40,7 @@ Palestrascoletivas::Application.routes.draw do
   put "/schedules/:event_id/:id/edit", :to => "schedules#update", :as => false
   post "/schedules/search-talks", :to => "schedules#search_talks"
 
-  post "/sessions/get-type" => "sessions#get_type"
+  post "/activities/get-type" => "activities#get_type"
 
   resources :password_resets
 end

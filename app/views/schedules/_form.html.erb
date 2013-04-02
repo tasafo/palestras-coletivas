@@ -18,9 +18,9 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :session, t("labels.schedule.session"), :class => 'control-label' %>
+    <%= f.label :activity, t("labels.schedule.activity"), :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:schedule, :session_id, @sessions, :id, :description) %>
+      <%= collection_select(:schedule, :activity_id, @activities, :id, :description) %>
     </div>
   </div>
 

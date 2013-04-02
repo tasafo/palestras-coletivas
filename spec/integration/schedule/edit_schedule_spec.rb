@@ -4,7 +4,7 @@ describe "Edit schedule" do
   let!(:user) { create(:user, :paul) }
   let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
 
-  let!(:session_lanche) { create(:session, :lanche) }
+  let!(:activity_lanche) { create(:activity, :lanche) }
 
   let!(:schedule_abertura) { create(:schedule, :abertura, :event => event) }
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event) }
