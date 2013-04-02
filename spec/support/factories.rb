@@ -108,19 +108,19 @@ FactoryGirl.define do
 
   factory :schedule do
     trait :abertura do
-      date "05/06/2012"
+      day 1
       time "08:00"
       activity { create(:activity, :abertura) }
     end
 
     trait :palestra do
-      date "05/06/2012"
+      day 1
       time "09:00"
       activity { create(:activity, :palestra) }
     end
 
     trait :intervalo do
-      date "05/06/2012"
+      day 1
       time "10:00"
       activity { create(:activity, :intervalo) }
     end

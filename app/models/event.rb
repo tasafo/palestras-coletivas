@@ -12,6 +12,7 @@ class Event
   field :tags, type: String
   field :start_date, type: Date
   field :end_date, type: Date
+  field :days, type: Integer
   field :to_public, type: Boolean, :default => false
   field :place, type: String
   field :address, type: String
@@ -34,9 +35,16 @@ class Event
 
   after_validation :geocode, :if => :address_changed?
 
+  before_save :number_of_days
+
   fulltext_search_in :name, :edition, :tags, :address,
     :index_name => 'fulltext_index_events',
     :filters => {
       :published => lambda { |event| event.to_public }
     }
+
+private
+  def number_of_days
+    self.days = (self.start_date..self.end_date).to_a.count
+  end
 end

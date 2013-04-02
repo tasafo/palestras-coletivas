@@ -45,7 +45,7 @@ pt-BR:
         environments: "Ambientes"
 
       schedule:
-        date: "Data"
-        time: "Hora"
+        day: "Dia"
+        time: "Horário"
         environment: "Ambiente"
         activity: "Atividade"

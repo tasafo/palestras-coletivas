@@ -2,7 +2,7 @@ class Schedule
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :date, type: Date
+  field :day, type: Integer
   field :time, type: String
   field :environment, type: String
 
@@ -12,7 +12,7 @@ class Schedule
 
   belongs_to :talk
 
-  validates_presence_of :date, :time, :event, :activity
+  validates_presence_of :day, :time, :event, :activity
 
-  scope :by_date, lambda { |date| where(:date => date).order_by(:time => :asc) }
+  scope :by_day, lambda { |day| where(:day => day).order_by(:time => :asc) }
 end

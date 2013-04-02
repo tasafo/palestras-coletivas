@@ -20,9 +20,9 @@ describe "Edit schedule" do
       click_link "Tá Safo Conf"
       click_link "schedule_id_#{schedule_palestra2.id}"
 
-      select "06/06/2012", :from => "schedule_date"
+      select "06/06/2012", :from => "schedule_day"
 
-      fill_in "Hora", :with => "08:00"
+      fill_in "Horário", :with => "08:00"
 
       click_button "Atualizar programação"
     end
@@ -44,7 +44,7 @@ describe "Edit schedule" do
       click_link "Tá Safo Conf"
       click_link "schedule_id_#{schedule_palestra2.id}"
       
-      fill_in "Hora", :with => ""
+      fill_in "Horário", :with => ""
       
       click_button "Atualizar programação"
     end

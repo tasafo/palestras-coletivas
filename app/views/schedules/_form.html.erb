@@ -4,9 +4,9 @@
   <%= render "shared/error_messages", :record => @schedule %>
 
   <div class="control-group">
-    <%= f.label :date, t("labels.schedule.date"), :class => 'control-label' %>
+    <%= f.label :day, t("labels.schedule.day"), :class => 'control-label' %>
     <div class="controls">
-      <%= select_tag("schedule[date]", @dates.html_safe) %>
+      <%= select_tag("schedule[day]", @dates.html_safe) %>
     </div>
   </div>
 

@@ -21,9 +21,9 @@ describe "Create schedule", :js => true do
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
 
-      select "05/06/2012", :from => "schedule_date"
+      select "05/06/2012", :from => "schedule_day"
 
-      fill_in "Hora", :with => "08:00"
+      fill_in "Horário", :with => "08:00"
 
       select activity_abertura.description, :from => "schedule_activity_id"
 
@@ -67,9 +67,9 @@ describe "Create schedule", :js => true do
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
 
-      select "05/06/2012", :from => "schedule_date"
+      select "05/06/2012", :from => "schedule_day"
 
-      fill_in "Hora", :with => "08:00"
+      fill_in "Horário", :with => "08:00"
 
       select activity_palestra.description, :from => "schedule_activity_id"
 

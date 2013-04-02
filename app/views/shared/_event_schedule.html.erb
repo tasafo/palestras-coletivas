@@ -30,6 +30,7 @@
           </thead>
 
           <tbody>
+          <% day = 1 %>
           <% @dates.each do |date| %>
             <tr class="info">
               <% unless @authorized %>
@@ -39,7 +40,7 @@
                 <h4><p class="text-center"><%= l date, :format => :custom %></h4></p>
               </td>
             </tr>
-            <% @event.schedules.by_date(date).each do |schedule| %>
+            <% @event.schedules.by_day(day).each do |schedule| %>
               <tr id="row_<%= schedule.id %>">
                 <td><p class="text-center"><%= schedule.time %></p></td>
 
@@ -61,6 +62,7 @@
                 <% end %>
               </tr>
             <% end %>
+            <% day += 1 %>
           <% end %>
           </tbody>
 

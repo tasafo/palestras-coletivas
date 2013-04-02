@@ -11,10 +11,10 @@ describe Schedule, "validations" do
     end
   end
 
-  it "requires date" do
-    schedule = Schedule.create(:date => nil)
+  it "requires day" do
+    schedule = Schedule.create(:day => nil)
 
-    expect(schedule).to have(1).error_on(:date)
+    expect(schedule).to have(1).error_on(:day)
   end
 
   it "requires time" do

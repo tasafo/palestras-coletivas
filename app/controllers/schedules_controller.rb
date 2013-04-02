@@ -68,12 +68,12 @@ private
     event_dates = (@event.start_date..@event.end_date).to_a
 
     @dates = ""
+    day = 1
     event_dates.each do |date|
-      if @schedule.date? && @schedule.date == date
-        selected = "selected='selected'"
-      end
+      selected = @schedule.day == day ? "selected='selected'" : ""
 
-      @dates += "<option #{selected}>#{date}</option>"
+      @dates += "<option value='#{day}' #{selected}>#{date}</option>"
+      day += 1
     end
 
     @talk_title = @schedule.talk? ? @schedule.talk.title : ""
