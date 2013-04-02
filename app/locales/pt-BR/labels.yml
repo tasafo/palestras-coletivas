@@ -25,6 +25,7 @@ pt-BR:
       name: "Nome"
       edition: "Edição"
       description: "Descrição"
+      stocking: "Lotação"
       tags: "Tags"
       start_date: "Data de início"
       end_date: "Data de término"

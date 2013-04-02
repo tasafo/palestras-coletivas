@@ -18,6 +18,7 @@ describe "Create event", :js => true do
       fill_in "Nome", :with => "Tá Safo Conf"
       fill_in "Edição", :with => "2012"
       fill_in "Descrição", :with => "Evento de tecnologia que vem com sua 1ª edição na região"
+      fill_in "Lotação", :with => 100
       fill_in "Tags", :with => "tecnologia, agilidade, gestão"
       fill_in "Data de início", :with => "05/06/2012"
       fill_in "Data de término", :with => "06/06/2012"

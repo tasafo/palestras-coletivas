@@ -65,4 +65,10 @@ describe Event, "validations" do
 
     expect(event).to have(1).error_on(:owner)
   end
+
+  it "requires stocking" do
+    event = Event.create(:stocking => nil)
+
+    expect(event).to have(1).error_on(:stocking)
+  end
 end

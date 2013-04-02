@@ -11,14 +11,16 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @organizers = organizers
-    @groups = groups
+    
+    guest_list
   end
 
   def create
     @event = Event.new(params[:event])
     @event.owner = current_user.id
     @event.users << current_user
+
+    guest_list
 
     if @event.save
       if params[:users]
@@ -57,14 +59,16 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-    @organizers = organizers
-    @groups = groups
+
+    guest_list
 
     redirect_to events_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
 
   def update
     @event = Event.find(params[:id])
+
+    guest_list
 
     if @event.update_attributes(params[:event])
       @event.users = nil
@@ -92,12 +96,9 @@ class EventsController < ApplicationController
   end
 
 private
-  def organizers
-    User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
-  end
-
-  def groups
-    Group.order_by(:name => :asc)
+  def guest_list
+    @organizers = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
+    @groups = Group.order_by(:name => :asc)
   end
 
   def all_public_events

@@ -14,13 +14,16 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
-    @members = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
+
+    list_members
   end
 
   def create
     @group = Group.new(params[:group])
     @group.owner = current_user.id
     @group.users << current_user
+
+    list_members
 
     if @group.save
       if params[:users]
@@ -67,7 +70,8 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
-    @members = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
+
+    list_members
 
     unauthorized = @group.owner == current_user.id.to_s ? false : true
 
@@ -76,6 +80,8 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
+
+    list_members
 
     if @group.update_attributes(params[:group])
       @group.users = nil
@@ -90,5 +96,10 @@ class GroupsController < ApplicationController
     else
       render :edit
     end
+  end
+
+private
+  def list_members
+    @members = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
   end
 end

@@ -71,6 +71,7 @@ FactoryGirl.define do
       name "Tá Safo Conf"
       edition "2012"
       description "Evento de tecnologia que vem com sua 1ª edição na região"
+      stocking 100
       tags "tecnologia, agilidade, gestão"
       start_date "05/06/2012"
       end_date "06/06/2012"

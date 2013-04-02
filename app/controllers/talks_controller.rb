@@ -27,13 +27,16 @@ class TalksController < ApplicationController
 
   def new
     @talk = Talk.new
-    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
+    
+    list_authors
   end
 
   def create
     @talk = Talk.new(params[:talk])
     @talk.owner = current_user.id
     @talk.users << current_user
+
+    list_authors
 
     if @talk.save
       if params[:users]
@@ -86,7 +89,8 @@ class TalksController < ApplicationController
 
   def edit
     @talk = Talk.find(params[:id])
-    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
+
+    list_authors
 
     unauthorized = @talk.owner == current_user.id.to_s ? false : true
 
@@ -95,6 +99,8 @@ class TalksController < ApplicationController
 
   def update
     @talk = Talk.find(params[:id])
+
+    list_authors
 
     if @talk.update_attributes(params[:talk])
       @talk.users = nil
@@ -114,5 +120,9 @@ class TalksController < ApplicationController
 private
   def all_public_talks
     Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
+  end
+
+  def list_authors
+    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
   end
 end

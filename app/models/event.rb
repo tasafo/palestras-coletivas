@@ -9,6 +9,7 @@ class Event
   field :edition, type: String
   slug :name, :edition
   field :description, type: String
+  field :stocking, type: Integer, :default => 0
   field :tags, type: String
   field :start_date, type: Date
   field :end_date, type: Date
@@ -30,6 +31,8 @@ class Event
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :place, :address, :owner
 
   validates_length_of :description, maximum: 500
+
+  validates_numericality_of :stocking, greater_than_or_equal_to: 0
 
   geocoded_by :address
 
