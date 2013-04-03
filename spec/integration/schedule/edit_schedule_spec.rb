@@ -22,7 +22,7 @@ describe "Edit schedule" do
 
       select "06/06/2012", :from => "schedule_day"
 
-      fill_in "Horário", :with => "08:00"
+      fill_in_inputmask "Horário", :with => "08:00"
 
       click_button "Atualizar programação"
     end

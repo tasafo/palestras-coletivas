@@ -23,7 +23,7 @@ describe "Create schedule", :js => true do
 
       select "05/06/2012", :from => "schedule_day"
 
-      fill_in "Horário", :with => "08:00"
+      fill_in_inputmask "Horário", :with => "08:00"
 
       select activity_abertura.description, :from => "schedule_activity_id"
 
@@ -69,7 +69,7 @@ describe "Create schedule", :js => true do
 
       select "05/06/2012", :from => "schedule_day"
 
-      fill_in "Horário", :with => "08:00"
+      fill_in_inputmask "Horário", :with => "08:00"
 
       select activity_palestra.description, :from => "schedule_activity_id"
 

@@ -13,7 +13,7 @@
   <div class="control-group">
     <%= f.label :time, t("labels.schedule.time"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :time, :class => "input-mini" %>
+      <%= f.text_field :time, :class => "input-mini hour" %>
     </div>
   </div>
 
@@ -33,6 +33,7 @@
 
   <%= f.hidden_field :event_id, :value => @event.id %>
   <%= f.hidden_field :talk_id, :value => @schedule.talk_id %>
+  <input id="old_talk_id" name="old_talk_id" type="hidden" value="<%= @schedule.talk_id %>" />
 
   <div class="form-actions">
     <%= f.submit :class => 'btn btn-primary' %>
