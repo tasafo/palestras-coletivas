@@ -9,12 +9,11 @@
     <h3 class="featurette-heading"><%= link_to talk.title, talk_path(talk), :target => "_blank" %></h3>
     
     <p class="lead">
-      <strong><%= t("labels.talk.description") %></strong><br/>
       <%= talk.description %><br/>
 
-      <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
-      
       <strong><%= t("show.talk.tags") %>:</strong> <%= talk.tags %><br/>
+
+      <%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %><br/>
 
       <% author = t("show.talk.authors") %>
       <strong><%= author[talk.users.count > 1 ? :other : :one] %></strong><br/>
@@ -24,7 +23,7 @@
       <% end %>
 
       <br/>
-      <a id="talk_<%= talk.id %>" onclick="select_talk('<%= talk.id %>', '<%= talk.title %>')" class="btn btn-success"><%= t("titles.talks.select") %></a>
+      <input type="button" id="talk_id_<%= talk.id %>" onclick="select_talk('<%= talk.id %>', '<%= talk.title %>')" class="btn btn-success" value="<%= t("titles.talks.select") %>" />
     </p>
   </div>
 <% end %>

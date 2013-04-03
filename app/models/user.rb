@@ -10,6 +10,9 @@ class User
   field :auth_token, type: String
   field :password_reset_token, type: String
   field :password_reset_sent_at, type: DateTime
+  field :counter_organizing_events, type: Integer, default: 0
+  field :counter_talks_events, type: Integer, default: 0
+  field :counter_participation_events, type: Integer, default: 0
 
   has_and_belongs_to_many :talks
 
@@ -35,6 +38,8 @@ class User
 
   before_create { generate_token(:auth_token) }
 
+  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s).order_by(:name => :asc) }
+
   def password=(password)
     if password.blank?
       @validate_password = false
@@ -58,14 +63,26 @@ class User
     UserMailer.password_reset(self).deliver
   end
 
-  private
-    def erase_password
-      @password = nil
-      @password_confirmation = nil
-      @validate_password = false
+  def set_counter(field, operation)
+    field = "counter_#{field}"
+
+    if operation == :inc
+      self[field] = self[field] + 1
+    elsif operation == :dec
+      self[field] = self[field] - 1 if self[field] > 0
     end
 
-    def require_password?
-      new_record? || @validate_password
-    end
+    self.save
+  end
+
+private
+  def erase_password
+    @password = nil
+    @password_confirmation = nil
+    @validate_password = false
+  end
+
+  def require_password?
+    new_record? || @validate_password
+  end
 end

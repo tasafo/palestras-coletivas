@@ -1,12 +1,22 @@
 require "spec_helper"
 
-describe "Edit event", :js => true do
+describe "Edit event" do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
-  let!(:event) { create(:event, :tasafoconf, :users => [ user, other_user ], :owner => user.id) }
-  let!(:group) { create(:group, :tasafo, :users => [ user ], :owner => user.id) }
-  let!(:other_group) { create(:group, :gurupa, :users => [ user ], :owner => user.id) }
+
+  let!(:tasafo) { create(:group, :tasafo, :users => [ user ], :owner => user.id) }
+  let!(:gurupa) { create(:group, :gurupa, :users => [ user ], :owner => user.id) }
+
+  let!(:event) {
+    create(
+      :event,
+      :tasafoconf,
+      :users => [ user, other_user ],
+      :groups => [ tasafo ],
+      :owner => user.id
+    )
+  }
     
   context "with valid data" do
     before do
@@ -23,8 +33,12 @@ describe "Edit event", :js => true do
       select another_user.name, :from => "user_id"
       click_button :add_user
 
-      select group.name, :from => "group_id"
+      select gurupa.name, :from => "group_id"
       click_button :add_group
+
+      click_button :"user_id_#{other_user.id}"
+
+      click_button :"group_id_#{tasafo.id}"
 
       click_button "Atualizar evento"
     end

@@ -40,11 +40,58 @@ class Event
 
   before_save :number_of_days
 
+  scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
+
   fulltext_search_in :name, :edition, :tags, :address,
     :index_name => 'fulltext_index_events',
     :filters => {
       :published => lambda { |event| event.to_public }
     }
+
+  def update_list_organizers(owner, list_id_organizers)
+    if self.users?
+      owner.set_counter(:organizing_events, :dec)
+
+      self.users.each do |organizer|
+        organizer.set_counter(:organizing_events, :dec)
+      end
+
+      self.users = nil
+    end
+
+    self.users << owner
+    owner.set_counter(:organizing_events, :inc)
+    
+    if list_id_organizers
+      list_id_organizers.each do |organizer|
+        user = User.find(organizer)
+        if user
+          self.users << user
+          user.set_counter(:organizing_events, :inc)
+        end
+      end
+    end
+  end
+
+  def update_list_groups(list_id_groups)
+    if self.groups?
+      self.groups.each do |group|
+        group.set_counter(:participation_events, :dec)
+      end
+
+      self.groups = nil
+    end
+    
+    if list_id_groups
+      list_id_groups.each do |g|
+        group = Group.find(g)
+        if group
+          self.groups << group
+          group.set_counter(:participation_events, :inc)
+        end
+      end
+    end
+  end
 
 private
   def number_of_days

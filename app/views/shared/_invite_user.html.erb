@@ -1,14 +1,9 @@
   <fieldset>
     <legend><p class="text-info"><%= t("new.invite.#{key}") %></p></legend>
-    <select id="user_id">
-      <% if users %>
-        <% users.each do |u| %>
-          <option value="<%= u.id %>"><%= u.name %></option>
-        <% end %>
-      <% end %>
-    </select>
+
+    <%= select_tag("user_id", options_from_collection_for_select(users, "id", "name")) %>
     
-    <input type="button" id="add_user" class="btn" value="<%= t("new.invite.add") %> "/>
+    <input type="button" id="add_user" class="btn btn-success" value="<%= t("new.invite.add") %> "/>
     
     <div id="users">
       <table id="table_users" class="table table-striped">
@@ -23,8 +18,12 @@
             <% model.users.each do |u| %>
               <% if u.id.to_s != model.owner %>
                 <tr id="row_<%= u.id %>">
-                  <td><%= u.name %><input type="hidden" name="users[]" value="<%= u.id %>" /></td>
-                  <td><a class="btn" onclick="remove_user('<%= u.id %>')"><%= t("new.invite.js.remove") %></a></td>
+                  <td>
+                    <%= u.name %><input type="hidden" name="users[]" value="<%= u.id %>" />
+                  </td>
+                  <td>
+                    <input type="button" id="user_id_<%= u.id %>" class="btn btn-danger" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.id %>')" />
+                  </td>
                 </tr>
               <% end %>
             <% end %>

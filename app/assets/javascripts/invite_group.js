@@ -20,7 +20,7 @@ function add_group() {
 
         if (!found) {
             $('#table_groups > tbody:last').append(
-                '<tr id="row_' + group_id + '"><td>' + group_desc + '<input type="hidden" name="groups[]" value="' + group_id + '" /></td><td><a class="btn" onclick="remove_group(\'' + group_id + '\')">' + $("#remove").text() + '</a></td></tr>'
+                '<tr id="row_' + group_id + '"><td>' + group_desc + '<input type="hidden" name="groups[]" value="' + group_id + '" /></td><td><input type="button" class="btn btn-danger" id="group_id_' + group_id + '" onclick="remove_group(\'' + group_id + '\')" value="' + $("#remove").text() + '" /></td></tr>'
             );
         }
     }

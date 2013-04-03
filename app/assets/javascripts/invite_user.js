@@ -20,7 +20,7 @@ function add_user() {
 
         if (!found) {
             $('#table_users > tbody:last').append(
-                '<tr id="row_' + user_id + '"><td>' + user_desc + '<input type="hidden" name="users[]" value="' + user_id + '" /></td><td><a class="btn" onclick="remove_user(\'' + user_id + '\')">' + $("#remove").text() + '</a></td></tr>'
+                '<tr id="row_' + user_id + '"><td>' + user_desc + '<input type="hidden" name="users[]" value="' + user_id + '" /></td><td><input type="button" class="btn btn-danger" id="user_id_' + user_id + '" onclick="remove_user(\'' + user_id + '\')" value="' + $("#remove").text() + '" /></td></tr>'
             );
         }
     }

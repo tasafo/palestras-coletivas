@@ -4,13 +4,12 @@
       <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "btn btn-primary" %>
 
       <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "btn btn-success" %>
-      <br />
-    <% else %>
-      <h2><%= t("titles.schedules.index") %></h2>
+      <hr>
     <% end %>
-    <hr>
 
     <% if @event.schedules? %>
+      <h2><%= t("titles.schedules.index") %></h2>
+      <hr>
       <div id="schedules">
         <table id="table_schedules" class="table table-striped">
           <thead>
@@ -68,6 +67,5 @@
 
         </table>
       </div>
+      <hr>
     <% end %>
-
-    <hr>

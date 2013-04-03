@@ -77,16 +77,16 @@ describe "Create schedule", :js => true do
 
       click_button "Buscar"
 
-      click_link "talk_#{talk.id}"
+      click_button :"talk_id_#{talk.id}"
 
       click_button "Adicionar programação"
     end
 
-    xit "redirects to the event page" do
+    it "redirects to the event page" do
       expect(current_path).to match(%r[/events/\w+])
     end
 
-    xit "displays success message" do
+    it "displays success message" do
       expect(page).to have_content("A programação foi adicionada!")
     end
   end  

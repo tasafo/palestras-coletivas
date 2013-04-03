@@ -18,11 +18,11 @@
     </div>
   </div>
 
-  <div class="form-actions">
-    <%= submit_tag t("form.submit.login"), :class => 'btn btn-primary' %>
-  </div>
-
   <p>
     <%= link_to t("new.user.forgotten_password"), new_password_reset_path %>
   </p>
+  
+  <div class="form-actions">
+    <%= submit_tag t("form.submit.login"), :class => 'btn btn-primary' %>
+  </div>
 <% end %>

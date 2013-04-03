@@ -2,12 +2,25 @@
   <hr class="featurette-divider">
 
   <div class="featurette">
-    <h3 class="featurette-heading"><%= link_to event.name, event_path(event) %></h3>
+    <h3 class="featurette-heading text-info"><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h3>
+
+    <% if event.start_date == event.end_date %>
+      <h4 class="text-success"><%= l event.start_date, :format => :long %></h4>
+    <% else %>
+      <h4 class="text-success">
+        <%= t("show.event.of") %> <%= l event.start_date, :format => :long %> 
+        <%= t("show.event.to") %> <%= l event.end_date, :format => :long %>
+      </h4>
+    <% end %>
     
     <p class="lead">
-      <%= t("event.created_time", :time => time_ago_in_words(event.created_at)) %><br/>
-      
-      <strong><%= t("show.event.tags") %>:</strong> <%= event.tags %>
+      <strong><%= t("labels.event.place") %>:</strong> <%= event.place %><br/>
+
+      <strong><%= t("labels.event.address") %>:</strong> <%= event.address %><br/>
+
+      <strong><%= t("labels.event.tags") %>:</strong> <%= event.tags %><br/>
+
+      <%= t("event.created_time", :time => time_ago_in_words(event.created_at)) %>
     </p>
   </div>
 <% end %>

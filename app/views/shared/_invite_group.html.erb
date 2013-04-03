@@ -1,14 +1,9 @@
   <fieldset>
     <legend><p class="text-info"><%= t("new.invite.group") %></p></legend>
-    <select id="group_id">
-      <% if groups %>
-        <% groups.each do |g| %>
-          <option value="<%= g.id %>"><%= g.name %></option>
-        <% end %>
-      <% end %>
-    </select>
+
+    <%= select_tag("group_id", options_from_collection_for_select(groups, "id", "name")) %>
     
-    <input type="button" id="add_group" class="btn" value="<%= t("new.invite.add") %> "/>
+    <input type="button" id="add_group" class="btn btn-success" value="<%= t("new.invite.add") %> "/>
     
     <div id="groups">
       <table id="table_groups" class="table table-striped">
@@ -22,8 +17,12 @@
           <% if model.groups %>
             <% model.groups.each do |g| %>
               <tr id="row_<%= g.id %>">
-                <td><%= g.name %><input type="hidden" name="groups[]" value="<%= g.id %>" /></td>
-                <td><a class="btn" onclick="remove_group('<%= g.id %>')"><%= t("new.invite.js.remove") %></a></td>
+                <td>
+                  <%= g.name %><input type="hidden" name="groups[]" value="<%= g.id %>" />
+                </td>
+                <td>
+                  <input type="button" id="group_id_<%= g.id %>" class="btn btn-danger" value="<%= t("new.invite.js.remove") %>" onclick="remove_group('<%= g.id %>')" />
+                </td>
               </tr>
             <% end %>
           <% end %>

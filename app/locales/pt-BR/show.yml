@@ -25,8 +25,8 @@ pt-BR:
         one: Organizador
         other: Organizadores
       groups:
-        one: Grupo
-        other: Grupos
+        one: Grupo envolvido
+        other: Grupos envolvidos
       not_found: "Evento não encontrado"
       of: "De"
       to: "até"

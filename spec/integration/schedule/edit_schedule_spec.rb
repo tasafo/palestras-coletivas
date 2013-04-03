@@ -1,15 +1,19 @@
 require "spec_helper"
 
-describe "Edit schedule" do
+describe "Edit schedule", :js => true do
   let!(:user) { create(:user, :paul) }
   let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
+
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }
 
   let!(:activity_lanche) { create(:activity, :lanche) }
 
   let!(:schedule_abertura) { create(:schedule, :abertura, :event => event) }
-  let!(:schedule_palestra) { create(:schedule, :palestra, :event => event) }
-  let!(:schedule_intervalo) { create(:schedule, :intervalo, :event => event) }
-  let!(:schedule_palestra2) { create(:schedule, :palestra, :event => event) }
+  let!(:schedule_intervalo) { create(:schedule, :intervalo, :event => event) }  
+
+  let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
+  let!(:schedule_palestra2) { create(:schedule, :palestra, :event => event, :talk => another_talk) }
 
   context "with valid data" do
     before do
@@ -18,11 +22,17 @@ describe "Edit schedule" do
 
       click_link "Eventos"
       click_link "Tá Safo Conf"
-      click_link "schedule_id_#{schedule_palestra2.id}"
+      click_link "schedule_id_#{schedule_palestra.id}"
 
       select "06/06/2012", :from => "schedule_day"
 
       fill_in_inputmask "Horário", :with => "08:00"
+
+      fill_in :search_text, :with => "tecnologia"
+
+      click_button "Buscar"
+
+      click_button :"talk_id_#{another_talk.id}"
 
       click_button "Atualizar programação"
     end

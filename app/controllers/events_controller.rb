@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     if logged_in?
       @events = current_user.events.order_by(:start_date => :desc)
     else
-      @events = all_public_events
+      @events = Event.all_public
     end
   end
 
@@ -17,25 +17,15 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(params[:event])
+
     @event.owner = current_user.id
-    @event.users << current_user
 
     guest_list
 
     if @event.save
-      if params[:users]
-        params[:users].each do |m|
-          user = User.find(m)
-          @event.users << [user] if user
-        end
-      end
+      @event.update_list_organizers current_user, params[:users]
 
-      if params[:groups]
-        params[:groups].each do |g|
-          group = Group.find(g)
-          @event.groups << [group] if group
-        end
-      end
+      @event.update_list_groups params[:groups]
 
       redirect_to event_path(@event), :notice => t("flash.events.create.notice")
     else
@@ -70,24 +60,10 @@ class EventsController < ApplicationController
 
     guest_list
 
-    if @event.update_attributes(params[:event])
-      @event.users = nil
-      @event.groups = nil
-      @event.users << current_user
+    if @event.update_attributes(params[:event])      
+      @event.update_list_organizers current_user, params[:users]
 
-      if params[:users]
-        params[:users].each do |m|
-          user = User.find(m)
-          @event.users << [user] if user
-        end
-      end
-
-      if params[:groups]
-        params[:groups].each do |g|
-          group = Group.find(g)
-          @event.groups << [group] if group
-        end
-      end
+      @event.update_list_groups params[:groups]
 
       redirect_to event_path(@event), :notice => t("flash.events.update.notice")
     else
@@ -97,11 +73,8 @@ class EventsController < ApplicationController
 
 private
   def guest_list
-    @organizers = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
-    @groups = Group.order_by(:name => :asc)
-  end
+    @organizers = User.organizers current_user
 
-  def all_public_events
-    Event.where(:to_public => true).order_by(:start_date => :desc)
+    @groups = Group.order_by(:name => :asc)
   end
 end
