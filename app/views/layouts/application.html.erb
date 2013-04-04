@@ -35,19 +35,9 @@
       }
     </style>
 
-    <%= favicon_link_tag 'images/apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
-
-    <%= favicon_link_tag 'images/apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
-
-    <%= favicon_link_tag 'images/apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
-
-    <%= favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
-
-    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
-  </head>
   <body>
     <%= render "shared/header" %>
-    
+
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -67,7 +57,7 @@
     </div>
 
     <%= javascript_include_tag "application" %>
-    
+
     <% if Rails.env == 'production' %>
       <script type="text/javascript">
         var _gaq = _gaq || [];

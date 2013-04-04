@@ -1,8 +1,10 @@
 <% if record.errors.any? %>
-  <div>
-    <p class="text-warning"><%= t("form.errors") %></p>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4><%= t("form.errors") %></h4>
+    <br/>
     <% record.errors.full_messages.each do |message| %>
-      <p class="text-error"><%= message %></p>
+      <p><%= message %></p>
     <% end %>
   </div>
 <% end %>
