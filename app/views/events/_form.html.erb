@@ -55,7 +55,7 @@
     <div class="controls">
       <%= f.text_field :address, :placeholder => t("placeholder.events.address"), :class => "span8" %>
     </div>
-  </div>  
+  </div>
 
   <div class="control-group">
     <%= f.label :tags, t("labels.event.tags"), :class => 'control-label' %>
@@ -81,7 +81,7 @@
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
           events_path, :class => 'btn' %>
   </div>
-  
+
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
   <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>
