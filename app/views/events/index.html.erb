@@ -9,14 +9,6 @@
 <% end %>
 
 <% unless @events.blank? %>
-  <br />
-  <%= form_for @event, :html => { :class => 'form-search' }, :url => events_path, :method => "get" do |f| %>
-    <div class="input-append">
-      <input type="text" class="span12 search-query" id="event_search" name="event[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.events.search") %>">
-      <button type="submit" class="btn"><%= t("form.submit.search") %></button>
-    </div>
-  <% end %>
-
   <%= render "shared/events" %>
 <% else %>
   <h1><%= t("titles.events.no_events") %></h1>

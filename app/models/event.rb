@@ -46,12 +46,6 @@ class Event
 
   scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
 
-  fulltext_search_in :name, :edition, :tags, :address,
-    :index_name => 'fulltext_index_events',
-    :filters => {
-      :published => lambda { |event| event.to_public }
-    }
-
   def update_list_organizers(owner, list_id_organizers)
     if self.users?
       owner.set_counter(:organizing_events, :dec)

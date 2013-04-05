@@ -2,23 +2,10 @@ class EventsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
 
   def index
-    @event = Event.new
-    @search = ""
-
     if params[:my].nil?
-      if params[:event].nil?
-        @events = Event.all_public
-      else
-        @search = params[:event][:search]
-
-        if @search.empty?
-          @events = Event.all_public
-        else
-          @events = Kaminari.paginate_array(Event.fulltext_search(@search, :index => 'fulltext_index_events', :published => [ true ])).page(params[:page]).per(5)
-        end
-      end
+      @events = Event.all_public
     else
-      @events = current_user.events.page(params[:page]).per(5).order_by(:start_date => :desc) if logged_in?
+      @events = current_user.events.order_by(:start_date => :desc) if logged_in?
     end
   end
 
