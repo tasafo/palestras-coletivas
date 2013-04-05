@@ -90,8 +90,8 @@ GEM
       mongoid (>= 3.0.1)
       rake
       rspec (>= 2.9)
-    mongoid_fulltext (0.6.0)
-      mongoid (~> 3.0.1)
+    mongoid_fulltext (0.6.1)
+      mongoid (~> 3.0)
       unicode_utils (~> 1.0.0)
     mongoid_slug (3.0.0)
       mongoid (> 3.0)
