@@ -34,6 +34,7 @@ pt-BR:
       index: "Eventos"
       new: "Adicionar evento"
       edit: "Editar evento"
+      my: "Meus eventos"
       no_events: "Nenhum evento adicionado"
 
     schedules:

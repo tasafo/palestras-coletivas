@@ -5,9 +5,7 @@ pt-BR:
       title: "Exemplo: Ruby on Rails"
       description: "Exemplo: A palestra fala sobre a linguagem de programação Ruby e o framework de desenvolvimento web Rails"
       tags: "Exemplo: ruby, rails"
-
-    index:
-      search: "busca por título e tags"
+      search: "por título e tags"
 
     groups:
       gravatar_url: "Exemplo: http://gravatar.com/nome-do-grupo"
@@ -20,3 +18,4 @@ pt-BR:
       tags: "Exemplo: tecnologia"
       place: "Centro de Convenções da Universidade Federal do Pará"
       address: "Exemplo: Rua das Laranjeiras, 574, Nazaré, Belém - Pará, Brasil"
+      search: "por nome, edição, tags e endereço"

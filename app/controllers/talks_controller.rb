@@ -123,6 +123,6 @@ private
   end
 
   def list_authors
-    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
+    @authors = User.not_in(:_id => current_user.id.to_s)
   end
 end

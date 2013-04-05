@@ -12,7 +12,7 @@
   <br />
   <%= form_for @talk, :html => { :class => 'form-search' }, :url => talks_path, :method => "get" do |f| %>
     <div class="input-append">
-      <input type="text" class="span12 search-query" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.index.search") %>">
+      <input type="text" class="span12 search-query" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
       <button type="submit" class="btn"><%= t("form.submit.search") %></button>
     </div>
   <% end %>
