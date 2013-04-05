@@ -48,6 +48,12 @@ describe Event, "validations" do
     expect(event).to have(1).error_on(:end_date)
   end
 
+  it "requires deadline date enrollment" do
+    event = Event.create(:deadline_date_enrollment => nil)
+
+    expect(event).to have(1).error_on(:deadline_date_enrollment)
+  end
+  
   it "requires place" do
     event = Event.create(:place => nil)
 

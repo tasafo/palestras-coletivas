@@ -22,6 +22,7 @@ describe "Create event" do
       fill_in "Tags", :with => "tecnologia, agilidade, gestão"
       fill_in_inputmask "Data de início", :with => "05/06/2012"
       fill_in_inputmask "Data de término", :with => "06/06/2012"
+      fill_in_inputmask "Prazo para inscrição", :with => "06/06/2012"
       fill_in "Local", :with => "Centro de Convenções New York"
       fill_in "Endereço", :with => "New York, NY"
       check("Quero publicar")

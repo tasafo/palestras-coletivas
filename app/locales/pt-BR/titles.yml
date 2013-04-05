@@ -41,3 +41,7 @@ pt-BR:
       index: "Programação"
       new: "Adicionar programação"
       edit: "Editar programação"
+
+    enrollments:
+      new: "Quero participar do evento"
+      edit: "Alterar minha participação"

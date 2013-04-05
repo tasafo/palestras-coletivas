@@ -8,7 +8,7 @@ pt-BR:
       _yes: "Sim"
       _no: "Não"
       not_public: "O trabalho ainda não está publicado"
-      without_presentation: "O palestrante está preparando o material para publicá-lo"
+      without_presentation: "O material ainda não está publicado"
       my_talks_published: "Meus trabalhos publicados"
 
     user:
@@ -27,6 +27,11 @@ pt-BR:
       groups:
         one: Grupo envolvido
         other: Grupos envolvidos
+      enrolled:
+        one: Inscrito
+        other: Inscritos
       not_found: "Evento não encontrado"
       of: "De"
       to: "até"
+      participate: "Quero participar!"
+      cancel_my_participation: "Cancelar minha participação"

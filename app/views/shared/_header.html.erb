@@ -30,14 +30,14 @@
           <li class="">
             <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas", :target => "_blank" %>
           </li>
+          <li class="<%= request.fullpath == events_path ? 'active' : '' %>">
+            <%= link_to t("menu.events"), events_path %>
+          </li>
           <li class="<%= request.fullpath == talks_path ? 'active' : '' %>">
             <%= link_to t("menu.talks"), talks_path %>
           </li>
           <li class="<%= request.fullpath == groups_path ? 'active' : '' %>">
             <%= link_to t("menu.groups"), groups_path %>
-          </li>
-          <li class="<%= request.fullpath == events_path ? 'active' : '' %>">
-            <%= link_to t("menu.events"), events_path %>
           </li>
         <% if logged_in? %>
           <li class="<%= request.fullpath == edit_user_path(current_user) ? 'active' : '' %>">

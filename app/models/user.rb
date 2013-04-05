@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include UpdateCounter
 
   field :name, type: String
   slug :name
@@ -11,7 +12,7 @@ class User
   field :password_reset_token, type: String
   field :password_reset_sent_at, type: DateTime
   field :counter_organizing_events, type: Integer, default: 0
-  field :counter_talks_events, type: Integer, default: 0
+  field :counter_presentation_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
 
   has_and_belongs_to_many :talks
@@ -19,6 +20,8 @@ class User
   has_and_belongs_to_many :groups
 
   has_and_belongs_to_many :events
+
+  has_many :enrollments
 
   attr_reader :password
 
@@ -63,18 +66,6 @@ class User
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
-  end
-
-  def set_counter(field, operation)
-    field = "counter_#{field}"
-
-    if operation == :inc
-      self[field] = self[field] + 1
-    elsif operation == :dec
-      self[field] = self[field] - 1 if self[field] > 0
-    end
-
-    self.save
   end
 
 private

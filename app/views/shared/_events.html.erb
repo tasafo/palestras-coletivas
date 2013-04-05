@@ -13,6 +13,10 @@
       </h4>
     <% end %>
     
+    <h4 class="text-error">
+      <%= t("labels.event.deadline_date_enrollment") %>: <%= l event.deadline_date_enrollment, :format => :long %>
+    </h4>
+
     <p class="lead">
       <strong><%= t("labels.event.place") %>:</strong> <%= event.place %><br/>
 

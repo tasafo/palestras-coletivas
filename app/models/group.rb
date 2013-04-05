@@ -2,6 +2,7 @@ class Group
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include UpdateCounter
 
   field :gravatar_url, type: String
   field :name, type: String
@@ -16,16 +17,4 @@ class Group
   has_and_belongs_to_many :events
 
   validates_presence_of :name, :tags, :owner
-
-  def set_counter(field, operation)
-    field = "counter_#{field}"
-
-    if operation == :inc
-      self[field] = self[field] + 1
-    elsif operation == :dec
-      self[field] = self[field] - 1 if self[field] > 0
-    end
-
-    self.save
-  end
 end

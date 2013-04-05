@@ -22,9 +22,13 @@
     </p>
 
     <% if logged_in? %>
-    <p>
-      <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
-    </p>
+      <% @talk.users.each do |user| %>
+        <% if user.id == current_user.id %>
+          <p>
+            <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
+          </p>
+        <% end %>
+      <% end %>
     <% end %>
 
     <% author = t("show.talk.authors") %>

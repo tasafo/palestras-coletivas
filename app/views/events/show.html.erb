@@ -11,6 +11,10 @@
       </h4>
     <% end %>
 
+    <h4 class="text-error">
+      <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
+    </h4>
+
     <p>
       <strong><%= t("labels.event.description") %>:</strong> <%= @event.description %>
     </p>
@@ -31,27 +35,51 @@
       <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => "img-polaroid" %>
     <% end %>
 
+    <% if @open_enrollment %>
+      <br/><br/>
+
+      <% if @new_subscription %>
+        <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "btn btn-success btn-large" %>
+      <% else %>
+        <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
+
+        <% button_type = @enrollment.active? ? "btn-warning" : "btn-success" %>
+          
+        <%= link_to message_button, edit_enrollment_path(@event, @enrollment), :class => "btn btn-large #{button_type}" %>
+      <% end %>
+    <% end %>
+
     <%= render "shared/event_schedule" %>
 
     <% unless @event.users.blank? %>
       <% organizer = t("show.event.organizers") %>
-      <strong><%= organizer[@event.users.count > 1 ? :other : :one] %></strong><br/>
+      <% count = @event.users.count %>
+      <h4><%= organizer[count > 1 ? :other : :one] %> (<%= count %>)</h4>
 
       <% @event.users.each do |user| %>
         <%= render "shared/user", :user => user %><br/><br/>
       <% end %>
-      <br/>
     <% end %>
 
     <% unless @event.groups.blank? %>
       <% group = t("show.event.groups") %>
-      <strong><%= group[@event.groups.count > 1 ? :other : :one] %></strong><br/>
+      <% count = @event.groups.count %>
+      <h4><%= group[count > 1 ? :other : :one] %> (<%= count %>)</h4>
 
       <% @event.groups.each do |group| %>
         <%= render "shared/group", :group => group %><br/><br/>
       <% end %>
-      <br/>
     <% end %>
+
+    <% unless @event.enrollments.actives.blank? %>
+      <% enrolled = t("show.event.enrolled") %>
+      <% count = @event.enrollments.actives.count %>
+      <h4><%= enrolled[count > 1 ? :other : :one] %> (<%= count %>)</h4>
+
+      <% @event.enrollments.actives.each do |enrollment| %>
+        <%= render "shared/user", :user => enrollment.user %><br/><br/>
+      <% end %>
+    <% end %>    
   <% else %>
     <h1><%= t("show.event.not_found") %></h1>
   <% end %>

@@ -15,7 +15,7 @@ class SchedulesController < ApplicationController
     auxiliary_objetcs
 
     if @schedule.save
-      @schedule.update_users_counter params[:old_talk_id], params[:talk_id]
+      @schedule.update_counter_of_users_talks params[:old_talk_id], params[:talk_id]
 
       redirect_to event_path(@event), :notice => t("flash.schedules.create.notice")
     else
@@ -37,7 +37,7 @@ class SchedulesController < ApplicationController
     auxiliary_objetcs
 
     if @schedule.update_attributes(params[:schedule])
-      @schedule.update_users_counter params[:old_talk_id], params[:talk_id]
+      @schedule.update_counter_of_users_talks params[:old_talk_id], params[:talk_id]
 
       redirect_to event_path(@event), :notice => t("flash.schedules.update.notice")
     else

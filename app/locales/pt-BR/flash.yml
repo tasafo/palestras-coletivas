@@ -47,3 +47,9 @@ pt-BR:
         notice: "A programação foi adicionada!"
       update:
         notice: "A programação foi atualizada!"
+
+    enrollments:
+      create:
+        notice: "Sua inscrição foi realizada!"
+      update:
+        notice: "Sua inscrição foi alterada!"

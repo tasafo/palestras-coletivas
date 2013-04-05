@@ -3,6 +3,7 @@ class Talk
   include Mongoid::FullTextSearch
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include UpdateCounter
 
   field :presentation_url, type: String
   field :title, type: String
@@ -13,6 +14,7 @@ class Talk
   field :code, type: String
   field :to_public, type: Boolean, :default => false
   field :owner, type: String
+  field :counter_presentation_events, type: Integer, default: 0
 
   has_and_belongs_to_many :users
   

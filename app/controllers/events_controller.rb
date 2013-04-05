@@ -51,9 +51,31 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @dates = (@event.start_date..@event.end_date).to_a
       @authorized = authorized_access?(@event)
+      
+      @open_enrollment = @event.deadline_date_enrollment >= Date.today
+
+      @new_subscription = true
+
+      if logged_in?
+        @enrollment = Enrollment.where(:event => @event, :user => current_user).first
+
+        @new_subscription = false if @enrollment
+
+        @the_user_is_speaker = false
+
+        @event.schedules.each do |schedule|
+          if schedule.talk?
+            schedule.talk.users.each do |user|
+              @the_user_is_speaker = true if user.id == current_user.id
+            end
+          end
+        end
+
+        @open_enrollment = false if @the_user_is_speaker || @authorized
+      end
 
       unless @event.to_public
-        @event = nil unless @authorized
+        @event = nil unless @authorized 
       end
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path

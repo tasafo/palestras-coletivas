@@ -44,6 +44,13 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :deadline_date_enrollment, t("labels.event.deadline_date_enrollment"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :deadline_date_enrollment, :class => "span2 date" %>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :place, t("labels.event.place"), :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :place, :placeholder => t("placeholder.events.place"), :class => "span8" %>

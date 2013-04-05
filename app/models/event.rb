@@ -4,6 +4,7 @@ class Event
   include Mongoid::Slug
   include Mongoid::FullTextSearch
   include Geocoder::Model::Mongoid
+  include UpdateCounter
 
   field :name, type: String
   field :edition, type: String
@@ -13,14 +14,15 @@ class Event
   field :tags, type: String
   field :start_date, type: Date
   field :end_date, type: Date
+  field :deadline_date_enrollment, type: Date
   field :days, type: Integer
   field :to_public, type: Boolean, :default => false
   field :place, type: String
   field :address, type: String
   field :coordinates, type: Array
   field :owner, type: String
-  field :links, type: Hash # {description, url}
-  field :environments, type: Hash # {description, order}
+  field :counter_registered_users, type: Integer, default: 0
+  field :counter_present_users, type: Integer, default: 0
 
   has_and_belongs_to_many :users
 
@@ -28,7 +30,9 @@ class Event
 
   has_many :schedules
 
-  validates_presence_of :name, :edition, :tags, :start_date, :end_date, :place, :address, :owner
+  has_many :enrollments
+
+  validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :address, :owner
 
   validates_length_of :description, maximum: 500
 

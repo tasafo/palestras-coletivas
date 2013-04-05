@@ -75,7 +75,8 @@ FactoryGirl.define do
       tags "tecnologia, agilidade, gestão"
       start_date "05/06/2012"
       end_date "06/06/2012"
-      place "Centro de Convenções do Jurunas"
+      deadline_date_enrollment "06/06/2012"
+      place "Centro de Convenções New York"
       address "New York, NY"
       to_public true
     end
@@ -108,22 +109,25 @@ FactoryGirl.define do
   end
 
   factory :schedule do
+    day 1
+
     trait :abertura do
-      day 1
       time "08:00"
       activity { create(:activity, :abertura) }
     end
 
     trait :palestra do
-      day 1
       time "09:00"
       activity { create(:activity, :palestra) }
     end
 
     trait :intervalo do
-      day 1
       time "10:00"
       activity { create(:activity, :intervalo) }
     end
+  end
+
+  factory :enrollment do
+
   end
 end
