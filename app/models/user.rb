@@ -38,7 +38,9 @@ class User
 
   before_create { generate_token(:auth_token) }
 
-  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s).order_by(:name => :asc) }
+  default_scope order_by(:name => :asc)
+
+  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s) }
 
   def password=(password)
     if password.blank?
