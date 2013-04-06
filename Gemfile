@@ -12,7 +12,7 @@ gem 'mongoid_slug'
 gem 'kaminari'
 gem 'mongoid_fulltext'
 gem 'geocoder'
-gem 'thin'
+gem 'unicorn'
 
 group :assets do
   gem 'sass-rails'
