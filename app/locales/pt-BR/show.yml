@@ -4,6 +4,9 @@ pt-BR:
       authors:
         one: Autor
         other: Autores
+      events:
+        one: Apresentado no evento
+        other: Apresentado nos eventos
       to_public: "Público"
       _yes: "Sim"
       _no: "Não"
@@ -19,6 +22,7 @@ pt-BR:
         one: Membro
         other: Membros
       not_found: "Grupo não encontrado"
+      profile: "Veja o perfil completo em"
 
     event:
       organizers:

@@ -1,25 +1,27 @@
-<div>
+<div class="featurette">
   <% if @group %>
     <% thumb = @group.thumbnail_url.blank? ? "without_avatar.jpg" : @group.thumbnail_url %>
 
     <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
 
-    <h2><%= @group.name %></h2>
+    <h2 class="featurette-heading"><%= @group.name %></h2>
 
-    <p>
-      <strong><%= t("labels.group.tags") %>:</strong> <%= @group.tags %>
+    <p class="lead">
+      <strong><%= t("labels.group.tags") %>:</strong> <%= @group.tags %><br/>
+
+      <% if @tem_perfil_no_gravatar %>
+        <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
+        <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
+        <%= t("show.group.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
+      <% end %>
     </p>
 
-    <br/>
-
     <% member = t("show.group.members") %>
-    <strong><%= member[@group.users.count > 1 ? :other : :one] %></strong><br/>
+    <h4><%= member[@group.users.count > 1 ? :other : :one] %></h4>
 
     <% @group.users.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
     <% end %>
-
-    <br/>
 
     <% if logged_in? && current_user.id.to_s == @group.owner.to_s %>
       <%= link_to t("titles.groups.edit"), edit_group_path(@group), :class => "btn btn-primary" %>

@@ -1,6 +1,6 @@
 <div>
   <% if @talk %>
-    <h2><%= @talk.title %></h2>
+    <h2 class="text-info"><%= @talk.title %></h2>
 
     <% if Rails.env != 'test' %>
       <% unless @talk.code.empty? %>
@@ -12,6 +12,13 @@
       <br/>
     <% end %>
     
+    <% @talk.users.each do |user| %>
+      <% if logged_in? && current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
+        <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
+        <br/><br/>
+      <% end %>
+    <% end %>
+
     <p>
       <strong><%= t("labels.talk.description") %></strong><br/>
       <p class="text-info"><%= simple_format @talk.description %></p>
@@ -32,15 +39,18 @@
     <% end %>
 
     <% author = t("show.talk.authors") %>
-    <strong><%= author[@talk.users.count > 1 ? :other : :one] %></strong><br/>
+    <h4><%= author[@talk.users.count > 1 ? :other : :one] %></h4>
 
     <% @talk.users.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
     <% end %>
 
-    <% @talk.users.each do |user| %>
-      <% if logged_in? && current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
-        <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
+    <% if @talk.schedules? %>
+      <% event = t("show.talk.events") %>
+      <h4><%= event[@talk.schedules.count > 1 ? :other : :one] %></h4>
+
+      <% @talk.schedules.each do |schedule| %>
+          <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event), :target => "_blank" %></h5>
       <% end %>
     <% end %>
   <% else %>
