@@ -18,8 +18,14 @@ class Event
   field :days, type: Integer
   field :to_public, type: Boolean, :default => false
   field :place, type: String
-  field :address, type: String
+
+  field :street, type: String
+  field :district, type: String
+  field :city, type: String
+  field :state, type: String  
+  field :country, type: String
   field :coordinates, type: Array
+
   field :owner, type: String
   field :counter_registered_users, type: Integer, default: 0
   field :counter_present_users, type: Integer, default: 0
@@ -32,7 +38,7 @@ class Event
 
   has_many :enrollments
 
-  validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :address, :owner
+  validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :street, :district, :city, :state, :country, :owner
 
   validates_length_of :description, maximum: 500
 
@@ -40,11 +46,15 @@ class Event
 
   geocoded_by :address
 
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode
 
   before_save :number_of_days
 
   scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
+
+  def address
+    [street, district, city, state, country].compact.join(', ')
+  end
 
   def update_list_organizers(owner, list_id_organizers)
     if self.users?

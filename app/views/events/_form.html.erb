@@ -58,9 +58,37 @@
   </div>
 
   <div class="control-group">
-    <%= f.label :address, t("labels.event.address"), :class => 'control-label' %>
+    <%= f.label :street, t("labels.event.street"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :address, :placeholder => t("placeholder.events.address"), :class => "span8" %>
+      <%= f.text_field :street, :placeholder => t("placeholder.events.street"), :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :district, t("labels.event.district"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :district, :placeholder => t("placeholder.events.district"), :class => "span4" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :city, t("labels.event.city"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :placeholder => t("placeholder.events.city"), :class => "span4" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :state, t("labels.event.state"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :state, :placeholder => t("placeholder.events.state"), :class => "span4" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :country, t("labels.event.country"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :country, :placeholder => t("placeholder.events.country"), :class => "span4" %>
     </div>
   </div>
 

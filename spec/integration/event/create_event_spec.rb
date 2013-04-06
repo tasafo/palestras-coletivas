@@ -23,8 +23,12 @@ describe "Create event" do
       fill_in_inputmask "Data de início", :with => "05/06/2012"
       fill_in_inputmask "Data de término", :with => "06/06/2012"
       fill_in_inputmask "Prazo para inscrição", :with => "06/06/2012"
-      fill_in "Local", :with => "Centro de Convenções New York"
-      fill_in "Endereço", :with => "New York, NY"
+      fill_in "Local", :with => "Centro de Convenções do Jurunas"
+      fill_in "Endereço", :with => "Rua dos Caripunas, 800"
+      fill_in "Bairro", :with => "Jurunas"
+      fill_in "Cidade", :with => "Belém"
+      fill_in "Estado", :with => "Pará"
+      fill_in "País", :with => "Brasil"
       check("Quero publicar")
 
       select other_user.name, :from => "user_id"

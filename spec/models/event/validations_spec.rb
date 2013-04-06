@@ -60,10 +60,34 @@ describe Event, "validations" do
     expect(event).to have(1).error_on(:place)
   end
 
-  it "requires address" do
-    event = Event.create(:address => nil)
+  it "requires street" do
+    event = Event.create(:street => nil)
 
-    expect(event).to have(1).error_on(:address)
+    expect(event).to have(1).error_on(:street)
+  end
+
+  it "requires district" do
+    event = Event.create(:district => nil)
+
+    expect(event).to have(1).error_on(:district)
+  end
+
+  it "requires city" do
+    event = Event.create(:city => nil)
+
+    expect(event).to have(1).error_on(:city)
+  end
+
+  it "requires state" do
+    event = Event.create(:state => nil)
+
+    expect(event).to have(1).error_on(:state)
+  end
+
+  it "requires country" do
+    event = Event.create(:country => nil)
+
+    expect(event).to have(1).error_on(:country)
   end
   
   it "requires owner" do

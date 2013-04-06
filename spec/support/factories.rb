@@ -76,8 +76,12 @@ FactoryGirl.define do
       start_date "05/06/2012"
       end_date "06/06/2012"
       deadline_date_enrollment "06/06/2012"
-      place "Centro de Convenções New York"
-      address "New York, NY"
+      place "Centro de Convenções do Jurunas"
+      street "Rua dos Caripunas, 800"
+      district "Jurunas"
+      city "Belém"
+      state "Pará"
+      country "Brasil"
       to_public true
     end
   end

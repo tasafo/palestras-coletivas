@@ -32,6 +32,11 @@ pt-BR:
       end_date: "Data de término"
       place: "Local"
       address: "Endereço"
+      street: "Endereço"
+      district: "Bairro"
+      city: "Cidade"
+      state: "Estado"
+      country: "País"
       to_public: "Quero publicar"
 
     schedule:
