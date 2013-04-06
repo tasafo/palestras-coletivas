@@ -60,10 +60,10 @@ function search_talk() {
         beforeSend: function(xhr) {
             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
         },
-        dataType : "json",
+        dataType : "text",
         success : function(respond) {
             if (respond)
-                $("#search_result").html(respond.result);
+                $("#search_result").html(respond);
             else
                 $("#search_result").html("");
         }

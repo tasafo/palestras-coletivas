@@ -56,10 +56,12 @@ class SchedulesController < ApplicationController
         :partial => "shared/talks_found",
         :layout => false
       )
+
+      result = result.html_safe
     end
 
     respond_to do |format|
-      format.json { render :json => { :result => result } }
+      format.text { render :text => result }
     end
   end
 
