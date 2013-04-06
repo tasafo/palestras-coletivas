@@ -43,6 +43,9 @@
         <div class="span3">
           <p class="text-center"><%= link_to image_tag("logo.png", :alt => "Palestras Coletivas"), root_path %><p>
           <p class="text-info"><%= t("app.info") %></p>
+          <hr>
+          <p><%= t("app.developed_by") %></p>
+          <p class="text-center"><%= link_to image_tag("nomadetec.png", :alt => "Nômade Tecnologia"), "http://nomadetec.com.br", :target => "_blank" %><p>
         </div>
         <div class="span9">
           <%= render "shared/flash_messages" %>
@@ -52,7 +55,7 @@
 
       <footer>
         <hr class="featurette-divider">
-        <p>&copy; <a href="http://nomadetec.com.br" target="_blank">Nômade Tecnologia</a> 2013</p>
+        <p>&copy; 2013 - <a href="http://nomadetec.com.br" target="_blank">Nômade Tecnologia</a></p>
       </footer>
     </div>
 
