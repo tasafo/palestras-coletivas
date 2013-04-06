@@ -46,12 +46,14 @@ class GroupsController < ApplicationController
       profile = @group.gravatar_url
 
       begin
-        xml = Nokogiri::XML(open("#{profile}.xml"))
+        unless profile.blank?
+          xml = Nokogiri::XML(open("#{profile}.xml"))
 
-        @profile_url = xml.xpath("//profileUrl").text
-        @about_me = xml.xpath("//aboutMe").text
-        @current_location = xml.xpath("//currentLocation").text
-        @tem_perfil_no_gravatar = true
+          @profile_url = xml.xpath("//profileUrl").text
+          @about_me = xml.xpath("//aboutMe").text
+          @current_location = xml.xpath("//currentLocation").text
+          @tem_perfil_no_gravatar = true
+        end
       rescue OpenURI::HTTPError, SocketError
         @tem_perfil_no_gravatar = false
       end

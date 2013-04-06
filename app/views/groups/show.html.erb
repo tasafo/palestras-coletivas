@@ -16,6 +16,10 @@
       <% end %>
     </p>
 
+    <% if logged_in? && current_user.id.to_s == @group.owner.to_s %>
+      <%= link_to t("titles.groups.edit"), edit_group_path(@group), :class => "btn btn-primary" %>
+    <% end %>
+
     <% member = t("show.group.members") %>
     <h4><%= member[@group.users.count > 1 ? :other : :one] %></h4>
 
@@ -23,8 +27,13 @@
       <%= render "shared/user", :user => user %><br/><br/>
     <% end %>
 
-    <% if logged_in? && current_user.id.to_s == @group.owner.to_s %>
-      <%= link_to t("titles.groups.edit"), edit_group_path(@group), :class => "btn btn-primary" %>
+    <% if @group.events? %>
+      <% event = t("show.group.events") %>
+      <h4><%= event[@group.events.count > 1 ? :other : :one] %></h4>
+
+      <% @group.events.each do |event| %>
+          <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event), :target => "_blank" %></h5>
+      <% end %>
     <% end %>
   <% else %>
     <h1><%= t("show.group.not_found") %></h1>

@@ -64,6 +64,13 @@ FactoryGirl.define do
       name "GURU-PA"
       tags "ruby, rails"
     end
+
+    trait :invalid do
+      gravatar_url "http://nononononono"
+      name "Invalid"
+      tags "invalid"
+      thumbnail_url ""
+    end
   end
 
   factory :event do

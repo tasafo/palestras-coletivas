@@ -50,6 +50,8 @@ class Event
 
   before_save :number_of_days
 
+  default_scope order_by(:start_date => :asc)
+
   scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
 
   def address

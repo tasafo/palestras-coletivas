@@ -21,6 +21,9 @@ pt-BR:
       members:
         one: Membro
         other: Membros
+      events:
+        one: Contribuímos com o evento
+        other: Contribuímos com os eventos
       not_found: "Grupo não encontrado"
       profile: "Veja o perfil completo em"
 
