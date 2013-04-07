@@ -32,7 +32,7 @@ describe "Edit schedule", :js => true do
 
       click_button "Buscar"
 
-      click_button :"talk_id_#{another_talk.id}"
+      click_button another_talk.id
 
       click_button "Atualizar programação"
     end

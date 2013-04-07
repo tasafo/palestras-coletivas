@@ -10,6 +10,41 @@
   <% end %>
 </div>
 
+<% if @user.groups? %>
+  <% event = t("show.user.groups") %>
+  <h4><%= event[@user.groups.count > 1 ? :other : :one] %></h4>
+
+  <% @user.groups.each do |group| %>
+    <h5><%= link_to group.name, group_path(group), :target => "_blank" %></h5>
+  <% end %>
+<% end %>
+
+<% if @user.events? %>
+  <% event = t("show.user.events") %>
+  <h4><%= event[@user.events.count > 1 ? :other : :one] %></h4>
+
+  <% @user.events.each do |event| %>
+    <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event), :target => "_blank" %></h5>
+  <% end %>
+<% end %>
+
+<% presentations = "" %>
+
+<% if @user.talks? %>
+  <% @user.talks.each do |talk| %>
+    <% if talk.schedules? %>
+      <% talk.schedules.each do |schedule| %>
+        <% presentations += '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event), :target => "_blank") + '</h5>' %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% unless presentations.blank? %>
+  <h4><%= t("show.user.presentations") %></h4>
+  <%= presentations.html_safe %>
+<% end %>
+
 <hr class="featurette-divider">
 
 <% unless @talks.empty? %>

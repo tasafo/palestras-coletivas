@@ -16,6 +16,13 @@ pt-BR:
 
     user:
       profile: "Veja o perfil completo em"
+      presentations: "Trabalhos apresentados em eventos"
+      groups:
+        one: Grupo que eu participo
+        other: Grupos que eu participo
+      events:
+        one: Evento que ajudei a organizar
+        other: Eventos que ajudei a organizar
 
     group:
       members:
