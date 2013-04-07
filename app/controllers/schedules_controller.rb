@@ -46,22 +46,14 @@ class SchedulesController < ApplicationController
   end
 
   def search_talks
-    result = nil
     search = params[:search]
     
     unless search.blank?
       @talks = Talk.fulltext_search(search, :index => 'fulltext_index_talks', :published => [ true ])
-
-      result = render_to_string(
-        :partial => "shared/talks_found",
-        :layout => false
-      )
-
-      result = result.html_safe
     end
 
     respond_to do |format|
-      format.text { render :text => result }
+      format.json { render :json => @talks }
     end
   end
 

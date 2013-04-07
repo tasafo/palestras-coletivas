@@ -33,7 +33,10 @@
 
   <%= f.hidden_field :event_id, :value => @event.id %>
   <%= f.hidden_field :talk_id, :value => @schedule.talk_id %>
+  
   <input id="old_talk_id" name="old_talk_id" type="hidden" value="<%= @schedule.talk_id %>" />
+  
+  <input id="titles_talks_select" name="titles_talks_select" type="hidden" value="<%= t("titles.talks.select") %>" />
 
   <div class="form-actions">
     <%= f.submit :class => 'btn btn-primary' %>
