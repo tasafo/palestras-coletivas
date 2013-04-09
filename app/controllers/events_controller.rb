@@ -80,10 +80,12 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
+    owner = User.find(@event.owner)
+
     guest_list
 
     if @event.update_attributes(params[:event])      
-      @event.update_list_organizers current_user, params[:users]
+      @event.update_list_organizers owner, params[:users]
 
       @event.update_list_groups params[:groups]
 
