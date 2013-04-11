@@ -41,6 +41,8 @@ class EventsController < ApplicationController
       
       @open_enrollment = @event.deadline_date_enrollment >= Date.today
 
+      @can_record_presence = @authorized && Date.today >= @event.start_date
+
       @new_subscription = true
 
       if logged_in?

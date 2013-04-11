@@ -11,11 +11,19 @@ class Enrollment
 
   scope :actives, lambda { where(:active => true).order_by(:created_at => :asc) }
 
-  def update_counter_of_events_and_users
-    operation = self.active? ? :inc : :dec
+  def update_counter_of_events_and_users(option)
+    if option == "active"
+      operation = self.active? ? :inc : :dec
 
-    user.set_counter(:participation_events, operation)
+      user.set_counter(:enrollment_events, operation)
 
-    event.set_counter(:registered_users, operation)
+      event.set_counter(:registered_users, operation)
+    elsif option == "present"
+      operation = self.present? ? :inc : :dec
+      
+      user.set_counter(:participation_events, operation)
+
+      event.set_counter(:present_users, operation)
+    end
   end
 end

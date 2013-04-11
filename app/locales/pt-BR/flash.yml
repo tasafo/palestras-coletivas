@@ -50,6 +50,6 @@ pt-BR:
 
     enrollments:
       create:
-        notice: "Sua inscrição foi realizada!"
+        notice: "A inscrição foi realizada!"
       update:
-        notice: "Sua inscrição foi alterada!"
+        notice: "A inscrição foi alterada!"

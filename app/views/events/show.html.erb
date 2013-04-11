@@ -45,8 +45,17 @@
 
         <% button_type = @enrollment.active? ? "btn-warning" : "btn-success" %>
           
-        <%= link_to message_button, edit_enrollment_path(@event, @enrollment), :class => "btn btn-large #{button_type}" %>
+        <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
       <% end %>
+    <% end %>
+
+    <hr>
+
+    <% if @authorized %>
+      <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "btn btn-primary" %>
+
+      <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "btn btn-success" %>
+      <hr>
     <% end %>
 
     <%= render "shared/event_schedule" %>
@@ -77,6 +86,14 @@
       <h4><%= enrolled[count > 1 ? :other : :one] %> (<%= count %>)</h4>
 
       <% @event.enrollments.actives.each do |enrollment| %>
+        <% if @can_record_presence %>
+          <% message_button = enrollment.present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
+
+          <% button_type = enrollment.present? ? "btn-warning" : "btn-primary" %>
+            
+          <%= link_to message_button, edit_enrollment_path(@event, enrollment, :present), :class => "btn #{button_type}", :id => "user_id_#{enrollment.user.id}" %>
+        <% end %>
+
         <%= render "shared/user", :user => enrollment.user %><br/><br/>
       <% end %>
     <% end %>    

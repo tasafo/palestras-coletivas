@@ -16,7 +16,7 @@ describe "Edit enrollment" do
       click_link "Eventos"
       click_link "Tá Safo Conf"
       click_link "Cancelar minha participação"
-      click_button "Alterar minha participação"
+      click_button "Alterar participação"
     end
 
     it "redirects to the event page" do
@@ -24,7 +24,7 @@ describe "Edit enrollment" do
     end
 
     it "displays success message" do
-      expect(page).to have_content("Sua inscrição foi alterada!")
+      expect(page).to have_content("A inscrição foi alterada!")
     end
   end
 
@@ -34,7 +34,7 @@ describe "Edit enrollment" do
       click_link "Eventos"
       click_link "Tá Safo Conf"
       click_link "Quero participar!"
-      click_button "Alterar minha participação"
+      click_button "Alterar participação"
     end
 
     it "redirects to the event page" do
@@ -42,7 +42,7 @@ describe "Edit enrollment" do
     end
 
     it "displays success message" do
-      expect(page).to have_content("Sua inscrição foi alterada!")
+      expect(page).to have_content("A inscrição foi alterada!")
     end
   end
 end

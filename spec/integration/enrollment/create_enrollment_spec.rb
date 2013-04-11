@@ -21,7 +21,7 @@ describe "Create enrollment" do
     end
 
     it "displays success message" do
-      expect(page).to have_content("Sua inscrição foi realizada!")
+      expect(page).to have_content("A inscrição foi realizada!")
     end
   end
 

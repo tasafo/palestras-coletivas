@@ -43,9 +43,9 @@ Palestrascoletivas::Application.routes.draw do
   post "/activities/get-type" => "activities#get_type"
 
   get "/enrollments/:event_id/new", :to => "enrollments#new", :as => :new_enrollment
-  get "/enrollments/:event_id/:id/edit", :to => "enrollments#edit", :as => :edit_enrollment
+  get "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#edit", :as => :edit_enrollment
   post "/enrollments/:event_id/new", :to => "enrollments#create", :as => false
-  put "/enrollments/:event_id/:id/edit", :to => "enrollments#update", :as => false
+  put "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#update", :as => false
 
   resources :password_resets
 end

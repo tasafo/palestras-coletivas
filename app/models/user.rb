@@ -13,6 +13,7 @@ class User
   field :password_reset_sent_at, type: DateTime
   field :counter_organizing_events, type: Integer, default: 0
   field :counter_presentation_events, type: Integer, default: 0
+  field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
 
   has_and_belongs_to_many :talks
