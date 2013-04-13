@@ -9,9 +9,9 @@
     <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
 
     <h3 class="featurette-heading"><%= link_to talk.title, talk_path(talk) %></h3>
-    
+
     <p class="lead">
-      <%= talk.description %><br/>
+      <%= talk.description.html_safe %><br/>
 
       <strong><%= t("show.talk.tags") %>:</strong> <%= talk.tags %><br/>
 
@@ -20,7 +20,7 @@
       <% if show_user %>
         <% author = t("show.talk.authors") %>
         <strong><%= author[talk.users.count > 1 ? :other : :one] %></strong><br/>
-      
+
         <% talk.users.each do |user| %>
           <%= render "shared/user", :user => user %><br/>
         <% end %>

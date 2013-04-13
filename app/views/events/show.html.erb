@@ -6,7 +6,7 @@
       <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
     <% else %>
       <h4 class="text-success">
-        <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %> 
+        <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
         <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
       </h4>
     <% end %>
@@ -16,7 +16,7 @@
     </h4>
 
     <p>
-      <strong><%= t("labels.event.description") %>:</strong> <%= @event.description %>
+      <strong><%= t("labels.event.description") %>:</strong> <%= @event.description.html_safe %>
     </p>
 
     <p>
@@ -44,7 +44,7 @@
         <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
         <% button_type = @enrollment.active? ? "btn-warning" : "btn-success" %>
-          
+
         <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
       <% end %>
     <% end %>
@@ -90,13 +90,13 @@
           <% message_button = enrollment.present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
           <% button_type = enrollment.present? ? "btn-warning" : "btn-primary" %>
-            
+
           <%= link_to message_button, edit_enrollment_path(@event, enrollment, :present), :class => "btn #{button_type}", :id => "user_id_#{enrollment.user.id}" %>
         <% end %>
 
         <%= render "shared/user", :user => enrollment.user %><br/><br/>
       <% end %>
-    <% end %>    
+    <% end %>
   <% else %>
     <h1><%= t("show.event.not_found") %></h1>
   <% end %>
