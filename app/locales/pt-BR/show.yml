@@ -33,15 +33,11 @@ pt-BR:
       profile: "Veja o perfil completo em"
 
     event:
-      organizers:
-        one: Organizador
-        other: Organizadores
+      organizers: Quem está na organização
       groups:
         one: Grupo envolvido
         other: Grupos envolvidos
-      enrolled:
-        one: Inscrito
-        other: Inscritos
+      enrolled: Quem se inscreveu
       not_found: "Evento não encontrado"
       of: "De"
       to: "até"

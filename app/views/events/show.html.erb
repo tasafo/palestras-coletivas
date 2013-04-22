@@ -61,9 +61,8 @@
     <%= render "shared/event_schedule" %>
 
     <% unless @event.users.blank? %>
-      <% organizer = t("show.event.organizers") %>
       <% count = @event.users.count %>
-      <h4><%= organizer[count > 1 ? :other : :one] %> (<%= count %>)</h4>
+      <h4><%= t("show.event.organizers") %> (<%= count %>)</h4>
 
       <% @event.users.each do |user| %>
         <%= render "shared/user", :user => user %><br/><br/>
@@ -81,9 +80,8 @@
     <% end %>
 
     <% unless @event.enrollments.actives.blank? %>
-      <% enrolled = t("show.event.enrolled") %>
       <% count = @event.enrollments.actives.count %>
-      <h4><%= enrolled[count > 1 ? :other : :one] %> (<%= count %>)</h4>
+      <h4><%= t("show.event.enrolled") %> (<%= count %>)</h4>
 
       <% @event.enrollments.actives.each do |enrollment| %>
         <% if @can_record_presence %>
