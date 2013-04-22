@@ -1,6 +1,6 @@
 pt-BR:
   talk:
-    created_time: "criada há %{time}"
+    created_time: "criado há %{time}"
 
   group:
     created_time: "criado há %{time}"

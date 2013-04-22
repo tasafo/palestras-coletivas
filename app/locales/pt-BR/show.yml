@@ -1,9 +1,7 @@
 pt-BR:
   show:
     talk:
-      authors:
-        one: Autor
-        other: Autores
+      created_by: Criado por
       events:
         one: Apresentado no evento
         other: Apresentado nos eventos

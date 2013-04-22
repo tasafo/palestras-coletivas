@@ -38,8 +38,7 @@
       <% end %>
     <% end %>
 
-    <% author = t("show.talk.authors") %>
-    <h4><%= author[@talk.users.count > 1 ? :other : :one] %></h4>
+    <h4><%= t("show.talk.created_by") %></h4>
 
     <% @talk.users.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
