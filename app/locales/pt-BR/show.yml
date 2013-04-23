@@ -16,11 +16,14 @@ pt-BR:
       profile: "Veja o perfil completo em"
       presentations: "Trabalhos apresentados em eventos"
       groups:
-        one: Grupo que eu participo
-        other: Grupos que eu participo
+        one: Grupo que participo
+        other: Grupos que participo
       events:
         one: Evento que ajudei a organizar
         other: Eventos que ajudei a organizar
+      participations:
+        one: "Evento que participei"
+        other: "Eventos que participei"
 
     group:
       members:
@@ -33,11 +36,12 @@ pt-BR:
       profile: "Veja o perfil completo em"
 
     event:
-      organizers: Quem está na organização
+      organizers: Organização
       groups:
         one: Grupo envolvido
         other: Grupos envolvidos
       enrolled: Quem se inscreveu
+      presents: Quem participou
       not_found: "Evento não encontrado"
       of: "De"
       to: "até"

@@ -11,6 +11,8 @@ class Enrollment
 
   scope :actives, lambda { where(:active => true).order_by(:created_at => :asc) }
 
+  scope :presents, lambda { where(:present => true).order_by(:updated_at => :asc) }  
+
   def update_counter_of_events_and_users(option)
     if option == "active"
       operation = self.active? ? :inc : :dec

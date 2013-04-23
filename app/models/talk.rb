@@ -22,6 +22,8 @@ class Talk
   
   validates_presence_of :title, :description, :tags, :users, :owner
 
+  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :title => :asc).limit(5)
+
   fulltext_search_in :title, :tags,
     :index_name => 'fulltext_index_talks',
     :filters => {

@@ -1,4 +1,4 @@
-<div>
+<div class="span8">
   <h1>Opa! Tudo bem contigo?</h1>
 
   <br/>
@@ -7,13 +7,94 @@
     Meu nome é Palestras Coletivas, fui desenvolvido para ajudar você a organizar seus
   </p>
 
-  <%= link_to "eventos", events_path, :class => "btn btn-large btn-success" %>
-  <%= link_to "trabalhos", talks_path, :class => "btn btn-large btn-success" %>
-  <%= link_to "grupos", groups_path, :class => "btn btn-large btn-success" %>
-
-  <br/><br/>
+  <p class="text-center">
+    <%= link_to "eventos", events_path, :class => "btn btn-large btn-success" %>
+    <%= link_to "trabalhos", talks_path, :class => "btn btn-large btn-success" %>
+    <%= link_to "grupos", groups_path, :class => "btn btn-large btn-success" %>
+  </p>
 
   <p class="lead">
     Estou evoluindo constantemente para te ajudar a reunir pessoas e compartilhar conhecimento.
   </p>
+</div>
+
+<div class="span4">
+  <table class="table table-condensed">
+    <tr>
+      <td colspan="2"><h3 class="text-center">Top 5 do PC</h3></td>
+    </tr>
+
+  <% unless @talks.blank? %>
+    <tr>
+      <td colspan="2"><h4>Tá em todas</h4></td>
+    </tr>
+    <% @talks.each do |talk| %>
+      <tr>
+        <td><%= link_to talk.title, talk_path(talk), :target => "_blank" %></td>
+        <td><span class="badge badge-inverse"><%= talk.counter_presentation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @events.blank? %>
+    <tr>
+      <td colspan="2"><h4>Bombou!</h4></td>
+    </tr>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to "#{event.name} - #{event.edition}", event_path(event), :target => "_blank" %></td>
+        <td><span class="badge badge-inverse"><%= event.counter_present_users %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @groups.blank? %>
+    <tr>
+      <td colspan="2"><h4>É só chamar!</h4></td>
+    </tr>
+    <% @groups.each do |group| %>
+      <tr>
+        <td><%= render "shared/group", :group => group %></td>
+        <td><span class="badge badge-inverse"><%= group.counter_participation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>  
+
+  <% unless @organizers.blank? %>
+    <tr>
+      <td colspan="2"><h4>E lá vamos nós!</h4></td>
+    </tr>
+    <% @organizers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_organizing_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+  
+  <% unless @talkers.blank? %>
+    <tr>
+      <td colspan="2"><h4>Fala pra chuchu</h4></td>
+    </tr>
+    <% @talkers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_presentation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @participations.blank? %>
+    <tr>
+      <td colspan="2"><h4>Não perde uma</h4></td>
+    </tr>
+    <% @participations.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_participation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  </table>
 </div>

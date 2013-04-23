@@ -50,9 +50,11 @@ class Event
 
   before_save :number_of_days
 
-  default_scope order_by(:start_date => :asc)
+  scope :by_start_date, order_by(:start_date => :asc)
 
   scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
+
+  scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :name => :asc, :edition => :asc).limit(5)
 
   def address
     [street, district, city, state, country].compact.join(', ')

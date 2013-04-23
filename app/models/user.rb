@@ -42,9 +42,15 @@ class User
 
   before_create { generate_token(:auth_token) }
 
-  default_scope order_by(:name => :asc)
+  scope :by_name, order_by(:name => :asc)
 
   scope :organizers, lambda { |user| not_in(:_id => user.id.to_s) }
+
+  scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :name => :asc).limit(5)
+
+  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :name => :asc).limit(5)
+
+  scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :name => :asc).limit(5)
 
   def password=(password)
     if password.blank?

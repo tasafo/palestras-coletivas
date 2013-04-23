@@ -46,6 +46,15 @@
   <%= presentations.html_safe %>
 <% end %>
 
+<% unless @participations.blank? %>
+  <% participation = t("show.user.participations") %>
+  <h4><%= participation[@participations.count > 1 ? :other : :one] %></h4>
+
+  <% @participations.each do |participation| %>
+    <h5><%= link_to "#{participation.event.name} - #{participation.event.edition}", event_path(participation.event), :target => "_blank" %></h5>
+  <% end %>
+<% end %>
+
 <hr class="featurette-divider">
 
 <% unless @talks.empty? %>

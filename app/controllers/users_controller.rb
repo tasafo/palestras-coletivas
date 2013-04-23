@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     begin
       @user = User.find(params[:id])
       @talks = @user.talks.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
+      @participations = Enrollment.where(:present => true, :user => @user).order_by(:updated_at => :asc)
 
       profile = Gravatar.profile(@user.email)
 
