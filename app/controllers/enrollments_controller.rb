@@ -25,7 +25,7 @@ class EnrollmentsController < ApplicationController
 
     @authorized = authorized_access?(@event)
 
-    @can_record_presence = @authorized && @event.start_date >= Date.today
+    @can_record_presence = @authorized && Date.today >= @event.start_date
 
     if @option == "active"
       @user_id = current_user.id

@@ -23,7 +23,7 @@
     <% member = t("show.group.members") %>
     <h4><%= member[@group.users.count > 1 ? :other : :one] %></h4>
 
-    <% @group.users.each do |user| %>
+    <% @group.users.by_name.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
     <% end %>
 

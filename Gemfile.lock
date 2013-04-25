@@ -54,7 +54,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    ffi (1.7.0)
+    ffi (1.8.1)
     geocoder (1.1.8)
     hike (1.2.2)
     i18n (0.6.1)
