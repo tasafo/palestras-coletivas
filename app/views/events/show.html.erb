@@ -64,7 +64,7 @@
       <% count = @event.users.count %>
       <h4><%= t("show.event.organizers") %> (<%= count %>)</h4>
 
-      <% @event.users.each do |user| %>
+      <% @event.users.by_name.each do |user| %>
         <%= render "shared/user", :user => user %><br/><br/>
       <% end %>
     <% end %>
@@ -79,30 +79,28 @@
       <% end %>
     <% end %>
 
-    <% if Date.today > @event.end_date && !@can_record_presence %>
-      <% unless @event.enrollments.presents.blank? %>
-          <% count = @event.enrollments.presents.count %>
-          <h4><%= t("show.event.presents") %> (<%= count %>)</h4>
+    <% if @show_users_present %>
+      <% unless @users_present.blank? %>
+          <h4><%= t("show.event.presents") %> (<%= @users_present.count %>)</h4>
 
-          <% @event.enrollments.presents.each do |enrollment| %>
-            <%= render "shared/user", :user => enrollment.user %><br/><br/>
+          <% @users_present.each do |user| %>
+            <%= render "shared/user", :user => user %><br/><br/>
           <% end %>
       <% end %>
     <% else %>
-      <% unless @event.enrollments.actives.blank? %>
-        <% count = @event.enrollments.actives.count %>
-        <h4><%= t("show.event.enrolled") %> (<%= count %>)</h4>
+      <% unless @users_active.blank? %>
+        <h4><%= t("show.event.enrolled") %> (<%= @users_active.count %>)</h4>
 
-        <% @event.enrollments.actives.each do |enrollment| %>
+        <% @users_active.each do |h| %>
           <% if @can_record_presence %>
-            <% message_button = enrollment.present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
+            <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
-            <% button_type = enrollment.present? ? "btn-warning" : "btn-primary" %>
+            <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
 
-            <%= link_to message_button, edit_enrollment_path(@event, enrollment, :present), :class => "btn #{button_type}", :id => "user_id_#{enrollment.user.id}" %>
+            <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
           <% end %>
 
-          <%= render "shared/user", :user => enrollment.user %><br/><br/>
+          <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
         <% end %>
       <% end %>
     <% end %>
