@@ -44,7 +44,7 @@ class User
 
   scope :by_name, order_by(:name => :asc)
 
-  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s) }
+  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s).order_by(:name => :asc) }
 
   scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :name => :asc).limit(5)
 

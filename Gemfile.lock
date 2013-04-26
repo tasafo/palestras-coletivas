@@ -102,7 +102,7 @@ GEM
     moped (1.4.5)
     multi_json (1.7.2)
     nokogiri (1.5.9)
-    origin (1.0.11)
+    origin (1.1.0)
     polyglot (0.3.3)
     pry (0.9.12.1)
       coderay (~> 1.0.5)
