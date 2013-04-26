@@ -91,17 +91,37 @@
       <% unless @users_active.blank? %>
         <h4><%= t("show.event.enrolled") %> (<%= @users_active.count %>)</h4>
 
-        <% @users_active.each do |h| %>
-          <% if @can_record_presence %>
-            <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
+        <% if @can_record_presence %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th><%= t("show.event.table.number") %></th>
+                <th><%= t("show.event.table.name") %></th>
+                <th><%= t("show.event.table.email") %></th>
+                <th><%= t("show.event.table.presence") %></th>
+              </tr>
+            </thead>
+            <tbody>
+            <% contador = 0 %>
+            <% @users_active.each do |h| %>
+              <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
-            <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
+              <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
 
-            <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+              <tr>
+                <td><%= contador += 1 %></td>
+                <td><%= h[:enrollment].user.name %></td>
+                <td><%= h[:enrollment].user.email %></td>
+                <td><%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <% @users_active.each do |h| %>
+            <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
           <% end %>
-
-          <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
-        <% end %>
+        <% end %>        
       <% end %>
     <% end %>
   <% else %>
