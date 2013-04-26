@@ -49,3 +49,8 @@ pt-BR:
       cancel_my_participation: "Cancelar minha participação"
       record_presence: "Registrar presença"
       undo_presence: "Desfazer presença"
+      table:
+        number: "N."
+        name: "Nome"
+        email: "E-mail"
+        presence: "Presença"
