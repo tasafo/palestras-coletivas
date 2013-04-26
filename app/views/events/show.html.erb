@@ -91,14 +91,16 @@
       <% unless @users_active.blank? %>
         <h4><%= t("show.event.enrolled") %> (<%= @users_active.count %>)</h4>
 
-        <% if @can_record_presence %>
+        <% if @authorized %>
           <table class="table">
             <thead>
               <tr>
                 <th><%= t("show.event.table.number") %></th>
                 <th><%= t("show.event.table.name") %></th>
                 <th><%= t("show.event.table.email") %></th>
-                <th><%= t("show.event.table.presence") %></th>
+                <% if @can_record_presence %>
+                  <th><%= t("show.event.table.presence") %></th>
+                <% end %>  
               </tr>
             </thead>
             <tbody>
@@ -112,7 +114,11 @@
                 <td><%= contador += 1 %></td>
                 <td><%= h[:enrollment].user.name %></td>
                 <td><%= h[:enrollment].user.email %></td>
-                <td><%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %></td>
+                <% if @can_record_presence %>
+                  <td>
+                    <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
             </tbody>
