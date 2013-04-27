@@ -10,8 +10,11 @@ E como eu instalo isso no meu Ubuntu?
 Já que a gente é hispter, vamos usar a última versão do Ruby
 
 	rvm install ruby-2.0.0-p0
+	
 	rvm use 2.0.0
+	
 	rvm gemset create palestrascoletivas
+	
 	rvm gemset use palestrascoletivas
 
 Moleque, na verdade a gente é muito hispter e por isso usamos o MongoDB, então instala ele lá!
@@ -39,4 +42,5 @@ Depois roda esse comando para adicionar uns dados no banco
 Agora é só rodar e brincar!
 	
 	rails s
+
 	localhost:3000
