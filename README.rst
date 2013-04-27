@@ -7,7 +7,7 @@ Um ambiente para você organizar eventos, trabalhos (palestras e cursos), grupos
 E como eu instalo isso no meu Ubuntu?
 =====================================
 
-Já que a gente é hispter, vamos usar a última versão do Ruby
+Já que a gente é hipster, vamos usar a última versão do Ruby
 
 	rvm install ruby-2.0.0-p0
 	
@@ -17,7 +17,7 @@ Já que a gente é hispter, vamos usar a última versão do Ruby
 	
 	rvm gemset use palestrascoletivas
 
-Moleque, na verdade a gente é muito hispter e por isso usamos o MongoDB, então instala ele lá!
+Moleque, na verdade a gente é muito hipster e por isso usamos o MongoDB, então instala ele lá!
 
 	sudo apt-get install mongodb
 
