@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:thoughtbot/capybara-webkit.git
+  revision: 0abc7e139f902e2ca1fcd2c145f688bb321f5cbe
+  specs:
+    capybara-webkit (0.14.1)
+      capybara (~> 2.0, >= 2.0.2)
+      json
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,9 +45,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (0.14.2)
-      capybara (~> 2.0, >= 2.0.2)
-      json
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
@@ -54,7 +59,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    ffi (1.7.0)
+    ffi (1.8.1)
     geocoder (1.1.8)
     hike (1.2.2)
     i18n (0.6.1)
@@ -200,7 +205,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   capybara
-  capybara-webkit
+  capybara-webkit!
   database_cleaner
   factory_girl_rails
   geocoder

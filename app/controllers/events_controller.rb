@@ -43,6 +43,16 @@ class EventsController < ApplicationController
 
       @can_record_presence = @authorized && Date.today >= @event.start_date
 
+      @show_users_present = Date.today > @event.end_date && !@can_record_presence
+
+      @users_present = []
+      @event.enrollments.presents.each { |e| @users_present << e.user }
+      @users_present.sort_by! { |u| u.name }
+
+      @users_active = []
+      @event.enrollments.actives.each { |e| @users_active << { :name => e.user.name, :enrollment => e } }
+      @users_active.sort_by! { |h| h[:name] }
+
       @new_subscription = true
 
       if logged_in?
