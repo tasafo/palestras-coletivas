@@ -101,6 +101,7 @@ GEM
       stringex (~> 1.4)
     moped (1.4.5)
     multi_json (1.7.2)
+    newrelic_rpm (3.6.1.88)
     nokogiri (1.5.9)
     origin (1.1.0)
     polyglot (0.3.3)
@@ -216,6 +217,7 @@ DEPENDENCIES
   mongoid-rspec
   mongoid_fulltext
   mongoid_slug
+  newrelic_rpm
   nokogiri
   pry
   rails (= 3.2.13)

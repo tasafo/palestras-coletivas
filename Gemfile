@@ -13,6 +13,7 @@ gem 'kaminari'
 gem 'mongoid_fulltext'
 gem 'geocoder'
 gem 'unicorn'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails'
