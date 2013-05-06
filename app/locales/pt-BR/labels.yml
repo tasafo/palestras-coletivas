@@ -16,6 +16,7 @@ pt-BR:
       to_public: "Quero publicar"
       watched: "Assisti! (desfazer)"
       not_watched: "Assistir"
+      who_watched: "Quem já assistiu!"
 
     group:
       gravatar_url: "Url do gravatar"
@@ -47,3 +48,7 @@ pt-BR:
       environment: "Ambiente"
       activity: "Atividade"
       talk: "Trabalho"
+
+    general:
+      person: "Pessoa"
+      people: "Pessoas"

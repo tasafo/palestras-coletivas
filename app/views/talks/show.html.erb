@@ -46,6 +46,18 @@
       <% end %>
     <% end %>
 
+    <% if @talk.watched_users.any? %>
+      <h4>
+        <%= t("labels.talk.who_watched") %>
+        <small>
+          (<%= pluralize(@talk.watched_users.size, t("labels.general.person").downcase) %>)
+        </small>
+      </h4>
+      <% @talk.watched_users.each do |user| %>
+        <span class="watched_user"><%= render "shared/user_thumb", :user => user %></span>
+      <% end %>  <br/><br/>
+    <% end %>
+
     <h4><%= t("show.talk.created_by") %></h4>
 
     <% @talk.users.each do |user| %>
