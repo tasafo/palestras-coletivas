@@ -117,10 +117,17 @@ class TalksController < ApplicationController
     end
   end
 
-  def toggle_watch
+  def watch
     @talk = Talk.find(params[:id])
 
-    current_user.toggle_watch_talk! @talk
+    current_user.watch_talk! @talk
+    redirect_to talk_path(@talk)
+  end
+
+  def unwatch
+    @talk = Talk.find(params[:id])
+
+    current_user.unwatch_talk! @talk
     redirect_to talk_path(@talk)
   end
 

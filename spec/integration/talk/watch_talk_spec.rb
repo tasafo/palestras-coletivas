@@ -10,10 +10,10 @@ describe "Watch talk" do
   end
 
   it "toggle talk as watched" do
-    click_link "Não assisti"
-    expect(page).to have_content("Assisti!")
+    click_link "Assistir"
+    expect(page).to have_selector("a", :text => "Assisti! (desfazer)")
 
-    click_link "Assisti!"
-    expect(page).to have_content("Não assisti")
+    click_link "Assisti! (desfazer)"
+    expect(page).to have_selector("a", :text => "Assistir")
   end
 end

@@ -18,7 +18,8 @@ Palestrascoletivas::Application.routes.draw do
   put "/talks/:id/edit", :to => "talks#update", :as => false
   get "/talks/:id", :to => "talks#show", :as => :talk
   post "/talks/info-url" => "talks#info_url"
-  get "/talks/:id/toggle_watch", :to => "talks#toggle_watch", :as => :toggle_watch_talk
+  get "/talks/:id/watch", :to => "talks#watch", :as => :watch_talk
+  get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
 
 
   get "/groups", :to => "groups#index"

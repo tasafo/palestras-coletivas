@@ -77,12 +77,13 @@ class User
     UserMailer.password_reset(self).deliver
   end
 
-  def toggle_watch_talk! talk
-    if watched_talk? talk
-      self.watched_talks.delete talk
-    else
-      self.watched_talks << talk
-    end
+  def watch_talk! talk
+    return if watched_talk? talk
+    self.watched_talks << talk
+  end
+
+  def unwatch_talk! talk
+    self.watched_talks.delete talk
   end
 
   def watched_talk? talk

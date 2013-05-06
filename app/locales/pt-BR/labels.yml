@@ -14,8 +14,8 @@ pt-BR:
       thumbnail: "Miniatura"
       code: "Código"
       to_public: "Quero publicar"
-      watched: "Assisti!"
-      not_watched: "Não assisti"
+      watched: "Assisti! (desfazer)"
+      not_watched: "Assistir"
 
     group:
       gravatar_url: "Url do gravatar"
