@@ -16,7 +16,9 @@ class User
   field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
 
-  has_and_belongs_to_many :talks
+  has_and_belongs_to_many :talks, :inverse_of => :talks
+
+  has_and_belongs_to_many :watched_talks, :class_name => "Talk", :inverse_of => :watched_user
 
   has_and_belongs_to_many :groups
 
@@ -73,6 +75,18 @@ class User
     self.password_reset_sent_at = Time.zone.now
     save!
     UserMailer.password_reset(self).deliver
+  end
+
+  def toggle_watch_talk! talk
+    if watched_talk? talk
+      self.watched_talks.delete talk
+    else
+      self.watched_talks << talk
+    end
+  end
+
+  def watched_talk? talk
+    self.watched_talks.include? talk
   end
 
 private
