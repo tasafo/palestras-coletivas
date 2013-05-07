@@ -117,6 +117,20 @@ class TalksController < ApplicationController
     end
   end
 
+  def watch
+    @talk = Talk.find(params[:id])
+
+    current_user.watch_talk! @talk
+    redirect_to talk_path(@talk)
+  end
+
+  def unwatch
+    @talk = Talk.find(params[:id])
+
+    current_user.unwatch_talk! @talk
+    redirect_to talk_path(@talk)
+  end
+
 private
   def all_public_talks
     Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
