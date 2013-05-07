@@ -16,7 +16,9 @@ class Talk
   field :owner, type: String
   field :counter_presentation_events, type: Integer, default: 0
 
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, :inverse_of => :talks
+
+  has_and_belongs_to_many :watched_users, class_name: "User", :inverse_of => :watched_talk
   
   has_many :schedules
   
