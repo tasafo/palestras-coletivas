@@ -9,13 +9,13 @@ describe "Watch talk" do
     visit talk_path(talk)
   end
 
-  it "toggle talk as watched" do
+  it "mark and unmark talk as watched" do
     expect(page).to have_selector("span.watched_user", :count => 0)
 
     click_link "Assistir"
     expect(page).to have_selector("span.watched_user", :count => 1)
 
-    click_link "Assisti! (desfazer)"
+    click_link "Assistir (desfazer)"
     expect(page).to have_selector("a", :text => "Assistir")
     expect(page).to have_selector("span.watched_user", :count => 0)
   end
