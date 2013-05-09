@@ -9,6 +9,7 @@ class TalksController < ApplicationController
     @search = ""
 
     if params[:my].nil?
+      @my = false
       if params[:talk].nil?
         @talks = all_public_talks
       else
@@ -21,6 +22,7 @@ class TalksController < ApplicationController
         end
       end
     else
+      @my = true
       @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc) if logged_in?
     end
   end
@@ -28,7 +30,7 @@ class TalksController < ApplicationController
   def new
     @talk = Talk.new
     
-    @authors = User.list_authors current_user
+    @authors = User.list_users current_user
   end
 
   def create
@@ -36,7 +38,7 @@ class TalksController < ApplicationController
     
     @talk.add_authors current_user, params[:users]
     
-    @authors = User.list_authors current_user
+    @authors = User.list_users current_user
 
     if @talk.save
       @talk.update_user_counters
@@ -85,7 +87,7 @@ class TalksController < ApplicationController
   def edit
     @talk = Talk.find(params[:id])
 
-    @authors = User.list_authors current_user
+    @authors = User.list_users current_user
 
     unauthorized = @talk.owner == current_user.id.to_s ? false : true
 
@@ -97,7 +99,7 @@ class TalksController < ApplicationController
 
     @talk.add_authors current_user, params[:users]
 
-    @authors = User.list_authors(current_user)
+    @authors = User.list_users current_user
 
     if @talk.update_attributes(params[:talk])
       @talk.update_user_counters

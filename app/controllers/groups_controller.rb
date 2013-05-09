@@ -5,34 +5,29 @@ class GroupsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
 
   def index
-    if logged_in?
-      @groups = current_user.groups.order_by(:name => :asc)
-    else
+    if params[:my].nil?
       @groups = Group.all.order_by(:name => :asc)
+      @my = false
+    else
+      @groups = current_user.groups.order_by(:name => :asc) if logged_in?
+      @my = true
     end
   end
 
   def new
     @group = Group.new
 
-    list_members
+    @members = User.list_users current_user
   end
 
   def create
     @group = Group.new(params[:group])
-    @group.owner = current_user.id
-    @group.users << current_user
 
-    list_members
+    @group.add_members current_user, params[:users]
+
+    @members = User.list_users current_user
 
     if @group.save
-      if params[:users]
-        params[:users].each do |m|
-          user = User.find(m)
-          @group.users << [user] if user
-        end
-      end
-
       redirect_to group_path(@group), :notice => t("flash.groups.create.notice")
     else
       render :new
@@ -86,7 +81,7 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find(params[:id])
 
-    list_members
+    @members = User.list_users current_user
 
     unauthorized = @group.owner == current_user.id.to_s ? false : true
 
@@ -96,25 +91,14 @@ class GroupsController < ApplicationController
   def update
     @group = Group.find(params[:id])
 
-    list_members
+    @group.add_members current_user, params[:users]
+
+    @members = User.list_users current_user
 
     if @group.update_attributes(params[:group])
-      @group.users = nil
-      @group.users << current_user
-      if params[:users]
-        params[:users].each do |m|
-          user = User.find(m)
-          @group.users << [user] if user
-        end
-      end
       redirect_to group_path(@group), :notice => t("flash.groups.update.notice")
     else
       render :edit
     end
-  end
-
-private
-  def list_members
-    @members = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
   end
 end

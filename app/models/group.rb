@@ -19,4 +19,18 @@ class Group
   validates_presence_of :name, :tags, :owner
 
   scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :name => :asc).limit(5)
+
+  def add_members(owner, others)
+    self.owner = owner.id if new_record?
+
+    self.users = nil
+    self.users << owner
+
+    if others
+      others.each do |member|
+        user = User.find(member)
+        self.users << [user] if user
+      end
+    end
+  end
 end
