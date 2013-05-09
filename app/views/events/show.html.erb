@@ -74,7 +74,7 @@
       <% count = @event.groups.count %>
       <h4><%= group[count > 1 ? :other : :one] %> (<%= count %>)</h4>
 
-      <% @event.groups.each do |group| %>
+      <% @event.groups.by_name.each do |group| %>
         <%= render "shared/group", :group => group %><br/><br/>
       <% end %>
     <% end %>
@@ -104,14 +104,14 @@
               </tr>
             </thead>
             <tbody>
-            <% contador = 0 %>
+            <% counter = 0 %>
             <% @users_active.each do |h| %>
               <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
               <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
 
               <tr>
-                <td><%= contador += 1 %></td>
+                <td><%= counter += 1 %></td>
                 <td><%= h[:enrollment].user.name %></td>
                 <td><%= h[:enrollment].user.email %></td>
                 <% if @can_record_presence %>

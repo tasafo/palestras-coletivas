@@ -13,8 +13,8 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    
-    guest_list
+    @organizers = User.without_the_owner current_user
+    @groups = Group.by_name
   end
 
   def create
@@ -22,7 +22,8 @@ class EventsController < ApplicationController
 
     @event.owner = current_user.id
 
-    guest_list
+    @organizers = User.without_the_owner current_user
+    @groups = Group.by_name
 
     if @event.save
       @event.update_list_organizers current_user, params[:users]
@@ -40,7 +41,7 @@ class EventsController < ApplicationController
       @event = Event.find(params[:id])
       @dates = (@event.start_date..@event.end_date).to_a
       @authorized = authorized_access?(@event)
-      
+
       @open_enrollment = @event.deadline_date_enrollment >= Date.today
 
       @can_record_presence = @authorized && Date.today >= @event.start_date
@@ -49,10 +50,10 @@ class EventsController < ApplicationController
 
       @users_present = []
       @event.enrollments.presents.each { |e| @users_present << e.user }
-      @users_present.sort_by! { |u| u.name }
+      @users_present.sort_by! { |u| u._slugs }
 
       @users_active = []
-      @event.enrollments.actives.each { |e| @users_active << { :name => e.user.name, :enrollment => e } }
+      @event.enrollments.actives.each { |e| @users_active << { :name => e.user._slugs, :enrollment => e } }
       @users_active.sort_by! { |h| h[:name] }
 
       @new_subscription = true
@@ -76,7 +77,7 @@ class EventsController < ApplicationController
       end
 
       unless @event.to_public
-        @event = nil unless @authorized 
+        @event = nil unless @authorized
       end
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path
@@ -85,8 +86,8 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-
-    guest_list
+    @organizers = User.without_the_owner current_user
+    @groups = Group.by_name
 
     redirect_to events_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
@@ -96,9 +97,10 @@ class EventsController < ApplicationController
 
     owner = User.find(@event.owner)
 
-    guest_list
+    @organizers = User.without_the_owner current_user
+    @groups = Group.by_name
 
-    if @event.update_attributes(params[:event])      
+    if @event.update_attributes(params[:event])
       @event.update_list_organizers owner, params[:users]
 
       @event.update_list_groups params[:groups]
@@ -107,12 +109,5 @@ class EventsController < ApplicationController
     else
       render :edit
     end
-  end
-
-private
-  def guest_list
-    @organizers = User.organizers current_user
-
-    @groups = Group.by_name
   end
 end

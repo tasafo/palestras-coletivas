@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <% if model.users %>
-            <% model.users.each do |u| %>
+            <% model.users.by_name.each do |u| %>
               <% if u.id.to_s != model.owner %>
                 <tr id="row_<%= u.id %>">
                   <td>

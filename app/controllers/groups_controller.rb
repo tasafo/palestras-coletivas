@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
 
-    @members = User.list_users current_user
+    @members = User.without_the_owner current_user
   end
 
   def create
@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
 
     @group.add_members current_user, params[:users]
 
-    @members = User.list_users current_user
+    @members = User.without_the_owner current_user
 
     if @group.save
       redirect_to group_path(@group), :notice => t("flash.groups.create.notice")
@@ -81,7 +81,7 @@ class GroupsController < ApplicationController
   def edit
     @group = Group.find(params[:id])
 
-    @members = User.list_users current_user
+    @members = User.without_the_owner current_user
 
     unauthorized = @group.owner == current_user.id.to_s ? false : true
 
@@ -93,7 +93,7 @@ class GroupsController < ApplicationController
 
     @group.add_members current_user, params[:users]
 
-    @members = User.list_users current_user
+    @members = User.without_the_owner current_user
 
     if @group.update_attributes(params[:group])
       redirect_to group_path(@group), :notice => t("flash.groups.update.notice")
