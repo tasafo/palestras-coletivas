@@ -60,7 +60,7 @@
 
     <h4><%= t("show.talk.created_by") %></h4>
 
-    <% @talk.users.each do |user| %>
+    <% @talk.users.by_name.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
     <% end %>
 

@@ -24,9 +24,21 @@
       <td colspan="2"><h3 class="text-center">Top 5 do PC</h3></td>
     </tr>
 
+  <% unless @users_public_talks.blank? %>
+    <tr>
+      <td colspan="2"><h5>Mas já tem trabalho</h5></td>
+    </tr>
+    <% @users_public_talks.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_public_talks %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
   <% unless @talks.blank? %>
     <tr>
-      <td colspan="2"><h4>Tá em todas</h4></td>
+      <td colspan="2"><h5>Tá em todas (trabalhos)</h5></td>
     </tr>
     <% @talks.each do |talk| %>
       <tr>
@@ -38,7 +50,7 @@
 
   <% unless @events.blank? %>
     <tr>
-      <td colspan="2"><h4>Bombou!</h4></td>
+      <td colspan="2"><h5>Bombou! (eventos)</h5></td>
     </tr>
     <% @events.each do |event| %>
       <tr>
@@ -50,7 +62,7 @@
 
   <% unless @groups.blank? %>
     <tr>
-      <td colspan="2"><h4>É só chamar!</h4></td>
+      <td colspan="2"><h5>É só chamar! (grupos)</h5></td>
     </tr>
     <% @groups.each do |group| %>
       <tr>
@@ -62,7 +74,7 @@
 
   <% unless @organizers.blank? %>
     <tr>
-      <td colspan="2"><h4>E lá vamos nós!</h4></td>
+      <td colspan="2"><h5>E lá vamos nós! (organizadores)</h5></td>
     </tr>
     <% @organizers.each do |user| %>
       <tr>
@@ -74,7 +86,7 @@
   
   <% unless @talkers.blank? %>
     <tr>
-      <td colspan="2"><h4>Fala pra chuchu</h4></td>
+      <td colspan="2"><h5>Fala pra chuchu (palestrantes)</h5></td>
     </tr>
     <% @talkers.each do |user| %>
       <tr>
@@ -86,7 +98,7 @@
 
   <% unless @participations.blank? %>
     <tr>
-      <td colspan="2"><h4>Não perde uma</h4></td>
+      <td colspan="2"><h5>Não perde uma (participantes)</h5></td>
     </tr>
     <% @participations.each do |user| %>
       <tr>

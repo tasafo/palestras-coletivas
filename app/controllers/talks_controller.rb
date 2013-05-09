@@ -28,24 +28,19 @@ class TalksController < ApplicationController
   def new
     @talk = Talk.new
     
-    list_authors
+    @authors = User.list_authors current_user
   end
 
   def create
     @talk = Talk.new(params[:talk])
-    @talk.owner = current_user.id
-    @talk.users << current_user
-
-    list_authors
+    
+    @talk.add_authors current_user, params[:users]
+    
+    @authors = User.list_authors current_user
 
     if @talk.save
-      if params[:users]
-        params[:users].each do |a|
-          user = User.find(a)
-          @talk.users << [user] if user
-        end
-      end
-
+      @talk.update_user_counters
+      
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
       render :new
@@ -55,7 +50,7 @@ class TalksController < ApplicationController
   def show
     begin
       @talk = Talk.find(params[:id])
-      @authorized = authorized_access?(@talk)
+      @authorized = authorized_access? @talk
 
       unless @talk.to_public
         @talk = nil unless @authorized
@@ -90,7 +85,7 @@ class TalksController < ApplicationController
   def edit
     @talk = Talk.find(params[:id])
 
-    list_authors
+    @authors = User.list_authors current_user
 
     unauthorized = @talk.owner == current_user.id.to_s ? false : true
 
@@ -100,17 +95,13 @@ class TalksController < ApplicationController
   def update
     @talk = Talk.find(params[:id])
 
-    list_authors
+    @talk.add_authors current_user, params[:users]
+
+    @authors = User.list_authors(current_user)
 
     if @talk.update_attributes(params[:talk])
-      @talk.users = nil
-      @talk.users << current_user
-      if params[:users]
-        params[:users].each do |a|
-          user = User.find(a)
-          @talk.users << [user] if user
-        end
-      end
+      @talk.update_user_counters
+
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
     else
       render :edit
@@ -134,9 +125,5 @@ class TalksController < ApplicationController
 private
   def all_public_talks
     Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
-  end
-
-  def list_authors
-    @authors = User.not_in(:_id => current_user.id.to_s).order_by(:name => :asc)
   end
 end
