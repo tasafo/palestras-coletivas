@@ -42,7 +42,7 @@
     </tr>
     <% @talks.each do |talk| %>
       <tr>
-        <td><%= link_to talk.title, talk_path(talk), :target => "_blank" %></td>
+        <td><%= link_to talk.title, talk_path(talk) %></td>
         <td><span class="badge badge-inverse"><%= talk.counter_presentation_events %></span></td>
       </tr>
     <% end %>
@@ -54,7 +54,7 @@
     </tr>
     <% @events.each do |event| %>
       <tr>
-        <td><%= link_to "#{event.name} - #{event.edition}", event_path(event), :target => "_blank" %></td>
+        <td><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></td>
         <td><span class="badge badge-inverse"><%= event.counter_present_users %></span></td>
       </tr>
     <% end %>

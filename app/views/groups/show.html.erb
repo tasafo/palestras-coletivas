@@ -12,7 +12,7 @@
       <% if @tem_perfil_no_gravatar %>
         <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
         <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
-        <%= t("show.group.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
+        <%= t("show.group.profile") %> <%= link_to @profile_url, @profile_url %>
       <% end %>
     </p>
 
@@ -32,7 +32,7 @@
       <h4><%= event[@group.events.count > 1 ? :other : :one] %></h4>
 
       <% @group.events.each do |event| %>
-          <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event), :target => "_blank" %></h5>
+          <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h5>
       <% end %>
     <% end %>
   <% else %>

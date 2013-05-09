@@ -69,7 +69,7 @@
       <h4><%= event[@talk.schedules.count > 1 ? :other : :one] %></h4>
 
       <% @talk.schedules.each do |schedule| %>
-          <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event), :target => "_blank" %></h5>
+          <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event) %></h5>
       <% end %>
     <% end %>
   <% else %>
