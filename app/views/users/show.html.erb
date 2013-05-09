@@ -6,7 +6,7 @@
     <p class="lead">
       <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
       <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
-      <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url, :target => "_blank" %>
+      <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url %>
     </p>
   <% end %>
 </div>
@@ -16,7 +16,7 @@
   <h4><%= event[@user.groups.count > 1 ? :other : :one] %></h4>
 
   <% @user.groups.each do |group| %>
-    <h5><%= link_to group.name, group_path(group), :target => "_blank" %></h5>
+    <h5><%= link_to group.name, group_path(group) %></h5>
   <% end %>
 <% end %>
 
@@ -25,7 +25,7 @@
   <h4><%= event[@user.events.count > 1 ? :other : :one] %></h4>
 
   <% @user.events.each do |event| %>
-    <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event), :target => "_blank" %></h5>
+    <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h5>
   <% end %>
 <% end %>
 
@@ -35,7 +35,7 @@
   <% @user.talks.each do |talk| %>
     <% if talk.schedules? %>
       <% talk.schedules.each do |schedule| %>
-        <% presentations += '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event), :target => "_blank") + '</h5>' %>
+        <% presentations += '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
       <% end %>
     <% end %>
   <% end %>
@@ -51,7 +51,7 @@
   <h4><%= participation[@participations.count > 1 ? :other : :one] %></h4>
 
   <% @participations.each do |participation| %>
-    <h5><%= link_to "#{participation.event.name} - #{participation.event.edition}", event_path(participation.event), :target => "_blank" %></h5>
+    <h5><%= link_to "#{participation.event.name} - #{participation.event.edition}", event_path(participation.event) %></h5>
   <% end %>
 <% end %>
 

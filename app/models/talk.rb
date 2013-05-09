@@ -31,4 +31,26 @@ class Talk
     :filters => {
       :published => lambda { |talk| talk.to_public }
     }
+
+  def add_authors(owner, others)
+    self.owner = owner.id if new_record?
+
+    self.users = nil
+    self.users << owner
+
+    if others
+      others.each do |author|
+        user = User.find(author)
+        self.users << [user] if user
+      end
+    end
+  end
+
+  def update_user_counters
+    self.users.each do |author|
+      user = User.find(author)
+      user.counter_public_talks = user.talks.where(:to_public => true).count
+      user.save
+    end
+  end
 end

@@ -15,6 +15,7 @@ class User
   field :counter_presentation_events, type: Integer, default: 0
   field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
+  field :counter_public_talks, type: Integer, default: 0
 
   has_and_belongs_to_many :talks, :inverse_of => :talks
 
@@ -54,6 +55,8 @@ class User
 
   scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :name => :asc).limit(5)
 
+  scope :public_talks, where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :name => :asc).limit(5)
+
   def password=(password)
     if password.blank?
       @validate_password = false
@@ -88,6 +91,10 @@ class User
 
   def watched_talk? talk
     self.watched_talks.include? talk
+  end
+
+  def self.list_authors(owner)
+    User.not_in(:_id => owner.id.to_s).order_by(:name => :asc)
   end
 
 private
