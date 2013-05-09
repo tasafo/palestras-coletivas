@@ -6,10 +6,10 @@ class GroupsController < ApplicationController
 
   def index
     if params[:my].nil?
-      @groups = Group.all.order_by(:name => :asc)
+      @groups = Group.all.by_name
       @my = false
     else
-      @groups = current_user.groups.order_by(:name => :asc) if logged_in?
+      @groups = current_user.groups.by_name if logged_in?
       @my = true
     end
   end

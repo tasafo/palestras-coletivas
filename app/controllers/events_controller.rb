@@ -113,6 +113,6 @@ private
   def guest_list
     @organizers = User.organizers current_user
 
-    @groups = Group.order_by(:name => :asc)
+    @groups = Group.by_name
   end
 end
