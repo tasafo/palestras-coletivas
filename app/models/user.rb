@@ -45,17 +45,17 @@ class User
 
   before_create { generate_token(:auth_token) }
 
-  scope :by_name, order_by(:name => :asc)
+  scope :by_name, order_by(:_slugs => :asc)
 
-  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s).order_by(:name => :asc) }
+  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s).order_by(:_slugs => :asc) }
 
-  scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :name => :asc).limit(5)
+  scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5)
 
-  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :name => :asc).limit(5)
+  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5)
 
-  scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :name => :asc).limit(5)
+  scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :_slugs => :asc).limit(5)
 
-  scope :public_talks, where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :name => :asc).limit(5)
+  scope :public_talks, where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5)
 
   def password=(password)
     if password.blank?
@@ -94,7 +94,7 @@ class User
   end
 
   def self.list_users(owner)
-    User.not_in(:_id => owner.id.to_s).order_by(:name => :asc)
+    User.not_in(:_id => owner.id.to_s).by_name
   end
 
 private
