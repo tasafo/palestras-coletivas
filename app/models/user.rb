@@ -93,7 +93,7 @@ class User
     self.watched_talks.include? talk
   end
 
-  def self.list_authors(owner)
+  def self.list_users(owner)
     User.not_in(:_id => owner.id.to_s).order_by(:name => :asc)
   end
 

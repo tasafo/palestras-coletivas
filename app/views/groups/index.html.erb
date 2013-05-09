@@ -4,6 +4,11 @@
 
 <% if logged_in? %>
   <%= link_to t("titles.groups.new"), new_group_path, :class => "btn btn-primary" %>
+  <% if @my %>
+    <%= link_to t("titles.groups.all"), "/groups", :class => "btn" %>
+  <% else %>
+    <%= link_to t("titles.groups.my"), "/groups?my=true", :class => "btn" %>
+  <% end %>
   <br />
 <% end %>
 

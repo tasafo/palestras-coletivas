@@ -4,8 +4,10 @@ class EventsController < ApplicationController
   def index
     if params[:my].nil?
       @events = Event.all_public
+      @my = false
     else
       @events = current_user.events.order_by(:start_date => :desc) if logged_in?
+      @my = true
     end
   end
 
