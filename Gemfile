@@ -32,8 +32,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'capybara-webkit', :git => 'git@github.com:thoughtbot/capybara-webkit.git' # até versao 1.0.0 ser lancada
+  gem 'capybara', "2.0.3"
+  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
 end
