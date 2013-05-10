@@ -56,6 +56,8 @@ class EventsController < ApplicationController
       @event.enrollments.actives.each { |e| @users_active << { :name => e.user._slugs, :enrollment => e } }
       @users_active.sort_by! { |h| h[:name] }
 
+      @crowded = @users_active.count >= @event.stocking
+
       @new_subscription = true
 
       if logged_in?
