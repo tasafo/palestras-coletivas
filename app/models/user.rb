@@ -47,7 +47,7 @@ class User
 
   scope :by_name, order_by(:_slugs => :asc)
 
-  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s).order_by(:_slugs => :asc) }
+  scope :without_the_owner, lambda { |user| not_in(:_id => user.id.to_s).by_name }
 
   scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5)
 
@@ -91,10 +91,6 @@ class User
 
   def watched_talk? talk
     self.watched_talks.include? talk
-  end
-
-  def self.list_users(owner)
-    User.not_in(:_id => owner.id.to_s).by_name
   end
 
 private

@@ -30,7 +30,7 @@ class TalksController < ApplicationController
   def new
     @talk = Talk.new
     
-    @authors = User.list_users current_user
+    @authors = User.without_the_owner current_user
   end
 
   def create
@@ -38,7 +38,7 @@ class TalksController < ApplicationController
     
     @talk.add_authors current_user, params[:users]
     
-    @authors = User.list_users current_user
+    @authors = User.without_the_owner current_user
 
     if @talk.save
       @talk.update_user_counters
@@ -87,7 +87,7 @@ class TalksController < ApplicationController
   def edit
     @talk = Talk.find(params[:id])
 
-    @authors = User.list_users current_user
+    @authors = User.without_the_owner current_user
 
     unauthorized = @talk.owner == current_user.id.to_s ? false : true
 
@@ -99,7 +99,7 @@ class TalksController < ApplicationController
 
     @talk.add_authors current_user, params[:users]
 
-    @authors = User.list_users current_user
+    @authors = User.without_the_owner current_user
 
     if @talk.update_attributes(params[:talk])
       @talk.update_user_counters

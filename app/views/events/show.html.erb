@@ -11,9 +11,17 @@
       </h4>
     <% end %>
 
-    <h4 class="text-error">
-      <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
-    </h4>
+    <% if @open_enrollment %>
+      <h4 class="text-error">
+        <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
+      </h4>
+    <% end %>
+
+    <% if @event.stocking > 0 %>
+      <p>
+        <strong><%= t("labels.event.stocking") %>:</strong> <%= @event.stocking %>
+      </p>
+    <% end %>
 
     <p>
       <strong><%= t("labels.event.description") %>:</strong> <%= @event.description.html_safe %>
@@ -39,13 +47,21 @@
       <br/><br/>
 
       <% if @new_subscription %>
-        <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "btn btn-success btn-large" %>
+        <% if @crowded %>
+          <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
+        <% else %>
+          <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "btn btn-success btn-large" %>
+        <% end %>
       <% else %>
         <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
         <% button_type = @enrollment.active? ? "btn-warning" : "btn-success" %>
 
-        <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
+        <% if @crowded && !@enrollment.active? %>
+          <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
+        <% else %>
+          <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
+        <% end %>
       <% end %>
     <% end %>
 
@@ -74,7 +90,7 @@
       <% count = @event.groups.count %>
       <h4><%= group[count > 1 ? :other : :one] %> (<%= count %>)</h4>
 
-      <% @event.groups.each do |group| %>
+      <% @event.groups.by_name.each do |group| %>
         <%= render "shared/group", :group => group %><br/><br/>
       <% end %>
     <% end %>
@@ -104,14 +120,14 @@
               </tr>
             </thead>
             <tbody>
-            <% contador = 0 %>
+            <% counter = 0 %>
             <% @users_active.each do |h| %>
               <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
               <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
 
               <tr>
-                <td><%= contador += 1 %></td>
+                <td><%= counter += 1 %></td>
                 <td><%= h[:enrollment].user.name %></td>
                 <td><%= h[:enrollment].user.email %></td>
                 <% if @can_record_presence %>
