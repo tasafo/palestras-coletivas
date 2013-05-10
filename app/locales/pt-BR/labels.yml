@@ -14,8 +14,8 @@ pt-BR:
       thumbnail: "Miniatura"
       code: "Código"
       to_public: "Quero publicar"
-      watched: "Assistir (desfazer)"
-      not_watched: "Assistir"
+      watched: "Já assisti! (desfazer)"
+      not_watched: "Já assisti!"
       who_watched: "Quem já assistiu!"
 
     group:

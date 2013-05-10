@@ -12,11 +12,11 @@ describe "Watch talk" do
   it "mark and unmark talk as watched" do
     expect(page).to have_selector("span.watched_user", :count => 0)
 
-    click_link "Assistir"
+    click_link "Já assisti!"
     expect(page).to have_selector("span.watched_user", :count => 1)
 
-    click_link "Assistir (desfazer)"
-    expect(page).to have_selector("a", :text => "Assistir")
+    click_link "Já assisti! (desfazer)"
+    expect(page).to have_selector("a", :text => "Já assisti!")
     expect(page).to have_selector("span.watched_user", :count => 0)
   end
 end
