@@ -83,7 +83,19 @@
       </tr>
     <% end %>
   <% end %>
-  
+
+  <% unless @organizers.blank? %>
+    <tr>
+      <td colspan="2"><h5>E lá vamos nós! (organizadores)</h5></td>
+    </tr>
+    <% @organizers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_organizing_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
   <% unless @talkers.blank? %>
     <tr>
       <td colspan="2"><h5>Fala pra chuchu (palestrantes)</h5></td>
