@@ -34,9 +34,9 @@ class UsersController < ApplicationController
         @about_me = xml.xpath("//aboutMe").text
         @current_location = xml.xpath("//currentLocation").text
         @emails = xml.xpath("//emails/value")
-        @tem_perfil_no_gravatar = true
+        @has_gravatar_profile = true
       rescue OpenURI::HTTPError, SocketError
-        @tem_perfil_no_gravatar = false
+        @has_gravatar_profile = false
       end
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path, :notice => t("flash.user_not_found")
