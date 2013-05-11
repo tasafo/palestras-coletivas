@@ -13,18 +13,21 @@
     <% end %>
     
     <% if logged_in? %>
-      <% if current_user.watched_talk? @talk %>
-        <%= link_to t("labels.talk.watched"), unwatch_talk_path(@talk), :class => "btn btn-primary" %>
-      <% else %>
-        <%= link_to t("labels.talk.not_watched"), watch_talk_path(@talk), :class => "btn btn-danger" %>
-      <% end %>
-
       <% @talk.users.each do |user| %>
         <% if current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
           <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
-          <br/><br/>
         <% end %>
       <% end %>
+
+      <% unless @authorized %>
+        <% if current_user.watched_talk? @talk %>
+          <%= link_to t("labels.talk.watched"), unwatch_talk_path(@talk), :class => "btn btn-primary" %>
+        <% else %>
+          <%= link_to t("labels.talk.not_watched"), watch_talk_path(@talk), :class => "btn btn-danger" %>
+        <% end %>
+      <% end %>
+
+      <br/><br/>
     <% end %>
 
     <p>
