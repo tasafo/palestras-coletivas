@@ -14,7 +14,7 @@
     
     <% if logged_in? %>
       <% @talk.users.each do |user| %>
-        <% if current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
+        <% if user.owner_talk? current_user, @talk %>
           <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
         <% end %>
       <% end %>

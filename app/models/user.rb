@@ -98,6 +98,10 @@ class User
     self.watched_talks.include? talk
   end
 
+  def owner_talk? user, talk
+    user.id.to_s == self.id.to_s && talk.owner.to_s == self.id.to_s
+  end
+
 private
 
   def erase_password
