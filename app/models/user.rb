@@ -11,6 +11,7 @@ class User
   field :auth_token, type: String
   field :password_reset_token, type: String
   field :password_reset_sent_at, type: DateTime
+  field :counter_watched_talks, type: Integer, default: 0
   field :counter_organizing_events, type: Integer, default: 0
   field :counter_presentation_events, type: Integer, default: 0
   field :counter_enrollment_events, type: Integer, default: 0
@@ -49,6 +50,8 @@ class User
 
   scope :without_the_owner, lambda { |user| not_in(:_id => user.id.to_s).by_name }
 
+  scope :top_talk_watchers, where(:counter_watched_talks.gt => 0).order_by(:counter_watched_talks => :desc, :_slugs => :asc).limit(5)
+
   scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5)
 
   scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5)
@@ -83,17 +86,24 @@ class User
   def watch_talk! talk
     return if watched_talk? talk
     self.watched_talks << talk
+    set_counter :watched_talks, :inc
   end
 
   def unwatch_talk! talk
     self.watched_talks.delete talk
+    set_counter :watched_talks, :dec
   end
 
   def watched_talk? talk
     self.watched_talks.include? talk
   end
 
+  def owner_talk? user, talk
+    user.id.to_s == self.id.to_s && talk.owner.to_s == self.id.to_s
+  end
+
 private
+
   def erase_password
     @password = nil
     @password_confirmation = nil

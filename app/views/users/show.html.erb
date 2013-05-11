@@ -2,7 +2,7 @@
   <%= gravatar_image(@user.email, @user.name) %>
   <h3 class="featurette-heading"><%= @user.name %></h3>
 
-  <% if @tem_perfil_no_gravatar %>
+  <% if @has_gravatar_profile %>
     <p class="lead">
       <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
       <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
@@ -15,7 +15,7 @@
   <% event = t("show.user.groups") %>
   <h4><%= event[@user.groups.count > 1 ? :other : :one] %></h4>
 
-  <% @user.groups.each do |group| %>
+  <% @user.groups.by_name.each do |group| %>
     <h5><%= link_to group.name, group_path(group) %></h5>
   <% end %>
 <% end %>

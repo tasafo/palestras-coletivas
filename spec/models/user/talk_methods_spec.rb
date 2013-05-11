@@ -23,6 +23,12 @@ describe User, "talk methods" do
         regular_user.watch_talk! talk
         expect(regular_user.watched_talk? talk).to be_true
       end
+
+      it "increments watched talks counter" do
+        expect(regular_user.counter_watched_talks).to be_eql 0
+        regular_user.watch_talk! talk
+        expect(regular_user.counter_watched_talks).to be_eql 1
+      end
     end
   end
 
@@ -36,6 +42,12 @@ describe User, "talk methods" do
         expect(regular_user.watched_talk? talk).to be_true
         regular_user.unwatch_talk! talk
         expect(regular_user.watched_talk? talk).to be_false
+      end
+
+      it "decrements watched talks counter" do
+        expect(regular_user.counter_watched_talks).to be_eql 1
+        regular_user.unwatch_talk! talk
+        expect(regular_user.counter_watched_talks).to be_eql 0
       end
     end
 

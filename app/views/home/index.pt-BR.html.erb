@@ -72,6 +72,18 @@
     <% end %>
   <% end %>  
 
+  <% unless @top_talk_watchers.blank? %>
+    <tr>
+      <td colspan="2"><h5>Quem assistiu mais palestras?</h5></td>
+    </tr>
+    <% @top_talk_watchers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_watched_talks %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
   <% unless @organizers.blank? %>
     <tr>
       <td colspan="2"><h5>E lá vamos nós! (organizadores)</h5></td>
@@ -83,7 +95,7 @@
       </tr>
     <% end %>
   <% end %>
-  
+
   <% unless @talkers.blank? %>
     <tr>
       <td colspan="2"><h5>Fala pra chuchu (palestrantes)</h5></td>

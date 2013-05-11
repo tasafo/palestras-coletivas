@@ -9,7 +9,7 @@
     <p class="lead">
       <strong><%= t("labels.group.tags") %>:</strong> <%= @group.tags %><br/>
 
-      <% if @tem_perfil_no_gravatar %>
+      <% if @has_gravatar_profile %>
         <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
         <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
         <%= t("show.group.profile") %> <%= link_to @profile_url, @profile_url %>
