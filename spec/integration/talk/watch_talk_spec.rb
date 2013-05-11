@@ -2,10 +2,11 @@ require "spec_helper"
 
 describe "Watch talk" do
   let!(:user) { create(:user, :paul) }
+  let!(:other_user) { create(:user, :billy) }
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
 
   before do
-    login_as(user)
+    login_as(other_user)
     visit talk_path(talk)
   end
 
