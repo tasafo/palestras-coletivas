@@ -11,15 +11,14 @@ Palestrascoletivas::Application.routes.draw do
   post "/login", :to => "login#create"
   get "/logout", :to => "login#destroy"
 
-  get "/talks", :to => "talks#index"
-  get "/talks/new", :to => "talks#new", :as => :new_talk
-  get "/talks/:id/edit", :to => "talks#edit", :as => :edit_talk
-  post "/talks/new", :to => "talks#create", :as => false
-  put "/talks/:id/edit", :to => "talks#update", :as => false
-  get "/talks/:id", :to => "talks#show", :as => :talk
-  post "/talks/info-url" => "talks#info_url"
-  get "/talks/:id/watch", :to => "talks#watch", :as => :watch_talk
-  get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
+  resources :talks, except: :destroy do
+    get :watch
+    get :unwatch
+  end
+
+  resource :talks, only: [:none] do
+    post :info_url, path: "info-url"
+  end
 
 
   get "/groups", :to => "groups#index"
