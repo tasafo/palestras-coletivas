@@ -62,6 +62,10 @@ class Event
     [street, district, city, state, country].compact.join(', ')
   end
 
+  def is_in_progress?
+    (start_date..end_date).include?(Date.today)
+  end
+
   def update_list_organizers(owner, list_id_organizers)
     if self.users?
       owner.set_counter(:organizing_events, :dec)

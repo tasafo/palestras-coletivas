@@ -3,11 +3,10 @@ require 'spec_helper'
 describe "add presence", js: true do
   let(:user) { create(:user, :paul) }
   let(:billy) { create(:user, :billy) }
-  let(:event) { create(:event, :tasafoconf, owner: billy) }
+  let(:event) { create(:event, :tasafoconf, owner: billy, start_date: Date.today, end_date: Date.today) }
 
   before do
     login_as(user)
-
   end
 
   context "when user does not presence" do
