@@ -1,15 +1,31 @@
 <div>
   <% if @event %>
+    <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>" />
     <h2 class="text-info"><%= @event.name %> - <%= @event.edition %></h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <% if @event.start_date == @event.end_date %>
+          <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
+        <% else %>
+          <h4 class="text-success">
+            <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
+            <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
+          </h4>
+        <% end %>
+      </div>
 
-    <% if @event.start_date == @event.end_date %>
-      <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
-    <% else %>
-      <h4 class="text-success">
-        <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
-        <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
-      </h4>
-    <% end %>
+      <div class="span4" >
+        <% if logged_in? %>
+          <h3>
+            <% if current_user.present_at? @event %>
+              <a href="" class="btn btn-present btn-success">Cheguei!</a>
+            <% else %>
+              <a href="" class="btn btn-present">Check-in</a>
+            <% end %>
+          </h3>
+        <% end %>
+      </div>
+    </div>
 
     <% if @open_enrollment %>
       <h4 class="text-error">
@@ -116,7 +132,7 @@
                 <th><%= t("show.event.table.email") %></th>
                 <% if @can_record_presence %>
                   <th><%= t("show.event.table.presence") %></th>
-                <% end %>  
+                <% end %>
               </tr>
             </thead>
             <tbody>
@@ -143,7 +159,7 @@
           <% @users_active.each do |h| %>
             <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
           <% end %>
-        <% end %>        
+        <% end %>
       <% end %>
     <% end %>
   <% else %>

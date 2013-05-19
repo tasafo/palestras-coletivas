@@ -83,6 +83,54 @@ class User
     UserMailer.password_reset(self).deliver
   end
 
+  def arrived_at event
+    if enrolled_at? event
+      enrollment = Enrollment.find_by user: self, event: event
+    else
+      enrollment = enroll_at event
+    end
+
+    enrollment.present = true
+    enrollment.save
+  end
+
+  def enrolled_at? event
+    begin
+      enrollment = Enrollment.find_by user: self, event: event
+
+      if enrollment.nil?
+        return false
+      end
+
+      true
+    rescue Mongoid::Errors::DocumentNotFound
+      false
+    end
+  end
+
+  def enroll_at event
+    Enrollment.create(
+      user: self,
+      event: event,
+      active: true
+    )
+  end
+
+  def present_at? event
+    begin
+      enrollment = Enrollment.find_by user: self, event: event
+
+      if enrollment.nil?
+        return false
+      else
+        return enrollment.present
+      end
+    rescue Mongoid::Errors::DocumentNotFound
+      return false
+    end
+
+  end
+
   def watch_talk! talk
     return if watched_talk? talk
     self.watched_talks << talk

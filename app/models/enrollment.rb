@@ -22,7 +22,7 @@ class Enrollment
       event.set_counter(:registered_users, operation)
     elsif option == "present"
       operation = self.present? ? :inc : :dec
-      
+
       user.set_counter(:participation_events, operation)
 
       event.set_counter(:present_users, operation)
