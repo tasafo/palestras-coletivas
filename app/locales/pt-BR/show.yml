@@ -50,7 +50,7 @@ pt-BR:
       sellout: "Lotação esgotada!"
       record_presence: "Registrar presença"
       undo_presence: "Desfazer presença"
-      btn_presence_checkin: "i'm here!"
+      btn_presence_checkin: "Estou aqui!"
       table:
         number: "N."
         name: "Nome"

@@ -5,15 +5,13 @@ $(function() {
 
   $("#event_deadline_date_enrollment").datepicker();
 
-  $(".btn-present").on("click", function(e){
+  $(".btn-present").on("click", function(e) {
     e.preventDefault();
     addPresence(this)
-
   });
 });
 
-var addPresence = function(obj){
-
+var addPresence = function(obj) {
   $.ajax({
     url: "/events/presence",
     data: {
@@ -21,8 +19,8 @@ var addPresence = function(obj){
     },
     type: "put",
     dataType: "json",
-    success: function(res){
-      $(obj).addClass("btn-success");
+    success: function(res) {
+      $(obj).addClass("btn-info disabled");
       $(obj).text($(obj).attr("data"));
     }
   })
