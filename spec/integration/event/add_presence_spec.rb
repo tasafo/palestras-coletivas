@@ -16,7 +16,7 @@ describe "add presence", js: true do
     end
 
     it "button turns green" do
-      find('a.btn-present').should have_content('Cheguei!')
+      find('a.btn-present').should have_content(I18n.t("show.event.btn_presence_checkin"))
     end
   end
 
@@ -27,7 +27,7 @@ describe "add presence", js: true do
     end
 
     it "display success button" do
-      find('a.btn-present').should have_content('Cheguei!')
+      find('a.btn-present').should have_content(I18n.t("show.event.btn_presence_checkin"))
     end
   end
 end

@@ -23,7 +23,7 @@ var addPresence = function(obj){
     dataType: "json",
     success: function(res){
       $(obj).addClass("btn-success");
-      $(obj).text("Cheguei!");
+      $(obj).text($(obj).attr("data"));
     }
   })
 }
