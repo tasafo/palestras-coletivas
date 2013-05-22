@@ -36,6 +36,7 @@ Palestrascoletivas::Application.routes.draw do
   post "/events/new", :to => "events#create", :as => false
   put "/events/:id/edit", :to => "events#update", :as => false
   get "/events/:id", :to => "events#show", :as => :event
+  put "/events/presence", to: "events#presence", as: :event_presence
 
   get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
   get "/schedules/:event_id/:id/edit", :to => "schedules#edit", :as => :edit_schedule

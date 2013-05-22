@@ -1,15 +1,19 @@
 <div>
   <% if @event %>
+    <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>" />
     <h2 class="text-info"><%= @event.name %> - <%= @event.edition %></h2>
-
-    <% if @event.start_date == @event.end_date %>
-      <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
-    <% else %>
-      <h4 class="text-success">
-        <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
-        <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
-      </h4>
-    <% end %>
+    <div class="row-fluid">
+      <div class="span6">
+        <% if @event.start_date == @event.end_date %>
+          <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
+        <% else %>
+          <h4 class="text-success">
+            <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
+            <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
+          </h4>
+        <% end %>
+      </div>
+    </div>
 
     <% if @open_enrollment %>
       <h4 class="text-error">
@@ -39,13 +43,9 @@
       <strong><%= t("labels.event.address") %>:</strong> <%= @event.address %>
     </p>
 
-    <% if Rails.env != 'test' %>
-      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => "img-polaroid" %>
-    <% end %>
+    <hr>
 
     <% if @open_enrollment %>
-      <br/><br/>
-
       <% if @new_subscription %>
         <% if @crowded %>
           <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
@@ -63,6 +63,26 @@
           <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
         <% end %>
       <% end %>
+    <% end %>
+
+    <% if logged_in? && @event.is_in_progress? %>
+      <% if current_user.present_at? @event %>
+        <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-info disabled">
+          <%= t("show.event.btn_presence_checkin") %>
+        </a>
+      <% else %>
+        <% if @crowded && @enrollment.active? %>
+          <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-danger">Check-in</a>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @open_enrollment %>
+      <hr>
+    <% end %>
+    
+    <% if Rails.env != 'test' %>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => "img-polaroid" %>
     <% end %>
 
     <hr>
@@ -116,7 +136,7 @@
                 <th><%= t("show.event.table.email") %></th>
                 <% if @can_record_presence %>
                   <th><%= t("show.event.table.presence") %></th>
-                <% end %>  
+                <% end %>
               </tr>
             </thead>
             <tbody>
@@ -143,7 +163,7 @@
           <% @users_active.each do |h| %>
             <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
           <% end %>
-        <% end %>        
+        <% end %>
       <% end %>
     <% end %>
   <% else %>

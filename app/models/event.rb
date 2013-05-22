@@ -22,7 +22,7 @@ class Event
   field :street, type: String
   field :district, type: String
   field :city, type: String
-  field :state, type: String  
+  field :state, type: String
   field :country, type: String
   field :coordinates, type: Array
 
@@ -62,6 +62,10 @@ class Event
     [street, district, city, state, country].compact.join(', ')
   end
 
+  def is_in_progress?
+    (start_date..end_date).include?(Date.today)
+  end
+
   def update_list_organizers(owner, list_id_organizers)
     if self.users?
       owner.set_counter(:organizing_events, :dec)
@@ -75,7 +79,7 @@ class Event
 
     self.users << owner
     owner.set_counter(:organizing_events, :inc)
-    
+
     if list_id_organizers
       list_id_organizers.each do |organizer|
         user = User.find(organizer)
@@ -95,7 +99,7 @@ class Event
 
       self.groups = nil
     end
-    
+
     if list_id_groups
       list_id_groups.each do |g|
         group = Group.find(g)

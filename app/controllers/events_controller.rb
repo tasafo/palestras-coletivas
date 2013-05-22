@@ -112,4 +112,16 @@ class EventsController < ApplicationController
       render :edit
     end
   end
+
+  def presence
+    event = Event.find params[:event_id]
+
+    respond_to do |format|
+      if current_user.arrived_at event
+        format.json { render json: { success: true } }
+      else
+        format.json { render json: { success: false } }
+      end
+    end
+  end
 end
