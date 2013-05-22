@@ -71,13 +71,13 @@
           <%= t("show.event.btn_presence_checkin") %>
         </a>
       <% else %>
-        <% if @crowded && @enrollment.active? %>
+        <% if (@crowded && @enrollment && @enrollment.active?) || !@crowded %>
           <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-danger">Check-in</a>
         <% end %>
       <% end %>
     <% end %>
 
-    <% if @open_enrollment %>
+    <% if @open_enrollment || @event.is_in_progress? %>
       <hr>
     <% end %>
     
