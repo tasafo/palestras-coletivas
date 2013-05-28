@@ -66,4 +66,20 @@ describe "See groups" do
       expect(page).to have_content("Invalid")
     end
   end
+
+  context "when user events" do
+    before do
+      login_as(user)
+      click_link "Grupos"
+      click_link "Meus grupos"
+    end
+
+    it "redirects to the groups page" do
+      expect(current_path).to eql(groups_path)
+    end
+
+    it "displays group" do
+      expect(page).to have_content("Tá safo!")
+    end
+  end
 end
