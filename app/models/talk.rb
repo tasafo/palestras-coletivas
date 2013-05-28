@@ -21,6 +21,8 @@ class Talk
   has_and_belongs_to_many :watched_users, class_name: "User", :inverse_of => :watched_talk
   
   has_many :schedules
+
+  embeds_many :external_events
   
   validates_presence_of :title, :description, :tags, :users, :owner
 

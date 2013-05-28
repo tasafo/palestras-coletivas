@@ -139,6 +139,22 @@ FactoryGirl.define do
   end
 
   factory :enrollment do
+    
+  end
 
+  factory :external_event do
+    trait :rubyconf do
+      name "Ruby Conf 2011"
+      place "São Paulo, SP"
+      date "01/01/2011"
+      url "http://rubyconf.com"
+    end
+
+    trait :fisl do
+      name "FISL 12"
+      place "Porto Alegre, RS"
+      date "02/02/2012"
+      url "http://fisl.org.br"
+    end    
   end
 end
