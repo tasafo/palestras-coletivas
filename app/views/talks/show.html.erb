@@ -81,7 +81,7 @@
 
       <table class="table">
         <tbody>
-        <% @talk.external_events.each do |external_event| %>
+        <% @talk.external_events.by_date.each do |external_event| %>
           <% event_date = l external_event.date, :format => :long %>
           <tr>
             <td>
