@@ -51,5 +51,10 @@ Palestrascoletivas::Application.routes.draw do
   post "/enrollments/:event_id/new", :to => "enrollments#create", :as => false
   put "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#update", :as => false
 
+  get "/external_events/:talk_id/new", :to => "external_events#new", :as => :new_external_event
+  get "/external_events/:talk_id/:id/edit", :to => "external_events#edit", :as => :edit_external_event
+  post "/external_events/:talk_id/new", :to => "external_events#create", :as => false
+  put "/external_events/:talk_id/:id/edit", :to => "external_events#update", :as => false
+
   resources :password_resets
 end

@@ -6,6 +6,7 @@ pt-BR:
       group: "Grupo"
       event: "Evento"
       schedule: "Programação"
+      external_event: "Eventos externos"
 
     attributes:
       user:
@@ -61,3 +62,9 @@ pt-BR:
         time: "Horário"
         environment: "Ambiente"
         activity: "Atividade"
+
+      external_event:
+        name: "Nome"
+        place: "Local"
+        date: "Data"
+        url: "Link"

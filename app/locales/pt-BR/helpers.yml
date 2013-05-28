@@ -24,3 +24,7 @@ pt-BR:
       enrollment:
         create: "Quero participar!"
         update: "Alterar participação"
+
+      external_event:
+        create: "Adicionar evento externo"
+        update: "Atualizar evento externo"

@@ -53,6 +53,7 @@ class TalksController < ApplicationController
     begin
       @talk = Talk.find(params[:id])
       @authorized = authorized_access? @talk
+      @owns = owner? @talk
 
       unless @talk.to_public
         @talk = nil unless @authorized

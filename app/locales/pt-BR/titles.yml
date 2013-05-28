@@ -49,3 +49,7 @@ pt-BR:
     enrollments:
       new: "Quero participar do evento"
       edit: "Alterar participação"
+
+    external_event:
+      new: "Adicionar evento externo para"
+      edit: "Editar evento externo de"

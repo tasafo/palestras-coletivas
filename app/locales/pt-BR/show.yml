@@ -11,6 +11,8 @@ pt-BR:
       not_public: "O trabalho ainda não está publicado"
       without_presentation: "O material ainda não está publicado"
       my_talks_published: "Meus trabalhos publicados"
+      external_event: "Adicionar evento externo"
+      external_events: "Apresentado em outros eventos"
 
     user:
       profile: "Veja o perfil completo em"

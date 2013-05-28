@@ -52,3 +52,9 @@ pt-BR:
     general:
       person: "Pessoa"
       people: "Pessoas"
+
+    external_event:
+      name: "Nome do evento"
+      place: "Local"
+      date: "Data"
+      url: "Link"
