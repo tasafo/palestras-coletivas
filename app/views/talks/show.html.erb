@@ -2,16 +2,14 @@
   <% if @talk %>
     <h2 class="text-info"><%= @talk.title %></h2>
 
-    <% if Rails.env != 'test' %>
-      <% unless @talk.code.empty? %>
-        <iframe src="http://www.slideshare.net/slideshow/embed_code/<%= @talk.code %>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>
-      <% else %>
-        <br/>
-        <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
-      <% end %>
+    <%= @frame.html_safe %>
+
+    <% if @talk.code.empty? %>
       <br/>
+      <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
     <% end %>
-    
+    <br/>
+
     <% if @owns %>
       <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
       <%= link_to t("show.talk.external_event"), new_external_event_path(@talk), :class => "btn btn-primary" %>
@@ -96,7 +94,7 @@
         <% end %>
         </tbody>
       </table>
-    <% end %>    
+    <% end %>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>
   <% end %>

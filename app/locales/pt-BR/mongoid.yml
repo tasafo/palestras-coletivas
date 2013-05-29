@@ -18,7 +18,7 @@ pt-BR:
         counter_participation_events: "Número de participações em eventos"
 
       talk:
-        presentation_url: "Endereço da apresentação"
+        presentation_url: "Link do trabalho"
         title: "Título"
         description: "Descrição"
         tags: "Tags"

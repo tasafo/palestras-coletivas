@@ -7,8 +7,8 @@ pt-BR:
       password_confirmation: "Confirme sua senha"
 
     talk:
-      presentation_url: "Link do slideshare"
-      title: "Titulo"
+      presentation_url: "Link do trabalho"
+      title: "Título"
       description: "Descrição"
       tags: "Tags"
       thumbnail: "Miniatura"
