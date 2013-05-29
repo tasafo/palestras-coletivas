@@ -49,7 +49,17 @@ FactoryGirl.define do
       thumbnail ""
       code ""
       to_public true
-    end    
+    end
+
+    factory :speakerdeck_talk do
+      presentation_url "https://speakerdeck.com/luizsanches/ruby-praticamente-falando"
+      title "Ruby - praticamente falando"
+      description "Indrodução à linguagem Ruby"
+      thumbnail "https://speakerd.s3.amazonaws.com/presentations/920aa870aa9d0130a293521e21bc27c7/thumb_slide_0.jpg"
+      code "920aa870aa9d0130a293521e21bc27c7"
+      tags "ruby, programação"
+      to_public true
+    end
   end
 
   factory :group do
@@ -104,7 +114,7 @@ FactoryGirl.define do
       type "interval"
       description "Abertura"
       order 2
-    end    
+    end
 
     trait :intervalo do
       type "interval"
@@ -139,7 +149,7 @@ FactoryGirl.define do
   end
 
   factory :enrollment do
-    
+
   end
 
   factory :external_event do
@@ -155,6 +165,6 @@ FactoryGirl.define do
       place "Porto Alegre, RS"
       date "02/02/2012"
       url "http://fisl.org.br"
-    end    
+    end
   end
 end

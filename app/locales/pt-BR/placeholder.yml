@@ -1,7 +1,6 @@
 pt-BR:
   placeholder:
     talks:
-      presentation_url: "Exemplo: http://slideshare.net/usuario/titulo-da-palestra"
       title: "Exemplo: O futuro do mundo"
       description: "Exemplo: A palestra fala sobre o futuro do mundo em que vivemos"
       tags: "Exemplo: futuro, mundo"
