@@ -7,6 +7,7 @@ gem 'mongoid', '~> 3.0.0'
 gem 'rails-i18n'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'nokogiri', :require => false
+gem 'multi_json', :require => false
 gem 'jquery-rails'
 gem 'mongoid_slug'
 gem 'kaminari'
@@ -32,7 +33,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara', "2.0.3"
+  gem 'capybara'
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
