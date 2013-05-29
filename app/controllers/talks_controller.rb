@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 class TalksController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
 
@@ -29,20 +26,20 @@ class TalksController < ApplicationController
 
   def new
     @talk = Talk.new
-    
+
     @authors = User.without_the_owner current_user
   end
 
   def create
     @talk = Talk.new(params[:talk])
-    
+
     @talk.add_authors current_user, params[:users]
-    
+
     @authors = User.without_the_owner current_user
 
     if @talk.save
       @talk.update_user_counters
-      
+
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
       render :new
@@ -64,22 +61,12 @@ class TalksController < ApplicationController
   end
 
   def info_url
-    url = params[:link]
+    oembed = Oembed.new params[:link]
 
-    begin
-      xml = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{url}&format=xml"))
-
-      unless xml.nil?
-        title = xml.xpath("//title").text
-        code = xml.xpath("//slideshow-id").text
-        thumbnail = xml.xpath("//thumbnail").text
-
-        respond_to do |format|
-          format.json { render :json => {:error => false, :title => title, :code => code, :thumbnail => thumbnail} }
-        end
-      end
-    rescue OpenURI::HTTPError
-      respond_to do |format|
+    respond_to do |format|
+      if oembed.success
+        format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
+      else
         format.json { render :json => {:error => true} }
       end
     end
