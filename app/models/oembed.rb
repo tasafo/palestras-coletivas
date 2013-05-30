@@ -10,7 +10,7 @@ class Oembed
     @code = code
   end
 
-  def open_url
+  def open_presentation
     begin
       if @url.include? "slideshare.net"
         record = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
@@ -41,7 +41,7 @@ class Oembed
     end
   end
 
-  def frame
+  def show_presentation
     dimension = "width=\"427\" height=\"356\""
 
     if @url.include? "slideshare.net"
