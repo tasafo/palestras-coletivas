@@ -9,14 +9,14 @@
     <p class="lead">
       <strong><%= t("labels.group.tags") %>:</strong> <%= @group.tags %><br/>
 
-      <% if @has_gravatar_profile %>
-        <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
-        <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
-        <%= t("show.group.profile") %> <%= link_to @profile_url, @profile_url %>
+      <% if @gravatar.has_profile %>
+        <%= @gravatar.about_me.blank? ? "" : "#{@gravatar.about_me}<br/>".html_safe %>
+        <%= @gravatar.current_location.blank? ? "" : "#{@gravatar.current_location}<br/>".html_safe %>
+        <%= t("show.group.profile") %> <%= link_to @gravatar.profile_url, @gravatar.profile_url %>
       <% end %>
     </p>
 
-    <% if logged_in? && current_user.id.to_s == @group.owner.to_s %>
+    <% if @owns %>
       <%= link_to t("titles.groups.edit"), edit_group_path(@group), :class => "btn btn-primary" %>
     <% end %>
 
