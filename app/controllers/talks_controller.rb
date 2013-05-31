@@ -52,8 +52,11 @@ class TalksController < ApplicationController
       @authorized = authorized_access? @talk
       @owns = owner? @talk
 
-      oembed = Oembed.new @talk.presentation_url, @talk.code
-      @frame = oembed.frame
+      @presentation = Oembed.new @talk.presentation_url, @talk.code
+      @presentation.show_presentation
+
+      @video = Oembed.new @talk.video_link
+      @video.show_video
 
       unless @talk.to_public
         @talk = nil unless @authorized
@@ -67,7 +70,7 @@ class TalksController < ApplicationController
     oembed = Oembed.new params[:link]
 
     respond_to do |format|
-      if oembed.open_url
+      if oembed.open_presentation
         format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
       else
         format.json { render :json => {:error => true} }

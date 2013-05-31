@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 class UsersController < ApplicationController
   before_filter :require_logged_user, :only => [:edit, :update]
 
@@ -12,8 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      redirect_to login_path,
-        :notice => t("flash.signup.create.notice")
+      redirect_to login_path, :notice => t("flash.signup.create.notice")
     else
       render :new
     end
@@ -25,19 +21,9 @@ class UsersController < ApplicationController
       @talks = @user.talks.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
       @participations = Enrollment.where(:present => true, :user => @user).order_by(:updated_at => :asc)
 
-      profile = Gravatar.profile(@user.email)
-
-      begin
-        xml = Nokogiri::XML(open("#{profile}.xml"))
-
-        @profile_url = xml.xpath("//profileUrl").text
-        @about_me = xml.xpath("//aboutMe").text
-        @current_location = xml.xpath("//currentLocation").text
-        @emails = xml.xpath("//emails/value")
-        @has_gravatar_profile = true
-      rescue OpenURI::HTTPError, SocketError
-        @has_gravatar_profile = false
-      end
+      user_profile = Gravatar.profile(@user.email)
+      @gravatar = Gravatar.new user_profile
+      @gravatar.show_profile
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path, :notice => t("flash.user_not_found")
     end

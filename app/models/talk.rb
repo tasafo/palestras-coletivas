@@ -14,6 +14,7 @@ class Talk
   field :code, type: String
   field :to_public, type: Boolean, :default => false
   field :owner, type: String
+  field :video_link, type: String
   field :counter_presentation_events, type: Integer, default: 0
 
   has_and_belongs_to_many :users, :inverse_of => :talks

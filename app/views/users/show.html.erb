@@ -2,11 +2,11 @@
   <%= gravatar_image(@user.email, @user.name) %>
   <h3 class="featurette-heading"><%= @user.name %></h3>
 
-  <% if @has_gravatar_profile %>
+  <% if @gravatar.has_profile %>
     <p class="lead">
-      <%= @about_me.blank? ? "" : "#{@about_me}<br/>".html_safe %>
-      <%= @current_location.blank? ? "" : "#{@current_location}<br/>".html_safe %>
-      <%= t("show.user.profile") %> <%= link_to @profile_url, @profile_url %>
+      <%= @gravatar.about_me.blank? ? "" : "#{@gravatar.about_me}<br/>".html_safe %>
+      <%= @gravatar.current_location.blank? ? "" : "#{@gravatar.current_location}<br/>".html_safe %>
+      <%= t("show.user.profile") %> <%= link_to @gravatar.profile_url, @gravatar.profile_url %>
     </p>
   <% end %>
 </div>

@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 class GroupsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
 
@@ -36,43 +33,22 @@ class GroupsController < ApplicationController
 
   def show
     begin
-      @group = Group.find(params[:id])
-
-      profile = @group.gravatar_url
-
-      begin
-        unless profile.blank?
-          xml = Nokogiri::XML(open("#{profile}.xml"))
-
-          @profile_url = xml.xpath("//profileUrl").text
-          @about_me = xml.xpath("//aboutMe").text
-          @current_location = xml.xpath("//currentLocation").text
-          @has_gravatar_profile = true
-        end
-      rescue OpenURI::HTTPError, SocketError
-        @has_gravatar_profile = false
-      end
+      @group = Group.find params[:id]
+      @owns = owner? @group
+      @gravatar = Gravatar.new @group.gravatar_url
+      @gravatar.show_profile
     rescue Mongoid::Errors::DocumentNotFound
       redirect_to root_path
     end
   end
 
   def info_url
-    url = params[:link]
+    gravatar = Gravatar.new params[:link]
 
-    begin
-      xml = Nokogiri::XML(open("#{url}.xml"))
-
-      unless xml.nil?
-        name = xml.xpath("//displayName").text
-        thumbnail_url = xml.xpath("//thumbnailUrl").text
-
-        respond_to do |format|
-          format.json { render :json => {:error => false, :name => name, :thumbnail_url => thumbnail_url} }
-        end
-      end
-    rescue OpenURI::HTTPError
-      respond_to do |format|
+    respond_to do |format|
+      if gravatar.open_profile
+        format.json { render :json => {:error => false, :name => gravatar.name, :thumbnail_url => gravatar.thumbnail_url} }
+      else
         format.json { render :json => {:error => true} }
       end
     end
