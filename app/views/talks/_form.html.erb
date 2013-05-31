@@ -33,6 +33,14 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :video_link, t("labels.talk.video_link"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :video_link, :class => "span8" %>
+      <span class="help-block"><p class="text-info"><%= t("new.talk.help.video_link_html") %></p></span>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :to_public, t("labels.talk.to_public"), :class => 'control-label' %>
     <div class="controls">
       <%= f.check_box :to_public %>

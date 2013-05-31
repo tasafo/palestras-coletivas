@@ -2,13 +2,19 @@
   <% if @talk %>
     <h2 class="text-info"><%= @talk.title %></h2>
 
-    <%= @frame.html_safe %>
+    <%= @presentation.frame.html_safe %>
 
     <% if @talk.code.empty? %>
       <br/>
       <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
     <% end %>
     <br/>
+
+    <% if @video.found %>
+      <br/>
+      <%= @video.frame.html_safe %>
+      <br/>
+    <% end %>
 
     <% if @owns %>
       <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
@@ -36,14 +42,10 @@
       <strong><%= t("labels.talk.tags") %>:</strong> <%= @talk.tags %>
     </p>
 
-    <% if logged_in? %>
-      <% @talk.users.each do |user| %>
-        <% if user.id == current_user.id %>
-          <p>
-            <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
-          </p>
-        <% end %>
-      <% end %>
+    <% if @authorized %>
+      <p>
+        <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
+      </p>
     <% end %>
 
     <% if @talk.watched_users.any? %>

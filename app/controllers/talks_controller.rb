@@ -52,8 +52,11 @@ class TalksController < ApplicationController
       @authorized = authorized_access? @talk
       @owns = owner? @talk
 
-      oembed = Oembed.new @talk.presentation_url, @talk.code
-      @frame = oembed.show_presentation
+      @presentation = Oembed.new @talk.presentation_url, @talk.code
+      @presentation.show_presentation
+
+      @video = Oembed.new @talk.video_link
+      @video.show_video
 
       unless @talk.to_public
         @talk = nil unless @authorized

@@ -26,6 +26,7 @@ pt-BR:
         code: "Código"
         to_public: "Pública"
         owner: "Criador"
+        video_link: "Link do vídeo"
         counter_presentation_events: "Número de apresentações em eventos"
 
       group:
