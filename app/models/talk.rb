@@ -24,6 +24,7 @@ class Talk
   has_many :schedules
 
   embeds_many :external_events
+  embeds_many :comments, :as => :commentable
   
   validates_presence_of :title, :description, :tags, :users, :owner
 

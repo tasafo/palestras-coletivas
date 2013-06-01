@@ -18,6 +18,11 @@ pt-BR:
       update:
         notice: "O trabalho foi atualizado!"
 
+    comments:
+      create: 
+        notice: "Obrigado pelo comentário!"
+        alert: "Verifique novamente o comentário"
+
     users:
       update:
         notice: "Seus dados foram atualizados!"

@@ -20,6 +20,7 @@ Palestrascoletivas::Application.routes.draw do
   post "/talks/info-url" => "talks#info_url"
   get "/talks/:id/watch", :to => "talks#watch", :as => :watch_talk
   get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
+  post "/talks/:commentable_id/comment", :to => "comments#create", :as => :talk_comments
 
 
   get "/groups", :to => "groups#index"
