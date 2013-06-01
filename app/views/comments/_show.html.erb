@@ -1,10 +1,20 @@
-<article id="comment_<%= comment.id %>" class="comment">
+<article id="comment_<%= comment.id %>" class="comment span8">
   <%= render "shared/user", :user => comment.user %>
-  <%= comment.body %>
-  <%= link_to I18n.t("actions.answer"), :class => "answer_comment" %>
+  <span class="date"><%= comment.created_at.strftime("%d/%m/%y") %></span>
+  <div class="body">
+    <%=raw comment.body %>
+  </div>
+  <%= link_to I18n.t("actions.answer"), "#", :class => "answer_comment" %>
 
   <% comment.comments.each do |answer| %>
-    <%= render "comments/answer", :answer => answer, :comment => comment %>
+    <div class="row-fluid">
+      <%= render "comments/answer", :answer => answer, :comment => comment %>
+    </div>
   <% end %>
-  <%= render "comments/answer_form", :commentable => commentable, :comment => comment %>
+
+  <div class="row-fluid">
+    <div class="span11 offset1">
+      <%= render "comments/answer_form", :commentable => commentable, :comment => comment %>
+    </div>
+  </div>
 </article>

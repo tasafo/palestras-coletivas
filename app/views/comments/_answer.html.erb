@@ -1,4 +1,7 @@
-<article id="answer_<%= comment.id %>" class="answer">
+<article id="answer_<%= comment.id %>" class="answer comment span11 offset1">
   <%= render "shared/user", :user => answer.user %>
-  <%= answer.body %>
+  <span class="date"><%= comment.created_at.strftime("%d/%m/%y") %></span>
+  <div class="body">
+    <%=raw answer.body %>
+  </div>
 </article>
