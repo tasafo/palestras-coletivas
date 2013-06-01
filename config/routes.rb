@@ -22,7 +22,8 @@ Palestrascoletivas::Application.routes.draw do
   get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
   post "/talks/:commentable_id/comment", :to => "comments#create", :as => :talk_comments
   
-  post "/comments/:commentable_id/parent/:parent_id/answer", :to => "comments#answer", :as => :comment_answers
+  post "/comments/:commentable_id/comment/:comment_id/answer", :to => "comments#answer", :as => :comment_answers
+  delete "/comments/:commentable_type/:commentable_id/comment/:id", :to => "comments#destroy", :as => :comment
 
   get "/groups", :to => "groups#index"
   get "/groups/new", :to => "groups#new", :as => :new_group

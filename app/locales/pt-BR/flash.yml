@@ -22,6 +22,8 @@ pt-BR:
       create: 
         notice: "Obrigado pelo comentário!"
         alert: "Verifique novamente o comentário"
+      destroy:
+        notice: "Comentário apagado!"
 
     users:
       update:

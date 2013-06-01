@@ -5,3 +5,6 @@ pt-BR:
     new: "Criar"
     comment: "Comentar"
     answer: "Responder"
+    delete:
+      label: "Apagar"
+      confirm: "Você tem certeza?"

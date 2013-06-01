@@ -33,4 +33,16 @@ describe Comment do
       expect(new_comment).to be_persisted
     end
   end
+
+  describe "#commented_by?" do
+    it "checks if comment was created by user" do
+      comment = Comment.new
+
+      comment.user = talk_owner
+      expect(comment.commented_by? commentor).to be_false
+
+      comment.user = commentor
+      expect(comment.commented_by? commentor).to be_true
+    end
+  end
 end
