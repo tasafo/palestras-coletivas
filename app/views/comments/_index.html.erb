@@ -1,0 +1,8 @@
+<section>
+  <h1><%= I18n.t("titles.comments.index") %></h1>
+  <%= render "comments/form", :commentable => commentable %>
+
+  <% commentable.comments.each do |comment| %>
+    <%= render "comments/show", :commentable => commentable, :comment => comment %>
+  <% end %>
+</section>

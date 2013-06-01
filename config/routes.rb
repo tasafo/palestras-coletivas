@@ -21,7 +21,8 @@ Palestrascoletivas::Application.routes.draw do
   get "/talks/:id/watch", :to => "talks#watch", :as => :watch_talk
   get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
   post "/talks/:commentable_id/comment", :to => "comments#create", :as => :talk_comments
-
+  
+  post "/comments/:commentable_id/parent/:parent_id/answer", :to => "comments#answer", :as => :comment_answers
 
   get "/groups", :to => "groups#index"
   get "/groups/new", :to => "groups#new", :as => :new_group

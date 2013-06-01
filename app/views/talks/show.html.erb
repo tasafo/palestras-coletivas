@@ -98,23 +98,7 @@
       </table>
     <% end %>
 
-    <section>
-      <h1><%= I18n.t("titles.comments.index") %></h1>
-      <%= form_for [@talk,Comment.new] do |f| %>
-        <%= f.text_area :body, :placeholder => t("placeholder.comments"), :rows => 5, :class => "span8" %>
-        <%= hidden_field_tag :commentable_type, :talk %>
-        <div>
-          <%= f.submit I18n.t("actions.comment"), :class => 'btn btn-primary' %>
-        </div>
-      <% end %>
-
-      <% @talk.comments.each do |comment| %>
-        <article class="comment">
-          <%= render "shared/user", :user => comment.user %>
-          <%= comment.body %>
-        </article>
-      <% end %>
-    </section>
+    <%= render "comments/index", :commentable => @talk %>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>
   <% end %>

@@ -5,6 +5,7 @@ class Comment
   field :body
 
   embedded_in :commentable, :polymorphic => true
+  embeds_many :comments, :as => :commentable
   belongs_to :user
 
   validates_presence_of :user, :body

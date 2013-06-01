@@ -1,0 +1,7 @@
+<%= form_for [commentable,Comment.new] do |f| %>
+  <%= f.text_area :body, :placeholder => t("placeholder.comments"), :rows => 5, :class => "span8" %>
+  <%= hidden_field_tag :commentable_type, commentable.class %>
+  <div>
+    <%= f.submit I18n.t("actions.comment"), :class => 'btn btn-primary' %>
+  </div>
+<% end %>
