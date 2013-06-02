@@ -6,6 +6,7 @@ pt-BR:
       group: "Grupo"
       event: "Evento"
       schedule: "Programação"
+      external_event: "Eventos externos"
 
     attributes:
       user:
@@ -17,7 +18,7 @@ pt-BR:
         counter_participation_events: "Número de participações em eventos"
 
       talk:
-        presentation_url: "Endereço da apresentação"
+        presentation_url: "Link do trabalho"
         title: "Título"
         description: "Descrição"
         tags: "Tags"
@@ -25,6 +26,7 @@ pt-BR:
         code: "Código"
         to_public: "Pública"
         owner: "Criador"
+        video_link: "Link do vídeo"
         counter_presentation_events: "Número de apresentações em eventos"
 
       group:
@@ -61,3 +63,9 @@ pt-BR:
         time: "Horário"
         environment: "Ambiente"
         activity: "Atividade"
+
+      external_event:
+        name: "Nome"
+        place: "Local"
+        date: "Data"
+        url: "Link"

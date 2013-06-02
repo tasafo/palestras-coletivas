@@ -53,3 +53,9 @@ pt-BR:
         notice: "A inscrição foi realizada!"
       update:
         notice: "A inscrição foi alterada!"
+
+    external_event:
+      create:
+        notice: "O evento externo foi adicionado!"
+      update:
+        notice: "O evento externo foi atualizado!"

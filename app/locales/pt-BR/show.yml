@@ -11,6 +11,8 @@ pt-BR:
       not_public: "O trabalho ainda não está publicado"
       without_presentation: "O material ainda não está publicado"
       my_talks_published: "Meus trabalhos publicados"
+      external_event: "Adicionar evento externo"
+      external_events: "Apresentado em outros eventos"
 
     user:
       profile: "Veja o perfil completo em"
@@ -47,5 +49,12 @@ pt-BR:
       to: "até"
       participate: "Quero participar!"
       cancel_my_participation: "Cancelar minha participação"
+      sellout: "Lotação esgotada!"
       record_presence: "Registrar presença"
       undo_presence: "Desfazer presença"
+      btn_presence_checkin: "Estou aqui!"
+      table:
+        number: "N."
+        name: "Nome"
+        email: "E-mail"
+        presence: "Presença"

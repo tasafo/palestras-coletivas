@@ -1,19 +1,31 @@
 <div>
   <% if @event %>
+    <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>" />
     <h2 class="text-info"><%= @event.name %> - <%= @event.edition %></h2>
+    <div class="row-fluid">
+      <div class="span6">
+        <% if @event.start_date == @event.end_date %>
+          <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
+        <% else %>
+          <h4 class="text-success">
+            <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
+            <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
+          </h4>
+        <% end %>
+      </div>
+    </div>
 
-    <% if @event.start_date == @event.end_date %>
-      <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
-    <% else %>
-      <h4 class="text-success">
-        <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
-        <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
+    <% if @open_enrollment %>
+      <h4 class="text-error">
+        <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
       </h4>
     <% end %>
 
-    <h4 class="text-error">
-      <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
-    </h4>
+    <% if @event.stocking > 0 %>
+      <p>
+        <strong><%= t("labels.event.stocking") %>:</strong> <%= @event.stocking %>
+      </p>
+    <% end %>
 
     <p>
       <strong><%= t("labels.event.description") %>:</strong> <%= @event.description.html_safe %>
@@ -31,22 +43,46 @@
       <strong><%= t("labels.event.address") %>:</strong> <%= @event.address %>
     </p>
 
-    <% if Rails.env != 'test' %>
-      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => "img-polaroid" %>
-    <% end %>
+    <hr>
 
     <% if @open_enrollment %>
-      <br/><br/>
-
       <% if @new_subscription %>
-        <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "btn btn-success btn-large" %>
+        <% if @crowded %>
+          <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
+        <% else %>
+          <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "btn btn-success btn-large" %>
+        <% end %>
       <% else %>
         <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
         <% button_type = @enrollment.active? ? "btn-warning" : "btn-success" %>
 
-        <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
+        <% if @crowded && !@enrollment.active? %>
+          <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
+        <% else %>
+          <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
+        <% end %>
       <% end %>
+    <% end %>
+
+    <% if logged_in? && @event.is_in_progress? %>
+      <% if current_user.present_at? @event %>
+        <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-info disabled">
+          <%= t("show.event.btn_presence_checkin") %>
+        </a>
+      <% else %>
+        <% if (@crowded && @enrollment && @enrollment.active?) || !@crowded %>
+          <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-danger">Check-in</a>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @open_enrollment || @event.is_in_progress? %>
+      <hr>
+    <% end %>
+    
+    <% if Rails.env != 'test' %>
+      <%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x300&sensor=false&zoom=16&markers=#{@event.to_coordinates[0]}%2C#{@event.to_coordinates[1]}", :class => "img-polaroid" %>
     <% end %>
 
     <hr>
@@ -74,33 +110,59 @@
       <% count = @event.groups.count %>
       <h4><%= group[count > 1 ? :other : :one] %> (<%= count %>)</h4>
 
-      <% @event.groups.each do |group| %>
+      <% @event.groups.by_name.each do |group| %>
         <%= render "shared/group", :group => group %><br/><br/>
       <% end %>
     <% end %>
 
     <% if @show_users_present %>
       <% unless @users_present.blank? %>
-          <h4><%= t("show.event.presents") %> (<%= @users_present.count %>)</h4>
+        <h4><%= t("show.event.presents") %> (<%= @users_present.count %>)</h4>
 
-          <% @users_present.each do |user| %>
-            <%= render "shared/user", :user => user %><br/><br/>
-          <% end %>
+        <% @users_present.each do |user| %>
+          <%= render "shared/user", :user => user %><br/><br/>
+        <% end %>
       <% end %>
     <% else %>
       <% unless @users_active.blank? %>
         <h4><%= t("show.event.enrolled") %> (<%= @users_active.count %>)</h4>
 
-        <% @users_active.each do |h| %>
-          <% if @can_record_presence %>
-            <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
+        <% if @authorized %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th><%= t("show.event.table.number") %></th>
+                <th><%= t("show.event.table.name") %></th>
+                <th><%= t("show.event.table.email") %></th>
+                <% if @can_record_presence %>
+                  <th><%= t("show.event.table.presence") %></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+            <% counter = 0 %>
+            <% @users_active.each do |h| %>
+              <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
-            <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
+              <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
 
-            <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+              <tr>
+                <td><%= counter += 1 %></td>
+                <td><%= h[:enrollment].user.name %></td>
+                <td><%= h[:enrollment].user.email %></td>
+                <% if @can_record_presence %>
+                  <td>
+                    <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <% @users_active.each do |h| %>
+            <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
           <% end %>
-
-          <%= render "shared/user", :user => h[:enrollment].user %><br/><br/>
         <% end %>
       <% end %>
     <% end %>

@@ -4,8 +4,8 @@
   <div class="control-group">
     <%= f.label :presentation_url, t("labels.talk.presentation_url"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.url_field :presentation_url, :placeholder => t("placeholder.talks.presentation_url"), :class => "span8" %>
-      <span class="help-block"><%= t("new.talk.help.presentation_url") %></span>
+      <%= f.url_field :presentation_url, :class => "span8" %>
+      <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
       <span id="searching_talk" class="text-info" style="display:none"><%= t("new.talk.searching") %></span>
       <span id="talk_not_found" class="text-error" style="display:none"><%= t("new.talk.not_found") %></span>
     </div>
@@ -33,6 +33,14 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :video_link, t("labels.talk.video_link"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.url_field :video_link, :class => "span8" %>
+      <span class="help-block"><p class="text-info"><%= t("new.talk.help.video_link_html") %></p></span>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :to_public, t("labels.talk.to_public"), :class => 'control-label' %>
     <div class="controls">
       <%= f.check_box :to_public %>
@@ -50,7 +58,7 @@
 
   <%= f.hidden_field :thumbnail %>
   <%= f.hidden_field :code %>
-  
+
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
   <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>

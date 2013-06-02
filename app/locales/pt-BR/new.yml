@@ -8,7 +8,8 @@ pt-BR:
       searching: "Procurando trabalho..."
 
       help:
-        presentation_url: "Quando seu trabalho estiver no slideshare, você poderá editar esse registro e atualizar o campo posteriormente."
+        presentation_url_html: "Quando estiver pronto, informe o link de seu trabalho. Exemplos:<br>http://www.slideshare.net/usuario/trabalho<br>https://speakerdeck.com/usuario/trabalho"
+        video_link_html: "Se quiser, informe o link do vídeo de seu trabalho. Exemplos:<br>http://www.youtube.com/watch?v=xptoabc<br>https://vimeo.com/00101100"
         to_public: "Marque para que as pessoas vejam seu trabalho"
 
     group:

@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <% if model.groups %>
-            <% model.groups.each do |g| %>
+            <% model.groups.by_name.each do |g| %>
               <tr id="row_<%= g.id %>">
                 <td>
                   <%= g.name %><input type="hidden" name="groups[]" value="<%= g.id %>" />

@@ -37,9 +37,9 @@
                 <% if schedule.talk? %>
                   <td>
                     <p class="text-center">
-                      <%= link_to schedule.talk.title, talk_path(schedule.talk), :target => "_blank" %><br/>
+                      <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
                       (<% schedule.talk.users.each do |user| %>
-                        <%= link_to user.name, user_path(user), :target => "_blank" %>
+                        <%= link_to user.name, user_path(user) %>
                       <% end %>)
                     </p>
                   </td>

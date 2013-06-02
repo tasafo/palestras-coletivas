@@ -7,15 +7,16 @@ pt-BR:
       password_confirmation: "Confirme sua senha"
 
     talk:
-      presentation_url: "Link do slideshare"
-      title: "Titulo"
+      presentation_url: "Link do trabalho"
+      title: "Título"
       description: "Descrição"
       tags: "Tags"
       thumbnail: "Miniatura"
       code: "Código"
       to_public: "Quero publicar"
-      watched: "Assistir (desfazer)"
-      not_watched: "Assistir"
+      video_link: "Link do vídeo"
+      watched: "Já assisti! (desfazer)"
+      not_watched: "Já assisti!"
       who_watched: "Quem já assistiu!"
 
     group:
@@ -52,3 +53,9 @@ pt-BR:
     general:
       person: "Pessoa"
       people: "Pessoas"
+
+    external_event:
+      name: "Nome do evento"
+      place: "Local"
+      date: "Data"
+      url: "Link"

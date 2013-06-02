@@ -1,0 +1,39 @@
+<h2 class="text-info"><%= @talk.title %></h2>
+
+<%= form_for(@external_event, :url => url, :html => {:class => 'form-horizontal'}) do |f| %>
+  <%= render "shared/error_messages", :record => @external_event %>
+
+  <div class="control-group">
+    <%= f.label :name, t("labels.external_event.name"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :date, t("labels.external_event.date"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :date, :class => "span2 date" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :place, t("labels.external_event.place"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :place, :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :url, t("labels.external_event.url"), :class => 'control-label' %>
+      <div class="controls">
+      <%= f.url_field :url, :class => "span8" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-large btn-primary" %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+          talk_path(@talk), :class => 'btn btn-large' %>
+  </div>
+<% end %>

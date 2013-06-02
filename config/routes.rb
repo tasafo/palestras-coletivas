@@ -35,6 +35,7 @@ Palestrascoletivas::Application.routes.draw do
   post "/events/new", :to => "events#create", :as => false
   put "/events/:id/edit", :to => "events#update", :as => false
   get "/events/:id", :to => "events#show", :as => :event
+  put "/events/presence", to: "events#presence", as: :event_presence
 
   get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
   get "/schedules/:event_id/:id/edit", :to => "schedules#edit", :as => :edit_schedule
@@ -48,6 +49,11 @@ Palestrascoletivas::Application.routes.draw do
   get "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#edit", :as => :edit_enrollment
   post "/enrollments/:event_id/new", :to => "enrollments#create", :as => false
   put "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#update", :as => false
+
+  get "/external_events/:talk_id/new", :to => "external_events#new", :as => :new_external_event
+  get "/external_events/:talk_id/:id/edit", :to => "external_events#edit", :as => :edit_external_event
+  post "/external_events/:talk_id/new", :to => "external_events#create", :as => false
+  put "/external_events/:talk_id/:id/edit", :to => "external_events#update", :as => false
 
   resources :password_resets
 end

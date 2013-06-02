@@ -20,7 +20,7 @@
       <% if show_user %>
         <strong><%= t("show.talk.created_by") %></strong><br/>
 
-        <% talk.users.each do |user| %>
+        <% talk.users.by_name.each do |user| %>
           <%= render "shared/user", :user => user %><br/>
         <% end %>
       <% end %>

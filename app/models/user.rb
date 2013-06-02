@@ -11,10 +11,12 @@ class User
   field :auth_token, type: String
   field :password_reset_token, type: String
   field :password_reset_sent_at, type: DateTime
+  field :counter_watched_talks, type: Integer, default: 0
   field :counter_organizing_events, type: Integer, default: 0
   field :counter_presentation_events, type: Integer, default: 0
   field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
+  field :counter_public_talks, type: Integer, default: 0
 
   has_and_belongs_to_many :talks, :inverse_of => :talks
 
@@ -44,15 +46,19 @@ class User
 
   before_create { generate_token(:auth_token) }
 
-  scope :by_name, order_by(:name => :asc)
+  scope :by_name, order_by(:_slugs => :asc)
 
-  scope :organizers, lambda { |user| not_in(:_id => user.id.to_s) }
+  scope :without_the_owner, lambda { |user| not_in(:_id => user.id.to_s).by_name }
 
-  scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :name => :asc).limit(5)
+  scope :top_talk_watchers, where(:counter_watched_talks.gt => 0).order_by(:counter_watched_talks => :desc, :_slugs => :asc).limit(5)
 
-  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :name => :asc).limit(5)
+  scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5)
 
-  scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :name => :asc).limit(5)
+  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5)
+
+  scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :_slugs => :asc).limit(5)
+
+  scope :public_talks, where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5)
 
   def password=(password)
     if password.blank?
@@ -77,13 +83,63 @@ class User
     UserMailer.password_reset(self).deliver
   end
 
+  def arrived_at event
+    if enrolled_at? event
+      enrollment = Enrollment.find_by user: self, event: event
+    else
+      enrollment = enroll_at event
+    end
+
+    enrollment.present = true
+    enrollment.save
+  end
+
+  def enrolled_at? event
+    begin
+      enrollment = Enrollment.find_by user: self, event: event
+
+      if enrollment.nil?
+        return false
+      end
+
+      true
+    rescue Mongoid::Errors::DocumentNotFound
+      false
+    end
+  end
+
+  def enroll_at event
+    Enrollment.create(
+      user: self,
+      event: event,
+      active: true
+    )
+  end
+
+  def present_at? event
+    begin
+      enrollment = Enrollment.find_by user: self, event: event
+
+      if enrollment.nil?
+        return false
+      else
+        return enrollment.present
+      end
+    rescue Mongoid::Errors::DocumentNotFound
+      return false
+    end
+
+  end
+
   def watch_talk! talk
     return if watched_talk? talk
     self.watched_talks << talk
+    set_counter :watched_talks, :inc
   end
 
   def unwatch_talk! talk
     self.watched_talks.delete talk
+    set_counter :watched_talks, :dec
   end
 
   def watched_talk? talk
@@ -91,6 +147,7 @@ class User
   end
 
 private
+
   def erase_password
     @password = nil
     @password_confirmation = nil

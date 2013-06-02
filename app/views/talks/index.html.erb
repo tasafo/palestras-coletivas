@@ -4,7 +4,11 @@
 
 <% if logged_in? %>
   <%= link_to t("titles.talks.new"), new_talk_path, :class => "btn btn-primary" %>
-  <%= link_to t("titles.talks.my"), "/talks?my=true", :class => "btn" %>
+  <% if @my %>
+    <%= link_to t("titles.talks.all"), "/talks", :class => "btn" %>
+  <% else %>
+    <%= link_to t("titles.talks.my"), "/talks?my=true", :class => "btn" %>
+  <% end %>
   <br />
 <% end %>
 

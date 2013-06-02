@@ -65,7 +65,7 @@ function search_talk() {
 
                     talks += '<img src="' + thumb + '" class="featurette-image pull-left img-polaroid" />';
 
-                    talks += '<h3 class="featurette-heading"><a href="/talks/' + json[i]._slugs[0] + '" target="_blank">' + json[i].title +'</a></h3>';
+                    talks += '<h3 class="featurette-heading"><a href="/talks/' + json[i]._slugs[0] + '">' + json[i].title +'</a></h3>';
 
                     talks += '<p class="lead">';
 

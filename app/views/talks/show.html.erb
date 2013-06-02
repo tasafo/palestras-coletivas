@@ -2,29 +2,35 @@
   <% if @talk %>
     <h2 class="text-info"><%= @talk.title %></h2>
 
-    <% if Rails.env != 'test' %>
-      <% unless @talk.code.empty? %>
-        <iframe src="http://www.slideshare.net/slideshow/embed_code/<%= @talk.code %>" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>
-      <% else %>
-        <br/>
-        <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
-      <% end %>
+    <%= @presentation.frame.html_safe %>
+
+    <% if @talk.code.empty? %>
+      <br/>
+      <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
+    <% end %>
+    <br/>
+
+    <% if @video.found %>
+      <br/>
+      <%= @video.frame.html_safe %>
       <br/>
     <% end %>
-    
-    <% @talk.users.each do |user| %>
-      <% if logged_in? %>
+
+    <% if @owns %>
+      <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
+      <%= link_to t("show.talk.external_event"), new_external_event_path(@talk), :class => "btn btn-primary" %>
+    <% end %>
+
+    <% if logged_in? %>
+      <% unless @authorized %>
         <% if current_user.watched_talk? @talk %>
           <%= link_to t("labels.talk.watched"), talk_unwatch_path(@talk), :class => "btn btn-primary" %>
         <% else %>
           <%= link_to t("labels.talk.not_watched"), talk_watch_path(@talk), :class => "btn btn-danger" %>
         <% end %>
-
-        <% if current_user.id.to_s == user.id.to_s && @talk.owner.to_s == user.id.to_s %>
-          <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
-          <br/><br/>
-        <% end %>
       <% end %>
+
+      <br/><br/>
     <% end %>
 
     <p>
@@ -36,14 +42,10 @@
       <strong><%= t("labels.talk.tags") %>:</strong> <%= @talk.tags %>
     </p>
 
-    <% if logged_in? %>
-      <% @talk.users.each do |user| %>
-        <% if user.id == current_user.id %>
-          <p>
-            <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
-          </p>
-        <% end %>
-      <% end %>
+    <% if @authorized %>
+      <p>
+        <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
+      </p>
     <% end %>
 
     <% if @talk.watched_users.any? %>
@@ -60,7 +62,7 @@
 
     <h4><%= t("show.talk.created_by") %></h4>
 
-    <% @talk.users.each do |user| %>
+    <% @talk.users.by_name.each do |user| %>
       <%= render "shared/user", :user => user %><br/><br/>
     <% end %>
 
@@ -69,8 +71,31 @@
       <h4><%= event[@talk.schedules.count > 1 ? :other : :one] %></h4>
 
       <% @talk.schedules.each do |schedule| %>
-          <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event), :target => "_blank" %></h5>
+        <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event) %></h5>
       <% end %>
+    <% end %>
+
+    <% if @talk.external_events? %>
+      <br/>
+      <h4><%= t("show.talk.external_events") %></h4>
+
+      <table class="table">
+        <tbody>
+        <% @talk.external_events.by_date.each do |external_event| %>
+          <% event_date = l external_event.date, :format => :long %>
+          <tr>
+            <td>
+              <h5><%= link_to "#{external_event.name}, #{external_event.place}, #{event_date}.", external_event.url %></h5>
+            </td>
+            <% if @owns %>
+              <td>
+                <%= link_to t("actions.edit"), edit_external_event_path(@talk, external_event), :class => "btn", :id => "external_event_id_#{external_event.id}" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
     <% end %>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>

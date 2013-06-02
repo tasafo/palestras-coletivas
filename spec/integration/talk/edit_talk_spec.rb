@@ -15,7 +15,7 @@ describe "Edit talk", :js => true do
       click_link "Compartilhe"
       click_link "Editar trabalho"
 
-      fill_in "Titulo", :with => "Ruby praticamente falando"
+      fill_in "Título", :with => "Ruby praticamente falando"
       fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
       fill_in "Tags", :with => "ruby, programação"
 
@@ -43,7 +43,7 @@ describe "Edit talk", :js => true do
       click_link "Compartilhe"
       click_link "Editar trabalho"
 
-      fill_in "Titulo", :with => ""
+      fill_in "Título", :with => ""
 
       click_button "Atualizar trabalho"
     end

@@ -22,7 +22,7 @@ class Event
   field :street, type: String
   field :district, type: String
   field :city, type: String
-  field :state, type: String  
+  field :state, type: String
   field :country, type: String
   field :coordinates, type: Array
 
@@ -50,14 +50,20 @@ class Event
 
   before_save :number_of_days
 
+  scope :by_name, order_by(:_slugs => :asc)
+
   scope :by_start_date, order_by(:start_date => :asc)
 
   scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
 
-  scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :name => :asc, :edition => :asc).limit(5)
+  scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :_slugs => :asc, :edition => :asc).limit(5)
 
   def address
     [street, district, city, state, country].compact.join(', ')
+  end
+
+  def is_in_progress?
+    (start_date..end_date).include?(Date.today)
   end
 
   def update_list_organizers(owner, list_id_organizers)
@@ -73,7 +79,7 @@ class Event
 
     self.users << owner
     owner.set_counter(:organizing_events, :inc)
-    
+
     if list_id_organizers
       list_id_organizers.each do |organizer|
         user = User.find(organizer)
@@ -93,7 +99,7 @@ class Event
 
       self.groups = nil
     end
-    
+
     if list_id_groups
       list_id_groups.each do |g|
         group = Group.find(g)

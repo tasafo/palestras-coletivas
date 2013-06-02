@@ -1,6 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-
 class TalksController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
 
@@ -9,6 +6,7 @@ class TalksController < ApplicationController
     @search = ""
 
     if params[:my].nil?
+      @my = false
       if params[:talk].nil?
         @talks = all_public_talks
       else
@@ -21,30 +19,26 @@ class TalksController < ApplicationController
         end
       end
     else
+      @my = true
       @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc) if logged_in?
     end
   end
 
   def new
     @talk = Talk.new
-    
-    list_authors
+
+    @authors = User.without_the_owner current_user
   end
 
   def create
     @talk = Talk.new(params[:talk])
-    @talk.owner = current_user.id
-    @talk.users << current_user
 
-    list_authors
+    @talk.add_authors current_user, params[:users]
+
+    @authors = User.without_the_owner current_user
 
     if @talk.save
-      if params[:users]
-        params[:users].each do |a|
-          user = User.find(a)
-          @talk.users << [user] if user
-        end
-      end
+      @talk.update_user_counters
 
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
@@ -55,7 +49,14 @@ class TalksController < ApplicationController
   def show
     begin
       @talk = Talk.find(params[:id])
-      @authorized = authorized_access?(@talk)
+      @authorized = authorized_access? @talk
+      @owns = owner? @talk
+
+      @presentation = Oembed.new @talk.presentation_url, @talk.code
+      @presentation.show_presentation
+
+      @video = Oembed.new @talk.video_link
+      @video.show_video
 
       unless @talk.to_public
         @talk = nil unless @authorized
@@ -66,22 +67,12 @@ class TalksController < ApplicationController
   end
 
   def info_url
-    url = params[:link]
+    oembed = Oembed.new params[:link]
 
-    begin
-      xml = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{url}&format=xml"))
-
-      unless xml.nil?
-        title = xml.xpath("//title").text
-        code = xml.xpath("//slideshow-id").text
-        thumbnail = xml.xpath("//thumbnail").text
-
-        respond_to do |format|
-          format.json { render :json => {:error => false, :title => title, :code => code, :thumbnail => thumbnail} }
-        end
-      end
-    rescue OpenURI::HTTPError
-      respond_to do |format|
+    respond_to do |format|
+      if oembed.open_presentation
+        format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
+      else
         format.json { render :json => {:error => true} }
       end
     end
@@ -90,7 +81,7 @@ class TalksController < ApplicationController
   def edit
     @talk = Talk.find(params[:id])
 
-    list_authors
+    @authors = User.without_the_owner current_user
 
     unauthorized = @talk.owner == current_user.id.to_s ? false : true
 
@@ -100,17 +91,13 @@ class TalksController < ApplicationController
   def update
     @talk = Talk.find(params[:id])
 
-    list_authors
+    @talk.add_authors current_user, params[:users]
+
+    @authors = User.without_the_owner current_user
 
     if @talk.update_attributes(params[:talk])
-      @talk.users = nil
-      @talk.users << current_user
-      if params[:users]
-        params[:users].each do |a|
-          user = User.find(a)
-          @talk.users << [user] if user
-        end
-      end
+      @talk.update_user_counters
+
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
     else
       render :edit
@@ -134,9 +121,5 @@ class TalksController < ApplicationController
 private
   def all_public_talks
     Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
-  end
-
-  def list_authors
-    @authors = User.not_in(:_id => current_user.id.to_s)
   end
 end
