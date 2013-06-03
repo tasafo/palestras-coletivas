@@ -36,7 +36,7 @@ describe "Edit user" do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_user_path(user))
+      expect(current_path).to eql(user_path(user))
     end
 
     it "displays error messages" do
@@ -93,7 +93,7 @@ describe "Edit user" do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_user_path(user))
+      expect(current_path).to eql(user_path(user))
     end
 
     it "displays error messages" do

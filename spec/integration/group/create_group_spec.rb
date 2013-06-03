@@ -42,7 +42,7 @@ describe "Create group", :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(new_group_path)
+      expect(current_path).to eql(groups_path)
     end
 
     it "displays error messages" do

@@ -67,7 +67,7 @@ describe "Edit event" do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_event_path(event))
+      expect(current_path).to eql(event_path(event))
     end
 
     it "displays error messages" do
