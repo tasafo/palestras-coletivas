@@ -28,6 +28,10 @@ Palestrascoletivas::Application.routes.draw do
     put :presence
   end
 
+  post   "/comments/:commentable_type/:commentable_id/comments",                    :to => "comments#create", :as => :comments
+  post   "/comments/:commentable_type/:commentable_id/comments/:comment_id/answer", :to => "comments#answer",  :as => :comment_answers
+  delete "/comments/:commentable_type/:commentable_id/comments/:id",                :to => "comments#destroy", :as => :comment
+
   get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
   get "/schedules/:event_id/:id/edit", :to => "schedules#edit", :as => :edit_schedule
   post "/schedules/:event_id/new", :to => "schedules#create", :as => false

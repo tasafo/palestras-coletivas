@@ -97,6 +97,8 @@
         </tbody>
       </table>
     <% end %>
+
+    <%= render "comments/index", :commentable => @talk %>
   <% else %>
     <h1><%= t("show.talk.not_public") %></h1>
   <% end %>
