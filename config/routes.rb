@@ -20,10 +20,10 @@ Palestrascoletivas::Application.routes.draw do
   post "/talks/info-url" => "talks#info_url"
   get "/talks/:id/watch", :to => "talks#watch", :as => :watch_talk
   get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
-  post "/talks/:commentable_id/comment", :to => "comments#create", :as => :talk_comments
   
-  post "/comments/:commentable_id/comment/:comment_id/answer", :to => "comments#answer", :as => :comment_answers
-  delete "/comments/:commentable_type/:commentable_id/comment/:id", :to => "comments#destroy", :as => :comment
+  post   "/comments/:commentable_type/:commentable_id/comments",                    :to => "comments#create", :as => :comments
+  post   "/comments/:commentable_type/:commentable_id/comments/:comment_id/answer", :to => "comments#answer",  :as => :comment_answers
+  delete "/comments/:commentable_type/:commentable_id/comments/:id",                :to => "comments#destroy", :as => :comment
 
   get "/groups", :to => "groups#index"
   get "/groups/new", :to => "groups#new", :as => :new_group

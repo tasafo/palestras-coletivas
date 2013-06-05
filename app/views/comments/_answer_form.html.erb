@@ -1,6 +1,5 @@
-<%= form_for Comment.new, :url => comment_answers_path(commentable, comment), :html => { :class => "answer_form" } do |f| %>
+<%= form_for Comment.new, :url => comment_answers_path(commentable.class, commentable, comment), :html => { :class => "answer_form" } do |f| %>
   <%= f.text_area :body, :placeholder => t("placeholder.comments"), :rows => 5, :class => "span8" %>
-  <%= hidden_field_tag :commentable_type, commentable.class %>
   <div>
     <%= f.submit I18n.t("actions.answer"), :class => 'btn btn-primary' %>
   </div>

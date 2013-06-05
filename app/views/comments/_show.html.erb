@@ -1,11 +1,10 @@
 <article id="comment_<%= comment.id %>" class="comment span8">
   <%= render "shared/user", :user => comment.user %>
-  <span class="date"><%= comment.created_at.strftime("%d/%m/%y") %></span>
+  <span class="date"><%= l comment.created_at, :format => :long %></span>
   <div class="body">
-    <%=raw comment.body %>
+    <%= comment.body %>
   </div>
   <%= link_to I18n.t("actions.answer"), "#", :class => "answer_comment" %> 
-
 
   <% if comment.commented_by? current_user %>
   | <%= link_to I18n.t("actions.delete.label"), comment_path(commentable.class, commentable, comment), :method => :delete, :class => "delete", :confirm => I18n.t("actions.delete.confirm") %>
