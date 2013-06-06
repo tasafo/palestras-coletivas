@@ -1,27 +1,15 @@
 class CommentsController < ApplicationController
+
+  before_filter :find_commentable
+
   def create
-    @commentable = find_commentable
+    @comment = @commentable.comments.find params[:comment_id] if params[:comment_id]
+    @comment ||= @commentable
 
-    comment_params = {user: current_user, commentable: @commentable, body: params[:comment][:body] } 
-    @comment = Comment.new.comment_on! comment_params
+    comment_params = {user: current_user, commentable: @comment, body: params[:comment][:body] } 
+    @new_comment = Comment.new.comment_on! comment_params
 
-    if @comment.persisted?
-      flash[:notice] = I18n.t("flash.comments.create.notice")
-    else
-      flash[:notice] = I18n.t("flash.comments.create.alert")
-    end
-
-    redirect_to @commentable
-  end
-
-  def answer
-    @commentable = find_commentable
-    @comment = @commentable.comments.find params[:comment_id]
-
-    answer_params = {user: current_user, commentable: @comment, body: params[:comment][:body] } 
-    @answer = Comment.new.comment_on! answer_params
-
-    if @answer.persisted?
+    if @new_comment.persisted?
       flash[:notice] = I18n.t("flash.comments.create.notice")
     else
       flash[:notice] = I18n.t("flash.comments.create.alert")
@@ -31,8 +19,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @commentable = find_commentable
-
     @comment = find_comment_by_id @commentable, params[:id]
 
     @comment.destroy
@@ -45,7 +31,7 @@ class CommentsController < ApplicationController
 
   def find_commentable
     commentable_class = params[:commentable_type].camelize.constantize
-    commentable_class.find(params[:commentable_id])
+    @commentable = commentable_class.find(params[:commentable_id])
   end
 
   def find_comment_by_id commentable, id
