@@ -105,14 +105,14 @@ class TalksController < ApplicationController
   end
 
   def watch
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find(params[:talk_id])
 
     current_user.watch_talk! @talk
     redirect_to talk_path(@talk)
   end
 
   def unwatch
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find(params[:talk_id])
 
     current_user.unwatch_talk! @talk
     redirect_to talk_path(@talk)

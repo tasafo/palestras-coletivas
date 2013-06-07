@@ -3,40 +3,36 @@ Palestrascoletivas::Application.routes.draw do
 
   get "/signup", :to => "users#new", :as => :new_user
   post "/signup", :to => "users#create", :as => false
-  get "/users/:id", :to => "users#show", :as => :user
-  get "/users/:id/edit", :to => "users#edit", :as => :edit_user
-  put "/users/:id/edit", :to => "users#update", :as => false
-
   get "/login", :to => "login#new"
   post "/login", :to => "login#create"
   get "/logout", :to => "login#destroy"
 
-  get "/talks", :to => "talks#index"
-  get "/talks/new", :to => "talks#new", :as => :new_talk
-  get "/talks/:id/edit", :to => "talks#edit", :as => :edit_talk
-  post "/talks/new", :to => "talks#create", :as => false
-  put "/talks/:id/edit", :to => "talks#update", :as => false
-  get "/talks/:id", :to => "talks#show", :as => :talk
-  post "/talks/info-url" => "talks#info_url"
-  get "/talks/:id/watch", :to => "talks#watch", :as => :watch_talk
-  get "/talks/:id/unwatch", :to => "talks#unwatch", :as => :unwatch_talk
+  resources :users, only: [:show, :edit, :update]
 
+  resources :talks, except: :destroy do
+    get :watch
+    get :unwatch
+  end
 
-  get "/groups", :to => "groups#index"
-  get "/groups/new", :to => "groups#new", :as => :new_group
-  get "/groups/:id/edit", :to => "groups#edit", :as => :edit_group
-  post "/groups/new", :to => "groups#create", :as => false
-  put "/groups/:id/edit", :to => "groups#update", :as => false
-  get "/groups/:id", :to => "groups#show", :as => :group
-  post "/groups/info-url" => "groups#info_url"
+  resource :talks, only: :none do
+    post :info_url, path: "info-url"
+  end
 
-  get "/events", :to => "events#index"
-  get "/events/new", :to => "events#new", :as => :new_event
-  get "/events/:id/edit", :to => "events#edit", :as => :edit_event
-  post "/events/new", :to => "events#create", :as => false
-  put "/events/:id/edit", :to => "events#update", :as => false
-  get "/events/:id", :to => "events#show", :as => :event
-  put "/events/presence", to: "events#presence", as: :event_presence
+  resources :groups, except: :destroy
+  resource :groups, only: :none do
+    post :info_url, path: "info-url"
+  end
+
+  resources :events, except: :destroy
+  resource :event, only: :none do
+    put :presence
+  end
+
+  scope "/comments/:commentable_type/:commentable_id" do
+    post   "/comments",                    :to => "comments#create", :as => :comments
+    post   "/comments/:comment_id/answer", :to => "comments#create",  :as => :comment_answers
+    delete "/comments/:id",                :to => "comments#destroy", :as => :comment
+  end
 
   get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
   get "/schedules/:event_id/:id/edit", :to => "schedules#edit", :as => :edit_schedule

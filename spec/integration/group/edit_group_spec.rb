@@ -48,7 +48,7 @@ describe "Edit group", :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_group_path(group))
+      expect(current_path).to eql(group_path(group))
     end
 
     it "displays error messages" do

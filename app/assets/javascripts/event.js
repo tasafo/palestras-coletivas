@@ -13,7 +13,7 @@ $(function() {
 
 var addPresence = function(obj) {
   $.ajax({
-    url: "/events/presence",
+    url: "/event/presence",
     data: {
       event_id: $("#event_id").val()
     },
