@@ -4,6 +4,7 @@ class Talk
   include Mongoid::Timestamps
   include Mongoid::Slug
   include UpdateCounter
+  include Commentable
 
   field :presentation_url, type: String
   field :title, type: String
