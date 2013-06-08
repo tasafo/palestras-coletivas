@@ -29,9 +29,8 @@ Palestrascoletivas::Application.routes.draw do
   end
 
   scope "/comments/:commentable_type/:commentable_id" do
-    post   "/comments",                    :to => "comments#create", :as => :comments
-    post   "/comments/:comment_id/answer", :to => "comments#create",  :as => :comment_answers
-    delete "/comments/:id",                :to => "comments#destroy", :as => :comment
+    post   "/comments",     :to => "comments#create",  :as => :comments
+    delete "/comments/:id", :to => "comments#destroy", :as => :comment
   end
 
   get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
