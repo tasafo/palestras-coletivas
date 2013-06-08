@@ -21,6 +21,21 @@ FactoryGirl.define do
       name "Luis Miguel"
       email "luizgrsanches@gmail.com"
     end
+
+    trait :random do
+      sequence(:name)  { |n| "John #{n}" }
+      sequence(:email) { |n| "john#{n}@example.org" }
+      password_reset_token SecureRandom.urlsafe_base64
+      password_reset_sent_at 5.hours.ago
+    end
+  end
+
+  factory :comment do
+    trait :talk do
+      commentable { build :talk }
+      body        { "Gostei!" }
+      user        { build :user, :luis }
+    end
   end
 
   factory :talk do

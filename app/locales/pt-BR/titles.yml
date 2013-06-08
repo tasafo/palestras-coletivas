@@ -16,6 +16,9 @@ pt-BR:
       select: "Selecionar trabalho"
       no_talks: "Nenhum trabalho adicionado"
 
+    comments:
+      index: "Comentários"
+
     home:
       index: "Trabalhos publicados"
 

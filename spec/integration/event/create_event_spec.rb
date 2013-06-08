@@ -62,7 +62,7 @@ describe "Create event" do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(new_event_path)
+      expect(current_path).to eql(events_path)
     end
 
     it "displays error messages" do

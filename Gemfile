@@ -33,8 +33,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'launchy'
+  gem 'capybara', '2.1.0'
+  gem 'capybara-webkit', '1.0.0'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
 end

@@ -9,7 +9,7 @@ $(function() {
             $("#searching_talk").show();
 
             $.ajax({
-                url : "/talks/info-url/",
+                url : "/talks/info-url",
                 data : {
                     link : link
                 },

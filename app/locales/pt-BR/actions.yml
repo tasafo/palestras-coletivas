@@ -3,3 +3,8 @@ pt-BR:
     back: "Voltar"
     edit: "Editar"
     new: "Criar"
+    comment: "Comentar"
+    answer: "Responder"
+    delete:
+      label: "Apagar"
+      confirm: "Você tem certeza?"

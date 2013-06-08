@@ -43,11 +43,11 @@ class GroupsController < ApplicationController
   end
 
   def info_url
-    gravatar = Gravatar.new params[:link]
+    @gravatar = Gravatar.new params[:link]
 
     respond_to do |format|
-      if gravatar.open_profile
-        format.json { render :json => {:error => false, :name => gravatar.name, :thumbnail_url => gravatar.thumbnail_url} }
+      if @gravatar.open_profile
+        format.json { render :json => {:error => false, :name => @gravatar.name, :thumbnail_url => @gravatar.thumbnail_url} }
       else
         format.json { render :json => {:error => true} }
       end

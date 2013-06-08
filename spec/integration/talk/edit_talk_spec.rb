@@ -49,7 +49,7 @@ describe "Edit talk", :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_talk_path(talk))
+      expect(current_path).to eql(talk_path(talk))
     end
 
     it "displays error messages" do

@@ -6,6 +6,8 @@ pt-BR:
       tags: "Exemplo: futuro, mundo"
       search: "por título e tags"
 
+    comments: "Comente aqui!"
+
     groups:
       gravatar_url: "Exemplo: http://gravatar.com/nome-do-grupo"
       tags: "Exemplo: gestão, desenvolvimento"

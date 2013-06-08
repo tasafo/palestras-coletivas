@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Create group", :js => true do
+describe "Create group" do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
@@ -42,7 +42,7 @@ describe "Create group", :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(new_group_path)
+      expect(current_path).to eql(groups_path)
     end
 
     it "displays error messages" do
