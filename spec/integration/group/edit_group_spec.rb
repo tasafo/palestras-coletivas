@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Edit group", :js => true do
+describe "Edit group" do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }

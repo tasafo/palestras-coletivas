@@ -44,7 +44,7 @@ class Gravatar
         @thumbnail_url = record.xpath("//thumbnailUrl").text
         true
       end
-    rescue OpenURI::HTTPError
+    rescue OpenURI::HTTPError, SocketError
       false
     end
   end
