@@ -62,3 +62,8 @@ pt-BR:
       place: "Local"
       date: "Data"
       url: "Link"
+
+    rating:
+      vote!: "Dê um feedback!"
+      vote: "Voto"
+      votes: "Votos"

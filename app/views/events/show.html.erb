@@ -3,6 +3,12 @@
     <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>" />
     <h2 class="text-info"><%= @event.name %> - <%= @event.edition %></h2>
     <div class="row-fluid">
+      <div class="span12">
+        <%= render "ratings/show", :rateable => @event %>
+      </div>
+    </div>
+
+    <div class="row-fluid">
       <div class="span6">
         <% if @event.start_date == @event.end_date %>
           <h3 class="text-success"><%= l @event.start_date, :format => :long %></h3>
@@ -166,7 +172,9 @@
         <% end %>
       <% end %>
     <% end %>
-  
+
+    <%= render "ratings/rate_form", :rateable => @event %>
+
     <%= render "comments/index", :commentable => @event %>
   <% else %>
     <h1><%= t("show.event.not_found") %></h1>

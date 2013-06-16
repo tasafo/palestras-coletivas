@@ -6,6 +6,7 @@ class Event
   include Geocoder::Model::Mongoid
   include UpdateCounter
   include Commentable
+  include Rateable
 
   field :name, type: String
   field :edition, type: String
@@ -18,6 +19,7 @@ class Event
   field :deadline_date_enrollment, type: Date
   field :days, type: Integer
   field :to_public, type: Boolean, :default => false
+  field :rating, type: Fixnum, :default => 0
   field :place, type: String
 
   field :street, type: String
@@ -32,6 +34,7 @@ class Event
   field :counter_present_users, type: Integer, default: 0
 
   embeds_many :comments, :as => :commentable
+  embeds_many :ratings, :as => :rateable
 
   has_and_belongs_to_many :users
 
