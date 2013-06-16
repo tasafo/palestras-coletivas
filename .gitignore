@@ -16,3 +16,4 @@
 /coverage
 .env
 .rvmrc
+.DS_Store
