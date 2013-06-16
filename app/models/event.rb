@@ -5,6 +5,7 @@ class Event
   include Mongoid::FullTextSearch
   include Geocoder::Model::Mongoid
   include UpdateCounter
+  include Commentable
 
   field :name, type: String
   field :edition, type: String
@@ -29,6 +30,8 @@ class Event
   field :owner, type: String
   field :counter_registered_users, type: Integer, default: 0
   field :counter_present_users, type: Integer, default: 0
+
+  embeds_many :comments, :as => :commentable
 
   has_and_belongs_to_many :users
 
