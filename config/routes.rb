@@ -28,6 +28,10 @@ Palestrascoletivas::Application.routes.draw do
     put :presence
   end
 
+  scope "/ratings/:rateable_type/:rateable_id" do
+    post "/ratings", :to => "ratings#create", :as => :ratings
+  end
+
   scope "/comments/:commentable_type/:commentable_id" do
     post   "/comments",     :to => "comments#create",  :as => :comments
     delete "/comments/:id", :to => "comments#destroy", :as => :comment

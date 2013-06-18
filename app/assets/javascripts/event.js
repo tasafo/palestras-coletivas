@@ -9,6 +9,16 @@ $(function() {
     e.preventDefault();
     addPresence(this)
   });
+
+  $("form.rating .rating").rating({
+    callback: function (value, link) {
+      $(this.form).submit();
+    },
+    required: true,
+    half:     true
+  });
+
+  $(".rating.readonly").rating({required: true,readOnly: true, half: true});
 });
 
 var addPresence = function(obj) {
