@@ -34,8 +34,8 @@ end
 
 group :test do
   gem 'launchy'
-  gem 'capybara', '2.1.0'
-  gem 'capybara-webkit', '1.0.0'
+  gem 'capybara', '2.0.3'
+  gem 'capybara-webkit', '0.14.2'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
 end
