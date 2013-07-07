@@ -26,7 +26,8 @@
         <%= render "talks/show/watched_users" %>
       </div>
       <div class="span8">
-        <%= render('talks/show/slideshare') %>
+        <%= render 'talks/show/slideshare' %>
+        <%= render "comments/index", :commentable => @talk %>
       </div>
     </div>
   </div>
