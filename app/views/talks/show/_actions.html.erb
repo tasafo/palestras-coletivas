@@ -1,0 +1,7 @@
+<% if @talk.users.include? current_user %>
+  <div class="span8">
+    <ul id="work-filter">
+      <li><%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %></li>
+    </ul>
+  </div>
+<% end %>

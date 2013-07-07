@@ -1,0 +1,11 @@
+<% if @talk.watched_users.any? %>
+  <h5>
+    <%= t("labels.talk.who_watched") %>
+    <small>
+      (<%= pluralize(@talk.watched_users.size, t("labels.general.person").downcase) %>)
+    </small>
+  </h5>
+  <% @talk.watched_users.each do |user| %>
+    <span class="watched_user"><%= render "shared/user_thumb", :user => user %></span>
+  <% end %>
+<% end %>

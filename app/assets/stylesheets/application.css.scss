@@ -1,0 +1,60 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "docs";
+
+.logo {
+	display: block;
+	width: 150px;
+	height: 70px;
+	position: absolute;
+	top: 15px;
+	background: url(/assets/palestras-coletivas.png) 0 0 no-repeat;
+	text-indent:-5000px;
+}
+
+.nav-agency {
+	position:relative;
+}
+.thumb-presentation {
+	height:127px;
+	position:relative;
+
+	.thumb-users {
+		position:absolute;
+		bottom: -10px;
+		right: -9px;
+		
+		a {
+			width:30px;
+			height:30px;
+			display:inline-block;
+		}
+	}
+}
+.featurette {
+	h3 {
+		margin-top:0;
+	}
+}
+input.search-query {
+	border-radius:0;
+}
+#flickr-wrapper {
+	.thumb-user img {
+		width: 50px;
+		height: 50px;
+	}
+}

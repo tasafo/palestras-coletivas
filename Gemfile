@@ -18,9 +18,8 @@ gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
   gem 'therubyracer', :platforms => :ruby
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails'
   gem 'uglifier'
 end
 
