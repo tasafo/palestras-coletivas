@@ -28,9 +28,9 @@
   <%= render "shared/invite_user", :model => @group, :users => @members, :key => "member" %>
 
   <div class="form-actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+    <%= f.submit :class => 'm-btn blue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          groups_path, :class => 'btn' %>
+          groups_path, :class => 'm-btn' %>
   </div>
 
   <%= f.hidden_field :thumbnail_url %>

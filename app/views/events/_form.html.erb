@@ -112,9 +112,9 @@
   <%= render "shared/invite_group", :model => @event, :groups => @groups %>
 
   <div class="form-actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+    <%= f.submit :class => 'm-btn blue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          events_path, :class => 'btn' %>
+          events_path, :class => 'm-btn red' %>
   </div>
 
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>

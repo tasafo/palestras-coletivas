@@ -1,3 +1,27 @@
+<div class="row-fluid">
+    <div class="span12">
+      <div class="page-header">
+        <div class="row-fluid">
+          <div class="span4">
+             <h1><%= t("titles.events.index") %></h1>
+          </div>
+          <% if logged_in? %>
+          <div class="span8">
+            <ul id="work-filter">
+              <li><%= link_to t("titles.events.new"), new_event_path, :class => "m-btn blue" %></li>
+              <% if @my %>
+              <li><%= link_to t("titles.events.all"), "/events", :class => "m-btn" %></li>
+              <% else %>
+              <li><%= link_to t("titles.events.my"), "/events?my=true", :class => "m-btn" %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div>
   <% if @event %>
     <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>" />
@@ -54,31 +78,31 @@
     <% if @open_enrollment %>
       <% if @new_subscription %>
         <% if @crowded %>
-          <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
+          <span class="m-btn big disabled"><%= t("show.event.sellout") %></span>
         <% else %>
-          <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "btn btn-success btn-large" %>
+          <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "m-btn green big" %>
         <% end %>
       <% else %>
         <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
-        <% button_type = @enrollment.active? ? "btn-warning" : "btn-success" %>
+        <% button_type = @enrollment.active? ? "red" : "green" %>
 
         <% if @crowded && !@enrollment.active? %>
-          <span class="btn btn-large btn-inverse disabled"><%= t("show.event.sellout") %></span>
+          <span class="m-btn big disabled"><%= t("show.event.sellout") %></span>
         <% else %>
-          <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "btn btn-large #{button_type}" %>
+          <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "m-btn big #{button_type}" %>
         <% end %>
       <% end %>
     <% end %>
 
     <% if logged_in? && @event.is_in_progress? %>
       <% if current_user.present_at? @event %>
-        <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-info disabled">
+        <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="m-btn big btn-present btn-info disabled">
           <%= t("show.event.btn_presence_checkin") %>
         </a>
       <% else %>
         <% if (@crowded && @enrollment && @enrollment.active?) || !@crowded %>
-          <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-large btn-present btn-danger">Check-in</a>
+          <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="m-btn big btn-present btn-danger">Check-in</a>
         <% end %>
       <% end %>
     <% end %>
@@ -94,9 +118,9 @@
     <hr>
 
     <% if @authorized %>
-      <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "btn btn-primary" %>
+      <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "m-btn blue" %>
 
-      <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "btn btn-success" %>
+      <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "m-btn green" %>
       <hr>
     <% end %>
 
@@ -150,7 +174,7 @@
             <% @users_active.each do |h| %>
               <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
-              <% button_type = h[:enrollment].present? ? "btn-warning" : "btn-primary" %>
+              <% button_type = h[:enrollment].present? ? "red" : "blue" %>
 
               <tr>
                 <td><%= counter += 1 %></td>
@@ -158,7 +182,7 @@
                 <td><%= h[:enrollment].user.email %></td>
                 <% if @can_record_presence %>
                   <td>
-                    <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+                    <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "m-btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
                   </td>
                 <% end %>
               </tr>

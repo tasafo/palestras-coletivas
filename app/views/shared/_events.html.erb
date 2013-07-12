@@ -1,6 +1,4 @@
 <% @events.each do |event| %>
-  <hr class="featurette-divider">
-
   <div class="featurette">
     <h3 class="featurette-heading text-info"><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h3>
 

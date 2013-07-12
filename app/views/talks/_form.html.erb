@@ -51,9 +51,9 @@
   <%= render "shared/invite_user", :model => @talk, :users => @authors, :key => "author" %>
 
   <div class="form-actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+    <%= f.submit :class => 'm-btn blue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          talks_path, :class => 'btn' %>
+          talks_path, :class => 'm-btn' %>
   </div>
 
   <%= f.hidden_field :thumbnail %>

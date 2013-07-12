@@ -3,7 +3,7 @@
 
     <%= select_tag("group_id", options_from_collection_for_select(groups, "id", "name")) %>
     
-    <input type="button" id="add_group" class="btn btn-success" value="<%= t("new.invite.add") %> "/>
+    <input type="button" id="add_group" class="m-btn green" value="<%= t("new.invite.add") %> "/>
     
     <div id="groups">
       <table id="table_groups" class="table table-striped">
@@ -21,7 +21,7 @@
                   <%= g.name %><input type="hidden" name="groups[]" value="<%= g.id %>" />
                 </td>
                 <td>
-                  <input type="button" id="group_id_<%= g.id %>" class="btn btn-danger" value="<%= t("new.invite.js.remove") %>" onclick="remove_group('<%= g.id %>')" />
+                  <input type="button" id="group_id_<%= g.id %>" class="m-btn red" value="<%= t("new.invite.js.remove") %>" onclick="remove_group('<%= g.id %>')" />
                 </td>
               </tr>
             <% end %>

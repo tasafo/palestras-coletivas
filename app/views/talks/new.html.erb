@@ -1,3 +1,14 @@
-<h1><%= t("titles.talks.new") %></h1>
+<div class="row-fluid">
+  <div class="span12">
+    <div class="page-header">
+      <div class="row-fluid">
+        <div class="span4">
+          <h1><%= t("titles.talks.index") %></h1>
+          <p><%= t("titles.talks.new") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= render 'form', :url => talks_path %>

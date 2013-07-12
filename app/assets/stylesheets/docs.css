@@ -1704,11 +1704,7 @@ label {
 	list-style: none;
 	margin-right: 5px;
 }
-#work-filter li a {
-	padding: 2px 8px;
-	font-size: 11px;
-	text-decoration: none;
-}
+
 .portfolio_showcase {
 	margin: 0;
 	padding: 0;

@@ -3,7 +3,7 @@
 
     <%= select_tag("user_id", options_from_collection_for_select(users, "id", "name")) %>
     
-    <input type="button" id="add_user" class="btn btn-success" value="<%= t("new.invite.add") %> "/>
+    <input type="button" id="add_user" class="m-btn green" value="<%= t("new.invite.add") %> "/>
     
     <div id="users">
       <table id="table_users" class="table table-striped">
@@ -22,7 +22,7 @@
                     <%= u.name %><input type="hidden" name="users[]" value="<%= u.id %>" />
                   </td>
                   <td>
-                    <input type="button" id="user_id_<%= u.id %>" class="btn btn-danger" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.id %>')" />
+                    <input type="button" id="user_id_<%= u.id %>" class="m-btn red" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.id %>')" />
                   </td>
                 </tr>
               <% end %>

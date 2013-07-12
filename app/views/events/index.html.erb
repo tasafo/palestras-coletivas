@@ -9,11 +9,11 @@
           <% if logged_in? %>
           <div class="span8">
             <ul id="work-filter">
-              <li><%= link_to t("titles.events.new"), new_event_path, :class => "btn btn-primary" %></li>
+              <li><%= link_to t("titles.events.new"), new_event_path, :class => "m-btn blue" %></li>
               <% if @my %>
-              <li><%= link_to t("titles.events.all"), "/events", :class => "btn" %></li>
+              <li><%= link_to t("titles.events.all"), "/events", :class => "m-btn" %></li>
               <% else %>
-              <li><%= link_to t("titles.events.my"), "/events?my=true", :class => "btn" %></li>
+              <li><%= link_to t("titles.events.my"), "/events?my=true", :class => "m-btn" %></li>
               <% end %>
             </ul>
           </div>

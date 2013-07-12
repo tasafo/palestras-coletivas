@@ -1,9 +1,9 @@
 <% if logged_in? %>
   <% unless @authorized %>
     <% if current_user.watched_talk? @talk %>
-      <%= link_to t("labels.talk.watched"), talk_unwatch_path(@talk), :class => "btn btn-primary" %>
+      <%= link_to t("labels.talk.watched"), talk_unwatch_path(@talk), :class => "m-btn blue" %>
     <% else %>
-      <%= link_to t("labels.talk.not_watched"), talk_watch_path(@talk), :class => "btn btn-danger" %>
+      <%= link_to t("labels.talk.not_watched"), talk_watch_path(@talk), :class => "m-btn green" %>
     <% end %>
   <% end %>
 <% end %>
