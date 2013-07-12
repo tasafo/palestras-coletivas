@@ -771,7 +771,6 @@ footer h2, footer h3, footer h4 {
 footer .copyright {
 	border-bottom: 0px;
 	font-size: 0.8em;
-	margin-bottom: 40px;
 }
 .footer ul {
 	list-style: none;
@@ -842,7 +841,7 @@ footer .copyright {
 	margin-top: 70px;
 	border-top: 1px solid #e5e5e5;
 	background: url(/assets/bg_footer.png);
-	padding: 60px 0 0 0;
+	padding: 20px 0 10px;
 	color: #919191;
 }
 .footer a {
