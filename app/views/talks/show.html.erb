@@ -1,105 +1,36 @@
-<div>
-  <% if @talk %>
-    <h2 class="text-info"><%= @talk.title %></h2>
-
-    <%= @presentation.frame.html_safe %>
-
-    <% if @talk.code.empty? %>
-      <br/>
-      <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
-    <% end %>
-    <br/>
-
-    <% if @video.found %>
-      <br/>
-      <%= @video.frame.html_safe %>
-      <br/>
-    <% end %>
-
-    <% if @owns %>
-      <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "btn btn-primary" %>
-      <%= link_to t("show.talk.external_event"), new_external_event_path(@talk), :class => "btn btn-primary" %>
-    <% end %>
-
-    <% if logged_in? %>
-      <% unless @authorized %>
-        <% if current_user.watched_talk? @talk %>
-          <%= link_to t("labels.talk.watched"), talk_unwatch_path(@talk), :class => "btn btn-primary" %>
-        <% else %>
-          <%= link_to t("labels.talk.not_watched"), talk_watch_path(@talk), :class => "btn btn-danger" %>
-        <% end %>
-      <% end %>
-
-      <br/><br/>
-    <% end %>
-
-    <p>
-      <strong><%= t("labels.talk.description") %></strong><br/>
-      <p class="text-info"><%= simple_format @talk.description %></p>
-    </p>
-
-    <p>
-      <strong><%= t("labels.talk.tags") %>:</strong> <%= @talk.tags %>
-    </p>
-
-    <% if @authorized %>
-      <p>
-        <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
-      </p>
-    <% end %>
-
-    <% if @talk.watched_users.any? %>
-      <h4>
-        <%= t("labels.talk.who_watched") %>
-        <small>
-          (<%= pluralize(@talk.watched_users.size, t("labels.general.person").downcase) %>)
-        </small>
-      </h4>
-      <% @talk.watched_users.each do |user| %>
-        <span class="watched_user"><%= render "shared/user_thumb", :user => user %></span>
-      <% end %>  <br/><br/>
-    <% end %>
-
-    <h4><%= t("show.talk.created_by") %></h4>
-
-    <% @talk.users.by_name.each do |user| %>
-      <%= render "shared/user", :user => user %><br/><br/>
-    <% end %>
-
-    <% if @talk.schedules? %>
-      <% event = t("show.talk.events") %>
-      <h4><%= event[@talk.schedules.count > 1 ? :other : :one] %></h4>
-
-      <% @talk.schedules.each do |schedule| %>
-        <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event) %></h5>
-      <% end %>
-    <% end %>
-
-    <% if @talk.external_events? %>
-      <br/>
-      <h4><%= t("show.talk.external_events") %></h4>
-
-      <table class="table">
-        <tbody>
-        <% @talk.external_events.by_date.each do |external_event| %>
-          <% event_date = l external_event.date, :format => :long %>
-          <tr>
-            <td>
-              <h5><%= link_to "#{external_event.name}, #{external_event.place}, #{event_date}.", external_event.url %></h5>
-            </td>
-            <% if @owns %>
-              <td>
-                <%= link_to t("actions.edit"), edit_external_event_path(@talk, external_event), :class => "btn", :id => "external_event_id_#{external_event.id}" %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    <% end %>
-
-    <%= render "comments/index", :commentable => @talk %>
-  <% else %>
-    <h1><%= t("show.talk.not_public") %></h1>
-  <% end %>
+<div class="row-fluid">
+  <div class="span12">
+    <div class="page-header">
+      <div class="row-fluid">
+        <div class="span4">
+          <h1>Trabalhos</h1>
+        </div>
+        
+        <%= render "talks/show/actions" %>
+      </div>
+    </div>
+  </div>
 </div>
+
+<% if @talk %>
+  <div class="work" id="portfolio">
+    <div class="row-fluid work-item">
+      <div class="span4">
+        <h2><%= @talk.title %></h2>
+        <%= simple_format @talk.description %>
+        <%= render "talks/show/tags" %>
+        <%= render "talks/show/creators" %>
+        <%= render "talks/show/public_label" %>
+        <%= render "talks/show/watch_button" %>
+        <%= render "talks/show/schedules" %>
+        <%= render "talks/show/watched_users" %>
+      </div>
+      <div class="span8">
+        <%= render 'talks/show/slideshare' %>
+        <%= render "comments/index", :commentable => @talk %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <h1><%= t("show.talk.not_public") %></h1>
+<% end %>

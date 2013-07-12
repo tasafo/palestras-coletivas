@@ -1,19 +1,30 @@
-<% unless @events.blank? %>
-  <h1><%= t("titles.events.index") %> (<%= @events.count %>)</h1>
-<% end %>
 
-<% if logged_in? %>
-  <%= link_to t("titles.events.new"), new_event_path, :class => "btn btn-primary" %>
-  <% if @my %>
-    <%= link_to t("titles.events.all"), "/events", :class => "btn" %>
-  <% else %>
-    <%= link_to t("titles.events.my"), "/events?my=true", :class => "btn" %>
-  <% end %>
-  <br />
-<% end %>
+<div class="row-fluid">
+    <div class="span12">
+      <div class="page-header">
+        <div class="row-fluid">
+          <div class="span4">
+             <h1><%= t("titles.events.index") %> <small>(<%= @events.count %>)</small></h1>
+          </div>
+          <% if logged_in? %>
+          <div class="span8">
+            <ul id="work-filter">
+              <li><%= link_to t("titles.events.new"), new_event_path, :class => "btn btn-primary" %></li>
+              <% if @my %>
+              <li><%= link_to t("titles.events.all"), "/events", :class => "btn" %></li>
+              <% else %>
+              <li><%= link_to t("titles.events.my"), "/events?my=true", :class => "btn" %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <% unless @events.blank? %>
   <%= render "shared/events" %>
 <% else %>
-  <h1><%= t("titles.events.no_events") %></h1>
+  <p><%= t("titles.events.no_events") %></p>
 <% end %>
