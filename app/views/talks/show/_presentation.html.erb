@@ -1,0 +1,8 @@
+<% if Rails.env != 'test' %>
+  <% unless @talk.code.empty? %>
+    <%= @presentation.frame.html_safe %>
+  <% else %>
+    <br/>
+    <h4><p class="text-warning"><%= t("show.talk.without_presentation") %></p></h4>
+  <% end %>
+<% end %>
