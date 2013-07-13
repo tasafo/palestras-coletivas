@@ -1,26 +1,28 @@
 <div class="utility">
-    <div class="container">
+    <div class="container navbar">
     <% if logged_in? %>
-        <p class="navbar-text pull-right dropdown">
-            <%= gravatar_image(current_user.email, current_user.name, "30x30") %>
-            
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= t("user.greeting", :name => current_user.name) %></a> 
-            <b class="caret"></b>
-        </p>
-        <% else %>
-            <li><%= link_to t("menu.login"), login_path %> </li>
-            <li><%= link_to t("menu.signup"), new_user_path %> </li>
-    <% end %>
-    
-    <% if logged_in? %>    
-        <ul class="dropdown-menu">
-            <li><a href="<%= user_path(current_user) %>">Perfil</a></li>
-            <li class="<%= request.fullpath == edit_user_path(current_user) ? 'active' : '' %>">
-                <%= link_to t("menu.my_data"), edit_user_path(current_user) %>
-            </li>
-            <li><%= link_to t("menu.logout"), logout_path %></li>
-        </ul>
-    <% end %>
+        <div class="navbar-text pull-right dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">
+				<%= gravatar_image(current_user.email, current_user.name, "30x30") %>
+            	<%= t("user.greeting", :name => current_user.name) %>
+                <b class="caret"></b>
+             </a> 
+              <% if logged_in? %>    
+                <ul class="dropdown-menu">
+                    <li><a href="<%= user_path(current_user) %>">Perfil</a></li>
+                    <li class="<%= request.fullpath == edit_user_path(current_user) ? 'active' : '' %>">
+                        <%= link_to t("menu.my_data"), edit_user_path(current_user) %>
+                    </li>
+                    <li><%= link_to t("menu.logout"), logout_path %></li>
+                </ul>
+            <% end %>
+                <% else %>
+                    <ul>
+                        <li><%= link_to t("menu.login"), login_path %> </li>
+                        <li><%= link_to t("menu.signup"), new_user_path %> </li>
+                    </ul>
+            <% end %>
+      	</div>
     </div>
 </div>
 
