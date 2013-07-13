@@ -4,32 +4,32 @@
   <div class="control-group">
     <%= f.label :name, t("labels.user.name"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name %>
+      <%= f.text_field :name, :class => "m-wrap m-ctrl-large" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :email, t("labels.user.email"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.email_field :email %>
+      <%= f.email_field :email, :class => "m-wrap m-ctrl-large" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :password, t("labels.user.password"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.password_field :password %>
+      <%= f.password_field :password, :class => "m-wrap m-ctrl-small" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :password_confirmation, t("labels.user.password_confirmation"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, :class => "m-wrap m-ctrl-small" %>
     </div>
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, :class => 'm-btn blue big' %>
   </div>
 <% end %>

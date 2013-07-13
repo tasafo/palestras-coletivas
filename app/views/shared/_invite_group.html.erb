@@ -1,7 +1,7 @@
   <fieldset>
     <legend><p class="text-info"><%= t("new.invite.group") %></p></legend>
 
-    <%= select_tag("group_id", options_from_collection_for_select(groups, "id", "name")) %>
+    <%= select_tag("group_id", options_from_collection_for_select(groups, "id", "name"), :class => "m-wrap m-ctrl-small") %>
     
     <input type="button" id="add_group" class="m-btn green" value="<%= t("new.invite.add") %> "/>
     

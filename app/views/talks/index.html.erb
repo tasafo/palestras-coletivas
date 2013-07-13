@@ -35,7 +35,7 @@
     	<% unless @talks.blank? %>
         <%= form_for @talk, :html => { :class => 'form-search' }, :url => talks_path, :method => "get" do |f| %>
 
-              <input type="text" class="search-query" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
+              <input type="text" class="search-query m-wrap" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
               <button type="submit" class="m-btn"><%= t("form.submit.search") %></button>
 
         <% end %>
