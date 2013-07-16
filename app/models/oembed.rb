@@ -42,7 +42,7 @@ class Oembed
   end
 
   def show_presentation
-    dimension = "width=\"427\" height=\"356\""
+    dimension = "width=\"100%\" height=\"620\""
 
     if @url.include? "slideshare.net"
       @frame = "<iframe src=\"http://www.slideshare.net/slideshow/embed_code/#{@code}\" #{dimension} frameborder=\"0\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" style=\"border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>"
@@ -78,6 +78,6 @@ class Oembed
       end
     rescue OpenURI::HTTPError
       @found = false
-    end 
+    end
   end
 end
