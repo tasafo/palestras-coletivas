@@ -22,40 +22,41 @@
           <tbody>
           <% day = 1 %>
           <% @dates.each do |date| %>
-            <tr class="info">
-              <% unless @authorized %>
-                <td></td>
-              <% end %>
-              <td colspan="3">
-                <h4><p class="text-center"><%= l date, :format => :custom %></h4></p>
-              </td>
-            </tr>
-            <% @event.schedules.by_day(day).each do |schedule| %>
-              <tr id="row_<%= schedule.id %>">
-                <td><p class="text-center"><%= schedule.time %></p></td>
-
-                <% if schedule.talk? %>
-                  <td>
-                    <p class="text-center">
-                      <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
-                      (<% schedule.talk.users.each do |user| %>
-                        <%= link_to user.name, user_path(user) %>
-                      <% end %>)
-                    </p>
-                  </td>
-                <% else %>
-                  <td><p class="text-center"><%= schedule.activity.description %></p></td>
+            <% if @event.schedules.by_day(day).count > 0 %>
+              <tr class="info">
+                <% unless @authorized %>
+                  <td></td>
                 <% end %>
-
-                <% if @authorized %>
-                  <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "btn", :id => "schedule_id_#{schedule.id}" %></td>
-                <% end %>
+                <td colspan="3">
+                  <h4><p class="text-center"><%= l date, :format => :custom %></h4></p>
+                </td>
               </tr>
+              <% @event.schedules.by_day(day).each do |schedule| %>
+                <tr id="row_<%= schedule.id %>">
+                  <td><p class="text-center"><%= schedule.time %></p></td>
+
+                  <% if schedule.talk? %>
+                    <td>
+                      <p class="text-center">
+                        <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
+                        (<% schedule.talk.users.each do |user| %>
+                          <%= link_to user.name, user_path(user) %>
+                        <% end %>)
+                      </p>
+                    </td>
+                  <% else %>
+                    <td><p class="text-center"><%= schedule.activity.description %></p></td>
+                  <% end %>
+
+                  <% if @authorized %>
+                    <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "btn", :id => "schedule_id_#{schedule.id}" %></td>
+                  <% end %>
+                </tr>
+              <% end %>
             <% end %>
             <% day += 1 %>
           <% end %>
           </tbody>
-
         </table>
       </div>
       <hr>
