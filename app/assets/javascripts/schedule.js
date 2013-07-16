@@ -2,7 +2,7 @@ $(function() {
     $("#schedule_activity_id").change(function() {
         activity_id = $("#schedule_activity_id").val();
         activity_desc = $("#schedule_activity_id").find("option:selected").text();
-        
+
         if (activity_id) {
             $.ajax({
                 url : "/activities/get-type/",
@@ -43,6 +43,16 @@ $(function() {
         }
     });
 
+    $('#edit_schedule_' + $('#schedule_schedule_id').val()).submit(function() {
+        if ($("#search_talks").is(":visible")) {
+            if ($("#schedule_talk_id").val() == "") {
+                alert($("#alert_enter_talks").val());
+                $("#search_text").focus();
+                return false;
+            }
+        }
+    });
+
     $("#schedule_activity_id").trigger("change");
     $("#schedule_date").focus();
 });
@@ -57,7 +67,7 @@ function search_talk() {
         $.getJSON('/schedules/search-talks/' + search_text, function(json) {
             if (json) {
                 for (var i in json) {
-                    talks += '<hr class="featurette-divider>';
+                    talks += '<hr class="featurette-divider">';
 
                     talks += '<div id="div_' + json[i]._id + '" class="featurette">';
 
@@ -83,13 +93,13 @@ function search_talk() {
                 $(".btn-select-talk").click(function() {
                     talk_id = $(this).attr("id");
                     talk_title = $(this).attr("title");
-                    
+
                     $(".featurette").each(function(index) {
                         $(this).css("background-color", "white");
                     });
 
                     $("#div_" + talk_id).css("background-color", "#CCFF99");
-                    
+
                     $("#schedule_talk_id").val(talk_id);
                     $("#talk_title").text(talk_title);
                     $("#div_talk").show();

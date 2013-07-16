@@ -29,14 +29,18 @@
     <div class="controls">
       <span id="talk_title" class="input-xlarge uneditable-input"><%= @talk_title %></span>
     </div>
-  </div>  
+  </div>
 
   <%= f.hidden_field :event_id, :value => @event.id %>
   <%= f.hidden_field :talk_id, :value => @schedule.talk_id %>
-  
+  <%= f.hidden_field :schedule_id, :value => @schedule.id %>
+
   <input id="old_talk_id" name="old_talk_id" type="hidden" value="<%= @schedule.talk_id %>" />
-  
+
   <input id="titles_talks_select" name="titles_talks_select" type="hidden" value="<%= t("titles.talks.select") %>" />
+
+  <input id="alert_enter_talks" name="alert_enter_talks" type="hidden" value="<%= t("new.schedule.you_must_enter_a_talk") %>" />
+
 
   <div class="form-actions">
     <%= f.submit :class => 'btn btn-primary' %>
@@ -47,7 +51,7 @@
   <hr>
   <div class="input-append" id="search_talks" style="display:none">
     <h3 class="text-info"><%= t("titles.talks.search") %></h3>
-    <input class="span12" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
+    <input class="span6" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
     <button id="search_button" class="btn btn-info" type="button"><%= t("form.submit.search") %></button>
   </div>
 
