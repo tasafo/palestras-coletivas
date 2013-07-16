@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe PasswordEncryptor do
-  let(:encryptor) { mock("encryptor") }
+  let(:encryptor) { double("encryptor") }
 
   it "sets encryptor to BCrypt" do
     expect(PasswordEncryptor.encryptor).to eql(BCrypt::Password)
