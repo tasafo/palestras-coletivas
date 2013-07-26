@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.14'
 gem 'mongoid', '~> 3.0.0'
 gem 'rails-i18n'
 gem "bcrypt-ruby", :require => "bcrypt"
@@ -18,7 +18,7 @@ gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails'
-  gem 'bootstrap-sass', '~> 2.3.1.0'
+  gem 'bootstrap-sass'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
 end
