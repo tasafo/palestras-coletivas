@@ -30,7 +30,7 @@ class Gravatar
         @current_location = record.xpath("//currentLocation").text
         @has_profile = true
       end
-    rescue OpenURI::HTTPError, SocketError
+    rescue
       @has_profile = false
     end
   end
@@ -44,7 +44,7 @@ class Gravatar
         @thumbnail_url = record.xpath("//thumbnailUrl").text
         true
       end
-    rescue OpenURI::HTTPError, SocketError
+    rescue
       false
     end
   end
