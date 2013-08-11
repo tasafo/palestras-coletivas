@@ -1,11 +1,12 @@
 pt-BR:
   menu:
-    start: "Início"
+    access: "Acesso"
     signup: "Cadastre-se"
-    login: "Acessar minha conta"
+    login: "Minha conta"
+    user_profile: "Perfil"
+    user_data: "Meus dados"
     logout: "Sair"
     talks: "Trabalhos"
-    my_data: "Meus dados"
-    about: "Sobre"
-    groups: "Grupos"
     events: "Eventos"
+    groups: "Grupos"
+    about: "Sobre"

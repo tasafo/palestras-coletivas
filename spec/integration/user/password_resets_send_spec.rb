@@ -6,7 +6,7 @@ describe "Send password resets" do
   context "when valid data" do
     before do
       visit root_path
-      click_link "Acessar minha conta"
+      click_link "Minha conta"
       click_link "Esqueceu a senha?"
 
       fill_in "Seu e-mail", :with => user.email
@@ -26,14 +26,14 @@ describe "Send password resets" do
   context "when invalid data" do
     before do
       visit root_path
-      click_link "Acessar minha conta"
+      click_link "Minha conta"
       click_link "Esqueceu a senha?"
 
       fill_in "Seu e-mail", :with => "notfound@mail.com"
 
       click_button "Redefinir senha"
     end
-    
+
     it "renders form page" do
       expect(current_path).to eql(new_password_reset_path)
     end
