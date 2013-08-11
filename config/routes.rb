@@ -6,6 +6,7 @@ Palestrascoletivas::Application.routes.draw do
   get "/login", :to => "login#new"
   post "/login", :to => "login#create"
   get "/logout", :to => "login#destroy"
+  get "/ranking", :to => "ranking#index"
 
   resources :users, only: [:show, :edit, :update]
 

@@ -6,8 +6,8 @@
 				<%= gravatar_image(current_user.email, current_user.name, "30x30") %>
             	<%= t("user.greeting", :name => current_user.name) %>
                 <b class="caret"></b>
-             </a> 
-              <% if logged_in? %>    
+             </a>
+              <% if logged_in? %>
                 <ul class="dropdown-menu">
                     <li><a href="<%= user_path(current_user) %>">Perfil</a></li>
                     <li class="<%= request.fullpath == edit_user_path(current_user) ? 'active' : '' %>">
@@ -30,10 +30,11 @@
     <div class="navbar">
         <%= link_to t("menu.start"), root_path, :class => "logo" %>
         <ul class="nav">
-            <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas", :target => "_blank" %> </li>
-            <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
             <li class="<%= request.fullpath == talks_path ? 'active' : '' %>"> <%= link_to t("menu.talks"), talks_path %> </li>
+            <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
             <li class="<%= request.fullpath == groups_path ? 'active' : '' %>"> <%= link_to t("menu.groups"), groups_path %> </li>
+            <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
+            <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
         </ul>
     </div>
 </div>

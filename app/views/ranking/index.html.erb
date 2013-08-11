@@ -1,0 +1,104 @@
+<div class="span4">
+  <table class="table table-condensed">
+    <tr>
+      <td colspan="2"><h3 class="text-center">Top 5 do PC</h3></td>
+    </tr>
+
+  <% unless @users_public_talks.blank? %>
+    <tr>
+      <td colspan="2"><h5>Mas já tem trabalho</h5></td>
+    </tr>
+    <% @users_public_talks.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_public_talks %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @talks.blank? %>
+    <tr>
+      <td colspan="2"><h5>Tá em todas (trabalhos)</h5></td>
+    </tr>
+    <% @talks.each do |talk| %>
+      <tr>
+        <td><%= link_to talk.title, talk_path(talk) %></td>
+        <td><span class="badge badge-inverse"><%= talk.counter_presentation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @events.blank? %>
+    <tr>
+      <td colspan="2"><h5>Bombou! (eventos)</h5></td>
+    </tr>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></td>
+        <td><span class="badge badge-inverse"><%= event.counter_present_users %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @groups.blank? %>
+    <tr>
+      <td colspan="2"><h5>É só chamar! (grupos)</h5></td>
+    </tr>
+    <% @groups.each do |group| %>
+      <tr>
+        <td><%= render "shared/group", :group => group %></td>
+        <td><span class="badge badge-inverse"><%= group.counter_participation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @top_talk_watchers.blank? %>
+    <tr>
+      <td colspan="2"><h5>Quem assistiu mais palestras?</h5></td>
+    </tr>
+    <% @top_talk_watchers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_watched_talks %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @organizers.blank? %>
+    <tr>
+      <td colspan="2"><h5>E lá vamos nós! (organizadores)</h5></td>
+    </tr>
+    <% @organizers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_organizing_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @talkers.blank? %>
+    <tr>
+      <td colspan="2"><h5>Fala pra chuchu (palestrantes)</h5></td>
+    </tr>
+    <% @talkers.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_presentation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <% unless @participations.blank? %>
+    <tr>
+      <td colspan="2"><h5>Não perde uma (participantes)</h5></td>
+    </tr>
+    <% @participations.each do |user| %>
+      <tr>
+        <td><%= render "shared/user", :user => user %></td>
+        <td><span class="badge badge-inverse"><%= user.counter_participation_events %></span></td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  </table>
+</div>
