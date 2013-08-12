@@ -24,11 +24,21 @@
     </style>
   </head>
   <body>
-    <%= render "shared/header" %>
-    <div class="container">
-    	<%= render "shared/flash_messages" %>
+    <div class="container background-transparent">
+      <%= render "shared/header" %>
+      <%= render "shared/flash_messages" %>
       <%= yield %>
     </div>
     <%= render "shared/footer" %>
+    <script>
+    $.backstretch([
+      "/assets/home_01.jpg",
+      "/assets/home_02.jpg",
+      "/assets/home_03.jpg"
+      ], {
+        fade: 1000,
+        duration: 3000
+    });
+    </script>
   </body>
 </html>
