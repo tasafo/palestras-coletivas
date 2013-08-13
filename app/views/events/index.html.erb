@@ -11,9 +11,9 @@
             <ul id="work-filter">
               <li><%= link_to t("titles.events.new"), new_event_path, :class => "m-btn blue" %></li>
               <% if @my %>
-              <li><%= link_to t("titles.events.all"), "/events", :class => "m-btn" %></li>
+              <li><%= link_to t("titles.events.all"), "/events", :class => "m-btn black" %></li>
               <% else %>
-              <li><%= link_to t("titles.events.my"), "/events?my=true", :class => "m-btn" %></li>
+              <li><%= link_to t("titles.events.my"), "/events?my=true", :class => "m-btn black" %></li>
               <% end %>
             </ul>
           </div>

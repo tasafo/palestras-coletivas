@@ -19,19 +19,10 @@
 @import "m-buttons.min";
 @import "m-forms.min";
 
-.logo {
-	display: block;
-	width: 150px;
-	height: 70px;
-	position: absolute;
-	top: 15px;
-	background: url(/assets/palestras-coletivas.png) 0 0 no-repeat;
-	text-indent:-5000px;
-}
-
 .nav-agency {
 	position:relative;
 }
+
 .thumb-presentation {
 	height:127px;
 	position:relative;
@@ -48,14 +39,17 @@
 		}
 	}
 }
+
 .featurette {
 	h3 {
 		margin-top:0;
 	}
 }
+
 input.search-query {
 	border-radius:0;
 }
+
 #flickr-wrapper {
 	.thumb-user img {
 		width: 50px;
@@ -67,7 +61,6 @@ input.search-query {
    Home Styles
    ========================================================================== */
 #home {
-	background: rgba(255, 255, 255, 0.70);
   height: 500px;
 }
 
@@ -84,4 +77,19 @@ input.search-query {
   letter-spacing: 5px;
   line-height: 80px;
   margin-bottom: 30px;
+}
+
+#location-map{
+  background: #fff;
+  border: none;
+  height: 540px;
+  width: 100%;
+
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#location-map img {
+  max-width: initial;
 }

@@ -1,10 +1,11 @@
   <fieldset>
     <legend><p class="text-info"><%= t("new.invite.#{key}") %></p></legend>
 
-    <%= select_tag("user_id", options_from_collection_for_select(users, "id", "name"), :class => "m-wrap m-ctrl-small") %>
-    
-    <input type="button" id="add_user" class="m-btn green" value="<%= t("new.invite.add") %> "/>
-    
+    <div class="m-input-append">
+      <%= select_tag("user_id", options_from_collection_for_select(users, "id", "name"), :class => "m-wrap m-ctrl-medium") %>
+      <input type="button" id="add_user" class="m-btn green" value="<%= t("new.invite.add") %> "/>
+    </div>
+
     <div id="users">
       <table id="table_users" class="table table-striped">
         <thead>

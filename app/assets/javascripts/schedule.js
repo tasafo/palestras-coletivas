@@ -83,7 +83,7 @@ function search_talk() {
 
                     talks += json[i].tags + '<br/><br/>';
 
-                    talks += '<input type="button" id="' + json[i]._id + '" title="' + json[i].title + '" class="btn btn-success btn-select-talk" value="' + titles_talks_select + '" />';
+                    talks += '<input type="button" id="' + json[i]._id + '" title="' + json[i].title + '" class="m-btn green big btn-select-talk" value="' + titles_talks_select + '" />';
 
                     talks += '</div>';
                 }

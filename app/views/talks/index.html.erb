@@ -1,4 +1,3 @@
-
 <div class="row-fluid">
   <div class="span12">
     <div class="page-header">
@@ -9,11 +8,11 @@
         <% if logged_in? %>
         <div class="span8">
           <ul id="work-filter">
-            <li><%= link_to t("titles.talks.new"), new_talk_path, :class => "m-btn  blue" %></li>
+            <li><%= link_to t("titles.talks.new"), new_talk_path, :class => "m-btn blue" %></li>
             <% if @my %>
-            <li><%= link_to t("titles.talks.all"), "/talks", :class => "m-btn" %></li>
+            <li><%= link_to t("titles.talks.all"), "/talks", :class => "m-btn black" %></li>
             <% else %>
-            <li><%= link_to t("titles.talks.my"), "/talks?my=true", :class => "m-btn" %></li>
+            <li><%= link_to t("titles.talks.my"), "/talks?my=true", :class => "m-btn black" %></li>
             <% end %>
           </ul>
         </div>
@@ -22,6 +21,7 @@
     </div>
   </div>
 </div>
+
 <div class="row">
   <div class="span8">
     <% unless @talks.blank? %>
@@ -30,16 +30,14 @@
         <p><%= t("titles.talks.no_talks") %></p>
     <% end %>
   </div>
-  
-  	<div class="span4">
-    	<% unless @talks.blank? %>
-        <%= form_for @talk, :html => { :class => 'form-search' }, :url => talks_path, :method => "get" do |f| %>
-
-              <input type="text" class="search-query m-wrap" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
-              <button type="submit" class="m-btn"><%= t("form.submit.search") %></button>
-
-        <% end %>
-        <% end %>
+  <div class="span4">
+    <% unless @talks.blank? %>
+    <div class="m-input-append">
+      <%= form_for @talk, :html => { :class => 'form-search' }, :url => talks_path, :method => "get" do |f| %>
+        <input type="text" class="search-query m-wrap" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
+        <button type="submit" class="m-btn green"><%= t("form.submit.search") %></button>
+      <% end %>
     </div>
-    
+    <% end %>
+  </div>
 </div>

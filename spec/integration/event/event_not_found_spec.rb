@@ -33,7 +33,7 @@ describe "Event not found" do
     it "redirects to the home page" do
       expect(current_path).to eql(event_path(event))
     end
-    
+
     it "displays error message" do
       expect(page).to have_content("Evento não encontrado")
     end
@@ -47,7 +47,7 @@ describe "Event not found" do
     it "redirects to the home page" do
       expect(current_path).to eql(event_path(event))
     end
-    
+
     it "displays error message" do
       expect(page).to have_content("Evento não encontrado")
     end

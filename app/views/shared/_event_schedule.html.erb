@@ -49,7 +49,7 @@
                   <% end %>
 
                   <% if @authorized %>
-                    <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "btn", :id => "schedule_id_#{schedule.id}" %></td>
+                    <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "m-btn blue", :id => "schedule_id_#{schedule.id}" %></td>
                   <% end %>
                 </tr>
               <% end %>

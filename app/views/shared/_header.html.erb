@@ -1,35 +1,38 @@
 <div class="container-narrow">
-    <%= link_to (image_tag "palestras-coletivas.png"), root_path %>
-    <ul class="nav nav-pills pull-right">
-        <li class="<%= request.fullpath == talks_path ? 'active' : '' %>"> <%= link_to t("menu.talks"), talks_path %> </li>
-        <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
-        <li class="<%= request.fullpath == groups_path ? 'active' : '' %>"> <%= link_to t("menu.groups"), groups_path %> </li>
-        <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
-        <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
-        <li>
-            <div class="navbar-text pull-right dropdown">
+    <div class="span7">
+        <%= link_to (image_tag "palestras-coletivas.png"), root_path %>
+        <ul class="nav nav-pills pull-right">
+            <li class="<%= request.fullpath == talks_path ? 'active' : '' %>"> <%= link_to t("menu.talks"), talks_path %> </li>
+            <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
+            <li class="<%= request.fullpath == groups_path ? 'active' : '' %>"> <%= link_to t("menu.groups"), groups_path %> </li>
+            <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
+            <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
+        </ul>
+    </div>
+    <div class="span2">
+        <div class="m-btn-group">
             <% if logged_in? %>
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">
+                <a class="m-btn dropdown-toggle blue" data-toggle="dropdown" role="button" href="#">
                     <%= gravatar_image(current_user.email, current_user.name, "30x30") %>
                     <%= t("user.greeting", :name => current_user.name) %>
-                    <b class="caret"></b>
+                    <span class="caret white"></span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="m-dropdown-menu blue">
                     <li><%= link_to t("menu.user_profile"), user_path(current_user) %></li>
                     <li><%= link_to t("menu.user_data"), edit_user_path(current_user) %></li>
+                    <li class="divider"></li>
                     <li><%= link_to t("menu.logout"), logout_path %></li>
                 </ul>
             <% else %>
-                <a class="dropdown-toggle" data-toggle="dropdown" role="button" href="#">
+                <a class="m-btn dropdown-toggle blue" data-toggle="dropdown" role="button" href="#">
                     <%= t("menu.access") %>
-                    <b class="caret"></b>
+                    <span class="caret white"></span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="m-dropdown-menu blue">
                     <li><%= link_to t("menu.login"), login_path %> </li>
                     <li><%= link_to t("menu.signup"), new_user_path %> </li>
                 </ul>
             <% end %>
-            </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>

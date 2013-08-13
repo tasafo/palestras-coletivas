@@ -1,6 +1,6 @@
 <%= form_for @user, :url => url do |f| %>
   <%= render "shared/error_messages", :record => @user %>
-  
+
   <div class="control-group">
     <%= f.label :name, t("labels.user.name"), :class => 'control-label' %>
     <div class="controls">
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'm-btn blue big' %>
+  <div class="m-btn-strip">
+    <%= f.submit nil, :class => 'm-btn blue' %>
   </div>
 <% end %>

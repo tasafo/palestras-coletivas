@@ -1,45 +1,41 @@
 <%= paginate @talks %>
 
 <% @talks.each do |talk| %>
-
   <div class="featurette row">
     <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
     <div class="span2">
     	<div class="thumb-presentation">
-        	<%= image_tag thumb, :class => "featurette-image img-polaroid" %>
-            <% if show_user %>
-            	<div class="thumb-users">
-                <% talk.users.by_name.each do |user| %>
-                  <%= render "shared/user_thumb", :user => user %>
-                <% end %>
-                </div>
+      	<%= image_tag thumb, :class => "featurette-image img-polaroid" %>
+        <% if show_user %>
+        	<div class="thumb-users">
+            <% talk.users.by_name.each do |user| %>
+              <%= render "shared/user_thumb", :user => user %>
             <% end %>
-        </div>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <div class="span6">
-    	<h3 class="featurette-heading">
-        <%= link_to talk.title, talk_path(talk) %></h3>
+    	<h3 class="featurette-heading"><%= link_to talk.title, talk_path(talk) %></h3>
 
-         <p><%= talk.description.html_safe %></p>
-         <p><strong><%= t("show.talk.tags") %>:</strong> <%= talk.tags %></p>
-         <p><%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %></p>
-    
-          <% talk.users.each do |user| %>
-            <% if logged_in? && user.id == current_user.id %>
-              <p><strong><%= t("show.talk.to_public") %>:</strong> 
-              <%= talk.to_public ? t("show.talk._yes") : t("show.talk._no") %></p>
-            <% end %>
-          <% end %>
-    
-          <% if talk.thumbnail.blank? %>
-            <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
-          <% end %>
+      <p><%= talk.description.html_safe %></p>
+      <p><strong><%= t("show.talk.tags") %>:</strong> <%= talk.tags %></p>
+      <p><%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %></p>
 
+      <% talk.users.each do |user| %>
+        <% if logged_in? && user.id == current_user.id %>
+          <p><strong><%= t("show.talk.to_public") %>:</strong>
+          <%= talk.to_public ? t("show.talk._yes") : t("show.talk._no") %></p>
+        <% end %>
+      <% end %>
+
+      <% if talk.thumbnail.blank? %>
+        <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
+      <% end %>
     </div>
   </div>
   <hr />
 <% end %>
-
 
 <%= paginate @talks %>

@@ -1,26 +1,24 @@
-<h2 class="text-info"><%= "#{@event.name} - #{@event.edition}" %></h2>
-
 <%= form_for(@schedule, :url => url, :html => {:class => 'form-horizontal' }) do |f| %>
   <%= render "shared/error_messages", :record => @schedule %>
 
   <div class="control-group">
     <%= f.label :day, t("labels.schedule.day"), :class => 'control-label' %>
     <div class="controls">
-      <%= select_tag("schedule[day]", @dates.html_safe) %>
+      <%= select_tag("schedule[day]", @dates.html_safe, :class => "m-wrap m-ctrl-small") %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :time, t("labels.schedule.time"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :time, :class => "input-mini hour" %>
+      <%= f.text_field :time, :class => "m-wrap m-ctrl-small hour" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :activity, t("labels.schedule.activity"), :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:schedule, :activity_id, @activities, :id, :description) %>
+      <%= collection_select(:schedule, :activity_id, @activities, :id, :description, {}, :class => "m-wrap m-ctrl-medium") %>
     </div>
   </div>
 
@@ -41,18 +39,19 @@
 
   <input id="alert_enter_talks" name="alert_enter_talks" type="hidden" value="<%= t("new.schedule.you_must_enter_a_talk") %>" />
 
-
-  <div class="form-actions">
-    <%= f.submit :class => 'btn btn-primary' %>
+  <div class="m-btn-strip">
+    <%= f.submit :class => 'm-btn blue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          event_path(@event), :class => 'btn' %>
+          event_path(@event), :class => 'm-btn black' %>
   </div>
 
   <hr>
   <div class="input-append" id="search_talks" style="display:none">
     <h3 class="text-info"><%= t("titles.talks.search") %></h3>
-    <input class="span6" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
-    <button id="search_button" class="btn btn-info" type="button"><%= t("form.submit.search") %></button>
+    <div class="m-input-append">
+      <input class="search-query m-wrap m-ctrl-large" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
+      <button id="search_button" class="m-btn green" type="button"><%= t("form.submit.search") %></button>
+    </div>
   </div>
 
   <div id="search_result"></div>

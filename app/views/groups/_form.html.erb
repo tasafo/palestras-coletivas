@@ -27,14 +27,14 @@
 
   <%= render "shared/invite_user", :model => @group, :users => @members, :key => "member" %>
 
-  <div class="form-actions">
+  <div class="m-btn-strip">
     <%= f.submit :class => 'm-btn blue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          groups_path, :class => 'm-btn' %>
+          groups_path, :class => 'm-btn black' %>
   </div>
 
   <%= f.hidden_field :thumbnail_url %>
-  
+
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
   <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>

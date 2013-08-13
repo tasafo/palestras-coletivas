@@ -1,11 +1,5 @@
 pt-BR:
   titles:
-    signup:
-      new: "Cadastre-se"
-
-    login:
-      new: "Acesse sua conta"
-
     talks:
       index: "Trabalhos"
       new: "Adicionar trabalho"
@@ -22,19 +16,22 @@ pt-BR:
     home:
       index: "Trabalhos publicados"
 
-    user:
+    users:
+      index: "Usuários"
+      profile: "Perfil do usuário"
       edit: "Editar meus dados"
+      signup: "Cadastre-se"
+      login: "Acesse sua conta"
+      reset_password: "Redefinir senha"
 
     groups:
       index: "Grupos"
+      profile: "Perfil do grupo"
       new: "Adicionar grupo"
       edit: "Editar grupo"
       no_groups: "Nenhum grupo adicionado"
       my: "Meus grupos"
       all: "Todos os grupos"
-
-    reset_password:
-      new: "Redefinir senha"
 
     events:
       index: "Eventos"
@@ -51,7 +48,7 @@ pt-BR:
 
     enrollments:
       new: "Quero participar do evento"
-      edit: "Alterar participação"
+      edit: "Alterar participação no evento"
 
     external_event:
       new: "Adicionar evento externo para"

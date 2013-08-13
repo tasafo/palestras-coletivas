@@ -1,20 +1,16 @@
 <% @groups.by_name.each do |group| %>
-  <hr class="featurette-divider">
-
   <div class="featurette">
     <% thumb = group.thumbnail_url.blank? ? "without_avatar.jpg" : group.thumbnail_url %>
 
     <%= image_tag thumb, :class => "featurette-image pull-left img-polaroid" %>
 
     <h3 class="featurette-heading"><%= link_to group.name, group_path(group) %></h3>
-    
+
     <p class="lead">
       <%= t("group.created_time", :time => time_ago_in_words(group.created_at)) %><br/>
-      
+
       <strong><%= t("show.group.tags") %>:</strong> <%= group.tags %>
     </p>
   </div>
-  <br/>
+  <hr class="featurette-divider">
 <% end %>
-
-<hr class="featurette-divider">

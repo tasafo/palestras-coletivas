@@ -1,10 +1,7 @@
-<h2 class="text-info"><%= "#{@event.name} - #{@event.edition}" %></h2>
-
 <%= form_for(@enrollment, :url => url, :html => {:class => 'form-horizontal'}) do |f| %>
-
   <% unless @enrollment.new_record? %>
     <h2 class="<%= @message_type %>"><%= @message_button %></h2>
-    
+
     <% unless @user_name.nil? %>
       <h3><%= @user_name %></h3>
     <% end %>
@@ -15,9 +12,9 @@
   <%= f.hidden_field :event_id, :value => @event.id %>
   <%= f.hidden_field :user_id, :value => @user_id %>
 
-  <div class="form-actions">
-    <%= f.submit :class => "btn btn-large btn-primary" %>
+  <div class="m-btn-strip">
+    <%= f.submit :class => "m-btn blue" %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          event_path(@event), :class => 'btn btn-large' %>
+          event_path(@event), :class => 'm-btn black' %>
   </div>
 <% end %>
