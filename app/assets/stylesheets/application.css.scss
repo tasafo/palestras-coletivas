@@ -57,26 +57,9 @@ input.search-query {
 	}
 }
 
-/* ==========================================================================
-   Home Styles
-   ========================================================================== */
-#home {
-  height: 500px;
-}
-
 .background-transparent {
-	background: rgba(255, 255, 255, 0.70);
-}
-
-.hero-text {
-  padding-top: 5%;
-}
-
-.hero-text h1 {
-  font-size: 60px;
-  letter-spacing: 5px;
-  line-height: 80px;
-  margin-bottom: 30px;
+	background: rgba(255, 255, 255, 0.90);
+  color: Charcoal
 }
 
 #location-map{
