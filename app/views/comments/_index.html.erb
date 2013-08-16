@@ -1,5 +1,5 @@
 <section class="comments">
-  <h1><%= I18n.t("titles.comments.index") %></h1>
+  <h2><%= I18n.t("titles.comments.index") %></h2>
   <% if logged_in? %>
     <%= render "comments/form", :commentable => commentable %>
   <% end %>
@@ -7,8 +7,6 @@
     <h4><%= I18n.t("labels.comments.empty") %></h4>
   <% end %>
   <% commentable.comments.each do |comment| %>
-    <div class="row-fluid">
-      <%= render "comments/show", :commentable => commentable, :comment => comment %>
-    </div>
+    <%= render "comments/show", :commentable => commentable, :comment => comment %>
   <% end %>
 </section>

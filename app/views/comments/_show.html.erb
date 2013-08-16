@@ -6,7 +6,7 @@
   </div>
 
   <% if logged_in? %>
-    <%= link_to I18n.t("actions.answer"), "#", :class => "answer_comment" %> 
+    <%= link_to I18n.t("actions.answer"), "#", :class => "answer_comment" %>
   <% end %>
 
   <% if logged_in? && comment.commented_by?(current_user) %>
@@ -14,16 +14,10 @@
   <% end %>
 
   <% comment.comments.each do |answer| %>
-    <div class="row-fluid">
-      <%= render "comments/answer", :answer => answer, :comment => comment %>
-    </div>
+    <%= render "comments/answer", :answer => answer, :comment => comment %>
   <% end %>
 
   <% if logged_in? %>
-    <div class="row-fluid">
-      <div class="span11 offset1">
-        <%= render "comments/answer_form", :commentable => commentable, :comment => comment %>
-      </div>
-    </div>
+    <%= render "comments/answer_form", :commentable => commentable, :comment => comment %>
   <% end %>
 </article>
