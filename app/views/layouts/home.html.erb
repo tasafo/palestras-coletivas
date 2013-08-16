@@ -12,33 +12,20 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
     <![endif]-->
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <style type="text/css">
-      body {
-        padding-top: 20px;
-      }
-      /* Custom container */
-      .container-narrow {
-        margin: 10px auto;
-        max-width: 900px;
-      }
-      /* Supporting marketing content */
-      .marketing {
-        margin: 60px 0;
-      }
-      .marketing p + h4 {
-        margin-top: 28px;
-      }
-    </style>
   </head>
   <body>
-    <div class="container background-transparent">
+    <div class="container">
       <%= render "shared/header" %>
       <%= render "shared/flash_messages" %>
-      <%= yield %>
     </div>
+    <section id="content">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </section>
     <%= render "shared/footer" %>
     <script>
-    $.backstretch([
+    $("#content").backstretch([
       "/assets/home_01.jpg",
       "/assets/home_02.jpg",
       "/assets/home_03.jpg"
