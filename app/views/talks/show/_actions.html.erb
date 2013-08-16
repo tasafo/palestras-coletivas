@@ -2,7 +2,7 @@
   <div class="span8">
     <ul id="work-filter">
       <li><%= link_to t("titles.talks.edit"), edit_talk_path(@talk), :class => "m-btn blue" %></li>
-      <li><%= link_to t("show.talk.external_event"), new_external_event_path(@talk), :class => "m-btn black" %></li>
+      <li><%= link_to t("show.talk.external_event"), new_talks_external_event_path(@talk), :class => "m-btn black" %></li>
     </ul>
   </div>
 <% end %>
