@@ -6,26 +6,28 @@ class Enrollment
   field :present, type: Boolean, :default => false
 
   belongs_to :event
-
   belongs_to :user
 
   scope :actives, lambda { where(:active => true) }
-
   scope :presents, lambda { where(:present => true) }
 
   def update_counter_of_events_and_users(option)
-    if option == "active"
-      operation = self.active? ? :inc : :dec
+    self.send("update_#{option}_counter")
+  end
 
-      user.set_counter(:enrollment_events, operation)
+  def update_active_counter
+    operation = self.active? ? :inc : :dec
 
-      event.set_counter(:registered_users, operation)
-    elsif option == "present"
-      operation = self.present? ? :inc : :dec
+    user.set_counter(:enrollment_events, operation)
 
-      user.set_counter(:participation_events, operation)
+    event.set_counter(:registered_users, operation)    
+  end
 
-      event.set_counter(:present_users, operation)
-    end
+  def update_present_counter
+    operation = self.present? ? :inc : :dec
+
+    user.set_counter(:participation_events, operation)
+
+    event.set_counter(:present_users, operation)
   end
 end
