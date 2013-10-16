@@ -19,7 +19,7 @@ describe "Signup" do
       expect(current_path).to eql(login_path)
     end
 
-    it "displays sucess message" do
+    it "displays success message" do
       expect(page).to have_content("Seu cadastro foi realizado com sucesso")
     end
   end
