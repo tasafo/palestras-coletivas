@@ -4,12 +4,10 @@ class RatingsController < ApplicationController
   def create
     @rateable = find_rateable
 
+    result = @rateable.rate_by current_user, params[:rate][:my_rating]
+
     respond_to do |format|
-      if @rateable.rate_by current_user, params[:rate][:my_rating]
-        format.json { render json: { success: true } }
-      else
-        format.json { render json: { success: false } }
-      end
+      format.json { render json: { success: result } }
     end
   end
 
