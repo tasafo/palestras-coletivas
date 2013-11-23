@@ -15,6 +15,7 @@ gem 'mongoid_fulltext'
 gem 'geocoder'
 gem 'unicorn'
 gem 'newrelic_rpm'
+gem 'rails_12factor'
 
 group :assets do
   gem 'sass-rails'
