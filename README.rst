@@ -48,3 +48,7 @@ Agora é só rodar e brincar!
 	rails s
 
 	localhost:3000
+
+Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
+
+  bundle exec rake coverage
