@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.16'
 gem 'mongoid', '~> 3.0.0'
 gem 'rails-i18n'
 gem "bcrypt-ruby", :require => "bcrypt"
@@ -30,6 +30,7 @@ group :development, :test do
   gem 'mongoid-rspec'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
 end
 
 group :test do

@@ -70,8 +70,8 @@ Palestrascoletivas::Application.configure do
     :enable_starttls_auto => true,
     :port => 587,
     :authentication => :plain,
-    :user_name => "palestrascoletivas",
-    :password => 'pc159gl753'
+    :user_name => ENV['EMAIL_ACCOUNT'],
+    :password => ENV['EMAIL_PASSWORD']
   }
 
   config.action_mailer.default_url_options = { :host => 'palestrascoletivas.com' }
