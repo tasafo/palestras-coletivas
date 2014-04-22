@@ -45,6 +45,7 @@ pt-BR:
       state: "Estado"
       country: "País"
       to_public: "Quero publicar"
+      about: "Sobre o evento"
 
     schedule:
       day: "Dia"
