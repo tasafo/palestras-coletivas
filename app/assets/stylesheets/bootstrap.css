@@ -243,6 +243,7 @@ a:focus {
 
 .user-box{
   padding: 15px 0 0 30px;
+  height: 150px;
 }
 
 .user-box p{
