@@ -8,15 +8,13 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
+ *= require bootstrap
+ *= require bootstrap-responsive
+ *= require jquery.rating
+ *= require jquery-ui.custom.min
+ *= require m-buttons.min
+ *= require m-forms.min
  */
-
-@import "bootstrap";
-@import "bootstrap-responsive";
-@import "jquery.rating";
-@import "jquery-ui.custom.min";
-@import "m-buttons.min";
-@import "m-forms.min";
 
 .nav-agency {
 	position:relative;
