@@ -60,6 +60,11 @@ class User
 
   scope :public_talks, where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5)
 
+
+  def show_name
+    return until_two_names(name) unless name.blank?
+  end
+
   def password=(password)
     if password.blank?
       @validate_password = false
@@ -147,6 +152,11 @@ class User
   end
 
 private
+
+  def until_two_names(name)
+    nameArray = name.split(" ")
+    return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
+  end
 
   def erase_password
     @password = nil

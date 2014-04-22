@@ -238,7 +238,21 @@ a:focus {
   -webkit-border-radius: 500px;
   -moz-border-radius: 500px;
   border-radius: 500px;
+  margin: 10px 0 15px 0;
 }
+
+.user-box{
+  padding: 15px 0 0 30px;
+}
+
+.user-box p{
+  text-align: center;
+}
+
+.img-user-box{
+  margin: 0 0 10px 25px;
+}
+
 .row {
   margin-left: -20px;
   *zoom: 1;
