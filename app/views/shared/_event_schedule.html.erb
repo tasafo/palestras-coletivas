@@ -6,14 +6,14 @@
           <thead>
             <tr>
               <th width="10%">
-                <p class="text-center"><%= t("new.schedule.table.time") %></p>
+                <p class="text-center schedule-font"><%= t("new.schedule.table.time") %></p>
               </th>
               <th width="80%">
-                <p class="text-center"><%= t("new.schedule.table.activity") %></p>
+                <p class="text-center schedule-font"><%= t("new.schedule.table.activity") %></p>
               </th>
               <% if @authorized %>
                 <th width="10%">
-                  <p class="text-left"><%= t("new.schedule.table.operation") %></p>
+                  <p class="text-left schedule-font"><%= t("new.schedule.table.operation") %></p>
                 </th>
               <% end %>
             </tr>
@@ -28,16 +28,16 @@
                   <td></td>
                 <% end %>
                 <td colspan="3">
-                  <h4><p class="text-center"><%= l date, :format => :custom %></h4></p>
+                  <h4><p class="text-center schedule-font"><%= l date, :format => :custom %></h4></p>
                 </td>
               </tr>
               <% @event.schedules.by_day(day).each do |schedule| %>
                 <tr id="row_<%= schedule.id %>">
-                  <td><p class="text-center"><%= schedule.time %></p></td>
+                  <td><p class="text-center schedule-font"><%= schedule.time %></p></td>
 
                   <% if schedule.talk? %>
                     <td>
-                      <p class="text-center">
+                      <p class="text-center schedule-font">
                         <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
                         (<% schedule.talk.users.each do |user| %>
                           <%= link_to user.name, user_path(user) %>
@@ -45,7 +45,7 @@
                       </p>
                     </td>
                   <% else %>
-                    <td><p class="text-center"><%= schedule.activity.description %></p></td>
+                    <td><p class="text-center schedule-font"><%= schedule.activity.description %></p></td>
                   <% end %>
 
                   <% if @authorized %>
