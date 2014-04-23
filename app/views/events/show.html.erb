@@ -23,13 +23,13 @@
       <h2>
         <%= @event.name %>
       </h2>
-      
+
       <% if @event.start_date == @event.end_date %>
         <h4><%= l @event.start_date, :format => :long %> - <%= @event.place %></h4>
       <% else %>
         <h4>
           <%= t("show.event.of") %> <%= l @event.start_date, :format => :long %>
-          <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %> 
+          <%= t("show.event.to") %> <%= l @event.end_date, :format => :long %>
           - <%= @event.place %>
         </h4>
       <% end %>
@@ -78,7 +78,7 @@
           <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
       <% end %>
     </div>
-    
+
   </div>
 </section>
 
@@ -96,7 +96,7 @@
   <div class="container">
      <%= @event.place %> - <%= t("labels.event.address") %>: <%= @event.address %>
   </div>
-
+  <br/>
   <div id="location-map"></div>
 </section>
 
