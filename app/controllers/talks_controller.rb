@@ -23,11 +23,6 @@ class TalksController < ApplicationController
       @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc) if logged_in?
     end
 
-    respond_to do |format|
-      format.html
-      format.json { render json: all_public_talks.to_json } #{ render :json => all_public_talks.to_json(:only => [:_id, :title, :description]) }
-    end
-
   end
 
   def new
