@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe PasswordEncryptor do
+describe PasswordEncryptor, :type => :model do
   let(:encryptor) { double("encryptor") }
 
   it "sets encryptor to BCrypt" do
@@ -9,9 +9,9 @@ describe PasswordEncryptor do
 
   context "encrypting password" do
     it "encrypts password" do
-      PasswordEncryptor.stub :encryptor => encryptor
+      allow(PasswordEncryptor).to receive_messages :encryptor => encryptor
 
-      encryptor.should_receive(:create).with("test")
+      expect(encryptor).to receive(:create).with("test")
 
       PasswordEncryptor.encrypt("test")
     end
@@ -19,21 +19,21 @@ describe PasswordEncryptor do
 
   context "validating password" do
     before do
-      PasswordEncryptor.stub :encryptor => encryptor
+      allow(PasswordEncryptor).to receive_messages :encryptor => encryptor
     end
 
     it "instantiates encryptor" do
-      encryptor.should_receive(:new).with("some hash")
+      expect(encryptor).to receive(:new).with("some hash")
       PasswordEncryptor.valid?("some hash", "test")
     end
 
     it "is valid when password is correct" do
-      encryptor.stub :new => "test"
+      allow(encryptor).to receive_messages :new => "test"
       expect(PasswordEncryptor).to be_valid("some hash", "test")
     end
 
     it "is invalid when password is incorrect" do
-      encryptor.stub :new => "test"
+      allow(encryptor).to receive_messages :new => "test"
       expect(PasswordEncryptor).not_to be_valid("some hash", "invalid")
     end
   end

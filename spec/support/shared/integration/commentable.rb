@@ -8,7 +8,7 @@ shared_examples "a commentable" do
   end
 
   context "with valid comment" do
-    it "comment on a commentable" do
+    it "on a commentable" do
       within(".new_comment_form") do
         fill_in "comment_body", :with => "Muito massa!"
         click_button I18n.t("actions.comment")
@@ -20,7 +20,7 @@ shared_examples "a commentable" do
       expect(page).to have_content "Muito massa!"
     end
 
-    it "comment on a comment" do
+    it "on a comment" do
       within(".new_comment_form") do
         fill_in "comment_body", :with => "Muito massa!"
         click_button I18n.t("actions.comment")

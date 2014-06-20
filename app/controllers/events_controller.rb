@@ -87,7 +87,8 @@ class EventsController < ApplicationController
       render layout: 'event'
 
     rescue Mongoid::Errors::DocumentNotFound
-      redirect_to root_path
+      @event = nil
+      
     end
   end
 

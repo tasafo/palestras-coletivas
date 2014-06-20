@@ -1,16 +1,16 @@
 require "./app/models/gravatar"
 require "digest/md5"
 
-describe Gravatar do
+describe Gravatar, :type => :model do
   it "generates MD5 from e-mail" do
-    Digest::MD5.should_receive(:hexdigest).with("paul@example.org")
+    expect(Digest::MD5).to receive(:hexdigest).with("paul@example.org")
 
     Gravatar.url("paul@example.org")
   end
 
   context "returns values" do
     before do
-      Digest::MD5.stub :hexdigest => "abc123"
+      allow(Digest::MD5).to receive_messages :hexdigest => "abc123"
     end
 
     it "returns url" do

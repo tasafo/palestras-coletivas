@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe User, ".present_at? event" do
+describe User, ".present_at? event", :type => :model do
   subject(:user) { create(:user, :paul) }
   let(:billy) { create :user, :billy }
   let(:event) { create(:event, :tasafoconf, owner: billy) }
 
   context "when user does not have enrollment" do
     it "search for enrollment" do
-      Enrollment
-        .should_receive(:find_by)
+      expect(Enrollment)
+        .to receive(:find_by)
           .with(user: user, event: event)
             .and_return(nil)
       user.present_at? event
     end
 
     it "returns false" do
-      expect(user.present_at? event).to be_false
+      expect(user.present_at? event).to be false
     end
   end
 
@@ -26,8 +26,8 @@ describe User, ".present_at? event" do
 
     context "when user is not present at event" do
       it "search for enrollment" do
-        Enrollment
-          .should_receive(:find_by)
+        expect(Enrollment)
+          .to receive(:find_by)
             .with(user: user, event: event)
               .and_return(enrollment)
 
@@ -35,7 +35,7 @@ describe User, ".present_at? event" do
       end
 
       it "returns false" do
-        expect(user.present_at? event).to be_false
+        expect(user.present_at? event).to be false
       end
     end
 
@@ -46,7 +46,7 @@ describe User, ".present_at? event" do
       end
 
       it "returns true" do
-        expect(user.present_at? event).to be_true
+        expect(user.present_at? event).to be true
       end
     end
   end

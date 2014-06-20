@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Group, "validations" do
+describe Group, "validations", :type => :model do
   context "when valid data" do
     let!(:user) { create(:user, :paul) }
     let!(:other_user) { create(:user, :billy) }
@@ -12,25 +12,26 @@ describe Group, "validations" do
 
     it "must have 2 users" do
       subject.add_members user, [other_user]
-      expect(subject).to have(2).users
+
+      expect(subject.users.size).to eq(2)
     end
   end
 
   it "requires name" do
     group = Group.create(:name => nil)
 
-    expect(group).to have(1).error_on(:name)
+    expect(group.errors[:name].size).to eq(1)
   end
 
   it "requires tags" do
     group = Group.create(:tags => nil)
 
-    expect(group).to have(1).error_on(:tags)
+    expect(group.errors[:tags].size).to eq(1)
   end
 
   it "requires owner" do
     group = Group.create(:owner => nil)
 
-    expect(group).to have(1).error_on(:owner)
+    expect(group.errors[:owner].size).to eq(1)
   end
 end

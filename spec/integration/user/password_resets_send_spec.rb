@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Send password resets" do
+describe "Send password resets", :type => :request do
   let!(:user) { create(:user, :paul) }
 
   context "when valid data" do

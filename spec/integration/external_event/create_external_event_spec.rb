@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Create external event of talk" do
+describe "Create external event of talk", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
 

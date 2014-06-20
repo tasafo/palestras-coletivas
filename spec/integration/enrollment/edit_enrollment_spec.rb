@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Edit enrollment" do
+describe "Edit enrollment", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }

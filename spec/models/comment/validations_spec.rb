@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Talk, "validations" do
+describe Talk, "validations", :type => :model do
   let!(:comment)  { create(:comment, :talk) }
 
   context "when valid data" do
@@ -10,14 +10,14 @@ describe Talk, "validations" do
   end
 
   it "requires body" do
-    comment.body = nil
+    comment.update_attributes(body: nil)
 
-    expect(comment).to have(1).error_on(:body)
+    expect(comment.errors[:body].size).to eq(1)
   end
 
   it "requires user" do
-    comment.user = nil
+    comment.update_attributes(user: nil)
 
-    expect(comment).to have(1).error_on(:user)
+    expect(comment.errors[:user].size).to eq(1)
   end
 end

@@ -1,6 +1,7 @@
 module SpecHelpers
   def login_as(user)
     visit root_path
+    click_link "Acesso"
     click_link "Minha conta"
 
     fill_in "Seu e-mail", :with => user.email

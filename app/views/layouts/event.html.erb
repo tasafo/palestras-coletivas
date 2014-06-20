@@ -14,7 +14,7 @@
     <%= stylesheet_link_tag "event", :media => "all" %>
   </head>
   <body>
-      <!--Nav Bar -->
+    <!--Nav Bar -->
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
@@ -23,34 +23,39 @@
                         <li><a class="scroll" href="#about"><%= t("labels.event.about") %></a></li>
                         <li><a class="scroll" href="#schedule"><%= t("titles.schedules.index") %></a></li>
                         <li><a class="scroll" href="#location"><%= t("labels.event.place") %></a></li>
-                        <% unless @event.users.blank? %>
-                          <li>
-                            <a class="scroll" href="#organizers">
-                              <%= t("show.event.organizers") %>
-                            </a>
-                          </li>
+                        <% if @event %>
+                          <% unless @event.users.blank? %>
+                            <li>
+                              <a class="scroll" href="#organizers">
+                                <%= t("show.event.organizers") %>
+                              </a>
+                            </li>
+                          <% end %>
+
+                          <% unless @event.groups.blank? %>
+                            <li>
+                              <a class="scroll" href="#groups">
+                                Grupos
+                              </a>
+                            </li>
+                          <% end %>
                         <% end %>
 
-                        <% unless @event.groups.blank? %>
-                          <li>
-                            <a class="scroll" href="#groups">
-                              Grupos
-                            </a>
-                          </li>
-                        <% end %>
-
-                         <li>
-                            <a class="scroll" href="#presents">
-                              <%= t("show.event.enrolled") %>
-                            </a>
-                          </li>
+                        <li>
+                          <a class="scroll" href="#presents">
+                            <%= t("show.event.enrolled") %>
+                          </a>
+                        </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </div>
     </div>
-    	<%= render "shared/flash_messages" %>
-      <%= yield %>
+
+    <br/><br/>
+    <%= render "shared/flash_messages" %>
+    
+    <%= yield %>
     
     <%= render "shared/footer" %>
 

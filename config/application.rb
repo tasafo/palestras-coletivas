@@ -11,7 +11,6 @@ end
 module Palestrascoletivas
   class Application < Rails::Application
     config.time_zone = 'Brasilia'
-
     config.i18n.load_path += Dir["app/locales/**/*.yml"]
     config.i18n.default_locale = "pt-BR"
     config.i18n.available_locales = ["pt-BR", "en"]
@@ -21,5 +20,6 @@ module Palestrascoletivas
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
+    I18n.enforce_available_locales = true
   end
 end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Create enrollment" do
+describe "Create enrollment", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:event) { create(:event, :tasafoconf, :deadline_date_enrollment => Date.today, :users => [ user ], :owner => user.id) }

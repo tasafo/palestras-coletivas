@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ExternalEvent, "validations" do
+describe ExternalEvent, "validations", :type => :model do
   context "when valid data" do
     let(:external_event) { build(:external_event, :fisl) }
 
@@ -10,20 +10,20 @@ describe ExternalEvent, "validations" do
   end
 
   it "requires name" do
-    external_event = ExternalEvent.new(:name => nil)
+    external_event = ExternalEvent.create(:name => nil)
 
-    expect(external_event).to have(1).error_on(:name)
+    expect(external_event.errors[:name].size).to eq(1)
   end
 
   it "requires place" do
-    external_event = ExternalEvent.new(:place => nil)
+    external_event = ExternalEvent.create(:place => nil)
 
-    expect(external_event).to have(1).error_on(:place)
+    expect(external_event.errors[:place].size).to eq(1)
   end
 
   it "requires date" do
-    external_event = ExternalEvent.new(:date => nil)
+    external_event = ExternalEvent.create(:date => nil)
 
-    expect(external_event).to have(1).error_on(:date)
+    expect(external_event.errors[:date].size).to eq(1)
   end  
 end

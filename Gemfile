@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.18'
 gem 'mongoid', '~> 3.0.0'
 gem 'rails-i18n'
 gem "bcrypt-ruby", :require => "bcrypt"
@@ -26,7 +26,7 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0'
   gem 'mongoid-rspec'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
@@ -35,8 +35,8 @@ end
 
 group :test do
   gem 'launchy'
-  gem 'capybara', '2.0.3'
-  gem 'capybara-webkit', '0.14.2'
+  gem 'capybara' #, '2.0.3'
+  gem 'capybara-webkit' #, '0.14.2'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
 end

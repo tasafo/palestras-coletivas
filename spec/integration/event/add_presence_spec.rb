@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "add presence", js: true do
+describe "add presence", type: :request, js: true do
   let(:user) { create(:user, :paul) }
   let(:billy) { create(:user, :billy) }
   let(:event) { create(:event, :tasafoconf, owner: billy, start_date: Date.today, end_date: Date.today) }
@@ -16,7 +16,7 @@ describe "add presence", js: true do
     end
 
     it "button turns green" do
-      find('a.btn-present').should have_content(I18n.t("show.event.btn_presence_checkin"))
+      expect(find('a.btn-present')).to have_content(I18n.t("show.event.btn_presence_checkin"))
     end
   end
 
@@ -27,7 +27,7 @@ describe "add presence", js: true do
     end
 
     it "display success button" do
-      find('a.btn-present').should have_content(I18n.t("show.event.btn_presence_checkin"))
+      expect(find('a.btn-present')).to have_content(I18n.t("show.event.btn_presence_checkin"))
     end
   end
 end
