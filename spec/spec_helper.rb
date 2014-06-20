@@ -31,6 +31,4 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 
   Capybara.javascript_driver = :webkit
-
-  #config.infer_spec_type_from_file_location!
 end
