@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
-gem 'rails', '3.2.18'
+gem 'rails', '3.2.19'
 gem 'mongoid', '~> 3.0.0'
 gem 'rails-i18n'
 gem "bcrypt-ruby", :require => "bcrypt"
@@ -19,7 +19,7 @@ gem 'rails_12factor'
 
 group :assets do
   gem 'sass-rails'
-  gem 'bootstrap-sass'
+  gem 'bootstrap-sass', '3.1.1.1'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
 end
