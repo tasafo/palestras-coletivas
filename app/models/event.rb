@@ -64,6 +64,8 @@ class Event
 
   scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :_slugs => :asc, :edition => :asc).limit(5)
 
+  scope :last_events, -> (limit) { all.order_by('created_at DESC').limit(limit) }
+
   def address
     [street, district, city, state, country].compact.join(', ')
   end
