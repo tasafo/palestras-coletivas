@@ -18,8 +18,7 @@ gem 'newrelic_rpm'
 gem 'rails_12factor'
 
 group :assets do
-  gem 'sass-rails'
-  gem 'bootstrap-sass'
+  gem 'sass-rails', '>= 3.2'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
 end
