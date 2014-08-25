@@ -1,0 +1,69 @@
+section#top {
+  height: 350px;
+  background: #2E8AF1;
+  text-align: center;
+  padding-top: 100px
+}
+
+section#top h1 {
+  color: #fff;
+  font-weight: 100;
+  font-size: 6em;
+  letter-spacing: 15px;
+}
+
+.box-talk{
+  margin-top: 20px;
+  padding-bottom: 10px;
+  width: 230px;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.box-talk p{
+  /*margin-top: 10px;*/
+  font-size: 16px;
+  padding: 0 10px 0 10px;
+  margin-bottom: -5px
+}
+
+.box-talk span{
+  font-size: 10px;
+  color: #7F7F7F;
+  padding: 0 10px 0 10px;
+}
+
+.box-talk p a{
+  color: #606060
+}
+
+.box-talk .thumb-user img{
+  position: relative;
+  margin-top: -30px
+}
+
+.nav-talks{
+  text-align: right;
+  padding: 40px 0 20px 0;
+}
+
+.nav-talks .filter-tags{
+  margin-top: -13px
+}
+
+.btn-talks {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding:14px 40px;
+  border-radius: 4px;
+  background: #D1CDCC;
+  color: #7F7F7F;
+}
+
+.btn-talks:hover {
+  color: #fff;
+  background: #2E8AEF;
+  text-decoration: none;
+}
