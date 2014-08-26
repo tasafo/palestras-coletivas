@@ -66,3 +66,10 @@ pt-BR:
         notice: "O evento externo foi adicionado!"
       update:
         notice: "O evento externo foi atualizado!"
+
+    attach_event:
+      create:
+        notice: "O trabalho foi anexado ao evento!"
+        alert: "O trabalho já está anexado no evento"
+      new:
+        alert: "Não existem eventos disponíveis para essa operação"

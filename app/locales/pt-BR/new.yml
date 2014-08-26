@@ -22,7 +22,7 @@ pt-BR:
     event:
       help:
         to_public: "Marque para que as pessoas vejam o evento"
-        accepts_dynamic_programming: "Marque para que palestrantes possam adicionar seu trabalho ao evento"
+        accepts_dynamic_programming: "Marque para que palestrantes possam adicionar seus trabalhos ao evento"
 
     schedule:
       you_must_enter_a_talk: "Você deve informar um trabalho."

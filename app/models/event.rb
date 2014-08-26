@@ -66,6 +66,10 @@ class Event
 
   scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :_slugs => :asc, :edition => :asc).limit(5)
 
+  def name_and_edition
+    [name, edition].compact.join(' - ')
+  end
+
   def address
     [street, district, city, state, country].compact.join(', ')
   end

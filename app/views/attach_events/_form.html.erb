@@ -1,0 +1,16 @@
+<%= form_for(@schedule, :url => url, :html => {:class => 'form-horizontal'}) do |f| %>
+  <%= render "shared/error_messages", :record => @schedule %>
+
+  <div class="control-group">
+    <%= f.label :attach_event, t("labels.attach_event.event"), :class => 'control-label' %>
+    <div class="controls">
+      <%= collection_select(:attach_event, :event_id, @events, :id, :name_and_edition, {}, :class => "m-wrap m-ctrl-medium") %>
+    </div>
+  </div>
+
+  <div class="m-btn-strip">
+    <%= f.submit :class => 'm-btn blue' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+          talk_path(@talk), :class => 'm-btn black' %>
+  </div>
+<% end %>

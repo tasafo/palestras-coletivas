@@ -53,3 +53,6 @@ pt-BR:
     external_event:
       new: "Adicionar evento externo para"
       edit: "Editar evento externo de"
+
+    attach_event:
+      new: "Anexar o trabalho ao evento"

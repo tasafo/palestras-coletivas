@@ -1,0 +1,9 @@
+<div class="row-fluid">
+  <div class="span12">
+    <div class="page-header">
+      <h1><%= t("titles.attach_event.new") %> <%= @talk.title %></h1>
+    </div>
+  </div>
+</div>
+
+<%= render 'form', :url => talks_attach_events_path(@talk) %>

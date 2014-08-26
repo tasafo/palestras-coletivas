@@ -13,6 +13,7 @@ pt-BR:
       my_talks_published: "Meus trabalhos publicados"
       external_event: "Adicionar evento externo"
       external_events: "Apresentado em outros eventos"
+      attach_event: "Anexar a um evento"
 
     user:
       profile: "Veja o perfil completo em"

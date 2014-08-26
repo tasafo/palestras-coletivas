@@ -69,3 +69,6 @@ pt-BR:
       vote!: "Dê um feedback!"
       vote: "Voto"
       votes: "Votos"
+
+    attach_event:
+      event: "Evento"
