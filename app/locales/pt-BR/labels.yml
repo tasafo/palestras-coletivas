@@ -45,6 +45,7 @@ pt-BR:
       state: "Estado"
       country: "País"
       to_public: "Quero publicar"
+      accepts_dynamic_programming: "Aceita programação dinâmica"
       about: "Sobre o evento"
 
     schedule:

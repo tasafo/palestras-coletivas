@@ -33,6 +33,8 @@ class Event
   field :counter_registered_users, type: Integer, default: 0
   field :counter_present_users, type: Integer, default: 0
 
+  field :accepts_dynamic_programming, type: Boolean, :default => false
+
   embeds_many :comments, :as => :commentable
   embeds_many :ratings, :as => :rateable
 
