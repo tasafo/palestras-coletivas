@@ -29,6 +29,10 @@
     </div>
   </div>
 
+  <div class="control-group">
+    <p>Ainda não possui conta? <a href="<%= new_user_path %>">Cadastre-se<a></p>
+  </div>
+
   <div class="m-btn-strip">
     <%= submit_tag t("form.submit.login"), :class => 'm-btn blue' %>
     <%= link_to t("new.user.forgotten_password"), new_password_reset_path, :class => 'm-btn black' %>

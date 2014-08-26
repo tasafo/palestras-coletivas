@@ -1,5 +1,6 @@
 class LoginController < ApplicationController
   def new
+    
   end
 
   def create
@@ -8,7 +9,8 @@ class LoginController < ApplicationController
     if @user
       reset_session
       session[:user_id] = @user.id
-      redirect_to root_path
+
+      redirect_to return_point
     else
       flash.now[:alert] = t("flash.login.create.alert")
       render :new
