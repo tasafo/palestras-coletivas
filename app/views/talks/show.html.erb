@@ -1,29 +1,32 @@
-<section id="top-section">
-
-  <h1>Trabalhos</h1>
-
+<section id="top">
+  <h1>Talks</h1>
 </section>
 
 <% if @talk %>
-  <div class="work" id="portfolio">
-    <div class="row-fluid work-item">
-      <div class="span4">
-        <h2><%= @talk.title %></h2>
-        <%= simple_format @talk.description %>
-        <%= render "talks/show/tags" %>
-        <%= render "talks/show/creators" %>
-        <%= render "talks/show/public_label" %>
-        <%= render "talks/show/watch_button" %>
-        <%= render "talks/show/schedules" %>
-        <%= render "talks/show/watched_users" %>
-      </div>
-      <div class="span8">
-        <%= render 'talks/show/presentation' %>
-        <%= render 'talks/show/video' %>
-        <%= render "comments/index", :commentable => @talk %>
+  <section id="content-talk">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+
+          <h2><%= @talk.title %></h2>
+          <%= simple_format @talk.description %>
+          <%= render "talks/show/tags" %>
+          <%= render "talks/show/creators" %>
+          <%= render "talks/show/public_label" %>
+          <%= render "talks/show/watch_button" %>
+          <%= render "talks/show/schedules" %>
+          <%= render "talks/show/watched_users" %>
+
+        </div>
+
+        <div class="col-md-8">
+          <%= render 'talks/show/presentation' %>
+          <%= render 'talks/show/video' %>
+          <%= render "comments/index", :commentable => @talk %>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 <% else %>
   <h1><%= t("show.talk.not_public") %></h1>
 <% end %>
