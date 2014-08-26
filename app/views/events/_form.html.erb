@@ -1,115 +1,115 @@
-<%= form_for(@event, :url => url, :html => {:class => 'form-horizontal' }) do |f| %>
+<%= form_for(@event, :url => url, :html => {:class => 'form-horizontal', role: 'form' }) do |f| %>
   <%= render "shared/error_messages", :record => @event %>
 
-  <div class="control-group">
-    <%= f.label :name, t("labels.event.name"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :placeholder => t("placeholder.events.name"), :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :name, t("labels.event.name"), :class => 'control-label col-md-3' %>
+    <div class="col-md-8">
+      <%= f.text_field :name, :placeholder => t("placeholder.events.name"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :edition, t("labels.event.edition"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :edition, :placeholder => t("placeholder.events.edition"), :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :edition, t("labels.event.edition"), :class => 'control-label col-md-3' %>
+    <div class="col-md-1">
+      <%= f.text_field :edition, :placeholder => t("placeholder.events.edition"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :description, t("labels.event.description"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :description, :placeholder => t("placeholder.events.description"), :rows => 5, :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :description, t("labels.event.description"), :class => 'control-label col-md-3' %>
+    <div class="col-md-8">
+      <%= f.text_area :description, :placeholder => t("placeholder.events.description"), :rows => 5, :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :stocking, t("labels.event.stocking"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :stocking, :class => "m-wrap m-ctrl-small" %>
+  <div class="form-group">
+    <%= f.label :stocking, t("labels.event.stocking"), :class => 'control-label col-md-3' %>
+    <div class="col-md-1">
+      <%= f.text_field :stocking, :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :start_date, t("labels.event.start_date"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :start_date, :class => "m-wrap m-ctrl-small date" %>
+  <div class="form-group">
+    <%= f.label :start_date, t("labels.event.start_date"), :class => 'control-label col-md-3' %>
+    <div class="col-md-2">
+      <%= f.text_field :start_date, :class => "form-control date" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :end_date, t("labels.event.end_date"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :end_date, :class => "m-wrap m-ctrl-small date" %>
+  <div class="form-group">
+    <%= f.label :end_date, t("labels.event.end_date"), :class => 'control-label col-md-3' %>
+    <div class="col-md-2">
+      <%= f.text_field :end_date, :class => "form-control date" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :deadline_date_enrollment, t("labels.event.deadline_date_enrollment"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :deadline_date_enrollment, :class => "m-wrap m-ctrl-small date" %>
+  <div class="form-group">
+    <%= f.label :deadline_date_enrollment, t("labels.event.deadline_date_enrollment"), :class => 'control-label col-md-3' %>
+    <div class="col-md-2">
+      <%= f.text_field :deadline_date_enrollment, :class => "form-control date" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :place, t("labels.event.place"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :place, :placeholder => t("placeholder.events.place"), :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :place, t("labels.event.place"), :class => 'control-label col-md-3' %>
+    <div class="col-md-6">
+      <%= f.text_field :place, :placeholder => t("placeholder.events.place"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :street, t("labels.event.street"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :street, :placeholder => t("placeholder.events.street"), :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :street, t("labels.event.street"), :class => 'control-label col-md-3' %>
+    <div class="col-md-6">
+      <%= f.text_field :street, :placeholder => t("placeholder.events.street"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :district, t("labels.event.district"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :district, :placeholder => t("placeholder.events.district"), :class => "m-wrap m-ctrl-medium" %>
+  <div class="form-group">
+    <%= f.label :district, t("labels.event.district"), :class => 'control-label col-md-3' %>
+    <div class="col-md-3">
+      <%= f.text_field :district, :placeholder => t("placeholder.events.district"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :city, t("labels.event.city"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :city, :placeholder => t("placeholder.events.city"), :class => "m-wrap m-ctrl-medium" %>
+  <div class="form-group">
+    <%= f.label :city, t("labels.event.city"), :class => 'control-label col-md-3' %>
+    <div class="col-md-3">
+      <%= f.text_field :city, :placeholder => t("placeholder.events.city"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :state, t("labels.event.state"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :state, :placeholder => t("placeholder.events.state"), :class => "m-wrap m-ctrl-medium" %>
+  <div class="form-group">
+    <%= f.label :state, t("labels.event.state"), :class => 'control-label col-md-3' %>
+    <div class="col-md-3">
+      <%= f.text_field :state, :placeholder => t("placeholder.events.state"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :country, t("labels.event.country"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :country, :placeholder => t("placeholder.events.country"), :class => "m-wrap m-ctrl-medium" %>
+  <div class="form-group">
+    <%= f.label :country, t("labels.event.country"), :class => 'control-label col-md-3' %>
+    <div class="col-md-3">
+      <%= f.text_field :country, :placeholder => t("placeholder.events.country"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :tags, t("labels.event.tags"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :tags, :placeholder => t("placeholder.events.tags"), :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :tags, t("labels.event.tags"), :class => 'control-label col-md-3' %>
+    <div class="col-md-4">
+      <%= f.text_field :tags, :placeholder => t("placeholder.events.tags"), :class => "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
+  <div class="form-group">
     <%= f.label :accepts_dynamic_programming, t("labels.event.accepts_dynamic_programming"), :class => 'control-label' %>
-    <div class="controls">
+    <div class="col-md-4">
       <%= f.check_box :accepts_dynamic_programming %>
       <span class="help-inline"><%= t("new.event.help.accepts_dynamic_programming") %></span>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :to_public, t("labels.event.to_public"), :class => 'control-label' %>
-    <div class="controls">
+  <div class="form-group">
+    <%= f.label :to_public, t("labels.event.to_public"), :class => 'control-label col-md-3' %>
+    <div class="col-md-6">
       <%= f.check_box :to_public %>
       <span class="help-inline"><%= t("new.event.help.to_public") %></span>
     </div>

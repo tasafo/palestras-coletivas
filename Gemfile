@@ -18,8 +18,7 @@ gem 'newrelic_rpm'
 gem 'rails_12factor'
 
 group :assets do
-  gem 'sass-rails'
-  gem 'bootstrap-sass', '3.1.1.1'
+  gem 'sass-rails', '>= 3.2'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
 end
@@ -35,8 +34,8 @@ end
 
 group :test do
   gem 'launchy'
-  gem 'capybara' #, '2.0.3'
-  gem 'capybara-webkit' #, '0.14.2'
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
 end

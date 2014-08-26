@@ -1,4 +1,4 @@
-<article id="answer_<%= answer.id %>" class="answer comment span11 offset1">
+<article id="answer_<%= answer.id %>" class="answer comment col-md-11 offset1">
   <%= render "shared/user", :user => answer.user %>
   <span class="date"><%= l answer.created_at, :format => :long %></span>
   <div class="body">

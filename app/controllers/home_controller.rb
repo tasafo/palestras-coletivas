@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
-  def index
-    render layout: "home"
+  layout 'home'
 
+  def index
+    @events = Event.last_events(3)
+    @talkers = User.presentation_events
   end
 end

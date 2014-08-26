@@ -1,0 +1,163 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap.min
+ *= require bootstrap-theme
+ *= require flexslider
+ *= require font-awesome
+ *= require animate
+ */
+
+ body {
+    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    overflow-x: hidden;
+    position: relative;
+    color: #606060;
+}
+
+section{
+  padding: 50px
+}
+
+section#intro{
+  padding: 0;
+  background-image: url(home_02.jpg);
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  background-size: cover
+}
+
+.blur {
+    /* Absolutely position it, but stretch it to all four corners, then put it just behind #search's z-index */
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  /*filter: blur(4px);
+  -webkit-filter: blur(4px);
+  -moz-filter: blur(4px);
+  filter: url('blur.svg#blur');*/ /* for Firefox */
+  background: rgba(30,30,30,0.6);
+}
+
+.intro-container{
+  position: relative;
+  z-index: 100;
+  color: #fff;
+
+}
+
+.event{
+  text-align: center;
+  margin-top: 15%;
+}
+
+.event h1{
+  font-size: 70px;
+  line-height: 60px;
+  font-weight: 300;
+}
+
+.event p{
+  margin-top: 50px;
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.btn-start {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding:14px 40px;
+  border: 1px solid;
+  border-radius: 4px;
+  margin-top: 40px;
+  background: transparent;
+}
+
+.btn-start:hover {
+  color: #fff;
+  background: #be5254;
+  border-color: #be5254;
+}
+
+section#about h3{
+  font-weight:100;line-height:1.1;
+  font-size: 40px;
+  margin-bottom: 50px
+}
+
+section#about{
+  text-align: center;
+}
+
+section#about .caption h4{
+  font-weight:100;
+  line-height:1.1;
+  font-size: 22px;
+}
+
+section#about .caption p{
+  font-size: 12px
+}
+
+section#tops-presentations{
+  padding: 0;
+  background-image: url(10.jpg);
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+}
+
+section#tops-presentations .blur-presentation {
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  background: rgba(30,30,30,0.6);
+}
+
+section#tops-presentations .presentations-container{
+  position: relative;
+  z-index: 100;
+  padding: 80px;
+}
+
+section#tops-presentations h3{
+  font-weight:100;line-height:1.1;
+  font-size: 40px;
+  margin-bottom: 50px
+}
+
+section#calltoaction{
+  text-align: center;
+  background: #333333;
+  color: #fff;
+}
+
+section#calltoaction a.btn-call {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding:14px 40px;
+  border-radius: 4px;
+  margin-top: 40px;
+  background: #BC640B;
+  text-decoration: none;
+}
+
+section#calltoaction .btn-call:hover {
+  color: #fff;
+  background: #BC640B;
+}
