@@ -1,63 +1,84 @@
-    <% if @event.schedules? %>
-      <h4><%= t("titles.schedules.index") %></h4>
-      <hr>
-      <div id="schedules">
-        <table id="table_schedules" class="table table-striped">
-          <thead>
-            <tr>
+    <h4><%= t("titles.schedules.index") %></h4>
+    <hr>
+    <div id="schedules">
+      <table id="table_schedules" class="table table-striped">
+        <thead>
+          <tr>
+            <th width="10%">
+              <p class="text-center schedule-font"><%= t("new.schedule.table.time") %></p>
+            </th>
+            <th width="70%">
+              <p class="text-center schedule-font"><%= t("new.schedule.table.activity") %></p>
+            </th>
+            <% if @authorized %>
               <th width="10%">
-                <p class="text-center schedule-font"><%= t("new.schedule.table.time") %></p>
+                <p class="text-left schedule-font"><%= t("new.schedule.table.operation") %></p>
               </th>
-              <th width="80%">
-                <p class="text-center schedule-font"><%= t("new.schedule.table.activity") %></p>
-              </th>
-              <% if @authorized %>
-                <th width="10%">
-                  <p class="text-left schedule-font"><%= t("new.schedule.table.operation") %></p>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
-
-          <tbody>
-          <% day = 1 %>
-          <% @dates.each do |date| %>
-            <% if @event.schedules.by_day(day).count > 0 %>
-              <tr class="info">
-                <% unless @authorized %>
-                  <td></td>
-                <% end %>
-                <td colspan="3">
-                  <h4><p class="text-center schedule-font"><%= l date, :format => :custom %></h4></p>
-                </td>
-              </tr>
-              <% @event.schedules.by_day(day).each do |schedule| %>
-                <tr id="row_<%= schedule.id %>">
-                  <td><p class="text-center schedule-font"><%= schedule.time %></p></td>
-
-                  <% if schedule.talk? %>
-                    <td>
-                      <p class="text-center schedule-font">
-                        <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
-                        (<% schedule.talk.users.each do |user| %>
-                          <%= link_to user.name, user_path(user) %>
-                        <% end %>)
-                      </p>
-                    </td>
-                  <% else %>
-                    <td><p class="text-center schedule-font"><%= schedule.activity.description %></p></td>
-                  <% end %>
-
-                  <% if @authorized %>
-                    <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "m-btn blue", :id => "schedule_id_#{schedule.id}" %></td>
-                  <% end %>
-                </tr>
-              <% end %>
             <% end %>
-            <% day += 1 %>
+            <% if @can_vote %>
+              <th width="10%">
+                <p class="text-left schedule-font"><%= t("new.schedule.table.votes") %></p>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% day = 1 %>
+        <% @dates.each do |date| %>
+          <% if @event.schedules.by_day(day).count > 0 %>
+            <tr class="info">
+              <% unless @authorized %>
+                <td></td>
+              <% end %>
+              <td colspan="4">
+                <h4><p class="text-center schedule-font"><%= l date, :format => :custom %></h4></p>
+              </td>
+            </tr>
+            <% @event.schedules.by_day(day).each do |schedule| %>
+              <tr id="row_<%= schedule.id %>">
+                <td>
+                  <% unless @can_vote %>
+                    <p class="text-center schedule-font"><%= schedule.time %></p>                  
+                  <% end %>
+                </td>
+
+                <% if schedule.talk? %>
+                  <td>
+                    <p class="text-center schedule-font">
+                      <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
+                      (<% schedule.talk.users.each do |user| %>
+                        <%= link_to user.name, user_path(user) %>
+                      <% end %>)
+                    </p>
+                  </td>
+                <% else %>
+                  <td><p class="text-center schedule-font"><%= schedule.activity.description %></p></td>
+                <% end %>
+
+                <% if @authorized %>
+                  <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "m-btn blue", :id => "schedule_id_#{schedule.id}" %></td>
+                <% end %>
+
+                <% if @can_vote %>
+                  <td>
+                    <% if logged_in? %>
+                      <% if schedule.votes? && schedule.votes.find_by(:user => current_user) %>
+                        <%= link_to schedule.counter_votes, remove_vote_schedule_path(@event, schedule), :class => "m-btn red", :id => "remove_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_remove_vote") %>
+                      <% else %>
+                        <%= link_to schedule.counter_votes, add_vote_schedule_path(@event, schedule), :class => "m-btn green", :id => "add_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_add_vote") %>
+                      <% end %>
+                    <% else %>
+                      <%= schedule.counter_votes %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
           <% end %>
-          </tbody>
-        </table>
-      </div>
-      <hr>
-    <% end %>
+          <% day += 1 %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+    <hr>

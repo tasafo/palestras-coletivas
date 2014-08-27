@@ -54,6 +54,8 @@ pt-BR:
       record_presence: "Registrar presença"
       undo_presence: "Desfazer presença"
       btn_presence_checkin: "Estou aqui!"
+      btn_add_vote: "Adicionar voto"
+      btn_remove_vote: "Retirar voto"
       table:
         number: "N."
         name: "Nome"

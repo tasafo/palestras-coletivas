@@ -30,6 +30,7 @@ pt-BR:
         time: "Horário"
         activity: "Atividade"
         operation: "Operação"
+        votes: "Votos"
 
     invite:
       author: "Convidar autores"

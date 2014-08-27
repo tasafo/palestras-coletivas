@@ -28,6 +28,8 @@ class User
 
   has_many :enrollments
 
+  has_many :votes
+
   attr_reader :password
 
   validates_presence_of :name

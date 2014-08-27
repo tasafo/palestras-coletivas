@@ -54,6 +54,9 @@ pt-BR:
         notice: "A programação foi adicionada!"
       update:
         notice: "A programação foi atualizada!"
+      vote:
+        add: "Voto adicionado com sucesso!"
+        remove: "Voto retirado com sucesso!"
 
     enrollments:
       create:

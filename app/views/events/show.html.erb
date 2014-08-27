@@ -81,13 +81,15 @@
     </div>
   </section>
 
-  <section id="schedule">
-    <div class="container">
-      <div class="row-fluid">
-        <%= render "shared/event_schedule" %>
+  <% if @event.schedules? %>
+    <section id="schedule">
+      <div class="container">
+        <div class="row-fluid">
+          <%= render "shared/event_schedule" %>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <% end %>
 
   <section id="location">
     <h4><%= t("labels.event.place") %></h4>

@@ -51,6 +51,8 @@ Palestrascoletivas::Application.routes.draw do
   post "/schedules/:event_id/new", :to => "schedules#create", :as => false
   put "/schedules/:event_id/:id/edit", :to => "schedules#update", :as => false
   get "/schedules/search-talks/:search", :to => "schedules#search_talks"
+  get "/schedules/:event_id/:id/add_vote", :to => "schedules#add_vote", :as => :add_vote_schedule
+  get "/schedules/:event_id/:id/remove_vote", :to => "schedules#remove_vote", :as => :remove_vote_schedule
 
   post "/activities/get-type" => "activities#get_type"
 
