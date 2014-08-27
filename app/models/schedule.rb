@@ -38,4 +38,16 @@ class Schedule
       talk.set_counter(:presentation_events, :inc)
     end    
   end
+
+  def find_vote(user)
+    begin
+      if self.votes.find_by(:user => user)
+        true
+      else
+        false
+      end
+    rescue
+      false
+    end
+  end
 end

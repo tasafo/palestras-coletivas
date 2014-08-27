@@ -63,7 +63,7 @@
                 <% if @can_vote %>
                   <td>
                     <% if logged_in? %>
-                      <% if schedule.votes? && schedule.votes.find_by(:user => current_user) %>
+                      <% if schedule.votes? && schedule.find_vote(current_user) %>
                         <%= link_to schedule.counter_votes, remove_vote_schedule_path(@event, schedule), :class => "m-btn red", :id => "remove_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_remove_vote") %>
                       <% else %>
                         <%= link_to schedule.counter_votes, add_vote_schedule_path(@event, schedule), :class => "m-btn green", :id => "add_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_add_vote") %>
