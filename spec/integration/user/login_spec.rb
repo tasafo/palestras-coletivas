@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Login" do
+describe "Login", :type => :request do
   context "with valids credential" do
     let!(:user) { create(:user, :paul) }
 

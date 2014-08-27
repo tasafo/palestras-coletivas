@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Logout" do
+describe "Logout", :type => :request do
   context "when logged in" do
     let!(:user) { create(:user, :paul) }
 

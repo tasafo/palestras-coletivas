@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Show user profile" do
+describe "Show user profile", :type => :request do
   let!(:user) { create(:user, :luis) }
   let!(:other_user) { create(:user, :billy) }
 

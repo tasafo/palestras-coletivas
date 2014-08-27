@@ -1,9 +1,4 @@
-<div class="span2">
-  <div class="user-box">
-    <a href="<%= user_path(user) %>" title="<%= user.name %>">
-    	<% url = Gravatar.url(user.email) %>
-    	<%= image_tag url, :alt => user.name, class: 'img-circle img-user-box' %>
-      <p><%= user.show_name %></p>
-    </a>
-  </div>
-</div>
+<p>
+  <a href="<%= user_path(user) %>" title="<%= user.name %>"><%= gravatar_image(user.email, user.name, "30x30") %></a>
+  <a href="<%= user_path(user) %>" title="<%= user.name %>"><%= user.name %></a>
+</p>

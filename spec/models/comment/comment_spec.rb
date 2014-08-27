@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Comment do
+describe Comment, :type => :model do
   let!(:talk_owner) { create(:user, :random) }
   let!(:commentable)  { create(:talk, :users => [ talk_owner ], :owner => talk_owner.id.to_s) }
 
@@ -39,10 +39,10 @@ describe Comment do
       comment = Comment.new
 
       comment.user = talk_owner
-      expect(comment.commented_by? commentor).to be_false
+      expect(comment.commented_by? commentor).to be false
 
       comment.user = commentor
-      expect(comment.commented_by? commentor).to be_true
+      expect(comment.commented_by? commentor).to be true
     end
   end
 end

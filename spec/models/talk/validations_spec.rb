@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Talk, "validations" do
+describe Talk, "validations", :type => :model do
   context "when valid data" do
     let!(:user) { create(:user, :paul) }
     let!(:talk) { create(:talk, :users => [ user ], :owner => user.id.to_s) }
@@ -13,30 +13,30 @@ describe Talk, "validations" do
   it "requires title" do
     talk = Talk.create(:title => nil)
 
-    expect(talk).to have(1).error_on(:title)
+    expect(talk.errors[:title].size).to eq(1)
   end
 
   it "requires description" do
     talk = Talk.create(:description => nil)
 
-    expect(talk).to have(1).error_on(:description)
+    expect(talk.errors[:description].size).to eq(1)
   end
 
   it "requires tags" do
     talk = Talk.create(:tags => nil)
 
-    expect(talk).to have(1).error_on(:tags)
+    expect(talk.errors[:tags].size).to eq(1)
   end
 
   it "requires user" do
     talk = Talk.create(:users => nil)
 
-    expect(talk).to have(1).error_on(:users)
+    expect(talk.errors[:users].size).to eq(1)
   end
 
   it "requires owner" do
     talk = Talk.create(:owner => nil)
 
-    expect(talk).to have(1).error_on(:owner)
+    expect(talk.errors[:owner].size).to eq(1)
   end
 end

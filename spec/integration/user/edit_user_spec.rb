@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Edit user" do
+describe "Edit user", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
 

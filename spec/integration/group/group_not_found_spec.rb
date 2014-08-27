@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Group not found" do
+describe "Group not found", :type => :request do
   context "when group does not exist" do
     before do
       visit root_path

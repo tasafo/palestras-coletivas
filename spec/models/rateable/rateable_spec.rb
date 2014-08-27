@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Rateable do
+describe Rateable, :type => :model do
   class DummyEvent
     include Mongoid::Document
     include Rateable
@@ -23,8 +23,8 @@ describe Rateable do
     subject.save
     rating = subject.rate_by user, 4
 
-    rating.rank.should == 4
-    rating.user.should == user
+    expect(rating.rank).to eq(4)
+    expect(rating.user).to eq(user)
     expect(subject.ratings.size).to be_eql 1
   end
 
@@ -34,8 +34,8 @@ describe Rateable do
     rating = subject.rate_by user, 2
     rating = subject.rate_by user, 1
 
-    rating.rank.should == 1
-    rating.user.should == user
+    expect(rating.rank).to eq(1)
+    expect(rating.user).to eq(user)
     expect(subject.ratings.size).to be_eql 1
   end
 

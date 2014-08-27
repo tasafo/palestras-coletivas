@@ -9,6 +9,13 @@ class EventsController < ApplicationController
       @events = current_user.events.order_by(:start_date => :desc) if logged_in?
       @my = true
     end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        render json: Event.all_public.only('name', 'edition', 'description', 'start_date', 'days', 'street', 'district', 'state', 'country')
+      }
+    end
   end
 
   def new
@@ -84,10 +91,13 @@ class EventsController < ApplicationController
 
       @image_top = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].sample
 
+      @can_vote = @event && @event.accepts_submissions && @event.end_date >= Date.today
+
       render layout: 'event'
 
     rescue Mongoid::Errors::DocumentNotFound
-      redirect_to root_path
+      @event = nil
+      
     end
   end
 

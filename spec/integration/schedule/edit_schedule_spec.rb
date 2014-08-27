@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Edit schedule", :js => true do
+describe "Edit schedule", :type => :request, :js => true do
   let!(:user) { create(:user, :paul) }
   let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
 

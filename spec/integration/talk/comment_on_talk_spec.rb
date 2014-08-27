@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Comment on talk" do
+describe "Comment on talk", :type => :request do
   it_behaves_like "a commentable" do
     let!(:commentable) { create(:talk, :users => [ user ], :owner => user.id) }
     let(:commentable_path)  { talk_path commentable }

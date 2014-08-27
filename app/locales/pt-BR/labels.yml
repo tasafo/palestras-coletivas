@@ -45,6 +45,7 @@ pt-BR:
       state: "Estado"
       country: "País"
       to_public: "Quero publicar"
+      accepts_submissions: "Aceita submissão de trabalhos"
       about: "Sobre o evento"
 
     schedule:
@@ -68,3 +69,6 @@ pt-BR:
       vote!: "Dê um feedback!"
       vote: "Voto"
       votes: "Votos"
+
+    submit_event:
+      event: "Evento"

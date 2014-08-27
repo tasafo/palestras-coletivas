@@ -24,12 +24,13 @@ shared_examples "a rateable" do
       add_rating(4.0)
       rateable.reload
       expect(rateable.ratings.size).to be == 2
-      assert_rating (3 + 4)/2.0
+      assert_rating (3 + 4) / 2.0
     end
 
     def assert_rating rating
       expect(rateable.rating).to be == rating
-      expect(page).to have_selector(".rating .readonly[checked='checked'][value='#{rating}']")
+      #expect(page).to have_selector(".rating .readonly[checked='checked'][value='#{rating}']")
+      expect(page.has_checked_field?("rate_my_rating_#{(rating * 10).to_i}"))
     end
 
     def add_rating rating

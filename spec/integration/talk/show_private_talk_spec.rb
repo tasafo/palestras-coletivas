@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Show private talk", :js => true do
+describe "Show private talk", :type => :request, :js => true do
   let!(:user) { create(:user, :paul) }
   let!(:other_talk) { create(:other_talk, :users => [ user ], :owner => user.id) }
 

@@ -33,6 +33,8 @@ class Event
   field :counter_registered_users, type: Integer, default: 0
   field :counter_present_users, type: Integer, default: 0
 
+  field :accepts_submissions, type: Boolean, :default => false
+
   embeds_many :comments, :as => :commentable
   embeds_many :ratings, :as => :rateable
 
@@ -63,6 +65,10 @@ class Event
   scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
 
   scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :_slugs => :asc, :edition => :asc).limit(5)
+
+  def name_and_edition
+    [name, edition].compact.join(' - ')
+  end
 
   def address
     [street, district, city, state, country].compact.join(', ')

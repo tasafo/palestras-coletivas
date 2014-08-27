@@ -27,7 +27,6 @@ class TalksController < ApplicationController
       format.html
       format.json { render json: all_public_talks.to_json } #{ render :json => all_public_talks.to_json(:only => [:_id, :title, :description]) }
     end
-
   end
 
   def new

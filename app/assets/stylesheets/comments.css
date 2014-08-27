@@ -17,7 +17,7 @@ section.comments .comment .answer_form {
   display: none;
 }
 
-section.comments .comment span.date {
+section.comments .comment span.date_comment {
   color: #999;
   font-size: 80%;
 }

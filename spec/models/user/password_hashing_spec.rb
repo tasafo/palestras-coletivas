@@ -4,13 +4,13 @@ describe User, "password hashing" do
   subject(:user) { User.new }
 
   it "generates hash" do
-    PasswordEncryptor.should_receive(:encrypt).with("test")
+    expect(PasswordEncryptor).to receive(:encrypt).with("test")
 
     user.password = "test"
   end
 
   it "sets hash" do
-    PasswordEncryptor.stub :encrypt => "hash"
+    allow(PasswordEncryptor).to receive_messages :encrypt => "hash"
 
     user.password = "test"
 
@@ -18,7 +18,7 @@ describe User, "password hashing" do
   end
 
   it "sets password" do
-    PasswordEncryptor.stub :encrypt
+    allow(PasswordEncryptor).to receive :encrypt
 
     user.password = "test"
 

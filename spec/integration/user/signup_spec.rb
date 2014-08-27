@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Signup" do
+describe "Signup", :type => :request do
   context "with valid data" do
     before do
       visit root_path

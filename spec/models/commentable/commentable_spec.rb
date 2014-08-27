@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Commentable do
+describe Commentable, :type => :model do
   class DummyTalk
     include Mongoid::Document
     include Commentable

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "View ranking" do
+describe "View ranking", :type => :request do
   before do
     visit root_path
     click_link "Ranking"

@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe ApplicationHelper do
+describe ApplicationHelper, :type => :helper do
   describe "#gravatar_image" do
     let(:image) do
       helper.gravatar_image("paul@example.org", "Paul Young")
     end
 
     before do
-      Gravatar.stub :url => "/some/gravatar"
+      allow(Gravatar).to receive_messages :url => "/some/gravatar"
     end
 
     it "generates gravatar url" do
-      Gravatar.should_receive(:url).with("paul@example.org")
+      expect(Gravatar).to receive(:url).with("paul@example.org")
 
       helper.gravatar_image("paul@example.org", "Paul Young")
     end

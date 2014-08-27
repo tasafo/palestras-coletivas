@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Create enrollment" do
+describe "Create enrollment", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:event) { create(:event, :tasafoconf, :deadline_date_enrollment => Date.today, :users => [ user ], :owner => user.id) }
@@ -39,6 +39,24 @@ describe "Create enrollment" do
 
     it "displays login message" do
       expect(page).to have_content("Você precisa estar logado para acessar esta página.")
+    end
+
+    context 'when user do log in' do
+      
+      before do
+        visit root_path
+        click_link "Eventos"
+        click_link "Tá Safo Conf"
+        click_link "Quero participar!"
+        fill_in "Seu e-mail", :with => other_user.email
+        fill_in "Sua senha", :with => "testdrive"
+        click_button "Acessar minha conta"
+      end
+      
+      it "redirects to enrollment page" do
+        expect(current_path).to eql new_enrollment_path(event)
+      end
+      
     end
   end
 

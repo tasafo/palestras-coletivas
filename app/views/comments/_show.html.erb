@@ -1,6 +1,6 @@
 <article id="comment_<%= comment.id %>" class="comment span8">
   <%= render "shared/user", :user => comment.user %>
-  <span class="date"><%= l comment.created_at, :format => :long %></span>
+  <span class="date_comment"><%= l comment.created_at, :format => :long %></span>
   <div class="body">
     <%= comment.body %>
   </div>

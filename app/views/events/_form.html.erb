@@ -100,6 +100,14 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :accepts_submissions, t("labels.event.accepts_submissions"), :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :accepts_submissions %>
+      <span class="help-inline"><%= t("new.event.help.accepts_submissions") %></span>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :to_public, t("labels.event.to_public"), :class => 'control-label' %>
     <div class="controls">
       <%= f.check_box :to_public %>

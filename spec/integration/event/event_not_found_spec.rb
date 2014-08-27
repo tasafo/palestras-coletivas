@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Event not found" do
+describe "Event not found", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:event) {
@@ -20,7 +20,7 @@ describe "Event not found" do
     end
 
     it "redirects to the home page" do
-      expect(current_path).to eql(root_path)
+      expect(current_path).to eql("/events/00000111111000000111111")
     end
   end
 

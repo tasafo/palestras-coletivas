@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "See groups" do
+describe "See groups", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:group) { create(:group, :tasafo, :users => [ user ], :owner => user.id) }
   let!(:other_group) { create(:group, :gurupa, :users => [ user ], :owner => user.id) }

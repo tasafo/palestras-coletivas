@@ -54,6 +54,9 @@ pt-BR:
         notice: "A programação foi adicionada!"
       update:
         notice: "A programação foi atualizada!"
+      vote:
+        add: "Voto adicionado com sucesso!"
+        remove: "Voto retirado com sucesso!"
 
     enrollments:
       create:
@@ -66,3 +69,10 @@ pt-BR:
         notice: "O evento externo foi adicionado!"
       update:
         notice: "O evento externo foi atualizado!"
+
+    submit_event:
+      create:
+        notice: "O trabalho foi submetido ao evento!"
+        alert: "O trabalho já está submetido no evento"
+      new:
+        alert: "Não existem eventos disponíveis para essa operação"

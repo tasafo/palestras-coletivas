@@ -22,6 +22,7 @@ pt-BR:
     event:
       help:
         to_public: "Marque para que as pessoas vejam o evento"
+        accepts_submissions: "Marque para que as pessoas possam submeter seus trabalhos ao evento"
 
     schedule:
       you_must_enter_a_talk: "Você deve informar um trabalho."
@@ -29,6 +30,7 @@ pt-BR:
         time: "Horário"
         activity: "Atividade"
         operation: "Operação"
+        votes: "Votos"
 
     invite:
       author: "Convidar autores"

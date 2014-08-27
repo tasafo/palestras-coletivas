@@ -182,4 +182,8 @@ FactoryGirl.define do
       url "http://fisl.org.br"
     end
   end
+
+  factory :vote do
+
+  end
 end

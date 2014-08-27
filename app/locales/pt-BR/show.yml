@@ -13,6 +13,7 @@ pt-BR:
       my_talks_published: "Meus trabalhos publicados"
       external_event: "Adicionar evento externo"
       external_events: "Apresentado em outros eventos"
+      submit_event: "Submeter a um evento"
 
     user:
       profile: "Veja o perfil completo em"
@@ -53,6 +54,8 @@ pt-BR:
       record_presence: "Registrar presença"
       undo_presence: "Desfazer presença"
       btn_presence_checkin: "Estou aqui!"
+      btn_add_vote: "Adicionar voto"
+      btn_remove_vote: "Retirar voto"
       table:
         number: "N."
         name: "Nome"
