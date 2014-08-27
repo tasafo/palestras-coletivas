@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Remove vote in schedule", :type => :request, :js => true do
   let!(:user) { create(:user, :paul) }
   
-  let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id, start_date: Date.today, end_date: Date.today + 5.days, accepts_dynamic_programming: true) }
+  let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id, start_date: Date.today, end_date: Date.today + 5.days, accepts_submissions: true) }
   
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
   let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }

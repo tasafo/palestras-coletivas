@@ -23,8 +23,8 @@ Palestrascoletivas::Application.routes.draw do
     resources :external_events, only: [:new, :create, :edit, :update], path: "/"
   end
 
-  resource :talks, only: :none, path: "attach_events/:talk_id" do
-    resources :attach_events, only: [:new, :create], path: "/"
+  resource :talks, only: :none, path: "submit_events/:talk_id" do
+    resources :submit_events, only: [:new, :create], path: "/"
   end
 
   resources :groups, except: :destroy

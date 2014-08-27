@@ -45,7 +45,7 @@ pt-BR:
       state: "Estado"
       country: "País"
       to_public: "Quero publicar"
-      accepts_dynamic_programming: "Aceita programação dinâmica"
+      accepts_submissions: "Aceita submissão de trabalhos"
       about: "Sobre o evento"
 
     schedule:
@@ -70,5 +70,5 @@ pt-BR:
       vote: "Voto"
       votes: "Votos"
 
-    attach_event:
+    submit_event:
       event: "Evento"

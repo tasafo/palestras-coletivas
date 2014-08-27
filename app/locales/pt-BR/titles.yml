@@ -54,5 +54,5 @@ pt-BR:
       new: "Adicionar evento externo para"
       edit: "Editar evento externo de"
 
-    attach_event:
-      new: "Anexar o trabalho ao evento"
+    submit_event:
+      new: "Submeter o trabalho ao evento"

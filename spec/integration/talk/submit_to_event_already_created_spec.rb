@@ -1,10 +1,10 @@
 require "spec_helper"
 
-describe "Create attach event of talk already created", :type => :request, js: true do
+describe "Submit talk already created", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
   let!(:activity_palestra) { create(:activity, :palestra) }
-  let!(:event) { create(:event, :tasafoconf, owner: user, start_date: Date.today, end_date: Date.today + 5.days, accepts_dynamic_programming: true) }
+  let!(:event) { create(:event, :tasafoconf, owner: user, start_date: Date.today, end_date: Date.today + 5.days, accepts_submissions: true) }
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
   
   context "when valid data" do
@@ -13,9 +13,9 @@ describe "Create attach event of talk already created", :type => :request, js: t
 
       click_link "Trabalhos"
       click_link "Compartilhe"
-      click_link "Anexar a um evento"
+      click_link "Submeter a um evento"
 
-      select event.name_and_edition, :from => "attach_event_event_id"
+      select event.name_and_edition, :from => "submit_event_event_id"
 
       click_button "Adicionar programação"
     end
@@ -25,7 +25,7 @@ describe "Create attach event of talk already created", :type => :request, js: t
     end
 
     it "displays success message" do
-      expect(page).to have_content("O trabalho já está anexado no evento")
+      expect(page).to have_content("O trabalho já está submetido no evento")
     end
   end
 end

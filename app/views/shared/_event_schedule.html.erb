@@ -69,7 +69,7 @@
                         <%= link_to schedule.counter_votes, add_vote_schedule_path(@event, schedule), :class => "m-btn green", :id => "add_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_add_vote") %>
                       <% end %>
                     <% else %>
-                      <%= schedule.counter_votes %>
+                      <%= link_to schedule.counter_votes, "#schedules", :class => "m-btn blue disabled" %>
                     <% end %>
                   </td>
                 <% end %>
