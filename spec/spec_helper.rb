@@ -34,4 +34,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 
   Capybara.javascript_driver = :webkit
+
+  Mongoid.logger.level = Logger::INFO
 end
