@@ -16,6 +16,7 @@ gem 'geocoder'
 gem 'unicorn'
 gem 'newrelic_rpm'
 gem 'rails_12factor'
+gem 'lograge'
 
 group :assets do
   gem 'sass-rails'
