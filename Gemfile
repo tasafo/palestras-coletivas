@@ -39,4 +39,5 @@ group :test do
   gem 'capybara-webkit' #, '0.14.2'
   gem 'selenium-webdriver'
   gem 'simplecov', :require => false
+  gem "codeclimate-test-reporter", require: nil
 end
