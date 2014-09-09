@@ -4,4 +4,4 @@ rvm:
 services:
   - mongodb
 before_install:
-  - apt-get install libqtwebkit-dev
+  - sudo apt-get install libqtwebkit-dev
