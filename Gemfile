@@ -34,6 +34,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rake'
   gem 'launchy'
   gem 'capybara' #, '2.0.3'
   gem 'capybara-webkit' #, '0.14.2'
