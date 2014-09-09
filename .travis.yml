@@ -8,4 +8,4 @@ before_install:
   - sudo apt-get install xvfb
 before_script:
   - echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
-script: xvfb-run rspec
+script: xvfb-run -a bundle exec rspec
