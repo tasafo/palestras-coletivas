@@ -2,6 +2,10 @@
 
 Um ambiente para você organizar eventos, trabalhos (palestras e cursos), grupos e compartilhar conhecimento (http://palestrascoletivas.com/).
 
+## Status do código
+
+[![Code Climate](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/gpa.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Test Coverage](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/coverage.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Build Status](https://travis-ci.org/tasafo/palestras-coletivas.svg?branch=master)](https://travis-ci.org/tasafo/palestras-coletivas)
+
 ## E como eu instalo isso no meu Ubuntu?
 
 ### Aconselhamos você a usar o gerenciador de versões Ruby (http://rvm.io)
@@ -55,10 +59,6 @@ Agora espera...
 ### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
 
 	bundle exec rake coverage
-
-## Status do código
-
-[![Code Climate](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/gpa.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Test Coverage](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/coverage.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas)
 
 ## Licença
 
