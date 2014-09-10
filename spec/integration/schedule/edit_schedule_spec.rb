@@ -54,7 +54,7 @@ describe "Edit schedule", :type => :request, :js => true do
       click_link "Tá Safo Conf"
       click_link "schedule_id_#{schedule_palestra2.id}"
       
-      fill_in "Horário", :with => "     "
+      fill_in "Horário", :with => ""
       
       click_button "Atualizar programação"
     end
