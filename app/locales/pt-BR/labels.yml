@@ -2,6 +2,8 @@ pt-BR:
   labels:
     user:
       name: "Seu primeiro e último nome"
+      username: "Seu nome de usuário"
+      username_explanaition: "ex: @marcos . É assim que outros usuários encontrarão você."
       email: "Seu e-mail"
       password: "Sua senha"
       password_confirmation: "Confirme sua senha"

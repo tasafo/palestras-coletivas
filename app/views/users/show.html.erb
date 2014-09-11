@@ -8,7 +8,7 @@
 
 <div class="featurette">
   <%= gravatar_image(@user.email, @user.name) %>
-  <h3 class="featurette-heading"><%= @user.name %></h3>
+  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %>  </small></h3>
 
   <% if @gravatar.has_profile %>
     <p class="lead">

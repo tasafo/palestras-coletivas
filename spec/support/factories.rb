@@ -7,11 +7,13 @@ FactoryGirl.define do
 
     trait :paul do
       name "Paul Young"
+      username "@pyoung"
       email "paul@example.org"
     end
 
     trait :billy do
       name "Billy Paul"
+      username "@bpaul"
       email "billy@example.org"
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago
@@ -19,11 +21,13 @@ FactoryGirl.define do
 
     trait :luis do
       name "Luis Miguel"
+      username "@lmiguel"
       email "luizgrsanches@gmail.com"
     end
 
     trait :random do
       sequence(:name)  { |n| "John #{n}" }
+      sequence(:username)  { |n| "@john#{n}" }
       sequence(:email) { |n| "john#{n}@example.org" }
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago

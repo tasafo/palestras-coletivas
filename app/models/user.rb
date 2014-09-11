@@ -6,6 +6,7 @@ class User
 
   field :name, type: String
   slug :name
+  field :username, type: String
   field :email, type: String
   field :password_hash, type: String
   field :auth_token, type: String
@@ -32,13 +33,15 @@ class User
 
   attr_reader :password
 
-  validates_presence_of :name
+  validates_presence_of :name, :username
 
   validates_length_of :name, minimum: 3
 
-  validates_uniqueness_of :name, :email
+  validates_uniqueness_of :name, :email, :username
 
   validates :email, :format => { :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i }
+
+  validates :username, :format => { :with => /^@[a-z]\w{2}\w+$/ }
 
   validates_presence_of :password, :if => :require_password?
 
