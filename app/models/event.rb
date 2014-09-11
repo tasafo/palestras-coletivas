@@ -48,7 +48,7 @@ class Event
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :street, :district, :city, :state, :country, :owner
 
-  validates_length_of :description, maximum: 500
+  validates_length_of :description, maximum: 2000
 
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
 
