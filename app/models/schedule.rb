@@ -15,6 +15,8 @@ class Schedule
 
   validates_presence_of :day, :time, :event, :activity
 
+  validates_format_of :time, with: /^(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9])$/
+
   scope :by_day, lambda { |day| where(:day => day).order_by(:time => :asc, :counter_votes => :desc) }
 
   def update_counter_of_users_talks(old_talk_id, talk_id)
