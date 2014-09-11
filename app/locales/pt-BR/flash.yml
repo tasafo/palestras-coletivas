@@ -61,6 +61,7 @@ pt-BR:
     enrollments:
       create:
         notice: "A inscrição foi realizada!"
+        error: "A inscrição já havia sido realizada!"
       update:
         notice: "A inscrição foi alterada!"
 
