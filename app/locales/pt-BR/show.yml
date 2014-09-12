@@ -8,16 +8,16 @@ pt-BR:
       to_public: "Público"
       _yes: "Sim"
       _no: "Não"
-      not_public: "O trabalho ainda não está publicado"
+      not_public: "A palestra ainda não está publicada"
       without_presentation: "O material ainda não está publicado"
-      my_talks_published: "Meus trabalhos publicados"
+      my_talks_published: "Minhas palestras publicadas"
       external_event: "Adicionar evento externo"
       external_events: "Apresentado em outros eventos"
       submit_event: "Submeter a um evento"
 
     user:
       profile: "Veja o perfil completo em"
-      presentations: "Trabalhos apresentados em eventos"
+      presentations: "Palestras apresentadas em eventos"
       groups:
         one: Grupo que participo
         other: Grupos que participo

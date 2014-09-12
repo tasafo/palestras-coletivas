@@ -2,7 +2,7 @@ pt-BR:
   mongoid:
     models:
       user: "Usuário"
-      talk: "Trabalho"
+      talk: "Palestra"
       group: "Grupo"
       event: "Evento"
       schedule: "Programação"
@@ -18,7 +18,7 @@ pt-BR:
         counter_participation_events: "Número de participações em eventos"
 
       talk:
-        presentation_url: "Link do trabalho"
+        presentation_url: "Link da palestra"
         title: "Título"
         description: "Descrição"
         tags: "Tags"

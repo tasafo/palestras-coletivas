@@ -7,7 +7,7 @@ pt-BR:
       password_confirmation: "Confirme sua senha"
 
     talk:
-      presentation_url: "Link do trabalho"
+      presentation_url: "Link da palestra"
       title: "Título"
       description: "Descrição"
       tags: "Tags"
@@ -45,7 +45,7 @@ pt-BR:
       state: "Estado"
       country: "País"
       to_public: "Quero publicar"
-      accepts_submissions: "Aceita submissão de trabalhos"
+      accepts_submissions: "Aceita submissão de palestras"
       about: "Sobre o evento"
 
     schedule:
@@ -53,7 +53,7 @@ pt-BR:
       time: "Horário"
       environment: "Ambiente"
       activity: "Atividade"
-      talk: "Trabalho"
+      talk: "Palestra"
 
     general:
       person: "Pessoa"

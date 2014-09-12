@@ -10,7 +10,7 @@ describe "Show public talk", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Compartilhe"
     end
 
@@ -27,7 +27,7 @@ describe "Show public talk", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Ruby - praticamente falando"
     end
 
@@ -44,7 +44,7 @@ describe "Show public talk", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "A história da informática"
     end
 

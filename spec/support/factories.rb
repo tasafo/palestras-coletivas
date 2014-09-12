@@ -121,7 +121,7 @@ FactoryGirl.define do
   factory :activity do
     trait :palestra do
       type "talk"
-      description "Trabalho"
+      description "Palestra"
       order 1
     end
 

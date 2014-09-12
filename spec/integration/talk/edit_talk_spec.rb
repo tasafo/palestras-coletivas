@@ -11,9 +11,9 @@ describe "Edit talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Compartilhe"
-      click_link "Editar trabalho"
+      click_link "Editar palestra"
 
       fill_in "Título", :with => "Ruby praticamente falando"
       fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
@@ -22,7 +22,7 @@ describe "Edit talk", :type => :request, :js => true do
       select other_user.name, :from => "user_id"
       click_button :add_user
 
-      click_button "Atualizar trabalho"
+      click_button "Atualizar palestra"
     end
 
     it "redirects to the talk page" do
@@ -30,7 +30,7 @@ describe "Edit talk", :type => :request, :js => true do
     end
 
     it "displays success message" do
-      expect(page).to have_content("O trabalho foi atualizado!")
+      expect(page).to have_content("A palestra foi atualizada!")
     end
   end
 
@@ -39,13 +39,13 @@ describe "Edit talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Compartilhe"
-      click_link "Editar trabalho"
+      click_link "Editar palestra"
 
       fill_in "Título", :with => ""
 
-      click_button "Atualizar trabalho"
+      click_button "Atualizar palestra"
     end
 
     it "renders form page" do
