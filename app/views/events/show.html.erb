@@ -115,22 +115,6 @@
     </section>
   <% end %>
 
-  <% unless @event.groups.blank? %>
-    <% group = t("show.event.groups") %>
-    <% count = @event.groups.count %>
-    <section id="groups">
-      <h4><%= group[count > 1 ? :other : :one] %> (<%= count %>)</h4>
-
-      <div class="container">
-        <div class="row-fluid">
-          <% @event.groups.by_name.each do |group| %>
-            <%= render "shared/group_event", :group => group %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-  <% end %>
-
   <section id="presents">
     <div class="container">
       <% if @show_users_present %>

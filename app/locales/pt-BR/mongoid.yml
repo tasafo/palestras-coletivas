@@ -3,7 +3,6 @@ pt-BR:
     models:
       user: "Usuário"
       talk: "Palestra"
-      group: "Grupo"
       event: "Evento"
       schedule: "Programação"
       external_event: "Eventos externos"
@@ -28,14 +27,6 @@ pt-BR:
         owner: "Criador"
         video_link: "Link do vídeo"
         counter_presentation_events: "Número de apresentações em eventos"
-
-      group:
-        gravatar_url: "Endereço do avatar"
-        name: "Nome"
-        tags: "Tags"
-        thumbnail_url: "Miniatura"
-        owner: "Criador"
-        counter_participation_events: "Número de participações em eventos"
 
       event:
         name: "Nome"

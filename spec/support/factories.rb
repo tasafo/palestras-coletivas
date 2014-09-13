@@ -77,27 +77,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :group do
-    trait :tasafo do
-      gravatar_url "http://gravatar.com/tasafo"
-      name "Tá safo!"
-      tags "agilidade, gestão de projetos, engenharia de software"
-      thumbnail_url "http://0.gravatar.com/avatar/c1bcd79fb1d8d4f148e3b77cc7c2c130"
-    end
-
-    trait :gurupa do
-      name "GURU-PA"
-      tags "ruby, rails"
-    end
-
-    trait :invalid do
-      gravatar_url "http://nononononono"
-      name "Invalid"
-      tags "invalid"
-      thumbnail_url ""
-    end
-  end
-
   factory :event do
     trait :tasafoconf do
       name "Tá Safo Conf"

@@ -22,12 +22,6 @@ pt-BR:
     comments:
       empty: "Sem comentários ainda."
 
-    group:
-      gravatar_url: "Url do gravatar"
-      name: "Nome"
-      tags: "Tags"
-      thumbnail_url: "Miniatura"
-
     event:
       name: "Nome"
       edition: "Edição"

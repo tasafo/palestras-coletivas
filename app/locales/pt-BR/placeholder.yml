@@ -8,10 +8,6 @@ pt-BR:
 
     comments: "Comente aqui!"
 
-    groups:
-      gravatar_url: "Exemplo: http://gravatar.com/nome-do-grupo"
-      tags: "Exemplo: gestão, desenvolvimento"
-
     events:
       name: "Conferência de Tecnologia"
       edition: "2013"

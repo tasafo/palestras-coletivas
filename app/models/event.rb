@@ -40,8 +40,6 @@ class Event
 
   has_and_belongs_to_many :users
 
-  has_and_belongs_to_many :groups
-
   has_many :schedules
 
   has_many :enrollments
@@ -98,26 +96,6 @@ class Event
         if user
           self.users << user
           user.set_counter(:organizing_events, :inc)
-        end
-      end
-    end
-  end
-
-  def update_list_groups(list_id_groups)
-    if self.groups?
-      self.groups.each do |group|
-        group.set_counter(:participation_events, :dec)
-      end
-
-      self.groups = nil
-    end
-
-    if list_id_groups
-      list_id_groups.each do |g|
-        group = Group.find(g)
-        if group
-          self.groups << group
-          group.set_counter(:participation_events, :inc)
         end
       end
     end

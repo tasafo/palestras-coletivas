@@ -2,8 +2,5 @@ pt-BR:
   talk:
     created_time: "criado há %{time}"
 
-  group:
-    created_time: "criado há %{time}"
-
   event:
     created_time: "criado há %{time}"

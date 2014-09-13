@@ -29,12 +29,6 @@ pt-BR:
       update:
         notice: "Seus dados foram atualizados!"
 
-    groups:
-      create:
-        notice: "O grupo foi adicionado!"
-      update:
-        notice: "O grupo foi atualizado!"
-
     reset_password:
       create:
         notice: "E-mail enviado com as instruções de redefinição de senha."

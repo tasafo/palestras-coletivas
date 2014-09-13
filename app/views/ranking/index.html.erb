@@ -1,13 +1,13 @@
 <div class="row-fluid">
   <div class="span12">
     <div class="page-header">
-      <h1>Top 5 do PC</h1>
+      <h1><%= t("ranking.title") %></h1>
     </div>
     <div class="span5">
       <table class="table table-condensed">
         <% unless @users_public_talks.blank? %>
           <tr>
-            <td colspan="2"><h4>Mas já tem palestra</h4></td>
+            <td colspan="2"><h4><%= t("ranking.public_talks") %></h4></td>
           </tr>
           <% @users_public_talks.each do |user| %>
             <tr>
@@ -19,7 +19,7 @@
 
         <% unless @talks.blank? %>
           <tr>
-            <td colspan="2"><h4>Tá em todas (palestras)</h4></td>
+            <td colspan="2"><h4><%= t("ranking.talks") %></h4></td>
           </tr>
           <% @talks.each do |talk| %>
             <tr>
@@ -31,7 +31,7 @@
 
         <% unless @events.blank? %>
           <tr>
-            <td colspan="2"><h4>Bombou! (eventos)</h4></td>
+            <td colspan="2"><h4><%= t("ranking.events") %></h4></td>
           </tr>
           <% @events.each do |event| %>
             <tr>
@@ -41,21 +41,9 @@
           <% end %>
         <% end %>
 
-        <% unless @groups.blank? %>
-          <tr>
-            <td colspan="2"><h4>É só chamar! (grupos)</h4></td>
-          </tr>
-          <% @groups.each do |group| %>
-            <tr>
-              <td><%= render "shared/group", :group => group %></td>
-              <td><span class="badge badge-inverse"><%= group.counter_participation_events %></span></td>
-            </tr>
-          <% end %>
-        <% end %>
-
         <% unless @top_talk_watchers.blank? %>
           <tr>
-            <td colspan="2"><h4>Quem assistiu mais palestras?</h4></td>
+            <td colspan="2"><h4><%= t("ranking.watchers") %></h4></td>
           </tr>
           <% @top_talk_watchers.each do |user| %>
             <tr>
@@ -67,7 +55,7 @@
 
         <% unless @organizers.blank? %>
           <tr>
-            <td colspan="2"><h4>E lá vamos nós! (organizadores)</h4></td>
+            <td colspan="2"><h4><%= t("ranking.organizers") %></h4></td>
           </tr>
           <% @organizers.each do |user| %>
             <tr>
@@ -79,7 +67,7 @@
 
         <% unless @talkers.blank? %>
           <tr>
-            <td colspan="2"><h4>Fala pra chuchu (palestrantes)</h4></td>
+            <td colspan="2"><h4><%= t("ranking.speakers") %></h4></td>
           </tr>
           <% @talkers.each do |user| %>
             <tr>
@@ -91,7 +79,7 @@
 
         <% unless @participations.blank? %>
           <tr>
-            <td colspan="2"><h4>Não perde uma (participantes)</h4></td>
+            <td colspan="2"><h4><%= t("ranking.participants") %></h4></td>
           </tr>
           <% @participations.each do |user| %>
             <tr>

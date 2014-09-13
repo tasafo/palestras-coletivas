@@ -25,15 +25,6 @@ pt-BR:
       login: "Acesse sua conta"
       reset_password: "Redefinir senha"
 
-    groups:
-      index: "Grupos"
-      profile: "Perfil do grupo"
-      new: "Adicionar grupo"
-      edit: "Editar grupo"
-      no_groups: "Nenhum grupo adicionado"
-      my: "Meus grupos"
-      all: "Todos os grupos"
-
     events:
       index: "Eventos"
       new: "Adicionar evento"

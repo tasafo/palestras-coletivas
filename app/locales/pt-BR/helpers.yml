@@ -9,10 +9,6 @@ pt-BR:
         create: "Adicionar palestra"
         update: "Atualizar palestra"
 
-      group:
-        create: "Adicionar grupo"
-        update: "Atualizar grupo"
-
       event:
         create: "Adicionar evento"
         update: "Atualizar evento"

@@ -12,13 +12,6 @@ pt-BR:
         video_link_html: "Se quiser, informe o link do vídeo de sua palestra. Exemplos:<br>http://www.youtube.com/watch?v=xptoabc<br>https://vimeo.com/00101100"
         to_public: "Marque para que as pessoas vejam sua palestra"
 
-    group:
-      not_found: "Avatar não encontrado"
-      searching: "Procurando grupo..."
-
-      help:
-        gravatar_url: "Utilize ou crie o perfil do grupo do Gravatar, você poderá editar esse registro e atualizar o campo a qualquer momento."
-
     event:
       help:
         to_public: "Marque para que as pessoas vejam o evento"
@@ -36,17 +29,14 @@ pt-BR:
       author: "Convidar autores"
       organizer: "Convidar organizadores"
       member: "Convidar membros"
-      group: "Convidar grupos"
       add: "Adicionar"
 
       table:
         author: "Autor"
         organizer: "Organizador"
         member: "Membro"
-        group: "Grupo"
         operation: "Operação"
 
       js:
         the_user_is_already_in_the_list: "O usuário já está adicionado"
-        the_group_is_already_in_the_list: "O grupo já está adicionado"
         remove: "Remover"
