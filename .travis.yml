@@ -1,11 +1,19 @@
 language: ruby
 rvm:
-  - 2.0.0
+- 2.0.0
 services:
-  - mongodb
+- mongodb
 before_install:
-  - sudo apt-get install libqtwebkit-dev
-  - sudo apt-get install xvfb
+- sudo apt-get install libqtwebkit-dev
+- sudo apt-get install xvfb
 before_script:
-  - echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
+- echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
 script: xvfb-run -a bundle exec rspec
+addons:
+  code_climate:
+    repo_token: 6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493
+deploy:
+  provider: heroku
+  app: palestrascoletivas
+  api_key:
+    secure: Ywt596AjohWjOtt14gpnzG9kyLTp+fiOY6Z1i07PHhaiOyoIhv41u5r+yTDhJCjcDw8R+2yOzWBa8igoL+lgJDaw4nTUV+GnFVcW/noFB65LDyjIbvUXGvWdYIN1Y9SpVsm4D9l2WkSUJsyHvFVQOQ1kIJj4zEdxB6LVtnsJeic=
