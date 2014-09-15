@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe User, "validations", :type => :model do
+  let!(:user) { create(:user, :paul) }
+
   context "when valid data" do
-    let!(:user) { create(:user, :paul) }
-    
     it "accepts valid attribuites" do
       expect(user).to be_valid
     end
@@ -13,6 +13,50 @@ describe User, "validations", :type => :model do
     user = User.create(:name => nil)
 
     expect(user.errors[:name].size).to eq(2)
+  end
+
+  it "requires username" do
+    expect {user.username = nil}.to change { user.valid? }
+  end
+
+  it "uniquiness of username" do
+    duplicated_user = create(:user, :random)
+    expect {duplicated_user.username = user.username}.to change { duplicated_user.valid? }
+  end
+
+  it "format of username is valid if it looks like twitter username" do
+    user.username = "@user"
+    expect(user).to be_valid
+
+    user.username = "@user12"
+    expect(user).to be_valid
+
+    user.username = "@u12ser"
+    expect(user).to be_valid
+
+    user.username = "@user_name21"
+    expect(user).to be_valid
+
+    user.username = "@Username"
+    expect(user).to be_invalid
+
+    user.username = "@user_name*"
+    expect(user).to be_invalid
+
+    user.username = "@12user"
+    expect(user).to be_invalid
+
+    user.username = "@"
+    expect(user).to be_invalid
+
+    user.username = "@1111"
+    expect(user).to be_invalid
+
+    user.username = "@user name"
+    expect(user).to be_invalid
+
+    user.username = "@use" # 3 digits
+    expect(user).to be_invalid
   end
 
   it "requires email" do

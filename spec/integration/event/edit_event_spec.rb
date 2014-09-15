@@ -13,7 +13,7 @@ describe "Edit event", :type => :request do
       :owner => user.id
     )
   }
-    
+
   context "with valid data" do
     before do
       login_as(user)
@@ -25,9 +25,6 @@ describe "Edit event", :type => :request do
 
       fill_in "Nome", :with => "Confraternização do Tá safo!"
       fill_in "Tags", :with => "agilidade, gestão"
-
-      select another_user.name, :from => "user_id"
-      click_button :add_user
 
       click_button :"user_id_#{other_user.id}"
 
