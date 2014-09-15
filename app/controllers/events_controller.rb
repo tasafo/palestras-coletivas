@@ -21,7 +21,6 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @organizers = User.without_the_owner current_user
-    @groups = Group.by_name
   end
 
   def create
@@ -30,12 +29,9 @@ class EventsController < ApplicationController
     @event.owner = current_user.id
 
     @organizers = User.without_the_owner current_user
-    @groups = Group.by_name
 
     if @event.save
       @event.update_list_organizers current_user, params[:users]
-
-      @event.update_list_groups params[:groups]
 
       redirect_to event_path(@event), :notice => t("flash.events.create.notice")
     else
@@ -104,7 +100,6 @@ class EventsController < ApplicationController
   def edit
     @event = Event.find(params[:id])
     @organizers = User.without_the_owner current_user
-    @groups = Group.by_name
 
     redirect_to events_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
@@ -115,12 +110,9 @@ class EventsController < ApplicationController
     owner = User.find(@event.owner)
 
     @organizers = User.without_the_owner current_user
-    @groups = Group.by_name
 
     if @event.update_attributes(params[:event])
       @event.update_list_organizers owner, params[:users]
-
-      @event.update_list_groups params[:groups]
 
       redirect_to event_path(@event), :notice => t("flash.events.update.notice")
     else

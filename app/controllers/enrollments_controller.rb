@@ -15,6 +15,8 @@ class EnrollmentsController < ApplicationController
       @enrollment.update_counter_of_events_and_users "active"
 
       redirect_to event_path(@event), :notice => t("flash.enrollments.create.notice")
+    else
+      redirect_to event_path(@event), :notice => t("flash.enrollments.create.error")
     end
   end
 

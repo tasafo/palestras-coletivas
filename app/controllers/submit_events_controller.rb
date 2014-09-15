@@ -18,7 +18,7 @@ class SubmitEventsController < ApplicationController
 
     @talk = Talk.find_by(_slugs: params[:talk_id])
 
-    @activity = Activity.find_by(description: "Trabalho")
+    @activity = Activity.find_by(type: "talk")
     
     begin
       @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)

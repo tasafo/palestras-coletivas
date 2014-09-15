@@ -14,9 +14,9 @@ pt-BR:
 
     talks:
       create:
-        notice: "O trabalho foi adicionado!"
+        notice: "A palestra foi adicionada!"
       update:
-        notice: "O trabalho foi atualizado!"
+        notice: "A palestra foi atualizada!"
 
     comments:
       create: 
@@ -28,12 +28,6 @@ pt-BR:
     users:
       update:
         notice: "Seus dados foram atualizados!"
-
-    groups:
-      create:
-        notice: "O grupo foi adicionado!"
-      update:
-        notice: "O grupo foi atualizado!"
 
     reset_password:
       create:
@@ -61,6 +55,7 @@ pt-BR:
     enrollments:
       create:
         notice: "A inscrição foi realizada!"
+        error: "A inscrição já havia sido realizada!"
       update:
         notice: "A inscrição foi alterada!"
 
@@ -72,7 +67,7 @@ pt-BR:
 
     submit_event:
       create:
-        notice: "O trabalho foi submetido ao evento!"
-        alert: "O trabalho já está submetido no evento"
+        notice: "A palestra foi submetida ao evento!"
+        alert: "A palestra já está submetida no evento"
       new:
         alert: "Não existem eventos disponíveis para essa operação"

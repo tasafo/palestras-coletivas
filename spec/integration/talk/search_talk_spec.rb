@@ -14,14 +14,14 @@ describe "Search talk", :type => :request do
     end
 
     it "displays access my account" do
-      expect(page).to have_content("Trabalhos")
+      expect(page).to have_content("Palestras")
     end
   end
 
   context "with empty search" do
     before do
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
       fill_in :talk_search, :with => ""
       click_button "Buscar"
     end
@@ -31,14 +31,14 @@ describe "Search talk", :type => :request do
     end
 
     it "displays access my account" do
-      expect(page).to have_content("Trabalhos")
+      expect(page).to have_content("Palestras")
     end
   end
 
   context "when the search is successful" do
     before do
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
       fill_in :talk_search, :with => "compartilhe"
       click_button "Buscar"
     end
@@ -55,7 +55,7 @@ describe "Search talk", :type => :request do
   context "when the search is not successful" do
     before do
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
       fill_in :talk_search, :with => "noob"
       click_button "Buscar"
     end

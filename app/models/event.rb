@@ -40,15 +40,13 @@ class Event
 
   has_and_belongs_to_many :users
 
-  has_and_belongs_to_many :groups
-
   has_many :schedules
 
   has_many :enrollments
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :street, :district, :city, :state, :country, :owner
 
-  validates_length_of :description, maximum: 500
+  validates_length_of :description, maximum: 2000
 
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
 
@@ -98,26 +96,6 @@ class Event
         if user
           self.users << user
           user.set_counter(:organizing_events, :inc)
-        end
-      end
-    end
-  end
-
-  def update_list_groups(list_id_groups)
-    if self.groups?
-      self.groups.each do |group|
-        group.set_counter(:participation_events, :dec)
-      end
-
-      self.groups = nil
-    end
-
-    if list_id_groups
-      list_id_groups.each do |g|
-        group = Group.find(g)
-        if group
-          self.groups << group
-          group.set_counter(:participation_events, :inc)
         end
       end
     end

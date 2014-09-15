@@ -34,18 +34,4 @@ class Gravatar
       @has_profile = false
     end
   end
-
-  def open_profile
-    begin
-      record = Nokogiri::XML(open("#{@url}.xml"))
-
-      unless record.nil?
-        @name = record.xpath("//displayName").text
-        @thumbnail_url = record.xpath("//thumbnailUrl").text
-        true
-      end
-    rescue
-      false
-    end
-  end
 end

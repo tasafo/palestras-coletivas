@@ -4,28 +4,21 @@ pt-BR:
       forgotten_password: "Esqueceu a senha?"
 
     talk:
-      not_found: "Trabalho não encontrado"
-      searching: "Procurando trabalho..."
+      not_found: "Palestra não encontrada"
+      searching: "Procurando palestra..."
 
       help:
-        presentation_url_html: "Quando estiver pronto, informe o link de seu trabalho. Exemplos:<br>http://www.slideshare.net/usuario/trabalho<br>https://speakerdeck.com/usuario/trabalho"
-        video_link_html: "Se quiser, informe o link do vídeo de seu trabalho. Exemplos:<br>http://www.youtube.com/watch?v=xptoabc<br>https://vimeo.com/00101100"
-        to_public: "Marque para que as pessoas vejam seu trabalho"
-
-    group:
-      not_found: "Avatar não encontrado"
-      searching: "Procurando grupo..."
-
-      help:
-        gravatar_url: "Utilize ou crie o perfil do grupo do Gravatar, você poderá editar esse registro e atualizar o campo a qualquer momento."
+        presentation_url_html: "Quando estiver pronto, informe o link de sua palestra. Exemplos:<br>http://www.slideshare.net/usuario/palestra<br>https://speakerdeck.com/usuario/palestra"
+        video_link_html: "Se quiser, informe o link do vídeo de sua palestra. Exemplos:<br>http://www.youtube.com/watch?v=xptoabc<br>https://vimeo.com/00101100"
+        to_public: "Marque para que as pessoas vejam sua palestra"
 
     event:
       help:
         to_public: "Marque para que as pessoas vejam o evento"
-        accepts_submissions: "Marque para que as pessoas possam submeter seus trabalhos ao evento"
+        accepts_submissions: "Marque para que as pessoas possam submeter suas palestras ao evento"
 
     schedule:
-      you_must_enter_a_talk: "Você deve informar um trabalho."
+      you_must_enter_a_talk: "Você deve informar uma palestra."
       table:
         time: "Horário"
         activity: "Atividade"
@@ -36,17 +29,14 @@ pt-BR:
       author: "Convidar autores"
       organizer: "Convidar organizadores"
       member: "Convidar membros"
-      group: "Convidar grupos"
       add: "Adicionar"
 
       table:
         author: "Autor"
         organizer: "Organizador"
         member: "Membro"
-        group: "Grupo"
         operation: "Operação"
 
       js:
         the_user_is_already_in_the_list: "O usuário já está adicionado"
-        the_group_is_already_in_the_list: "O grupo já está adicionado"
         remove: "Remover"

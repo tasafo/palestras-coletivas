@@ -20,7 +20,7 @@ describe Schedule, "validations", :type => :model do
   it "requires time" do
     schedule = Schedule.create(:time => nil)
 
-    expect(schedule.errors[:time].size).to eq(1)
+    expect(schedule.errors[:time].size).to eq(2)
   end
 
   it "requires event" do

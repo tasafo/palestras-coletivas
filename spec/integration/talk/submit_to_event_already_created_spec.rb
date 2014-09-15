@@ -11,7 +11,7 @@ describe "Submit talk already created", :type => :request, js: true do
     before do
       login_as user
 
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Compartilhe"
       click_link "Submeter a um evento"
 
@@ -25,7 +25,7 @@ describe "Submit talk already created", :type => :request, js: true do
     end
 
     it "displays success message" do
-      expect(page).to have_content("O trabalho já está submetido no evento")
+      expect(page).to have_content("A palestra já está submetida no evento")
     end
   end
 end
