@@ -10,7 +10,7 @@ namespace :db do
           user.username = "@#{user.name.gsub(" ", "").underscore}"
           saved = user.save
 
-          if !saved
+          if saved
             saved_users << "*** Saved user #{user.id} with username '#{user.username}'."
           else
             saved_users << "*** [Error] Could not save user #{user.id} with username '#{user.username}'. Please change it manually!"
