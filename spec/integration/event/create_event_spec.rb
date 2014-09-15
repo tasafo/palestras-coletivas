@@ -1,11 +1,10 @@
 require "spec_helper"
 
-describe "Create event", :type => :request do
-  let!(:user) { create(:user, :paul) }
-  let!(:other_user) { create(:user, :billy) }
-  let!(:another_user) { create(:user, :luis) }
-  let!(:group) { create(:group, :tasafo, :users => [ user ], :owner => user.id) }
-  let!(:other_group) { create(:group, :gurupa, :users => [ user ], :owner => user.id) }
+describe "Create event", :type => :request, :js => true do
+  let!(:user)        { create(:user, :paul) }
+  let!(:billy)       { create(:user, :billy, username: "@username_billy", name: "Billy Boy") }
+  let!(:luis)        { create(:user, :luis, username: "@username_luis", name: "Luis XIV") }
+  let!(:group)       { create(:group, :tasafo, :users => [ user ], :owner => user.id) }
 
   context "with valid data" do
     before do
@@ -31,11 +30,13 @@ describe "Create event", :type => :request do
       fill_in "País", :with => "Brasil"
       check("Quero publicar")
 
-      select other_user.name, :from => "user_id"
+      fill_autocomplete('invitee_username', with: '@us', select: "Luis XIV (@username_luis)")
       click_button :add_user
 
-      select another_user.name, :from => "user_id"
+      fill_autocomplete('invitee_username', with: '@us', select: "Billy Boy (@username_billy)")
       click_button :add_user
+
+      click_button "user_id_#{luis.id}"
 
       select group.name, :from => "group_id"
       click_button :add_group
@@ -49,6 +50,11 @@ describe "Create event", :type => :request do
 
     it "displays success message" do
       expect(page).to have_content("O evento foi adicionado!")
+    end
+
+    it "invites the right organizers" do
+      expect(page).to     have_content("Billy Boy")
+      expect(page).to_not have_content("Luis XIV")
     end
   end
 
