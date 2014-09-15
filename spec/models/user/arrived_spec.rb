@@ -39,7 +39,7 @@ describe User, ".arrived_at", :type => :model do
 
     it ".arrived_at event" do
       expect(Enrollment).to receive(:find_by).with(user: subject, event: event)
-      expect(subject.arrived_at(event)).to be true
+      expect(subject.arrived_at(event)).to be false
     end
   end
 

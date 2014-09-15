@@ -27,11 +27,6 @@ Palestrascoletivas::Application.routes.draw do
     resources :submit_events, only: [:new, :create], path: "/"
   end
 
-  resources :groups, except: :destroy
-  resource :groups, only: :none do
-    post :info_url, path: "info-url"
-  end
-
   resources :events, except: :destroy
   resource :event, only: :none do
     put :presence

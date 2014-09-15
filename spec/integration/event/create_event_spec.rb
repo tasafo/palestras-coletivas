@@ -4,7 +4,6 @@ describe "Create event", :type => :request, :js => true do
   let!(:user)        { create(:user, :paul) }
   let!(:billy)       { create(:user, :billy, username: "@username_billy", name: "Billy Boy") }
   let!(:luis)        { create(:user, :luis, username: "@username_luis", name: "Luis XIV") }
-  let!(:group)       { create(:group, :tasafo, :users => [ user ], :owner => user.id) }
 
   context "with valid data" do
     before do
@@ -37,9 +36,6 @@ describe "Create event", :type => :request, :js => true do
       click_button :add_user
 
       click_button "user_id_#{luis.id}"
-
-      select group.name, :from => "group_id"
-      click_button :add_group
 
       click_button "Adicionar evento"
     end

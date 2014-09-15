@@ -8,8 +8,8 @@ describe "Show private talk", :type => :request, :js => true do
     before do
       login_as(user)
       visit root_path
-      click_link "Trabalhos"
-      click_link "Meus trabalhos"
+      click_link "Palestras"
+      click_link "Minhas palestras"
       click_link "Ruby praticamente falando"
     end
 
@@ -33,7 +33,7 @@ describe "Show private talk", :type => :request, :js => true do
     end
 
     it "displays error message" do
-      expect(page).to have_content("O trabalho ainda não está publicado")
+      expect(page).to have_content("A palestra ainda não está publicada")
     end
   end
 end

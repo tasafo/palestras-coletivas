@@ -1,6 +1,6 @@
 # Palestras coletivas
 
-Um ambiente para você organizar eventos, trabalhos (palestras e cursos), grupos e compartilhar conhecimento (http://palestrascoletivas.com/).
+Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento (http://palestrascoletivas.com/).
 
 ## Status do código
 

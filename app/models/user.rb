@@ -23,8 +23,6 @@ class User
 
   has_and_belongs_to_many :watched_talks, :class_name => "Talk", :inverse_of => :watched_user
 
-  has_and_belongs_to_many :groups
-
   has_and_belongs_to_many :events
 
   has_many :enrollments

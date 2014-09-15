@@ -9,7 +9,7 @@ pt-BR:
       password_confirmation: "Confirme sua senha"
 
     talk:
-      presentation_url: "Link do trabalho"
+      presentation_url: "Link da palestra"
       title: "Título"
       description: "Descrição"
       tags: "Tags"
@@ -24,12 +24,6 @@ pt-BR:
 
     comments:
       empty: "Sem comentários ainda."
-
-    group:
-      gravatar_url: "Url do gravatar"
-      name: "Nome"
-      tags: "Tags"
-      thumbnail_url: "Miniatura"
 
     event:
       name: "Nome"
@@ -48,7 +42,7 @@ pt-BR:
       state: "Estado"
       country: "País"
       to_public: "Quero publicar"
-      accepts_submissions: "Aceita submissão de trabalhos"
+      accepts_submissions: "Aceita submissão de palestras"
       about: "Sobre o evento"
 
     schedule:
@@ -56,7 +50,7 @@ pt-BR:
       time: "Horário"
       environment: "Ambiente"
       activity: "Atividade"
-      talk: "Trabalho"
+      talk: "Palestra"
 
     general:
       person: "Pessoa"

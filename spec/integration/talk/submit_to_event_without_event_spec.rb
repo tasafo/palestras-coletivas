@@ -8,7 +8,7 @@ describe "Submit talk without event", :type => :request, js: true do
     before do
       login_as user
 
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Compartilhe"
       click_link "Submeter a um evento"
     end
