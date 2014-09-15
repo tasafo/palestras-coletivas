@@ -16,6 +16,7 @@ pt-BR:
       thumbnail: "Miniatura"
       code: "Código"
       to_public: "Quero publicar"
+      search_user: "ex: @marcos ou Marcos"
       video_link: "Link do vídeo"
       watched: "Já assisti! (desfazer)"
       not_watched: "Já assisti!"

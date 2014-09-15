@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe "Create talk", :type => :request, :js => true do
-  let!(:user) { create(:user, :paul) }
-  let!(:other_user) { create(:user, :billy) }
-  let!(:another_user) { create(:user, :luis) }
+  let!(:user)         { create(:user, :paul) }
+  let!(:invited_user) { create(:user, :luis, name: "Luis XIV", username: "@username_luis") }
+  let!(:other_user)   { create(:user, :billy, name: "Billy Boy", username: "@username_billy") }
 
   context "with valid data from slideshare" do
     before do
@@ -19,7 +19,7 @@ describe "Create talk", :type => :request, :js => true do
       fill_in "Link do vídeo", :with => "http://www.youtube.com/watch?v=wGe5agueUwI"
       check("Quero publicar")
 
-      select other_user.name, :from => "user_id"
+      fill_autocomplete('invitee_username', with: '@us', select: "Luis XIV (@username_luis)")
       click_button :add_user
 
       click_button "Adicionar trabalho"
@@ -31,6 +31,11 @@ describe "Create talk", :type => :request, :js => true do
 
     it "displays success message" do
       expect(page).to have_content("O trabalho foi adicionado!")
+    end
+
+    it "invites the right co-author" do
+      expect(page).to     have_content("Luis XIV")
+      expect(page).to_not have_content("Billy Boy")
     end
   end
 

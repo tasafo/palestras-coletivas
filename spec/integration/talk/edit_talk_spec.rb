@@ -1,10 +1,10 @@
 require "spec_helper"
 
 describe "Edit talk", :type => :request, :js => true do
-  let!(:user) { create(:user, :paul) }
-  let!(:other_user) { create(:user, :billy) }
-  let!(:another_user) { create(:user, :luis) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:user)   { create(:user, :paul) }
+  let!(:billy)  { create(:user, :billy, username: "@username_billy", name: "Billy Boy") }
+  let!(:luis)   { create(:user, :luis, username: "@username_luis", name: "Luis XIV") }
+  let!(:talk)   { create(:talk, :users => [ user, luis ], :owner => user.id) }
 
   context "with valid data" do
     before do
@@ -19,8 +19,10 @@ describe "Edit talk", :type => :request, :js => true do
       fill_in "Descrição", :with => "Palestra que fala sobre a linguagem de programação ruby"
       fill_in "Tags", :with => "ruby, programação"
 
-      select other_user.name, :from => "user_id"
+      fill_autocomplete('invitee_username', with: '@us', select: "Billy Boy (@username_billy)")
       click_button :add_user
+
+      click_button "user_id_#{luis.id}"
 
       click_button "Atualizar trabalho"
     end
@@ -31,6 +33,11 @@ describe "Edit talk", :type => :request, :js => true do
 
     it "displays success message" do
       expect(page).to have_content("O trabalho foi atualizado!")
+    end
+
+    it "displays the right co-authors" do
+      expect(page).to     have_content("Billy Boy")
+      expect(page).to_not have_content("Luis XIV")
     end
   end
 
@@ -59,7 +66,7 @@ describe "Edit talk", :type => :request, :js => true do
 
   context "when the talk is not user" do
     before do
-      login_as(other_user)
+      login_as(billy)
       visit edit_talk_path(talk)
     end
 
