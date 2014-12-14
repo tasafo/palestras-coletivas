@@ -1,30 +1,30 @@
-class AttachEventsController < ApplicationController
+class SubmitEventsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create]
 
   def new
     @schedule = Schedule.new
     @talk = Talk.find(params[:talk_id])
-    @events = Event.where(:to_public => true, :accepts_dynamic_programming => true, :end_date.gte => Date.today).order_by(:start_date => :desc)
+    @events = Event.where(:to_public => true, :accepts_submissions => true, :end_date.gte => Date.today).order_by(:start_date => :desc)
 
     if @events.count <= 0
-      redirect_to talk_path(@talk), :alert => t("flash.attach_event.new.alert")
+      redirect_to talk_path(@talk), :alert => t("flash.submit_event.new.alert")
     end
   end
 
   def create
     @error = false
 
-    @event = Event.find(params[:attach_event]['event_id'])
+    @event = Event.find(params[:submit_event]['event_id'])
 
     @talk = Talk.find_by(_slugs: params[:talk_id])
 
-    @activity = Activity.find_by(description: "Trabalho")
+    @activity = Activity.find_by(type: "talk")
     
     begin
       @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
 
       @error = true
-      @message = t("flash.attach_event.create.alert")
+      @message = t("flash.submit_event.create.alert")
 
     rescue Mongoid::Errors::DocumentNotFound
       @schedule = Schedule.new(
@@ -37,7 +37,7 @@ class AttachEventsController < ApplicationController
 
       if @schedule.save
         @error = true
-        @message = t("flash.attach_event.create.notice")
+        @message = t("flash.submit_event.create.notice")
       end
     
     end

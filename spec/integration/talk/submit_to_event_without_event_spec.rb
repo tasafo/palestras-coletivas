@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Create attach event of talk without event", :type => :request, js: true do
+describe "Submit talk without event", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
 
@@ -8,9 +8,9 @@ describe "Create attach event of talk without event", :type => :request, js: tru
     before do
       login_as user
 
-      click_link "Trabalhos"
+      click_link "Palestras"
       click_link "Compartilhe"
-      click_link "Anexar a um evento"
+      click_link "Submeter a um evento"
     end
 
     it "redirects to the talk page" do

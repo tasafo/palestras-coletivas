@@ -23,13 +23,8 @@ Palestrascoletivas::Application.routes.draw do
     resources :external_events, only: [:new, :create, :edit, :update], path: "/"
   end
 
-  resource :talks, only: :none, path: "attach_events/:talk_id" do
-    resources :attach_events, only: [:new, :create], path: "/"
-  end
-
-  resources :groups, except: :destroy
-  resource :groups, only: :none do
-    post :info_url, path: "info-url"
+  resource :talks, only: :none, path: "submit_events/:talk_id" do
+    resources :submit_events, only: [:new, :create], path: "/"
   end
 
   resources :events, except: :destroy
@@ -51,6 +46,8 @@ Palestrascoletivas::Application.routes.draw do
   post "/schedules/:event_id/new", :to => "schedules#create", :as => false
   put "/schedules/:event_id/:id/edit", :to => "schedules#update", :as => false
   get "/schedules/search-talks/:search", :to => "schedules#search_talks"
+  get "/schedules/:event_id/:id/add_vote", :to => "schedules#add_vote", :as => :add_vote_schedule
+  get "/schedules/:event_id/:id/remove_vote", :to => "schedules#remove_vote", :as => :remove_vote_schedule
 
   post "/activities/get-type" => "activities#get_type"
 

@@ -1,3 +1,6 @@
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'simplecov'
 SimpleCov.start "rails" if ENV["COVERAGE"]
 
@@ -31,4 +34,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL
 
   Capybara.javascript_driver = :webkit
+
+  Mongoid.logger.level = Logger::INFO
 end

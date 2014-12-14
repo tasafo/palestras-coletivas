@@ -8,6 +8,8 @@ class Enrollment
   belongs_to :event
   belongs_to :user
 
+  validates_uniqueness_of :user, :scope => :event
+
   scope :actives, lambda { where(:active => true) }
   scope :presents, lambda { where(:present => true) }
 

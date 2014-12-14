@@ -1,20 +1,21 @@
 pt-BR:
   titles:
     talks:
-      index: "Trabalhos"
-      new: "Adicionar trabalho"
-      edit: "Editar trabalho"
-      my: "Meus trabalhos"
-      all: "Todos os trabalhos"
-      search: "Buscar trabalho"
-      select: "Selecionar trabalho"
-      no_talks: "Nenhum trabalho adicionado"
+      index: "Palestras"
+      new: "Adicionar palestra"
+      edit: "Editar palestra"
+      show: "Exibir palestra"
+      my: "Minhas palestras"
+      all: "Todos as palestras"
+      search: "Buscar palestra"
+      select: "Selecionar palestra"
+      no_talks: "Nenhuma palestra adicionada"
 
     comments:
       index: "Comentários"
 
     home:
-      index: "Trabalhos publicados"
+      index: "Palestras publicadas"
 
     users:
       index: "Usuários"
@@ -23,15 +24,6 @@ pt-BR:
       signup: "Cadastre-se"
       login: "Acesse sua conta"
       reset_password: "Redefinir senha"
-
-    groups:
-      index: "Grupos"
-      profile: "Perfil do grupo"
-      new: "Adicionar grupo"
-      edit: "Editar grupo"
-      no_groups: "Nenhum grupo adicionado"
-      my: "Meus grupos"
-      all: "Todos os grupos"
 
     events:
       index: "Eventos"
@@ -54,5 +46,5 @@ pt-BR:
       new: "Adicionar evento externo para"
       edit: "Editar evento externo de"
 
-    attach_event:
-      new: "Anexar o trabalho ao evento"
+    submit_event:
+      new: "Submeter a palestra ao evento"

@@ -2,8 +2,7 @@ pt-BR:
   mongoid:
     models:
       user: "Usuário"
-      talk: "Trabalho"
-      group: "Grupo"
+      talk: "Palestra"
       event: "Evento"
       schedule: "Programação"
       external_event: "Eventos externos"
@@ -18,7 +17,7 @@ pt-BR:
         counter_participation_events: "Número de participações em eventos"
 
       talk:
-        presentation_url: "Link do trabalho"
+        presentation_url: "Link da palestra"
         title: "Título"
         description: "Descrição"
         tags: "Tags"
@@ -28,14 +27,6 @@ pt-BR:
         owner: "Criador"
         video_link: "Link do vídeo"
         counter_presentation_events: "Número de apresentações em eventos"
-
-      group:
-        gravatar_url: "Endereço do avatar"
-        name: "Nome"
-        tags: "Tags"
-        thumbnail_url: "Miniatura"
-        owner: "Criador"
-        counter_participation_events: "Número de participações em eventos"
 
       event:
         name: "Nome"

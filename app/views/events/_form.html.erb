@@ -100,10 +100,10 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :accepts_dynamic_programming, t("labels.event.accepts_dynamic_programming"), :class => 'control-label' %>
+    <%= f.label :accepts_submissions, t("labels.event.accepts_submissions"), :class => 'control-label' %>
     <div class="col-md-4">
-      <%= f.check_box :accepts_dynamic_programming %>
-      <span class="help-inline"><%= t("new.event.help.accepts_dynamic_programming") %></span>
+      <%= f.check_box :accepts_submissions %>
+      <span class="help-inline"><%= t("new.event.help.accepts_submissions") %></span>
     </div>
   </div>
 
@@ -117,8 +117,6 @@
 
   <%= render "shared/invite_user", :model => @event, :users => @organizers, :key => "organizer" %>
 
-  <%= render "shared/invite_group", :model => @event, :groups => @groups %>
-
   <div class="m-btn-strip">
     <%= f.submit :class => 'm-btn blue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
@@ -126,7 +124,6 @@
   </div>
 
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
-  <span id="group_in_the_list"><%= t("new.invite.js.the_group_is_already_in_the_list") %></span>
   <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>
 

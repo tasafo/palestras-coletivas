@@ -8,7 +8,7 @@ describe "See talks", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Trabalhos"
+      click_link "Palestras"
     end
 
     it "redirects to the home page" do

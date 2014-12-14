@@ -19,15 +19,6 @@
   <% end %>
 </div>
 
-<% if @user.groups? %>
-  <% event = t("show.user.groups") %>
-  <h4><%= event[@user.groups.count > 1 ? :other : :one] %></h4>
-
-  <% @user.groups.by_name.each do |group| %>
-    <h5><%= link_to group.name, group_path(group) %></h5>
-  <% end %>
-<% end %>
-
 <% if @user.events? %>
   <% event = t("show.user.events") %>
   <h4><%= event[@user.events.count > 1 ? :other : :one] %></h4>

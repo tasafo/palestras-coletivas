@@ -1,3 +1,4 @@
 pt-BR:
   app:
-    info: "Um ambiente para você organizar eventos, trabalhos (palestras e cursos), grupos e compartilhar conhecimento."
+    name: "Palestras Coletivas"
+    info: "Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento."

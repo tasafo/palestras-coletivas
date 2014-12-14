@@ -57,6 +57,39 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def add_vote
+    @event = Event.find(params[:event_id])
+
+    @schedule = Schedule.find(params[:id])
+
+    begin
+      @vote = Vote.create(:schedule => @schedule, :user => current_user)
+
+      @schedule.set_counter(:votes, :inc)
+    rescue
+
+    end
+
+    redirect_to "/events/#{@event._slugs[0]}#schedule", :notice => t("flash.schedules.vote.add")
+  end
+
+  def remove_vote
+    @event = Event.find(params[:event_id])
+
+    @schedule = Schedule.find(params[:id])
+
+    begin
+      @vote = Vote.find_by(:schedule => @schedule, :user => current_user)
+      @vote.destroy
+
+      @schedule.set_counter(:votes, :dec)
+    rescue
+
+    end
+
+    redirect_to "/events/#{@event._slugs[0]}#schedule", :notice => t("flash.schedules.vote.remove")
+  end
+
 private
   def auxiliary_objetcs
     @event = Event.find(params[:event_id])
