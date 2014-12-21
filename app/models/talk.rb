@@ -1,6 +1,6 @@
 class Talk
   include Mongoid::Document
-  include Mongoid::FullTextSearch
+  include Mongoid::Search
   include Mongoid::Timestamps
   include Mongoid::Slug
   include UpdateCounter
@@ -29,13 +29,11 @@ class Talk
   
   validates_presence_of :title, :description, :tags, :users, :owner
 
-  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5)
+  scope :presentation_events, -> { where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5) }
 
-  fulltext_search_in :title, :tags,
-    :index_name => 'fulltext_index_talks',
-    :filters => {
-      :published => lambda { |talk| talk.to_public }
-    }
+  scope :search, lambda { |search| where(:to_public => true).full_text_search(search).asc(:title) }
+
+  search_in :title, :tags
 
   def add_authors(owner, others)
     self.owner = owner.id if new_record?

@@ -14,9 +14,9 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Vamos usar a versão 2.1 do Ruby
 
-	rvm install ruby-2.1.1
+	rvm install ruby-2.1.5
 
-	rvm use 2.1.1
+	rvm use 2.1.5
 
 	rvm gemset create palestrascoletivas
 

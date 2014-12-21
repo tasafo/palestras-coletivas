@@ -4,5 +4,4 @@ class Rating
   belongs_to :user
 
   field :rank, :type => Float
-  attr_accessible :rank, :user
 end

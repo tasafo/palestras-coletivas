@@ -1,15 +1,19 @@
-Palestrascoletivas::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
   config.cache_classes = true
+
+  # Configure static asset server for tests with Cache-Control for performance
+  config.serve_static_files = true
+  config.static_cache_control = "public, max-age=3600"
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_files = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -75,4 +79,6 @@ Palestrascoletivas::Application.configure do
   }
 
   config.action_mailer.default_url_options = { :host => 'palestrascoletivas.com' }
+
+  config.eager_load = true
 end

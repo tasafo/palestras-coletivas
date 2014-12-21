@@ -30,7 +30,7 @@ class Gravatar
         @current_location = record.xpath("//currentLocation").text
         @has_profile = true
       end
-    rescue
+    rescue OpenURI::HTTPError
       @has_profile = false
     end
   end

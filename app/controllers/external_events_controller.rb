@@ -1,14 +1,13 @@
 class ExternalEventsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :set_talk, only: [:new, :create, :edit, :update]
 
   def new
     @external_event = ExternalEvent.new
-    @talk = Talk.find(params[:talk_id])
   end
 
   def create
-    @external_event = ExternalEvent.new(params[:external_event])
-    @talk = Talk.find(params[:talk_id])
+    @external_event = ExternalEvent.new(external_event_params)
     @talk.external_events << [@external_event]
 
     if @talk.save
@@ -19,18 +18,25 @@ class ExternalEventsController < ApplicationController
   end
 
   def edit
-    @talk = Talk.find(params[:talk_id])
     @external_event = @talk.external_events.find(params[:id])
   end
 
   def update
-    @talk = Talk.find(params[:talk_id])
     @external_event = @talk.external_events.find(params[:id])
 
-    if @external_event.update_attributes(params[:external_event])
+    if @external_event.update_attributes(external_event_params)
       redirect_to talk_path(@talk), :notice => t("flash.external_event.update.notice")
     else
       render :edit
     end
   end
+
+  private
+    def set_talk
+      @talk = Talk.find(params[:talk_id])
+    end
+
+    def external_event_params
+      params.require(:external_event).permit(:name, :date, :place, :url)
+    end
 end

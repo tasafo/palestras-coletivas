@@ -69,7 +69,7 @@ function search_talk() {
                 for (var i in json) {
                     talks += '<hr class="featurette-divider">';
 
-                    talks += '<div id="div_' + json[i]._id + '" class="featurette">';
+                    talks += '<div id="div_' + json[i]._id['$oid'] + '" class="featurette">';
 
                     thumb = json[i].thumbnail ? json[i].thumbnail : '/assets/without_presentation.jpg';
 
@@ -83,7 +83,7 @@ function search_talk() {
 
                     talks += json[i].tags + '<br/><br/>';
 
-                    talks += '<input type="button" id="' + json[i]._id + '" title="' + json[i].title + '" class="m-btn green btn-select-talk" value="' + titles_talks_select + '" />';
+                    talks += '<input type="button" id="' + json[i]._id['$oid'] + '" title="' + json[i].title + '" class="m-btn green btn-select-talk" value="' + titles_talks_select + '" />';
 
                     talks += '</div>';
                 }

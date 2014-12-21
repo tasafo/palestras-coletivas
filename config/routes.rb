@@ -44,7 +44,7 @@ Palestrascoletivas::Application.routes.draw do
   get "/schedules/:event_id/new", :to => "schedules#new", :as => :new_schedule
   get "/schedules/:event_id/:id/edit", :to => "schedules#edit", :as => :edit_schedule
   post "/schedules/:event_id/new", :to => "schedules#create", :as => false
-  put "/schedules/:event_id/:id/edit", :to => "schedules#update", :as => false
+  patch "/schedules/:event_id/:id/edit", :to => "schedules#update", :as => false
   get "/schedules/search-talks/:search", :to => "schedules#search_talks"
   get "/schedules/:event_id/:id/add_vote", :to => "schedules#add_vote", :as => :add_vote_schedule
   get "/schedules/:event_id/:id/remove_vote", :to => "schedules#remove_vote", :as => :remove_vote_schedule
@@ -54,7 +54,7 @@ Palestrascoletivas::Application.routes.draw do
   get "/enrollments/:event_id/new", :to => "enrollments#new", :as => :new_enrollment
   get "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#edit", :as => :edit_enrollment
   post "/enrollments/:event_id/new", :to => "enrollments#create", :as => false
-  put "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#update", :as => false
+  patch "/enrollments/:event_id/:id/:option/edit", :to => "enrollments#update", :as => false
 
   resources :password_resets
 end

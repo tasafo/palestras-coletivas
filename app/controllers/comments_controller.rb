@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   before_filter :find_commentable
 
   def create

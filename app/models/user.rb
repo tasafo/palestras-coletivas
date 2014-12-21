@@ -36,7 +36,7 @@ class User
 
   validates_uniqueness_of :name, :email
 
-  validates :email, :format => { :with => /^[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}$/i }
+  validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/
 
   validates_presence_of :password, :if => :require_password?
 
@@ -46,20 +46,19 @@ class User
 
   before_create { generate_token(:auth_token) }
 
-  scope :by_name, order_by(:_slugs => :asc)
+  scope :by_name, -> { order_by(:_slugs => :asc) }
 
   scope :without_the_owner, lambda { |user| not_in(:_id => user.id.to_s).by_name }
 
-  scope :top_talk_watchers, where(:counter_watched_talks.gt => 0).order_by(:counter_watched_talks => :desc, :_slugs => :asc).limit(5)
+  scope :top_talk_watchers, -> { where(:counter_watched_talks.gt => 0).order_by(:counter_watched_talks => :desc, :_slugs => :asc).limit(5) }
 
-  scope :organizing_events, where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5)
+  scope :organizing_events, -> { where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5) }
 
-  scope :presentation_events, where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5)
+  scope :presentation_events, -> { where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5) }
 
-  scope :participation_events, where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :_slugs => :asc).limit(5)
+  scope :participation_events, -> { where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :_slugs => :asc).limit(5) }
 
-  scope :public_talks, where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5)
-
+  scope :public_talks, -> { where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5) }
 
   def show_name
     return until_two_names(name) unless name.blank?
@@ -85,7 +84,7 @@ class User
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    UserMailer.password_reset(self).deliver_now
   end
 
   def arrived_at event
@@ -100,40 +99,23 @@ class User
   end
 
   def enrolled_at? event
-    begin
-      enrollment = Enrollment.find_by user: self, event: event
+    enrollment = Enrollment.find_by user: self, event: event
 
-      if enrollment.nil?
-        return false
-      end
-
-      true
-    rescue Mongoid::Errors::DocumentNotFound
-      false
-    end
+    enrollment.nil? ? false : true
   end
 
   def enroll_at event
-    Enrollment.create(
-      user: self,
-      event: event,
-      active: true
-    )
+    Enrollment.create(user: self, event: event, active: true)
   end
 
   def present_at? event
-    begin
-      enrollment = Enrollment.find_by user: self, event: event
+    enrollment = Enrollment.find_by user: self, event: event
 
-      if enrollment.nil?
-        return false
-      else
-        return enrollment.present
-      end
-    rescue Mongoid::Errors::DocumentNotFound
+    if enrollment.nil?
       return false
+    else
+      return enrollment.present
     end
-
   end
 
   def watch_talk! talk
@@ -151,20 +133,19 @@ class User
     self.watched_talks.include? talk
   end
 
-private
+  private
+    def until_two_names(name)
+      nameArray = name.split(" ")
+      return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
+    end
 
-  def until_two_names(name)
-    nameArray = name.split(" ")
-    return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
-  end
+    def erase_password
+      @password = nil
+      @password_confirmation = nil
+      @validate_password = false
+    end
 
-  def erase_password
-    @password = nil
-    @password_confirmation = nil
-    @validate_password = false
-  end
-
-  def require_password?
-    new_record? || @validate_password
-  end
+    def require_password?
+      new_record? || @validate_password
+    end
 end

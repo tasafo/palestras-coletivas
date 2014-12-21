@@ -1,5 +1,6 @@
 class TalksController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :set_talk, only: [:show, :edit, :update]
 
   def index
     @talk = Talk.new
@@ -12,10 +13,10 @@ class TalksController < ApplicationController
       else
         @search = params[:talk][:search]
 
-        if @search.empty?
+        if @search.blank?
           @talks = all_public_talks
         else
-          @talks = Kaminari.paginate_array(Talk.fulltext_search(@search, :index => 'fulltext_index_talks', :published => [ true ])).page(params[:page]).per(5)
+          @talks = Kaminari.paginate_array(Talk.search(@search)).page(params[:page]).per(5)
         end
       end
     else
@@ -25,7 +26,7 @@ class TalksController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: all_public_talks.to_json } #{ render :json => all_public_talks.to_json(:only => [:_id, :title, :description]) }
+      format.json { render json: all_public_talks.to_json }
     end
   end
 
@@ -36,7 +37,7 @@ class TalksController < ApplicationController
   end
 
   def create
-    @talk = Talk.new(params[:talk])
+    @talk = Talk.new(talk_params)
 
     @talk.add_authors current_user, params[:users]
 
@@ -52,8 +53,7 @@ class TalksController < ApplicationController
   end
 
   def show
-    begin
-      @talk = Talk.find(params[:id])
+    unless @talk.nil?
       @authorized = authorized_access? @talk
       @owns = owner? @talk
 
@@ -66,7 +66,7 @@ class TalksController < ApplicationController
       unless @talk.to_public
         @talk = nil unless @authorized
       end
-    rescue Mongoid::Errors::DocumentNotFound
+    else
       redirect_to root_path
     end
   end
@@ -84,8 +84,6 @@ class TalksController < ApplicationController
   end
 
   def edit
-    @talk = Talk.find(params[:id])
-
     @authors = User.without_the_owner current_user
 
     unauthorized = @talk.owner == current_user.id.to_s ? false : true
@@ -94,13 +92,11 @@ class TalksController < ApplicationController
   end
 
   def update
-    @talk = Talk.find(params[:id])
-
     @talk.add_authors current_user, params[:users]
 
     @authors = User.without_the_owner current_user
 
-    if @talk.update_attributes(params[:talk])
+    if @talk.update_attributes(talk_params)
       @talk.update_user_counters
 
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
@@ -123,8 +119,16 @@ class TalksController < ApplicationController
     redirect_to talk_path(@talk)
   end
 
-private
-  def all_public_talks
-    Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
-  end
+  private
+    def all_public_talks
+      Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
+    end
+
+    def set_talk
+      @talk = Talk.find(params[:id])
+    end
+
+    def talk_params
+      params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
+    end
 end

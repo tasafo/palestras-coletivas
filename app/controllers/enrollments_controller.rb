@@ -1,5 +1,6 @@
 class EnrollmentsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :set_enrollment, only: [:edit, :update]
 
   def new
     @enrollment = Enrollment.new
@@ -8,7 +9,7 @@ class EnrollmentsController < ApplicationController
   end
 
   def create
-    @enrollment = Enrollment.new(params[:enrollment])
+    @enrollment = Enrollment.new(enrollment_params)
     @event = Event.find(params[:enrollment][:event_id])
 
     if @enrollment.save
@@ -21,7 +22,6 @@ class EnrollmentsController < ApplicationController
   end
 
   def edit
-    @enrollment = Enrollment.find(params[:id])
     @event = Event.find(params[:event_id])
     @option = params[:option]
 
@@ -62,14 +62,22 @@ class EnrollmentsController < ApplicationController
   end
 
   def update
-    @enrollment = Enrollment.find(params[:id])
     @event = Event.find(params[:event_id])
     @option = params[:option]
 
-    if @enrollment.update_attributes(params[:enrollment])
+    if @enrollment.update_attributes(enrollment_params)
       @enrollment.update_counter_of_events_and_users @option
 
       redirect_to event_path(@event), :notice => t("flash.enrollments.update.notice")
     end
   end
+
+  private
+    def set_enrollment
+      @enrollment = Enrollment.find(params[:id])
+    end
+
+    def enrollment_params
+      params.require(:enrollment).permit(:event_id, :user_id)
+    end
 end

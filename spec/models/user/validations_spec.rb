@@ -45,7 +45,7 @@ describe User, "validations", :type => :model do
       :password_confirmation => "invalid!"
     )
 
-    expect(user.errors[:password].size).to eq(1)
+    expect(user.errors[:password_confirmation].size).to eq(1)
   end
 
   it "set password hash when setting password" do
@@ -61,7 +61,7 @@ describe User, "validations", :type => :model do
       user.password = "test"
       user.valid?
 
-      expect(user.errors[:password].size).to be >= 1
+      expect(user.errors[:password_confirmation].size).to be >= 1
     end
 
     it "skips password validation when not setting password" do

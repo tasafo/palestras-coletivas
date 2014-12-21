@@ -10,8 +10,8 @@ class Enrollment
 
   validates_uniqueness_of :user, :scope => :event
 
-  scope :actives, lambda { where(:active => true) }
-  scope :presents, lambda { where(:present => true) }
+  scope :actives, -> { where(:active => true) }
+  scope :presents, -> { where(:present => true) }
 
   def update_counter_of_events_and_users(option)
     self.send("update_#{option}_counter")

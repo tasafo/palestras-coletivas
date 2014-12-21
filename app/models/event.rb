@@ -2,7 +2,6 @@ class Event
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
-  include Mongoid::FullTextSearch
   include Geocoder::Model::Mongoid
   include UpdateCounter
   include Commentable
@@ -56,13 +55,13 @@ class Event
 
   before_save :number_of_days
 
-  scope :by_name, order_by(:_slugs => :asc)
+  scope :by_name, -> { order_by(:_slugs => :asc) }
 
-  scope :by_start_date, order_by(:start_date => :asc)
+  scope :by_start_date, -> { order_by(:start_date => :asc) }
 
-  scope :all_public, lambda { where(:to_public => true).order_by(:start_date => :desc) }
+  scope :all_public, -> { where(:to_public => true).order_by(:start_date => :desc) }
 
-  scope :present_users, where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :_slugs => :asc, :edition => :asc).limit(5)
+  scope :present_users, -> { where(:counter_present_users.gt => 0).order_by(:counter_present_users => :desc, :_slugs => :asc, :edition => :asc).limit(5) }
 
   def name_and_edition
     [name, edition].compact.join(' - ')
