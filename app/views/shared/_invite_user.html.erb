@@ -6,7 +6,7 @@
               placeholder: t("labels.talk.search_user"),
               :class => "m-wrap m-ctrl-large",
               :data => {
-                :invitees => users.map { |u| { value: u.id, label: "#{u.name} (#{u.username})", username: u.username, name: u.name } }
+                :invitees => users.map { |u| { value: u.oid, label: "#{u.name} (#{u.username})", username: u.username, name: u.name } }
               } %>
 
       <%= hidden_field :user, :id %>
@@ -24,13 +24,13 @@
         <tbody>
           <% if model.users %>
             <% model.users.by_name.each do |u| %>
-              <% if u.id.to_s != model.owner %>
+              <% if u.oid != model.owner %>
                 <tr id="row_<%= u.id %>">
                   <td>
-                    <%= u.name %> <%= "(#{u.username})" %><input type="hidden" name="users[]" value="<%= u.id %>" />
+                    <%= u.name %> <%= "(#{u.username})" %><input type="hidden" name="users[]" value="<%= u.oid %>" />
                   </td>
                   <td>
-                    <input type="button" id="user_id_<%= u.id %>" class="m-btn red" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.id %>')" />
+                    <input type="button" id="user_id_<%= u.oid %>" class="m-btn red" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.oid %>')" />
                   </td>
                 </tr>
               <% end %>

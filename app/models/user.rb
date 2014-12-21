@@ -39,7 +39,7 @@ class User
 
   validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/
 
-  validates :username, :format => { :with => /^@[a-z]\w{2}\w+$/ }
+  validates_format_of :username, with: /\A@[a-z]\w{2}\w+\z/
 
   validates_presence_of :password, :if => :require_password?
 
@@ -62,6 +62,10 @@ class User
   scope :participation_events, -> { where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :_slugs => :asc).limit(5) }
 
   scope :public_talks, -> { where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5) }
+
+  def oid
+    self._id.to_s
+  end
 
   def show_name
     return until_two_names(name) unless name.blank?
