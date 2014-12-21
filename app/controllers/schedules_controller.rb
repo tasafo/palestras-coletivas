@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
-  before_action :set_schedule, only: [:edit, :update, :add_vote, :remove_vote]
+  before_action :set_schedule, only: [:edit, :update]
 
   def new
     @schedule = Schedule.new
@@ -47,31 +47,6 @@ class SchedulesController < ApplicationController
 
     respond_to do |format|
       format.json { render :json => @talks.only('_id', 'thumbnail', '_slugs', 'title', 'description', 'tags') }
-    end
-  end
-
-  def add_vote
-    @event = Event.find(params[:event_id])
-
-    if @event
-      @vote = Vote.create(:schedule => @schedule, :user => current_user)
-
-      @schedule.set_counter(:votes, :inc)
-    end
-
-    redirect_to "/events/#{@event._slugs[0]}#schedule", :notice => t("flash.schedules.vote.add")
-  end
-
-  def remove_vote
-    @event = Event.find(params[:event_id])
-
-    if @event
-      @vote = Vote.find_by(:schedule => @schedule, :user => current_user)
-      @vote.destroy
-
-      @schedule.set_counter(:votes, :dec)
-
-      redirect_to "/events/#{@event._slugs[0]}#schedule", :notice => t("flash.schedules.vote.remove")
     end
   end
 

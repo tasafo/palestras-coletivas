@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Create enrollment", :type => :request do
+describe "Create enrollment", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
@@ -55,7 +55,7 @@ describe "Create enrollment", :type => :request do
       end
       
       it "redirects to enrollment page" do
-        expect(current_path).to eql new_enrollment_path(event)
+        expect(current_path).to eql new_event_enrollment_path(event, :active)
       end
     end
 

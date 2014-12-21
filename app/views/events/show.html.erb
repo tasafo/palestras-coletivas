@@ -5,7 +5,7 @@
         <% if @authorized %>
           <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "m-btn blue" %>
 
-          <%= link_to t("titles.schedules.new"), new_schedule_path(@event), :class => "m-btn green" %>
+          <%= link_to t("titles.schedules.new"), new_event_schedule_path(@event), :class => "m-btn green" %>
         <% end %>
 
         <% if logged_in? && @event.is_in_progress? %>
@@ -41,7 +41,7 @@
             <% if @crowded %>
               <span class="m-btn disabled"><%= t("show.event.sellout") %></span>
             <% else %>
-              <%= link_to t("show.event.participate"), new_enrollment_path(@event), :class => "m-btn green" %>
+              <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), :class => "m-btn green" %>
             <% end %>
           <% else %>
             <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
@@ -51,7 +51,7 @@
             <% if @crowded && !@enrollment.active? %>
               <span class="m-btn disabled"><%= t("show.event.sellout") %></span>
             <% else %>
-              <%= link_to message_button, edit_enrollment_path(@event, @enrollment, :active), :class => "m-btn #{button_type}" %>
+              <%= link_to message_button, edit_event_enrollment_path(@event, :active, @enrollment), :class => "m-btn #{button_type}" %>
             <% end %>
           <% end %>
         <% end %>
@@ -154,7 +154,7 @@
                   <td><%= h[:enrollment].user.email %></td>
                   <% if @can_record_presence %>
                     <td>
-                      <%= link_to message_button, edit_enrollment_path(@event, h[:enrollment], :present), :class => "m-btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, h[:enrollment]), :class => "m-btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
                     </td>
                   <% end %>
                 </tr>

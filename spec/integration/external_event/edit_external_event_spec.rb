@@ -40,7 +40,7 @@ describe "Edit external event of talk", :type => :request do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(talks_external_event_path(talk, fisl))
+      expect(current_path).to eql(talk_external_event_path(talk, fisl))
     end
 
     it "displays error messages" do

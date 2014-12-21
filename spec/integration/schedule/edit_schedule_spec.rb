@@ -60,7 +60,7 @@ describe "Edit schedule", :type => :request, :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_schedule_path(event, schedule_palestra2))
+      expect(current_path).to eql(event_schedule_path(event, schedule_palestra2))
     end
 
     it "displays error messages" do

@@ -11,14 +11,14 @@ class EnrollmentsController < ApplicationController
   def create
     @enrollment = Enrollment.new(enrollment_params)
     @event = Event.find(params[:enrollment][:event_id])
+    message = "error"
 
     if @enrollment.save
       @enrollment.update_counter_of_events_and_users "active"
-
-      redirect_to event_path(@event), :notice => t("flash.enrollments.create.notice")
-    else
-      redirect_to event_path(@event), :notice => t("flash.enrollments.create.error")
+      message = "notice"
     end
+
+    redirect_to event_path(@event), :notice => t("flash.enrollments.create.#{message}")
   end
 
   def edit
@@ -78,6 +78,6 @@ class EnrollmentsController < ApplicationController
     end
 
     def enrollment_params
-      params.require(:enrollment).permit(:event_id, :user_id)
+      params.require(:enrollment).permit(:event_id, :user_id, :active, :present)
     end
 end

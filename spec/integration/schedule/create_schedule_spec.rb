@@ -50,7 +50,7 @@ describe "Create schedule", :type => :request, :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(new_schedule_path(event))
+      expect(current_path).to eql(event_schedules_path(event))
     end
 
     it "displays error messages" do

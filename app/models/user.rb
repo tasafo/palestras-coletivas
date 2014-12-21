@@ -95,11 +95,7 @@ class User
   end
 
   def arrived_at event
-    if enrolled_at? event
-      enrollment = Enrollment.find_by user: self, event: event
-    else
-      enrollment = enroll_at event
-    end
+    enrollment = (enrolled_at? event) ? (Enrollment.find_by user: self, event: event) : (enroll_at event)
 
     enrollment.present = true
     enrollment.save
