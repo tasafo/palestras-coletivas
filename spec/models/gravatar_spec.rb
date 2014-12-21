@@ -1,4 +1,4 @@
-require "./app/models/gravatar"
+require "./app/models/concerns/gravatar"
 require "digest/md5"
 
 describe Gravatar, :type => :model do
