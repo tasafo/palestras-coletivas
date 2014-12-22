@@ -2,7 +2,7 @@
   <section id="page-header">
     <div class="row-fluid">
       <div class="span12">
-        <% if @authorized %>
+        <% if @presenter.authorized %>
           <%= link_to t("titles.events.edit"), edit_event_path(@event), :class => "m-btn blue" %>
 
           <%= link_to t("titles.schedules.new"), new_event_schedule_path(@event), :class => "m-btn green" %>
@@ -14,7 +14,7 @@
               <%= t("show.event.btn_presence_checkin") %>
             </a>
           <% else %>
-            <% if (@crowded && @enrollment && @enrollment.active?) || !@crowded %>
+            <% if (@presenter.crowded && @presenter.enrollment && @presenter.enrollment.active?) || !@presenter.crowded %>
               <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="m-btn blue btn-present">Check-in</a>
             <% end %>
           <% end %>
@@ -36,22 +36,22 @@
           </h4>
         <% end %>
 
-        <% if @open_enrollment %>
-          <% if @new_subscription %>
-            <% if @crowded %>
+        <% if @presenter.open_enrollment %>
+          <% if @presenter.new_subscription %>
+            <% if @presenter.crowded %>
               <span class="m-btn disabled"><%= t("show.event.sellout") %></span>
             <% else %>
               <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), :class => "m-btn green" %>
             <% end %>
           <% else %>
-            <% message_button = @enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
+            <% message_button = @presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
-            <% button_type = @enrollment.active? ? "red" : "orange" %>
+            <% button_type = @presenter.enrollment.active? ? "red" : "orange" %>
 
-            <% if @crowded && !@enrollment.active? %>
+            <% if @presenter.crowded && !@presenter.enrollment.active? %>
               <span class="m-btn disabled"><%= t("show.event.sellout") %></span>
             <% else %>
-              <%= link_to message_button, edit_event_enrollment_path(@event, :active, @enrollment), :class => "m-btn #{button_type}" %>
+              <%= link_to message_button, edit_event_enrollment_path(@event, :active, @presenter.enrollment), :class => "m-btn #{button_type}" %>
             <% end %>
           <% end %>
         <% end %>
@@ -74,7 +74,7 @@
       </div>
 
       <div class="row-fluid">
-        <% if @open_enrollment %>
+        <% if @presenter.open_enrollment %>
           <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
         <% end %>
       </div>
@@ -117,33 +117,33 @@
 
   <section id="presents">
     <div class="container">
-      <% if @show_users_present %>
-        <% unless @users_present.blank? %>
-          <h4><%= t("show.event.presents") %> (<%= @users_present.count %>)</h4>
+      <% if @presenter.show_users_present %>
+        <% unless @presenter.users_present.blank? %>
+          <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h4>
 
-          <% @users_present.each do |user| %>
+          <% @presenter.users_present.each do |user| %>
             <%= render "shared/user_event", :user => user %>
           <% end %>
         <% end %>
       <% else %>
-        <% unless @users_active.blank? %>
-          <h4><%= t("show.event.enrolled") %> (<%= @users_active.count %>)</h4>
+        <% unless @presenter.users_active.blank? %>
+          <h4><%= t("show.event.enrolled") %> (<%= @presenter.users_active.count %>)</h4>
 
-          <% if @authorized %>
+          <% if @presenter.authorized %>
             <table class="table">
               <thead>
                 <tr>
                   <th><%= t("show.event.table.number") %></th>
                   <th><%= t("show.event.table.name") %></th>
                   <th><%= t("show.event.table.email") %></th>
-                  <% if @can_record_presence %>
+                  <% if @presenter.can_record_presence %>
                     <th><%= t("show.event.table.presence") %></th>
                   <% end %>
                 </tr>
               </thead>
               <tbody>
               <% counter = 0 %>
-              <% @users_active.each do |h| %>
+              <% @presenter.users_active.each do |h| %>
                 <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
                 <% button_type = h[:enrollment].present? ? "red" : "blue" %>
@@ -152,7 +152,7 @@
                   <td><%= counter += 1 %></td>
                   <td><%= h[:enrollment].user.name %></td>
                   <td><%= h[:enrollment].user.email %></td>
-                  <% if @can_record_presence %>
+                  <% if @presenter.can_record_presence %>
                     <td>
                       <%= link_to message_button, edit_event_enrollment_path(@event, :present, h[:enrollment]), :class => "m-btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
                     </td>
@@ -162,7 +162,7 @@
               </tbody>
             </table>
           <% else %>
-            <% @users_active.each do |h| %>
+            <% @presenter.users_active.each do |h| %>
               <%= render "shared/user_event", :user => h[:enrollment].user %>
             <% end %>
           <% end %>
