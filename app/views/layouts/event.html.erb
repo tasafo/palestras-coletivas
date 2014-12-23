@@ -52,6 +52,7 @@
     
     <%= render "shared/footer" %>
 
+    <% if @presenter.image_top %>
     <script>
       $.backstretch([
         "/tops/<%= @presenter.image_top %>.jpg"
@@ -60,5 +61,6 @@
           duration: 3000
       });
     </script>
+    <% end %>
   </body>
 </html>

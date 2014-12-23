@@ -41,7 +41,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @presenter = EventConcern.new(@event)
+    user = current_user ? current_user : nil
+    
+    @presenter = EventPresenter.new(@event, user, authorized_access?(@event))
 
     render layout: 'event'
   end
