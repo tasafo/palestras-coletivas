@@ -1,5 +1,5 @@
 class EventPresenter
-  attr_reader :dates, :authorized, :open_enrollment, :can_record_presence, :show_users_present,
+  attr_reader :event, :dates, :authorized, :open_enrollment, :can_record_presence, :show_users_present,
     :users_present, :users_active, :crowded, :new_subscription, :the_user_is_speaker, :enrollment,
     :image_top, :can_vote
 
@@ -10,11 +10,9 @@ class EventPresenter
   private
     def prepare_event(event, user_logged_in, authorized)
       if event
-        @authorized = authorized
         @dates = (event.start_date..event.end_date).to_a
+
         @open_enrollment = event.deadline_date_enrollment >= Date.today
-        @can_record_presence = @authorized && Date.today >= event.start_date
-        @show_users_present = Date.today > event.end_date && !@can_record_presence
 
         @users_present = prepare_users_present event
 
@@ -22,18 +20,31 @@ class EventPresenter
 
         @crowded = @users_active.count >= event.stocking
 
-        @new_subscription = true
-
         logged event, user_logged_in
-
-        unless event.to_public
-          event = nil unless @authorized
-        end
 
         @image_top = ('01'..'12').to_a.sample
 
-        @can_vote = event && event.accepts_submissions && event.end_date >= Date.today
+        @can_vote = prepare_can_vote(event)
+
+        prepare_authorized(event, authorized)
       end  
+    end
+
+    def prepare_authorized(event, authorized)
+      @authorized = authorized
+
+      @can_record_presence = @authorized && Date.today >= event.start_date
+      
+      @show_users_present = Date.today > event.end_date && !@can_record_presence
+
+      @event = event
+      unless event.to_public
+        @event = nil unless @authorized
+      end
+    end
+
+    def prepare_can_vote(event)
+      event && event.accepts_submissions && event.end_date >= Date.today
     end
 
     def prepare_users_present(event)
@@ -51,6 +62,8 @@ class EventPresenter
     end
 
     def logged(event, user_logged_in)
+      @new_subscription = true
+
       if user_logged_in
         @enrollment = Enrollment.where(:event => event, :user => user_logged_in).first
 
