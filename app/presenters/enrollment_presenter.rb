@@ -1,0 +1,56 @@
+class EnrollmentPresenter
+  attr_reader :user_id, :user_name, :type_message, :button_message, :option_value, :can_record_presence
+
+  def initialize(args = {})
+    if args.size == 1
+      @user_id = args[:user].id
+    else
+      event, enrollment, option_type, authorized_edit, user = args[:event], args[:enrollment], args[:option_type], args[:authorized_edit], args[:user]
+
+      @can_record_presence = (authorized_edit || user.id.to_s == enrollment.user.id.to_s) && Date.today >= event.start_date
+      
+      prepare_message enrollment, option_type, user
+    end
+  end
+
+  private
+    def prepare_message(enrollment, option_type, user)
+      @option_value = false
+      @type_message = "text-warning"
+
+      case option_type
+      when "active"
+        option_active enrollment, user
+      when "present"
+        option_present enrollment
+      end
+    end
+
+    def option_active(enrollment, user)
+      @user_id = user.id
+      @user_name = user.name
+
+      if enrollment.active?
+        @button_message = I18n.t("show.event.cancel_my_participation")
+      else
+        @type_message = "text-success"
+        @option_value = true
+        @button_message = I18n.t("show.event.participate")
+      end
+    end
+
+    def option_present(enrollment)
+      if @can_record_presence
+        @user_id = enrollment.user.id
+        @user_name = enrollment.user.name
+
+        if enrollment.present?
+          @button_message = I18n.t("show.event.undo_presence")
+        else
+          @type_message = "text-success"
+          @option_value = true
+          @button_message = I18n.t("show.event.record_presence")
+        end
+      end
+    end
+end

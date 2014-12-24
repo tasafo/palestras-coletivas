@@ -46,7 +46,7 @@
           <% else %>
             <% message_button = @presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
-            <% button_type = @presenter.enrollment.active? ? "red" : "orange" %>
+            <% button_type = @presenter.enrollment.active? ? "red" : "purple" %>
 
             <% if @presenter.crowded && !@presenter.enrollment.active? %>
               <span class="m-btn disabled"><%= t("show.event.sellout") %></span>

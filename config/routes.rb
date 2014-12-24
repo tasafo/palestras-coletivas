@@ -23,7 +23,7 @@ Palestrascoletivas::Application.routes.draw do
     resources :schedules, only: [:new, :create, :edit, :update] do
       resources :votes, only: [:new, :create]
     end
-    resources :enrollments, only: [:new, :create, :edit, :update], path: ":option"
+    resources :enrollments, only: [:new, :create, :edit, :update], path: ":option_type"
   end
 
   resource :talks do

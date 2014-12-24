@@ -1,11 +1,11 @@
 class EnrollmentsController < ApplicationController
   before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
   before_action :set_enrollment, only: [:edit, :update]
+  before_action :set_event, only: [:new, :edit, :update]
 
   def new
     @enrollment = Enrollment.new
-    @event = Event.find(params[:event_id])
-    @user_id = current_user.id
+    @presenter = EnrollmentPresenter.new(user: current_user)
   end
 
   def create
@@ -22,57 +22,34 @@ class EnrollmentsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:event_id])
-    @option = params[:option]
+    @option_type = params[:option_type]
 
-    @authorized = authorized_access?(@event)
+    @presenter = EnrollmentPresenter.new(
+      event: @event,
+      enrollment: @enrollment,
+      option_type: @option_type,
+      authorized_edit: authorized_access?(@event),
+      user: current_user
+    )
 
-    @can_record_presence = @authorized && Date.today >= @event.start_date
-
-    if @option == "active"
-      @user_id = current_user.id
-
-      if @enrollment.active?
-        @message_type = "text-warning"
-        @value = false
-        @message_button = t("show.event.cancel_my_participation")
-      else
-        @message_type = "text-success"
-        @value = true
-        @message_button = t("show.event.participate")
-      end
-    elsif @option == "present"
-      if @can_record_presence
-        @user_id = @enrollment.user.id
-        @user_name = @enrollment.user.name
-
-        if @enrollment.present?
-          @message_type = "text-warning"
-          @value = false
-          @message_button = t("show.event.undo_presence")
-        else
-          @message_type = "text-success"
-          @value = true
-          @message_button = t("show.event.record_presence")
-        end
-      else
-        redirect_to event_path(@event), :notice => t("flash.unauthorized_access")
-      end
-    end
+    redirect_to event_path(@event), :notice => t("flash.unauthorized_access") unless @presenter.can_record_presence
   end
 
   def update
-    @event = Event.find(params[:event_id])
-    @option = params[:option]
+    @option_type = params[:option_type]
 
     if @enrollment.update_attributes(enrollment_params)
-      @enrollment.update_counter_of_events_and_users @option
+      @enrollment.update_counter_of_events_and_users @option_type
 
       redirect_to event_path(@event), :notice => t("flash.enrollments.update.notice")
     end
   end
 
   private
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
+
     def set_enrollment
       @enrollment = Enrollment.find(params[:id])
     end

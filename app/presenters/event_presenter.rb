@@ -50,13 +50,13 @@ class EventPresenter
     def prepare_users_present(event)
       users_present = []
       event.enrollments.presents.each { |enrollment| users_present << enrollment.user }
-      users_present.sort_by! { |user| user._slugs }
+      users_present.sort_by! { |user| user._slugs[0] }
     end
 
     def prepare_users_active(event)
       users_active = []
       event.enrollments.actives.each do |enrollment|
-        users_active << { :name => enrollment.user._slugs, :enrollment => enrollment }
+        users_active << { :name => enrollment.user._slugs[0], :enrollment => enrollment }
       end
       users_active.sort_by! { |user| user[:name] }
     end

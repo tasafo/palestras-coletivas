@@ -7,7 +7,7 @@ namespace :db do
       saved_users = []
       users.each do |user|
         if user.username.blank?
-          user.username = I18n.transliterate("@#{user.name.gsub(" ", "").gsub("@", "").underscore}")
+          user.username = I18n.transliterate("@#{user.name.gsub(" ", "").gsub("@", "").underscore}").downcase
           saved = user.save
 
           if saved
