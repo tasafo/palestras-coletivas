@@ -33,8 +33,8 @@
   <div class="span4">
     <% unless @talks.blank? %>
     <div class="m-input-append">
-      <%= form_for @talk, :html => { :class => 'form-search' }, :url => talks_path, :method => "get" do |f| %>
-        <input type="text" class="search-query m-wrap" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
+      <%= form_tag talks_path, method: "get", html: { class: 'form-search' } do |f| %>
+        <input type="text" class="search-query m-wrap" id="search" name="search" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
         <button type="submit" class="m-btn green"><%= t("form.submit.search") %></button>
       <% end %>
     </div>

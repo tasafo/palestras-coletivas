@@ -11,30 +11,40 @@ class Oembed
   end
 
   def open_presentation
+    if @url.include? "slideshare.net"
+      open_slideshare
+    elsif @url.include? "speakerdeck.com"
+      open_speakerdeck
+    end  
+  end
+
+  def open_slideshare
     begin
-      if @url.include? "slideshare.net"
-        record = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
+      record = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
 
-        unless record.nil?
-          @title = record.xpath("//title").text
-          @code = record.xpath("//slideshow-id").text
-          @thumbnail = record.xpath("//thumbnail").text
-          true
-        end
-
-      elsif @url.include? "speakerdeck.com"
-        record = MultiJson.load(open("https://speakerdeck.com/oembed.json?url=#{@url}"))
-
-        unless record.nil?
-          html_field = record['html']
-          @title = record["title"]
-          @code = html_field.match(/player\/(.*)\" style/)[1]
-          @thumbnail = "https://speakerd.s3.amazonaws.com/presentations/#{code}/thumb_slide_0.jpg"
-          true
-        end
-
+      unless record.nil?
+        @title = record.xpath("//title").text
+        @code = record.xpath("//slideshow-id").text
+        @thumbnail = record.xpath("//thumbnail").text
+        return true
       end
+    rescue OpenURI::HTTPError
+      false
 
+    end
+  end
+
+  def open_speakerdeck
+    begin
+      record = MultiJson.load(open("https://speakerdeck.com/oembed.json?url=#{@url}"))
+
+      unless record.nil?
+        html_field = record['html']
+        @title = record["title"]
+        @code = html_field.match(/player\/(.*)\" style/)[1]
+        @thumbnail = "https://speakerd.s3.amazonaws.com/presentations/#{code}/thumb_slide_0.jpg"
+        return true
+      end
     rescue OpenURI::HTTPError
       false
 

@@ -3,30 +3,14 @@ class TalksController < ApplicationController
   before_action :set_talk, only: [:show, :edit, :update]
 
   def index
-    @talk = Talk.new
-    @search = ""
+    @search = params[:search]
+    @my = !params[:my].nil?
 
-    if params[:my].nil?
-      @my = false
-      if params[:talk].nil?
-        @talks = all_public_talks
-      else
-        @search = params[:talk][:search]
-
-        if @search.blank?
-          @talks = all_public_talks
-        else
-          @talks = Kaminari.paginate_array(Talk.search(@search)).page(params[:page]).per(5)
-        end
-      end
-    else
-      @my = true
-      @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc) if logged_in?
-    end
+    @talks = search_talks @search, @my, params[:page]
 
     respond_to do |format|
       format.html
-      format.json { render json: all_public_talks.to_json }
+      format.json { render json: @talks.only('id', 'name', 'description', 'tags', 'presentation_url', 'thumbnail') }
     end
   end
 
@@ -120,8 +104,16 @@ class TalksController < ApplicationController
   end
 
   private
-    def all_public_talks
-      Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
+    def search_talks(search, my, page)
+      if my
+        current_user.talks.page(page).per(5).desc(:created_at) if logged_in?
+      else
+        if search.blank?
+          Talk.where(to_public: true).page(page).per(5).desc(:created_at)
+        else
+          Kaminari.paginate_array(Talk.search(search)).page(page).per(5)
+        end
+      end
     end
 
     def set_talk

@@ -22,7 +22,7 @@ describe "Search talk", :type => :request do
     before do
       visit root_path
       click_link "Palestras"
-      fill_in :talk_search, :with => ""
+      fill_in :search, :with => ""
       click_button "Buscar"
     end
 
@@ -39,7 +39,7 @@ describe "Search talk", :type => :request do
     before do
       visit root_path
       click_link "Palestras"
-      fill_in :talk_search, :with => "compartilhe"
+      fill_in :search, :with => "compartilhe"
       click_button "Buscar"
     end
 
@@ -56,7 +56,7 @@ describe "Search talk", :type => :request do
     before do
       visit root_path
       click_link "Palestras"
-      fill_in :talk_search, :with => "noob"
+      fill_in :search, :with => "noob"
       click_button "Buscar"
     end
 
