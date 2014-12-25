@@ -11,7 +11,7 @@ gem 'multi_json', :require => false
 gem 'jquery-rails'
 gem 'mongoid_slug'
 gem 'kaminari'
-gem 'mongoid_search'
+gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 gem 'geocoder'
 gem 'unicorn'
 gem 'lograge'

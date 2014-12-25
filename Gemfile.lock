@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/mauriciozaffari/mongoid_search.git
+  revision: dfc7c45157a9339862f140a5641a5ea249d6f48a
+  branch: master
+  specs:
+    mongoid_search (0.3.2)
+      fast-stemmer (~> 1.0.0)
+      mongoid (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -114,11 +123,8 @@ GEM
       mongoid (>= 3.0.1)
       rake
       rspec (>= 2.14)
-    mongoid_search (0.3.2)
-      fast-stemmer (~> 1.0.0)
-      mongoid (>= 3.0.0)
-    mongoid_slug (3.2.1)
-      mongoid (> 3.0)
+    mongoid_slug (4.0.0)
+      mongoid (>= 3.0)
       stringex (~> 2.0)
     moped (2.0.2)
       bson (~> 2.2)
@@ -264,7 +270,7 @@ DEPENDENCIES
   lograge
   mongoid
   mongoid-rspec
-  mongoid_search
+  mongoid_search!
   mongoid_slug
   multi_json
   newrelic_rpm
