@@ -100,7 +100,7 @@ private
       current_user.talks.desc(:created_at).page(page).per(5) if logged_in?
     else
       if search.blank?
-        Talk.where(to_public: true).desc(:created_at).page(page).per(5)
+        TalkQuery.new.publics.page(page).per(5)
       else
         Kaminari.paginate_array(TalkQuery.new.search(search)).page(page).per(5)
       end

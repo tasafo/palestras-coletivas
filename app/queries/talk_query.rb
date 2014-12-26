@@ -10,4 +10,8 @@ class TalkQuery
   def search(search)
     @relation.where(to_public: true).full_text_search(search).asc(:title)
   end
+
+  def publics
+    @relation.where(to_public: true).desc(:created_at)
+  end
 end
