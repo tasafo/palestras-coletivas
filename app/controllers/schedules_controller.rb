@@ -43,7 +43,7 @@ class SchedulesController < ApplicationController
   end
 
   def search_talks
-    @talks = Talk.search(params[:search]) unless params[:search].blank?
+    @talks = TalkQuery.new.search(params[:search]) unless params[:search].blank?
 
     respond_to do |format|
       format.json { render :json => @talks.only('_id', 'thumbnail', '_slugs', 'title', 'description', 'tags') }

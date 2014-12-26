@@ -3,7 +3,7 @@ class RankingController < ApplicationController
     @organizers = User.organizing_events
     @talkers = User.presentation_events
     @participations = User.participation_events
-    @talks = Talk.presentation_events
+    @talks = TalkQuery.new.presentation_events
     @events = Event.present_users
     @users_public_talks = User.public_talks
     @top_talk_watchers = User.top_talk_watchers

@@ -22,14 +22,10 @@ class TalksController < ApplicationController
 
   def create
     @talk = Talk.new(talk_params)
-
-    @talk.add_authors current_user, params[:users]
-
     @authors = User.without_the_owner current_user
+    TalkService.new(@talk).add_authors current_user, params[:users]
 
     if @talk.save
-      @talk.update_user_counters
-
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
       render :new
@@ -41,11 +37,9 @@ class TalksController < ApplicationController
       @authorized = authorized_access? @talk
       @owns = owner? @talk
 
-      @presentation = Oembed.new @talk.presentation_url, @talk.code
-      @presentation.show_presentation
+      @presentation = Oembed.new(@talk.presentation_url, @talk.code).show_presentation
 
-      @video = Oembed.new @talk.video_link
-      @video.show_video
+      @video = Oembed.new(@talk.video_link).show_video
 
       unless @talk.to_public
         @talk = nil unless @authorized
@@ -56,10 +50,10 @@ class TalksController < ApplicationController
   end
 
   def info_url
-    oembed = Oembed.new params[:link]
+    oembed = Oembed.new(params[:link]).open_presentation
 
     respond_to do |format|
-      if oembed.open_presentation
+      if oembed
         format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
       else
         format.json { render :json => {:error => true} }
@@ -70,18 +64,14 @@ class TalksController < ApplicationController
   def edit
     @authors = User.without_the_owner current_user
 
-    unauthorized = @talk.owner == current_user.id.to_s ? false : true
-
-    redirect_to talks_path, :notice => t("flash.unauthorized_access") if unauthorized
+    redirect_to talks_path, :notice => t("flash.unauthorized_access") unless (@talk.owner.to_s == current_user.id.to_s)
   end
 
   def update
-    @talk.add_authors current_user, params[:users]
-
     @authors = User.without_the_owner current_user
 
     if @talk.update_attributes(talk_params)
-      @talk.update_user_counters
+      TalkService.new(@talk).add_authors current_user, params[:users]
 
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
     else
@@ -103,24 +93,25 @@ class TalksController < ApplicationController
     redirect_to talk_path(@talk)
   end
 
-  private
-    def search_talks(search, my, page)
-      if my
-        current_user.talks.page(page).per(5).desc(:created_at) if logged_in?
+private
+
+  def search_talks(search, my, page)
+    if my
+      current_user.talks.desc(:created_at).page(page).per(5) if logged_in?
+    else
+      if search.blank?
+        Talk.where(to_public: true).desc(:created_at).page(page).per(5)
       else
-        if search.blank?
-          Talk.where(to_public: true).page(page).per(5).desc(:created_at)
-        else
-          Kaminari.paginate_array(Talk.search(search)).page(page).per(5)
-        end
+        Kaminari.paginate_array(TalkQuery.new.search(search)).page(page).per(5)
       end
     end
+  end
 
-    def set_talk
-      @talk = Talk.find(params[:id])
-    end
+  def set_talk
+    @talk = Talk.find(params[:id])
+  end
 
-    def talk_params
-      params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
-    end
+  def talk_params
+    params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
+  end
 end
