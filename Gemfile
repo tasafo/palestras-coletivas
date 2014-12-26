@@ -9,7 +9,7 @@ gem 'bcrypt', :require => 'bcrypt'
 gem 'nokogiri', :require => false
 gem 'multi_json', :require => false
 gem 'jquery-rails'
-gem 'mongoid_slug'
+gem 'mongoid-slug'
 gem 'kaminari'
 gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 gem 'geocoder'

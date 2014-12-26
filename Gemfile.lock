@@ -123,7 +123,7 @@ GEM
       mongoid (>= 3.0.1)
       rake
       rspec (>= 2.14)
-    mongoid_slug (4.0.0)
+    mongoid-slug (4.0.0)
       mongoid (>= 3.0)
       stringex (~> 2.0)
     moped (2.0.2)
@@ -270,8 +270,8 @@ DEPENDENCIES
   lograge
   mongoid
   mongoid-rspec
+  mongoid-slug
   mongoid_search!
-  mongoid_slug
   multi_json
   newrelic_rpm
   nokogiri
