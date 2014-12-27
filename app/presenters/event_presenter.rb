@@ -7,6 +7,10 @@ class EventPresenter
     prepare_event event, user_logged_in, authorized
   end
 
+  def show_checkin
+    (@crowded && @enrollment && @enrollment.active?) || !@crowded
+  end
+
   private
     def prepare_event(event, user_logged_in, authorized)
       if event

@@ -6,15 +6,15 @@ class Talk
   include UpdateCounter
   include Commentable
 
-  field :presentation_url
-  field :title
-  field :description
-  field :tags
-  field :thumbnail
-  field :code
+  field :presentation_url, type: String
+  field :title, type: String
+  field :description, type: String
+  field :tags, type: String
+  field :thumbnail, type: String
+  field :code, type: String
   field :to_public, type: Boolean, default: false
-  field :owner
-  field :video_link
+  field :owner, type: String
+  field :video_link, type: String
   field :counter_presentation_events, type: Integer, default: 0
 
   has_and_belongs_to_many :users, inverse_of: :talks
@@ -26,5 +26,5 @@ class Talk
   slug :title
   search_in :title, :tags
   
-  validates_presence_of :title, :description, :tags, :users, :owner
+  validates_presence_of :title, :description, :tags, :owner, :users
 end

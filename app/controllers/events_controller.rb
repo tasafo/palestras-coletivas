@@ -3,18 +3,16 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update]
 
   def index
-    if params[:my].nil?
-      @events = Event.all_public
-      @my = false
-    else
-      @events = current_user.events.order_by(:start_date => :desc) if logged_in?
-      @my = true
-    end
+    @my = !params[:my].nil?
+
+    @events = EventQuery.new.all_public unless @my
+
+    @events = current_user.events.desc(:start_date) if logged_in? && @my
 
     respond_to do |format|
       format.html
       format.json {
-        render json: Event.all_public.only('name', 'edition', 'description', 'start_date', 'days', 'street', 'district', 'state', 'country')
+        render json: EventQuery.new.all_public.only('name', 'edition', 'description', 'start_date', 'end_date', 'street', 'district', 'state', 'country')
       }
     end
   end
@@ -26,14 +24,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-
-    @event.owner = current_user.id
-
     @organizers = User.without_the_owner current_user
 
-    if @event.save
-      @event.update_list_organizers current_user, params[:users]
-
+    if EventService.new(@event, params[:users], owner: current_user).save
       redirect_to event_path(@event), :notice => t("flash.events.create.notice")
     else
       render :new
@@ -55,13 +48,9 @@ class EventsController < ApplicationController
   end
 
   def update
-    owner = User.find(@event.owner)
-
     @organizers = User.without_the_owner current_user
 
-    if @event.update_attributes(event_params)
-      @event.update_list_organizers owner, params[:users]
-
+    if EventService.new(@event, params[:users], params: event_params).update
       redirect_to event_path(@event), :notice => t("flash.events.update.notice")
     else
       render :edit

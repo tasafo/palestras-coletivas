@@ -8,13 +8,13 @@
           <%= link_to t("titles.schedules.new"), new_event_schedule_path(@event), :class => "m-btn green" %>
         <% end %>
 
-        <% if logged_in? && @event.is_in_progress? %>
+        <% if logged_in? && @event.in_progress? %>
           <% if current_user.present_at? @event %>
             <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="m-btn btn-present btn-info disabled">
               <%= t("show.event.btn_presence_checkin") %>
             </a>
           <% else %>
-            <% if (@presenter.crowded && @presenter.enrollment && @presenter.enrollment.active?) || !@presenter.crowded %>
+            <% if @presenter.show_checkin %>
               <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="m-btn blue btn-present">Check-in</a>
             <% end %>
           <% end %>

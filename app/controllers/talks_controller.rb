@@ -23,9 +23,8 @@ class TalksController < ApplicationController
   def create
     @talk = Talk.new(talk_params)
     @authors = User.without_the_owner current_user
-    TalkService.new(@talk).add_authors current_user, params[:users]
 
-    if @talk.save
+    if TalkService.new(@talk, params[:users], current_user).save
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
       render :new
@@ -70,9 +69,7 @@ class TalksController < ApplicationController
   def update
     @authors = User.without_the_owner current_user
 
-    if @talk.update_attributes(talk_params)
-      TalkService.new(@talk).add_authors current_user, params[:users]
-
+    if TalkService.new(@talk, params[:users], current_user, talk_params).update
       redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
     else
       render :edit
@@ -96,15 +93,13 @@ class TalksController < ApplicationController
 private
 
   def search_talks(search, my, page)
-    if my
-      current_user.talks.desc(:created_at).page(page).per(5) if logged_in?
-    else
-      if search.blank?
-        TalkQuery.new.publics.page(page).per(5)
-      else
-        Kaminari.paginate_array(TalkQuery.new.search(search)).page(page).per(5)
-      end
-    end
+    talks = TalkQuery.new.publics if search.blank?
+
+    talks = Kaminari.paginate_array(TalkQuery.new.search(search)) unless search.blank?
+
+    talks = current_user.talks.desc(:created_at) if logged_in? && my
+
+    talks.page(page).per(5)
   end
 
   def set_talk
