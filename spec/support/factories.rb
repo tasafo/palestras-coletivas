@@ -92,12 +92,13 @@ FactoryGirl.define do
       end_date "06/06/2012"
       deadline_date_enrollment "06/06/2012"
       place "Centro de Convenções do Jurunas"
-      street "Rua dos Caripunas, 800"
+      street "Rua dos Caripunas, 400"
       district "Jurunas"
       city "Belém"
       state "Pará"
       country "Brasil"
       to_public true
+      coordinates [-48.4945471, -1.4714916]
     end
   end
 

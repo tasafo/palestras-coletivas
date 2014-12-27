@@ -40,19 +40,4 @@ class Event
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
 
   slug :name, :edition
-  geocoded_by :address
-
-  after_validation :geocode
-
-  def name_and_edition
-    [name, edition].compact.join(' - ')
-  end
-
-  def address
-    [street, district, city, state, country].compact.join(', ')
-  end
-
-  def in_progress?
-    (start_date..end_date).include?(Date.today)
-  end
 end

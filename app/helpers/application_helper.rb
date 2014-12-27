@@ -3,4 +3,8 @@ module ApplicationHelper
     url = Gravatar.url(email)
     image_tag url, :alt => alt, :size => size, :class => 'img-circle'
   end
+
+  def event_address(event)
+    EventPolicy.new(event).address
+  end
 end

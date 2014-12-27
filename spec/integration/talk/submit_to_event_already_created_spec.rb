@@ -15,7 +15,7 @@ describe "Submit talk already created", :type => :request, js: true do
       click_link "Compartilhe"
       click_link "Submeter a um evento"
 
-      select event.name_and_edition, :from => "submit_event_event_id"
+      select event.name, :from => "submit_event_event_id"
 
       click_button "Adicionar programação"
     end

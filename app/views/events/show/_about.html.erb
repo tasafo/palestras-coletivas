@@ -1,0 +1,19 @@
+  <section id="about">
+    <div class="container">
+      <h4><%= t("labels.event.about") %></h4>
+
+      <div class="description">
+        <%= simple_format(@event.description) %>
+      </div>
+
+      <div class="row-fluid">
+        <%= t("labels.event.stocking") %>: <%= @event.stocking %>
+      </div>
+
+      <div class="row-fluid">
+        <% if @presenter.open_enrollment %>
+          <%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, :format => :long %>
+        <% end %>
+      </div>
+    </div>
+  </section>

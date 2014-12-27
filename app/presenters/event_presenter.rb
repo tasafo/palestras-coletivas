@@ -11,6 +11,14 @@ class EventPresenter
     (@crowded && @enrollment && @enrollment.active?) || !@crowded
   end
 
+  def address
+    EventPolicy.new(@event).address
+  end
+
+  def in_progress?
+    EventPolicy.new(@event).in_progress?
+  end
+
   private
     def prepare_event(event, user_logged_in, authorized)
       if event

@@ -20,11 +20,22 @@ private
   def update_list_organizers
     @owner = User.find(@event.owner) unless @event.owner.nil?
     
+    save_coordinates
+
     save_owner
     
     save_organizers
 
     true
+  end
+
+  def save_coordinates
+    results = Geocoder.search(EventPolicy.new(@event).address)
+    
+    if results
+      @event.coordinates = [ results[0].geometry['location']['lng'], results[0].geometry['location']['lat'] ]
+      @event.save
+    end
   end
 
   def save_owner
