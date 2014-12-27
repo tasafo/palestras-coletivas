@@ -6,8 +6,8 @@ class EventService
     @params = args[:params]
   end
 
-  def save
-    @event.owner = @owner.id.to_s if @event.owner.nil?
+  def create
+    @event.owner = @owner.id.to_s
     @event.save && update_list_organizers
   end
 

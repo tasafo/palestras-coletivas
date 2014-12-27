@@ -6,7 +6,7 @@ class TalkService
     @params = params
   end
 
-  def save
+  def create
     @talk.owner = @owner.id.to_s if @talk.owner.nil?
     add_authors && @talk.save
   end

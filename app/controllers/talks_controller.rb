@@ -24,7 +24,7 @@ class TalksController < ApplicationController
     @talk = Talk.new(talk_params)
     @authors = User.without_the_owner current_user
 
-    if TalkService.new(@talk, params[:users], current_user).save
+    if TalkService.new(@talk, params[:users], current_user).create
       redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
     else
       render :new

@@ -26,11 +26,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @organizers = User.without_the_owner current_user
 
-    if EventService.new(@event, params[:users], owner: current_user).save
-      redirect_to event_path(@event), :notice => t("flash.events.create.notice")
-    else
-      render :new
-    end
+    save_event(:new, @event, params[:users], owner: current_user)
   end
 
   def show
@@ -50,11 +46,7 @@ class EventsController < ApplicationController
   def update
     @organizers = User.without_the_owner current_user
 
-    if EventService.new(@event, params[:users], params: event_params).update
-      redirect_to event_path(@event), :notice => t("flash.events.update.notice")
-    else
-      render :edit
-    end
+    save_event(:edit, @event, params[:users], params: event_params)
   end
 
   def presence
@@ -77,5 +69,15 @@ class EventsController < ApplicationController
         :name, :edition, :description, :stocking, :tags, :start_date, :end_date, :deadline_date_enrollment, 
         :accepts_submissions, :to_public, :place, :street, :district, :city, :state, :country
       )
+    end
+
+    def save_event(option, event, users, args = {})
+      operation = option == :new ? 'create' : 'update'
+
+      if eval("EventService.new(event, users, owner: args[:owner], params: args[:params]).#{operation}")
+        redirect_to event_path(event), :notice => t("flash.events.#{operation}.notice")
+      else
+        render option
+      end
     end
 end
