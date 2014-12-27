@@ -5,7 +5,6 @@ class User
   include UpdateCounter
 
   field :name, type: String
-  slug :name
   field :username, type: String
   field :email, type: String
   field :password_hash, type: String
@@ -20,48 +19,27 @@ class User
   field :counter_public_talks, type: Integer, default: 0
 
   has_and_belongs_to_many :talks, :inverse_of => :talks
-
   has_and_belongs_to_many :watched_talks, :class_name => "Talk", :inverse_of => :watched_user
-
   has_and_belongs_to_many :events
-
   has_many :enrollments
-
   has_many :votes
+
+  slug :name
 
   attr_reader :password
 
   validates_presence_of :name, :username
-
   validates_length_of :name, minimum: 3
-
   validates_uniqueness_of :name, :email, :username
-
   validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/
-
   validates_format_of :username, with: /\A@[a-z]\w{2}\w+\z/
-
   validates_presence_of :password, :if => :require_password?
-
   validates_confirmation_of :password, :if => :require_password?
 
   after_save :erase_password
-
   before_create { generate_token(:auth_token) }
 
-  scope :by_name, -> { order_by(:_slugs => :asc) }
-
-  scope :without_the_owner, lambda { |user| not_in(:_id => user.id.to_s).by_name }
-
-  scope :top_talk_watchers, -> { where(:counter_watched_talks.gt => 0).order_by(:counter_watched_talks => :desc, :_slugs => :asc).limit(5) }
-
-  scope :organizing_events, -> { where(:counter_organizing_events.gt => 0).order_by(:counter_organizing_events => :desc, :_slugs => :asc).limit(5) }
-
-  scope :presentation_events, -> { where(:counter_presentation_events.gt => 0).order_by(:counter_presentation_events => :desc, :_slugs => :asc).limit(5) }
-
-  scope :participation_events, -> { where(:counter_participation_events.gt => 0).order_by(:counter_participation_events => :desc, :_slugs => :asc).limit(5) }
-
-  scope :public_talks, -> { where(:counter_public_talks.gt => 0).order_by(:counter_public_talks => :desc, :_slugs => :asc).limit(5) }
+  scope :by_name, -> { asc(:_slugs) }
 
   def oid
     self._id.to_s

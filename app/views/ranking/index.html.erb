@@ -41,11 +41,11 @@
           <% end %>
         <% end %>
 
-        <% unless @top_talk_watchers.blank? %>
+        <% unless @watched_talks.blank? %>
           <tr>
             <td colspan="2"><h4><%= t("ranking.watchers") %></h4></td>
           </tr>
-          <% @top_talk_watchers.each do |user| %>
+          <% @watched_talks.each do |user| %>
             <tr>
               <td><%= render "shared/user", :user => user %></td>
               <td><span class="badge badge-inverse"><%= user.counter_watched_talks %></span></td>
