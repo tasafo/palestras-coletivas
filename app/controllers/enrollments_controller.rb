@@ -11,14 +11,8 @@ class EnrollmentsController < ApplicationController
   def create
     @enrollment = Enrollment.new(enrollment_params)
     @event = Event.find(params[:enrollment][:event_id])
-    message = "error"
 
-    if @enrollment.save
-      @enrollment.update_counter_of_events_and_users "active"
-      message = "notice"
-    end
-
-    redirect_to event_path(@event), :notice => t("flash.enrollments.create.#{message}")
+    save_enrollment(:create, @event, @enrollment, "active")
   end
 
   def edit
@@ -38,11 +32,7 @@ class EnrollmentsController < ApplicationController
   def update
     @option_type = params[:option_type]
 
-    if @enrollment.update_attributes(enrollment_params)
-      @enrollment.update_counter_of_events_and_users @option_type
-
-      redirect_to event_path(@event), :notice => t("flash.enrollments.update.notice")
-    end
+    save_enrollment(:update, @event, @enrollment, @option_type, enrollment_params)
   end
 
 private
@@ -57,5 +47,13 @@ private
 
   def enrollment_params
     params.require(:enrollment).permit(:event_id, :user_id, :active, :present)
+  end
+
+  def save_enrollment(operation, event, enrollment, option_type, params = nil)
+    result = EnrollmentDecorator.new(enrollment, option_type, params).send operation
+
+    message_type = result ? 'notice' : 'error'
+      
+    redirect_to event_path(event), notice: t("flash.enrollments.#{operation.to_s}.#{message_type}")
   end
 end
