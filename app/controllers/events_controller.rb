@@ -25,7 +25,11 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    save_object(:new, @event, params[:users], owner: current_user)
+    if EventDecorator.new(@event).create(params[:users], current_user)
+      redirect_to event_path(@event), notice: t("flash.events.create.notice")
+    else
+      render :new
+    end
   end
 
   def show
@@ -41,7 +45,11 @@ class EventsController < ApplicationController
   end
 
   def update
-    save_object(:edit, @event, params[:users], params: event_params)
+    if EventDecorator.new(@event).update(params[:users], event_params)
+      redirect_to event_path(@event), notice: t("flash.events.update.notice")
+    else
+      render :edit
+    end
   end
 
   def presence

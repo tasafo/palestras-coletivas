@@ -1,23 +1,24 @@
 class TalkDecorator
-  def set_attributes(talk, users, args = {})
+  def initialize(talk)
     @talk = talk
-    @users = users
-    @owner = args[:owner]
-    @params = args[:params]
   end
 
-  def create
-    @talk.owner = @owner.id.to_s
+  def create(users, owner)
+    @users = users
+    @talk.owner = owner.id.to_s
     add_authors && @talk.save
   end
 
-  def update
-    @talk.update_attributes(@params) && add_authors
+  def update(users, params)
+    @users = users
+    @talk.update_attributes(params) && add_authors
   end
 
 private
 
   def add_authors
+    @owner = User.find(@talk.owner) unless @talk.owner.nil?
+
     @talk.users = nil
     @talk.users << @owner
 

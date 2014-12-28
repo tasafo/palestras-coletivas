@@ -22,7 +22,11 @@ class TalksController < ApplicationController
   def create
     @talk = Talk.new(talk_params)
 
-    save_object(:new, @talk, params[:users], owner: current_user)
+    if TalkDecorator.new(@talk).create(params[:users], current_user)
+      redirect_to talk_path(@talk), notice: t("flash.talks.create.notice")
+    else
+      render :new
+    end
   end
 
   def show
@@ -59,7 +63,11 @@ class TalksController < ApplicationController
   end
 
   def update
-    save_object(:edit, @talk, params[:users], params: talk_params)
+    if TalkDecorator.new(@talk).update(params[:users], talk_params)
+      redirect_to talk_path(@talk), notice: t("flash.talks.update.notice")
+    else
+      render :edit
+    end
   end
 
   def watch
