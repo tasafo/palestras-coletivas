@@ -4,7 +4,7 @@
   <div class="control-group">
     <%= f.label :day, t("labels.schedule.day"), :class => 'control-label' %>
     <div class="controls">
-      <%= select_tag("schedule[day]", @dates.html_safe, :class => "m-wrap m-ctrl-small") %>
+      <%= select_tag("schedule[day]", @presenter.dates.html_safe, :class => "m-wrap m-ctrl-small") %>
     </div>
   </div>
 
@@ -18,14 +18,14 @@
   <div class="control-group">
     <%= f.label :activity, t("labels.schedule.activity"), :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:schedule, :activity_id, @activities, :id, :description, {}, :class => "m-wrap m-ctrl-medium") %>
+      <%= collection_select(:schedule, :activity_id, @presenter.activities, :id, :description, {}, :class => "m-wrap m-ctrl-medium") %>
     </div>
   </div>
 
-  <div id="div_talk" class="control-group" style="display:<%= @display %>">
+  <div id="div_talk" class="control-group" style="display:<%= @presenter.display %>">
     <label class="control-label"><%= t("labels.talk.title") %></label>
     <div class="controls">
-      <span id="talk_title" class="input-xlarge uneditable-input"><%= @talk_title %></span>
+      <span id="talk_title" class="input-xlarge uneditable-input"><%= @presenter.talk_title %></span>
     </div>
   </div>
 

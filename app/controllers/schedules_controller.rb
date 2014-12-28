@@ -5,7 +5,7 @@ class SchedulesController < ApplicationController
   def new
     @schedule = Schedule.new
 
-    set_objetcs
+    set_presenter
 
     redirect_to root_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
@@ -13,33 +13,17 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
 
-    set_objetcs
+    set_presenter
 
-    if @schedule.save
-      @schedule.update_counter_of_users_talks params[:old_talk_id], params[:talk_id]
-
-      redirect_to event_path(@event), :notice => t("flash.schedules.create.notice")
-    else
-      render :new
-    end
+    save_schedule(:new, @event, @schedule, params[:old_talk_id], params[:talk_id])
   end
 
   def edit
-    set_objetcs
-
     redirect_to root_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
 
   def update
-    set_objetcs
-
-    if @schedule.update_attributes(schedule_params)
-      @schedule.update_counter_of_users_talks params[:old_talk_id], params[:talk_id]
-
-      redirect_to event_path(@event), :notice => t("flash.schedules.update.notice")
-    else
-      render :edit
-    end
+    save_schedule(:edit, @event, @schedule, params[:old_talk_id], params[:talk_id], schedule_params)
   end
 
   def search_talks
@@ -50,32 +34,31 @@ class SchedulesController < ApplicationController
     end
   end
 
-  private
-    def set_schedule
-      @schedule = Schedule.find(params[:id])
+private
+
+  def set_schedule
+    @schedule = Schedule.find(params[:id])
+
+    set_presenter
+  end
+
+  def set_presenter
+    @event = Event.find(params[:event_id])
+
+    @presenter = SchedulePresenter.new(@schedule, @event)
+  end
+
+  def schedule_params
+    params.require(:schedule).permit(:event_id, :activity_id, :talk_id, :day, :time, :environment)
+  end
+
+  def save_schedule(option, event, schedule, old_talk_id, talk_id, params = nil)
+    operation = option == :new ? :create : :update
+    
+    if ScheduleDecorator.new(schedule, old_talk_id, talk_id, params).send operation
+      redirect_to event_path(event), notice: t("flash.schedules.#{operation.to_s}.notice")
+    else
+      render option
     end
-
-    def schedule_params
-      params.require(:schedule).permit(:event_id, :activity_id, :talk_id, :day, :time, :environment)
-    end
-
-    def set_objetcs
-      @event = Event.find(params[:event_id])
-
-      @activities = Activity.all.order_by(:order => :asc)
-
-      event_dates = (@event.start_date..@event.end_date).to_a
-
-      @dates, day = "", 1
-      event_dates.each do |date|
-        selected = @schedule.day == day ? "selected='selected'" : ""
-
-        @dates += "<option value='#{day}' #{selected}>#{date}</option>"
-        day += 1
-      end
-
-      @talk_title = @schedule.talk? ? @schedule.talk.title : ""
-
-      @display = @schedule.talk? ? "block" : "none"
-    end
+  end
 end
