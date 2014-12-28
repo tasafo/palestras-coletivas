@@ -1,6 +1,7 @@
 class TalksController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_talk, only: [:show, :edit, :update]
+  before_action :set_authors, only: [:new, :create, :edit, :update]
 
   def index
     @search = params[:search]
@@ -16,19 +17,12 @@ class TalksController < ApplicationController
 
   def new
     @talk = Talk.new
-
-    @authors = User.without_the_owner current_user
   end
 
   def create
     @talk = Talk.new(talk_params)
-    @authors = User.without_the_owner current_user
 
-    if TalkService.new(@talk, params[:users], current_user).create
-      redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
-    else
-      render :new
-    end
+    save_talk(:new, @talk, params[:users], owner: current_user)
   end
 
   def show
@@ -61,19 +55,11 @@ class TalksController < ApplicationController
   end
 
   def edit
-    @authors = User.without_the_owner current_user
-
     redirect_to talks_path, :notice => t("flash.unauthorized_access") unless (@talk.owner.to_s == current_user.id.to_s)
   end
 
   def update
-    @authors = User.without_the_owner current_user
-
-    if TalkService.new(@talk, params[:users], current_user, talk_params).update
-      redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
-    else
-      render :edit
-    end
+    save_talk(:edit, @talk, params[:users], params: talk_params)
   end
 
   def watch
@@ -106,7 +92,21 @@ private
     @talk = Talk.find(params[:id])
   end
 
+  def set_authors
+    @authors = UserQuery.new.without_the_owner current_user
+  end
+
   def talk_params
     params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
+  end
+
+  def save_talk(option, talk, users, args = {})
+    operation = option == :new ? 'create' : 'update'
+
+    if eval("TalkDecorator.new(talk, users, owner: args[:owner], params: args[:params]).#{operation}")
+      redirect_to talk_path(talk), :notice => t("flash.talks.#{operation}.notice")
+    else
+      render option
+    end
   end
 end

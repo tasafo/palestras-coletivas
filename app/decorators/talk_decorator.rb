@@ -1,13 +1,13 @@
-class TalkService
-  def initialize(talk, users, owner, params = nil)
+class TalkDecorator
+  def initialize(talk, users, args = {})
     @talk = talk
     @users = users
-    @owner = owner
-    @params = params
+    @owner = args[:owner]
+    @params = args[:params]
   end
 
   def create
-    @talk.owner = @owner.id.to_s if @talk.owner.nil?
+    @talk.owner = @owner.id.to_s
     add_authors && @talk.save
   end
 

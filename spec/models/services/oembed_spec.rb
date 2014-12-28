@@ -1,4 +1,4 @@
-require "./app/models/concerns/oembed"
+require "./app/services/oembed"
 
 describe Oembed, :type => :model do
   context "returns" do

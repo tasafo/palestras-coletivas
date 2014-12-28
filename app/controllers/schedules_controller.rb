@@ -1,5 +1,5 @@
 class SchedulesController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_schedule, only: [:edit, :update]
 
   def new

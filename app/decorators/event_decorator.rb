@@ -1,4 +1,4 @@
-class EventService
+class EventDecorator
   def initialize(event, users, args = {})
     @event = event
     @users = users

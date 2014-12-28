@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_logged_user, :only => [:edit, :update]
+  before_action :require_logged_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update]
 
   def new
@@ -43,12 +43,13 @@ class UsersController < ApplicationController
     end 
   end
 
-  private
-    def set_user
-      @user = User.find(params[:id])
-    end
+private
 
-    def user_params
-      params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
+  end
 end

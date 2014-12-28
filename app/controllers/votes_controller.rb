@@ -22,9 +22,10 @@ class VotesController < ApplicationController
     end
   end
 
-  private
-    def set_schedule
-    	@event = Event.find(params[:event_id])
-      @schedule = Schedule.find(params[:schedule_id])
-    end
+private
+
+  def set_schedule
+  	@event = Event.find(params[:event_id])
+    @schedule = Schedule.find(params[:schedule_id])
+  end
 end

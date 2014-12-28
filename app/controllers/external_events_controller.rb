@@ -1,5 +1,5 @@
 class ExternalEventsController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_talk, only: [:new, :create, :edit, :update]
 
   def new
@@ -31,12 +31,13 @@ class ExternalEventsController < ApplicationController
     end
   end
 
-  private
-    def set_talk
-      @talk = Talk.find(params[:talk_id])
-    end
+private
 
-    def external_event_params
-      params.require(:external_event).permit(:name, :date, :place, :url)
-    end
+  def set_talk
+    @talk = Talk.find(params[:talk_id])
+  end
+
+  def external_event_params
+    params.require(:external_event).permit(:name, :date, :place, :url)
+  end
 end

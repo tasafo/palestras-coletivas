@@ -1,5 +1,5 @@
 class EnrollmentsController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_enrollment, only: [:edit, :update]
   before_action :set_event, only: [:new, :edit, :update]
 
@@ -45,16 +45,17 @@ class EnrollmentsController < ApplicationController
     end
   end
 
-  private
-    def set_event
-      @event = Event.find(params[:event_id])
-    end
+private
 
-    def set_enrollment
-      @enrollment = Enrollment.find(params[:id])
-    end
+  def set_event
+    @event = Event.find(params[:event_id])
+  end
 
-    def enrollment_params
-      params.require(:enrollment).permit(:event_id, :user_id, :active, :present)
-    end
+  def set_enrollment
+    @enrollment = Enrollment.find(params[:id])
+  end
+
+  def enrollment_params
+    params.require(:enrollment).permit(:event_id, :user_id, :active, :present)
+  end
 end

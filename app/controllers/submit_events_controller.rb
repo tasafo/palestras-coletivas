@@ -1,10 +1,10 @@
 class SubmitEventsController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create]
+  before_action :require_logged_user, only: [:new, :create]
 
   def new
     @schedule = Schedule.new
     @talk = Talk.find(params[:talk_id])
-    @events = Event.where(:to_public => true, :accepts_submissions => true, :end_date.gte => Date.today).order_by(:start_date => :desc)
+    @events = EventQuery.new.accepts_submissions
 
     if @events.count <= 0
       redirect_to talk_path(@talk), :alert => t("flash.submit_event.new.alert")
