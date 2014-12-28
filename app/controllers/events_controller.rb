@@ -1,14 +1,12 @@
-class EventsController < ApplicationController
+class EventsController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_event, only: [:show, :edit, :update]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
 
   def index
     @my = !params[:my].nil?
-
-    @events = EventQuery.new.all_public unless @my
-
-    @events = current_user.events.desc(:start_date) if logged_in? && @my
+    
+    @events = (logged_in? && @my) ? EventQuery.new.all_user(current_user) : EventQuery.new.all_public
 
     respond_to do |format|
       format.html
@@ -25,11 +23,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    if EventDecorator.new(@event).create(params[:users], current_user)
-      redirect_to event_path(@event), notice: t("flash.events.create.notice")
-    else
-      render :new
-    end
+    save_object(@event, params[:users], owner: current_user)
   end
 
   def show
@@ -45,11 +39,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    if EventDecorator.new(@event).update(params[:users], event_params)
-      redirect_to event_path(@event), notice: t("flash.events.update.notice")
-    else
-      render :edit
-    end
+    save_object(@event, params[:users], params: event_params)
   end
 
   def presence

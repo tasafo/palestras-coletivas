@@ -28,12 +28,6 @@ describe Talk, "validations", :type => :model do
     expect(talk.errors[:tags].size).to eq(1)
   end
 
-  it "requires user" do
-    talk = Talk.create(:users => nil)
-
-    expect(talk.errors[:users].size).to eq(1)
-  end
-
   it "requires owner" do
     talk = Talk.create(:owner => nil)
 

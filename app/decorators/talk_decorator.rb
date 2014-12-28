@@ -1,17 +1,18 @@
 class TalkDecorator
-  def initialize(talk)
+  def initialize(talk, users, args = {})
     @talk = talk
+    @users = users
+    @owner = args[:owner]
+    @params = args[:params]
   end
 
-  def create(users, owner)
-    @users = users
-    @talk.owner = owner.id.to_s
-    add_authors && @talk.save
+  def create
+    @talk.owner = @owner.id.to_s
+    @talk.save && add_authors
   end
 
-  def update(users, params)
-    @users = users
-    @talk.update_attributes(params) && add_authors
+  def update
+    @talk.update_attributes(@params) && add_authors
   end
 
 private

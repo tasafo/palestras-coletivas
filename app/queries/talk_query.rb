@@ -14,4 +14,8 @@ class TalkQuery
   def publics
     @relation.where(to_public: true).desc(:created_at)
   end
+
+  def all_user(user)
+    @relation.where(owner: user.id.to_s).desc(:created_at)
+  end
 end

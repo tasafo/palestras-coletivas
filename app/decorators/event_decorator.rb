@@ -1,17 +1,18 @@
 class EventDecorator
-  def initialize(event)
+  def initialize(event, users, args = {})
     @event = event
+    @users = users
+    @owner = args[:owner]
+    @params = args[:params]
   end
 
-  def create(users, owner)
-    @users = users
-    @event.owner = owner.id.to_s
+  def create
+    @event.owner = @owner.id.to_s
     @event.save && update_list_organizers
   end
 
-  def update(users, params)
-    @users = users
-    @event.update_attributes(params) && update_list_organizers
+  def update
+    @event.update_attributes(@params) && update_list_organizers
   end
 
 private

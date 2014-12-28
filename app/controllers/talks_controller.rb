@@ -1,4 +1,4 @@
-class TalksController < ApplicationController
+class TalksController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_talk, only: [:show, :edit, :update]
   before_action :set_authors, only: [:new, :create, :edit, :update]
@@ -22,11 +22,7 @@ class TalksController < ApplicationController
   def create
     @talk = Talk.new(talk_params)
 
-    if TalkDecorator.new(@talk).create(params[:users], current_user)
-      redirect_to talk_path(@talk), notice: t("flash.talks.create.notice")
-    else
-      render :new
-    end
+    save_object(@talk, params[:users], owner: current_user)
   end
 
   def show
@@ -63,11 +59,7 @@ class TalksController < ApplicationController
   end
 
   def update
-    if TalkDecorator.new(@talk).update(params[:users], talk_params)
-      redirect_to talk_path(@talk), notice: t("flash.talks.update.notice")
-    else
-      render :edit
-    end
+    save_object(@talk, params[:users], params: talk_params)
   end
 
   def watch
@@ -87,11 +79,11 @@ class TalksController < ApplicationController
 private
 
   def search_talks(search, my, page)
-    talks = TalkQuery.new.publics if search.blank?
-
-    talks = Kaminari.paginate_array(TalkQuery.new.search(search)) unless search.blank?
-
-    talks = current_user.talks.desc(:created_at) if logged_in? && my
+    if logged_in? && my
+      talks = TalkQuery.new.all_user(current_user)
+    else
+      talks = search.blank? ? TalkQuery.new.publics : Kaminari.paginate_array(TalkQuery.new.search(search))
+    end
 
     talks.page(page).per(5)
   end
