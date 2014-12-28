@@ -22,7 +22,7 @@ class TalksController < ApplicationController
   def create
     @talk = Talk.new(talk_params)
 
-    save_talk(:new, @talk, params[:users], owner: current_user)
+    save_object(:new, @talk, params[:users], owner: current_user)
   end
 
   def show
@@ -59,7 +59,7 @@ class TalksController < ApplicationController
   end
 
   def update
-    save_talk(:edit, @talk, params[:users], params: talk_params)
+    save_object(:edit, @talk, params[:users], params: talk_params)
   end
 
   def watch
@@ -98,15 +98,5 @@ private
 
   def talk_params
     params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
-  end
-
-  def save_talk(option, talk, users, args = {})
-    operation = option == :new ? 'create' : 'update'
-
-    if eval("TalkDecorator.new(talk, users, owner: args[:owner], params: args[:params]).#{operation}")
-      redirect_to talk_path(talk), :notice => t("flash.talks.#{operation}.notice")
-    else
-      render option
-    end
   end
 end

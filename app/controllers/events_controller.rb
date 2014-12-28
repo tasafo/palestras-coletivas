@@ -25,7 +25,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    save_event(:new, @event, params[:users], owner: current_user)
+    save_object(:new, @event, params[:users], owner: current_user)
   end
 
   def show
@@ -41,7 +41,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    save_event(:edit, @event, params[:users], params: event_params)
+    save_object(:edit, @event, params[:users], params: event_params)
   end
 
   def presence
@@ -69,15 +69,5 @@ private
       :name, :edition, :description, :stocking, :tags, :start_date, :end_date, :deadline_date_enrollment, 
       :accepts_submissions, :to_public, :place, :street, :district, :city, :state, :country
     )
-  end
-
-  def save_event(option, event, users, args = {})
-    operation = option == :new ? 'create' : 'update'
-
-    if eval("EventDecorator.new(event, users, owner: args[:owner], params: args[:params]).#{operation}")
-      redirect_to event_path(event), :notice => t("flash.events.#{operation}.notice")
-    else
-      render option
-    end
   end
 end

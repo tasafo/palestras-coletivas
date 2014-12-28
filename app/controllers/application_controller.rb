@@ -47,4 +47,18 @@ private
     owner
   end
 
+  def save_object(option, object, users, args = {})
+    operation = option == :new ? 'create' : 'update'
+    object_name = object.class.to_s.downcase
+
+    decorator = eval("#{object_name.titleize}Decorator.new")
+    decorator.send :set_attributes, object, users, owner: args[:owner], params: args[:params]
+    result = decorator.send operation.to_sym
+    
+    if result
+      redirect_to "/#{object_name.pluralize}/#{object._slugs[0]}", notice: t("flash.#{object_name.pluralize}.#{operation}.notice")
+    else
+      render option
+    end
+  end
 end

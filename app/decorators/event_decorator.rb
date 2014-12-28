@@ -1,5 +1,5 @@
 class EventDecorator
-  def initialize(event, users, args = {})
+  def set_attributes(event, users, args = {})
     @event = event
     @users = users
     @owner = args[:owner]

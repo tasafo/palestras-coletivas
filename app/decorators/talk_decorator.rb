@@ -1,5 +1,5 @@
 class TalkDecorator
-  def initialize(talk, users, args = {})
+  def set_attributes(talk, users, args = {})
     @talk = talk
     @users = users
     @owner = args[:owner]
