@@ -6,7 +6,7 @@ class EventsController < PersistenceController
   def index
     @my = !params[:my].nil?
     
-    @events = (logged_in? && @my) ? EventQuery.new.all_user(current_user) : EventQuery.new.all_public
+    @events = (logged_in? && @my) ? current_user.events.desc(:created_at) : EventQuery.new.all_public
 
     respond_to do |format|
       format.html
