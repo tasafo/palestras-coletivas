@@ -3,8 +3,8 @@ class EventPresenter
     :users_present, :users_active, :crowded, :new_subscription, :the_user_is_speaker, :enrollment,
     :image_top, :can_vote
 
-  def initialize(event, user_logged_in, authorized)
-    prepare_event event, user_logged_in, authorized
+  def initialize(event, authorized, user_logged_in = nil)
+    prepare_event event, authorized, user_logged_in
   end
 
   def show_checkin
@@ -20,7 +20,7 @@ class EventPresenter
   end
 
   private
-    def prepare_event(event, user_logged_in, authorized)
+    def prepare_event(event, authorized, user_logged_in = nil)
       if event
         @dates = (event.start_date..event.end_date).to_a
 
@@ -73,7 +73,7 @@ class EventPresenter
       users_active.sort_by! { |user| user[:name] }
     end
 
-    def logged(event, user_logged_in)
+    def logged(event, user_logged_in = nil)
       @new_subscription = true
 
       if user_logged_in

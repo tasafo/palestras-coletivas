@@ -10,7 +10,7 @@ describe "Edit event", :type => :request, js: true do
       :event,
       :tasafoconf,
       :users => [ user, other_user ],
-      :owner => user.id
+      :owner => user
     )
   }
 

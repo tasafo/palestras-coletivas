@@ -3,7 +3,7 @@ require "spec_helper"
 describe Talk, "validations", :type => :model do
   context "when valid data" do
     let!(:user) { create(:user, :paul) }
-    let!(:talk) { create(:talk, :users => [ user ], :owner => user.id.to_s) }
+    let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
 
     it "accepts valid attributes" do
       expect(talk).to be_valid

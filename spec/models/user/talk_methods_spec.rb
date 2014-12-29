@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe User, "talk methods", :type => :model do
   let!(:user)         { create(:user, :paul) }
-  let!(:talk)         { create(:talk, :users => [ user ], :owner => user.id.to_s) }
+  let!(:talk)         { create(:talk, :users => [ user ], :owner => user) }
   let!(:regular_user) { create(:user, :luis) }
 
   describe "watch_talk!" do

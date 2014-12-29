@@ -27,9 +27,7 @@ class EventsController < PersistenceController
   end
 
   def show
-    user = current_user ? current_user : nil
-    
-    @presenter = EventPresenter.new(@event, user, authorized_access?(@event))
+    @presenter = EventPresenter.new(@event, authorized_access?(@event), current_user)
 
     render layout: 'event'
   end

@@ -8,7 +8,7 @@ class EventQuery
   end
 
   def all_user(user)
-    @relation.where(owner: user.id.to_s).desc(:created_at)
+    @relation.where(owner: user).desc(:created_at)
   end
 
   def present_users

@@ -3,7 +3,7 @@ require "spec_helper"
 describe Schedule, "validations", :type => :model do
   context "when valid data" do
     let!(:user) { create(:user, :paul) }
-    let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
+    let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user) }
     let!(:schedule) { create(:schedule, :abertura, :event => event) }
 
     it "accepts valid attributes" do

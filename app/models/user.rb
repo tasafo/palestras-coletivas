@@ -18,11 +18,13 @@ class User
   field :counter_participation_events, type: Integer, default: 0
   field :counter_public_talks, type: Integer, default: 0
 
-  has_and_belongs_to_many :talks, :inverse_of => :talks
-  has_and_belongs_to_many :watched_talks, :class_name => "Talk", :inverse_of => :watched_user
+  has_and_belongs_to_many :talks, inverse_of: :talks
+  has_and_belongs_to_many :watched_talks, class_name: "Talk", inverse_of: :watched_user
   has_and_belongs_to_many :events
   has_many :enrollments
   has_many :votes
+  has_many :owner_events, class_name: "User", inverse_of: :owner
+  has_many :owner_talks, class_name: "User", inverse_of: :owner
 
   slug :name
 
