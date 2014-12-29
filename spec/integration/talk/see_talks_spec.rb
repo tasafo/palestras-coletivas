@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "See talks", :type => :request do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
 
   context "with two talks" do
     before do

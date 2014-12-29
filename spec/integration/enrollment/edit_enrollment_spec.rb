@@ -4,8 +4,8 @@ describe "Edit enrollment", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
-  let!(:event) { create(:event, :tasafoconf, :deadline_date_enrollment => Date.today, :users => [ user ], :owner => user.id) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:event) { create(:event, :tasafoconf, :deadline_date_enrollment => Date.today, :users => [ user ], :owner => user) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
   let!(:enrollment_active) { create(:enrollment, :event => event, :user => other_user) }
   let!(:enrollment_inactive) { create(:enrollment, :active => false, :event => event, :user => another_user) }

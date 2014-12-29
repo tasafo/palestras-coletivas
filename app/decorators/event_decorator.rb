@@ -7,7 +7,7 @@ class EventDecorator
   end
 
   def create
-    @event.owner = @owner.id.to_s
+    @event.owner = @owner
     @event.save && update_list_organizers
   end
 
@@ -18,12 +18,10 @@ class EventDecorator
 private
 
   def update_list_organizers
-    @owner = User.find(@event.owner) unless @event.owner.nil?
+    @owner = @event.owner if @event.owner
     
     save_coordinates
-
     save_owner
-    
     save_organizers
 
     true

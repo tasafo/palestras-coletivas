@@ -9,7 +9,7 @@ describe Event, "validations", :type => :model do
         :event,
         :tasafoconf,
         :users => [ user, other_user ],
-        :owner => user.id
+        :owner => user
       )
     }
 

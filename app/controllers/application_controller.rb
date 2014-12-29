@@ -24,7 +24,7 @@ private
 
     if logged_in? 
       model.users.each do |user|
-        if current_user.id == user.id
+        if current_user == user
           authorized = true
         end
       end
@@ -38,7 +38,7 @@ private
 
     if logged_in?
       model.users.each do |user|
-        if current_user.id == user.id && model.owner.to_s == user.id.to_s
+        if current_user == user && model.owner == user
           owner = true
         end
       end

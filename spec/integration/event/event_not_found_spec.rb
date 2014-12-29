@@ -9,7 +9,7 @@ describe "Event not found", :type => :request do
       :tasafoconf,
       :to_public => false,
       :users => [ user ],
-      :owner => user.id
+      :owner => user
     )
   }
 

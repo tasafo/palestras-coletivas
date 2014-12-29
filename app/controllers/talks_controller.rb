@@ -55,7 +55,7 @@ class TalksController < PersistenceController
   end
 
   def edit
-    redirect_to talks_path, :notice => t("flash.unauthorized_access") unless (@talk.owner.to_s == current_user.id.to_s)
+    redirect_to talks_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@talk)
   end
 
   def update
@@ -80,7 +80,7 @@ private
 
   def search_talks(search, my, page)
     if logged_in? && my
-      talks = TalkQuery.new.all_user(current_user)
+      talks = current_user.talks.desc(:created_at)
     else
       talks = search.blank? ? TalkQuery.new.publics : Kaminari.paginate_array(TalkQuery.new.search(search))
     end

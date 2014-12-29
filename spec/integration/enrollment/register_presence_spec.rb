@@ -13,7 +13,7 @@ describe "Register presence", :type => :request do
       :end_date => Date.today,
       :deadline_date_enrollment => Date.today,
       :users => [ user ],
-      :owner => user.id
+      :owner => user
     )
   }
 

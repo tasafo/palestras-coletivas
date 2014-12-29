@@ -24,7 +24,7 @@
         <tbody>
           <% if model.users %>
             <% model.users.by_name.each do |u| %>
-              <% if u.oid != model.owner %>
+              <% if u != model.owner %>
                 <tr id="row_<%= u.id %>">
                   <td>
                     <%= u.name %> <%= "(#{u.username})" %><input type="hidden" name="users[]" value="<%= u.oid %>" />

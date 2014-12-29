@@ -7,7 +7,7 @@ class TalkDecorator
   end
 
   def create
-    @talk.owner = @owner.id.to_s
+    @talk.owner = @owner
     @talk.save && add_authors
   end
 
@@ -18,7 +18,7 @@ class TalkDecorator
 private
 
   def add_authors
-    @owner = User.find(@talk.owner) unless @talk.owner.nil?
+    @owner = @talk.owner if @talk.owner
 
     @talk.users = nil
     @talk.users << @owner

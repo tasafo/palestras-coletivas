@@ -6,7 +6,7 @@ class EventsController < PersistenceController
   def index
     @my = !params[:my].nil?
     
-    @events = (logged_in? && @my) ? EventQuery.new.all_user(current_user) : EventQuery.new.all_public
+    @events = (logged_in? && @my) ? current_user.events.desc(:created_at) : EventQuery.new.all_public
 
     respond_to do |format|
       format.html
@@ -27,9 +27,7 @@ class EventsController < PersistenceController
   end
 
   def show
-    user = current_user ? current_user : nil
-    
-    @presenter = EventPresenter.new(@event, user, authorized_access?(@event))
+    @presenter = EventPresenter.new(@event, authorized_access?(@event), current_user)
 
     render layout: 'event'
   end

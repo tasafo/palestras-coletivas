@@ -7,10 +7,6 @@ class EventQuery
     @relation.where(to_public: true).desc(:start_date)
   end
 
-  def all_user(user)
-    @relation.where(owner: user.id.to_s).desc(:created_at)
-  end
-
   def present_users
     @relation.where(:counter_present_users.gt => 0).desc(:counter_present_users).asc(:_slugs).asc(:edition).limit(5)
   end

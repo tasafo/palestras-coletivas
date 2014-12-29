@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Submit talk", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:activity_palestra) { create(:activity, :palestra) }
   let!(:event) { create(:event, :tasafoconf, owner: user, start_date: Date.today, end_date: Date.today + 5.days, accepts_submissions: true) }
 

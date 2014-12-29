@@ -4,7 +4,7 @@ class UserQuery
   end
 
   def without_the_owner(user)
-    @relation.not_in(_id: user.id.to_s).asc(:_slugs)
+    @relation.not_in(_id: user).asc(:_slugs)
   end
 
   def ranking(type)

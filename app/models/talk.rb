@@ -14,7 +14,6 @@ class Talk
   field :thumbnail, type: String
   field :code, type: String
   field :to_public, type: Boolean, default: false
-  field :owner, type: String
   field :video_link, type: String
   field :counter_presentation_events, type: Integer, default: 0
 
@@ -23,6 +22,7 @@ class Talk
   has_many :schedules
   embeds_many :external_events
   embeds_many :comments, as: :commentable
+  belongs_to :owner, class_name: "User", inverse_of: :owner_talks
 
   slug :title
   search_in :title, :tags

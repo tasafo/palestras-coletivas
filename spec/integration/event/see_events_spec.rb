@@ -3,7 +3,7 @@ require "spec_helper"
 describe "See events", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
-  let!(:event) { create(:event, :tasafoconf, :users => [ user, other_user ], :owner => user.id) }
+  let!(:event) { create(:event, :tasafoconf, :users => [ user, other_user ], :owner => user) }
 
   context "public events" do
     before do

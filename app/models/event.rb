@@ -25,7 +25,6 @@ class Event
   field :state, type: String
   field :country, type: String
   field :coordinates, type: Array
-  field :owner, type: String
   field :counter_registered_users, type: Integer, default: 0
   field :counter_present_users, type: Integer, default: 0
   field :accepts_submissions, type: Boolean, default: false
@@ -35,6 +34,7 @@ class Event
   has_and_belongs_to_many :users
   has_many :schedules
   has_many :enrollments
+  belongs_to :owner, class_name: "User", inverse_of: :owner_events
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :street, :district, :city, :state, :country, :owner
   validates_length_of :description, maximum: 2000
