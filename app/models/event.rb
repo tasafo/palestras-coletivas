@@ -3,6 +3,7 @@ class Event
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Geocoder::Model::Mongoid
+  include Mongoid::Attributes::Dynamic
   include UpdateCounter
   include Commentable
   include Rateable

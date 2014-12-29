@@ -3,6 +3,7 @@ class Talk
   include Mongoid::Search
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include Mongoid::Attributes::Dynamic
   include UpdateCounter
   include Commentable
 
