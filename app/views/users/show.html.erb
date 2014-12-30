@@ -8,13 +8,13 @@
 
 <div class="featurette">
   <%= gravatar_image(@user.email, @user.name) %>
-  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %>  </small></h3>
+  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
 
-  <% if @gravatar.has_profile %>
+  <% if @presenter.gravatar.has_profile %>
     <p class="lead">
-      <%= @gravatar.about_me.blank? ? "" : "#{@gravatar.about_me}<br/>".html_safe %>
-      <%= @gravatar.current_location.blank? ? "" : "#{@gravatar.current_location}<br/>".html_safe %>
-      <%= t("show.user.profile") %> <%= link_to @gravatar.profile_url, @gravatar.profile_url %>
+      <%= @presenter.gravatar.about_me.blank? ? "" : "#{@presenter.gravatar.about_me}<br/>".html_safe %>
+      <%= @presenter.gravatar.current_location.blank? ? "" : "#{@presenter.gravatar.current_location}<br/>".html_safe %>
+      <%= t("show.user.profile") %> <%= link_to @presenter.gravatar.profile_url, @presenter.gravatar.profile_url %>
     </p>
   <% end %>
 </div>
@@ -45,7 +45,7 @@
   <%= presentations.html_safe %>
 <% end %>
 
-<% unless @participations.blank? %>
+<% unless @presenter.participations.blank? %>
   <% participation = t("show.user.participations") %>
   <h4><%= participation[@participations.count > 1 ? :other : :one] %></h4>
 
@@ -56,8 +56,8 @@
 
 <hr class="featurette-divider">
 
-<% unless @talks.empty? %>
-  <h3><%= t("show.talk.my_talks_published") %> (<%= @talks.count %>)</h3>
+<% unless @presenter.talks.empty? %>
+  <h3><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
 
-  <%= render "shared/talks", :show_user => false %>
+  <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
 <% end %>

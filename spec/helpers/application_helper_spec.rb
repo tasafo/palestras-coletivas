@@ -6,23 +6,13 @@ describe ApplicationHelper, :type => :helper do
       helper.gravatar_image("paul@example.org", "Paul Young")
     end
 
-    before do
-      allow(Gravatar).to receive_messages :url => "/some/gravatar"
-    end
-
-    it "generates gravatar url" do
-      expect(Gravatar).to receive(:url).with("paul@example.org")
-
-      helper.gravatar_image("paul@example.org", "Paul Young")
-    end
-
     context "with regular expressions" do
       it "returns image" do
         expect(image).to match(%r[<img.*?])
       end
 
       it "sets url" do
-        expect(image).to match(%r[src="/some/gravatar"])
+        expect(image).to match(/[efac3492328ff47a6c761063c7cf794a?d=mm]/)
       end
 
       it "sets alternative text" do
@@ -38,7 +28,7 @@ describe ApplicationHelper, :type => :helper do
       end
 
       it "sets url" do
-        expect(html["src"]).to eql("/some/gravatar")
+        expect(html["src"]).to eql("http://gravatar.com/avatar/efac3492328ff47a6c761063c7cf794a?d=mm")
       end
 
       it "sets alternative text" do

@@ -18,19 +18,14 @@ class UsersController < ApplicationController
 
   def show
     unless @user.nil?
-      @talks = @user.talks.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
-      @participations = Enrollment.where(:present => true, :user => @user).order_by(:updated_at => :asc)
-
-      user_profile = Gravatar.profile(@user.email)
-      @gravatar = Gravatar.new user_profile
-      @gravatar.show_profile
+      @presenter = UserPresenter.new(@user, params[:page])
     else
       redirect_to root_path, :notice => t("flash.user_not_found")
     end
   end
 
   def edit
-    if @user.id != current_user.id
+    if @user != current_user
       redirect_to talks_path, :notice => t("flash.unauthorized_access")
     end
   end

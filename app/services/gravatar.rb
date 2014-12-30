@@ -2,28 +2,25 @@ require 'nokogiri'
 require 'open-uri'
 
 class Gravatar
-  attr_accessor :url, :name, :thumbnail_url, :profile_url, :about_me, :current_location, :has_profile
+  DOMAIN = "http://gravatar.com"
 
-  def initialize(url)
-    @url = url
-  end
+  attr_reader :url, :profile, :profile_url, :about_me, :current_location, :has_profile
 
-  def self.url(email)
+  def initialize(email)
     hash = Digest::MD5.hexdigest(email)
 
-    "http://gravatar.com/avatar/#{hash}?d=mm"
+    @url = "#{DOMAIN}/avatar/#{hash}?d=mm"
+    @profile = "#{DOMAIN}/#{hash}"
+
+    get_profile
   end
 
-  def self.profile(email)
-    hash = Digest::MD5.hexdigest(email)
+private
 
-    "http://gravatar.com/#{hash}"
-  end
-
-  def show_profile
+  def get_profile
     begin
-      unless @url.blank?
-        record = Nokogiri::XML(open("#{@url}.xml"))
+      if @profile
+        record = Nokogiri::XML(open("#{@profile}.xml"))
 
         @profile_url = record.xpath("//profileUrl").text
         @about_me = record.xpath("//aboutMe").text

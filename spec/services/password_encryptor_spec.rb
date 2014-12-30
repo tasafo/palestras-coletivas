@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe PasswordEncryptor, :type => :model do
+describe PasswordEncryptor do
   let(:encryptor) { double("encryptor") }
 
   it "sets encryptor to BCrypt" do

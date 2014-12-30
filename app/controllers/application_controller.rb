@@ -16,7 +16,7 @@ private
   end
 
   def logged_in?
-    session[:user_id] && current_user
+    !current_user.nil?
   end
 
   def authorized_access?(model)

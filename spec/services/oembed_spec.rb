@@ -1,6 +1,6 @@
 require "./app/services/oembed"
 
-describe Oembed, :type => :model do
+describe Oembed do
   context "returns" do
     it "valid slideshsare presentation" do
       oembed = Oembed.new "http://pt.slideshare.net/luizsanches/ruby-praticamente-falando"
