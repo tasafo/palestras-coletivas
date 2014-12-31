@@ -9,10 +9,18 @@ class PersistenceController < ApplicationController
       operation = :create
     end
     
-    if eval("#{object_name.titleize}Decorator").new(object, users, args).send operation
+    decorator = get_decorator(object, users, args)
+
+    if decorator.send operation
       redirect_to "/#{object_name.pluralize}/#{object._slugs[0]}", notice: t("flash.#{object_name.pluralize}.#{operation}.notice")
     else
       render option
     end
+  end
+
+private
+
+  def get_decorator(object, users, args)
+    eval("#{object.class.name}Decorator").new(object, users, args)
   end
 end
