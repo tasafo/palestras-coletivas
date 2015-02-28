@@ -3,7 +3,7 @@ require 'multi_json'
 require 'open-uri'
 
 class Oembed
-  attr_accessor :url, :title, :code, :thumbnail, :frame, :found
+  attr_reader :url, :title, :code, :thumbnail, :frame
 
   def initialize(url, code = 0)
     @url = url
@@ -11,34 +11,11 @@ class Oembed
   end
 
   def open_presentation
-    begin
-      if @url.include? "slideshare.net"
-        record = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
-
-        unless record.nil?
-          @title = record.xpath("//title").text
-          @code = record.xpath("//slideshow-id").text
-          @thumbnail = record.xpath("//thumbnail").text
-          true
-        end
-
-      elsif @url.include? "speakerdeck.com"
-        record = MultiJson.load(open("https://speakerdeck.com/oembed.json?url=#{@url}"))
-
-        unless record.nil?
-          html_field = record['html']
-          @title = record["title"]
-          @code = html_field.match(/player\/(.*)\" style/)[1]
-          @thumbnail = "https://speakerd.s3.amazonaws.com/presentations/#{code}/thumb_slide_0.jpg"
-          true
-        end
-
-      end
-
-    rescue OpenURI::HTTPError
-      false
-
-    end
+    if @url.include? "slideshare.net"
+      open_slideshare
+    elsif @url.include? "speakerdeck.com"
+      open_speakerdeck
+    end  
   end
 
   def show_presentation
@@ -51,6 +28,7 @@ class Oembed
     else
       @frame = "<img src=\"/assets/without_presentation.jpg\" #{dimension} />"
     end
+    self
   end
 
   def show_video
@@ -66,18 +44,53 @@ class Oembed
 
     begin
       if video_url.nil?
-        @found = false
+        nil
       else
         record = MultiJson.load(open(video_url))
 
         unless record.nil?
           @title = record["title"]
           @frame = record['html']
-          @found = true
+          self
         end
       end
     rescue OpenURI::HTTPError
-      @found = false
+      nil
+    end
+  end
+
+private
+
+  def open_slideshare
+    begin
+      record = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
+
+      unless record.nil?
+        @title = record.xpath("//title").text
+        @code = record.xpath("//slideshow-id").text
+        @thumbnail = record.xpath("//thumbnail").text
+        self
+      end
+    rescue OpenURI::HTTPError
+      nil
+
+    end
+  end
+
+  def open_speakerdeck
+    begin
+      record = MultiJson.load(open("https://speakerdeck.com/oembed.json?url=#{@url}"))
+
+      unless record.nil?
+        html_field = record['html']
+        @title = record["title"]
+        @code = html_field.match(/player\/(.*)\" style/)[1]
+        @thumbnail = "https://speakerd.s3.amazonaws.com/presentations/#{code}/thumb_slide_0.jpg"
+        self
+      end
+    rescue OpenURI::HTTPError
+      nil
+
     end
   end
 end

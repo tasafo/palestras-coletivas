@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Create external event of talk", :type => :request do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
 
   context "when valid data" do
     before do
@@ -38,7 +38,7 @@ describe "Create external event of talk", :type => :request do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(talks_external_events_path(talk))
+      expect(current_path).to eql(talk_external_events_path(talk))
     end
 
     it "displays error messages" do

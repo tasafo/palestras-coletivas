@@ -3,10 +3,10 @@ require "spec_helper"
 describe "Create schedule", :type => :request, :js => true do
   let!(:user) { create(:user, :paul) }
   
-  let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
+  let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user) }
   
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
-  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
+  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user) }
   
   let!(:activity_abertura) { create(:activity, :abertura) }
   let!(:activity_palestra) { create(:activity, :palestra) }
@@ -50,7 +50,7 @@ describe "Create schedule", :type => :request, :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(new_schedule_path(event))
+      expect(current_path).to eql(event_schedules_path(event))
     end
 
     it "displays error messages" do

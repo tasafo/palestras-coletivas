@@ -1,18 +1,14 @@
 <section id="top">
-
   <h1>Talks</h1>
-
-  
 </section>
 
 <div class="container container-talks">
-
   <% if logged_in? %>
     <nav class="navbar navbar-default nav-bar-talks" role="navigation">
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <% unless @talks.blank? %>
-            <%= form_for @talk, :html => { :class => 'navbar-form navbar-left', role: 'search' }, :url => talks_path, :method => "get" do |f| %>
+            <%= form_for talks_path, :html => { :class => 'navbar-form navbar-left', role: 'search' }, :method => "get" do |f| %>
               <div class="form-group">
                 <input type="text" class="form-control" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
               </div>
@@ -40,12 +36,12 @@
         <div class="box-talk">
           <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
 
-          <%= image_tag thumb, :class => "featurette-image img-polaroid", height: '180', width: '230' %>
+          <%= image_tag thumb, class: "featurette-image img-polaroid", height: '180', width: '230' %>
 
           <% talk.users.by_name.each do |user| %>
             <a href="<%= user_path(user) %>" title="<%= user.name %>" class="thumb-user">
               <%= gravatar_image(user.email, user.name, "40x40") %>
-            <a>
+            </a>
           <% end %>
 
           <p><%= link_to talk.title, talk_path(talk) %></p>
@@ -54,7 +50,5 @@
         </div>
       </div>
     <% end %>
-
   </div>
-
 </div>

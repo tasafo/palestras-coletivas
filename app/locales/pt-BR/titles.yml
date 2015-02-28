@@ -6,7 +6,7 @@ pt-BR:
       edit: "Editar palestra"
       show: "Exibir palestra"
       my: "Minhas palestras"
-      all: "Todos as palestras"
+      all: "Todas as palestras"
       search: "Buscar palestra"
       select: "Selecionar palestra"
       no_talks: "Nenhuma palestra adicionada"
@@ -47,4 +47,4 @@ pt-BR:
       edit: "Editar evento externo de"
 
     submit_event:
-      new: "Submeter a palestra ao evento"
+      new: "Submeter a palestra"

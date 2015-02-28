@@ -2,10 +2,10 @@ require "spec_helper"
 
 describe "Edit schedule", :type => :request, :js => true do
   let!(:user) { create(:user, :paul) }
-  let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user.id) }
+  let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user) }
 
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
-  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
+  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user) }
 
   let!(:activity_lanche) { create(:activity, :lanche) }
 
@@ -60,7 +60,7 @@ describe "Edit schedule", :type => :request, :js => true do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(edit_schedule_path(event, schedule_palestra2))
+      expect(current_path).to eql(event_schedule_path(event, schedule_palestra2))
     end
 
     it "displays error messages" do

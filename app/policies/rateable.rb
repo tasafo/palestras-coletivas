@@ -15,7 +15,7 @@ module Rateable
     round_by_point_5(rating)
   end
 
-  private
+private
 
   def average ratings
     ratings.inject{ |sum, el| sum + el } / ratings.size

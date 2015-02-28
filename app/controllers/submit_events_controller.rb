@@ -1,10 +1,10 @@
 class SubmitEventsController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create]
+  before_action :require_logged_user, only: [:new, :create]
 
   def new
     @schedule = Schedule.new
     @talk = Talk.find(params[:talk_id])
-    @events = Event.where(:to_public => true, :accepts_submissions => true, :end_date.gte => Date.today).order_by(:start_date => :desc)
+    @events = EventQuery.new.accepts_submissions
 
     if @events.count <= 0
       redirect_to talk_path(@talk), :alert => t("flash.submit_event.new.alert")
@@ -20,13 +20,9 @@ class SubmitEventsController < ApplicationController
 
     @activity = Activity.find_by(type: "talk")
     
-    begin
-      @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
-
-      @error = true
-      @message = t("flash.submit_event.create.alert")
-
-    rescue Mongoid::Errors::DocumentNotFound
+    @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
+    
+    if @_schedule.nil?
       @schedule = Schedule.new(
         activity: @activity,
         event: @event,
@@ -39,7 +35,9 @@ class SubmitEventsController < ApplicationController
         @error = true
         @message = t("flash.submit_event.create.notice")
       end
-    
+    else
+      @error = true
+      @message = t("flash.submit_event.create.alert")
     end
 
     redirect_to talk_path(@talk), :notice => @message if @error

@@ -9,7 +9,7 @@ describe "Event not found", :type => :request do
       :tasafoconf,
       :to_public => false,
       :users => [ user ],
-      :owner => user.id
+      :owner => user
     )
   }
 
@@ -35,7 +35,7 @@ describe "Event not found", :type => :request do
     end
 
     it "displays error message" do
-      expect(page).to have_content("Evento não encontrado")
+      page.has_content? "Evento não encontrado"
     end
   end
 
@@ -49,7 +49,7 @@ describe "Event not found", :type => :request do
     end
 
     it "displays error message" do
-      expect(page).to have_content("Evento não encontrado")
+      page.has_content? "Evento não encontrado"
     end
   end
 end

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Search talk", :type => :request do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   
   context "without seeking" do
     before do
@@ -22,7 +22,7 @@ describe "Search talk", :type => :request do
     before do
       visit root_path
       click_link "Palestras"
-      fill_in :talk_search, :with => ""
+      fill_in :search, :with => ""
       click_button "Buscar"
     end
 
@@ -39,7 +39,7 @@ describe "Search talk", :type => :request do
     before do
       visit root_path
       click_link "Palestras"
-      fill_in :talk_search, :with => "compartilhe"
+      fill_in :search, :with => "compartilhe"
       click_button "Buscar"
     end
 
@@ -56,7 +56,7 @@ describe "Search talk", :type => :request do
     before do
       visit root_path
       click_link "Palestras"
-      fill_in :talk_search, :with => "noob"
+      fill_in :search, :with => "noob"
       click_button "Buscar"
     end
 

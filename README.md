@@ -1,6 +1,6 @@
 # Palestras coletivas
 
-Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento (http://palestrascoletivas.com/).
+Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento.
 
 ## Status do código
 
@@ -12,15 +12,9 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 	curl -sSL https://get.rvm.io | bash -s stable
 
-### Vamos usar a versão 2.1 do Ruby
+### Vamos usar a versão 2 do Ruby
 
-	rvm install ruby-2.1.1
-
-	rvm use 2.1.1
-
-	rvm gemset create palestrascoletivas
-
-	rvm gemset use palestrascoletivas
+	rvm install ruby-2.2.0
 
 ### Usamos o MongoDB, então instala ele lá!
 
@@ -54,7 +48,7 @@ Agora espera...
 
 ### Em seu navegador, vá para o endereço
 
-#### localhost:3000
+  localhost:3000
 
 ### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
 

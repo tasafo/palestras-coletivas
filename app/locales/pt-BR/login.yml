@@ -2,3 +2,5 @@ pt-BR:
   login:
     about_html: |
       Informe seus dados para fazer o login.
+    if_you_do_not_have_an_account_yet: Se você ainda não possui uma conta,
+    register_here: cadastre-se aqui.

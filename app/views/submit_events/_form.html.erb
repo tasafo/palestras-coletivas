@@ -4,7 +4,7 @@
   <div class="control-group">
     <%= f.label :submit_event, t("labels.submit_event.event"), :class => 'control-label' %>
     <div class="controls">
-      <%= collection_select(:submit_event, :event_id, @events, :id, :name_and_edition, {}, :class => "m-wrap m-ctrl-medium") %>
+      <%= collection_select(:submit_event, :event_id, @events, :id, :name, {}, :class => "m-wrap m-ctrl-medium") %>
     </div>
   </div>
 

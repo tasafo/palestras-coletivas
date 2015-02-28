@@ -7,11 +7,13 @@ FactoryGirl.define do
 
     trait :paul do
       name "Paul Young"
+      username "@pyoung"
       email "paul@example.org"
     end
 
     trait :billy do
       name "Billy Paul"
+      username "@bpaul"
       email "billy@example.org"
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago
@@ -19,11 +21,13 @@ FactoryGirl.define do
 
     trait :luis do
       name "Luis Miguel"
+      username "@lmiguel"
       email "luizgrsanches@gmail.com"
     end
 
     trait :random do
       sequence(:name)  { |n| "John #{n}" }
+      sequence(:username)  { |n| "@john#{n}" }
       sequence(:email) { |n| "john#{n}@example.org" }
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago
@@ -88,12 +92,13 @@ FactoryGirl.define do
       end_date "06/06/2012"
       deadline_date_enrollment "06/06/2012"
       place "Centro de Convenções do Jurunas"
-      street "Rua dos Caripunas, 800"
+      street "Rua dos Caripunas, 400"
       district "Jurunas"
       city "Belém"
       state "Pará"
       country "Brasil"
       to_public true
+      coordinates [-48.4945471, -1.4714916]
     end
   end
 

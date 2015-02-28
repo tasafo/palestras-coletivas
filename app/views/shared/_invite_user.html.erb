@@ -1,14 +1,16 @@
   <fieldset>
     <legend><p class="text-info"><%= t("new.invite.#{key}") %></p></legend>
 
-    <div class="row">
-      <div class="col-md-6">
-        <%= select_tag("user_id", options_from_collection_for_select(users, "id", "name"), :class => "form-control") %>
-      </div>
+    <div class="m-input-append" id="search-invitee">
+      <%= text_field :invitee, :username,
+              placeholder: t("labels.talk.search_user"),
+              :class => "m-wrap m-ctrl-large",
+              :data => {
+                :invitees => users.map { |u| { value: u.oid, label: "#{u.name} (#{u.username})", username: u.username, name: u.name } }
+              } %>
 
-      <div class="col-md-6">
-        <input type="button" id="add_user" class="btn btn-primary" value="<%= t("new.invite.add") %> "/>
-      </div>
+      <%= hidden_field :user, :id %>
+      <input type="button" id="add_user" class="m-btn green" value="<%= t("new.invite.add") %> "/>
     </div>
 
     <div id="users">
@@ -22,13 +24,13 @@
         <tbody>
           <% if model.users %>
             <% model.users.by_name.each do |u| %>
-              <% if u.id.to_s != model.owner %>
+              <% if u != model.owner %>
                 <tr id="row_<%= u.id %>">
                   <td>
-                    <%= u.name %><input type="hidden" name="users[]" value="<%= u.id %>" />
+                    <%= u.name %> <%= "(#{u.username})" %><input type="hidden" name="users[]" value="<%= u.oid %>" />
                   </td>
                   <td>
-                    <input type="button" id="user_id_<%= u.id %>" class="btn btn-warning" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.id %>')" />
+                    <input type="button" id="user_id_<%= u.oid %>" class="m-btn red" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.oid %>')" />
                   </td>
                 </tr>
               <% end %>

@@ -2,30 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :logged_in?
 
-  def set_return_point(path, overwrite = false)
-    if overwrite or cookies[:return_point].blank?
-      cookies[:return_point] = path
-    end
-  end
-
-  def return_point
-    cookies[:return_point] ? cookies[:return_point] : root_path
-  end
-
 private
   def require_logged_user
     unless logged_in?
-      set_return_point(request.env['PATH_INFO'])
-      redirect_to login_path, :alert => t("flash.must_be_logged")
+      redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}", :alert => t("flash.must_be_logged")
     end
   end
 
   def current_user
-    @current_user ||= User.find(session[:user_id])
+    user = User.find(session[:user_id]) if session[:user_id]
+
+    @current_user ||= user ? user : nil
   end
 
   def logged_in?
-    session[:user_id] && current_user
+    !current_user.nil?
   end
 
   def authorized_access?(model)
@@ -33,7 +24,7 @@ private
 
     if logged_in? 
       model.users.each do |user|
-        if current_user.id == user.id
+        if current_user == user
           authorized = true
         end
       end
@@ -47,7 +38,7 @@ private
 
     if logged_in?
       model.users.each do |user|
-        if current_user.id == user.id && model.owner.to_s == user.id.to_s
+        if current_user == user && model.owner == user
           owner = true
         end
       end
@@ -55,5 +46,4 @@ private
 
     owner
   end
-
 end

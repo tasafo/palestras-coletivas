@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Submit talk without event", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
 
   context "when valid data" do
     before do

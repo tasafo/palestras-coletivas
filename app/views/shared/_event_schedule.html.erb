@@ -10,12 +10,12 @@
             <th width="70%">
               <p class="text-center schedule-font"><%= t("new.schedule.table.activity") %></p>
             </th>
-            <% if @authorized %>
+            <% if @presenter.authorized %>
               <th width="10%">
                 <p class="text-left schedule-font"><%= t("new.schedule.table.operation") %></p>
               </th>
             <% end %>
-            <% if @can_vote %>
+            <% if @presenter.can_vote %>
               <th width="10%">
                 <p class="text-left schedule-font"><%= t("new.schedule.table.votes") %></p>
               </th>
@@ -25,10 +25,10 @@
 
         <tbody>
         <% day = 1 %>
-        <% @dates.each do |date| %>
+        <% @presenter.dates.each do |date| %>
           <% if @event.schedules.by_day(day).count > 0 %>
             <tr class="info">
-              <% unless @authorized %>
+              <% unless @presenter.authorized %>
                 <td></td>
               <% end %>
               <td colspan="4">
@@ -56,17 +56,17 @@
                   <td><p class="text-center schedule-font"><%= schedule.activity.description %></p></td>
                 <% end %>
 
-                <% if @authorized %>
-                  <td><%= link_to t("actions.edit"), edit_schedule_path(@event, schedule), :class => "m-btn blue", :id => "schedule_id_#{schedule.id}" %></td>
+                <% if @presenter.authorized %>
+                  <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), :class => "m-btn blue", :id => "schedule_id_#{schedule.id}" %></td>
                 <% end %>
 
-                <% if @can_vote %>
+                <% if @presenter.can_vote %>
                   <td>
                     <% if logged_in? %>
                       <% if schedule.votes? && schedule.find_vote(current_user) %>
-                        <%= link_to schedule.counter_votes, remove_vote_schedule_path(@event, schedule), :class => "m-btn red", :id => "remove_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_remove_vote") %>
+                        <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, :class => "m-btn red", :id => "remove_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_remove_vote") %>
                       <% else %>
-                        <%= link_to schedule.counter_votes, add_vote_schedule_path(@event, schedule), :class => "m-btn green", :id => "add_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_add_vote") %>
+                        <%= link_to schedule.counter_votes, new_event_schedule_vote_path(@event, schedule), :class => "m-btn green", :id => "add_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_add_vote") %>
                       <% end %>
                     <% else %>
                       <%= link_to schedule.counter_votes, "#schedules", :class => "m-btn blue disabled" %>

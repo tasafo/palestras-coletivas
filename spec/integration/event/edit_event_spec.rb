@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Edit event", :type => :request do
+describe "Edit event", :type => :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
@@ -10,10 +10,10 @@ describe "Edit event", :type => :request do
       :event,
       :tasafoconf,
       :users => [ user, other_user ],
-      :owner => user.id
+      :owner => user
     )
   }
-    
+
   context "with valid data" do
     before do
       login_as(user)
@@ -25,9 +25,6 @@ describe "Edit event", :type => :request do
 
       fill_in "Nome", :with => "Confraternização do Tá safo!"
       fill_in "Tags", :with => "agilidade, gestão"
-
-      select another_user.name, :from => "user_id"
-      click_button :add_user
 
       click_button :"user_id_#{other_user.id}"
 

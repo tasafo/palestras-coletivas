@@ -2,9 +2,9 @@ require "spec_helper"
 
 describe "Show public talk", :type => :request do
   let!(:user) { create(:user, :paul) }
-  let!(:talk) { create(:talk, :users => [ user ], :owner => user.id) }
-  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user.id) }
-  let!(:speakerdeck_talk) { create(:speakerdeck_talk, :users => [ user ], :owner => user.id) }
+  let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
+  let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user) }
+  let!(:speakerdeck_talk) { create(:speakerdeck_talk, :users => [ user ], :owner => user) }
 
   context "of slideshare" do
     before do

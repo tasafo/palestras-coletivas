@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="<%= t("app.info") %>">
-    <meta name="author" content="Software de Garagem">
+    <meta name="author" content="Tá safo!">
     <title><%= t("app.name") %></title>
     <%= csrf_meta_tags %>
     <!--[if lt IE 9]>
@@ -52,13 +52,15 @@
     
     <%= render "shared/footer" %>
 
+    <% if @presenter.image_top %>
     <script>
       $.backstretch([
-        "/tops/<%= @image_top %>.jpg"
+        "/tops/<%= @presenter.image_top %>.jpg"
         ], {
           fade: 1000,
           duration: 3000
       });
     </script>
+    <% end %>
   </body>
 </html>

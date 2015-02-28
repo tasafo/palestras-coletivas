@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
-
-  before_filter :find_commentable
+  before_action :find_commentable
 
   def create
     comment_params = {user: current_user, commentable: find_parent_comment, body: params[:comment][:body] } 
@@ -24,7 +23,7 @@ class CommentsController < ApplicationController
     redirect_to @commentable
   end
 
-  private
+private
 
   def find_commentable
     commentable_class = params[:commentable_type].camelize.constantize

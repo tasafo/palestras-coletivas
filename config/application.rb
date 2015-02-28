@@ -4,9 +4,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
 
-if defined?(Bundler)
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
-end
+Bundler.require(*Rails.groups)
 
 module Palestrascoletivas
   class Application < Rails::Application
@@ -18,7 +16,6 @@ module Palestrascoletivas
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
     config.assets.enabled = true
-    config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
     I18n.enforce_available_locales = true
   end

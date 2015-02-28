@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   layout 'home'
 
   def index
-    @events = Event.last_events(3)
-    @talkers = User.presentation_events
+    @events = Event.limit(3)
+    @talkers = UserQuery.new.ranking(:presentation_events)
   end
 end

@@ -1,16 +1,16 @@
 <%= form_for(@enrollment, :url => url, :html => {:class => 'form-horizontal'}) do |f| %>
   <% unless @enrollment.new_record? %>
-    <h2 class="<%= @message_type %>"><%= @message_button %></h2>
+    <h2 class="<%= @presenter.type_message %>"><%= @presenter.button_message %></h2>
 
-    <% unless @user_name.nil? %>
-      <h3><%= @user_name %></h3>
+    <% unless @presenter.user_name.nil? %>
+      <h3><%= @presenter.user_name %></h3>
     <% end %>
 
-    <%= f.hidden_field @option, :value => @value %>
+    <%= f.hidden_field @option_type, :value => @presenter.option_value %>
   <% end %>
 
   <%= f.hidden_field :event_id, :value => @event.id %>
-  <%= f.hidden_field :user_id, :value => @user_id %>
+  <%= f.hidden_field :user_id, :value => @presenter.user_id %>
 
   <div class="m-btn-strip">
     <%= f.submit :class => "m-btn blue" %>

@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-  before_filter :find_rateable
+  before_action :find_rateable
 
   def create
     @rateable = find_rateable
@@ -11,7 +11,7 @@ class RatingsController < ApplicationController
     end
   end
 
-  private
+private
 
   def find_rateable
     rateable_class = params[:rateable_type].camelize.constantize

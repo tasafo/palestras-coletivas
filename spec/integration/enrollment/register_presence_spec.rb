@@ -13,7 +13,7 @@ describe "Register presence", :type => :request do
       :end_date => Date.today,
       :deadline_date_enrollment => Date.today,
       :users => [ user ],
-      :owner => user.id
+      :owner => user
     )
   }
 
@@ -64,7 +64,7 @@ describe "Register presence", :type => :request do
 
       click_link "Eventos"
       click_link "Tá Safo Conf"
-      visit edit_enrollment_path(event, enrollment_billy, "present")
+      visit edit_event_enrollment_path(event, :present, enrollment_luis)
     end
 
     it "redirects to the event page" do

@@ -1,114 +1,64 @@
 class SchedulesController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+  before_action :require_logged_user, only: [:new, :create, :edit, :update]
+  before_action :set_schedule, only: [:edit, :update]
 
   def new
     @schedule = Schedule.new
 
-    auxiliary_objetcs
+    set_presenter
 
     redirect_to root_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
 
   def create
-    @schedule = Schedule.new(params[:schedule])
+    @schedule = Schedule.new(schedule_params)
 
-    auxiliary_objetcs
+    set_presenter
 
-    if @schedule.save
-      @schedule.update_counter_of_users_talks params[:old_talk_id], params[:talk_id]
-
-      redirect_to event_path(@event), :notice => t("flash.schedules.create.notice")
-    else
-      render :new
-    end
+    save_schedule(:new, @event, @schedule, params[:old_talk_id], params[:talk_id])
   end
 
   def edit
-    @schedule = Schedule.find(params[:id])
-
-    auxiliary_objetcs
-
     redirect_to root_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
   end
 
   def update
-    @schedule = Schedule.find(params[:id])
-
-    auxiliary_objetcs
-
-    if @schedule.update_attributes(params[:schedule])
-      @schedule.update_counter_of_users_talks params[:old_talk_id], params[:talk_id]
-
-      redirect_to event_path(@event), :notice => t("flash.schedules.update.notice")
-    else
-      render :edit
-    end
+    save_schedule(:edit, @event, @schedule, params[:old_talk_id], params[:talk_id], schedule_params)
   end
 
   def search_talks
-    search = params[:search]
-    
-    unless search.blank?
-      @talks = Talk.fulltext_search(search, :index => 'fulltext_index_talks', :published => [ true ])
-    end
+    @talks = TalkQuery.new.search(params[:search]) unless params[:search].blank?
 
     respond_to do |format|
-      format.json { render :json => @talks }
+      format.json { render :json => @talks.only('_id', 'thumbnail', '_slugs', 'title', 'description', 'tags') }
     end
-  end
-
-  def add_vote
-    @event = Event.find(params[:event_id])
-
-    @schedule = Schedule.find(params[:id])
-
-    begin
-      @vote = Vote.create(:schedule => @schedule, :user => current_user)
-
-      @schedule.set_counter(:votes, :inc)
-    rescue
-
-    end
-
-    redirect_to "/events/#{@event._slugs[0]}#schedule", :notice => t("flash.schedules.vote.add")
-  end
-
-  def remove_vote
-    @event = Event.find(params[:event_id])
-
-    @schedule = Schedule.find(params[:id])
-
-    begin
-      @vote = Vote.find_by(:schedule => @schedule, :user => current_user)
-      @vote.destroy
-
-      @schedule.set_counter(:votes, :dec)
-    rescue
-
-    end
-
-    redirect_to "/events/#{@event._slugs[0]}#schedule", :notice => t("flash.schedules.vote.remove")
   end
 
 private
-  def auxiliary_objetcs
+
+  def set_schedule
+    @schedule = Schedule.find(params[:id])
+
+    set_presenter
+  end
+
+  def set_presenter
     @event = Event.find(params[:event_id])
+
+    @presenter = SchedulePresenter.new(@schedule, @event)
+  end
+
+  def schedule_params
+    params.require(:schedule).permit(:event_id, :activity_id, :talk_id, :day, :time, :environment)
+  end
+
+  def save_schedule(option, event, schedule, old_talk_id, talk_id, params = nil)
+    operation = option == :new ? :create : :update
     
-    @activities = Activity.all.order_by(:order => :asc)
-
-    event_dates = (@event.start_date..@event.end_date).to_a
-
-    @dates = ""
-    day = 1
-    event_dates.each do |date|
-      selected = @schedule.day == day ? "selected='selected'" : ""
-
-      @dates += "<option value='#{day}' #{selected}>#{date}</option>"
-      day += 1
+    if ScheduleDecorator.new(schedule, old_talk_id, talk_id, params).send operation
+      redirect_to event_path(event), notice: t("flash.schedules.#{operation.to_s}.notice")
+    else
+      render option
     end
-
-    @talk_title = @schedule.talk? ? @schedule.talk.title : ""
-
-    @display = @schedule.talk? ? "block" : "none"
   end
 end

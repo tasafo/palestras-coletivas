@@ -1,81 +1,52 @@
-class TalksController < ApplicationController
-  before_filter :require_logged_user, :only => [:new, :create, :edit, :update]
+class TalksController < PersistenceController
+  before_action :require_logged_user, only: [:new, :create, :edit, :update]
+  before_action :set_talk, only: [:show, :edit, :update]
+  before_action :set_authors, only: [:new, :create, :edit, :update]
 
   def index
-    @talk = Talk.new
-    @search = ""
+    @search = params[:search]
+    @my = !params[:my].nil?
 
-    if params[:my].nil?
-      @my = false
-      if params[:talk].nil?
-        @talks = all_public_talks
-      else
-        @search = params[:talk][:search]
-
-        if @search.empty?
-          @talks = all_public_talks
-        else
-          @talks = Kaminari.paginate_array(Talk.fulltext_search(@search, :index => 'fulltext_index_talks', :published => [ true ])).page(params[:page]).per(5)
-        end
-      end
-    else
-      @my = true
-      @talks = current_user.talks.page(params[:page]).per(5).order_by(:created_at => :desc) if logged_in?
-    end
+    @talks = search_talks @search, @my, params[:page]
 
     respond_to do |format|
       format.html
-      format.json { render json: all_public_talks.to_json } #{ render :json => all_public_talks.to_json(:only => [:_id, :title, :description]) }
+      format.json { render json: @talks.only('id', 'name', 'description', 'tags', 'presentation_url', 'thumbnail') }
     end
   end
 
   def new
     @talk = Talk.new
-
-    @authors = User.without_the_owner current_user
   end
 
   def create
-    @talk = Talk.new(params[:talk])
+    @talk = Talk.new(talk_params)
 
-    @talk.add_authors current_user, params[:users]
-
-    @authors = User.without_the_owner current_user
-
-    if @talk.save
-      @talk.update_user_counters
-
-      redirect_to talk_path(@talk), :notice => t("flash.talks.create.notice")
-    else
-      render :new
-    end
+    save_object(@talk, params[:users], owner: current_user)
   end
 
   def show
-    begin
-      @talk = Talk.find(params[:id])
+    unless @talk.nil?
       @authorized = authorized_access? @talk
       @owns = owner? @talk
 
-      @presentation = Oembed.new @talk.presentation_url, @talk.code
-      @presentation.show_presentation
+      @presentation = Oembed.new(@talk.presentation_url, @talk.code).show_presentation
 
-      @video = Oembed.new @talk.video_link
-      @video.show_video
+      @video = Oembed.new(@talk.video_link).show_video
 
       unless @talk.to_public
         @talk = nil unless @authorized
       end
-    rescue Mongoid::Errors::DocumentNotFound
+    else
       redirect_to root_path
     end
   end
 
   def info_url
-    oembed = Oembed.new params[:link]
+    oembed = Oembed.new(params[:link]).open_presentation
 
     respond_to do |format|
-      if oembed.open_presentation
+      if oembed
         format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
       else
         format.json { render :json => {:error => true} }
@@ -84,29 +55,11 @@ class TalksController < ApplicationController
   end
 
   def edit
-    @talk = Talk.find(params[:id])
-
-    @authors = User.without_the_owner current_user
-
-    unauthorized = @talk.owner == current_user.id.to_s ? false : true
-
-    redirect_to talks_path, :notice => t("flash.unauthorized_access") if unauthorized
+    redirect_to talks_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@talk)
   end
 
   def update
-    @talk = Talk.find(params[:id])
-
-    @talk.add_authors current_user, params[:users]
-
-    @authors = User.without_the_owner current_user
-
-    if @talk.update_attributes(params[:talk])
-      @talk.update_user_counters
-
-      redirect_to talk_path(@talk), :notice => t("flash.talks.update.notice")
-    else
-      render :edit
-    end
+    save_object(@talk, params[:users], params: talk_params)
   end
 
   def watch
@@ -124,7 +77,26 @@ class TalksController < ApplicationController
   end
 
 private
-  def all_public_talks
-    Talk.where(:to_public => true).page(params[:page]).per(5).order_by(:created_at => :desc)
+
+  def search_talks(search, my, page)
+    if logged_in? && my
+      talks = current_user.talks.desc(:created_at)
+    else
+      talks = search.blank? ? TalkQuery.new.publics : Kaminari.paginate_array(TalkQuery.new.search(search))
+    end
+
+    talks.page(page).per(5)
+  end
+
+  def set_talk
+    @talk = Talk.find(params[:id])
+  end
+
+  def set_authors
+    @authors = UserQuery.new.without_the_owner current_user
+  end
+
+  def talk_params
+    params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
   end
 end

@@ -1,6 +1,6 @@
-<%= paginate @talks %>
+<%= paginate talks %>
 
-<% @talks.each do |talk| %>
+<% talks.each do |talk| %>
   <div class="featurette row">
     <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
     <div class="span2">
@@ -38,4 +38,4 @@
   <hr />
 <% end %>
 
-<%= paginate @talks %>
+<%= paginate talks %>

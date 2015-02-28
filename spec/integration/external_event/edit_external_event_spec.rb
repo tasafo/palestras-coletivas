@@ -4,7 +4,7 @@ describe "Edit external event of talk", :type => :request do
   let!(:user) { create(:user, :paul) }
   let!(:fisl) { build(:external_event, :fisl) }
   let!(:rubyconf) { build(:external_event, :rubyconf) }
-  let!(:talk) { create(:talk, :users => [user], :owner => user.id, :external_events => [fisl, rubyconf]) }
+  let!(:talk) { create(:talk, :users => [user], :owner => user, :external_events => [fisl, rubyconf]) }
 
   context "when valid data" do
     before do
@@ -40,7 +40,7 @@ describe "Edit external event of talk", :type => :request do
     end
 
     it "renders form page" do
-      expect(current_path).to eql(talks_external_event_path(talk, fisl))
+      expect(current_path).to eql(talk_external_event_path(talk, fisl))
     end
 
     it "displays error messages" do
