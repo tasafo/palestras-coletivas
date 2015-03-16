@@ -41,7 +41,7 @@ RSpec.configure do |config|
 
   Geocoder::Lookup::Test.set_default_stub(
     [
-      { 
+      {
         'geometry'     => {'location' => {'lat' => -1.4714916, 'lng' => -48.4945471}},
         'address'      => 'Rua dos Caripunas, 400, Jurunas, Belém, Pará, Brasil',
         'state'        => 'Pará',

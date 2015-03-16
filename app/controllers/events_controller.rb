@@ -5,7 +5,7 @@ class EventsController < PersistenceController
 
   def index
     @my = !params[:my].nil?
-    
+
     @events = (logged_in? && @my) ? current_user.events.desc(:created_at) : EventQuery.new.all_public
 
     respond_to do |format|
@@ -62,7 +62,7 @@ private
 
   def event_params
     params.require(:event).permit(
-      :name, :edition, :description, :stocking, :tags, :start_date, :end_date, :deadline_date_enrollment, 
+      :name, :edition, :description, :stocking, :tags, :start_date, :end_date, :deadline_date_enrollment,
       :accepts_submissions, :to_public, :place, :street, :district, :city, :state, :country
     )
   end

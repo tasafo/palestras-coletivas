@@ -11,7 +11,7 @@ describe RatingsController, :type => :controller do
       params = { rateable_type: "Event", rateable_id: event.id, rate: { my_rate: 4.0 } }
 
       post :create, params.merge(format: 'json')
-      
+
       parse_json = JSON(response.body)
 
       expect(parse_json["success"]).not_to be nil

@@ -6,17 +6,17 @@
       <h4 class="text-success"><%= l event.start_date, :format => :long %></h4>
     <% else %>
       <h4 class="text-success">
-        <%= t("show.event.of") %> <%= l event.start_date, :format => :long %> 
+        <%= t("show.event.of") %> <%= l event.start_date, :format => :long %>
         <%= t("show.event.to") %> <%= l event.end_date, :format => :long %>
       </h4>
     <% end %>
-    
+
     <% if event.deadline_date_enrollment >= Date.today %>
       <h4 class="text-error">
         <%= t("labels.event.deadline_date_enrollment") %>: <%= l event.deadline_date_enrollment, :format => :long %>
       </h4>
     <% end %>
-    
+
     <p class="lead">
       <strong><%= t("labels.event.place") %>:</strong> <%= event.place %><br/>
 

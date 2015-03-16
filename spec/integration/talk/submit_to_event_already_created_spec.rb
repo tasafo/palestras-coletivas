@@ -6,7 +6,7 @@ describe "Submit talk already created", :type => :request, js: true do
   let!(:activity_palestra) { create(:activity, :palestra) }
   let!(:event) { create(:event, :tasafoconf, owner: user, start_date: Date.today, end_date: Date.today + 5.days, accepts_submissions: true) }
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
-  
+
   context "when valid data" do
     before do
       login_as user

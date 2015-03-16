@@ -53,7 +53,7 @@ private
     result = EnrollmentDecorator.new(enrollment, option_type, params).send operation
 
     message_type = result ? 'notice' : 'error'
-      
+
     redirect_to event_path(event), notice: t("flash.enrollments.#{operation.to_s}.#{message_type}")
   end
 end

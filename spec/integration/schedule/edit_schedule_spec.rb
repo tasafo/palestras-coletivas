@@ -10,7 +10,7 @@ describe "Edit schedule", :type => :request, :js => true do
   let!(:activity_lanche) { create(:activity, :lanche) }
 
   let!(:schedule_abertura) { create(:schedule, :abertura, :event => event) }
-  let!(:schedule_intervalo) { create(:schedule, :intervalo, :event => event) }  
+  let!(:schedule_intervalo) { create(:schedule, :intervalo, :event => event) }
 
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
   let!(:schedule_palestra2) { create(:schedule, :palestra, :event => event, :talk => another_talk) }
@@ -53,9 +53,9 @@ describe "Edit schedule", :type => :request, :js => true do
       click_link "Eventos"
       click_link "Tá Safo Conf"
       click_link "schedule_id_#{schedule_palestra2.id}"
-      
+
       fill_in "Horário", :with => "24:00"
-      
+
       click_button "Atualizar programação"
     end
 

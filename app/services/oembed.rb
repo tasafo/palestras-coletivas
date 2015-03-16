@@ -15,7 +15,7 @@ class Oembed
       open_slideshare
     elsif @url.include? "speakerdeck.com"
       open_speakerdeck
-    end  
+    end
   end
 
   def show_presentation

@@ -26,6 +26,6 @@ class Talk
 
   slug :title
   search_in :title, :tags
-  
+
   validates_presence_of :title, :description, :tags, :owner
 end
