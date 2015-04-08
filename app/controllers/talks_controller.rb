@@ -47,7 +47,7 @@ class TalksController < PersistenceController
 
     respond_to do |format|
       if oembed
-        format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
+        format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail, :description => oembed.description} }
       else
         format.json { render :json => {:error => true} }
       end

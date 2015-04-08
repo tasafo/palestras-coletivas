@@ -79,6 +79,16 @@ FactoryGirl.define do
       tags "ruby, programação"
       to_public true
     end
+
+    factory :prezi_talk do
+      presentation_url "https://prezi.com/ggblugsq5p7h/soa-introducao/"
+      title "SOA - Introdução"
+      description "SOA - Introdução"
+      thumbnail "http://0701.static.prezi.com/preview/djt7yj5rtrehe5ipzqlb5fbx3qadw6rhlm5vs2oll757hbaoaxlq_0_0.png"
+      code "ggblugsq5p7h"
+      tags "soa, arquitetura de sistemas"
+      to_public true
+    end
   end
 
   factory :event do
