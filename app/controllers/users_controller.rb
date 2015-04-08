@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user), :notice => t("flash.users.update.notice")
     else
       render :edit
-    end 
+    end
   end
 
 private

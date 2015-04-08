@@ -8,7 +8,7 @@ describe "Create enrollment", :type => :request, js: true do
   let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
   let!(:enrollment_active) { create(:enrollment, :event => event, :user => another_user) }
-  
+
   context "when logged" do
     before do
       login_as(other_user)
@@ -53,7 +53,7 @@ describe "Create enrollment", :type => :request, js: true do
         fill_in "Sua senha", :with => "testdrive"
         click_button "Acessar minha conta"
       end
-      
+
       it "redirects to enrollment page" do
         expect(current_path).to eql new_event_enrollment_path(event, :active)
       end
@@ -70,7 +70,7 @@ describe "Create enrollment", :type => :request, js: true do
         click_button "Acessar minha conta"
         click_button "Quero participar!"
       end
-      
+
       it "redirects to the event page" do
         expect(current_path).to eql(event_path(event))
       end
@@ -78,7 +78,7 @@ describe "Create enrollment", :type => :request, js: true do
       it "displays error message" do
         expect(page).to have_content("A inscrição já havia sido realizada!")
       end
-    end    
+    end
   end
 
   context "when the user is organizer" do

@@ -39,14 +39,14 @@ class EventPresenter
         @can_vote = prepare_can_vote(event)
 
         prepare_authorized(event, authorized)
-      end  
+      end
     end
 
     def prepare_authorized(event, authorized)
       @authorized = authorized
 
       @can_record_presence = @authorized && Date.today >= event.start_date
-      
+
       @show_users_present = Date.today > event.end_date && !@can_record_presence
 
       @event = event

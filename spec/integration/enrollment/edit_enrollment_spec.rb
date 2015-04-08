@@ -9,7 +9,7 @@ describe "Edit enrollment", :type => :request, js: true do
   let!(:schedule_palestra) { create(:schedule, :palestra, :event => event, :talk => talk) }
   let!(:enrollment_active) { create(:enrollment, :event => event, :user => other_user) }
   let!(:enrollment_inactive) { create(:enrollment, :active => false, :event => event, :user => another_user) }
-  
+
   context "when the enrollment is active" do
     before do
       login_as(other_user)

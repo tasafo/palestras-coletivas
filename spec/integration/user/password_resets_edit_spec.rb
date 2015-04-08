@@ -58,5 +58,5 @@ describe "Edit password resets", :type => :request do
     it "displays error message" do
       expect(page).to have_content("A redefinição de senha expirou.")
     end
-  end  
+  end
 end

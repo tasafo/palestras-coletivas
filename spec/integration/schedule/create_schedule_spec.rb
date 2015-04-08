@@ -2,12 +2,12 @@ require "spec_helper"
 
 describe "Create schedule", :type => :request, :js => true do
   let!(:user) { create(:user, :paul) }
-  
+
   let!(:event) { create(:event, :tasafoconf, :users => [ user ], :owner => user) }
-  
+
   let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user) }
-  
+
   let!(:activity_abertura) { create(:activity, :abertura) }
   let!(:activity_palestra) { create(:activity, :palestra) }
   let!(:activity_intervalo) { create(:activity, :intervalo) }
@@ -89,5 +89,5 @@ describe "Create schedule", :type => :request, :js => true do
     it "displays success message" do
       expect(page).to have_content("A programação foi adicionada!")
     end
-  end  
+  end
 end

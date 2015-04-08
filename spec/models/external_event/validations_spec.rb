@@ -25,5 +25,5 @@ describe ExternalEvent, "validations", :type => :model do
     external_event = ExternalEvent.create(:date => nil)
 
     expect(external_event.errors[:date].size).to eq(1)
-  end  
+  end
 end

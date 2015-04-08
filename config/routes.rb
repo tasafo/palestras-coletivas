@@ -9,7 +9,7 @@ Palestrascoletivas::Application.routes.draw do
   get "/ranking", :to => "ranking#index"
 
   resources :password_resets
-  
+
   resources :users, only: [:show, :edit, :update]
 
   resources :talks, except: :destroy do

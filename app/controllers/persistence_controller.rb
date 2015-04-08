@@ -8,7 +8,7 @@ class PersistenceController < ApplicationController
       option = :new
       operation = :create
     end
-    
+
     decorator = get_decorator(object, users, args)
 
     if decorator.send operation

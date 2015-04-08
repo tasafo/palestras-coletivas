@@ -22,7 +22,7 @@ private
   def authorized_access?(model)
     authorized = false
 
-    if logged_in? 
+    if logged_in?
       model.users.each do |user|
         if current_user == user
           authorized = true
