@@ -14,7 +14,7 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Vamos usar a versão 2 do Ruby
 
-	rvm install ruby-2.2.0
+	rvm install 2.2.0
 
 ### Usamos o MongoDB, então instala ele lá!
 
@@ -34,10 +34,6 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 Agora espera...
 
-### Gerar o token de segurança da aplicação
-
-	echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
-
 ### Depois roda esse comando para adicionar uns dados no banco
 
 	rake db:seed
@@ -53,6 +49,10 @@ Agora espera...
 ### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
 
 	bundle exec rake coverage
+
+### Em produção, você deve gerar o token de segurança da aplicação
+
+	echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
 
 ## Licença
 

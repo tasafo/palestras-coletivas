@@ -65,6 +65,31 @@ describe "Create talk", :type => :request, :js => true do
     end
   end
 
+  context "with valid data from prezi" do
+    before do
+      login_as(user)
+      visit root_path
+
+      click_link "Palestras"
+      click_link "Adicionar palestra"
+
+      fill_in "Link da palestra", :with => "https://prezi.com/7uq1mhqnclzn/quero-uma-apresentacao-em-prezi/"
+      fill_in "Descrição", :with => "Quero uma apresentação em Prezi"
+      fill_in "Tags", :with => "apresentação"
+      check("Quero publicar")
+
+      click_button "Adicionar palestra"
+    end
+
+    it "redirects to the talk page" do
+      expect(current_path).to match(%r[/talks/\w+])
+    end
+
+    it "displays success message" do
+      expect(page).to have_content("A palestra foi adicionada!")
+    end
+  end
+
   context "with valid data but no link" do
     before do
       login_as(user)
@@ -113,6 +138,14 @@ describe "Create talk", :type => :request, :js => true do
 
   context "when the slides are not found" do
     before do
+      stub_request(:get, /slideshare.net/).
+        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(
+          :status => 404,
+          :body => '',
+          :headers => {}
+        )
+
       login_as(user)
       visit root_path
 

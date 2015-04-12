@@ -11,13 +11,9 @@ class Gravatar
 
     @url = "#{DOMAIN}/avatar/#{hash}?d=mm"
     @profile = "#{DOMAIN}/#{hash}"
-
-    get_profile
   end
 
-private
-
-  def get_profile
+  def get_fields
     begin
       if @profile
         record = Nokogiri::XML(open("#{@profile}.xml"))
@@ -26,6 +22,7 @@ private
         @about_me = record.xpath("//aboutMe").text
         @current_location = record.xpath("//currentLocation").text
         @has_profile = true
+        self
       end
     rescue OpenURI::HTTPError
       @has_profile = false

@@ -5,9 +5,9 @@ ruby '2.2.0'
 gem 'rails', '4.2.0'
 gem 'mongoid'
 gem 'rails-i18n'
-gem 'bcrypt', :require => 'bcrypt'
-gem 'nokogiri', :require => false
-gem 'multi_json', :require => false
+gem 'bcrypt', require: 'bcrypt'
+gem 'nokogiri', require: false
+gem 'multi_json', require: false
 gem 'mongoid-slug'
 gem 'kaminari'
 gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
@@ -35,12 +35,14 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-mocks'
+  gem 'webmock'
   gem 'rake'
   gem 'launchy'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
   gem "codeclimate-test-reporter", require: nil
 end
 
