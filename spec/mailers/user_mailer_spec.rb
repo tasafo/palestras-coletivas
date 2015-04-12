@@ -14,7 +14,7 @@ describe UserMailer, :type => :mailer do
     end
 
     it "sets from recipient" do
-      expect(mail.from).to include("no-reply@palestrascoletivas.com")
+      expect(mail.from).to include("no-reply@palestrascoletivas.com.br")
     end
 
     context "text format" do
