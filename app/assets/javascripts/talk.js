@@ -30,7 +30,9 @@ $(function() {
                         $("#talk_title").val(result.title);
                         $("#talk_code").val(result.code);
                         $("#talk_thumbnail").val(result.thumbnail);
-                        $("#talk_description").val(result.description);
+                        if (result.description) {
+                            $("#talk_description").val(result.description);
+                        }
                     }
                 }
             });
