@@ -1,8 +1,10 @@
 WebMock.disable_net_connect!(allow_localhost: true)
 
-WebMock.disable_net_connect!(allow: "codeclimate.com")
-
 RSpec.configure do |config|
+  config.after(:suite) do
+    WebMock.disable_net_connect!(:allow => 'codeclimate.com')
+  end
+
   config.before(:each) do
     stub_request(:any, "www.example.com")
 
