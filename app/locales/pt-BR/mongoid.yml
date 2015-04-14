@@ -16,6 +16,8 @@ pt-BR:
         counter_organizing_events: "Número de eventos organizados"
         counter_presentation_events: "Número de apresentações em eventos"
         counter_participation_events: "Número de participações em eventos"
+        facebook_url: "Endereço do Facebook"
+        facebook_photo: "Foto do Facebook"
 
       talk:
         presentation_url: "Link da palestra"

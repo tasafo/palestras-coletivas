@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.facebook_photo = Gravatar.get_facebook_photo(@user.facebook_url)
 
     if @user.save
       redirect_to login_path, :notice => t("flash.signup.create.notice")
@@ -31,6 +32,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user][:facebook_photo] = Gravatar.get_facebook_photo(params[:user][:facebook_url])
+
     if @user.update_attributes(user_params)
       redirect_to user_path(@user), :notice => t("flash.users.update.notice")
     else
@@ -45,6 +48,6 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :username, :email, :facebook_url, :facebook_photo, :password, :password_confirmation)
   end
 end

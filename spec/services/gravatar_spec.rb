@@ -37,7 +37,7 @@ describe Gravatar do
 
       gravatar = Gravatar.new("invalid").get_fields
 
-      expect(gravatar).to be_falsey
+      expect(gravatar.has_profile).to be_falsey
     end
   end
 end

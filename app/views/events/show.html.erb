@@ -21,8 +21,10 @@
     <div class="container">
        <%= @event.place %> - <%= t("labels.event.address") %>: <%= @presenter.address %>
     </div>
-    <br/>
-    <div id="location-map"></div>
+    <% if @event.coordinates %>
+      <br/>
+      <div id="location-map"></div>
+    <% end %>
   </section>
 
   <% unless @event.users.blank? %>
