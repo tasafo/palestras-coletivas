@@ -34,7 +34,7 @@ class User
 
   validates_presence_of :name, :username
   validates_length_of :name, minimum: 3
-  validates_uniqueness_of :name, :email, :username
+  validates_uniqueness_of :email, :username
   validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/
   validates_format_of :username, with: /\A@[a-z]\w{2}\w+\z/
   validates_presence_of :password, :if => :require_password?

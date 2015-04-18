@@ -7,8 +7,8 @@ describe "Signup", :type => :request do
 
       click_link "Cadastre-se"
 
-      fill_in "Seu primeiro e último nome", :with => "Paul Young"
-      fill_in "Seu nome de usuário", :with => "@pyoung"
+      fill_in "Seu nome", :with => "Paul Young"
+      fill_in "Seu apelido", :with => "@pyoung"
       fill_in "Seu e-mail", :with => "paul@example.org"
       fill_in "Sua senha", :with => "testdrive"
       fill_in "Confirme sua senha", :with => "testdrive"

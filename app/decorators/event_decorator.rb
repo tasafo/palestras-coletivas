@@ -28,14 +28,12 @@ private
   end
 
   def save_coordinates
-    begin
-      results = Geocoder.search(EventPolicy.new(@event).address)
+    results = Geocoder.search(EventPolicy.new(@event).address)
 
-      if results
-        @event.coordinates = [ results[0].geometry['location']['lng'], results[0].geometry['location']['lat'] ]
-        @event.save
-      end
-    rescue
+    if results
+      @event.coordinates = [ results[0].geometry['location']['lng'], results[0].geometry['location']['lat'] ]
+      @event.save
+    else
       false
     end
   end

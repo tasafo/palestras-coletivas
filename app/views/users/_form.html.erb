@@ -3,8 +3,9 @@
 
   <div class="control-group">
     <%= f.label :name, t("labels.user.name"), :class => 'control-label' %>
+    <i><%= t("labels.user.name_explanaition") %></i>
     <div class="controls">
-      <%= f.text_field :name, :class => "m-wrap m-ctrl-large" %>
+      <%= f.text_field :name, :placeholder => t("placeholder.users.name"), :class => "m-wrap m-ctrl-large" %>
     </div>
   </div>
 
@@ -12,21 +13,22 @@
     <%= f.label :username, t("labels.user.username"), :class => 'control-label' %>
     <i><%= t("labels.user.username_explanaition") %></i>
     <div class="controls">
-      <%= f.text_field :username, :class => "m-wrap m-ctrl-large" %>
+      <%= f.text_field :username, :placeholder => t("placeholder.users.username"), :class => "m-wrap m-ctrl-large" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :email, t("labels.user.email"), :class => 'control-label' %>
     <div class="controls">
-      <%= f.email_field :email, :class => "m-wrap m-ctrl-large" %>
+      <%= f.email_field :email, :placeholder => t("placeholder.users.email"), :class => "m-wrap m-ctrl-large" %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :facebook_url, t("labels.user.facebook_url"), :class => 'control-label' %>
+    <i><%= t("labels.user.facebook_url_explanaition") %></i>
     <div class="controls">
-      <%= f.text_field :facebook_url, :class => "m-wrap m-ctrl-large" %>
+      <%= f.text_field :facebook_url, :placeholder => t("placeholder.users.facebook_url"), :class => "m-wrap m-ctrl-large" %>
     </div>
   </div>
 

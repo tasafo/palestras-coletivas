@@ -20,3 +20,9 @@ pt-BR:
       state: "Pará"
       country: "Brasil"
       search: "por nome, edição, tags e endereço"
+
+    users:
+      name: "ex.: Fulano de Tal"
+      username: "ex.: @fulano"
+      email: "ex.: fulano@mail.com"
+      facebook_url: "ex.: https://www.facebook.com/fulanodetal"

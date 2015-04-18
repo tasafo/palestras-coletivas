@@ -10,7 +10,7 @@ describe "Edit user", :type => :request do
       visit root_path
       click_link "Meus dados"
 
-      fill_in "Seu primeiro e último nome", :with => "Carl Simon"
+      fill_in "Seu nome", :with => "Carl Simon"
 
       click_button "Atualizar dados"
     end
@@ -30,7 +30,7 @@ describe "Edit user", :type => :request do
       visit root_path
       click_link "Meus dados"
 
-      fill_in "Seu primeiro e último nome", :with => ""
+      fill_in "Seu nome", :with => ""
 
       click_button "Atualizar dados"
     end

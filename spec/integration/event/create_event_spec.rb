@@ -72,7 +72,7 @@ describe "Create event", :type => :request, :js => true do
     end
   end
 
-    context "with valid data but without address" do
+  context "with valid data but without address" do
     before do
       login_as(user)
       visit root_path

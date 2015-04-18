@@ -10,6 +10,7 @@ pt-BR:
     attributes:
       user:
         name: "Nome"
+        username: "Apelido"
         email: "E-mail"
         password: "Senha"
         password_confirmation: "Confirmação da senha"
