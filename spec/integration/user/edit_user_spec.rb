@@ -100,46 +100,4 @@ describe "Edit user", :type => :request do
       expect(page).to have_content("Verifique o formulário antes de continuar:")
     end
   end
-
-  context "with valid facebook url" do
-    before do
-      login_as user
-      visit root_path
-      click_link "Meus dados"
-
-      fill_in "Seu primeiro e último nome", :with => "Carl Simon"
-      fill_in "Endereço do Facebook", :with => "https://www.facebook.com/luizgrsanches"
-
-      click_button "Atualizar dados"
-    end
-
-    it "redirects to the user show page" do
-      expect(current_path).to match(%r[/users/\w+])
-    end
-
-    it "displays success message" do
-      expect(page).to have_content("Seus dados foram atualizados!")
-    end
-  end
-
-  context "with invalid facebook url" do
-    before do
-      login_as user
-      visit root_path
-      click_link "Meus dados"
-
-      fill_in "Seu primeiro e último nome", :with => "Carl Simon"
-      fill_in "Endereço do Facebook", :with => "https://www.facebook.com/nonononononononono"
-
-      click_button "Atualizar dados"
-    end
-
-    it "redirects to the user show page" do
-      expect(current_path).to match(%r[/users/\w+])
-    end
-
-    it "displays success message" do
-      expect(page).to have_content("Seus dados foram atualizados!")
-    end
-  end
 end

@@ -39,7 +39,9 @@ class Gravatar
 
         object = open("https://graph.facebook.com/#{id}/picture?type=large")
 
-        object.base_uri.to_s
+        image_url = object.base_uri.to_s
+
+        image_url.include?("gPCjrIGykBe.gif") ? nil : image_url
       end
     rescue
       nil
