@@ -10,7 +10,7 @@
                 <% if logged_in? %>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <%= gravatar_image(current_user.email, current_user.name, "20x20") %>
-                        <%= t("user.greeting", :name => current_user.name) %>
+                        <%= t("user.greeting", :name => current_user.username.gsub("@", "")) %>
                         <span class="caret white"></span>
                     </a>
                     <ul class="dropdown-menu">

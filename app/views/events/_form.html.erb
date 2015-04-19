@@ -127,4 +127,6 @@
   <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>
 
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+<% if Rails.env != 'test' %>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+<% end %>

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    unless @user.nil?
+    if !@user.nil?
       @presenter = UserPresenter.new(@user, params[:page])
     else
       redirect_to root_path, :notice => t("flash.user_not_found")

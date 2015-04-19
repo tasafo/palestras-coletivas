@@ -40,6 +40,9 @@ class User
   validates_presence_of :password, :if => :require_password?
   validates_confirmation_of :password, :if => :require_password?
 
+  index({email: 1}, {unique: true, background: true})
+  index({username: 1}, {unique: true, background: true})
+
   after_save :erase_password
   before_create { generate_token(:auth_token) }
 

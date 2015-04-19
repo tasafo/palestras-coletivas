@@ -33,8 +33,6 @@ private
     if results
       @event.coordinates = [ results[0].geometry['location']['lng'], results[0].geometry['location']['lat'] ]
       @event.save
-    else
-      false
     end
   end
 

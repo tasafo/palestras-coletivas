@@ -5,7 +5,7 @@ pt-BR:
 
     talk:
       not_found: "Palestra não encontrada"
-      searching: "Procurando palestra..."
+      searching: "Buscando informações da palestra..."
 
       help:
         presentation_url_html: "Quando estiver pronto, informe o link de sua palestra. Exemplos:<br>http://www.slideshare.net/usuario/palestra<br>https://speakerdeck.com/usuario/palestra<br>https://prezi.com/codigo-da-palestra"

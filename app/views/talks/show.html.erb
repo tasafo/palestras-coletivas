@@ -16,8 +16,7 @@
   <div class="work" id="portfolio">
     <div class="row-fluid work-item">
       <div class="span4">
-        <h2><%= @talk.title %></h2>
-        <%= simple_format @talk.description %>
+        <%= render "talks/show/details" %>
         <%= render "talks/show/tags" %>
         <%= render "talks/show/creators" %>
         <%= render "talks/show/public_label" %>
@@ -26,8 +25,10 @@
         <%= render "talks/show/watched_users" %>
       </div>
       <div class="span8">
-        <%= render 'talks/show/presentation' %>
-        <%= render 'talks/show/video' %>
+        <% unless @presentation.frame.include?("without_presentation") %>
+          <%= render 'talks/show/presentation' %>
+          <%= render 'talks/show/video' %>
+        <% end %>
         <%= render "comments/index", :commentable => @talk %>
       </div>
     </div>

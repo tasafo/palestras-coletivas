@@ -1,0 +1,7 @@
+<h2><%= @talk.title %></h2>
+
+<% if @presentation.frame.include?("without_presentation") %>
+  <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
+<% end %>
+
+<%= simple_format @talk.description %>

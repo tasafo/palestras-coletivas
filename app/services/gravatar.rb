@@ -52,7 +52,7 @@ class Gravatar
     user = User.find_by(email: @email)
 
     if user
-      user.facebook_photo.nil? ? @url : user.facebook_photo
+      user.facebook_photo.nil? || user.facebook_photo.empty? ? @url : user.facebook_photo
     else
       @url
     end
