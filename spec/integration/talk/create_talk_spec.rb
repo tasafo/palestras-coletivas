@@ -4,6 +4,7 @@ describe "Create talk", :type => :request, :js => true do
   let!(:user)         { create(:user, :paul) }
   let!(:invited_user) { create(:user, :luis, name: "Luis XIV", username: "@username_luis") }
   let!(:other_user)   { create(:user, :billy, name: "Billy Boy", username: "@username_billy") }
+  let!(:talk)         { create(:talk, :users => [ user ], :owner => user) }
 
   context "with valid data from slideshare" do
     before do
@@ -13,9 +14,9 @@ describe "Create talk", :type => :request, :js => true do
       click_link "Palestras"
       click_link "Adicionar palestra"
 
-      fill_in "Link da palestra", :with => "http://www.slideshare.net/luizsanches/compartilhe"
-      fill_in "Descrição", :with => "Palestra que fala sobre o compartilhamento de conhecimento na era da informação"
-      fill_in "Tags", :with => "conhecimento, compartilhamento"
+      fill_in "Link da palestra", :with => "http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup"
+      fill_in "Descrição", :with => "Palestra sobre processos e ferramentas para manter um bom negócio digital"
+      fill_in "Tags", :with => "tecnologia, empreendedorismo"
       fill_in "Link do vídeo", :with => "http://www.youtube.com/watch?v=wGe5agueUwI"
       check("Quero publicar")
 
@@ -136,7 +137,7 @@ describe "Create talk", :type => :request, :js => true do
     end
   end
 
-  context "when the slides are not found" do
+  context "when the presentation are not found" do
     before do
       stub_request(:get, /slideshare.net/).
         with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
@@ -158,6 +159,30 @@ describe "Create talk", :type => :request, :js => true do
 
     it "displays error message" do
       expect(page).to have_content("Palestra não encontrada")
+    end
+  end
+
+  context "with repeated talk" do
+    before do
+      login_as(user)
+      visit root_path
+
+      click_link "Palestras"
+      click_link "Adicionar palestra"
+
+      fill_in "Link da palestra", :with => "http://www.slideshare.net/luizsanches/compartilhe"
+      fill_in "Descrição", :with => "Palestra duplicada"
+      fill_in "Tags", :with => "duplicada"
+
+      click_button "Adicionar palestra"
+    end
+
+    it "renders form page" do
+      expect(current_path).to eql(talks_path)
+    end
+
+    it "displays error messages" do
+      expect(page).to have_content("Link da palestra já está em uso")
     end
   end
 end

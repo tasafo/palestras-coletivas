@@ -28,4 +28,18 @@ class Talk
   search_in :title, :tags
 
   validates_presence_of :title, :description, :tags, :owner
+  validates_uniqueness_of :presentation_url, :if => :has_url?
+
+  index({presentation_url: 1}, {background: true})
+
+  def has_url?
+    !presentation_url.blank?
+  end
+
+  before_save do
+    if presentation_url.blank?
+      self.code = ""
+      self.thumbnail = ""
+    end
+  end
 end

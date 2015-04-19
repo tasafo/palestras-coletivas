@@ -62,6 +62,7 @@ FactoryGirl.define do
     end
 
     factory :another_talk do
+      presentation_url ""
       title "A história da informática"
       description "Um história comovente da era da informática"
       tags "tecnologia, informática"
