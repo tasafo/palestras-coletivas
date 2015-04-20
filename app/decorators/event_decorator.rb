@@ -30,7 +30,7 @@ private
   def save_coordinates
     results = Geocoder.search(EventPolicy.new(@event).address)
 
-    if results
+    unless results.blank?
       @event.coordinates = [ results[0].geometry['location']['lng'], results[0].geometry['location']['lat'] ]
       @event.save
     end

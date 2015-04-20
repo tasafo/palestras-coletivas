@@ -35,7 +35,7 @@
   <% event = t("show.user.events") %>
   <h4><%= event[@user.events.count > 1 ? :other : :one] %></h4>
 
-  <% @user.events(to_public: true).each do |event| %>
+  <% @user.events.where(to_public: true).order(updated_at: :desc).each do |event| %>
     <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h5>
   <% end %>
 <% end %>
@@ -43,10 +43,10 @@
 <% presentations = "" %>
 
 <% if @user.talks? %>
-  <% @user.talks.each do |talk| %>
+  <% @user.talks.where(to_public: true).each do |talk| %>
     <% if talk.schedules? %>
       <% talk.schedules.each do |schedule| %>
-        <% presentations += '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
+        <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
       <% end %>
     <% end %>
   <% end %>

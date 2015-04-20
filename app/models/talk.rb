@@ -35,11 +35,4 @@ class Talk
   def has_url?
     !presentation_url.blank?
   end
-
-  before_save do
-    if presentation_url.blank?
-      self.code = ""
-      self.thumbnail = ""
-    end
-  end
 end
