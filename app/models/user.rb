@@ -83,31 +83,29 @@ class User
     enrollment = (enrolled_at? event) ? (Enrollment.find_by user: self, event: event) : (enroll_at event)
 
     enrollment.present = true
-    enrollment.save
+    EnrollmentDecorator.new(enrollment, 'present').update
   end
 
   def enrolled_at? event
     enrollment = Enrollment.find_by user: self, event: event
 
-    enrollment.nil? ? false : true
+    !enrollment.nil?
   end
 
   def enroll_at event
-    Enrollment.create(user: self, event: event, active: true)
+    enrollment = Enrollment.new(user: self, event: event, active: true)
+    EnrollmentDecorator.new(enrollment, 'active').create
   end
 
   def present_at? event
     enrollment = Enrollment.find_by user: self, event: event
 
-    if enrollment.nil?
-      return false
-    else
-      return enrollment.present
-    end
+    enrollment.nil? ? false : enrollment.present
   end
 
   def watch_talk! talk
     return if watched_talk? talk
+
     self.watched_talks << talk
     set_counter :watched_talks, :inc
   end
@@ -121,19 +119,20 @@ class User
     self.watched_talks.include? talk
   end
 
-  private
-    def until_two_names(name)
-      nameArray = name.split(" ")
-      return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
-    end
+private
 
-    def erase_password
-      @password = nil
-      @password_confirmation = nil
-      @validate_password = false
-    end
+  def until_two_names(name)
+    nameArray = name.split(" ")
+    return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
+  end
 
-    def require_password?
-      new_record? || @validate_password
-    end
+  def erase_password
+    @password = nil
+    @password_confirmation = nil
+    @validate_password = false
+  end
+
+  def require_password?
+    new_record? || @validate_password
+  end
 end

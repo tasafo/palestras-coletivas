@@ -6,7 +6,6 @@ describe User, ".arrived_at", :type => :model do
   let(:event) { create(:event, :tasafoconf, owner: billy.id ) }
 
   describe "user does not have subscribed" do
-
     it ".enrolled_at? event" do
       expect(Enrollment)
         .to receive(:find_by)
@@ -16,11 +15,9 @@ describe User, ".arrived_at", :type => :model do
     end
 
     it ".enroll_at" do
-      expect(Enrollment)
-        .to receive(:create)
-          .with(user: user, event: event, active: true)
-            .and_return(true)
-      subject.enroll_at(event)
+      enrollment = user.enroll_at(event)
+
+      expect(enrollment).to be_valid
     end
 
     it ".arrived_at event" do
@@ -30,17 +27,14 @@ describe User, ".arrived_at", :type => :model do
 
   describe "user have Enrollment" do
     before do
-      enrollment = Enrollment.create(
-        user: subject,
-        event: event,
-        active: true
-      )
+      2.times do
+        enrollment = Enrollment.new(user: subject, event: event, active: true)
+        enrollment = EnrollmentDecorator.new(enrollment, 'active').create
+      end
     end
 
     it ".arrived_at event" do
-      expect(Enrollment).to receive(:find_by).with(user: subject, event: event)
-      expect(subject.arrived_at(event)).to be false
+      expect(subject.enroll_at(event)).to be false
     end
   end
-
 end

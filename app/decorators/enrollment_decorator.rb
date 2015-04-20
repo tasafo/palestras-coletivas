@@ -11,7 +11,12 @@ class EnrollmentDecorator
   end
 
   def create
+    enrollment = Enrollment.find_by event: @enrollment.event, user: @enrollment.user
+
+    return false if enrollment
+
     @enrollment.save && update_counter_of_events_and_users
+    @enrollment
   end
 
   def update

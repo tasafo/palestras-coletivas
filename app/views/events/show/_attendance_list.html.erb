@@ -2,6 +2,7 @@
           <h4><%= t("show.event.enrolled") %> (<%= @presenter.users_active.count %>)</h4>
 
           <% if @presenter.authorized %>
+            <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h4>
             <table class="table">
               <thead>
                 <tr>
