@@ -31,7 +31,7 @@ class Event
 
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, inverse_of: :events
   has_many :schedules
   has_many :enrollments
   belongs_to :owner, class_name: "User", inverse_of: :owner_events
