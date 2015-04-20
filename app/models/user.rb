@@ -19,6 +19,7 @@ class User
   field :counter_public_talks, type: Integer, default: 0
   field :facebook_url, type: String
   field :facebook_photo, type: String
+  field :gravatar_photo, type: String
 
   has_and_belongs_to_many :talks, inverse_of: :talks
   has_and_belongs_to_many :watched_talks, class_name: "Talk", inverse_of: :watched_user
@@ -45,6 +46,7 @@ class User
 
   after_save :erase_password
   before_create { generate_token(:auth_token) }
+  before_save :update_thumbnail
 
   scope :by_name, -> { asc(:_slugs) }
 
@@ -119,6 +121,16 @@ class User
     self.watched_talks.include? talk
   end
 
+  def thumbnail
+    if !self.gravatar_photo.blank?
+      self.gravatar_photo
+    elsif !self.facebook_photo.blank?
+      self.facebook_photo
+    else
+      "/assets/without_avatar.jpg"
+    end
+  end
+
 private
 
   def until_two_names(name)
@@ -134,5 +146,11 @@ private
 
   def require_password?
     new_record? || @validate_password
+  end
+
+  def update_thumbnail
+    self.gravatar_photo = Gravatar.new(self.email).get_fields.thumbnail_url
+
+    self.facebook_photo = Facebook.thumbnail(self.facebook_url) unless self.facebook_url.blank?
   end
 end

@@ -19,7 +19,7 @@
 </div>
 
 <div class="featurette">
-  <%= gravatar_image(@user.email, @user.name) %>
+  <%= thumbnail(@user) %>
   <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
 
   <% if @presenter.gravatar.has_profile %>

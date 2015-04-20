@@ -9,6 +9,7 @@ FactoryGirl.define do
       name "Paul Young"
       username "@pyoung"
       email "paul@example.org"
+      gravatar_photo "/assets/without_avatar.jpg"
     end
 
     trait :billy do
@@ -17,12 +18,15 @@ FactoryGirl.define do
       email "billy@example.org"
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago
+      facebook_photo "/assets/without_avatar.jpg"
     end
 
     trait :luis do
       name "Luis Miguel"
       username "@lmiguel"
       email "luizgrsanches@gmail.com"
+      gravatar_photo nil
+      facebook_photo nil
     end
 
     trait :random do

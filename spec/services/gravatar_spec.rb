@@ -40,26 +40,4 @@ describe Gravatar do
       expect(gravatar.has_profile).to be_falsey
     end
   end
-
-  context "returns facebook photo" do
-    it "valid" do
-      photo_url = Gravatar.get_facebook_photo("https://facebook.com/luizgrsanches")
-
-      expect(photo_url).to be_truthy
-    end
-
-    it "invalid" do
-      stub_request(:get, /graph.facebook.com/).
-        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-        to_return(
-          :status => 404,
-          :body => '',
-          :headers => {}
-        )
-
-      photo_url = Gravatar.get_facebook_photo("https://facebook.com/1")
-
-      expect(photo_url).to be_falsey
-    end
-  end
 end

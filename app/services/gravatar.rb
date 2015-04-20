@@ -4,7 +4,7 @@ require 'open-uri'
 class Gravatar
   DOMAIN = "http://gravatar.com"
 
-  attr_reader :url, :profile, :profile_url, :about_me, :current_location, :has_profile, :email
+  attr_reader :url, :profile, :profile_url, :about_me, :current_location, :has_profile, :email, :thumbnail_url
 
   def initialize(email)
     hash = Digest::MD5.hexdigest(email)
@@ -22,39 +22,13 @@ class Gravatar
         @profile_url = record.xpath("//profileUrl").text
         @about_me = record.xpath("//aboutMe").text
         @current_location = record.xpath("//currentLocation").text
+        @thumbnail_url = record.xpath("//thumbnailUrl").text
         @has_profile = true
         self
       end
     rescue OpenURI::HTTPError
       @has_profile = false
       self
-    end
-  end
-
-  def self.get_facebook_photo(url)
-    begin
-      unless url.blank?
-        id = url.split("/").last
-        id = id.split("?").first if id.include?("?")
-
-        object = open("https://graph.facebook.com/#{id}/picture?type=large")
-
-        image_url = object.base_uri.to_s
-
-        image_url.include?("gPCjrIGykBe.gif") ? nil : image_url
-      end
-    rescue
-      nil
-    end
-  end
-
-  def get_image
-    user = User.find_by(email: @email)
-
-    if user
-      user.facebook_photo.nil? || user.facebook_photo.empty? ? @url : user.facebook_photo
-    else
-      @url
     end
   end
 end

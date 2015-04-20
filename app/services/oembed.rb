@@ -78,7 +78,6 @@ private
       end
     rescue OpenURI::HTTPError
       nil
-
     end
   end
 
@@ -96,14 +95,12 @@ private
       end
     rescue OpenURI::HTTPError
       nil
-
     end
   end
 
   def open_prezi
     begin
       code = @url.split("/")[3]
-
       record = MultiJson.load(open("https://prezi.com/api/embed/?id=#{code}"))
 
       if !record.nil? && record["error_code"].nil?
@@ -115,7 +112,6 @@ private
       end
     rescue OpenURI::HTTPError
       nil
-
     end
   end
 end
