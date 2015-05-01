@@ -15,7 +15,7 @@ section#top h1 {
 .box-talk{
   margin-top: 20px;
   padding-bottom: 10px;
-  width: 230px;
+  width: 170px;
   -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
   box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
@@ -23,7 +23,7 @@ section#top h1 {
 
 .box-talk p{
   /*margin-top: 10px;*/
-  font-size: 16px;
+  font-size: 14px;
   padding: 0 10px 0 10px;
   margin-bottom: -5px
 }
@@ -70,7 +70,7 @@ section#top h1 {
 .btn-talks:hover {
   color: #fff;
   background: #2E8AEF;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .top-new-talk{

@@ -5,6 +5,7 @@ describe "Show public talk", :type => :request do
   let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user) }
   let!(:speakerdeck_talk) { create(:speakerdeck_talk, :users => [ user ], :owner => user) }
+  let!(:prezi_talk) { create(:prezi_talk, :users => [ user ], :owner => user) }
 
   context "of slideshare" do
     before do
@@ -37,6 +38,23 @@ describe "Show public talk", :type => :request do
 
     it "displays detail talk" do
       expect(page).to have_content("Ruby - praticamente falando")
+    end
+  end
+
+  context "of prezi" do
+    before do
+      login_as(user)
+      visit root_path
+      click_link "Palestras"
+      click_link "SOA - Introdução"
+    end
+
+    it "redirects to the show page" do
+      expect(current_path).to eql(talk_path(prezi_talk))
+    end
+
+    it "displays detail talk" do
+      expect(page).to have_content("SOA - Introdução")
     end
   end
 

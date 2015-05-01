@@ -5,8 +5,8 @@
     <%= f.label :presentation_url, t("labels.talk.presentation_url"), :class => 'control-label col-md-3' %>
     <div class="col-md-6">
       <%= f.url_field :presentation_url, :class => "form-control" %>
+      <b><span id="searching_talk" class="text-error" style="display:none"><%= t("new.talk.searching") %></span></b>
       <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
-      <span id="searching_talk" class="text-info" style="display:none"><%= t("new.talk.searching") %></span>
       <span id="talk_not_found" class="text-error" style="display:none"><%= t("new.talk.not_found") %></span>
     </div>
   </div>
@@ -50,9 +50,9 @@
 
   <div class="container">
     <%= render "shared/invite_user", :model => @talk, :users => @authors, :key => "author" %>
-      
+
     <%= f.submit :class => 'btn btn-primary' %>
-    
+
   </div>
 
   <%= f.hidden_field :thumbnail %>

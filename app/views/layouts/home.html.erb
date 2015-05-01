@@ -12,9 +12,11 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
     <![endif]-->
 
-    <!-- Google Font -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
-    
+    <% if Rails.env != 'test' %>
+      <!-- Google Font -->
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <% end %>
+
     <%= stylesheet_link_tag "home", :media => "all" %>
   </head>
   <body>
@@ -97,7 +99,7 @@
         <div class="row row-talkers">
           <% @talkers.each do |talker| %>
             <div class="talker col-md-3 wow fadeInUp" data-wow-offset="200" data-wow-delay="">
-              <%= gravatar_image(talker.email, talker.name, "100x100") %>
+              <%= thumbnail(talker, "100x100") %>
               <p><a href="<%= user_path(talker) %>" title="<%= talker.name %>"><%= talker.name %></a></p>
             </div>
           <% end %>
@@ -106,6 +108,5 @@
 
     </section>
     <%= javascript_include_tag "home" %>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </body>
 </html>

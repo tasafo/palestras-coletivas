@@ -8,7 +8,7 @@ describe Comment, :type => :model do
 
   context "when commenting on commentable" do
     let(:new_comment)   { Comment.new }
-    let(:body)          { "Go reds!" } 
+    let(:body)          { "Go reds!" }
     let(:params)        { { commentable: commentable, user: commentor, body: body } }
 
     it "comments on commentable" do

@@ -20,7 +20,7 @@ describe "Login", :type => :request do
     end
 
     it "displays greeting message" do
-      expect(page).to have_content("Olá, Paul Young")
+      expect(page).to have_content("Olá, pyoung")
     end
   end
 

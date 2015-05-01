@@ -17,7 +17,16 @@ class TalkDecorator
 
 private
 
+  def clean_presentation_data
+    if @talk.presentation_url.blank?
+      @talk.code = ""
+      @talk.thumbnail = ""
+    end
+  end
+
   def add_authors
+    clean_presentation_data
+
     @owner = @talk.owner if @talk.owner
 
     @talk.users = nil

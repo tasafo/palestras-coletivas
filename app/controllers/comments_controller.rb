@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :find_commentable
 
   def create
-    comment_params = {user: current_user, commentable: find_parent_comment, body: params[:comment][:body] } 
+    comment_params = {user: current_user, commentable: find_parent_comment, body: params[:comment][:body] }
     @new_comment = Comment.new.comment_on! comment_params
 
     if @new_comment.persisted?
@@ -34,4 +34,4 @@ private
     parent = @commentable.comments.find params[:comment_id] if params[:comment_id]
     parent ||= @commentable
   end
-end 
+end

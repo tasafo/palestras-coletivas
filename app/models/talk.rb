@@ -26,6 +26,15 @@ class Talk
 
   slug :title
   search_in :title, :tags
-  
+
   validates_presence_of :title, :description, :tags, :owner
+  validates_uniqueness_of :presentation_url, :if => :has_url?
+  validates_length_of :title, maximum: 100
+  validates_length_of :description, maximum: 2000
+
+  index({presentation_url: 1}, {background: true})
+
+  def has_url?
+    !presentation_url.blank?
+  end
 end

@@ -8,7 +8,7 @@ describe EventsController, :type => :controller do
     it "should not to be nil" do
       params = { events: "all" }
       get :index, params.merge(format: 'json')
-      
+
       parse_json = JSON(response.body)
 
       expect(parse_json).not_to be nil

@@ -1,22 +1,25 @@
 <section id="top">
-  <h1>Talks</h1>
+  <h1><%= t("titles.talks.index") %></h1>
 </section>
 
 <div class="container container-talks">
-  <% if logged_in? %>
-    <nav class="navbar navbar-default nav-bar-talks" role="navigation">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <% unless @talks.blank? %>
-            <%= form_for talks_path, :html => { :class => 'navbar-form navbar-left', role: 'search' }, :method => "get" do |f| %>
-              <div class="form-group">
-                <input type="text" class="form-control" id="talk_search" name="talk[search]" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
-              </div>
-              <button type="submit" class="btn btn-default"><%= t("form.submit.search") %></button>
-            <% end %>
+  <nav class="navbar navbar-default nav-bar-talks" role="navigation">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <% unless @talks.blank? %>
+          <%= form_tag talks_path, :html => { :class => 'navbar-form navbar-left', role: 'search' }, :method => "get" do |f| %>
+            <div class="form-group">
+              <input type="text" class="form-control" id="search" name="search" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
+            </div>
+            <button type="submit" class="btn btn-default"><%= t("form.submit.search") %></button>
           <% end %>
+        <% end %>
+
+        <% if logged_in? %>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to t("titles.talks.new"), new_talk_path %></li>
+            <li>
+              <%= link_to t("titles.talks.new"), new_talk_path %>
+            </li>
             <li>
               <% if @my %>
                 <%= link_to t("titles.talks.all"), "/talks" %>
@@ -25,26 +28,28 @@
               <% end %>
             </li>
           </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-  <% end %>
+        <% end %>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <%= paginate @talks %>
 
   <div class="row">
     <% @talks.each do |talk| %>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="box-talk">
           <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
 
-          <%= image_tag thumb, class: "featurette-image img-polaroid", height: '180', width: '230' %>
+          <%= link_to image_tag(thumb, class: "featurette-image img-polaroid", width: '170', height: '128'), talk_path(talk) %>
 
           <% talk.users.by_name.each do |user| %>
             <a href="<%= user_path(user) %>" title="<%= user.name %>" class="thumb-user">
-              <%= gravatar_image(user.email, user.name, "40x40") %>
+              <%= thumbnail(user, "40x40") %>
             </a>
           <% end %>
 
-          <p><%= link_to talk.title, talk_path(talk) %></p>
+          <p><%= link_to suspension_points(talk.title, 50), talk_path(talk) %></p>
 
           <span><%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %></span>
         </div>

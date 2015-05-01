@@ -31,12 +31,14 @@ class Event
 
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, inverse_of: :events
   has_many :schedules
   has_many :enrollments
   belongs_to :owner, class_name: "User", inverse_of: :owner_events
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date, :deadline_date_enrollment, :place, :street, :district, :city, :state, :country, :owner
+  validates_length_of :name, maximum: 100
+  validates_length_of :edition, maximum: 20
   validates_length_of :description, maximum: 2000
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
 

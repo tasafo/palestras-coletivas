@@ -1,25 +1,29 @@
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script>
-    ;(function(w, d, g, u) {
-      var marker, position, config, map, gMaps = g.maps;
+<% if Rails.env != 'test' %>
+  <% if @event.coordinates %>
+    <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script>
+      ;(function(w, d, g, u) {
+        var marker, position, config, map, gMaps = g.maps;
 
-      position = new gMaps.LatLng(<%= @event.coordinates[1] %>, <%= @event.coordinates[0] %>),
+        position = new gMaps.LatLng(<%= @event.coordinates[1] %>, <%= @event.coordinates[0] %>),
 
-      config = {
-          center: position,
-          mapTypeControl: false,
-          mapTypeId: gMaps.MapTypeId.ROADMAP,
-          scrollwheel: false,
-          zoom: 16
-      };
+        config = {
+            center: position,
+            mapTypeControl: false,
+            mapTypeId: gMaps.MapTypeId.ROADMAP,
+            scrollwheel: false,
+            zoom: 16
+        };
 
-      map = new gMaps.Map(d.getElementById("location-map"), config);
+        map = new gMaps.Map(d.getElementById("location-map"), config);
 
-      marker = new gMaps.Marker({
-          animation: gMaps.Animation.BOUNCE,
-          map: map,
-          position: position
-      });
+        marker = new gMaps.Marker({
+            animation: gMaps.Animation.BOUNCE,
+            map: map,
+            position: position
+        });
 
-    }(window, document, google, undefined));
-  </script>
+      }(window, document, google, undefined));
+    </script>
+  <% end %>
+<% end %>

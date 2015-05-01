@@ -21,8 +21,10 @@
     <div class="container">
        <%= @event.place %> - <%= t("labels.event.address") %>: <%= @presenter.address %>
     </div>
-    <br/>
-    <div id="location-map"></div>
+    <% if @event.coordinates %>
+      <br/>
+      <div id="location-map"></div>
+    <% end %>
   </section>
 
   <% unless @event.users.blank? %>
@@ -50,47 +52,7 @@
           <% end %>
         <% end %>
       <% else %>
-        <% unless @presenter.users_active.blank? %>
-          <h4><%= t("show.event.enrolled") %> (<%= @presenter.users_active.count %>)</h4>
-
-          <% if @presenter.authorized %>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th><%= t("show.event.table.number") %></th>
-                  <th><%= t("show.event.table.name") %></th>
-                  <th><%= t("show.event.table.email") %></th>
-                  <% if @presenter.can_record_presence %>
-                    <th><%= t("show.event.table.presence") %></th>
-                  <% end %>
-                </tr>
-              </thead>
-              <tbody>
-              <% counter = 0 %>
-              <% @presenter.users_active.each do |h| %>
-                <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
-
-                <% button_type = h[:enrollment].present? ? "red" : "blue" %>
-
-                <tr>
-                  <td><%= counter += 1 %></td>
-                  <td><%= h[:enrollment].user.name %></td>
-                  <td><%= h[:enrollment].user.email %></td>
-                  <% if @presenter.can_record_presence %>
-                    <td>
-                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, h[:enrollment]), :class => "m-btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
-                    </td>
-                  <% end %>
-                </tr>
-              <% end %>
-              </tbody>
-            </table>
-          <% else %>
-            <% @presenter.users_active.each do |h| %>
-              <%= render "shared/user_event", :user => h[:enrollment].user %>
-            <% end %>
-          <% end %>
-        <% end %>
+        <%= render "events/show/attendance_list" %>
       <% end %>
     </div>
 

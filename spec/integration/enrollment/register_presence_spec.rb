@@ -19,7 +19,7 @@ describe "Register presence", :type => :request do
 
   let!(:enrollment_billy) { create(:enrollment, :event => event, :user => other_user) }
   let!(:enrollment_luis) { create(:enrollment, :present => true, :event => event, :user => another_user) }
-  
+
   context "when the user is not present" do
     before do
       login_as(user)

@@ -10,7 +10,7 @@ describe "Edit user", :type => :request do
       visit root_path
       click_link "Meus dados"
 
-      fill_in "Seu primeiro e último nome", :with => "Carl Simon"
+      fill_in "Seu nome", :with => "Carl Simon"
 
       click_button "Atualizar dados"
     end
@@ -30,7 +30,7 @@ describe "Edit user", :type => :request do
       visit root_path
       click_link "Meus dados"
 
-      fill_in "Seu primeiro e último nome", :with => ""
+      fill_in "Seu nome", :with => ""
 
       click_button "Atualizar dados"
     end
@@ -51,7 +51,7 @@ describe "Edit user", :type => :request do
     end
 
     it "redirects to the talks page" do
-      expect(current_path).to eql(talks_path)
+      expect(current_path).to eql(users_path)
     end
 
     it "displays error messages" do

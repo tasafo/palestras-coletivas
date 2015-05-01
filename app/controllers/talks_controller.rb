@@ -47,7 +47,15 @@ class TalksController < PersistenceController
 
     respond_to do |format|
       if oembed
-        format.json { render :json => {:error => false, :title => oembed.title, :code => oembed.code, :thumbnail => oembed.thumbnail} }
+        format.json {
+          render :json => {
+            :error => false,
+            :title => oembed.title,
+            :code => oembed.code,
+            :thumbnail => oembed.thumbnail,
+            :description => oembed.description
+          }
+        }
       else
         format.json { render :json => {:error => true} }
       end
@@ -80,12 +88,12 @@ private
 
   def search_talks(search, my, page)
     if logged_in? && my
-      talks = current_user.talks.desc(:created_at)
+      talks = TalkQuery.new.owner(current_user)
     else
       talks = search.blank? ? TalkQuery.new.publics : Kaminari.paginate_array(TalkQuery.new.search(search))
     end
 
-    talks.page(page).per(5)
+    talks.page(page).per(12)
   end
 
   def set_talk

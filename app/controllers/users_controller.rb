@@ -17,16 +17,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    unless @user.nil?
+    if !@user.nil?
       @presenter = UserPresenter.new(@user, params[:page])
     else
-      redirect_to root_path, :notice => t("flash.user_not_found")
+      redirect_to users_path, :notice => t("flash.user_not_found")
     end
   end
 
   def edit
     if @user != current_user
-      redirect_to talks_path, :notice => t("flash.unauthorized_access")
+      redirect_to users_path, :notice => t("flash.unauthorized_access")
     end
   end
 
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user), :notice => t("flash.users.update.notice")
     else
       render :edit
-    end 
+    end
   end
 
 private
@@ -45,6 +45,6 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :username, :email, :facebook_url, :facebook_photo, :password, :password_confirmation)
   end
 end

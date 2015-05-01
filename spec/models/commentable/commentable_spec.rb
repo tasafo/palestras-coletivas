@@ -18,10 +18,10 @@ describe Commentable, :type => :model do
 
     end
     it "finds among comment answers" do
-      comment = subject.comments.build :body => "Hello!"      
+      comment = subject.comments.build :body => "Hello!"
       comment2 = subject.comments.build :body => "I am not here!"
 
-      answer = comment.comments.build :body => "Bye!"      
+      answer = comment.comments.build :body => "Bye!"
       answer2 = comment.comments.build :body => "Dont go!"
 
       expect(subject.find_comment_by_id(answer.id)).to eq answer

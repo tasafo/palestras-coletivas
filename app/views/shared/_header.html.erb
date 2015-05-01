@@ -16,28 +16,28 @@
         <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
         <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
         <li class="dropdown">
-            <% if logged_in? %>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <%= gravatar_image(current_user.email, current_user.name, "20x20") %>
-                    <%= t("user.greeting", :name => current_user.name) %>
-                    <span class="caret white"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><%= link_to t("menu.user_profile"), user_path(current_user) %></li>
-                    <li><%= link_to t("menu.user_data"), edit_user_path(current_user) %></li>
-                    <li class="divider"></li>
-                    <li><%= link_to t("menu.logout"), logout_path %></li>
-                </ul>
-            <% else %>
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <%= t("menu.access") %>
-                    <span class="caret white"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><%= link_to t("menu.login"), login_path %> </li>
-                    <li><%= link_to t("menu.signup"), new_user_path %> </li>
-                </ul>
-            <% end %>
+          <% if logged_in? %>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= thumbnail(current_user, "20x20") %>
+              <%= t("user.greeting", :name => current_user.username.gsub('@','')) %>
+              <span class="caret white"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t("menu.user_profile"), user_path(current_user) %></li>
+              <li><%= link_to t("menu.user_data"), edit_user_path(current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to t("menu.logout"), logout_path %></li>
+            </ul>
+          <% else %>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= t("menu.access") %>
+              <span class="caret white"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t("menu.login"), login_path %></li>
+              <li><%= link_to t("menu.signup"), new_user_path %></li>
+            </ul>
+          <% end %>
         </li>
       </ul>
     </div>

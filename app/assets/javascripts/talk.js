@@ -4,7 +4,7 @@ $(function() {
 
     $("#talk_presentation_url").focusout(function() {
         var link = $("#talk_presentation_url").val();
-        
+
         if (link) {
             $("#searching_talk").show();
 
@@ -30,6 +30,9 @@ $(function() {
                         $("#talk_title").val(result.title);
                         $("#talk_code").val(result.code);
                         $("#talk_thumbnail").val(result.thumbnail);
+                        if (result.description) {
+                            $("#talk_description").val(result.description);
+                        }
                     }
                 }
             });

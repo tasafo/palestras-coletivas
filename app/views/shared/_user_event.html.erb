@@ -1,7 +1,7 @@
 <div class="span2">
   <div class="user-box">
     <a href="<%= user_path(user) %>" title="<%= user.name %>">
-      <%= gravatar_image(user.email, user.name, "80x80", 'img-circle img-user-box') %>
+      <%= thumbnail(user, "80x80", 'img-circle img-user-box') %>
       <p><%= user.show_name %></p>
     </a>
   </div>

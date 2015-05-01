@@ -81,8 +81,8 @@ html[xmlns] .slides {display: block;}
 .flex-control-nav {width: 100%; position: relative; text-align: center;}
 .flex-control-nav li {margin: 30px 6px; display: inline-block; zoom: 1; *display: inline;}
 .flex-control-paging li a {width: 13px; height: 13px; display: block; background: #5c696a; background: #fff; cursor: pointer; text-indent: -9999px; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; border: 3px solid #c9cbca; }
-.flex-control-paging li a:hover { background: #fff; background: #212024); }
-.flex-control-paging li a.flex-active { background: #fff; background: #212024; cursor: default; }
+.flex-control-paging li a:hover {background: #fff; background: #212024;}
+.flex-control-paging li a.flex-active { background: #fff; background: #212024; cursor: default;}
 
 .flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
 .flex-control-thumbs li {width: 25%; float: left; margin: 0;}

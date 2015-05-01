@@ -23,7 +23,7 @@
 
     <div class="container">
       <div class="row-fluid">
-        <h2><%= @event.name %></h2>
+        <h2><%= @event.name %> - <%= @event.edition %></h2>
 
         <% if @event.start_date == @event.end_date %>
           <h4><%= l @event.start_date, :format => :long %> - <%= @event.place %></h4>

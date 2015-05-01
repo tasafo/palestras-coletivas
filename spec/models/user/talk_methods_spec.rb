@@ -6,7 +6,7 @@ describe User, "talk methods", :type => :model do
   let!(:regular_user) { create(:user, :luis) }
 
   describe "watch_talk!" do
-    context "when talk was already watched" do 
+    context "when talk was already watched" do
       before do
         regular_user.watch_talk! talk
       end
@@ -17,7 +17,7 @@ describe User, "talk methods", :type => :model do
       end
     end
 
-    context "when talk was not watched" do 
+    context "when talk was not watched" do
       it "marks talk as watched" do
         expect(regular_user.watched_talk? talk).to be false
         regular_user.watch_talk! talk
@@ -33,7 +33,7 @@ describe User, "talk methods", :type => :model do
   end
 
   describe "unwatch_talk!" do
-    context "when talk was already watched" do 
+    context "when talk was already watched" do
       before do
         regular_user.watch_talk! talk
       end
@@ -51,7 +51,7 @@ describe User, "talk methods", :type => :model do
       end
     end
 
-    context "when talk was not watched" do 
+    context "when talk was not watched" do
       it "makes no change" do
         expect(regular_user.watched_talk? talk).to be false
         regular_user.unwatch_talk! talk

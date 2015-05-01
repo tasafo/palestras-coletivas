@@ -1,10 +1,13 @@
 pt-BR:
   labels:
     user:
-      name: "Seu primeiro e último nome"
-      username: "Seu nome de usuário"
-      username_explanaition: "ex: @marcos . É assim que outros usuários encontrarão você."
+      name: "Seu nome"
+      name_explanaition: "Será usado no seu endereço. Ex.: palestrascoletivas.com.br/users/fulano-de-tal"
+      username: "Seu apelido"
+      username_explanaition: "Será usado para te encontrar na criação de palestras e eventos."
       email: "Seu e-mail"
+      facebook_url: "Endereço do Facebook"
+      facebook_url_explanaition: "Será usado para obtermos o seu avatar"
       password: "Sua senha"
       password_confirmation: "Confirme sua senha"
 

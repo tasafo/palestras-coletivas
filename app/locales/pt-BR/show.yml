@@ -40,8 +40,9 @@ pt-BR:
       btn_presence_checkin: "Estou aqui!"
       btn_add_vote: "Adicionar voto"
       btn_remove_vote: "Retirar voto"
-      table:
+      attendance_table:
         number: "N."
+        photo: "Foto"
         name: "Nome"
         email: "E-mail"
         presence: "Presença"

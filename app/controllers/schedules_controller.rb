@@ -54,7 +54,7 @@ private
 
   def save_schedule(option, event, schedule, old_talk_id, talk_id, params = nil)
     operation = option == :new ? :create : :update
-    
+
     if ScheduleDecorator.new(schedule, old_talk_id, talk_id, params).send operation
       redirect_to event_path(event), notice: t("flash.schedules.#{operation.to_s}.notice")
     else

@@ -1,13 +1,11 @@
 language: ruby
 rvm:
-  - 2.2.0
+  - 2.2.2
 services:
   - mongodb
 before_install:
   - sudo apt-get install libqtwebkit-dev
   - sudo apt-get install xvfb
-before_script:
-  - echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
 script: xvfb-run -a bundle exec rspec
 addons:
   code_climate:

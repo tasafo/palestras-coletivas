@@ -15,7 +15,7 @@ describe Rateable, :type => :model do
     subject.save
     rating_1 = subject.rate_by user, 4
     rating_2 = subject.rate_by other_user, 4
-    
+
     expect(subject.rating_by other_user).to be_eql rating_2
   end
 
@@ -53,6 +53,6 @@ describe Rateable, :type => :model do
     it "returns 0 if rateable has no rating" do
       subject.ratings.destroy_all
       expect(subject.rating).to be_eql 0
-    end 
+    end
   end
 end

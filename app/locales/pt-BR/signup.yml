@@ -2,5 +2,5 @@ pt-BR:
   signup:
     about_html:
       Preencha os campos abaixo para que possamos criar sua conta no Palestras Coletivas.<br/><br/>
-      Utilizamos o serviço <a href="http://gravatar.com">Gravatar</a> para obter mais informações sobre você, através de seu e-mail.
-      Caso ainda não tenha uma conta lá, você pode criá-la depois usando o e-mail informado no seu cadastro.<br/><br/>
+      Utilizamos o serviço <a href="http://gravatar.com">Gravatar</a> para obter seu avatar e mais informações sobre você, através de seu e-mail.
+      Caso não tenha uma conta lá, você pode utilizar o campo endereço do seu facebook para obtermos o seu avatar.<br/><br/>

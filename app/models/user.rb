@@ -17,10 +17,13 @@ class User
   field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
   field :counter_public_talks, type: Integer, default: 0
+  field :facebook_url, type: String
+  field :facebook_photo, type: String
+  field :gravatar_photo, type: String
 
   has_and_belongs_to_many :talks, inverse_of: :talks
   has_and_belongs_to_many :watched_talks, class_name: "Talk", inverse_of: :watched_user
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :events, inverse_of: :users
   has_many :enrollments
   has_many :votes
   has_many :owner_events, class_name: "User", inverse_of: :owner
@@ -32,14 +35,18 @@ class User
 
   validates_presence_of :name, :username
   validates_length_of :name, minimum: 3
-  validates_uniqueness_of :name, :email, :username
+  validates_uniqueness_of :email, :username
   validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/
   validates_format_of :username, with: /\A@[a-z]\w{2}\w+\z/
   validates_presence_of :password, :if => :require_password?
   validates_confirmation_of :password, :if => :require_password?
 
+  index({email: 1}, {unique: true, background: true})
+  index({username: 1}, {unique: true, background: true})
+
   after_save :erase_password
   before_create { generate_token(:auth_token) }
+  before_save :update_thumbnail
 
   scope :by_name, -> { asc(:_slugs) }
 
@@ -78,31 +85,29 @@ class User
     enrollment = (enrolled_at? event) ? (Enrollment.find_by user: self, event: event) : (enroll_at event)
 
     enrollment.present = true
-    enrollment.save
+    EnrollmentDecorator.new(enrollment, 'present').update
   end
 
   def enrolled_at? event
     enrollment = Enrollment.find_by user: self, event: event
 
-    enrollment.nil? ? false : true
+    !enrollment.nil?
   end
 
   def enroll_at event
-    Enrollment.create(user: self, event: event, active: true)
+    enrollment = Enrollment.new(user: self, event: event, active: true)
+    EnrollmentDecorator.new(enrollment, 'active').create
   end
 
   def present_at? event
     enrollment = Enrollment.find_by user: self, event: event
 
-    if enrollment.nil?
-      return false
-    else
-      return enrollment.present
-    end
+    enrollment.nil? ? false : enrollment.present
   end
 
   def watch_talk! talk
     return if watched_talk? talk
+
     self.watched_talks << talk
     set_counter :watched_talks, :inc
   end
@@ -116,19 +121,36 @@ class User
     self.watched_talks.include? talk
   end
 
-  private
-    def until_two_names(name)
-      nameArray = name.split(" ")
-      return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
+  def thumbnail
+    if !self.gravatar_photo.blank?
+      self.gravatar_photo
+    elsif !self.facebook_photo.blank?
+      self.facebook_photo
+    else
+      "/assets/without_avatar.jpg"
     end
+  end
 
-    def erase_password
-      @password = nil
-      @password_confirmation = nil
-      @validate_password = false
-    end
+private
 
-    def require_password?
-      new_record? || @validate_password
-    end
+  def until_two_names(name)
+    nameArray = name.split(" ")
+    return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
+  end
+
+  def erase_password
+    @password = nil
+    @password_confirmation = nil
+    @validate_password = false
+  end
+
+  def require_password?
+    new_record? || @validate_password
+  end
+
+  def update_thumbnail
+    self.gravatar_photo = Gravatar.new(self.email).get_fields.thumbnail_url
+
+    self.facebook_photo = Facebook.thumbnail(self.facebook_url) unless self.facebook_url.blank?
+  end
 end

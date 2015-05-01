@@ -53,7 +53,7 @@ describe Event, "validations", :type => :model do
 
     expect(event.errors[:deadline_date_enrollment].size).to eq(1)
   end
-  
+
   it "requires place" do
     event = Event.create(:place => nil)
 
@@ -89,7 +89,7 @@ describe Event, "validations", :type => :model do
 
     expect(event.errors[:country].size).to eq(1)
   end
-  
+
   it "requires owner" do
     event = Event.create(:owner => nil)
 

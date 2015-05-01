@@ -1,10 +1,9 @@
 require "spec_helper"
 
 describe ApplicationHelper, :type => :helper do
-  describe "#gravatar_image" do
-    let(:image) do
-      helper.gravatar_image("paul@example.org", "Paul Young")
-    end
+  describe "#thumbnail" do
+    let(:user) { create(:user, :paul) }
+    let(:image) { helper.thumbnail(user) }
 
     context "with regular expressions" do
       it "returns image" do
@@ -16,7 +15,7 @@ describe ApplicationHelper, :type => :helper do
       end
 
       it "sets alternative text" do
-        expect(image).to match(%r[alt="Paul Young"])
+        expect(image).to match(%r[alt="@pyoung"])
       end
     end
 
@@ -28,11 +27,11 @@ describe ApplicationHelper, :type => :helper do
       end
 
       it "sets url" do
-        expect(html["src"]).to eql("http://gravatar.com/avatar/efac3492328ff47a6c761063c7cf794a?d=mm")
+        expect(html["src"]).to eql("/assets/without_avatar.jpg")
       end
 
       it "sets alternative text" do
-        expect(html["alt"]).to eql("Paul Young")
+        expect(html["alt"]).to eql("@pyoung")
       end
     end
   end
