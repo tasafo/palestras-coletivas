@@ -4,7 +4,7 @@ pt-BR:
       index: "Palestras"
       new: "Adicionar palestra"
       edit: "Editar palestra"
-      show: "Exibir palestra"
+      show: "Palestra"
       my: "Minhas palestras"
       all: "Todas as palestras"
       search: "Buscar palestra"
@@ -43,8 +43,10 @@ pt-BR:
       edit: "Alterar participação no evento"
 
     external_event:
-      new: "Adicionar evento externo para"
-      edit: "Editar evento externo de"
+      title: "Evento externo"
+      new: "Adicionar para:"
+      edit: "Editar de:"
 
     submit_event:
-      new: "Submeter a palestra"
+      title: "Submeter"
+      new: "Palestra:"

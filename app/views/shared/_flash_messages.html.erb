@@ -1,5 +1,12 @@
-<div class="span11">
-  <% flash.each do |type, message| %>
-    <div class="alert alert-success"><%= message %></div>
-  <% end %>
-</div>
+<% unless flash.blank? %>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <% flash.each do |type, message| %>
+          <div class="alert alert-success"><%= message %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

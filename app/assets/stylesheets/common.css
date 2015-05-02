@@ -90,3 +90,19 @@ section {
   color: white;
   text-shadow: 0 1px 2px #000000;
 }
+
+.footer {
+  margin-top: 20px;
+  border-top: 1px solid #e5e5e5;
+  background: url(/assets/bg_footer.png);
+  padding: 20px 0 10px;
+  color: #919191;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer a:hover {
+  color: #61c168
+}

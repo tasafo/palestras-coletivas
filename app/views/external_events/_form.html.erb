@@ -1,37 +1,37 @@
-<%= form_for(@external_event, :url => url, :html => {:class => 'form-horizontal'}) do |f| %>
-  <%= render "shared/error_messages", :record => @external_event %>
+<%= form_for(@external_event, url: url, html: {class: 'form-horizontal'}) do |f| %>
+  <%= render "shared/error_messages", record: @external_event %>
 
-  <div class="control-group">
-    <%= f.label :name, t("labels.external_event.name"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :name, t("labels.external_event.name"), :class => 'control-label col-md-3' %>
+    <div class="col-md-5">
+      <%= f.text_field :name, class: "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :date, t("labels.external_event.date"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :date, :class => "m-wrap m-ctrl-small date" %>
+  <div class="form-group">
+    <%= f.label :date, t("labels.external_event.date"), :class => 'control-label col-md-3' %>
+    <div class="col-md-2">
+      <%= f.text_field :date, class: "form-control date" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :place, t("labels.external_event.place"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :place, :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :place, t("labels.external_event.place"), :class => 'control-label col-md-3' %>
+    <div class="col-md-5">
+      <%= f.text_field :place, class: "form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :url, t("labels.external_event.url"), :class => 'control-label' %>
-      <div class="controls">
-      <%= f.url_field :url, :class => "m-wrap m-ctrl-large" %>
+  <div class="form-group">
+    <%= f.label :url, t("labels.external_event.url"), :class => 'control-label col-md-3' %>
+    <div class="col-md-5">
+      <%= f.url_field :url, class: "form-control" %>
     </div>
   </div>
 
-  <div class="m-btn-strip">
-    <%= f.submit :class => 'm-btn blue' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          talk_path(@talk), :class => 'm-btn black' %>
+  <div class="container">
+    <%= f.submit class: 'btn btn-primary' %>
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+        talk_path(@talk), class: 'btn btn-default' %>
   </div>
 <% end %>

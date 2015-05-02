@@ -1,59 +1,40 @@
-<section id="top">
-  <h1><%= t("titles.talks.index") %></h1>
-</section>
+<%= render "shared/title", title: t("titles.talks.index") %>
 
-<div class="container container-talks">
-  <nav class="navbar navbar-default nav-bar-talks" role="navigation">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <% unless @talks.blank? %>
-          <%= form_tag talks_path, :html => { :class => 'navbar-form navbar-left', role: 'search' }, :method => "get" do |f| %>
-            <div class="form-group">
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="col-md-6">
+      <% unless @talks.blank? %>
+        <%= form_tag talks_path, method: "get", class: "form-inline" do |f| %>
+          <div class="col-md-12">
+            <div class="input-group">
               <input type="text" class="form-control" id="search" name="search" value="<%= @search %>" autocomplete="off" placeholder="<%= t("placeholder.talks.search") %>">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-success"><%= t("form.submit.search") %></button>
+              </span>
             </div>
-            <button type="submit" class="btn btn-default"><%= t("form.submit.search") %></button>
-          <% end %>
+          </div>
         <% end %>
+      <% end %>
+    </div>
 
+    <div class="col-md-6">
+      <div class="row-fluid">
         <% if logged_in? %>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <%= link_to t("titles.talks.new"), new_talk_path %>
-            </li>
-            <li>
+          <div class="col-md-4"></div>
+          <div class="col-md-8">
+            <div class="btn-group" role="group">
+              <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>
               <% if @my %>
-                <%= link_to t("titles.talks.all"), "/talks" %>
+                <%= link_to t("titles.talks.all"), "/talks", class: "btn btn-primary" %>
               <% else %>
-                <%= link_to t("titles.talks.my"), "/talks?my=true" %>
+                <%= link_to t("titles.talks.my"), "/talks?my=true", class: "btn btn-primary" %>
               <% end %>
-            </li>
-          </ul>
+            </div>
+          </div>
         <% end %>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <%= paginate @talks %>
-
-  <div class="row">
-    <% @talks.each do |talk| %>
-      <div class="col-md-3">
-        <div class="box-talk">
-          <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
-
-          <%= link_to image_tag(thumb, class: "featurette-image img-polaroid", width: '170', height: '128'), talk_path(talk) %>
-
-          <% talk.users.by_name.each do |user| %>
-            <a href="<%= user_path(user) %>" title="<%= user.name %>" class="thumb-user">
-              <%= thumbnail(user, "40x40") %>
-            </a>
-          <% end %>
-
-          <p><%= link_to suspension_points(talk.title, 50), talk_path(talk) %></p>
-
-          <span><%= t("talk.created_time", :time => time_ago_in_words(talk.created_at)) %></span>
-        </div>
       </div>
-    <% end %>
+    </div>
   </div>
+
+  <%= render "shared/talks", talks: @talks, show_user: true %>
 </div>

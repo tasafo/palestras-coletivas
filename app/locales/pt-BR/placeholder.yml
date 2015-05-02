@@ -4,7 +4,7 @@ pt-BR:
       title: "Exemplo: O futuro do mundo"
       description: "Exemplo: A palestra fala sobre o futuro do mundo em que vivemos"
       tags: "Exemplo: futuro, mundo"
-      search: "por título e tags"
+      search: "informe um título ou tags"
 
     comments: "Comente aqui!"
 

@@ -1,9 +1,5 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <h1><%= t("titles.submit_event.new") %> "<%= @talk.title %>"</h1>
-    </div>
-  </div>
-</div>
+<%= render "shared/title", title: t("titles.submit_event.title") %>
 
-<%= render 'form', :url => talk_submit_events_path(@talk) %>
+<h2><%= t("titles.submit_event.new") %> <b><%= @talk.title %></b></h2>
+
+<%= render 'form', url: talk_submit_events_path(@talk) %>

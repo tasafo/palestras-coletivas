@@ -1,5 +1,5 @@
-<%= form_for(@talk, :url => url, :html => {:class => 'form-horizontal' }) do |f| %>
-  <%= render "shared/error_messages", :record => @talk %>
+<%= form_for(@talk, url: url, html: {class: 'form-horizontal' }) do |f| %>
+  <%= render "shared/error_messages", record: @talk %>
 
   <div class="form-group">
     <%= f.label :presentation_url, t("labels.talk.presentation_url"), :class => 'control-label col-md-3' %>
@@ -49,10 +49,9 @@
   </div>
 
   <div class="container">
-    <%= render "shared/invite_user", :model => @talk, :users => @authors, :key => "author" %>
+    <%= render "shared/invite_user", model: @talk, users: @authors, key: "author" %>
 
-    <%= f.submit :class => 'btn btn-primary' %>
-
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 
   <%= f.hidden_field :thumbnail %>

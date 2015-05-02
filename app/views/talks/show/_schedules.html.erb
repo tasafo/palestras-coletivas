@@ -3,29 +3,6 @@
   <h5><%= event[@talk.schedules.count > 1 ? :other : :one] %></h5>
 
   <% @talk.schedules.each do |schedule| %>
-      <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event) %></h5>
+    <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event) %></h5>
   <% end %>
-<% end %>
-
-<% if @talk.external_events? %>
-  <br/>
-  <h4><%= t("show.talk.external_events") %></h4>
-
-  <table class="table">
-    <tbody>
-    <% @talk.external_events.by_date.each do |external_event| %>
-      <% event_date = l external_event.date, :format => :long %>
-      <tr>
-        <td>
-          <h5><%= link_to "#{external_event.name}, #{external_event.place}, #{event_date}.", external_event.url %></h5>
-        </td>
-        <% if @owns %>
-          <td>
-            <%= link_to t("actions.edit"), edit_talk_external_event_path(@talk, external_event), :class => "m-btn blue", :id => "external_event_id_#{external_event.id}" %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
 <% end %>

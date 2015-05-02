@@ -24,7 +24,7 @@
 
                 <tr>
                   <td><%= counter += 1 %></td>
-                  <td><%= render "shared/user_photo", user: h[:enrollment].user %></td>
+                  <td><%= render "shared/user_thumb", user: h[:enrollment].user %></td>
                   <td><%= h[:enrollment].user.name %></td>
                   <td><%= h[:enrollment].user.email %></td>
                   <% if @presenter.can_record_presence %>
