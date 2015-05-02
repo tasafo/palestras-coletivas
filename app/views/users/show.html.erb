@@ -1,24 +1,21 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <div class="row-fluid">
-        <div class="span4">
-          <h1><%= t("titles.users.profile") %></h1>
-        </div>
-        <% if logged_in? %>
-          <div class="span8">
-            <ul id="work-filter">
-              <li><%= link_to t("titles.talks.new"), new_talk_path, :class => "m-btn blue" %></li>
-              <li><%= link_to t("titles.events.new"), new_event_path, :class => "m-btn green" %></li>
-            </ul>
+<%= render "shared/title", title: t("titles.users.profile") %>
+
+<% if logged_in? %>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="col-md-12">
+        <center>
+          <div class="btn-group" role="group">
+            <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>
+            <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
           </div>
-        <% end %>
+        </center>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 
-<div class="featurette">
+<div class="container">
   <%= thumbnail(@user) %>
   <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
 
@@ -29,47 +26,51 @@
       <%= t("show.user.profile") %> <%= link_to @presenter.gravatar.profile_url, @presenter.gravatar.profile_url %>
     </p>
   <% end %>
-</div>
 
-<% if @user.events? %>
-  <% event = t("show.user.events") %>
-  <h4><%= event[@user.events.count > 1 ? :other : :one] %></h4>
+  <hr />
 
-  <% @user.events.where(to_public: true).order(updated_at: :desc).each do |event| %>
-    <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h5>
+  <% if @user.events? %>
+    <% event = t("show.user.events") %>
+    <h3><%= event[@user.events.count > 1 ? :other : :one] %></h3>
+
+    <% @user.events.where(to_public: true).order(updated_at: :desc).each do |event| %>
+      <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h5>
+    <% end %>
   <% end %>
-<% end %>
 
-<% presentations = "" %>
+  <% presentations = "" %>
 
-<% if @user.talks? %>
-  <% @user.talks.where(to_public: true).each do |talk| %>
-    <% if talk.schedules? %>
-      <% talk.schedules.each do |schedule| %>
-        <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
+  <% if @user.talks? %>
+    <% @user.talks.where(to_public: true).each do |talk| %>
+      <% if talk.schedules? %>
+        <% talk.schedules.each do |schedule| %>
+          <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
-<% end %>
 
-<% unless presentations.blank? %>
-  <h4><%= t("show.user.presentations") %></h4>
-  <%= presentations.html_safe %>
-<% end %>
-
-<% unless @presenter.participations.blank? %>
-  <% participation = t("show.user.participations") %>
-  <h4><%= participation[@participations.count > 1 ? :other : :one] %></h4>
-
-  <% @participations.each do |participation| %>
-    <h5><%= link_to "#{participation.event.name} - #{participation.event.edition}", event_path(participation.event) %></h5>
+  <% unless presentations.blank? %>
+    <hr />
+    <h3><%= t("show.user.presentations") %></h3>
+    <%= presentations.html_safe %>
   <% end %>
-<% end %>
 
-<hr class="featurette-divider">
+  <% unless @presenter.participations.blank? %>
+    <% participation = t("show.user.participations") %>
+    <h3><%= participation[@participations.count > 1 ? :other : :one] %></h3>
 
-<% unless @presenter.talks.empty? %>
-  <h3><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
+    <% @participations.each do |participation| %>
+      <h5><%= link_to "#{participation.event.name} - #{participation.event.edition}", event_path(participation.event) %></h5>
+    <% end %>
+  <% end %>
 
-  <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
-<% end %>
+  <hr />
+
+  <% unless @presenter.talks.empty? %>
+    <h3><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
+
+    <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
+  <% end %>
+
+</div>

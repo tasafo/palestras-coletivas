@@ -19,10 +19,10 @@ pt-BR:
 
     users:
       index: "Usuários"
-      profile: "Perfil do usuário"
+      profile: "Perfil"
       edit: "Editar meus dados"
       signup: "Cadastre-se"
-      login: "Acesse sua conta"
+      login: "Acesso"
       reset_password: "Redefinir senha"
 
     events:
