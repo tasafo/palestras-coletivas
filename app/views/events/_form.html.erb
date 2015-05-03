@@ -23,6 +23,14 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :thumbnail, class: 'control-label col-md-3' %>
+    <div class="col-md-2">
+      <%= f.select(:thumbnail, event_icons_select, class: "form-control") %>
+    </div>
+    <div id="event_thumbnail_icon" class="col-md-1"></div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :stocking, class: 'control-label col-md-3' %>
     <div class="col-md-1">
       <%= f.text_field :stocking, class: "form-control" %>

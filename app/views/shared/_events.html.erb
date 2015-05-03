@@ -4,7 +4,13 @@
     <% events.each do |event| %>
       <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
         <div class="box-event">
-          <%= link_to image_tag("without_event.jpg", width: '170', height: '128'), event_path(event) %>
+          <% if event.thumbnail.blank? %>
+            <%= link_to image_tag("without_event.jpg"), event_path(event) %>
+          <% else %>
+            <div class="icon">
+              <%= fa_icon event.thumbnail %>
+            </div>
+          <% end %>
 
           <h6><%= link_to suspension_points("#{event.name} - #{event.edition}", 50), event_path(event) %></h6>
 

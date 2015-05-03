@@ -35,7 +35,7 @@ class EventsController < PersistenceController
   end
 
   def edit
-    redirect_to events_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
+    redirect_to events_path, notice: t("flash.unauthorized_access") unless authorized_access?(@event)
   end
 
   def update
@@ -67,6 +67,7 @@ private
       :name,
       :edition,
       :description,
+      :thumbnail,
       :stocking,
       :tags,
       :start_date,

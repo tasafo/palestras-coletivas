@@ -17,6 +17,7 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 
 group :development do
   gem 'thin'

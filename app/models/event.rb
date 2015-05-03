@@ -11,6 +11,7 @@ class Event
   field :name, type: String
   field :edition, type: String
   field :description, type: String
+  field :thumbnail, type: String
   field :stocking, type: Integer, default: 0
   field :tags, type: String
   field :start_date, type: Date

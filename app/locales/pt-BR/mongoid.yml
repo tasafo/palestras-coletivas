@@ -36,6 +36,7 @@ pt-BR:
         name: "Nome"
         edition: "Edição"
         description: "Descrição"
+        thumbnail: "Ícone"
         stocking: "Lotação"
         tags: "Tags"
         start_date: "Data de início"
