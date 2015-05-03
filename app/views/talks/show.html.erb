@@ -1,11 +1,9 @@
 <%= render "shared/title", title: t("titles.talks.show") %>
 
 <% if @talk %>
-  <%= render "talks/show/actions" %>
-
-  <br />
-
   <div class="container">
+    <%= render "talks/show/actions" %>
+    <br />
     <div class="row">
       <div class="col-md-4">
         <%= render "talks/show/details" %>
@@ -23,10 +21,11 @@
           <%= render 'talks/show/presentation' %>
           <%= render 'talks/show/video' %>
         <% end %>
-        <%= render "comments/index", commentable: @talk %>
       </div>
     </div>
   </div>
+
+  <%= render "comments/index", commentable: @talk %>
 <% else %>
   <h1><%= t("show.talk.not_public") %></h1>
 <% end %>

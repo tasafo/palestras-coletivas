@@ -24,11 +24,11 @@ class Oembed
     dimension = "width=\"80%\" height=\"500\""
 
     if @url.include? "slideshare.net"
-      @frame = "<iframe src=\"http://www.slideshare.net/slideshow/embed_code/#{@code}\" #{dimension} frameborder=\"0\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" style=\"border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>"
+      @frame = "<iframe class=\"embed-responsive-item\" src=\"http://www.slideshare.net/slideshow/embed_code/#{@code}\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" style=\"border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>"
     elsif @url.include? "speakerdeck.com"
-      @frame = "<iframe src=\"//speakerdeck.com/player/#{@code}\" #{dimension} allowfullscreen=\"true\" allowtransparency=\"true\" frameborder=\"0\" id=\"talk_frame_8863\" mozallowfullscreen=\"true\" style=\"border:0; padding:0; margin:0; background:transparent;\" webkitallowfullscreen=\"true\"></iframe>"
+      @frame = "<iframe class=\"embed-responsive-item\" src=\"//speakerdeck.com/player/#{@code}\" allowfullscreen=\"true\" allowtransparency=\"true\" mozallowfullscreen=\"true\" style=\"border:0; padding:0; margin:0; background:transparent;\" webkitallowfullscreen=\"true\"></iframe>"
     elsif @url.include? "prezi.com"
-      @frame = "<iframe src=\"https://prezi.com/embed/#{@code}/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0#\" allowfullscreen=\"\" mozallowfullscreen=\"\" webkitallowfullscreen=\"\" frameborder=\"0\" #{dimension}></iframe>"
+      @frame = "<iframe class=\"embed-responsive-item\" src=\"https://prezi.com/embed/#{@code}/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0#\" allowfullscreen=\"\" mozallowfullscreen=\"\" webkitallowfullscreen=\"\"></iframe>"
     else
       @frame = "<img src=\"/assets/without_presentation.jpg\" #{dimension} />"
     end

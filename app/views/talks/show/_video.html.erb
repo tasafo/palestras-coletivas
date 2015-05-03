@@ -1,3 +1,10 @@
 <% if @video %>
-  <%= @video.frame.html_safe %>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="embed-responsive embed-responsive-4by3">
+        <%= @video.frame.html_safe %>
+      </div>
+    </div>
+  </div>
 <% end %>

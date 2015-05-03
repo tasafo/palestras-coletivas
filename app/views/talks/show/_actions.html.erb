@@ -1,15 +1,13 @@
 <% if logged_in? && @owns %>
-  <div class="container">
-    <div class="row-fluid">
-      <div class="col-md-12">
-        <center>
-          <div class="btn-group" role="group">
-            <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), class: "btn btn-primary" %>
-            <%= link_to t("show.talk.external_event"), new_talk_external_event_path(@talk), class: "btn btn-primary" %>
-            <%= link_to t("show.talk.submit_event"), new_talk_submit_event_path(@talk), class: "btn btn-primary" %>
-          </div>
-        </center>
-      </div>
+  <div class="row">
+    <div class="col-md-12">
+      <center>
+        <div class="btn-group" role="group">
+          <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), class: "btn btn-primary" %>
+          <%= link_to t("show.talk.external_event"), new_talk_external_event_path(@talk), class: "btn btn-primary" %>
+          <%= link_to t("show.talk.submit_event"), new_talk_submit_event_path(@talk), class: "btn btn-primary" %>
+        </div>
+      </center>
     </div>
   </div>
 <% end %>
