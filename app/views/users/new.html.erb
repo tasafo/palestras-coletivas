@@ -1,17 +1,9 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <div class="row-fluid">
-        <div class="span4">
-          <h1><%= t("titles.users.signup") %></h1>
-        </div>
-      </div>
-    </div>
-  </div>
+<%= render "shared/title", title: t("titles.users.signup") %>
+
+<div class="container">
+  <p>
+    <%= t("signup.about_html", url: login_path) %>
+  </p>
+
+  <%= render "form", url: new_user_path %>
 </div>
-
-<p>
-  <%= t("signup.about_html", :url => login_path) %>
-</p>
-
-<%= render "form", :url => new_user_path %>

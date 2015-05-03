@@ -1,7 +1,7 @@
-<%= form_for Comment.new, :url => comments_path(commentable.class, commentable), :html => { :class => "answer_form" } do |f| %>
-  <%= f.text_area :body, :placeholder => t("placeholder.comments"), :rows => 5, :class => "span8" %>
+<%= form_for Comment.new, url: comments_path(commentable.class, commentable), html: {class: "answer_form"} do |f| %>
+  <%= f.text_area :body, placeholder: t("placeholder.comments"), rows: 5, class: "col-md-8" %>
   <%= hidden_field_tag :comment_id, comment.id %>
   <div>
-    <%= f.submit I18n.t("actions.answer"), :class => 'm-btn blue' %>
+    <%= f.submit I18n.t("actions.answer"), class: 'btn btn-primary' %>
   </div>
 <% end %>

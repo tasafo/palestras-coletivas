@@ -26,6 +26,7 @@ pt-BR:
         other: "Eventos que participei"
 
     event:
+      place: "Local"
       organizers: Organização
       enrolled: Quem se inscreveu
       presents: Quem participou
@@ -40,6 +41,7 @@ pt-BR:
       btn_presence_checkin: "Estou aqui!"
       btn_add_vote: "Adicionar voto"
       btn_remove_vote: "Retirar voto"
+      btn_checkin: "Registrar entrada"
       attendance_table:
         number: "N."
         photo: "Foto"

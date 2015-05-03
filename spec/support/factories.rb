@@ -24,7 +24,7 @@ FactoryGirl.define do
     trait :luis do
       name "Luis Miguel"
       username "@lmiguel"
-      email "luizgrsanches@gmail.com"
+      email "luiz@example.org"
       gravatar_photo nil
       facebook_photo nil
     end
@@ -52,14 +52,13 @@ FactoryGirl.define do
     description "Essa palestra fala sobre compartilhamento de informações"
     tags "tecnologia, compartilhamento, informação"
     to_public true
-    thumbnail "//cdn.slidesharecdn.com/ss_thumbnails/compartilhe-130219192210-phpapp02-thumbnail.jpg?1361323471"
+    thumbnail "/assets/without_presentation.jpg"
     code "16635025"
 
     factory :other_talk do
       presentation_url "http://www.slideshare.net/luizsanches/ruby-praticamente-falando"
       title "Ruby praticamente falando"
       description "Fala sobre ruby e rails"
-      thumbnail "//cdn.slidesharecdn.com/ss_thumbnails/ruby-praticamente-falando-v1-1-110706064112-phpapp01-thumbnail.jpg?1309952602"
       code "8521445"
       tags "ruby, rails"
       to_public false
@@ -79,7 +78,6 @@ FactoryGirl.define do
       presentation_url "https://speakerdeck.com/luizsanches/ruby-praticamente-falando"
       title "Ruby - praticamente falando"
       description "Indrodução à linguagem Ruby"
-      thumbnail "https://speakerd.s3.amazonaws.com/presentations/920aa870aa9d0130a293521e21bc27c7/thumb_slide_0.jpg"
       code "920aa870aa9d0130a293521e21bc27c7"
       tags "ruby, programação"
       to_public true
@@ -89,7 +87,6 @@ FactoryGirl.define do
       presentation_url "https://prezi.com/ggblugsq5p7h/soa-introducao/"
       title "SOA - Introdução"
       description "SOA - Introdução"
-      thumbnail "http://0701.static.prezi.com/preview/djt7yj5rtrehe5ipzqlb5fbx3qadw6rhlm5vs2oll757hbaoaxlq_0_0.png"
       code "ggblugsq5p7h"
       tags "soa, arquitetura de sistemas"
       to_public true

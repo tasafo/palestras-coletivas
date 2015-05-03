@@ -1,9 +1,5 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <h1><%= t("titles.external_event.edit") %> <%= @talk.title %></h1>
-    </div>
-  </div>
-</div>
+<%= render "shared/title", title: t("titles.external_event.title") %>
+
+<h2><%= t("titles.external_event.edit") %> <b><%= @talk.title %></b></h2>
 
 <%= render 'form', :url => talk_external_event_path(@talk, @external_event) %>

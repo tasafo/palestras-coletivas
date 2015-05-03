@@ -17,15 +17,16 @@ gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 
 group :development do
   gem 'thin'
   gem 'web-console'
-  gem 'spring'
   gem 'quiet_assets'
 end
 
 group :development, :test do
+  gem 'spring'
   gem 'lograge'
   gem 'pry-rails'
   gem 'rspec-rails'
@@ -40,7 +41,7 @@ group :test do
   gem 'rake'
   gem 'launchy'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', '1.5.0'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem "codeclimate-test-reporter", require: nil

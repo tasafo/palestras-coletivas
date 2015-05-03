@@ -1,35 +1,45 @@
-<div class="container-narrow">
-    <div class="span9">
-        <%= link_to (image_tag "palestras-coletivas.png"), root_path %>
-        <ul class="nav nav-pills pull-right">
-            <li class="<%= request.fullpath == talks_path ? 'active' : '' %>"> <%= link_to t("menu.talks"), talks_path %> </li>
-            <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
-            <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
-            <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
-            <li class="dropdown">
-                <% if logged_in? %>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <%= thumbnail(current_user, "20x20") %>
-                        <%= t("user.greeting", :name => current_user.username.gsub("@", "")) %>
-                        <span class="caret white"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><%= link_to t("menu.user_profile"), user_path(current_user) %></li>
-                        <li><%= link_to t("menu.user_data"), edit_user_path(current_user) %></li>
-                        <li class="divider"></li>
-                        <li><%= link_to t("menu.logout"), logout_path %></li>
-                    </ul>
-                <% else %>
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <%= t("menu.access") %>
-                        <span class="caret white"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><%= link_to t("menu.login"), login_path %> </li>
-                        <li><%= link_to t("menu.signup"), new_user_path %> </li>
-                    </ul>
-                <% end %>
-            </li>
-        </ul>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to t("app.name"), root_path, class: "navbar-brand" %>
     </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="<%= request.fullpath == talks_path ? 'active' : '' %>"> <%= link_to t("menu.talks"), talks_path %> </li>
+        <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
+        <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
+        <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
+        <li class="dropdown">
+          <% if logged_in? %>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= thumbnail(current_user, "20x20") %>
+              <%= t("user.greeting", :name => current_user.username.gsub('@','')) %>
+              <span class="caret white"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t("menu.user_profile"), user_path(current_user) %></li>
+              <li><%= link_to t("menu.user_data"), edit_user_path(current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to t("menu.logout"), logout_path %></li>
+            </ul>
+          <% else %>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= t("menu.access") %>
+              <span class="caret white"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to t("menu.login"), login_path %></li>
+              <li><%= link_to t("menu.signup"), new_user_path %></li>
+            </ul>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

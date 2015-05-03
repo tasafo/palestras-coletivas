@@ -93,7 +93,7 @@ private
       talks = search.blank? ? TalkQuery.new.publics : Kaminari.paginate_array(TalkQuery.new.search(search))
     end
 
-    talks.page(page).per(5)
+    talks.page(page).per(12)
   end
 
   def set_talk

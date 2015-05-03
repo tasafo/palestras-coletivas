@@ -35,7 +35,7 @@ function add_user() {
 
     if (canInvite(userDisplay, userId)) {
         $('#table_users > tbody:last').append(
-            '<tr id="row_' + userId + '"><td>' + userDisplay + '<input type="hidden" name="users[]" value="' + userId + '" /></td><td><input type="button" class="m-btn red" id="user_id_' + userId + '" onclick="remove_user(\'' + userId + '\')" value="' + $("#remove").text() + '" /></td></tr>'
+            '<tr id="row_' + userId + '"><td>' + userDisplay + '<input type="hidden" name="users[]" value="' + userId + '" /></td><td><input type="button" class="btn btn-danger" id="user_id_' + userId + '" onclick="remove_user(\'' + userId + '\')" value="' + $("#remove").text() + '" /></td></tr>'
         );
     }
 }

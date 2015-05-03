@@ -18,13 +18,15 @@ $(function() {
                 success : function(result) {
                     if (!result.error) {
                         if (result.type_activity == "talk") {
+                            $("#search_result").show();
                             $("#search_talks").show();
                             $("#search_text").focus();
                         } else {
                             $("#schedule_talk_id").val("");
-                            $("#talk_title").text("");
+                            $("#talk_title").val("");
                             $("#div_talk").hide();
                             $("#search_talks").hide();
+                            $("#search_result").hide();
                         }
                     }
                 }
@@ -67,24 +69,23 @@ function search_talk() {
         $.getJSON('/schedules/search-talks/' + search_text, function(json) {
             if (json) {
                 for (var i in json) {
-                    talks += '<hr class="featurette-divider">';
-
-                    talks += '<div id="div_' + json[i]._id['$oid'] + '" class="featurette">';
-
                     thumb = json[i].thumbnail ? json[i].thumbnail : '/assets/without_presentation.jpg';
 
-                    talks += '<img src="' + thumb + '" class="featurette-image pull-left img-polaroid" />';
-
-                    talks += '<h3 class="featurette-heading"><a href="/talks/' + json[i]._slugs[0] + '">' + json[i].title +'</a></h3>';
-
-                    talks += '<p class="lead">';
-
-                    talks += json[i].description + '<br/>';
-
-                    talks += json[i].tags + '<br/><br/>';
-
-                    talks += '<input type="button" id="' + json[i]._id['$oid'] + '" title="' + json[i].title + '" class="m-btn green btn-select-talk" value="' + titles_talks_select + '" />';
-
+                    talks += '<hr />';
+                    talks += '<div id="div_' + json[i]._id['$oid'] + '" class="talk">';
+                    talks += '  <div class="container">';
+                    talks += '    <div class="row">';
+                    talks += '      <div class="col-md-2">';
+                    talks += '        <img src="' + thumb + '" class="img-thumbnail" />';
+                    talks += '        <input type="button" id="' + json[i]._id['$oid'] + '" title="' + json[i].title + '" class="btn btn-success btn-select-talk" value="' + titles_talks_select + '" />';
+                    talks += '      </div>';
+                    talks += '      <div class="col-md-10">';
+                    talks += '        <h4><a href="/talks/' + json[i]._slugs[0] + '">' + json[i].title +'</a></h4>';
+                    talks += '        <p>' + json[i].description + '</p>';
+                    talks += '        <p>' + json[i].tags + '</p>';
+                    talks += '      </div>';
+                    talks += '    </div>';
+                    talks += '  </div>';
                     talks += '</div>';
                 }
 
@@ -94,14 +95,14 @@ function search_talk() {
                     talk_id = $(this).attr("id");
                     talk_title = $(this).attr("title");
 
-                    $(".featurette").each(function(index) {
+                    $(".talk").each(function(index) {
                         $(this).css("background-color", "white");
                     });
 
                     $("#div_" + talk_id).css("background-color", "#CCFF99");
 
                     $("#schedule_talk_id").val(talk_id);
-                    $("#talk_title").text(talk_title);
+                    $("#talk_title").val(talk_title);
                     $("#div_talk").show();
                 });
             }

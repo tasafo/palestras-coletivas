@@ -1,16 +1,16 @@
-<%= form_for(@schedule, :url => url, :html => {:class => 'form-horizontal'}) do |f| %>
-  <%= render "shared/error_messages", :record => @schedule %>
+<%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
+  <%= render "shared/error_messages", record: @schedule %>
 
-  <div class="control-group">
-    <%= f.label :submit_event, t("labels.submit_event.event"), :class => 'control-label' %>
-    <div class="controls">
-      <%= collection_select(:submit_event, :event_id, @events, :id, :name, {}, :class => "m-wrap m-ctrl-medium") %>
+  <div class="form-group">
+    <%= f.label :submit_event, t("labels.submit_event.event"), class: 'control-label col-md-3' %>
+    <div class="col-md-5">
+      <%= collection_select(:submit_event, :event_id, @events, :id, :name, {}, class: "form-control") %>
     </div>
   </div>
 
-  <div class="m-btn-strip">
-    <%= f.submit :class => 'm-btn blue' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          talk_path(@talk), :class => 'm-btn black' %>
+  <div class="container">
+    <%= f.submit class: 'btn btn-primary' %>
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+          talk_path(@talk), class: 'btn btn-default' %>
   </div>
 <% end %>

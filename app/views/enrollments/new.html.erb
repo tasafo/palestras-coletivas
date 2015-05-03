@@ -1,9 +1,5 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <h1><%= t("titles.enrollments.new") %>: <%= "#{@event.name} - #{@event.edition}" %></h1>
-    </div>
-  </div>
-</div>
+<%= render "shared/title", title: t("titles.enrollments.title") %>
 
-<%= render 'form', :url => event_enrollments_path %>
+<h2><%= t("titles.enrollments.new") %> <b><%= "#{@event.name} - #{@event.edition}" %></b></h2>
+
+<%= render 'form', url: event_enrollments_path %>

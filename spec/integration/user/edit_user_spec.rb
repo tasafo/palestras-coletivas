@@ -51,7 +51,7 @@ describe "Edit user", :type => :request do
     end
 
     it "redirects to the talks page" do
-      expect(current_path).to eql(talks_path)
+      expect(current_path).to eql(users_path)
     end
 
     it "displays error messages" do

@@ -6,6 +6,6 @@
     </small>
   </h5>
   <% @talk.watched_users.each do |user| %>
-    <span class="watched_user"><%= render "shared/user_thumb", :user => user %></span>
+    <span class="watched_user"><%= render "shared/user_thumb", user: user %></span>
   <% end %>
 <% end %>

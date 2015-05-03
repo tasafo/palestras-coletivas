@@ -4,7 +4,7 @@ pt-BR:
       index: "Palestras"
       new: "Adicionar palestra"
       edit: "Editar palestra"
-      show: "Exibir palestra"
+      show: "Palestra"
       my: "Minhas palestras"
       all: "Todas as palestras"
       search: "Buscar palestra"
@@ -19,10 +19,10 @@ pt-BR:
 
     users:
       index: "Usuários"
-      profile: "Perfil do usuário"
+      profile: "Perfil"
       edit: "Editar meus dados"
       signup: "Cadastre-se"
-      login: "Acesse sua conta"
+      login: "Acesso"
       reset_password: "Redefinir senha"
 
     events:
@@ -35,16 +35,20 @@ pt-BR:
 
     schedules:
       index: "Programação"
-      new: "Adicionar programação"
-      edit: "Editar programação"
+      new: "Adicionar para o evento"
+      edit: "Editar do evento"
+      btn_new: "Adicionar programação"
 
     enrollments:
-      new: "Quero participar do evento"
+      title: "Inscrição"
+      new: "Se inscrever no evento"
       edit: "Alterar participação no evento"
 
     external_event:
-      new: "Adicionar evento externo para"
-      edit: "Editar evento externo de"
+      title: "Evento externo"
+      new: "Adicionar para:"
+      edit: "Editar de:"
 
     submit_event:
-      new: "Submeter a palestra"
+      title: "Submeter"
+      new: "Palestra:"

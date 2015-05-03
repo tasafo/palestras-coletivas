@@ -16,7 +16,7 @@ describe "Edit password resets", :type => :request do
     end
 
     it "redirects to the home page" do
-      expect(current_path).to eql(root_path)
+      expect(current_path).to eql(new_password_reset_path)
     end
 
     it "displays success message" do

@@ -1,5 +1,5 @@
 <% if logged_in? && @talk.users.include?(current_user) %>
   <p>
-    <strong><%= t("show.talk.to_public") %>:</strong> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
+    <b><%= t("show.talk.to_public") %>:</b> <%= @talk.to_public ? t("show.talk._yes") : t("show.talk._no") %>
   </p>
 <% end %>

@@ -20,13 +20,13 @@ class UsersController < ApplicationController
     if !@user.nil?
       @presenter = UserPresenter.new(@user, params[:page])
     else
-      redirect_to root_path, :notice => t("flash.user_not_found")
+      redirect_to users_path, :notice => t("flash.user_not_found")
     end
   end
 
   def edit
     if @user != current_user
-      redirect_to talks_path, :notice => t("flash.unauthorized_access")
+      redirect_to users_path, :notice => t("flash.unauthorized_access")
     end
   end
 

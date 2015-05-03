@@ -1,24 +1,14 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <div class="row-fluid">
-        <div class="span4">
-          <h1><%= t("titles.users.reset_password") %></h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/title", title: t("titles.users.reset_password") %>
 
-<%= form_tag password_resets_path, :method => :post do %>
-  <div class="control-group">
-    <%= label_tag :email, t("labels.user.email"), :class => 'control-label' %>
-    <div class="controls">
-      <%= email_field_tag :email, params[:email], :class => "m-wrap m-ctrl-large" %>
+<%= form_tag password_resets_path, method: :post, class: 'form-horizontal' do %>
+  <div class="form-group">
+    <%= label_tag :email, t("labels.user.email"), class: 'control-label col-md-2' %>
+    <div class="col-md-4">
+      <%= email_field_tag :email, params[:email], class: "form-control" %>
     </div>
   </div>
 
-  <div class="m-btn-strip">
-    <%= submit_tag t("form.submit.reset_password"), :class => 'm-btn blue' %>
+  <div class="container">
+    <%= submit_tag t("form.submit.reset_password"), class: 'btn btn-primary' %>
   </div>
 <% end %>

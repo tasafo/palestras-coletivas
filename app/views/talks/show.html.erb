@@ -1,38 +1,31 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <div class="row-fluid">
-        <div class="span4">
-          <h1><%= t("titles.talks.index") %></h1>
-          <p><%= t("titles.talks.show") %></p>
-        </div>
-        <%= render "talks/show/actions" %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/title", title: t("titles.talks.show") %>
 
 <% if @talk %>
-  <div class="work" id="portfolio">
-    <div class="row-fluid work-item">
-      <div class="span4">
+  <div class="container">
+    <%= render "talks/show/actions" %>
+    <br />
+    <div class="row">
+      <div class="col-md-4">
         <%= render "talks/show/details" %>
         <%= render "talks/show/tags" %>
         <%= render "talks/show/creators" %>
         <%= render "talks/show/public_label" %>
         <%= render "talks/show/watch_button" %>
         <%= render "talks/show/schedules" %>
+        <%= render "talks/show/external_events" %>
         <%= render "talks/show/watched_users" %>
       </div>
-      <div class="span8">
+
+      <div class="col-md-8">
         <% unless @presentation.frame.include?("without_presentation") %>
           <%= render 'talks/show/presentation' %>
           <%= render 'talks/show/video' %>
         <% end %>
-        <%= render "comments/index", :commentable => @talk %>
       </div>
     </div>
   </div>
+
+  <%= render "comments/index", commentable: @talk %>
 <% else %>
   <h1><%= t("show.talk.not_public") %></h1>
 <% end %>

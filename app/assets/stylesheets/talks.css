@@ -1,0 +1,87 @@
+section#top {
+  height: 200px;
+  background: #2E8AF1;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 10px;
+}
+
+section#top h1 {
+  color: #fff;
+  font-weight: 100px;
+  font-size: 100px;
+  font-size: 7.5vw;
+  letter-spacing: 15px;
+}
+
+.box-talk{
+  margin-top: 20px;
+  padding-bottom: 10px;
+  width: 170px;
+  height: 250px;
+  -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75);
+}
+
+.box-talk p{
+  /*margin-top: 10px;*/
+  font-size: 14px;
+  padding: 0 10px 0 10px;
+  margin-bottom: -5px
+}
+
+.box-talk span{
+  font-size: 10px;
+  color: #7F7F7F;
+  padding: 0 10px 0 10px;
+}
+
+.box-talk p a{
+  color: #606060
+}
+
+.box-talk .thumb-user img{
+  position: relative;
+  margin-top: -30px
+}
+
+.nav-talks{
+  text-align: right;
+  border: 1px solid;
+  padding: 40px 0 20px 0;
+}
+
+.nav-bar-talks{
+  margin-top: 20px
+}
+
+.nav-talks .filter-tags{
+  margin-top: -13px
+}
+
+.btn-talks {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding:14px 40px;
+  border-radius: 4px;
+  background: #D1CDCC;
+  color: #7F7F7F;
+}
+
+.btn-talks:hover {
+  color: #fff;
+  background: #2E8AEF;
+  text-decoration: none;
+}
+
+.top-new-talk{
+  padding: 40px 0 40px 0;
+}
+
+.top-new-talk h1{
+  font-weight: 200;
+  font-size: 4em;
+  text-align: center
+}

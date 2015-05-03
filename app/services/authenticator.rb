@@ -8,7 +8,7 @@ class Authenticator
   end
 
   def self.authenticate(email, password)
-    user = repository.find_by(:email => email)
+    user = repository.find_by(email: email)
     return unless user
 
     user if encryptor.valid?(user.password_hash, password)

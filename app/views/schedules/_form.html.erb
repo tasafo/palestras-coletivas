@@ -1,37 +1,37 @@
-<%= form_for(@schedule, :url => url, :html => {:class => 'form-horizontal' }) do |f| %>
+<%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
   <%= render "shared/error_messages", :record => @schedule %>
 
-  <div class="control-group">
-    <%= f.label :day, t("labels.schedule.day"), :class => 'control-label' %>
-    <div class="controls">
-      <%= select_tag("schedule[day]", @presenter.dates.html_safe, :class => "m-wrap m-ctrl-small") %>
+  <div class="form-group">
+    <%= f.label :day, class: 'control-label col-md-2' %>
+    <div class="col-md-2">
+      <%= select_tag("schedule[day]", @presenter.dates.html_safe, class: "form-control") %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :time, t("labels.schedule.time"), :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :time, :class => "m-wrap m-ctrl-small hour" %>
+  <div class="form-group">
+    <%= f.label :time, class: 'control-label col-md-2' %>
+    <div class="col-md-2">
+      <%= f.text_field :time, class: "form-control hour" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :activity, t("labels.schedule.activity"), :class => 'control-label' %>
-    <div class="controls">
-      <%= collection_select(:schedule, :activity_id, @presenter.activities, :id, :description, {}, :class => "m-wrap m-ctrl-medium") %>
+  <div class="form-group">
+    <%= f.label :activity, class: 'control-label col-md-2' %>
+    <div class="col-md-2">
+      <%= collection_select(:schedule, :activity_id, @presenter.activities, :id, :description, {}, class: "form-control") %>
     </div>
   </div>
 
-  <div id="div_talk" class="control-group" style="display:<%= @presenter.display %>">
-    <label class="control-label"><%= t("labels.talk.title") %></label>
-    <div class="controls">
-      <span id="talk_title" class="input-xlarge uneditable-input"><%= @presenter.talk_title %></span>
+  <div id="div_talk" class="form-group" style="display:<%= @presenter.display %>">
+    <label class="control-label col-md-2"><%= t("labels.talk.title") %></label>
+    <div class="col-md-6">
+      <input id="talk_title" class="form-control" value="<%= @presenter.talk_title %>" disabled>
     </div>
   </div>
 
-  <%= f.hidden_field :event_id, :value => @event.id %>
-  <%= f.hidden_field :talk_id, :value => @schedule.talk_id %>
-  <%= f.hidden_field :schedule_id, :value => @schedule.id %>
+  <%= f.hidden_field :event_id, value: @event.id %>
+  <%= f.hidden_field :talk_id, value: @schedule.talk_id %>
+  <%= f.hidden_field :schedule_id, value: @schedule.id %>
 
   <input id="old_talk_id" name="old_talk_id" type="hidden" value="<%= @schedule.talk_id %>" />
 
@@ -39,18 +39,24 @@
 
   <input id="alert_enter_talks" name="alert_enter_talks" type="hidden" value="<%= t("new.schedule.you_must_enter_a_talk") %>" />
 
-  <div class="m-btn-strip">
-    <%= f.submit :class => 'm-btn blue' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          event_path(@event), :class => 'm-btn black' %>
+  <div class="container">
+    <%= f.submit class: 'btn btn-primary' %>
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+          event_path(@event), class: 'btn btn-default' %>
   </div>
 
-  <hr>
-  <div class="input-append" id="search_talks" style="display:none">
+  <hr />
+
+  <div class="form-group" id="search_talks" style="display:none">
     <h3 class="text-info"><%= t("titles.talks.search") %></h3>
-    <div class="m-input-append">
-      <input class="search-query m-wrap m-ctrl-large" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
-      <button id="search_button" class="m-btn green" type="button"><%= t("form.submit.search") %></button>
+
+    <div class="col-md-4">
+      <div class="input-group">
+        <input class="form-control search-query" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
+        <span class="input-group-btn">
+          <button id="search_button" class="btn btn-success" type="button"><%= t("form.submit.search") %></button>
+        </span>
+      </div>
     </div>
   </div>
 

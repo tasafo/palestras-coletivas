@@ -24,7 +24,12 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
 
+  #Capybara.javascript_driver = :webkit_debug
   Capybara.javascript_driver = :webkit
+
+  config.before(:each, js: true) do
+    #page.driver.block_unknown_urls
+  end
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
@@ -33,10 +38,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.clean
-  end
-
-  config.before(:each, js: true) do
-    page.driver.block_unknown_urls
   end
 
   Mongoid.logger.level = Logger::INFO

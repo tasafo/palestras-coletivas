@@ -8,15 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
+ *= require bootstrap.min
+ *= require bootstrap-theme
+ *= require flexslider
+ *= require font-awesome
+ *= require animate
+ *= require common
+ *= require home-common
  */
-
-@import "bootstrap";
-@import "bootstrap-responsive";
-@import "docs";
-@import "comments";
-@import "jquery.rating";
-@import "jquery-ui.custom.min";
-@import "m-buttons.min";
-@import "m-forms.min";
-@import "common";

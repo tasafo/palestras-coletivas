@@ -1,42 +1,32 @@
-<div class="row-fluid">
-  <div class="span12">
-    <div class="page-header">
-      <div class="row-fluid">
-        <div class="span4">
-          <h1><%= t("titles.users.login") %></h1>
-        </div>
+<%= render "shared/title", title: t("titles.users.login") %>
+
+<div class="container">
+  <h3><%= t("login.about_html") %></h3>
+
+  <%= form_tag login_path, class: 'form-horizontal' do %>
+    <div class="form-group">
+      <%= label_tag :email, t("labels.user.email"), class: 'control-label col-md-2' %>
+      <div class="col-md-3">
+        <%= email_field_tag :email, nil, class: "form-control" %>
       </div>
     </div>
-  </div>
+
+    <div class="form-group">
+      <%= label_tag :password, t("labels.user.password"), class: 'control-label col-md-2' %>
+      <div class="col-md-3">
+        <%= password_field_tag :password, nil, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="container">
+      <p><%= t("login.if_you_do_not_have_an_account_yet") %> <%= link_to t("login.register_here"), new_user_path %></p>
+    </div>
+
+    <div class="container">
+      <%= submit_tag t("form.submit.login"), class: 'btn btn-primary' %>
+      <%= link_to t("new.user.forgotten_password"), new_password_reset_path, class: 'btn btn-default' %>
+    </div>
+
+    <%= hidden_field_tag 'redirect', @redirect %>
+  <% end %>
 </div>
-
-<p class="text-warning">
-  <%= t("login.about_html", :url => new_user_path) %>
-</p>
-
-<%= form_tag login_path, :html => {:class => 'form-signin' } do %>
-  <div class="control-group">
-    <%= label_tag :email, t("labels.user.email"), :class => 'control-label' %>
-    <div class="controls">
-      <%= email_field_tag :email, nil, :class => "m-wrap m-ctrl-large" %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= label_tag :password, t("labels.user.password"), :class => 'control-label' %>
-    <div class="controls">
-      <%= password_field_tag :password, nil, :class => "m-wrap m-ctrl-medium" %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <p><%= t("login.if_you_do_not_have_an_account_yet") %> <%= link_to t("login.register_here"), new_user_path %></p>
-  </div>
-
-  <div class="m-btn-strip">
-    <%= submit_tag t("form.submit.login"), :class => 'm-btn blue' %>
-    <%= link_to t("new.user.forgotten_password"), new_password_reset_path, :class => 'm-btn black' %>
-  </div>
-
-  <%= hidden_field_tag 'redirect', @redirect %>
-<% end %>

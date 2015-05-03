@@ -1,42 +1,46 @@
-  <fieldset>
-    <legend><p class="text-info"><%= t("new.invite.#{key}") %></p></legend>
+  <h3><%= t("new.invite.#{key}") %></h3>
 
-    <div class="m-input-append" id="search-invitee">
-      <%= text_field :invitee, :username,
-              placeholder: t("labels.talk.search_user"),
-              :class => "m-wrap m-ctrl-large",
-              :data => {
-                :invitees => users.map { |u| { value: u.oid, label: "#{u.name} (#{u.username})", username: u.username, name: u.name } }
-              } %>
+  <div id="search-invitee" class="col-md-4 input-group">
+    <%= text_field :invitee, :username, class: "form-control",
+        placeholder: t("labels.talk.search_user"),
+        data: {
+          invitees: users.map { |user| {
+              value: user.oid, label: "#{user.name} (#{user.username})", username: user.username, name: user.name
+            }
+          }
+        } %>
 
-      <%= hidden_field :user, :id %>
-      <input type="button" id="add_user" class="m-btn green" value="<%= t("new.invite.add") %> "/>
-    </div>
+    <%= hidden_field :user, :id %>
+    <span class="input-group-btn">
+      <button type="button" id="add_user" class="btn btn-success"><%= t("new.invite.add") %></button>
+    </span>
+  </div>
 
-    <div id="users">
-      <table id="table_users" class="table table-striped">
-        <thead>
-          <tr>
-            <th width="50%"><%= t("new.invite.table.#{key}") %></th>
-            <th width="50%"><%= t("new.invite.table.operation") %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if model.users %>
-            <% model.users.by_name.each do |u| %>
-              <% if u != model.owner %>
-                <tr id="row_<%= u.id %>">
-                  <td>
-                    <%= u.name %> <%= "(#{u.username})" %><input type="hidden" name="users[]" value="<%= u.oid %>" />
-                  </td>
-                  <td>
-                    <input type="button" id="user_id_<%= u.oid %>" class="m-btn red" value="<%= t("new.invite.js.remove") %>" onclick="remove_user('<%= u.oid %>')" />
-                  </td>
-                </tr>
-              <% end %>
+  <div id="users">
+    <table id="table_users" class="table table-striped">
+      <thead>
+        <tr>
+          <th width="50%"><%= t("new.invite.table.#{key}") %></th>
+          <th width="50%"><%= t("new.invite.table.operation") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if model.users %>
+          <% model.users.by_name.each do |user| %>
+            <% if user != model.owner %>
+              <tr id="row_<%= user.id %>">
+                <td>
+                  <%= user.name %> <%= "(#{user.username})" %><input type="hidden" name="users[]" value="<%= user.oid %>" />
+                </td>
+                <td>
+                  <button type="button" id="user_id_<%= user.oid %>" class="btn btn-danger" onclick="remove_user('<%= user.oid %>')">
+                    <%= t("new.invite.js.remove") %>
+                  </button>
+                </td>
+              </tr>
             <% end %>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-  </fieldset>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

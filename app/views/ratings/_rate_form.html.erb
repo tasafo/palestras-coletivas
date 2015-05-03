@@ -1,9 +1,9 @@
 <% if logged_in? %>
   <div class="rating_form">
     <h5><%= I18n.t("labels.rating.vote!") %></h5>
-    <%= form_for :rate, :url => ratings_path(rateable.class,rateable.id), :remote => true, :html => { :class => :rating, :'data-type' => 'json', :multipart => true } do |f| %>
+    <%= form_for :rate, url: ratings_path(rateable.class,rateable.id), remote: true, html: {class: :rating, :'data-type' => 'json', multipart: true } do |f| %>
       <% (0.5..5).step(0.5).to_a.each do |rating| %>
-        <%= f.radio_button :my_rating, rating, :class => "rating", :checked => (true if rateable.rating_by(current_user).rank == rating) %>
+        <%= f.radio_button :my_rating, rating, class: "rating", checked: (true if rateable.rating_by(current_user).rank == rating) %>
       <% end %>
     <% end %>
   </div>
