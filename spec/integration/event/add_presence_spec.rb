@@ -12,7 +12,7 @@ describe "add presence", type: :request, js: true do
   context "when user does not presence" do
     before do
       visit event_path(event)
-      click_link "Check-in"
+      click_link "Registrar entrada"
     end
 
     it "button turns green" do

@@ -1,47 +1,47 @@
-<%= form_for(@talk, url: url, html: {class: 'form-horizontal' }) do |f| %>
+<%= form_for(@talk, url: url, html: {class: 'form-horizontal'}) do |f| %>
   <%= render "shared/error_messages", record: @talk %>
 
   <div class="form-group">
-    <%= f.label :presentation_url, t("labels.talk.presentation_url"), class: 'control-label col-md-3' %>
+    <%= f.label :presentation_url, class: 'control-label col-md-3' %>
     <div class="col-md-6">
-      <%= f.url_field :presentation_url, :class => "form-control" %>
-      <b><span id="searching_talk" class="text-error" style="display:none"><%= t("new.talk.searching") %></span></b>
+      <%= f.url_field :presentation_url, class: "form-control" %>
+      <span id="searching_talk" class="text-error" style="display:none"><b><%= t("new.talk.searching") %></b></span>
       <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
       <span id="talk_not_found" class="text-error" style="display:none"><%= t("new.talk.not_found") %></span>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :title, t("labels.talk.title"), class: 'control-label col-md-3' %>
+    <%= f.label :title, class: 'control-label col-md-3' %>
     <div class="col-md-6">
       <%= f.text_field :title, placeholder: t("placeholder.talks.title"), class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :description, t("labels.talk.description"), class: 'control-label col-md-3' %>
+    <%= f.label :description, class: 'control-label col-md-3' %>
     <div class="col-md-6">
       <%= f.text_area :description, placeholder: t("placeholder.talks.description"), rows: 5, class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :tags, t("labels.talk.tags"), class: 'control-label col-md-3' %>
+    <%= f.label :tags, class: 'control-label col-md-3' %>
     <div class="col-md-4">
       <%= f.text_field :tags, placeholder: t("placeholder.talks.tags"), class: "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :video_link, t("labels.talk.video_link"), class: 'control-label col-md-3' %>
+    <%= f.label :video_link, class: 'control-label col-md-3' %>
     <div class="col-md-4">
-      <%= f.url_field :video_link, :class => "form-control" %>
+      <%= f.url_field :video_link, class: "form-control" %>
       <span class="help-block"><p class="text-info"><%= t("new.talk.help.video_link_html") %></p></span>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :to_public, t("labels.talk.to_public"), class: 'control-label col-md-3' %>
+    <%= f.label :to_public, class: 'control-label col-md-3' %>
     <div class="col-md-4">
       <%= f.check_box :to_public %>
       <span class="help-inline"><%= t("new.talk.help.to_public") %></span>

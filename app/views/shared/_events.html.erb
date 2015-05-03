@@ -1,32 +1,25 @@
-<% @events.each do |event| %>
-  <div class="featurette">
-    <h3 class="featurette-heading text-info"><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h3>
+  <%= render "shared/paginate", list: events %>
 
-    <% if event.start_date == event.end_date %>
-      <h4 class="text-success"><%= l event.start_date, :format => :long %></h4>
-    <% else %>
-      <h4 class="text-success">
-        <%= t("show.event.of") %> <%= l event.start_date, :format => :long %>
-        <%= t("show.event.to") %> <%= l event.end_date, :format => :long %>
-      </h4>
+  <div class="row">
+    <% events.each do |event| %>
+      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+        <div class="box-event">
+          <%= link_to image_tag("without_event.jpg", width: '170', height: '128'), event_path(event) %>
+
+          <h6><%= link_to suspension_points("#{event.name} - #{event.edition}", 50), event_path(event) %></h6>
+
+          <% if event.start_date == event.end_date %>
+            <p><b><%= l event.start_date %></b></p>
+          <% else %>
+            <p><b><%= l event.start_date %> - <%= l event.end_date %></b></p>
+          <% end %>
+
+          <span><%= t("event.created_time", time: time_ago_in_words(event.created_at)) %></span>
+        </div>
+      </div>
     <% end %>
-
-    <% if event.deadline_date_enrollment >= Date.today %>
-      <h4 class="text-error">
-        <%= t("labels.event.deadline_date_enrollment") %>: <%= l event.deadline_date_enrollment, :format => :long %>
-      </h4>
-    <% end %>
-
-    <p class="lead">
-      <strong><%= t("labels.event.place") %>:</strong> <%= event.place %><br/>
-
-      <strong><%= t("labels.event.address") %>:</strong> <%= event_address(event) %><br/>
-
-      <strong><%= t("labels.event.tags") %>:</strong> <%= event.tags %><br/>
-
-      <%= t("event.created_time", :time => time_ago_in_words(event.created_at)) %>
-    </p>
   </div>
-<% end %>
 
-<hr class="featurette-divider">
+  <hr/>
+
+  <%= render "shared/paginate", list: events %>

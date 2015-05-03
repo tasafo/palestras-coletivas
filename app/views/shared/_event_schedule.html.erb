@@ -1,5 +1,5 @@
-    <h4><%= t("titles.schedules.index") %></h4>
-    <hr>
+    <h2 class="text-primary"><%= t("titles.schedules.index") %></h2>
+    <hr />
     <div id="schedules">
       <table id="table_schedules" class="table table-striped">
         <thead>
@@ -32,7 +32,7 @@
                 <td></td>
               <% end %>
               <td colspan="4">
-                <h4><p class="text-center schedule-font"><%= l date, :format => :custom %></h4></p>
+                <h4><p class="text-center schedule-font"><%= l date, format: :custom %></h4></p>
               </td>
             </tr>
             <% @event.schedules.by_day(day).each do |schedule| %>
@@ -57,19 +57,19 @@
                 <% end %>
 
                 <% if @presenter.authorized %>
-                  <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), :class => "m-btn blue", :id => "schedule_id_#{schedule.id}" %></td>
+                  <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "schedule_id_#{schedule.id}" %></td>
                 <% end %>
 
                 <% if @presenter.can_vote %>
                   <td>
                     <% if logged_in? %>
                       <% if schedule.votes? && schedule.find_vote(current_user) %>
-                        <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, :class => "m-btn red", :id => "remove_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_remove_vote") %>
+                        <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, class: "btn btn-danger", id: "remove_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_remove_vote") %>
                       <% else %>
-                        <%= link_to schedule.counter_votes, new_event_schedule_vote_path(@event, schedule), :class => "m-btn green", :id => "add_vote_schedule_id_#{schedule.id}", :title => t("show.event.btn_add_vote") %>
+                        <%= link_to schedule.counter_votes, new_event_schedule_vote_path(@event, schedule), class: "btn btn-success", id: "add_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_add_vote") %>
                       <% end %>
                     <% else %>
-                      <%= link_to schedule.counter_votes, "#schedules", :class => "m-btn blue disabled" %>
+                      <%= link_to schedule.counter_votes, "#schedules", class: "btn btn-primary disabled" %>
                     <% end %>
                   </td>
                 <% end %>
@@ -81,4 +81,5 @@
         </tbody>
       </table>
     </div>
-    <hr>
+
+    <hr />

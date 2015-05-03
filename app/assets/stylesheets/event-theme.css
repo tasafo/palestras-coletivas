@@ -29,21 +29,18 @@ h1, h2, h3 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 800;
   color: #FFFFFF;
-  text-transform: uppercase;
 }
 
 h3 {
   font-size: 37px;
   letter-spacing: 0px;
   line-height: 32px;
-  text-transform: uppercase;
 }
 
 h4 {
   font-size: 21px;
   letter-spacing: -0.5px;
   line-height: 19px;
-  text-transform: uppercase;
   color: #232527;
 }
 
@@ -51,11 +48,11 @@ h5 {
   font-size: 19px;
   letter-spacing: 3px;
   line-height: 18px;
-  text-transform: uppercase;
 }
 
 p {
   color: #A5ACAF;
+  font-size: 14px;
 }
 
 .section-title {
@@ -222,14 +219,13 @@ iframe {
   font-weight: 800;
   font-size: 12px;
   letter-spacing: 2px;
-  text-transform: uppercase;
   text-shadow: none;
   color: #fff;
-  padding: 22px 15px;
+  padding: 15px 20px;
 }
 
 .navbar .nav > li > a:hover, .navbar .nav > li > a:focus {
-  background-color: #6DC3C8;
+  background-color: blue;
 }
 
 .navbar-fixed-top {
@@ -279,6 +275,10 @@ iframe {
   margin-bottom: 30px;
 }
 
+.section {
+  background-color: #fff;
+}
+
 /* ==========================================================================
    About
    ========================================================================== */
@@ -289,7 +289,8 @@ iframe {
 
 #about h4 {
   text-align: center;
-  padding: 20px
+  font-weight: bold;
+  padding: 10px
 }
 
 #about p {
@@ -301,11 +302,12 @@ iframe {
    ========================================================================== */
 
 #schedule {
-  background-color: #F0F0F0;
+  background-color: #fff;
 }
 
 #schedule h4 {
   text-align: center;
+  font-weight: bold;
 }
 
 /* ==========================================================================
@@ -318,6 +320,7 @@ iframe {
 
 #location h4 {
   text-align: center;
+  font-weight: bold;
 }
 
 /* ==========================================================================
@@ -325,11 +328,12 @@ iframe {
    ========================================================================== */
 
 #organizers {
-  background: #F0F0F0;
+  background: #fff;
 }
 
 #organizers h4 {
   text-align: center;
+  font-weight: bold;
 }
 
 /* ==========================================================================
@@ -349,17 +353,18 @@ iframe {
    ========================================================================== */
 
 #presents {
-  background: #F0F0F0;
+  background: #fff;
 }
 
 #presents h4 {
   text-align: center;
+  font-weight: bold;
 }
 
 #news h5 {
-    color: #FFFFFF;
-    font-size: 16px;
-    margin-bottom: 30px;
+  color: #FFFFFF;
+  font-size: 16px;
+  margin-bottom: 30px;
 }
 
 #news h4 {

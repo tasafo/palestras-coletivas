@@ -11,6 +11,8 @@
  *= require bootstrap.min
  *= require jquery.rating
  *= require jquery-ui.custom.min
+ *= require nav
  *= require common
  *= require event-theme
+ *= require comments
  */

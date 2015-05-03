@@ -1,8 +1,8 @@
 <%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
-  <%= render "shared/error_messages", :record => @schedule %>
+  <%= render "shared/error_messages", record: @schedule %>
 
   <div class="form-group">
-    <%= f.label :submit_event, t("labels.submit_event.event"), :class => 'control-label col-md-3' %>
+    <%= f.label :submit_event, t("labels.submit_event.event"), class: 'control-label col-md-3' %>
     <div class="col-md-5">
       <%= collection_select(:submit_event, :event_id, @events, :id, :name, {}, class: "form-control") %>
     </div>

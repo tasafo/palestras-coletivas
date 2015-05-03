@@ -25,7 +25,7 @@
             <div class="btn-group" role="group">
               <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>
               <% if @my %>
-                <%= link_to t("titles.talks.all"), "/talks", class: "btn btn-primary" %>
+                <%= link_to t("titles.talks.all"), talks_path, class: "btn btn-primary" %>
               <% else %>
                 <%= link_to t("titles.talks.my"), "/talks?my=true", class: "btn btn-primary" %>
               <% end %>

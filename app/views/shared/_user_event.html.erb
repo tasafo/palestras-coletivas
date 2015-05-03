@@ -1,8 +1,6 @@
-<div class="span2">
-  <div class="user-box">
-    <a href="<%= user_path(user) %>" title="<%= user.name %>">
-      <%= thumbnail(user, "80x80", 'img-circle img-user-box') %>
-      <p><%= user.show_name %></p>
-    </a>
-  </div>
+<div class="col-md-2">
+  <a href="<%= user_path(user) %>" title="<%= user.name %>">
+    <%= thumbnail(user, "80x80", 'img-circle') %>
+    <p><%= user.show_name %></p>
+  </a>
 </div>

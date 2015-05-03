@@ -17,19 +17,19 @@
               </thead>
               <tbody>
               <% counter = 0 %>
-              <% @presenter.users_active.each do |h| %>
-                <% message_button = h[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
+              <% @presenter.users_active.each do |user| %>
+                <% message_button = user[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
-                <% button_type = h[:enrollment].present? ? "red" : "blue" %>
+                <% button_type = user[:enrollment].present? ? "btn-danger" : "btn-primary" %>
 
                 <tr>
                   <td><%= counter += 1 %></td>
-                  <td><%= render "shared/user_thumb", user: h[:enrollment].user %></td>
-                  <td><%= h[:enrollment].user.name %></td>
-                  <td><%= h[:enrollment].user.email %></td>
+                  <td><%= render "shared/user_thumb", user: user[:enrollment].user %></td>
+                  <td><%= user[:enrollment].user.name %></td>
+                  <td><%= user[:enrollment].user.email %></td>
                   <% if @presenter.can_record_presence %>
                     <td>
-                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, h[:enrollment]), :class => "m-btn #{button_type}", :id => "user_id_#{h[:enrollment].user.id}" %>
+                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, user[:enrollment]), class: "btn #{button_type}", id: "user_id_#{user[:enrollment].user.id}" %>
                     </td>
                   <% end %>
                 </tr>
@@ -37,8 +37,8 @@
               </tbody>
             </table>
           <% else %>
-            <% @presenter.users_active.each do |h| %>
-              <%= render "shared/user_event", :user => h[:enrollment].user %>
+            <% @presenter.users_active.each do |user| %>
+              <%= render "shared/user_event", user: user[:enrollment].user %>
             <% end %>
           <% end %>
         <% end %>

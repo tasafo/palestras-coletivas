@@ -35,11 +35,13 @@ pt-BR:
 
     schedules:
       index: "Programação"
-      new: "Adicionar programação"
-      edit: "Editar programação"
+      new: "Adicionar para o evento"
+      edit: "Editar do evento"
+      btn_new: "Adicionar programação"
 
     enrollments:
-      new: "Quero participar do evento"
+      title: "Inscrição"
+      new: "Se inscrever no evento"
       edit: "Alterar participação no evento"
 
     external_event:

@@ -11,56 +11,24 @@
     <!--[if lt IE 9]>
       <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
     <![endif]-->
-    <%= stylesheet_link_tag "event", :media => "all" %>
+    <%= stylesheet_link_tag "event", media: "all" %>
   </head>
   <body>
-    <!--Nav Bar -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <div class="nav-collapse collapse">
-                    <ul class="nav pull-left">
-                        <li><a class="scroll" href="<%= root_path %>"><%= t("app.name") %></a></li>
-                        <li><a class="scroll" href="#about"><%= t("labels.event.about") %></a></li>
-                        <li><a class="scroll" href="#schedule"><%= t("titles.schedules.index") %></a></li>
-                        <li><a class="scroll" href="#location"><%= t("labels.event.place") %></a></li>
-                        <% if @event %>
-                          <% unless @event.users.blank? %>
-                            <li>
-                              <a class="scroll" href="#organizers">
-                                <%= t("show.event.organizers") %>
-                              </a>
-                            </li>
-                          <% end %>
-                        <% end %>
-
-                        <li>
-                          <a class="scroll" href="#presents">
-                            <%= t("show.event.enrolled") %>
-                          </a>
-                        </li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-    </div>
-
-    <br/><br/>
-    <%= render "shared/flash_messages" %>
+    <%= render "events/show/navbar" %>
 
     <%= yield %>
 
     <%= render "shared/footer" %>
 
     <% if @presenter.image_top %>
-    <script>
-      $.backstretch([
-        "/tops/<%= @presenter.image_top %>.jpg"
-        ], {
-          fade: 1000,
-          duration: 3000
-      });
-    </script>
+      <script>
+        $.backstretch([
+          "/tops/<%= @presenter.image_top %>.jpg"
+          ], {
+            fade: 1000,
+            duration: 3000
+        });
+      </script>
     <% end %>
   </body>
 </html>

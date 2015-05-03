@@ -1,8 +1,4 @@
-  <div class="row">
-    <div class="col-md-12">
-      <center><%= paginate talks %></center>
-    </div>
-  </div>
+  <%= render "shared/paginate", list: talks %>
 
   <div class="row">
     <% talks.each do |talk| %>
@@ -10,7 +6,7 @@
         <div class="box-talk">
           <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
 
-          <%= link_to image_tag(thumb, class: "featurette-image img-polaroid", width: '170', height: '128'), talk_path(talk) %>
+          <%= link_to image_tag(thumb, width: '170', height: '128'), talk_path(talk) %>
 
           <% if show_user %>
             <% talk.users.by_name.each do |user| %>
@@ -28,8 +24,4 @@
 
   <hr/>
 
-  <div class="row">
-    <div class="col-md-12">
-      <center><%= paginate talks %></center>
-    </div>
-  </div>
+  <%= render "shared/paginate", list: talks %>

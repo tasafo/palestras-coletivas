@@ -8,19 +8,19 @@
         position = new gMaps.LatLng(<%= @event.coordinates[1] %>, <%= @event.coordinates[0] %>),
 
         config = {
-            center: position,
-            mapTypeControl: false,
-            mapTypeId: gMaps.MapTypeId.ROADMAP,
-            scrollwheel: false,
-            zoom: 16
+          center: position,
+          mapTypeControl: false,
+          mapTypeId: gMaps.MapTypeId.ROADMAP,
+          scrollwheel: false,
+          zoom: 16
         };
 
         map = new gMaps.Map(d.getElementById("location-map"), config);
 
         marker = new gMaps.Marker({
-            animation: gMaps.Animation.BOUNCE,
-            map: map,
-            position: position
+          animation: gMaps.Animation.BOUNCE,
+          map: map,
+          position: position
         });
 
       }(window, document, google, undefined));

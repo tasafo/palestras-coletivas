@@ -1,5 +1,5 @@
 <div class="rating">
   <% (0.5..5).step(0.5).to_a.each do |rating| %>
-    <%= radio_button_tag :rating, rating, (rateable.rating == rating ? true : false), :class => "rating readonly" %>
+    <%= radio_button_tag :rating, rating, (rateable.rating == rating ? true : false), class: "rating readonly" %>
   <% end %> &nbsp;&nbsp;<b>(<%= pluralize(rateable.ratings.count, I18n.t("labels.rating.vote"), I18n.t("labels.rating.votes")) %>)</b>
 </div>

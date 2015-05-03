@@ -8,35 +8,32 @@
   <% if @event.schedules? %>
     <section id="schedule">
       <div class="container">
-        <div class="row-fluid">
-          <%= render "shared/event_schedule" %>
-        </div>
+        <%= render "shared/event_schedule" %>
       </div>
     </section>
   <% end %>
 
   <section id="location">
-    <h4><%= t("labels.event.place") %></h4>
-
     <div class="container">
-       <%= @event.place %> - <%= t("labels.event.address") %>: <%= @presenter.address %>
+      <h2 class="text-primary"><%= t("labels.event.place") %></h2>
+
+      <h5 class="text-left"><strong><%= @event.place %></strong></h5>
+      <h5 class="text-left"><strong><%= t("labels.event.address") %>: <%= @presenter.address %></strong></h5>
+
+      <% if @event.coordinates %>
+        <div id="location-map"></div>
+      <% end %>
     </div>
-    <% if @event.coordinates %>
-      <br/>
-      <div id="location-map"></div>
-    <% end %>
   </section>
 
   <% unless @event.users.blank? %>
     <section id="organizers">
-      <h4><%= t("show.event.organizers") %></h4>
-
       <div class="container">
-        <div class="row-fluid">
-          <% @event.users.by_name.each do |user| %>
-            <%= render "shared/user_event", :user => user %>
-          <% end %>
-        </div>
+        <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
+
+        <% @event.users.by_name.each do |user| %>
+          <%= render "shared/user_event", user: user %>
+        <% end %>
       </div>
     </section>
   <% end %>
@@ -45,35 +42,26 @@
     <div class="container">
       <% if @presenter.show_users_present %>
         <% unless @presenter.users_present.blank? %>
-          <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h4>
+          <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h2>
 
           <% @presenter.users_present.each do |user| %>
-            <%= render "shared/user_event", :user => user %>
+            <%= render "shared/user_event", user: user %>
           <% end %>
         <% end %>
       <% else %>
         <%= render "events/show/attendance_list" %>
       <% end %>
     </div>
+  </section>
 
+  <section class="section">
     <div class="container">
-      <div class="row-fluid">
-        <div class="span12">
-          <%= render "ratings/show", :rateable => @event %>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="row-fluid">
-        <div class="span12">
-          <%= render "ratings/rate_form", :rateable => @event %>
-        </div>
-      </div>
-
-      <%= render "comments/index", :commentable => @event %>
+      <%= render "ratings/show", rateable: @event %>
+      <%= render "ratings/rate_form", rateable: @event %>
     </div>
   </section>
+
+  <%= render "comments/index", commentable: @event %>
 
   <%= render "events/show/map" %>
 
@@ -82,7 +70,7 @@
   <section id="page-header">
     <div class="container">
       <div class="row-fluid">
-        <h2><%= t("show.event.not_found") %></h2>
+        <h1 class="text-primary"><%= t("show.event.not_found") %></h1>
       </div>
     </div>
   </section>

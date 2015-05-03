@@ -19,79 +19,80 @@ class EventPresenter
     EventPolicy.new(@event).in_progress?
   end
 
-  private
-    def prepare_event(event, authorized, user_logged_in = nil)
-      if event
-        @dates = (event.start_date..event.end_date).to_a
+private
 
-        @open_enrollment = event.deadline_date_enrollment >= Date.today
+  def prepare_event(event, authorized, user_logged_in = nil)
+    if event
+      @dates = (event.start_date..event.end_date).to_a
 
-        @users_present = prepare_users_present event
+      @open_enrollment = event.deadline_date_enrollment >= Date.today
 
-        @users_active = prepare_users_active event
+      @users_present = prepare_users_present event
 
-        @crowded = @users_active.count >= event.stocking
+      @users_active = prepare_users_active event
 
-        logged event, user_logged_in
+      @crowded = @users_active.count >= event.stocking
 
-        @image_top = ('01'..'12').to_a.sample
+      logged event, user_logged_in
 
-        @can_vote = prepare_can_vote(event)
+      @image_top = ('01'..'12').to_a.sample
 
-        prepare_authorized(event, authorized)
-      end
+      @can_vote = prepare_can_vote(event)
+
+      prepare_authorized(event, authorized)
     end
+  end
 
-    def prepare_authorized(event, authorized)
-      @authorized = authorized
+  def prepare_authorized(event, authorized)
+    @authorized = authorized
 
-      @can_record_presence = @authorized && Date.today >= event.start_date
+    @can_record_presence = @authorized && Date.today >= event.start_date
 
-      @show_users_present = Date.today > event.end_date && !@can_record_presence
+    @show_users_present = Date.today > event.end_date && !@can_record_presence
 
-      @event = event
-      unless event.to_public
-        @event = nil unless @authorized
-      end
+    @event = event
+    unless event.to_public
+      @event = nil unless @authorized
     end
+  end
 
-    def prepare_can_vote(event)
-      event && event.accepts_submissions && event.end_date >= Date.today
+  def prepare_can_vote(event)
+    event && event.accepts_submissions && event.end_date >= Date.today
+  end
+
+  def prepare_users_present(event)
+    users_present = []
+    event.enrollments.presents.each { |enrollment| users_present << enrollment.user }
+    users_present.sort_by! { |user| user._slugs[0] }
+  end
+
+  def prepare_users_active(event)
+    users_active = []
+    event.enrollments.actives.each do |enrollment|
+      users_active << { name: enrollment.user._slugs[0], enrollment: enrollment }
     end
+    users_active.sort_by! { |user| user[:name] }
+  end
 
-    def prepare_users_present(event)
-      users_present = []
-      event.enrollments.presents.each { |enrollment| users_present << enrollment.user }
-      users_present.sort_by! { |user| user._slugs[0] }
-    end
+  def logged(event, user_logged_in = nil)
+    @new_subscription = true
 
-    def prepare_users_active(event)
-      users_active = []
-      event.enrollments.actives.each do |enrollment|
-        users_active << { :name => enrollment.user._slugs[0], :enrollment => enrollment }
-      end
-      users_active.sort_by! { |user| user[:name] }
-    end
+    if user_logged_in
+      @enrollment = Enrollment.where(event: event, user: user_logged_in).first
 
-    def logged(event, user_logged_in = nil)
-      @new_subscription = true
+      @new_subscription = false if @enrollment
 
-      if user_logged_in
-        @enrollment = Enrollment.where(:event => event, :user => user_logged_in).first
+      @the_user_is_speaker = false
 
-        @new_subscription = false if @enrollment
-
-        @the_user_is_speaker = false
-
-        event.schedules.each do |schedule|
-          if schedule.talk?
-            schedule.talk.users.each do |user|
-              @the_user_is_speaker = true if user.id == user_logged_in.id
-            end
+      event.schedules.each do |schedule|
+        if schedule.talk?
+          schedule.talk.users.each do |user|
+            @the_user_is_speaker = true if user.id == user_logged_in.id
           end
         end
-
-        @open_enrollment = false if @the_user_is_speaker || @authorized
       end
+
+      @open_enrollment = false if @the_user_is_speaker || @authorized
     end
+  end
 end

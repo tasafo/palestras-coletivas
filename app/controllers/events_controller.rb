@@ -8,6 +8,8 @@ class EventsController < PersistenceController
 
     @events = (logged_in? && @my) ? current_user.events.desc(:created_at) : EventQuery.new.all_public
 
+    @events = @events.page(params[:page]).per(12)
+
     respond_to do |format|
       format.html
       format.json {
@@ -62,8 +64,22 @@ private
 
   def event_params
     params.require(:event).permit(
-      :name, :edition, :description, :stocking, :tags, :start_date, :end_date, :deadline_date_enrollment,
-      :accepts_submissions, :to_public, :place, :street, :district, :city, :state, :country
+      :name,
+      :edition,
+      :description,
+      :stocking,
+      :tags,
+      :start_date,
+      :end_date,
+      :deadline_date_enrollment,
+      :accepts_submissions,
+      :to_public,
+      :place,
+      :street,
+      :district,
+      :city,
+      :state,
+      :country
     )
   end
 end
