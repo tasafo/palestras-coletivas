@@ -16,4 +16,8 @@ module SpecHelpers
     end
     fill_in location, options
   end
+
+  def webkit?
+    [:webkit, :webkit_debug].include? Capybara.current_driver
+  end
 end
