@@ -46,6 +46,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    airbrake (4.1.0)
+      builder
+      multi_json
     arel (6.0.0)
     autoprefixer-rails (5.1.11)
       execjs
@@ -270,6 +273,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   bcrypt
   bootstrap-sass
   capybara
