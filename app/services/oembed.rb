@@ -24,9 +24,9 @@ class Oembed
     dimension = "width=\"80%\" height=\"500\""
 
     if @url.include? "slideshare.net"
-      @frame = "<iframe class=\"embed-responsive-item\" src=\"http://www.slideshare.net/slideshow/embed_code/#{@code}\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" style=\"border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>"
+      @frame = "<iframe class=\"embed-responsive-item\" src=\"https://www.slideshare.net/slideshow/embed_code/#{@code}\" marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\" style=\"border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px\" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>"
     elsif @url.include? "speakerdeck.com"
-      @frame = "<iframe class=\"embed-responsive-item\" src=\"//speakerdeck.com/player/#{@code}\" allowfullscreen=\"true\" allowtransparency=\"true\" mozallowfullscreen=\"true\" style=\"border:0; padding:0; margin:0; background:transparent;\" webkitallowfullscreen=\"true\"></iframe>"
+      @frame = "<iframe class=\"embed-responsive-item\" src=\"https://speakerdeck.com/player/#{@code}\" allowfullscreen=\"true\" allowtransparency=\"true\" mozallowfullscreen=\"true\" style=\"border:0; padding:0; margin:0; background:transparent;\" webkitallowfullscreen=\"true\"></iframe>"
     elsif @url.include? "prezi.com"
       @frame = "<iframe class=\"embed-responsive-item\" src=\"https://prezi.com/embed/#{@code}/?bgcolor=ffffff&amp;lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0#\" allowfullscreen=\"\" mozallowfullscreen=\"\" webkitallowfullscreen=\"\"></iframe>"
     else
@@ -40,9 +40,9 @@ class Oembed
 
     unless @url.nil?
       if @url.include? "youtube.com"
-        video_url = "http://www.youtube.com/oembed?url=#{@url}&format=json"
+        video_url = "https://www.youtube.com/oembed?url=#{@url}&format=json"
       elsif @url.include? "vimeo.com"
-        video_url = "http://vimeo.com/api/oembed.json?url=#{@url}"
+        video_url = "https://vimeo.com/api/oembed.json?url=#{@url}"
       end
     end
 
@@ -67,7 +67,7 @@ private
 
   def open_slideshare
     begin
-      record = Nokogiri::XML(open("http://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
+      record = Nokogiri::XML(open("https://www.slideshare.net/api/oembed/2?url=#{@url}&format=xml"))
 
       unless record.nil?
         @title = record.xpath("//title").text
