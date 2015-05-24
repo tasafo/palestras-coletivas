@@ -4,7 +4,7 @@
     <% talks.each do |talk| %>
       <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
         <div class="box-talk">
-          <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : talk.thumbnail %>
+          <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : https(talk.thumbnail) %>
 
           <%= link_to image_tag(thumb, width: '170', height: '128'), talk_path(talk) %>
 

@@ -17,13 +17,13 @@ describe Gravatar do
     it "url" do
       url = Gravatar.new("paul@example.org").url
 
-      expect(url).to eql("http://gravatar.com/avatar/abc123?d=mm")
+      expect(url).to eql("https://pt.gravatar.com/avatar/abc123?d=mm")
     end
 
     it "profile" do
       profile = Gravatar.new("paul@example.org").profile
 
-      expect(profile).to eql("http://gravatar.com/abc123")
+      expect(profile).to eql("https://pt.gravatar.com/abc123")
     end
 
     it "invalid gravatar" do
