@@ -30,4 +30,11 @@ Rails.application.configure do
   config.assets.debug = true
 
   config.eager_load = false
+
+  ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+    address: 'localhost',
+    port: 1025
+  }
 end

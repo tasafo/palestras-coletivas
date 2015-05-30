@@ -1,10 +1,11 @@
 require "spec_helper"
 
-describe UserMailer, :type => :mailer do
-  describe "password_reset" do
-    let!(:user) { create(:user, :paul) }
-    let(:mail) { UserMailer.password_reset(user) }
+describe UserMailer, type: :mailer do
+  let!(:user) { create(:user, :paul) }
+  let(:mail) { UserMailer.password_reset(user.id.to_s) }
+  let(:body) { mail.body }
 
+  describe "password_reset" do
     it "sets subject" do
       expect(mail.subject).to eql("Redefinir senha")
     end
@@ -15,12 +16,6 @@ describe UserMailer, :type => :mailer do
 
     it "sets from recipient" do
       expect(mail.from).to include("no-reply@palestrascoletivas.com.br")
-    end
-
-    context "text format" do
-      let(:body) { mail.body }
-
-      it_behaves_like "password reset email"
     end
   end
 end

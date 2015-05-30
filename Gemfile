@@ -12,13 +12,17 @@ gem 'mongoid-slug'
 gem 'kaminari'
 gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 gem 'geocoder'
-gem 'dotenv-rails'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'airbrake'
+
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 group :development do
   gem 'thin'
@@ -49,7 +53,7 @@ group :test do
 end
 
 group :production do
-  gem 'rails_12factor'
   gem 'unicorn'
   gem 'newrelic_rpm'
+  gem 'rails_12factor'
 end

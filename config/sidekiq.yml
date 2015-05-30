@@ -1,0 +1,4 @@
+:pidfile: tmp/pids/sidekiq.pid
+:queues:
+  - default
+  - mailers

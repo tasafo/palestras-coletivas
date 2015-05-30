@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
+require "active_job/railtie"
 
 Bundler.require(*Rails.groups)
 
@@ -18,5 +19,6 @@ module Palestrascoletivas
     config.assets.enabled = true
     config.assets.initialize_on_precompile = false
     I18n.enforce_available_locales = true
+    config.active_job.queue_adapter = :sidekiq
   end
 end

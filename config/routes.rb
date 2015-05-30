@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Palestrascoletivas::Application.routes.draw do
   root :to => "home#index"
 
@@ -46,4 +48,6 @@ Palestrascoletivas::Application.routes.draw do
   get "/schedules/search-talks/:search", :to => "schedules#search_talks"
 
   post "/activities/get-type" => "activities#get_type"
+
+  mount Sidekiq::Web, at: "/sidekiq"
 end

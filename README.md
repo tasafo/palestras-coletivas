@@ -24,9 +24,22 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 	gem install genghisapp
 
+### Usamos o Redis-Server, então instala ele lá!
+
+	sudo apt-get install redis-server
+
 ### Instala também a biblioteca webkit, que é uma dependência do capybara-webkit
 
 	sudo apt-get install libqtwebkit-dev
+
+### MailCatcher (http://mailcatcher.me)
+Instale o MailCatcher para testar o envio de e-mails localmente.
+
+  gem install mailcatcher
+
+Execute ele para ficar recebendo seus e-mails locais
+
+  mailcatcher
 
 ### Baixa as dependências do projeto
 
@@ -38,17 +51,33 @@ Agora espera...
 
 	rake db:seed
 
+### Em um terminal, execute o sidekiq para executar as tarefas de segundo plano
+
+	sidekiq
+
+### Se você estiver executando outra aplicação que utilize o sidekiq, é melhor rodar o comando
+
+  redis-cli flushall
+
 ### Agora é só rodar e brincar!
 
-	rails s
+	rails server
 
-### Em seu navegador, vá para o endereço
+### Em seu navegador, abra o endereço abaixo para testar a aplicação
 
   localhost:3000
 
+### Em seu navegador, abra o endereço abaixo para analisar as tarefas em segundo plano
+
+  localhost:3000/sidekiq
+
+### Em seu navegador, abra o endereço abaixo para analisar os e-mails recebidos localmente
+
+  localhost:1080
+
 ### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
 
-	bundle exec rake coverage
+	rake spec:coverage
 
 ### Em produção, você deve gerar o token de segurança da aplicação
 

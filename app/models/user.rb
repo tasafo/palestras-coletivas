@@ -78,7 +78,7 @@ class User
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver_now
+    UserMailer.password_reset(self.id.to_s).deliver_later
   end
 
   def arrived_at event
