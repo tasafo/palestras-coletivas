@@ -33,11 +33,12 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 	sudo apt-get install libqtwebkit-dev
 
 ### MailCatcher (http://mailcatcher.me)
-Instale o MailCatcher para testar o envio de e-mails localmente.
+
+#### Instale o MailCatcher para testar o envio de e-mails localmente.
 
   gem install mailcatcher
 
-Execute ele para ficar recebendo seus e-mails locais
+#### Execute ele para ficar recebendo seus e-mails locais
 
   mailcatcher
 
