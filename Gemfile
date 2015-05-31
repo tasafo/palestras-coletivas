@@ -3,22 +3,27 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 gem 'rails', '4.2.1'
-gem 'mongoid'
 gem 'rails-i18n'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
 gem 'nokogiri', require: false
 gem 'multi_json', require: false
-gem 'mongoid-slug'
 gem 'kaminari'
+gem 'airbrake'
+
+gem 'mongoid'
+gem 'mongoid-slug'
 gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 gem 'geocoder'
-gem 'dotenv-rails', require: 'dotenv/rails-now'
+
+gem 'sprockets', '~> 2.12'
 gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'uglifier'
-gem 'jquery-rails'
 gem 'font-awesome-rails'
-gem 'airbrake'
+gem 'jquery-rails'
+gem 'tinymce-rails'
+gem 'tinymce-rails-langs'
 
 gem 'sidekiq'
 gem 'sinatra', require: false
@@ -27,7 +32,7 @@ gem 'slim'
 group :development do
   gem 'thin'
   gem 'web-console'
-  gem 'quiet_assets'
+  #gem 'quiet_assets'
 end
 
 group :development, :test do

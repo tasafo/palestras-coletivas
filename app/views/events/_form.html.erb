@@ -18,7 +18,7 @@
   <div class="form-group">
     <%= f.label :description, class: 'control-label col-md-3' %>
     <div class="col-md-6">
-      <%= f.text_area :description, placeholder: t("placeholder.events.description"), rows: 5, class: "form-control" %>
+      <%= f.text_area :description, placeholder: t("placeholder.events.description"), rows: 5, class: "form-control tinymce_event_template" %>
     </div>
   </div>
 
@@ -134,3 +134,20 @@
   <span id="user_in_the_list"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
   <span id="remove"><%= t("new.invite.js.remove") %></span>
 <% end %>
+
+<%= tinymce_assets %>
+
+<script>
+  tinyMCE.init({
+    selector: ".tinymce_event_template",
+      menubar: false,
+      language: "pt_BR",
+      convert_urls: false,
+      plugins: "textcolor code anchor",
+      toolbar: [
+        "undo redo | styleselect fontsizeselect forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify | cut copy paste | bullist numlist outdent indent | anchor code"
+      ]
+  });
+</script>
+
+<%= tinymce %>
