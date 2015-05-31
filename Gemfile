@@ -32,7 +32,7 @@ gem 'slim'
 group :development do
   gem 'thin'
   gem 'web-console'
-  #gem 'quiet_assets'
+  gem 'quiet_assets'
 end
 
 group :development, :test do
