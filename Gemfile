@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 gem 'rails-i18n'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
