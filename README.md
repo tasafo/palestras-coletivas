@@ -30,7 +30,7 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Instala também a biblioteca webkit, que é uma dependência do capybara-webkit
 
-	sudo apt-get install libqtwebkit-dev
+	sudo apt-get install qt5-default libqt5webkit5-dev
 
 ### MailCatcher (http://mailcatcher.me)
 
