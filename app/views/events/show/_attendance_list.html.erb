@@ -27,11 +27,15 @@
                   <td><%= render "shared/user_thumb", user: user[:enrollment].user %></td>
                   <td><%= user[:enrollment].user.name %></td>
                   <td><%= user[:enrollment].user.email %></td>
-                  <% if @presenter.can_record_presence %>
-                    <td>
+                  <td>
+                    <% if @presenter.can_record_presence %>
                       <%= link_to message_button, edit_event_enrollment_path(@event, :present, user[:enrollment]), class: "btn #{button_type}", id: "user_id_#{user[:enrollment].user.id}" %>
-                    </td>
-                  <% end %>
+                      <% end %>
+
+                      <% if user[:enrollment].present? %>
+                        <a href="http://certifico.tasafo.org/?codigo=PC<%= @event.id %>&email=<%= user[:enrollment].user.email %>&nome=<%= user[:enrollment].user.name %>" target="_blank" class="btn btn-primary">Emitir certificado</a>
+                      <% end %>
+                  </td>
                 </tr>
               <% end %>
               </tbody>
