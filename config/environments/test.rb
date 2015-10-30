@@ -37,4 +37,7 @@ Rails.application.configure do
   config.lograge.enabled = true
 
   config.eager_load = false
+
+  Mongoid.logger.level = Logger::INFO
+  Mongo::Logger.logger.level = Logger::INFO
 end
