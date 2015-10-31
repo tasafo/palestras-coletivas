@@ -7,6 +7,10 @@
     <% end %>
 
     <%= f.hidden_field @option_type, value: @presenter.option_value %>
+
+    <% unless @presenter.option_value %>
+      <%= f.hidden_field :present, value: false %>
+    <% end %>
   <% end %>
 
   <%= f.hidden_field :event_id, :value => @event.id %>

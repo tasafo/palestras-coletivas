@@ -54,6 +54,7 @@ pt-BR:
         accepts_submissions: "Aceita submissão de palestras"
         counter_registered_users: "Número de usuários inscritos"
         counter_present_users: "Número de usuários presentes"
+        block_presence: "Bloquear presença"
 
       schedule:
         day: "Dia"

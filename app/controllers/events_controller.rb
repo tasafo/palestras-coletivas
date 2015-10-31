@@ -80,7 +80,8 @@ private
       :district,
       :city,
       :state,
-      :country
+      :country,
+      :block_presence
     )
   end
 end

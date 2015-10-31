@@ -12,22 +12,22 @@ describe "add presence", type: :request, js: true do
   context "when user does not presence" do
     before do
       visit event_path(event)
-      click_link "Registrar entrada"
     end
 
-    it "button turns green" do
-      expect(find('a.btn-present')).to have_content(I18n.t("show.event.btn_presence_checkin"))
+    it "does not show button" do
+      expect(page).not_to have_content(I18n.t("show.event.btn_presence_checkin"))
     end
   end
 
   context "when user is present" do
     before do
-      Enrollment.create!(user: user, event: event, active: true, present: true)
+      Enrollment.create!(user: user, event: event, active: true, present: false)
       visit event_path(event)
+      click_link "Registrar entrada"
     end
 
-    it "display success button" do
-      expect(find('a.btn-present')).to have_content(I18n.t("show.event.btn_presence_checkin"))
+    it "display presence button" do
+      expect(page).to have_content(I18n.t("show.event.btn_presence_checkin"))
     end
   end
 end

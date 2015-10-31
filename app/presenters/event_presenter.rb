@@ -8,7 +8,7 @@ class EventPresenter
   end
 
   def show_checkin
-    (@crowded && @enrollment && @enrollment.active?) || !@crowded
+    !@event.block_presence && @enrollment && @enrollment.active? && Date.today >= @event.start_date
   end
 
   def address

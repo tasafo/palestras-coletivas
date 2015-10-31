@@ -16,6 +16,7 @@ pt-BR:
       help:
         to_public: "Marque para que as pessoas vejam o evento"
         accepts_submissions: "Marque para que as pessoas possam submeter suas palestras ao evento"
+        block_presence: "Marque para que os inscritos não registrem sua presença na página do evento"
 
     schedule:
       you_must_enter_a_talk: "Você deve informar uma palestra."
