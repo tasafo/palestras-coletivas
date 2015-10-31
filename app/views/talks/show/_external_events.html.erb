@@ -3,13 +3,16 @@
 
   <table class="table">
     <tbody>
-    <% @talk.external_events.by_date.each do |external_event| %>
+    <% @talk.external_events.list(@owns).each do |external_event| %>
       <% event_date = l external_event.date, format: :long %>
       <tr>
         <td>
           <h5><%= link_to "#{external_event.name}, #{external_event.place}, #{event_date}.", external_event.url %></h5>
         </td>
         <% if @owns %>
+          <td>
+            <%= external_event.active ? 'ativo' : 'inativo' %>
+          </td>
           <td>
             <%= link_to t("actions.edit"), edit_talk_external_event_path(@talk, external_event), class: "btn btn-success", id: "external_event_id_#{external_event.id}" %>
           </td>

@@ -38,6 +38,6 @@ private
   end
 
   def external_event_params
-    params.require(:external_event).permit(:name, :date, :place, :url)
+    params.require(:external_event).permit(:name, :date, :place, :url, :active)
   end
 end

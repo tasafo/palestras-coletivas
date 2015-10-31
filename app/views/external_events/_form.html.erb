@@ -29,6 +29,13 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <%= f.label :active, class: 'control-label col-md-3' %>
+    <div class="col-md-6">
+      <%= f.check_box :active %>
+    </div>
+  </div>
+
   <div class="container">
     <%= f.submit class: 'btn btn-primary' %>
     <%= link_to t('.cancel', default: t("helpers.links.cancel")),
