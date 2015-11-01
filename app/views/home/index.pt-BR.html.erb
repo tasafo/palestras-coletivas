@@ -3,7 +3,7 @@
     <section class="intro" id="intro">
       <div class="blur"></div>
       <div class="container intro-container">
-        <div class="row flexslider">
+        <div class="row-fluid flexslider">
           <ul class="slides">
             <% @events.each do |event| %>
               <li>
@@ -50,11 +50,11 @@
 
     <section id="calltoaction">
       <div class="container">
-        <div class="row">
+        <div class="row-fluid">
           <div class="col-md-6 wow fadeInLeft" data-wow-offset="100">"A melhor forma de prever o futuro é criá-lo." Peter Drucker</div>
 
           <div class="col-md-6 wow fadeInRight" data-wow-offset="100">
-            <%= link_to 'Cadastre um evento', new_event_path, class: 'btn-call' %>
+            <%= link_to 'Cadastre um evento', new_event_path, class: 'btn btn-call' %>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
       <div class="container presentations-container">
         <h3 class="wow zoomInUp" data-wow-offset="150">Top speakers</h3>
 
-        <div class="row row-talkers">
+        <div class="row-fluid row-talkers">
           <% @talkers.each do |talker| %>
             <div class="talker col-md-4 wow fadeInUp" data-wow-offset="200" data-wow-delay="">
               <a href="<%= user_path(talker) %>" title="<%= talker.name %>">
