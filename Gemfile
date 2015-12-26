@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.2.4'
 
 gem 'rails', '4.2.5'
 gem 'rails-i18n'
@@ -9,8 +9,7 @@ gem 'bcrypt', require: 'bcrypt'
 gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'kaminari'
-gem 'airbrake'
-gem 'airbrake-ruby', github: 'airbrake/airbrake-ruby', branch: '13-at-exit-fix'
+gem 'airbrake', '4.3.4'
 
 gem 'mongoid'
 gem 'mongoid-slug'
