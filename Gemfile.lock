@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/airbrake/airbrake-ruby.git
+  revision: 1a4cc1a2b79dacac3aff04a00df4b5fbdd207d33
+  branch: 13-at-exit-fix
+  specs:
+    airbrake-ruby (1.0.1)
+
+GIT
   remote: git://github.com/mauriciozaffari/mongoid_search.git
   revision: 3f3a997d53ad91df5b01a07cbb9d59d64d9ae5d3
   branch: master
@@ -48,7 +55,6 @@ GEM
     addressable (2.4.0)
     airbrake (5.0.1)
       airbrake-ruby (~> 1.0)
-    airbrake-ruby (1.0.1)
     arel (6.0.3)
     autoprefixer-rails (6.2.1)
       execjs
@@ -300,6 +306,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake
+  airbrake-ruby!
   bcrypt
   bootstrap-sass
   capybara

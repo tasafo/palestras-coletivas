@@ -10,6 +10,7 @@ gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'kaminari'
 gem 'airbrake'
+gem 'airbrake-ruby', github: 'airbrake/airbrake-ruby', branch: '13-at-exit-fix'
 
 gem 'mongoid'
 gem 'mongoid-slug'
