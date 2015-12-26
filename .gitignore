@@ -18,6 +18,5 @@
 .env
 .rvmrc
 .DS_Store
-.env
 .ruby-version
 .ruby-gemset
