@@ -1,0 +1,10 @@
+engines:
+  brakeman:
+    enabled: true
+ratings:
+  paths:
+  - app/**
+  - "**.rb"
+exclude_paths:
+- spec/**/*
+- vendor/**/*
