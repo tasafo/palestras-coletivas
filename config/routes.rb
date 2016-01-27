@@ -22,7 +22,7 @@ Palestrascoletivas::Application.routes.draw do
   end
 
   resources :events, except: :destroy do
-    resources :schedules, only: [:new, :create, :edit, :update] do
+    resources :schedules, only: [:new, :create, :edit, :update, :destroy] do
       resources :votes, only: [:new, :create]
     end
     resources :enrollments, only: [:new, :create, :edit, :update], path: ":option_type"

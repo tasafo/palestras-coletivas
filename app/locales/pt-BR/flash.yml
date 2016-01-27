@@ -19,7 +19,7 @@ pt-BR:
         notice: "A palestra foi atualizada!"
 
     comments:
-      create: 
+      create:
         notice: "Obrigado pelo comentário!"
         alert: "Verifique novamente o comentário"
       destroy:
@@ -51,6 +51,8 @@ pt-BR:
       vote:
         add: "Voto adicionado com sucesso!"
         remove: "Voto retirado com sucesso!"
+      destroy:
+        notice: "A programação foi excluída!"
 
     enrollments:
       create:

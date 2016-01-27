@@ -23,7 +23,7 @@ pt-BR:
       table:
         time: "Horário"
         activity: "Atividade"
-        operation: "Operação"
+        operations: "Operações"
         votes: "Votos"
 
     invite:

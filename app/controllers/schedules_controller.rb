@@ -1,6 +1,6 @@
 class SchedulesController < ApplicationController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_schedule, only: [:edit, :update]
+  before_action :set_schedule, only: [:edit, :update, :destroy]
 
   def new
     @schedule = Schedule.new
@@ -24,6 +24,14 @@ class SchedulesController < ApplicationController
 
   def update
     save_schedule(:edit, @event, @schedule, params[:old_talk_id], params[:talk_id], schedule_params)
+  end
+
+  def destroy
+    redirect_to root_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@event)
+
+    if @schedule.destroy
+      redirect_to event_path(@event), notice: t("flash.schedules.destroy.notice")
+    end
   end
 
   def search_talks

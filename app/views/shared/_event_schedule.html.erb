@@ -11,8 +11,8 @@
               <p class="text-center schedule-font"><%= t("new.schedule.table.activity") %></p>
             </th>
             <% if @presenter.authorized %>
-              <th width="10%">
-                <p class="text-left schedule-font"><%= t("new.schedule.table.operation") %></p>
+              <th colspan="2" width="10%">
+                <p class="text-center schedule-font"><%= t("new.schedule.table.operations") %></p>
               </th>
             <% end %>
             <% if @presenter.can_vote %>
@@ -57,7 +57,8 @@
                 <% end %>
 
                 <% if @presenter.authorized %>
-                  <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "schedule_id_#{schedule.id}" %></td>
+                  <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %></td>
+                  <td><%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %></td>
                 <% end %>
 
                 <% if @presenter.can_vote %>
