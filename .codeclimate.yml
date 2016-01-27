@@ -6,4 +6,20 @@ ratings:
   - "app/**/*"
   - "**.rb"
 exclude_paths:
+- app/assets/**/*
+- app/locales/**/*
+- app/views/**/*
+- bin/**/*
+- config/**/*
+- db/**/*
+- doc/**/*
+- lib/**/*
+- public/**/*
 - spec/**/*
+- vendor/**/*
+- Gemfile
+- Gemfile.lock
+- Procfile
+- README.md
+- Rakefile
+- config.ru
