@@ -12,7 +12,7 @@ class TalkDecorator
   end
 
   def update
-    @talk.update_attributes(@params) && add_authors
+    @talk.update(@params) && add_authors
   end
 
 private

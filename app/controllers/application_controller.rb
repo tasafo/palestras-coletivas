@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
 private
   def require_logged_user
     unless logged_in?
-      redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}", :alert => t("flash.must_be_logged")
+      redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",
+        alert: t("flash.must_be_logged")
     end
   end
 

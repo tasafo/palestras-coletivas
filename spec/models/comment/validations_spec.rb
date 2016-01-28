@@ -10,13 +10,13 @@ describe Talk, "validations", :type => :model do
   end
 
   it "requires body" do
-    comment.update_attributes(body: nil)
+    comment.update(body: nil)
 
     expect(comment.errors[:body].size).to eq(1)
   end
 
   it "requires user" do
-    comment.update_attributes(user: nil)
+    comment.update(user: nil)
 
     expect(comment.errors[:user].size).to eq(1)
   end

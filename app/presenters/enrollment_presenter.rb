@@ -1,15 +1,20 @@
 class EnrollmentPresenter
-  attr_reader :user_id, :user_name, :type_message, :button_message, :option_value, :can_record_presence
+  attr_reader :user_id, :user_name, :type_message, :button_message,
+    :option_value, :can_record_presence
 
   def initialize(args = {})
     @user_id = args[:user].id if args.size == 1
 
-    prepare_message args[:event], args[:enrollment], args[:option_type], args[:authorized_edit], args[:user] if args.size > 1
+    if args.size > 1
+      prepare_message args[:event], args[:enrollment], args[:option_type],
+        args[:authorized_edit], args[:user]
+    end
   end
 
   private
     def prepare_message(event, enrollment, option_type, authorized_edit, user)
-      @can_record_presence = (authorized_edit || user == enrollment.user) && Date.today >= event.start_date
+      @can_record_presence = (authorized_edit || user == enrollment.user) &&
+        Date.today >= event.start_date
 
       @option_value = false
       @type_message = "text-warning"

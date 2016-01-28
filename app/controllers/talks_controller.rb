@@ -11,7 +11,10 @@ class TalksController < PersistenceController
 
     respond_to do |format|
       format.html
-      format.json { render json: @talks.only('id', 'name', 'description', 'tags', 'presentation_url', 'thumbnail') }
+      format.json {
+        render json: @talks.only('id', 'name', 'description', 'tags',
+          'presentation_url', 'thumbnail')
+      }
     end
   end
 
@@ -30,7 +33,8 @@ class TalksController < PersistenceController
       @authorized = authorized_access? @talk
       @owns = owner? @talk
 
-      @presentation = Oembed.new(@talk.presentation_url, @talk.code).show_presentation
+      @presentation = Oembed.new(@talk.presentation_url, @talk.code)
+        .show_presentation
 
       @video = Oembed.new(@talk.video_link).show_video
 
@@ -48,22 +52,23 @@ class TalksController < PersistenceController
     respond_to do |format|
       if oembed
         format.json {
-          render :json => {
-            :error => false,
-            :title => oembed.title,
-            :code => oembed.code,
-            :thumbnail => oembed.thumbnail,
-            :description => oembed.description
+          render json: {
+            error: false,
+            title: oembed.title,
+            code: oembed.code,
+            thumbnail: oembed.thumbnail,
+            description: oembed.description
           }
         }
       else
-        format.json { render :json => {:error => true} }
+        format.json { render json: {error: true} }
       end
     end
   end
 
   def edit
-    redirect_to talks_path, :notice => t("flash.unauthorized_access") unless authorized_access?(@talk)
+    redirect_to talks_path,
+      notice: t("flash.unauthorized_access") unless authorized_access?(@talk)
   end
 
   def update
@@ -90,7 +95,11 @@ private
     if logged_in? && my
       talks = TalkQuery.new.owner(current_user)
     else
-      talks = search.blank? ? TalkQuery.new.publics : Kaminari.paginate_array(TalkQuery.new.search(search))
+      talks = if search.blank?
+                TalkQuery.new.publics
+              else
+                Kaminari.paginate_array(TalkQuery.new.search(search))
+              end
     end
 
     talks.page(page).per(12)
@@ -105,6 +114,15 @@ private
   end
 
   def talk_params
-    params.require(:talk).permit(:presentation_url, :title, :description, :tags, :video_link, :to_public, :thumbnail, :code)
+    params.require(:talk).permit(
+      :presentation_url,
+      :title,
+      :description,
+      :tags,
+      :video_link,
+      :to_public,
+      :thumbnail,
+      :code
+    )
   end
 end

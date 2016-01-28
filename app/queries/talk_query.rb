@@ -4,7 +4,8 @@ class TalkQuery
   end
 
   def presentation_events
-    @relation.where(:counter_presentation_events.gt => 0).desc(:counter_presentation_events).asc(:_slugs).limit(5)
+    @relation.where(:counter_presentation_events.gt => 0)
+      .desc(:counter_presentation_events).asc(:_slugs).limit(5)
   end
 
   def search(search)

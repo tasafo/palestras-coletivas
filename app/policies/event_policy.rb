@@ -4,7 +4,8 @@ class EventPolicy
   end
 
   def address
-    [@event.street, @event.district, @event.city, @event.state, @event.country].compact.join(', ')
+    [@event.street, @event.district, @event.city, @event.state, @event.country]
+      .compact.join(', ')
   end
 
   def in_progress?

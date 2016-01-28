@@ -12,7 +12,8 @@ class PersistenceController < ApplicationController
     decorator = get_decorator(object, users, args)
 
     if decorator.send operation
-      redirect_to "/#{object_name.pluralize}/#{object._slugs[0]}", notice: t("flash.#{object_name.pluralize}.#{operation}.notice")
+      redirect_to "/#{object_name.pluralize}/#{object._slugs[0]}",
+        notice: t("flash.#{object_name.pluralize}.#{operation}.notice")
     else
       render option
     end

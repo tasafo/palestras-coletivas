@@ -6,7 +6,9 @@ class ActivitiesController < ApplicationController
       type_activity = activity.type
 
       respond_to do |format|
-        format.json { render :json => {:error => false, :type_activity => type_activity} }
+        format.json {
+          render json: {error: false, type_activity: type_activity}
+        }
       end
     end
   end

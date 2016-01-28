@@ -12,7 +12,7 @@ class EventDecorator
   end
 
   def update
-    @event.update_attributes(@params) && update_list_organizers
+    @event.update(@params) && update_list_organizers
   end
 
 private
@@ -31,7 +31,10 @@ private
     results = Geocoder.search(EventPolicy.new(@event).address)
 
     unless results.blank?
-      @event.coordinates = [ results[0].geometry['location']['lng'], results[0].geometry['location']['lat'] ]
+      @event.coordinates = [
+        results[0].geometry['location']['lng'],
+        results[0].geometry['location']['lat']
+      ]
       @event.save
     end
   end

@@ -4,7 +4,8 @@ require 'open-uri'
 class Gravatar
   DOMAIN = "https://pt.gravatar.com"
 
-  attr_reader :url, :profile, :profile_url, :about_me, :current_location, :has_profile, :email, :thumbnail_url
+  attr_reader :url, :profile, :profile_url, :about_me, :current_location,
+    :has_profile, :email, :thumbnail_url
 
   def initialize(email)
     hash = Digest::MD5.hexdigest(email)

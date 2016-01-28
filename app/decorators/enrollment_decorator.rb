@@ -11,7 +11,8 @@ class EnrollmentDecorator
   end
 
   def create
-    enrollment = Enrollment.find_by event: @enrollment.event, user: @enrollment.user
+    enrollment = Enrollment.find_by event: @enrollment.event,
+      user: @enrollment.user
 
     return false if enrollment
 
@@ -20,17 +21,23 @@ class EnrollmentDecorator
   end
 
   def update
-    @enrollment.update_attributes(@params) && update_counter_of_events_and_users
+    @enrollment.update(@params) && update_counter_of_events_and_users
   end
 
 private
 
   def update_counter_of_events_and_users
-    condition = @option_type == 'active' ? @enrollment.active? : @enrollment.present?
+    condition = if @option_type == 'active'
+                  @enrollment.active?
+                else
+                  @enrollment.present?
+                end
     operation = condition ? :inc : :dec
 
-    @enrollment.user.set_counter(OPTIONS[0][@option_type.to_sym][:event], operation)
-    @enrollment.event.set_counter(OPTIONS[0][@option_type.to_sym][:user], operation)
+    @enrollment.user.set_counter(OPTIONS[0][@option_type.to_sym][:event],
+      operation)
+    @enrollment.event.set_counter(OPTIONS[0][@option_type.to_sym][:user],
+      operation)
 
     true
   end

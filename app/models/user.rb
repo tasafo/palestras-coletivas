@@ -22,7 +22,8 @@ class User
   field :gravatar_photo, type: String
 
   has_and_belongs_to_many :talks, inverse_of: :talks
-  has_and_belongs_to_many :watched_talks, class_name: "Talk", inverse_of: :watched_user
+  has_and_belongs_to_many :watched_talks, class_name: "Talk",
+    inverse_of: :watched_user
   has_and_belongs_to_many :events, inverse_of: :users
   has_many :enrollments
   has_many :votes
@@ -55,7 +56,7 @@ class User
   end
 
   def show_name
-    return until_two_names(name) unless name.blank?
+    until_two_names(name) unless name.blank?
   end
 
   def password=(password)
@@ -82,7 +83,11 @@ class User
   end
 
   def arrived_at event
-    enrollment = (enrolled_at? event) ? (Enrollment.find_by user: self, event: event) : (enroll_at event)
+    enrollment =  if enrolled_at? event
+                    Enrollment.find_by user: self, event: event
+                  else
+                    enroll_at event
+                  end
 
     enrollment.present = true
     EnrollmentDecorator.new(enrollment, 'present').update
@@ -96,6 +101,7 @@ class User
 
   def enroll_at event
     enrollment = Enrollment.new(user: self, event: event, active: true)
+
     EnrollmentDecorator.new(enrollment, 'active').create
   end
 
@@ -135,7 +141,12 @@ private
 
   def until_two_names(name)
     nameArray = name.split(" ")
-    return nameArray.size > 1 ? "#{nameArray[0]} #{nameArray[nameArray.size-1]}".titleize : nameArray[0].titleize
+
+    if nameArray.size > 1
+      "#{nameArray[0]} #{nameArray[nameArray.size - 1]}".titleize
+    else
+      nameArray[0].titleize
+    end
   end
 
   def erase_password
@@ -151,6 +162,8 @@ private
   def update_thumbnail
     self.gravatar_photo = Gravatar.new(self.email).get_fields.thumbnail_url
 
-    self.facebook_photo = Facebook.thumbnail(self.facebook_url) unless self.facebook_url.blank?
+    unless self.facebook_url.blank?
+      self.facebook_photo = Facebook.thumbnail(self.facebook_url)
+    end
   end
 end

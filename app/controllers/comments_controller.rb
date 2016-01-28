@@ -2,7 +2,11 @@ class CommentsController < ApplicationController
   before_action :find_commentable
 
   def create
-    comment_params = {user: current_user, commentable: find_parent_comment, body: params[:comment][:body] }
+    comment_params = {
+      user: current_user,
+      commentable: find_parent_comment,
+      body: params[:comment][:body]
+    }
     @new_comment = Comment.new.comment_on! comment_params
 
     if @new_comment.persisted?
@@ -18,6 +22,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.find_comment_by_id params[:id]
 
     @comment.destroy
+
     flash[:notice] = I18n.t("flash.comments.destroy.notice")
 
     redirect_to @commentable
@@ -31,7 +36,10 @@ private
   end
 
   def find_parent_comment
-    parent = @commentable.comments.find params[:comment_id] if params[:comment_id]
+    if params[:comment_id]
+      parent = @commentable.comments.find params[:comment_id]
+    end
+
     parent ||= @commentable
   end
 end

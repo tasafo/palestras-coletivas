@@ -6,14 +6,20 @@ class EventsController < PersistenceController
   def index
     @my = !params[:my].nil?
 
-    @events = (logged_in? && @my) ? current_user.events.desc(:created_at) : EventQuery.new.all_public
+    @events = if logged_in? && @my
+                current_user.events.desc(:created_at)
+              else
+                EventQuery.new.all_public
+              end
 
     @events = @events.page(params[:page]).per(12)
 
     respond_to do |format|
       format.html
       format.json {
-        render json: EventQuery.new.all_public.only('name', 'edition', 'description', 'start_date', 'end_date', 'street', 'district', 'state', 'country')
+        render json: EventQuery.new.all_public.only('name', 'edition',
+          'description', 'start_date', 'end_date', 'street', 'district',
+          'state', 'country')
       }
     end
   end
@@ -29,13 +35,19 @@ class EventsController < PersistenceController
   end
 
   def show
-    @presenter = EventPresenter.new(@event, authorized_access?(@event), current_user)
+    @presenter = EventPresenter.new(
+      @event,
+      authorized_access?(@event),
+      current_user
+    )
 
     render layout: 'event'
   end
 
   def edit
-    redirect_to events_path, notice: t("flash.unauthorized_access") unless authorized_access?(@event)
+    unless authorized_access?(@event)
+      redirect_to events_path, notice: t("flash.unauthorized_access")
+    end
   end
 
   def update

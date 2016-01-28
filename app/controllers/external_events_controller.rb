@@ -11,7 +11,8 @@ class ExternalEventsController < ApplicationController
     @talk.external_events << [@external_event]
 
     if @talk.save
-      redirect_to talk_path(@talk), :notice => t("flash.external_event.create.notice")
+      redirect_to talk_path(@talk),
+        notice: t("flash.external_event.create.notice")
     else
       render :new
     end
@@ -24,8 +25,9 @@ class ExternalEventsController < ApplicationController
   def update
     @external_event = @talk.external_events.find(params[:id])
 
-    if @external_event.update_attributes(external_event_params)
-      redirect_to talk_path(@talk), :notice => t("flash.external_event.update.notice")
+    if @external_event.update(external_event_params)
+      redirect_to talk_path(@talk),
+        notice: t("flash.external_event.update.notice")
     else
       render :edit
     end
@@ -38,6 +40,12 @@ private
   end
 
   def external_event_params
-    params.require(:external_event).permit(:name, :date, :place, :url, :active)
+    params.require(:external_event).permit(
+      :name,
+      :date,
+      :place,
+      :url,
+      :active
+    )
   end
 end

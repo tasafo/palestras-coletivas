@@ -6,9 +6,8 @@ class SubmitEventsController < ApplicationController
     @talk = Talk.find(params[:talk_id])
     @events = EventQuery.new.accepts_submissions
 
-    if @events.count <= 0
-      redirect_to talk_path(@talk), :alert => t("flash.submit_event.new.alert")
-    end
+    redirect_to talk_path(@talk),
+      alert: t("flash.submit_event.new.alert") if @events.count <= 0
   end
 
   def create
@@ -20,7 +19,8 @@ class SubmitEventsController < ApplicationController
     @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
 
     if @_schedule.nil?
-      @schedule = Schedule.new(activity: @activity, event: @event, talk: @talk, day: 1, time: '00:00')
+      @schedule = Schedule.new(activity: @activity, event: @event,
+        talk: @talk, day: 1, time: '00:00')
 
       if @schedule.save
         @error = true
@@ -31,6 +31,6 @@ class SubmitEventsController < ApplicationController
       @message = t("flash.submit_event.create.alert")
     end
 
-    redirect_to talk_path(@talk), :notice => @message if @error
+    redirect_to talk_path(@talk), notice: @message if @error
   end
 end

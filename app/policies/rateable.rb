@@ -1,7 +1,7 @@
 module Rateable
   def rate_by user, rank
-    rating = ratings.find_or_create_by :user => user
-    rating.update_attributes :rank => rank
+    rating = ratings.find_or_create_by user: user
+    rating.update rank: rank
     rating
   end
 
@@ -22,6 +22,6 @@ private
   end
 
   def round_by_point_5 rating
-    (2*rating).round / 2.0
+    (2 * rating).round / 2.0
   end
 end

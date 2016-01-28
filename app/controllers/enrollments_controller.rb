@@ -26,13 +26,16 @@ class EnrollmentsController < ApplicationController
       user: current_user
     )
 
-    redirect_to event_path(@event), :notice => t("flash.unauthorized_access") unless @presenter.can_record_presence
+    unless @presenter.can_record_presence
+      redirect_to event_path(@event), notice: t("flash.unauthorized_access")
+    end
   end
 
   def update
     @option_type = params[:option_type]
 
-    save_enrollment(:update, @event, @enrollment, @option_type, enrollment_params)
+    save_enrollment(:update, @event, @enrollment, @option_type,
+      enrollment_params)
   end
 
 private
@@ -50,10 +53,15 @@ private
   end
 
   def save_enrollment(operation, event, enrollment, option_type, params = nil)
-    result = EnrollmentDecorator.new(enrollment, option_type, params).send operation
+    result = EnrollmentDecorator.new(
+      enrollment,
+      option_type,
+      params
+    ).send operation
 
     message_type = result ? 'notice' : 'error'
 
-    redirect_to event_path(event), notice: t("flash.enrollments.#{operation.to_s}.#{message_type}")
+    redirect_to event_path(event),
+      notice: t("flash.enrollments.#{operation.to_s}.#{message_type}")
   end
 end

@@ -1,14 +1,16 @@
 class EventPresenter
-  attr_reader :event, :dates, :authorized, :open_enrollment, :can_record_presence, :show_users_present,
-    :users_present, :users_active, :crowded, :new_subscription, :the_user_is_speaker, :enrollment,
-    :image_top, :can_vote
+  attr_reader :event, :dates, :authorized, :open_enrollment,
+    :can_record_presence, :show_users_present, :users_present, :users_active,
+    :crowded, :new_subscription, :the_user_is_speaker, :enrollment, :image_top,
+    :can_vote
 
   def initialize(event, authorized, user_logged_in = nil)
     prepare_event event, authorized, user_logged_in
   end
 
   def show_checkin
-    !@event.block_presence && @enrollment && @enrollment.active? && Date.today >= @event.start_date
+    !@event.block_presence && @enrollment && @enrollment.active? &&
+      Date.today >= @event.start_date
   end
 
   def address
@@ -62,14 +64,16 @@ private
 
   def prepare_users_present(event)
     users_present = []
-    event.enrollments.presents.each { |enrollment| users_present << enrollment.user }
+    event.enrollments.presents.each do |enrollment|
+      users_present << enrollment.user
+    end
     users_present.sort_by! { |user| user._slugs[0] }
   end
 
   def prepare_users_active(event)
     users_active = []
     event.enrollments.actives.each do |enrollment|
-      users_active << { name: enrollment.user._slugs[0], enrollment: enrollment }
+      users_active << {name: enrollment.user._slugs[0], enrollment: enrollment}
     end
     users_active.sort_by! { |user| user[:name] }
   end
