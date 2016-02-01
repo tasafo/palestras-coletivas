@@ -19,7 +19,7 @@ describe Facebook do
 
       thumbnail_url = Facebook.thumbnail("https://facebook.com/1")
 
-      expect(thumbnail_url).to be_falsey
+      expect(thumbnail_url).to be_empty
     end
   end
 end

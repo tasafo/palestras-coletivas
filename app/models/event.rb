@@ -1,3 +1,4 @@
+#:nodoc:
 class Event
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -36,11 +37,11 @@ class Event
   has_and_belongs_to_many :users, inverse_of: :events
   has_many :schedules
   has_many :enrollments
-  belongs_to :owner, class_name: "User", inverse_of: :owner_events
+  belongs_to :owner, class_name: 'User', inverse_of: :owner_events
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
-    :deadline_date_enrollment, :place, :street, :district, :city, :state,
-    :country, :owner
+                        :deadline_date_enrollment, :place, :street, :district,
+                        :city, :state, :country, :owner
   validates_length_of :name, maximum: 100
   validates_length_of :edition, maximum: 50
   validates_length_of :description, maximum: 2000

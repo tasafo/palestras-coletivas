@@ -1,6 +1,7 @@
+#:nodoc:
 class LoginController < ApplicationController
   def new
-     @redirect = params[:redirect]
+    @redirect = params[:redirect]
   end
 
   def create
@@ -11,15 +12,16 @@ class LoginController < ApplicationController
       reset_session
       session[:user_id] = @user.id
 
-      redirect_to (redirect.blank? ? root_path : redirect)
+      redirect_to redirect.blank? ? root_path : redirect
     else
-      flash.now[:alert] = t("flash.login.create.alert")
+      flash.now[:alert] = t('flash.login.create.alert')
       render :new
     end
   end
 
   def destroy
     reset_session
+
     redirect_to root_path
   end
 end

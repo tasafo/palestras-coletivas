@@ -1,11 +1,16 @@
+#:nodoc:
 class Fonts
-  FILE_NAME = "#{Rails.public_path}/fonts.txt"
+  attr_reader :file_name
 
-  def self.list
+  def initialize
+    @file_name = "#{Rails.public_path}/fonts.txt"
+  end
+
+  def list
     list = []
 
-    if File.exists?(FILE_NAME)
-      File.open(FILE_NAME).each do |line|
+    if File.exist?(@file_name)
+      File.open(@file_name).each do |line|
         list << line
       end
     end

@@ -1,3 +1,4 @@
+#:nodoc:
 class RatingsController < ApplicationController
   before_action :find_rateable
 
@@ -11,7 +12,7 @@ class RatingsController < ApplicationController
     end
   end
 
-private
+  private
 
   def find_rateable
     rateable_class = params[:rateable_type].camelize.constantize

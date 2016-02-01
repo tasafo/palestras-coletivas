@@ -1,3 +1,4 @@
+#:nodoc:
 class Vote
   include Mongoid::Document
   include Mongoid::Timestamps::Created

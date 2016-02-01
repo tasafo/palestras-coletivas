@@ -1,3 +1,4 @@
+#:nodoc:
 class TalksController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_talk, only: [:show, :edit, :update]
@@ -8,14 +9,6 @@ class TalksController < PersistenceController
     @my = !params[:my].nil?
 
     @talks = search_talks @search, @my, params[:page]
-
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: @talks.only('id', 'name', 'description', 'tags',
-          'presentation_url', 'thumbnail')
-      }
-    end
   end
 
   def new
@@ -29,46 +22,40 @@ class TalksController < PersistenceController
   end
 
   def show
-    unless @talk.nil?
-      @authorized = authorized_access? @talk
-      @owns = owner? @talk
+    redirect_to root_path and return if @talk.nil?
 
-      @presentation = Oembed.new(@talk.presentation_url, @talk.code)
-        .show_presentation
+    @authorized = authorized_access? @talk
+    @owns = owner? @talk
 
-      @video = Oembed.new(@talk.video_link).show_video
+    @presentation = Oembed.new(@talk.presentation_url, @talk.code)
+                          .show_presentation
 
-      unless @talk.to_public
-        @talk = nil unless @authorized
-      end
-    else
-      redirect_to root_path
-    end
+    @video = Oembed.new(@talk.video_link).show_video
+
+    return if @talk.to_public
+
+    @talk = nil unless @authorized
   end
 
   def info_url
     oembed = Oembed.new(params[:link]).open_presentation
 
+    hash = if oembed
+             { error: false, title: oembed.title, code: oembed.code,
+               thumbnail: oembed.thumbnail, description: oembed.description }
+           else
+             { error: true }
+           end
+
     respond_to do |format|
-      if oembed
-        format.json {
-          render json: {
-            error: false,
-            title: oembed.title,
-            code: oembed.code,
-            thumbnail: oembed.thumbnail,
-            description: oembed.description
-          }
-        }
-      else
-        format.json { render json: {error: true} }
-      end
+      format.json { render json: hash }
     end
   end
 
   def edit
-    redirect_to talks_path,
-      notice: t("flash.unauthorized_access") unless authorized_access?(@talk)
+    message = t('flash.unauthorized_access')
+
+    redirect_to talks_path, notice: message unless authorized_access?(@talk)
   end
 
   def update
@@ -79,6 +66,7 @@ class TalksController < PersistenceController
     @talk = Talk.find(params[:talk_id])
 
     current_user.watch_talk! @talk
+
     redirect_to talk_path(@talk)
   end
 
@@ -86,10 +74,11 @@ class TalksController < PersistenceController
     @talk = Talk.find(params[:talk_id])
 
     current_user.unwatch_talk! @talk
+
     redirect_to talk_path(@talk)
   end
 
-private
+  private
 
   def search_talks(search, my, page)
     if logged_in? && my
@@ -114,15 +103,8 @@ private
   end
 
   def talk_params
-    params.require(:talk).permit(
-      :presentation_url,
-      :title,
-      :description,
-      :tags,
-      :video_link,
-      :to_public,
-      :thumbnail,
-      :code
-    )
+    params.require(:talk).permit(:presentation_url, :title, :description,
+                                 :tags, :video_link, :to_public, :thumbnail,
+                                 :code)
   end
 end

@@ -1,3 +1,4 @@
+#:nodoc:
 class CommentsController < ApplicationController
   before_action :find_commentable
 
@@ -10,9 +11,9 @@ class CommentsController < ApplicationController
     @new_comment = Comment.new.comment_on! comment_params
 
     if @new_comment.persisted?
-      flash[:notice] = I18n.t("flash.comments.create.notice")
+      flash[:notice] = I18n.t('flash.comments.create.notice')
     else
-      flash[:notice] = I18n.t("flash.comments.create.alert")
+      flash[:alert] = I18n.t('flash.comments.create.alert')
     end
 
     redirect_to @commentable
@@ -23,15 +24,16 @@ class CommentsController < ApplicationController
 
     @comment.destroy
 
-    flash[:notice] = I18n.t("flash.comments.destroy.notice")
-
-    redirect_to @commentable
+    redirect_to @commentable, notice: t('flash.comments.destroy.notice')
   end
 
-private
+  private
 
   def find_commentable
-    commentable_class = params[:commentable_type].camelize.constantize
+    commentable_class = params[:commentable_type]
+
+    commentable_class = commentable_class.camelize.constantize
+
     @commentable = commentable_class.find(params[:commentable_id])
   end
 

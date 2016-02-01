@@ -5,7 +5,7 @@ describe Gravatar do
     it "MD5 from e-mail" do
       expect(Digest::MD5).to receive(:hexdigest).with("paul@example.org")
 
-      Gravatar.new("paul@example.org").get_fields
+      Gravatar.new("paul@example.org").fields
     end
   end
 
@@ -35,7 +35,7 @@ describe Gravatar do
           :headers => {}
         )
 
-      gravatar = Gravatar.new("invalid").get_fields
+      gravatar = Gravatar.new("invalid").fields
 
       expect(gravatar.has_profile).to be_falsey
     end

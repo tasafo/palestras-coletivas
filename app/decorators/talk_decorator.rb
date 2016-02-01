@@ -1,3 +1,4 @@
+#:nodoc:
 class TalkDecorator
   def initialize(talk, users, args = {})
     @talk = talk
@@ -15,13 +16,13 @@ class TalkDecorator
     @talk.update(@params) && add_authors
   end
 
-private
+  private
 
   def clean_presentation_data
-    if @talk.presentation_url.blank?
-      @talk.code = ""
-      @talk.thumbnail = ""
-    end
+    return unless @talk.presentation_url.blank?
+
+    @talk.code = ''
+    @talk.thumbnail = ''
   end
 
   def add_authors

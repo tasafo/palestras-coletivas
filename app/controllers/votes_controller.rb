@@ -1,3 +1,4 @@
+#:nodoc:
 class VotesController < ApplicationController
   before_action :set_schedule, only: [:new, :create]
 
@@ -9,7 +10,7 @@ class VotesController < ApplicationController
     end
 
     redirect_to "/events/#{@event._slugs[0]}#schedule",
-      notice: t("flash.schedules.vote.add")
+                notice: t('flash.schedules.vote.add')
   end
 
   def create
@@ -20,14 +21,14 @@ class VotesController < ApplicationController
       @schedule.set_counter(:votes, :dec)
 
       redirect_to "/events/#{@event._slugs[0]}#schedule",
-        notice: t("flash.schedules.vote.remove")
+                  notice: t('flash.schedules.vote.remove')
     end
   end
 
-private
+  private
 
   def set_schedule
-  	@event = Event.find(params[:event_id])
+    @event = Event.find(params[:event_id])
     @schedule = Schedule.find(params[:schedule_id])
   end
 end

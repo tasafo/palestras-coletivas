@@ -1,3 +1,4 @@
+#:nodoc:
 module UpdateCounter
   def set_counter(field, operation)
     field = "counter_#{field}"
@@ -8,6 +9,6 @@ module UpdateCounter
       self[field] = self[field] - 1 if self[field] > 0
     end
 
-    self.save
+    save
   end
 end

@@ -1,3 +1,4 @@
+#:nodoc:
 class EventQuery
   def initialize(relation = Event.scoped)
     @relation = relation
@@ -9,11 +10,11 @@ class EventQuery
 
   def present_users
     @relation.where(:counter_present_users.gt => 0)
-      .desc(:counter_present_users).asc(:_slugs).asc(:edition).limit(5)
+             .desc(:counter_present_users).asc(:_slugs).asc(:edition).limit(5)
   end
 
   def accepts_submissions
     @relation.where(to_public: true, accepts_submissions: true,
-      :end_date.gte => Date.today).desc(:start_date)
+                    :end_date.gte => Date.today).desc(:start_date)
   end
 end

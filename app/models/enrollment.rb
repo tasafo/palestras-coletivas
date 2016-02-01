@@ -1,3 +1,4 @@
+#:nodoc:
 class Enrollment
   include Mongoid::Document
   include Mongoid::Timestamps

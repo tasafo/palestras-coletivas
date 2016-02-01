@@ -1,3 +1,4 @@
+#:nodoc:
 class ScheduleDecorator
   def initialize(schedule, old_talk_id, talk_id, params = nil)
     @schedule = schedule
@@ -14,7 +15,7 @@ class ScheduleDecorator
     @schedule.update(@params) && update_counter_of_users_talks
   end
 
-private
+  private
 
   def update_counter_of_users_talks
     unless @old_talk_id.blank?

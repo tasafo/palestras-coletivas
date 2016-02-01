@@ -1,8 +1,9 @@
+#:nodoc:
 class EventPresenter
   attr_reader :event, :dates, :authorized, :open_enrollment,
-    :can_record_presence, :show_users_present, :users_present, :users_active,
-    :crowded, :new_subscription, :the_user_is_speaker, :enrollment, :image_top,
-    :can_vote
+              :can_record_presence, :show_users_present, :users_present,
+              :users_active, :crowded, :new_subscription, :the_user_is_speaker,
+              :enrollment, :image_top, :can_vote
 
   def initialize(event, authorized, user_logged_in = nil)
     prepare_event event, authorized, user_logged_in
@@ -10,7 +11,7 @@ class EventPresenter
 
   def show_checkin
     !@event.block_presence && @enrollment && @enrollment.active? &&
-      Date.today >= @event.start_date
+      Time.zone.today >= @event.start_date
   end
 
   def address
@@ -21,28 +22,20 @@ class EventPresenter
     EventPolicy.new(@event).in_progress?
   end
 
-private
+  private
 
   def prepare_event(event, authorized, user_logged_in = nil)
-    if event
-      @dates = (event.start_date..event.end_date).to_a
+    return unless event
 
-      @open_enrollment = event.deadline_date_enrollment >= Date.today
-
-      @users_present = prepare_users_present event
-
-      @users_active = prepare_users_active event
-
-      @crowded = @users_active.count >= event.stocking
-
-      logged event, user_logged_in
-
-      @image_top = ('01'..'12').to_a.sample
-
-      @can_vote = prepare_can_vote(event)
-
-      prepare_authorized(event, authorized)
-    end
+    @dates = (event.start_date..event.end_date).to_a
+    @open_enrollment = event.deadline_date_enrollment >= Time.zone.today
+    @users_present = prepare_users_present event
+    @users_active = prepare_users_active event
+    @crowded = @users_active.count >= event.stocking
+    logged event, user_logged_in
+    @image_top = ('01'..'12').to_a.sample
+    @can_vote = prepare_can_vote(event)
+    prepare_authorized(event, authorized)
   end
 
   def prepare_authorized(event, authorized)
@@ -53,9 +46,10 @@ private
     @show_users_present = Date.today > event.end_date && !@can_record_presence
 
     @event = event
-    unless event.to_public
-      @event = nil unless @authorized
-    end
+
+    return if event.to_public
+
+    @event = nil unless @authorized
   end
 
   def prepare_can_vote(event)
@@ -73,7 +67,8 @@ private
   def prepare_users_active(event)
     users_active = []
     event.enrollments.actives.each do |enrollment|
-      users_active << {name: enrollment.user._slugs[0], enrollment: enrollment}
+      name = enrollment.user._slugs[0]
+      users_active << { name: name, enrollment: enrollment }
     end
     users_active.sort_by! { |user| user[:name] }
   end
@@ -81,22 +76,22 @@ private
   def logged(event, user_logged_in = nil)
     @new_subscription = true
 
-    if user_logged_in
-      @enrollment = Enrollment.where(event: event, user: user_logged_in).first
+    return unless user_logged_in
 
-      @new_subscription = false if @enrollment
+    @enrollment = Enrollment.where(event: event, user: user_logged_in).first
 
-      @the_user_is_speaker = false
+    @new_subscription = false if @enrollment
 
-      event.schedules.each do |schedule|
-        if schedule.talk?
-          schedule.talk.users.each do |user|
-            @the_user_is_speaker = true if user.id == user_logged_in.id
-          end
+    @the_user_is_speaker = false
+
+    event.schedules.each do |schedule|
+      if schedule.talk?
+        schedule.talk.users.each do |user|
+          @the_user_is_speaker = true if user.id == user_logged_in.id
         end
       end
-
-      @open_enrollment = false if @the_user_is_speaker || @authorized
     end
+
+    @open_enrollment = false if @the_user_is_speaker || @authorized
   end
 end

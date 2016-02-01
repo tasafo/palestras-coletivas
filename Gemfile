@@ -10,6 +10,7 @@ gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'kaminari'
 gem 'airbrake', '4.3.4'
+gem 'jbuilder', '~> 2.0'
 
 gem 'mongoid'
 gem 'mongoid-slug'
@@ -54,7 +55,7 @@ group :test do
   gem 'capybara-webkit', '1.5.0'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :production do

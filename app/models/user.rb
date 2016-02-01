@@ -1,3 +1,4 @@
+#:nodoc:
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -22,13 +23,13 @@ class User
   field :gravatar_photo, type: String
 
   has_and_belongs_to_many :talks, inverse_of: :talks
-  has_and_belongs_to_many :watched_talks, class_name: "Talk",
-    inverse_of: :watched_user
+  has_and_belongs_to_many :watched_talks, class_name: 'Talk',
+                                          inverse_of: :watched_user
   has_and_belongs_to_many :events, inverse_of: :users
   has_many :enrollments
   has_many :votes
-  has_many :owner_events, class_name: "User", inverse_of: :owner
-  has_many :owner_talks, class_name: "User", inverse_of: :owner
+  has_many :owner_events, class_name: 'User', inverse_of: :owner
+  has_many :owner_talks, class_name: 'User', inverse_of: :owner
 
   slug :name
 
@@ -39,11 +40,11 @@ class User
   validates_uniqueness_of :email, :username
   validates_format_of :email, with: /\A[^@][\w.-]+@[\w.-]+[.][a-z]{2,4}\z/
   validates_format_of :username, with: /\A@[a-z]\w{2}\w+\z/
-  validates_presence_of :password, :if => :require_password?
-  validates_confirmation_of :password, :if => :require_password?
+  validates_presence_of :password, if: :require_password?
+  validates_confirmation_of :password, if: :require_password?
 
-  index({email: 1}, {unique: true, background: true})
-  index({username: 1}, {unique: true, background: true})
+  index({ email: 1 }, { unique: true, background: true })
+  index({ username: 1 }, { unique: true, background: true })
 
   after_save :erase_password
   before_create { generate_token(:auth_token) }
@@ -52,7 +53,7 @@ class User
   scope :by_name, -> { asc(:_slugs) }
 
   def oid
-    self._id.to_s
+    _id.to_s
   end
 
   def show_name
@@ -70,82 +71,82 @@ class User
   end
 
   def generate_token(column)
-    begin
+    while User.where(column => self[column]).exists?
       self[column] = SecureRandom.urlsafe_base64
-    end while User.where(column => self[column]).exists?
+    end
   end
 
   def send_password_reset
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self.id.to_s).deliver_later
+    UserMailer.password_reset(id.to_s).deliver_later
   end
 
-  def arrived_at event
-    enrollment =  if enrolled_at? event
-                    Enrollment.find_by user: self, event: event
-                  else
-                    enroll_at event
-                  end
+  def arrived_at(event)
+    enrollment = if enrolled_at? event
+                   Enrollment.find_by user: self, event: event
+                 else
+                   enroll_at event
+                 end
 
     enrollment.present = true
     EnrollmentDecorator.new(enrollment, 'present').update
   end
 
-  def enrolled_at? event
+  def enrolled_at?(event)
     enrollment = Enrollment.find_by user: self, event: event
 
     !enrollment.nil?
   end
 
-  def enroll_at event
+  def enroll_at(event)
     enrollment = Enrollment.new(user: self, event: event, active: true)
 
     EnrollmentDecorator.new(enrollment, 'active').create
   end
 
-  def present_at? event
+  def present_at?(event)
     enrollment = Enrollment.find_by user: self, event: event
 
     enrollment.nil? ? false : enrollment.present
   end
 
-  def watch_talk! talk
+  def watch_talk!(talk)
     return if watched_talk? talk
 
-    self.watched_talks << talk
+    watched_talks << talk
     set_counter :watched_talks, :inc
   end
 
-  def unwatch_talk! talk
-    self.watched_talks.delete talk
+  def unwatch_talk!(talk)
+    watched_talks.delete talk
     set_counter :watched_talks, :dec
   end
 
-  def watched_talk? talk
-    self.watched_talks.include? talk
+  def watched_talk?(talk)
+    watched_talks.include? talk
   end
 
   def thumbnail
-    if !self.gravatar_photo.blank?
-      self.gravatar_photo
-    elsif !self.facebook_photo.blank?
-      self.facebook_photo
+    if !gravatar_photo.blank?
+      gravatar_photo
+    elsif !facebook_photo.blank?
+      facebook_photo
     else
-      "/assets/without_avatar.jpg"
+      '/assets/without_avatar.jpg'
     end
   end
 
-private
+  private
 
   def until_two_names(name)
-    nameArray = name.split(" ")
+    name_array = name.split(' ')
 
-    if nameArray.size > 1
-      "#{nameArray[0]} #{nameArray[nameArray.size - 1]}".titleize
+    if name_array.size > 1
+      "#{name_array[0]} #{name_array[name_array.size - 1]}".titleize
     else
-      nameArray[0].titleize
+      name_array[0].titleize
     end
   end
 
@@ -160,10 +161,10 @@ private
   end
 
   def update_thumbnail
-    self.gravatar_photo = Gravatar.new(self.email).get_fields.thumbnail_url
+    self.gravatar_photo = Gravatar.new(email).fields.thumbnail_url
 
-    unless self.facebook_url.blank?
-      self.facebook_photo = Facebook.thumbnail(self.facebook_url)
+    if facebook_url.blank?
+      self.facebook_photo = Facebook.thumbnail(facebook_url)
     end
   end
 end

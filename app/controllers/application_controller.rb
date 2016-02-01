@@ -1,13 +1,13 @@
+#:nodoc:
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :logged_in?
 
-private
+  private
+
   def require_logged_user
-    unless logged_in?
-      redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",
-        alert: t("flash.must_be_logged")
-    end
+    redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",
+                alert: t('flash.must_be_logged') unless logged_in?
   end
 
   def current_user
@@ -21,28 +21,22 @@ private
   end
 
   def authorized_access?(model)
-    authorized = false
+    return false unless logged_in?
 
-    if logged_in?
-      model.users.each do |user|
-        if current_user == user
-          authorized = true
-        end
-      end
+    authorized = false
+    model.users.each do |user|
+      authorized = true if current_user == user
     end
 
     authorized
   end
 
   def owner?(model)
-    owner = false
+    return false unless logged_in?
 
-    if logged_in?
-      model.users.each do |user|
-        if current_user == user && model.owner == user
-          owner = true
-        end
-      end
+    owner = false
+    model.users.each do |user|
+      owner = true if current_user == user && model.owner == user
     end
 
     owner

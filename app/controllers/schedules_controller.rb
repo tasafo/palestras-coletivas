@@ -1,3 +1,4 @@
+#:nodoc:
 class SchedulesController < ApplicationController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_schedule, only: [:edit, :update, :destroy]
@@ -7,8 +8,9 @@ class SchedulesController < ApplicationController
 
     set_presenter
 
-    redirect_to root_path,
-      notice: t("flash.unauthorized_access") unless authorized_access?(@event)
+    message = t('flash.unauthorized_access')
+
+    redirect_to root_path, notice: message unless authorized_access?(@event)
   end
 
   def create
@@ -16,40 +18,34 @@ class SchedulesController < ApplicationController
 
     set_presenter
 
-    save_schedule(:new, @event, @schedule, params[:old_talk_id],
-      params[:talk_id])
+    save_schedule(:new, @event, @schedule, params)
   end
 
   def edit
-    redirect_to root_path,
-      notice: t("flash.unauthorized_access") unless authorized_access?(@event)
+    message = t('flash.unauthorized_access')
+
+    redirect_to root_path, notice: message unless authorized_access?(@event)
   end
 
   def update
-    save_schedule(:edit, @event, @schedule, params[:old_talk_id],
-      params[:talk_id], schedule_params)
+    save_schedule(:edit, @event, @schedule, params, schedule_params)
   end
 
   def destroy
-    redirect_to root_path,
-      notice: t("flash.unauthorized_access") unless authorized_access?(@event)
+    message = t('flash.unauthorized_access')
 
-    redirect_to event_path(@event),
-      notice: t("flash.schedules.destroy.notice") if @schedule.destroy
+    redirect_to root_path, notice: message unless authorized_access?(@event)
+
+    message = t('flash.schedules.destroy.notice')
+
+    redirect_to event_path(@event), notice: message if @schedule.destroy
   end
 
   def search_talks
     @talks = TalkQuery.new.search(params[:search]) unless params[:search].blank?
-
-    respond_to do |format|
-      format.json {
-        render json: @talks.only('_id', 'thumbnail', '_slugs', 'title',
-          'description', 'tags')
-      }
-    end
   end
 
-private
+  private
 
   def set_schedule
     @schedule = Schedule.find(params[:id])
@@ -64,22 +60,20 @@ private
   end
 
   def schedule_params
-    params.require(:schedule).permit(
-      :event_id,
-      :activity_id,
-      :talk_id,
-      :day,
-      :time,
-      :environment
-    )
+    params.require(:schedule).permit(:event_id, :activity_id, :talk_id,
+                                     :day, :time, :environment)
   end
 
-  def save_schedule(option, event, schedule, old_talk_id, talk_id, params=nil)
+  def save_schedule(option, event, schedule, fields, params = nil)
     act = option == :new ? :create : :update
 
-    if ScheduleDecorator.new(schedule, old_talk_id, talk_id, params).send act
-      redirect_to event_path(event),
-        notice: t("flash.schedules.#{act.to_s}.notice")
+    object = ScheduleDecorator.new(schedule, fields['old_talk_id'],
+                                   fields['schedule']['talk_id'], params)
+
+    if object.send act
+      message = t("flash.schedules.#{act}.notice")
+
+      redirect_to event_path(event), notice: message
     else
       render option
     end

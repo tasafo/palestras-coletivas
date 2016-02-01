@@ -13,8 +13,8 @@ FactoryGirl.define do
     end
 
     trait :billy do
-      name "Billy Paul"
-      username "@bpaul"
+      name "Billy"
+      username "@billy"
       email "billy@example.org"
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago

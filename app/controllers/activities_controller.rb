@@ -1,14 +1,13 @@
+#:nodoc:
 class ActivitiesController < ApplicationController
-  def get_type
+  def create
     activity = Activity.find(params[:id])
 
-    if activity
-      type_activity = activity.type
+    if activity && activity.id > 0
+      type = activity.type
 
       respond_to do |format|
-        format.json {
-          render json: {error: false, type_activity: type_activity}
-        }
+        format.json { render json: { error: false, type_activity: type } }
       end
     end
   end

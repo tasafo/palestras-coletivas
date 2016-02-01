@@ -104,6 +104,9 @@ GEM
     hashdiff (0.2.3)
     hike (1.2.3)
     i18n (0.7.0)
+    jbuilder (2.4.0)
+      activesupport (>= 3.0.0, < 5.1)
+      multi_json (~> 1.2)
     jquery-rails (4.1.0)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -309,6 +312,7 @@ DEPENDENCIES
   factory_girl_rails
   font-awesome-rails
   geocoder
+  jbuilder (~> 2.0)
   jquery-rails
   kaminari
   launchy

@@ -47,7 +47,7 @@ Palestrascoletivas::Application.routes.draw do
 
   get "/schedules/search-talks/:search", :to => "schedules#search_talks"
 
-  post "/activities/get-type" => "activities#get_type"
+  resources :activities, only: [:create]
 
   mount Sidekiq::Web, at: "/sidekiq"
 end

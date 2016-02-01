@@ -5,7 +5,7 @@ $(function() {
 
         if (activity_id) {
             $.ajax({
-                url : "/activities/get-type/",
+                url : "/activities/",
                 data : {
                     id : activity_id
                 },

@@ -1,3 +1,4 @@
+#:nodoc:
 class EventsController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_event, only: [:show, :edit, :update]
@@ -13,15 +14,6 @@ class EventsController < PersistenceController
               end
 
     @events = @events.page(params[:page]).per(12)
-
-    respond_to do |format|
-      format.html
-      format.json {
-        render json: EventQuery.new.all_public.only('name', 'edition',
-          'description', 'start_date', 'end_date', 'street', 'district',
-          'state', 'country')
-      }
-    end
   end
 
   def new
@@ -45,9 +37,9 @@ class EventsController < PersistenceController
   end
 
   def edit
-    unless authorized_access?(@event)
-      redirect_to events_path, notice: t("flash.unauthorized_access")
-    end
+    message = t('flash.unauthorized_access')
+
+    redirect_to events_path, notice: message unless authorized_access?(@event)
   end
 
   def update
@@ -64,7 +56,7 @@ class EventsController < PersistenceController
     end
   end
 
-private
+  private
 
   def set_event
     @event = Event.find(params[:id])
@@ -75,25 +67,11 @@ private
   end
 
   def event_params
-    params.require(:event).permit(
-      :name,
-      :edition,
-      :description,
-      :thumbnail,
-      :stocking,
-      :tags,
-      :start_date,
-      :end_date,
-      :deadline_date_enrollment,
-      :accepts_submissions,
-      :to_public,
-      :place,
-      :street,
-      :district,
-      :city,
-      :state,
-      :country,
-      :block_presence
-    )
+    params.require(:event).permit(:name, :edition, :description, :thumbnail,
+                                  :stocking, :tags, :start_date, :end_date,
+                                  :deadline_date_enrollment,
+                                  :accepts_submissions, :to_public, :place,
+                                  :street, :district, :city, :state, :country,
+                                  :block_presence)
   end
 end

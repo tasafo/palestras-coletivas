@@ -1,3 +1,4 @@
+#:nodoc:
 class TalkQuery
   def initialize(relation = Talk.scoped)
     @relation = relation
@@ -5,7 +6,7 @@ class TalkQuery
 
   def presentation_events
     @relation.where(:counter_presentation_events.gt => 0)
-      .desc(:counter_presentation_events).asc(:_slugs).limit(5)
+             .desc(:counter_presentation_events).asc(:_slugs).limit(5)
   end
 
   def search(search)

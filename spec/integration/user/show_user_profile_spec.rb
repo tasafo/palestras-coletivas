@@ -45,7 +45,7 @@ describe "Show user profile", :type => :request do
     end
 
     it "displays user profile" do
-      expect(page).to have_content("Billy Paul")
+      expect(page).to have_content("Billy")
     end
   end
 end

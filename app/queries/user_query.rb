@@ -1,3 +1,4 @@
+#:nodoc:
 class UserQuery
   def initialize(relation = User.scoped)
     @relation = relation
@@ -9,6 +10,6 @@ class UserQuery
 
   def ranking(type)
     eval("@relation.where(:counter_#{type}.gt => 0).desc(:counter_#{type})
-      .asc(:_slugs).limit(5)")
+         .asc(:_slugs).limit(5)")
   end
 end

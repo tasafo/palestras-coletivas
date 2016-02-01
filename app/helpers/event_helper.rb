@@ -1,5 +1,6 @@
+#:nodoc:
 module EventHelper
   def event_icons_select
-    Fonts.list.collect {|f| [f.strip, f.strip]}
+    Fonts.new.list.collect { |f| [f.strip, f.strip] }
   end
 end

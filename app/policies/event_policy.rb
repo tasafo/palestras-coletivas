@@ -1,3 +1,4 @@
+#:nodoc:
 class EventPolicy
   def initialize(event)
     @event = event
@@ -9,6 +10,6 @@ class EventPolicy
   end
 
   def in_progress?
-    (@event.start_date..@event.end_date).include?(Date.today)
+    (@event.start_date..@event.end_date).cover?(Time.zone.today)
   end
 end

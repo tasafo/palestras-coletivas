@@ -1,3 +1,4 @@
+#:nodoc:
 class RankingController < ApplicationController
   def index
     @organizers = UserQuery.new.ranking(:organizing_events)

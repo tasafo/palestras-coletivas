@@ -1,11 +1,12 @@
+#:nodoc:
 module Rateable
-  def rate_by user, rank
+  def rate_by(user, rank)
     rating = ratings.find_or_create_by user: user
     rating.update rank: rank
     rating
   end
 
-  def rating_by user
+  def rating_by(user)
     ratings.find_or_initialize_by user: user
   end
 
@@ -15,13 +16,13 @@ module Rateable
     round_by_point_5(rating)
   end
 
-private
+  private
 
-  def average ratings
-    ratings.inject{ |sum, el| sum + el } / ratings.size
+  def average(ratings)
+    ratings.inject { |a, e| a + e } / ratings.size
   end
 
-  def round_by_point_5 rating
+  def round_by_point_5(rating)
     (2 * rating).round / 2.0
   end
 end

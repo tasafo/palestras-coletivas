@@ -1,3 +1,4 @@
+#:nodoc:
 class SubmitEventsController < ApplicationController
   before_action :require_logged_user, only: [:new, :create]
 
@@ -7,7 +8,7 @@ class SubmitEventsController < ApplicationController
     @events = EventQuery.new.accepts_submissions
 
     redirect_to talk_path(@talk),
-      alert: t("flash.submit_event.new.alert") if @events.count <= 0
+                alert: t('flash.submit_event.new.alert') if @events.count <= 0
   end
 
   def create
@@ -15,20 +16,20 @@ class SubmitEventsController < ApplicationController
 
     @event = Event.find(params[:submit_event]['event_id'])
     @talk = Talk.find_by(_slugs: params[:talk_id])
-    @activity = Activity.find_by(type: "talk")
+    @activity = Activity.find_by(type: 'talk')
     @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
 
     if @_schedule.nil?
       @schedule = Schedule.new(activity: @activity, event: @event,
-        talk: @talk, day: 1, time: '00:00')
+                               talk: @talk, day: 1, time: '00:00')
 
       if @schedule.save
         @error = true
-        @message = t("flash.submit_event.create.notice")
+        @message = t('flash.submit_event.create.notice')
       end
     else
       @error = true
-      @message = t("flash.submit_event.create.alert")
+      @message = t('flash.submit_event.create.alert')
     end
 
     redirect_to talk_path(@talk), notice: @message if @error
