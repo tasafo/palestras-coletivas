@@ -59,6 +59,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :workload, class: 'control-label col-md-3' %>
+    <div class="col-md-1">
+      <%= f.text_field :workload, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.label :place, class: 'control-label col-md-3' %>
     <div class="col-md-6">
       <%= f.text_field :place, placeholder: t("placeholder.events.place"), class: "form-control" %>
@@ -128,6 +135,14 @@
     <div class="col-md-6">
       <%= f.check_box :block_presence %>
       <span class="help-inline"><%= t("new.event.help.block_presence") %></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :issue_certificates, class: 'control-label col-md-3' %>
+    <div class="col-md-6">
+      <%= f.check_box :issue_certificates %>
+      <span class="help-inline"><%= t("new.event.help.issue_certificates_html") %></span>
     </div>
   </div>
 

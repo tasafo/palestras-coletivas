@@ -31,6 +31,8 @@ class Event
   field :counter_present_users, type: Integer, default: 0
   field :accepts_submissions, type: Boolean, default: false
   field :block_presence, type: Boolean, default: false
+  field :workload, type: Fixnum, default: 0
+  field :issue_certificates, type: Boolean, default: false
 
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable
@@ -41,11 +43,12 @@ class Event
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
                         :deadline_date_enrollment, :place, :street, :district,
-                        :city, :state, :country, :owner
+                        :city, :state, :country, :owner, :workload
   validates_length_of :name, maximum: 100
   validates_length_of :edition, maximum: 50
   validates_length_of :description, maximum: 2000
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
+  validates_numericality_of :workload, greater_than_or_equal_to: 0
 
   slug :name, :edition
 end
