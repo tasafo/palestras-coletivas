@@ -27,11 +27,9 @@ class EventsController < PersistenceController
   end
 
   def show
-    @presenter = EventPresenter.new(
-      @event,
-      authorized_access?(@event),
-      current_user
-    )
+    @presenter = EventPresenter.new(@event, authorized_access?(@event),
+      current_user)
+    @certifico_url = ENV['CERTIFICO_URL']
 
     render layout: 'event'
   end
@@ -72,6 +70,7 @@ class EventsController < PersistenceController
                                   :deadline_date_enrollment,
                                   :accepts_submissions, :to_public, :place,
                                   :street, :district, :city, :state, :country,
-                                  :block_presence)
+                                  :block_presence, :workload,
+                                  :issue_certificates)
   end
 end

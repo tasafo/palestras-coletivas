@@ -275,6 +275,11 @@ iframe {
   margin-bottom: 30px;
 }
 
+section {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 .section {
   background-color: #fff;
 }
