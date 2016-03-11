@@ -48,12 +48,12 @@ $(function() {
 
   $("#issue_certificates_attendees").on("click", function(e) {
     e.preventDefault();
-    issueCertificatesParticipants('attendees');
+    issueCertificatesParticipants('attendees', 0);
   });
 
   $("#issue_certificates_all_participants").on("click", function(e) {
     e.preventDefault();
-    issueCertificatesParticipants('all');
+    issueCertificatesParticipants('all', 0);
   });
 
   $(".issue-certificate").on("click", function(e) {
@@ -85,7 +85,7 @@ var issueCertificatesSpeakers = function() {
   if (!confirmsSending('palestrantes'))
     return false;
 
-  var records = null;
+  var records = 'code=PC' + event_id + '&profile=2';
 
   $('#issuing_certificates').show();
 
@@ -94,7 +94,6 @@ var issueCertificatesSpeakers = function() {
     type: 'get',
     dataType: 'json',
     success: function(result) {
-      records = 'code=PC' + event_id + '&profile=2';
       c = 0;
 
       for(i = 0; i < result.length; i++) {
@@ -107,41 +106,17 @@ var issueCertificatesSpeakers = function() {
           c++;
         }
       }
+
+      sendToCertify(records);
     }
   });
-
-  console.log(records);
-
-  if (records != null) {
-    $.ajax({
-      url: certifico_url,
-      type: 'post',
-      dataType: 'text',
-      data: records,
-      statusCode: {
-        200: function() {
-          alert('> Certificados enviados com sucesso!');
-        },
-        404: function() {
-          alert('página não encontrada');
-        }
-      },
-      success: function(response) {
-        alert('>> Certificados enviados com sucesso!');
-      }
-    });
-
-    $('#issuing_certificates').hide();
-
-    alert('Certificados enviados com sucesso!');
-  }
 }
 
 var issueCertificatesOrganizers = function() {
   if (!confirmsSending('organizadores'))
     return false;
 
-  records = 'code=PC' + event_id + '&profile=1';
+  var records = 'code=PC' + event_id + '&profile=1';
 
   $('#issuing_certificates').show();
 
@@ -157,26 +132,16 @@ var issueCertificatesOrganizers = function() {
                    '&user['+i+'][email]=' + user['email'];
       }
 
-      $.ajax({
-        url: certifico_url,
-        type: 'post',
-        data: records,
-        success: function(response) {
-        }
-      });
-
-      $('#issuing_certificates').hide();
-
-      alert('Certificados enviados com sucesso!');
+      sendToCertify(records);
     }
   });
 }
 
-var issueCertificatesParticipants = function(kind, user_id = 0) {
+var issueCertificatesParticipants = function(kind, user_id) {
   if (!confirmsSending('participantes'))
     return false;
 
-  records = 'code=PC' + event_id + '&profile=3';
+  var records = 'code=PC' + event_id + '&profile=3';
 
   $('#issuing_certificates').show();
 
@@ -192,22 +157,25 @@ var issueCertificatesParticipants = function(kind, user_id = 0) {
                    '&user['+i+'][email]=' + user['email'];
       }
 
-      $.ajax({
-        url: certifico_url,
-        type: 'post',
-        data: records,
-        success: function(response) {
-
-        }
-      });
-
-      $('#issuing_certificates').hide();
-
-      alert('Certificados enviados com sucesso!');
+      sendToCertify(records);
     }
   });
 }
 
 var confirmsSending = function(profile) {
   return confirm('Você confirma a geração dos certificados para os ' + profile + '?');
+}
+
+var sendToCertify = function(_records) {
+  $.ajax({
+    url: certifico_url,
+    type: 'post',
+    data: _records,
+    success: function(response) {
+    }
+  });
+
+  $('#issuing_certificates').hide();
+
+  alert('Certificados enviados com sucesso!');
 }
