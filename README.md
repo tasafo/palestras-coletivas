@@ -10,79 +10,79 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Aconselhamos você a usar o gerenciador de versões Ruby (http://rvm.io)
 
-	curl -sSL https://get.rvm.io | bash -s stable
+    curl -sSL https://get.rvm.io | bash -s stable
 
 ### Vamos usar a versão 2 do Ruby
 
-	rvm install 2.2.3
+    rvm install 2.3.0
 
 ### Usamos o MongoDB, então instala ele lá!
 
-	sudo apt-get install mongodb
+    sudo apt-get install mongodb
 
 ### Aproveita e instala a biblioteca para gerenciar o mongo (http://genghisapp.com/)
 
-	gem install genghisapp
+    gem install genghisapp
 
 ### Usamos o Redis-Server, então instala ele lá!
 
-	sudo apt-get install redis-server
+    sudo apt-get install redis-server
 
 ### Instala também a biblioteca webkit, que é uma dependência do capybara-webkit
 
-	sudo apt-get install qt5-default libqt5webkit5-dev
+    sudo apt-get install qt5-default libqt5webkit5-dev
 
 ### MailCatcher (http://mailcatcher.me)
 
 #### Instale o MailCatcher para testar o envio de e-mails localmente.
 
-  gem install mailcatcher
+    gem install mailcatcher
 
 #### Execute ele para ficar recebendo seus e-mails locais
 
-  mailcatcher
+    mailcatcher
 
 ### Baixa as dependências do projeto
 
-	bundle install
+    bundle install
 
 Agora espera...
 
 ### Depois roda esse comando para adicionar uns dados no banco
 
-	rake db:seed
+    rake db:seed
 
 ### Em um terminal, execute o sidekiq para executar as tarefas de segundo plano
 
-	sidekiq
+    sidekiq
 
 ### Se você estiver executando outra aplicação que utilize o sidekiq, é melhor rodar o comando
 
-  redis-cli flushall
+    redis-cli flushall
 
 ### Agora é só rodar e brincar!
 
-	rails server
+    rails server
 
 ### Em seu navegador, abra o endereço abaixo para testar a aplicação
 
-  localhost:3000
+    localhost:3000
 
 ### Em seu navegador, abra o endereço abaixo para analisar as tarefas em segundo plano
 
-  localhost:3000/sidekiq
+    localhost:3000/sidekiq
 
 ### Em seu navegador, abra o endereço abaixo para analisar os e-mails recebidos localmente
 
-  localhost:1080
+    localhost:1080
 
 ### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
 
-	rake spec:coverage
+    rake spec:coverage
 
 ### Em produção, você deve gerar o token de segurança da aplicação
 
-	echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
+    echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
 
 ## Licença
 

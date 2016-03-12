@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.4'
+ruby '2.3.0'
 
-gem 'rails', '4.2.5'
+gem 'rails', '4.2.6'
 gem 'rails-i18n'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
@@ -10,14 +10,14 @@ gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'kaminari'
 gem 'airbrake', '4.3.4'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 
 gem 'mongoid'
 gem 'mongoid-slug'
 gem 'mongoid_search', github: 'mauriciozaffari/mongoid_search', branch: 'master'
 gem 'geocoder'
 
-gem 'sprockets', '~> 2.12'
+gem 'sprockets'
 gem 'sass-rails'
 gem 'bootstrap-sass'
 gem 'uglifier'
@@ -52,7 +52,7 @@ group :test do
   gem 'rake'
   gem 'launchy'
   gem 'capybara'
-  gem 'capybara-webkit', '1.5.0'
+  gem 'capybara-webkit', '1.8.0'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil

@@ -27,8 +27,8 @@ RSpec.configure do |config|
   #Capybara.javascript_driver = :webkit_debug
   Capybara.javascript_driver = :webkit
 
-  config.before(:each, js: true) do
-    page.driver.block_unknown_urls if webkit?
+  Capybara::Webkit.configure do |config|
+   config.block_unknown_urls
   end
 
   config.before(:suite) do
