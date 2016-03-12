@@ -9,7 +9,7 @@ script: xvfb-run -a bundle exec rspec
 addons:
   apt:
     packages:
-      - libqt5webkit5-dev
+      - libqtwebkit-dev
       - xvfb
   code_climate:
     repo_token: 6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493
