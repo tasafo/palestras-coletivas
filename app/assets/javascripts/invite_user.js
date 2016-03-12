@@ -1,8 +1,4 @@
 $(function() {
-    $("#user_in_the_list").hide();
-    $("#user_invalid").hide();
-    $("#remove").hide();
-
     $("#add_user").click(add_user);
 
     $("#invitee_username").autocomplete({

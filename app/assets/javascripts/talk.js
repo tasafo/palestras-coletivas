@@ -1,7 +1,4 @@
 $(function() {
-    $("#searching_talk").hide();
-    $("#talk_not_found").hide();
-
     $("#talk_presentation_url").focusout(function() {
         var link = $("#talk_presentation_url").val();
 
