@@ -20,5 +20,8 @@ module Palestrascoletivas
     config.assets.initialize_on_precompile = false
     I18n.enforce_available_locales = true
     config.active_job.queue_adapter = :sidekiq
+
+    Mongoid.logger.level = Logger::INFO
+    Mongo::Logger.logger.level = Logger::INFO
   end
 end

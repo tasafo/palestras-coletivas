@@ -37,7 +37,4 @@ Rails.application.configure do
     address: 'localhost',
     port: 1025
   }
-
-  Mongoid.logger.level = Logger::INFO
-  Mongo::Logger.logger.level = Logger::INFO
 end
