@@ -14,7 +14,7 @@
         <li class="<%= request.fullpath == talks_path ? 'active' : '' %>"> <%= link_to t("menu.talks"), talks_path %> </li>
         <li class="<%= request.fullpath == events_path ? 'active' : '' %>"> <%= link_to t("menu.events"), events_path %> </li>
         <li class="<%= request.fullpath == ranking_path ? 'active' : '' %>"> <%= link_to "Ranking", ranking_path %> </li>
-        <li class=""> <%= link_to t("menu.about"), "http://idopter.com/users/luiz-sanches/ideas/101-palestras-coletivas" %> </li>
+        <li class=""> <%= link_to t("menu.source"), "https://github.com/tasafo/palestras-coletivas" %> </li>
         <li class="dropdown">
           <% if logged_in? %>
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
