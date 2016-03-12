@@ -172,10 +172,12 @@ var sendToCertify = function(_records) {
     type: 'post',
     data: _records,
     success: function(response) {
+      alert(response);
+    },
+    error: function (request, status, error) {
+      alert(status);
     }
   });
 
   $('#issuing_certificates').hide();
-
-  alert('Certificados enviados com sucesso!');
 }
