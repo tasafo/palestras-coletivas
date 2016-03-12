@@ -9,6 +9,8 @@ class TalksController < PersistenceController
     @my = !params[:my].nil?
 
     @talks = search_talks @search, @my, params[:page]
+
+    render nothing: true, status: 404 if params[:page] && @talks.blank?
   end
 
   def new
