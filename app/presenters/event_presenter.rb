@@ -3,7 +3,7 @@ class EventPresenter
   attr_reader :event, :dates, :authorized, :open_enrollment,
               :can_record_presence, :show_users_present, :users_present,
               :users_active, :crowded, :new_subscription, :the_user_is_speaker,
-              :enrollment, :image_top, :can_vote
+              :enrollment, :image_top, :can_vote, :view_certificates
 
   def initialize(event, authorized, user_logged_in = nil)
     prepare_event event, authorized, user_logged_in
@@ -42,10 +42,10 @@ class EventPresenter
     @authorized = authorized
 
     @can_record_presence = @authorized && Date.today >= event.start_date
-
     @show_users_present = Date.today > event.end_date && !@can_record_presence
-
     @event = event
+    @view_certificates = @event.issue_certificates && @authorized &&
+                         Date.today > event.end_date
 
     return if event.to_public
 

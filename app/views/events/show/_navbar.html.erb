@@ -36,7 +36,7 @@
               <%= link_to t("show.event.enrolled"), "#presents", class: "scroll" %>
             </li>
 
-            <% if @event && @event.issue_certificates %>
+            <% if @event && @presenter.view_certificates %>
               <li>
                 <%= link_to t("show.event.certificates"), "#certificates", class: "scroll" %>
               </li>
