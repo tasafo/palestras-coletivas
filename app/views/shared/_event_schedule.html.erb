@@ -47,9 +47,10 @@
                   <td>
                     <p class="text-center schedule-font">
                       <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
-                      (<% schedule.talk.users.each do |user| %>
-                        <%= link_to user.name, user_path(user) %>
-                      <% end %>)
+                      <% schedule.talk.users.each do |user| %>
+                        ( <%= link_to user.name, user_path(user) %>
+                        <%= "- #{user.email}" if @presenter.authorized %>)&nbsp;
+                      <% end %>
                     </p>
                   </td>
                 <% else %>
