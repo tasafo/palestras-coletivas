@@ -3,7 +3,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user, :logged_in?
 
+  rescue_from Mongoid::Errors::InvalidFind, with: :record_not_found
+
   private
+
+  def record_not_found
+    redirect_to root_path
+  end
 
   def require_logged_user
     redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",
