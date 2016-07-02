@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.2.5'
 
 gem 'rails', '4.2.6'
 gem 'rails-i18n'
@@ -52,7 +52,7 @@ group :test do
   gem 'rake'
   gem 'launchy'
   gem 'capybara'
-  gem 'capybara-webkit', '1.8.0'
+  gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
