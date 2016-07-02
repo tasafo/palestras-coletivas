@@ -1,5 +1,7 @@
-os: linux
-dist: trusty
+matrix:
+  include:
+    - os: linux
+      dist: trusty
 sudo: false
 language: ruby
 rvm:
