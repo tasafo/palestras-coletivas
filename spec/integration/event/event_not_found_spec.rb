@@ -52,4 +52,15 @@ describe "Event not found", :type => :request do
       page.has_content? "Evento não encontrado"
     end
   end
+
+  context "when event is nil" do
+    before do
+      visit root_path
+      visit "/event"
+    end
+
+    it "redirects to the root path" do
+      expect(current_path).to eql(root_path)
+    end
+  end
 end
