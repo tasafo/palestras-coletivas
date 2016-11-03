@@ -78,7 +78,7 @@ test:
 production:
   clients:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: <%= ENV['MONGODB_URI'] %>
       options:
   options:
     raise_not_found_error: false
