@@ -13,8 +13,7 @@ class EnrollmentPresenter
   private
 
   def prepare_message(event, enrollment, option_type, authorized_edit, user)
-    @can_record_presence = (authorized_edit || user == enrollment.user) &&
-                           Time.zone.today >= event.start_date
+    @can_record_presence = (authorized_edit || user == enrollment.user)
 
     @option_value = false
     @type_message = 'text-warning'
