@@ -21,7 +21,7 @@ class SubmitEventsController < ApplicationController
 
     if @_schedule.nil?
       @schedule = Schedule.new(activity: @activity, event: @event,
-                               talk: @talk, day: 1, time: '00:00')
+                               talk: @talk, day: 1, time: get_time(@event))
 
       if @schedule.save
         @error = true
@@ -33,5 +33,21 @@ class SubmitEventsController < ApplicationController
     end
 
     redirect_to talk_path(@talk), notice: @message if @error
+  end
+
+  private
+
+  def get_time(event)
+    schedules = event.schedules.asc(:time)
+
+    time = schedules.empty? ? '00:00' : schedules.first.time
+
+    if time != '00:00'
+      hours = time.split(':')[0]
+      minutes = time.split(':')[1].to_i + 1
+      time = "#{hours}:%02d" % minutes.to_s
+    end
+
+    time
   end
 end

@@ -22,4 +22,12 @@ class Schedule
   def find_vote(user)
     votes.find_by(user: user) ? true : false
   end
+
+  def show_time
+    if self.event && self.event.accepts_submissions && !self.talk_id.nil?
+      ''
+    else
+      self.time
+    end
+  end
 end

@@ -5,6 +5,7 @@ describe "Submit talk", :type => :request, js: true do
   let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:activity_palestra) { create(:activity, :palestra) }
   let!(:event) { create(:event, :tasafoconf, owner: user, start_date: Date.today, end_date: Date.today + 5.days, accepts_submissions: true) }
+  let!(:schedule_abertura) { create(:schedule, :abertura, :event => event) }
 
   context "when valid data" do
     before do

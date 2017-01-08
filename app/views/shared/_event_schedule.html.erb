@@ -31,16 +31,14 @@
               <% unless @presenter.authorized %>
                 <td></td>
               <% end %>
-              <td colspan="4">
+              <td colspan="5">
                 <h4><p class="text-center schedule-font"><%= l date, format: :custom %></h4></p>
               </td>
             </tr>
             <% @event.schedules.by_day(day).each do |schedule| %>
               <tr id="row_<%= schedule.id %>">
                 <td>
-                  <% unless @can_vote %>
-                    <p class="text-center schedule-font"><%= schedule.time %></p>
-                  <% end %>
+                  <p class="text-center schedule-font"><%= schedule.show_time %></p>
                 </td>
 
                 <% if schedule.talk? %>
@@ -60,9 +58,12 @@
                 <% if @presenter.authorized %>
                   <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %></td>
                   <td><%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %></td>
+                  <% if @presenter.can_vote && schedule.talk_id.nil? %>
+                    <td></td>
+                  <% end %>
                 <% end %>
 
-                <% if @presenter.can_vote %>
+                <% if @presenter.can_vote && !schedule.talk_id.nil? %>
                   <td>
                     <% if logged_in? %>
                       <% if schedule.votes? && schedule.find_vote(current_user) %>
