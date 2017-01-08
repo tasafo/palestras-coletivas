@@ -59,7 +59,7 @@
                   <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %></td>
                   <td><%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %></td>
                   <% if @presenter.can_vote && schedule.talk_id.nil? %>
-                    <td></td>
+                    <td colspan="2"></td>
                   <% end %>
                 <% end %>
 
