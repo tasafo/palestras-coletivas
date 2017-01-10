@@ -7,7 +7,7 @@ services:
   - redis-server
 script:
   - xvfb-run -a bundle exec rspec
-  - bundle exec codeclimate-test-reporter
+  - CODECLIMATE_REPO_TOKEN=6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493 bundle exec codeclimate-test-reporter
 addons:
   apt:
     packages:
