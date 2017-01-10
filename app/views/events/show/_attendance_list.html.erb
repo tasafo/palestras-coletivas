@@ -1,5 +1,6 @@
         <% unless @presenter.users_active.blank? %>
-          <h4><%= t("show.event.enrolled") %> (<%= @presenter.users_active.count %>)</h4>
+          <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.count %>)</h2>
+          <hr />
 
           <% if @presenter.authorized %>
             <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h4>

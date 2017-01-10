@@ -3,13 +3,8 @@
 
     <div class="container">
       <h2 class="text-primary"><%= t("labels.event.about") %></h2>
+      <hr />
 
-      <h3 class="text-justify description"><%= simple_format(@event.description) %></h3>
-
-      <h4 class="text-danger"><%= t("labels.event.stocking") %>: <%= @event.stocking %></h4>
-
-      <% if @presenter.open_enrollment %>
-        <h4 class="text-danger"><%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, format: :long %></h4>
-      <% end %>
+      <div class="text-justify description"><%= @event.description.html_safe %></div>
     </div>
   </section>

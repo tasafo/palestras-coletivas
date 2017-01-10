@@ -2,11 +2,13 @@
     <hr />
 
     <% if @presenter.can_vote %>
+      <div class="text">
+        <%= t("show.event.hint_add_talk_html") %>
+      </div>
       <center>
         <%= link_to t("show.event.btn_use_talk"), "/talks?my=true", class: "btn btn-success" %>
         <%= link_to t("show.event.btn_add_talk"), new_talk_path, class: "btn btn-success" %>
       </center>
-      <h5 style="color: black"><%= t("show.event.hint_add_talk_html") %></h5>
       <hr />
     <% end %>
 

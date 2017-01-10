@@ -2,6 +2,7 @@
     <div class="container">
       <div class="row-fluid">
         <h2><%= @event.name %> - <%= @event.edition %></h2>
+        <hr />
 
         <% if @event.start_date == @event.end_date %>
           <h4><%= l @event.start_date, :format => :long %> - <%= @event.place %></h4>
@@ -11,6 +12,12 @@
             <%= t("show.event.to") %> <%= l @event.end_date, format: :long %>
             - <%= @event.place %>
           </h4>
+        <% end %>
+
+        <h4 class="text-danger"><%= t("labels.event.stocking") %>: <%= @event.stocking %></h4>
+
+        <% if @presenter.open_enrollment %>
+          <h4 class="text-danger"><%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, format: :long %></h4>
         <% end %>
       </div>
     </div>

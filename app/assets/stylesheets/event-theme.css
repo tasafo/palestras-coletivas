@@ -20,6 +20,12 @@ body {
   line-height: 1.2em
 }
 
+.text p {
+  color: black;
+  line-height: 20px;
+  font-size: 14pt;
+}
+
 .container-fluid {
   padding-left: 0px;
   padding-right: 0px;
@@ -254,7 +260,7 @@ iframe {
 }
 
 #page-header h2 {
-  margin-top: 20%;
+  margin-top: 15%;
   color: #fff;
   line-height: 1.5em;
   font-size: 38px;

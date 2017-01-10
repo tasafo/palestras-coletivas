@@ -17,9 +17,12 @@
   <section id="location">
     <div class="container">
       <h2 class="text-primary"><%= t("labels.event.place") %></h2>
+      <hr />
 
-      <h5 class="text-left"><strong><%= @event.place %></strong></h5>
-      <h5 class="text-left"><strong><%= t("labels.event.address") %>: <%= @presenter.address %></strong></h5>
+      <div class="text">
+        <p><%= @event.place %></p>
+        <p><%= t("labels.event.address") %>: <%= @presenter.address %></p>
+      </div>
 
       <% if @event.coordinates %>
         <div id="location-map"></div>
@@ -31,6 +34,7 @@
     <section id="organizers">
       <div class="container">
         <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
+        <hr />
 
         <% @event.users.by_name.each do |user| %>
           <%= render "shared/user_event", user: user %>
@@ -44,6 +48,7 @@
       <% if @presenter.show_users_present %>
         <% unless @presenter.users_present.blank? %>
           <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h2>
+          <hr />
 
           <% @presenter.users_present.each do |user| %>
             <%= render "shared/user_event", user: user %>
