@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 gem 'rails-i18n'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
@@ -56,7 +56,7 @@ group :test do
   gem 'capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: nil
+  gem 'codeclimate-test-reporter'
 end
 
 group :production do
