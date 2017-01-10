@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
       flash[:alert] = I18n.t('flash.comments.create.alert')
     end
 
-    redirect_to @commentable
+    redirect_to _commentable_path
   end
 
   def destroy
@@ -24,15 +24,13 @@ class CommentsController < ApplicationController
 
     @comment.destroy
 
-    redirect_to @commentable, notice: t('flash.comments.destroy.notice')
+    redirect_to _commentable_path, notice: t('flash.comments.destroy.notice')
   end
 
   private
 
   def find_commentable
-    commentable_class = params[:commentable_type]
-
-    commentable_class = commentable_class.camelize.constantize
+    commentable_class = [Event, Talk].find { |x| x.name == params[:commentable_type].classify }
 
     @commentable = commentable_class.find(params[:commentable_id])
   end
@@ -43,5 +41,9 @@ class CommentsController < ApplicationController
     end
 
     parent ||= @commentable
+  end
+
+  def _commentable_path
+    "/#{@commentable.class.name.pluralize.downcase}/#{@commentable._slugs[0]}"
   end
 end

@@ -9,8 +9,7 @@ class VotesController < ApplicationController
       @schedule.set_counter(:votes, :inc)
     end
 
-    redirect_to "/events/#{@event._slugs[0]}#schedule",
-                notice: t('flash.schedules.vote.add')
+    redirect_to _event_path, notice: t('flash.schedules.vote.add')
   end
 
   def create
@@ -20,15 +19,18 @@ class VotesController < ApplicationController
 
       @schedule.set_counter(:votes, :dec)
 
-      redirect_to "/events/#{@event._slugs[0]}#schedule",
-                  notice: t('flash.schedules.vote.remove')
+      redirect_to _event_path, notice: t('flash.schedules.vote.remove')
     end
   end
 
   private
 
   def set_schedule
-    @event = Event.find(params[:event_id])
+    @event = Event.find(params.merge(only_path: true)[:event_id])
     @schedule = Schedule.find(params[:schedule_id])
+  end
+
+  def _event_path
+    "/events/#{@event._slugs[0]}#schedule"
   end
 end
