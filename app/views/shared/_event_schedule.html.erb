@@ -1,5 +1,15 @@
     <h2 class="text-primary"><%= t("titles.schedules.index") %></h2>
     <hr />
+
+    <% if @presenter.can_vote %>
+      <center>
+        <%= link_to t("show.event.btn_use_talk"), "/talks?my=true", class: "btn btn-success" %>
+        <%= link_to t("show.event.btn_add_talk"), new_talk_path, class: "btn btn-success" %>
+      </center>
+      <h5 style="color: black"><%= t("show.event.hint_add_talk_html") %></h5>
+      <hr />
+    <% end %>
+
     <div id="schedules">
       <table id="table_schedules" class="table table-striped">
         <thead>
@@ -52,15 +62,18 @@
                     </p>
                   </td>
                 <% else %>
-                  <td><p class="text-center schedule-font"><%= schedule.activity.description %></p></td>
+                  <td>
+                    <p class="text-center schedule-font"><%= schedule.activity.description %></p>
+                  </td>
                 <% end %>
 
                 <% if @presenter.authorized %>
                   <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %></td>
                   <td><%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %></td>
-                  <% if @presenter.can_vote && schedule.talk_id.nil? %>
-                    <td colspan="2"></td>
-                  <% end %>
+                <% end %>
+
+                <% if @presenter.can_vote && schedule.talk_id.nil? %>
+                  <td colspan="2"></td>
                 <% end %>
 
                 <% if @presenter.can_vote && !schedule.talk_id.nil? %>

@@ -42,6 +42,11 @@ pt-BR:
       btn_add_vote: "Adicionar voto"
       btn_remove_vote: "Retirar voto"
       btn_checkin: "Registrar entrada"
+      btn_use_talk: Selecionar uma palestra
+      btn_add_talk: Adicionar uma palestra
+      hint_add_talk_html: "Você pode selecionar uma palestra sua ou criar uma proposta para ser adicionada na programação do evento.<br /><br />
+        Escolha uma das opções acima. Depois de selecionar ou criar uma palestra, clique no botão <b>'Submeter a um evento'</b>, selecione o evento e clique no botão <b>'Adicionar programação'</b>.<br /><br />
+        <b>Lembrete:</b> você precisa estar cadastrado e logado."
       attendance_table:
         number: "N."
         photo: "Foto"
