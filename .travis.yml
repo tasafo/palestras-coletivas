@@ -5,7 +5,9 @@ rvm:
 services:
   - mongodb
   - redis-server
-script: xvfb-run -a bundle exec rspec && bundle exec codeclimate-test-reporter
+script:
+  - xvfb-run -a bundle exec rspec
+  - bundle exec codeclimate-test-reporter
 addons:
   apt:
     packages:
