@@ -14,7 +14,7 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Vamos usar a versão 2 do Ruby
 
-    rvm install 2.3.0
+    rvm install 2.3.1
 
 ### Usamos o MongoDB, então instala ele lá!
 
