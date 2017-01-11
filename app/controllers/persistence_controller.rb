@@ -3,12 +3,8 @@ class PersistenceController < ApplicationController
   def save_object(object, users, args = {})
     object_name = object.class.name.downcase
 
-    option = :edit
-    operation = :update
-    if args[:owner]
-      option = :new
-      operation = :create
-    end
+    option = args[:owner] ? :new : :edit
+    operation = args[:owner] ? :create : :update
 
     decorator = get_decorator(object, users, args)
 
@@ -24,6 +20,8 @@ class PersistenceController < ApplicationController
   private
 
   def get_decorator(object, users, args)
-    eval("#{object.class.name}Decorator").new(object, users, args)
+    klass = "#{object.class.name}Decorator".constantize
+
+    klass.new(object, users, args)
   end
 end

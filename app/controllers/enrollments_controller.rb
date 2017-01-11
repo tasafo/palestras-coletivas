@@ -20,7 +20,7 @@ class EnrollmentsController < ApplicationController
     @option_type = params[:option_type]
 
     @presenter = EnrollmentPresenter.new(
-      event: @event, enrollment: @enrollment, option_type: @option_type,
+      enrollment: @enrollment, option_type: @option_type,
       authorized_edit: authorized_access?(@event), user: current_user
     )
 

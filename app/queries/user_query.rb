@@ -9,7 +9,8 @@ class UserQuery
   end
 
   def ranking(type)
-    eval("@relation.where(:counter_#{type}.gt => 0).desc(:counter_#{type})
-         .asc(:_slugs).limit(5)")
+    counter = "counter_#{type}".to_sym
+
+    @relation.where(counter.gt => 0).desc(counter).asc(:_slugs).limit(5)
   end
 end

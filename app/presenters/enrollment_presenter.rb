@@ -6,13 +6,13 @@ class EnrollmentPresenter
   def initialize(args = {})
     @user_id = args[:user].id if args.size == 1
 
-    prepare_message args[:event], args[:enrollment], args[:option_type],
+    prepare_message args[:enrollment], args[:option_type],
                     args[:authorized_edit], args[:user] if args.size > 1
   end
 
   private
 
-  def prepare_message(event, enrollment, option_type, authorized_edit, user)
+  def prepare_message(enrollment, option_type, authorized_edit, user)
     @can_record_presence = (authorized_edit || user == enrollment.user)
 
     @option_value = false

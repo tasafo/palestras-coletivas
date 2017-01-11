@@ -10,11 +10,9 @@ class CommentsController < ApplicationController
     }
     @new_comment = Comment.new.comment_on! comment_params
 
-    if @new_comment.persisted?
-      flash[:notice] = I18n.t('flash.comments.create.notice')
-    else
-      flash[:alert] = I18n.t('flash.comments.create.alert')
-    end
+    result = @new_comment.persisted? ? 'notice' : 'alert'
+
+    flash[result.to_sym] = I18n.t("flash.comments.create.#{result}")
 
     redirect_to _commentable_path
   end
@@ -36,11 +34,9 @@ class CommentsController < ApplicationController
   end
 
   def find_parent_comment
-    if params[:comment_id]
-      parent = @commentable.comments.find params[:comment_id]
-    end
+    parent = @commentable.comments.find(params[:comment_id]) if params[:comment_id]
 
-    parent ||= @commentable
+    parent || @commentable
   end
 
   def _commentable_path

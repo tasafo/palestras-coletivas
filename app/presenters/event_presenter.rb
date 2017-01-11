@@ -39,11 +39,11 @@ class EventPresenter
   end
 
   def prepare_authorized(event, authorized)
+    @event = event
     @authorized = authorized
 
     @can_record_presence = @authorized && Date.today >= event.start_date
     @show_users_present = Date.today > event.end_date && !@can_record_presence
-    @event = event
     @view_certificates = @event.issue_certificates && @authorized &&
                          Date.today > event.end_date
 
@@ -58,18 +58,22 @@ class EventPresenter
 
   def prepare_users_present(event)
     users_present = []
+
     event.enrollments.presents.each do |enrollment|
       users_present << enrollment.user
     end
+
     users_present.sort_by! { |user| user._slugs[0] }
   end
 
   def prepare_users_active(event)
     users_active = []
+
     event.enrollments.actives.each do |enrollment|
       name = enrollment.user._slugs[0]
       users_active << { name: name, enrollment: enrollment }
     end
+
     users_active.sort_by! { |user| user[:name] }
   end
 
@@ -82,16 +86,22 @@ class EventPresenter
 
     @new_subscription = false if @enrollment
 
-    @the_user_is_speaker = false
+    @the_user_is_speaker = speaker?(event, user_logged_in)
+
+    @open_enrollment = false if @the_user_is_speaker || @authorized
+  end
+
+  def speaker?(event, user_logged_in)
+    is_speaker = false
 
     event.schedules.each do |schedule|
-      if schedule.talk?
-        schedule.talk.users.each do |user|
-          @the_user_is_speaker = true if user.id == user_logged_in.id
-        end
+      next unless schedule.talk?
+
+      schedule.talk.users.each do |user|
+        is_speaker = true if user.id == user_logged_in.id
       end
     end
 
-    @open_enrollment = false if @the_user_is_speaker || @authorized
+    is_speaker
   end
 end
