@@ -42,14 +42,25 @@ class EventPresenter
     @event = event
     @authorized = authorized
 
-    @can_record_presence = @authorized && Date.today >= event.start_date
-    @show_users_present = Date.today > event.end_date && !@can_record_presence
-    @view_certificates = @event.issue_certificates && @authorized &&
-                         Date.today > event.end_date
+    @can_record_presence = record_presence?
+    @show_users_present = users_present?
+    @view_certificates = certificates?
 
     return if event.to_public
 
     @event = nil unless @authorized
+  end
+
+  def record_presence?
+    @authorized && Date.today >= @event.start_date
+  end
+
+  def users_present?
+    Date.today > @event.end_date && !@can_record_presence
+  end
+
+  def certificates?
+    @event.issue_certificates && @authorized && Date.today > event.end_date
   end
 
   def prepare_can_vote(event)
