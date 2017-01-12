@@ -49,11 +49,16 @@ class User
   after_save :erase_password
   before_create { generate_token(:auth_token) }
   before_save :update_thumbnail
+  before_validation :check_username
 
   scope :by_name, -> { asc(:_slugs) }
 
   def oid
     _id.to_s
+  end
+
+  def check_username
+    self.username = '@' << self.username if !self.username.blank? && self.username[0] != '@'
   end
 
   def show_name
