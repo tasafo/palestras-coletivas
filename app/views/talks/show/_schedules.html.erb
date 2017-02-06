@@ -1,8 +1,8 @@
-<% if @talk.schedules? %>
+<% if @talk.schedules.where(was_presented: true).count > 0 %>
   <% event = t("show.talk.events") %>
   <h5><%= event[@talk.schedules.count > 1 ? :other : :one] %></h5>
 
-  <% @talk.schedules.each do |schedule| %>
+  <% @talk.schedules.where(was_presented: true).each do |schedule| %>
     <h5><%= link_to "#{schedule.event.name} - #{schedule.event.edition}", event_path(schedule.event) %></h5>
   <% end %>
 <% end %>

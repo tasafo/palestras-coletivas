@@ -8,6 +8,7 @@ class Schedule
   field :time, type: String
   field :environment, type: String
   field :counter_votes, type: Integer, default: 0
+  field :was_presented, type: Boolean, default: false
 
   belongs_to :event
   belongs_to :activity

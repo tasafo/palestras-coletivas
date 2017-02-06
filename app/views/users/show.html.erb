@@ -43,7 +43,7 @@
   <% if @user.talks? %>
     <% @user.talks.where(to_public: true).each do |talk| %>
       <% if talk.schedules? %>
-        <% talk.schedules.each do |schedule| %>
+        <% talk.schedules.where(was_presented: true).each do |schedule| %>
           <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
         <% end %>
       <% end %>

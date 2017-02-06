@@ -70,8 +70,23 @@
                 <% end %>
 
                 <% if @presenter.authorized %>
-                  <td><%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %></td>
-                  <td><%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %></td>
+                  <td>
+                    <%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %>
+                  </td>
+                  <td>
+                    <%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %>
+                  </td>
+                  <% if !schedule.talk_id.nil? %>
+                  <td>
+                    <%= link_to t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}"), event_schedule_was_presented_path(@event, schedule), method: :post, class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}", id: "was_presented_schedule_id_#{schedule.id}" %>
+                  </td>
+                  <% end %>
+                <% else %>
+                  <% if !schedule.talk_id.nil? %>
+                  <td>
+                    <p><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
+                  </td>
+                  <% end %>
                 <% end %>
 
                 <% if @presenter.can_vote && schedule.talk_id.nil? %>
