@@ -27,6 +27,9 @@
                 <p class="text-center schedule-font"><%= t("new.schedule.table.operations") %></p>
               </th>
             <% end %>
+            <th width="20%">
+              <p class="text-center schedule-font"><%= t("new.schedule.table.status") %></p>
+            </th>
             <% if @presenter.can_vote %>
               <th width="10%">
                 <p class="text-left schedule-font"><%= t("new.schedule.table.votes") %></p>
@@ -43,7 +46,7 @@
               <% unless @presenter.authorized %>
                 <td></td>
               <% end %>
-              <td colspan="5">
+              <td colspan="6">
                 <h4><p class="text-center schedule-font"><%= l date, format: :custom %></h4></p>
               </td>
             </tr>
@@ -76,15 +79,15 @@
                   <td>
                     <%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %>
                   </td>
-                  <% if !schedule.talk_id.nil? %>
+                  <% unless schedule.talk_id.nil? %>
                   <td>
                     <%= link_to t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}"), event_schedule_was_presented_path(@event, schedule), method: :post, class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}", id: "was_presented_schedule_id_#{schedule.id}" %>
                   </td>
                   <% end %>
                 <% else %>
-                  <% if !schedule.talk_id.nil? %>
+                  <% unless schedule.talk_id.nil? %>
                   <td>
-                    <p><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
+                    <p class="text-center"><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
                   </td>
                   <% end %>
                 <% end %>
@@ -97,9 +100,9 @@
                   <td>
                     <% if logged_in? %>
                       <% if schedule.votes? && schedule.find_vote(current_user) %>
-                        <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, class: "btn btn-danger", id: "remove_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_remove_vote") %>
+                        <%= link_to schedule.counter_votes, event_schedule_vote_path(@event, schedule, 1), method: :delete, class: "btn btn-danger", id: "remove_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_remove_vote") %>
                       <% else %>
-                        <%= link_to schedule.counter_votes, new_event_schedule_vote_path(@event, schedule), class: "btn btn-success", id: "add_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_add_vote") %>
+                        <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, class: "btn btn-success", id: "add_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_add_vote") %>
                       <% end %>
                     <% else %>
                       <%= link_to schedule.counter_votes, "#schedules", class: "btn btn-primary disabled" %>

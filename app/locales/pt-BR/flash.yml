@@ -51,6 +51,7 @@ pt-BR:
       vote:
         add: "Voto adicionado com sucesso!"
         remove: "Voto retirado com sucesso!"
+        was_not_held: "Voto não foi realizado."
       destroy:
         notice: "A programação foi excluída!"
 

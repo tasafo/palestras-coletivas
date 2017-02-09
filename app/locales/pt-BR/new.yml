@@ -25,6 +25,7 @@ pt-BR:
         time: "Horário"
         activity: "Atividade"
         operations: "Operações"
+        status: "Situação"
         votes: "Votos"
 
     invite:
