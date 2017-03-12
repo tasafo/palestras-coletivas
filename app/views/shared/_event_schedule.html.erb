@@ -79,16 +79,20 @@
                   <td>
                     <%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %>
                   </td>
-                  <% unless schedule.talk_id.nil? %>
+                  <% if !schedule.talk_id.nil? %>
                   <td>
                     <%= link_to t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}"), event_schedule_was_presented_path(@event, schedule), method: :post, class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}", id: "was_presented_schedule_id_#{schedule.id}" %>
                   </td>
+                  <% else %>
+                  <td></td>
                   <% end %>
                 <% else %>
-                  <% unless schedule.talk_id.nil? %>
+                  <% if !schedule.talk_id.nil? %>
                   <td>
                     <p class="text-center"><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
                   </td>
+                  <% else %>
+                  <td></td>
                   <% end %>
                 <% end %>
 
