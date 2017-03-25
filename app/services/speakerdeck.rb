@@ -29,8 +29,7 @@ class Speakerdeck
       html_field = record['html']
       title = record['title']
       code = html_field.match(%r{player\/(.*)\" style})[1]
-      thumbnail = "https://speakerd.s3.amazonaws.com/presentations/
-        #{code}/thumb_slide_0.jpg"
+      thumbnail = "https://speakerd.s3.amazonaws.com/presentations/#{code}/thumb_slide_0.jpg"
 
       { title: title, code: code, thumbnail: thumbnail, description: '' }
     end
