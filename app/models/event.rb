@@ -51,4 +51,9 @@ class Event
   validates_numericality_of :workload, greater_than_or_equal_to: 0
 
   slug :name, :edition
+
+  scope :upcoming, -> {
+    where(to_public: true, :start_date.gte => Time.zone.today)
+    .desc(:start_date).limit(3)
+  }
 end
