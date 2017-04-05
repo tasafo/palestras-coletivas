@@ -137,15 +137,15 @@
       <span class="help-inline"><%= t("new.event.help.block_presence") %></span>
     </div>
   </div>
-
+<!--
   <div class="form-group">
-    <%= f.label :issue_certificates, class: 'control-label col-md-3' %>
+    <%#= f.label :issue_certificates, class: 'control-label col-md-3' %>
     <div class="col-md-6">
-      <%= f.check_box :issue_certificates %>
-      <span class="help-inline"><%= t("new.event.help.issue_certificates_html") %></span>
+      <%#= f.check_box :issue_certificates %>
+      <span class="help-inline"><%#= t("new.event.help.issue_certificates_html") %></span>
     </div>
   </div>
-
+-->
   <div class="container">
     <%= render "shared/invite_user", model: @event, users: @organizers, key: "organizer" %>
 
