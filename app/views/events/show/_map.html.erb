@@ -1,7 +1,7 @@
 <% if Rails.env != 'test' %>
   <% if @event.coordinates %>
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyDkxjiGvdUE4Pi72yOCkV2U9Yu1-pH1pC8"></script>
-    <script>
+    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyBrZhS-sHq2hso5tvYM0Yj1RZi4WJCN574&callback=initMap"></script>
+    <script type="text/javascript">
       ;(function(w, d, g, u) {
         var marker, position, config, map, gMaps = g.maps;
 
