@@ -1,29 +1,16 @@
 <% if Rails.env != 'test' %>
   <% if @event.coordinates %>
-    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyBrZhS-sHq2hso5tvYM0Yj1RZi4WJCN574&callback=initMap"></script>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js" integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg==" crossorigin=""></script>
+
     <script type="text/javascript">
-      ;(function(w, d, g, u) {
-        var marker, position, config, map, gMaps = g.maps;
-
-        position = new gMaps.LatLng(<%= @event.coordinates[1] %>, <%= @event.coordinates[0] %>),
-
-        config = {
-          center: position,
-          mapTypeControl: false,
-          mapTypeId: gMaps.MapTypeId.ROADMAP,
-          scrollwheel: false,
-          zoom: 16
-        };
-
-        map = new gMaps.Map(d.getElementById("location-map"), config);
-
-        marker = new gMaps.Marker({
-          animation: gMaps.Animation.BOUNCE,
-          map: map,
-          position: position
-        });
-
-      }(window, document, google, undefined));
+      var map = L.map('location-map').setView([<%= @event.coordinates[1] %>, <%= @event.coordinates[0] %>], 17);
+      mapLink = '<a href="https://openstreetmap.org">OpenStreetMap</a>';
+      L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; ' + mapLink,
+        maxZoom: 20,
+      }).addTo(map);
+      var marker = L.marker([<%= @event.coordinates[1] %>, <%= @event.coordinates[0] %>]).addTo(map);
     </script>
   <% end %>
 <% end %>
