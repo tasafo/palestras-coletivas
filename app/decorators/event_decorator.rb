@@ -21,23 +21,10 @@ class EventDecorator
   def update_list_organizers
     @owner = @event.owner if @event.owner
 
-    save_coordinates
     save_owner
     save_organizers
 
     true
-  end
-
-  def save_coordinates
-    results = Geocoder.search(EventPolicy.new(@event).address)
-
-    unless results.blank?
-      @event.coordinates = [
-        results[0].geometry['location']['lng'],
-        results[0].geometry['location']['lat']
-      ]
-      @event.save
-    end
   end
 
   def save_owner

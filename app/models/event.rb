@@ -56,4 +56,15 @@ class Event
     where(to_public: true, :start_date.gte => Time.zone.today)
     .desc(:start_date).limit(3)
   }
+
+  before_save do
+    results = Geocoder.search(EventPolicy.new(self).address)
+
+    unless results.blank?
+      self.coordinates = [
+        results[0].geometry['location']['lng'],
+        results[0].geometry['location']['lat']
+      ]
+    end
+  end
 end
