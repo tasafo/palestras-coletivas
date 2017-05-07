@@ -20,3 +20,4 @@
 .DS_Store
 .ruby-version
 .ruby-gemset
+start-servers.sh
