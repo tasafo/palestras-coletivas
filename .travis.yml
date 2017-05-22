@@ -2,7 +2,7 @@ dist: trusty
 sudo: false
 language: ruby
 rvm:
-  - 2.3.3
+  - 2.4.1
 services:
   - mongodb
   - redis-server

@@ -19,7 +19,7 @@ class Event
   field :end_date, type: Date
   field :deadline_date_enrollment, type: Date
   field :to_public, type: Boolean, default: false
-  field :rating, type: Fixnum, default: 0
+  field :rating, type: Integer, default: 0
   field :place, type: String
   field :street, type: String
   field :district, type: String
@@ -31,7 +31,7 @@ class Event
   field :counter_present_users, type: Integer, default: 0
   field :accepts_submissions, type: Boolean, default: false
   field :block_presence, type: Boolean, default: false
-  field :workload, type: Fixnum, default: 0
+  field :workload, type: Integer, default: 0
   field :issue_certificates, type: Boolean, default: false
 
   embeds_many :comments, as: :commentable
