@@ -13,7 +13,7 @@ gem 'kaminari-mongoid'
 gem 'airbrake', '4.3.4'
 gem 'jbuilder'
 
-gem 'mongoid'
+gem 'mongoid', '~> 5.2'
 gem 'mongoid-slug'
 gem 'mongoid_search'
 gem 'geocoder'
@@ -42,7 +42,6 @@ group :development, :test do
   gem 'lograge'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'mongoid-rspec'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 end

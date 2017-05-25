@@ -14,7 +14,7 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Vamos usar a versão 2 do Ruby
 
-    rvm install 2.3.1
+    rvm install 2.4.1
 
 ### Usamos o MongoDB, então instala ele lá!
 
@@ -47,6 +47,10 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
     bundle install
 
 Agora espera...
+
+### Copiar as configurações de conexão de banco de dados
+
+    cp .env.example .env
 
 ### Depois roda esse comando para adicionar uns dados no banco
 
@@ -82,7 +86,7 @@ Agora espera...
 
 ### Em produção, você deve gerar o token de segurança da aplicação
 
-    echo "SECRET_TOKEN=`bundle exec rake secret`" > .env
+    echo "SECRET_KEY_BASE=`bundle exec rake secret`" > .env
 
 ## Licença
 

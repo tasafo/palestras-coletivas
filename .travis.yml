@@ -3,6 +3,9 @@ sudo: false
 language: ruby
 rvm:
   - 2.4.1
+env:
+  - MONGODB_HOST=localhost:27017
+  - REDIS_URL=redis://localhost:6379
 services:
   - mongodb
   - redis-server
