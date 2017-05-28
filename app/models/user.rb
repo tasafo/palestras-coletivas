@@ -139,7 +139,7 @@ class User
     elsif !facebook_photo.blank?
       facebook_photo
     else
-      '/assets/without_avatar.jpg'
+      'without_avatar.jpg'
     end
   end
 

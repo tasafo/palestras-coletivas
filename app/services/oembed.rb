@@ -5,7 +5,7 @@ class Oembed
   def initialize(url, code = 0)
     @url = url
     @code = code
-    @without_presentation = '<img src="/assets/without_presentation.jpg"
+    @without_presentation = '<img src="/without_presentation.jpg"
       width="80%" height="500" />'
   end
 

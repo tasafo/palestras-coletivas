@@ -15,6 +15,7 @@
 /tmp
 /coverage
 /vendor
+public/assets
 .env
 .rvmrc
 .DS_Store

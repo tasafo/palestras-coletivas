@@ -69,7 +69,7 @@ function search_talk() {
         $.getJSON('/schedules/search-talks/' + search_text, function(json) {
             if (json) {
                 for (var i in json) {
-                    thumb = json[i].thumbnail ? json[i].thumbnail : '/assets/without_presentation.jpg';
+                    thumb = json[i].thumbnail ? json[i].thumbnail : '/without_presentation.jpg';
 
                     talks += '<hr />';
                     talks += '<div id="div_' + json[i]._id['$oid'] + '" class="talk">';
