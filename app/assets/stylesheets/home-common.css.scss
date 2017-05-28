@@ -15,7 +15,7 @@ section{
 
 section#intro{
   padding: 0;
-  background-image: url(home_02.jpg);
+  background-image: image-url('home_02.jpg');
   background-attachment: fixed;
   -webkit-background-size: cover;
   background-size: cover
@@ -95,7 +95,7 @@ section#about .caption p{
 
 section#tops-presentations{
   padding: 0;
-  background-image: url(10.jpg);
+  background-image: image-url('10.jpg');
   background-attachment: fixed;
   -webkit-background-size: cover;
   background-size: cover;

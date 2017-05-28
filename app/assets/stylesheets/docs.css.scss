@@ -11,7 +11,7 @@ Theme Designed/Developed for: Themesforce.com
 
 body {
 	position: relative;
-	background: url(/assets/bg_body-noise.png);
+	background: image-url('bg_body-noise.png');
 }
 /* Code in headings */
 h3 code {
@@ -176,7 +176,7 @@ hr.soften2 {
 	text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
 	-webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
 	-moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-	box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);/* background:url(../img/home-banner-bg.jpg) no-repeat;*/
+	box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
 }
 .jumbotron h1 {
 	font-size: 80px;
@@ -840,7 +840,7 @@ footer .copyright {
 .footer {
 	margin-top: 70px;
 	border-top: 1px solid #e5e5e5;
-	background: url(/assets/bg_footer.png);
+	background: image-url('bg_footer.png');
 	padding: 20px 0 10px;
 	color: #919191;
 }
@@ -2167,7 +2167,7 @@ div#output{display:none;}
 }
 .utility {
 	border-top: 1px solid #e5e5e5;
-	background: url(/assets/bg_footer.png);
+	background: image-url('bg_footer.png');
 	color: #919191;
 }
 #portfolio h2 {
