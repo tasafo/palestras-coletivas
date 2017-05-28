@@ -129,7 +129,7 @@ describe User, "validations", :type => :model do
     end
 
     it "no photo" do
-      expect(luis.thumbnail).to eq("/assets/without_avatar.jpg")
+      expect(luis.thumbnail).to eq("without_avatar.jpg")
     end
   end
 end
