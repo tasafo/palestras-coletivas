@@ -14,7 +14,7 @@ describe EventCertificatesController, type: :controller do
 
       params = { id: event.id.to_s }
 
-      get :speakers, params.merge(format: 'json')
+      get :speakers, params: params.merge(format: 'json')
 
       expect(response.status).to eql(200)
     end
@@ -26,7 +26,7 @@ describe EventCertificatesController, type: :controller do
 
       params = { id: event.id.to_s }
 
-      get :organizers, params.merge(format: 'json')
+      get :organizers, params: params.merge(format: 'json')
 
       expect(response.status).to eql(200)
     end
@@ -38,7 +38,7 @@ describe EventCertificatesController, type: :controller do
 
       params = { id: event.id.to_s, kind: 'attendees', user_id: 0 }
 
-      get :participants, params.merge(format: 'json')
+      get :participants, params: params.merge(format: 'json')
 
       expect(response.status).to eql(200)
     end
@@ -50,7 +50,7 @@ describe EventCertificatesController, type: :controller do
 
       params = { id: event.id.to_s, kind: 'all', user_id: 0 }
 
-      get :participants, params.merge(format: 'json')
+      get :participants, params: params.merge(format: 'json')
 
       expect(response.status).to eql(200)
     end
@@ -62,7 +62,7 @@ describe EventCertificatesController, type: :controller do
 
       params = { id: event.id.to_s, kind: 'user', user_id: user.id.to_s }
 
-      get :participants, params.merge(format: 'json')
+      get :participants, params: params.merge(format: 'json')
 
       expect(response.status).to eql(200)
     end

@@ -51,7 +51,7 @@ describe Rateable, :type => :model do
     end
 
     it "returns 0 if rateable has no rating" do
-      subject.ratings.destroy_all
+      subject.ratings.destroy
       expect(subject.rating).to be_eql 0
     end
   end

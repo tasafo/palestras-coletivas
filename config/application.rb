@@ -1,19 +1,22 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "sprockets/railtie"
-require "active_job/railtie"
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'sprockets/railtie'
+require 'active_job/railtie'
 
 Bundler.require(*Rails.groups)
 
 module Palestrascoletivas
   class Application < Rails::Application
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.1
+
     config.time_zone = 'Brasilia'
-    config.i18n.load_path += Dir["app/locales/**/*.yml"]
-    config.i18n.default_locale = "pt-BR"
-    config.i18n.available_locales = ["pt-BR", "en"]
-    config.encoding = "utf-8"
+    config.i18n.load_path += Dir['app/locales/**/*.yml']
+    config.i18n.default_locale = 'pt-BR'
+    config.i18n.available_locales = ['pt-BR', 'en']
+    config.encoding = 'utf-8'
     config.filter_parameters += [:password]
     config.active_support.escape_html_entities_in_json = true
     config.assets.enabled = true

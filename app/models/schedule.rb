@@ -12,11 +12,12 @@ class Schedule
 
   belongs_to :event
   belongs_to :activity
-  belongs_to :talk
+  belongs_to :talk, optional: true
   has_many :votes
 
-  validates_presence_of :day, :time, :event, :activity
+  validates_presence_of :day, :time
   validates_format_of :time, with: /\A(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9])\z/
+  before_validation :talk_presence
 
   scope :by_day, ->(day) { where(day: day).asc(:time).desc(:counter_votes) }
 
@@ -29,6 +30,12 @@ class Schedule
       ''
     else
       self.time
+    end
+  end
+
+  def talk_presence
+    if self.activity && self.activity.type == 'talk' && self.talk_id.blank?
+      errors.add(:talk, 'não pode ficar em branco')
     end
   end
 end

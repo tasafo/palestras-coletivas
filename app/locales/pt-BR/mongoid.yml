@@ -63,6 +63,7 @@ pt-BR:
         time: "Horário"
         environment: "Ambiente"
         activity: "Atividade"
+        talk: "Palestra"
 
       external_event:
         name: "Nome"

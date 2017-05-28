@@ -9,7 +9,7 @@ class Comment
   embeds_many :comments, as: :commentable
   belongs_to :user
 
-  validates_presence_of :user, :body
+  validates_presence_of :body
 
   def comment_on!(commentable: nil, user: nil, body: '')
     self.user = user

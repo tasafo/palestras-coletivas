@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.4.1'
 
-gem 'rails' , '~> 4.2'
+gem 'rails' , '~> 5.1'
 gem 'rails-i18n'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
@@ -10,10 +10,10 @@ gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'airbrake', '4.3.4'
+gem 'airbrake', '~> 6.1'
 gem 'jbuilder'
 
-gem 'mongoid', '~> 5.2'
+gem 'mongoid', '~> 6.1'
 gem 'mongoid-slug'
 gem 'mongoid_search'
 gem 'geocoder'
@@ -32,14 +32,13 @@ gem 'sinatra', require: false
 gem 'slim'
 
 group :development do
-  gem 'thin'
+  gem 'puma'
   gem 'web-console'
-  gem 'quiet_assets'
+  gem 'spring'
+  gem 'spring-watcher-listen'
 end
 
 group :development, :test do
-  gem 'spring'
-  gem 'lograge'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

@@ -4,28 +4,24 @@ Rails.application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
-  # Configure static asset server for tests with Cache-Control for performance
-  config.serve_static_files = true
-  config.static_cache_control = "public, max-age=3600"
+  config.eager_load = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
-  # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_files = false
+  # Apache or NGINX already handles this.
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  # Compress JavaScripts and CSS
-  config.assets.compress = true
+  # Compress JavaScripts and CSS.
+  config.assets.js_compressor = :uglifier
+  # config.assets.css_compressor = :sass
 
-  # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = true
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
 
   # Generate digests for assets URLs
   config.assets.digest = true
-
-  # Defaults to nil and saved in location specified by config.assets.prefix
-  # config.assets.manifest = YOUR_PATH
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
@@ -65,7 +61,7 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_caching = false
 
   ActionMailer::Base.delivery_method = :smtp
 
@@ -81,5 +77,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'palestrascoletivas.com.br' }
 
-  config.eager_load = true
+  config.log_formatter = ::Logger::Formatter.new
 end
