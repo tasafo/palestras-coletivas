@@ -61,4 +61,5 @@ group :production do
   gem 'unicorn'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
+  gem 'scout_apm'
 end
