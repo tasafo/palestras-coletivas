@@ -12,7 +12,7 @@ class EventsController < PersistenceController
               else
                 EventQuery.new.all_public
               end
-    @events = @events.page(params[:page]).per(12)
+    @events = @events.page(params[:page]).per(3)
     render nothing: true, status: 404 if params[:page] && @events.blank?
   end
 
