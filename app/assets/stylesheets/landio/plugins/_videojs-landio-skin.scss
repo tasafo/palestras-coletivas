@@ -39,11 +39,11 @@
 
 @font-face {
   font-family: 'icomoon';
-  src:url('../icomoon.eot?-d8wcrs');
-  src:url('../icomoon.eot?#iefix-d8wcrs') format('embedded-opentype'),
-    url('../icomoon.ttf?-d8wcrs') format('truetype'),
-    url('../icomoon.woff?-d8wcrs') format('woff'),
-    url('../icomoon.svg?-d8wcrs#icomoon') format('svg');
+  src:font-url('icomoon.eot?-d8wcrs');
+  src:font-url('icomoon.eot?#iefix-d8wcrs') format('embedded-opentype'),
+    font-url('icomoon.ttf?-d8wcrs') format('truetype'),
+    font-url('icomoon.woff?-d8wcrs') format('woff'),
+    font-url('icomoon.svg?-d8wcrs#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
