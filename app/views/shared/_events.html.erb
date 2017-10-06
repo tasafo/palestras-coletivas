@@ -22,7 +22,7 @@
               <% else %>
                 <p><%= l event.start_date %> - <%= l event.end_date %></p>
               <% end %>
-              <p class="card-text"> <%=  suspension_points(sanitize(event.description), 100) %> </p>
+              <div class="card-text"> <%=  suspension_points(sanitize(event.description), 100) %> </div>
           </div>
 
           <div class="card-footer">
