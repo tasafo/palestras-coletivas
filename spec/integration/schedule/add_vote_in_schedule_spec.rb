@@ -19,7 +19,7 @@ describe "Add vote in schedule", :type => :request, :js => true do
     before do
       login_as(user)
 
-      click_link "Eventos"
+      visit events_path
       click_link "Tá Safo Conf"
       click_link "add_vote_schedule_id_#{schedule_palestra.id}"
     end

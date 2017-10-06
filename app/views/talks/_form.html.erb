@@ -1,63 +1,49 @@
-<%= form_for(@talk, url: url, html: {class: 'form-horizontal'}) do |f| %>
-  <%= render "shared/error_messages", record: @talk %>
+      <%= form_for(@talk, url: url, html: {class: 'form-horizontal'}) do |f| %>
+        <%= render "shared/error_messages", record: @talk %>
 
-  <div class="form-group">
-    <%= f.label :presentation_url, class: 'control-label col-md-3' %>
-    <div class="col-md-6">
-      <%= f.url_field :presentation_url, class: "form-control" %>
-      <span id="searching_talk" class="text-error" style="display:none"><b><%= t("new.talk.searching") %></b></span>
-      <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
-      <span id="talk_not_found" class="text-error" style="display:none"><%= t("new.talk.not_found") %></span>
-    </div>
-  </div>
+        <div class="md-form">
+          <%= f.url_field :presentation_url, class: "form-control" %>
+          <%= f.label :presentation_url %>
+          <span id="searching_talk" class="text-error" style="display:none"><b><%= t("new.talk.searching") %></b></span>
+          <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
+          <span id="talk_not_found" class="text-error" style="display:none"><%= t("new.talk.not_found") %></span>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :title, class: 'control-label col-md-3' %>
-    <div class="col-md-6">
-      <%= f.text_field :title, placeholder: t("placeholder.talks.title"), class: "form-control" %>
-    </div>
-  </div>
+        <div class="md-form">
+          <%= f.text_field :title, class: "form-control" %>
+          <%= f.label :title %>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :description, class: 'control-label col-md-3' %>
-    <div class="col-md-6">
-      <%= f.text_area :description, placeholder: t("placeholder.talks.description"), rows: 5, class: "form-control" %>
-    </div>
-  </div>
+        <div class="md-form">
+          <%= f.text_area :description, rows: 5, class: "md-textarea" %>
+          <%= f.label :description %>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :tags, class: 'control-label col-md-3' %>
-    <div class="col-md-4">
-      <%= f.text_field :tags, placeholder: t("placeholder.talks.tags"), class: "form-control" %>
-    </div>
-  </div>
+        <div class="md-form">
+          <%= f.text_field :tags, class: "form-control col-md-4" %>
+          <%= f.label :tags %>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :video_link, class: 'control-label col-md-3' %>
-    <div class="col-md-4">
-      <%= f.url_field :video_link, class: "form-control" %>
-      <span class="help-block"><p class="text-info"><%= t("new.talk.help.video_link_html") %></p></span>
-    </div>
-  </div>
+        <div class="md-form">
+          <%= f.url_field :video_link, class: "form-control" %>
+          <%= f.label :video_link %>
+        </div>
 
-  <div class="form-group">
-    <%= f.label :to_public, class: 'control-label col-md-3' %>
-    <div class="col-md-4">
-      <%= f.check_box :to_public %>
-      <span class="help-inline"><%= t("new.talk.help.to_public") %></span>
-    </div>
-  </div>
+        <div class="form-group">
+          <%= f.check_box :to_public %>
+          <%= f.label :to_public %>
+        </div>
 
-  <div class="container">
-    <%= render "shared/invite_user", model: @talk, users: @authors, key: "author" %>
+        <div class="container">
+          <%= render "shared/invite_user", model: @talk, users: @authors, key: "author" %>
 
-    <%= f.submit class: 'btn btn-primary' %>
-  </div>
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
 
-  <%= f.hidden_field :thumbnail %>
-  <%= f.hidden_field :code %>
+        <%= f.hidden_field :thumbnail %>
+        <%= f.hidden_field :code %>
 
-  <span id="user_in_the_list" style="display:none"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
-  <span id="user_invalid" style="display:none"><%= t("new.invite.js.user_invalid") %></span>
-  <span id="remove" style="display:none"><%= t("new.invite.js.remove") %></span>
-<% end %>
+        <span id="user_in_the_list" style="display:none"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
+        <span id="user_invalid" style="display:none"><%= t("new.invite.js.user_invalid") %></span>
+        <span id="remove" style="display:none"><%= t("new.invite.js.remove") %></span>
+      <% end %>

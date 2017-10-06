@@ -7,7 +7,7 @@ describe "Login", :type => :request do
     before do
       visit root_path
 
-      click_link "Minha conta"
+      click_link "Entrar"
 
       fill_in "Seu e-mail", :with => user.email
       fill_in "Sua senha", :with => "testdrive"
@@ -18,21 +18,13 @@ describe "Login", :type => :request do
     it "redirects to home page" do
       expect(current_path).to eql(root_path)
     end
-
-    it "displays greeting message" do
-      expect(page).to have_content("Olá, pyoung")
-    end
   end
 
   context "with invalid credentials" do
     before do
       visit root_path
-      click_link "Minha conta"
+      click_link "Entrar"
       click_button "Acessar minha conta"
-    end
-
-    it "displays error message" do
-      expect(page).to have_content("E-mail/senha inválidos.")
     end
 
     it "displays login page" do

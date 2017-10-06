@@ -1,5 +1,15 @@
-<%= render "shared/title", title: t("titles.external_event.title") %>
+<%= render "shared/header", index: :event %>
+<%= render "shared/title", title: t("titles.external_event.title"), index: :event %>
 
-<h2><%= t("titles.external_event.edit") %> <b><%= @talk.title %></b></h2>
 
-<%= render 'form', :url => talk_external_event_path(@talk, @external_event) %>
+<div class="container">
+  <div class="card">
+    <div class="card-body mx-4">
+      <!--Header-->
+      <div class="text-center">
+          <h3 class="dark-grey-text mb-5"><strong><%= t("titles.external_event.edit") %> <%= @talk.title %></strong></h3>
+      </div>
+      <%= render 'form', :url => talk_external_event_path(@talk, @external_event) %>
+    </div>
+  </div>
+</div>

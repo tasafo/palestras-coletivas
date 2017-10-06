@@ -1,4 +1,5 @@
-<%= render "shared/title", title: t("titles.users.reset_password") %>
+<%= render "shared/header", index: :talk %>
+<%= render "shared/title", title: t("titles.users.reset_password"), index: :talk %>
 
 <%= form_for @user, url: password_reset_path(params[:id]), html: {class: 'form-horizontal' } do |f| %>
   <div class="form-group">

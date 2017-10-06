@@ -11,7 +11,7 @@ describe "Edit talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Compartilhe"
       click_link "Editar palestra"
 
@@ -46,7 +46,7 @@ describe "Edit talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Compartilhe"
       click_link "Editar palestra"
 

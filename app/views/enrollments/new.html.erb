@@ -1,5 +1,7 @@
-<%= render "shared/title", title: t("titles.enrollments.title") %>
+<%= render "shared/header", index: :event %>
+<%= render "shared/title", title: t("titles.enrollments.title"), index: :event %>
 
-<h2><%= t("titles.enrollments.new") %> <b><%= "#{@event.name} - #{@event.edition}" %></b></h2>
-
-<%= render 'form', url: event_enrollments_path %>
+<div class="container">
+  <h2><%= t("titles.enrollments.new") %> <b><%= "#{@event.name} - #{@event.edition}" %></b></h2>
+  <%= render 'form', url: event_enrollments_path %>
+</div>

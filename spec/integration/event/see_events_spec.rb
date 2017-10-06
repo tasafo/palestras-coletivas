@@ -8,7 +8,7 @@ describe "See events", :type => :request do
   context "public events" do
     before do
       visit root_path
-      click_link "Eventos"
+      find(".event-link").click
     end
 
     it "redirects to the home page" do
@@ -23,7 +23,7 @@ describe "See events", :type => :request do
   context "user events" do
     before do
       login_as(user)
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Meus eventos"
     end
 

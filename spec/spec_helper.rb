@@ -21,6 +21,8 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
 
+  Capybara.default_max_wait_time = 5
+
   #Capybara.javascript_driver = :webkit_debug
   Capybara.javascript_driver = :webkit
 

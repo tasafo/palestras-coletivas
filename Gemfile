@@ -30,6 +30,7 @@ gem 'tinymce-rails-langs'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'popper_js', '~> 1.11', '>= 1.11.1'
 
 group :development do
   gem 'puma'

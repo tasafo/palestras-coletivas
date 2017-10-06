@@ -12,5 +12,19 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
-//= require_tree .
+//= require jquery-ui/jquery-ui.min
+//= require jquery-ui/i18n/jquery.ui.datepicker-pt-BR.min
+//= require popper
+//= require bootstrap
+//= require mdb/mdb
+//= require schedule
+//= require jquery.rating.pack
+//= require jquery.flexslider
+//= require jquery.maskedinput.min
+//= require jquery.backstretch.min
+//= require custom
+//= require comments
+//= require event
+//= require external_events
+//= require invite_user
+//= require talk

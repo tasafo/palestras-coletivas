@@ -20,7 +20,7 @@ describe "Delete schedule", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
 
       click_with_alert "delete_schedule_id_#{schedule_palestra.id}"

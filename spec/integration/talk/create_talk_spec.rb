@@ -11,7 +11,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup"
@@ -45,7 +45,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "https://speakerdeck.com/luizsanches/ruby-praticamente-falando"
@@ -71,7 +71,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "https://prezi.com/7uq1mhqnclzn/quero-uma-apresentacao-em-prezi/"
@@ -96,7 +96,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       fill_in "Título", :with => "A linguagem C"
@@ -122,7 +122,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       click_button "Adicionar palestra"
@@ -150,7 +150,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "http://www.slideshare.net/luizsanches/invalid"
@@ -167,7 +167,7 @@ describe "Create talk", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "http://www.slideshare.net/luizsanches/compartilhe"

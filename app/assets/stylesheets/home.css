@@ -8,11 +8,15 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require bootstrap.min
- *= require bootstrap-theme
  *= require flexslider
  *= require font-awesome
- *= require animate
- *= require common
- *= require home-common
+ *= require landio/landio
  */
+
+.carousel-header{
+  background: url(tim-napier-181584.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

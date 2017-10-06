@@ -1,6 +1,6 @@
   <h3><%= t("new.invite.#{key}") %></h3>
 
-  <div id="search-invitee" class="col-md-4 input-group">
+  <div id="search-invitee" class="col-md-6 input-group">
     <%= text_field :invitee, :username, class: "form-control",
         placeholder: t("labels.talk.search_user"),
         data: {
@@ -11,9 +11,7 @@
         } %>
 
     <%= hidden_field :user, :id %>
-    <span class="input-group-btn">
-      <button type="button" id="add_user" class="btn btn-success"><%= t("new.invite.add") %></button>
-    </span>
+    <button type="button" id="add_user" class="btn btn-success"><%= t("new.invite.add") %></button>
   </div>
 
   <div id="users">

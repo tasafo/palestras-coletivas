@@ -8,7 +8,7 @@ describe "Show private talk", :type => :request, :js => true do
     before do
       login_as(user)
       visit root_path
-      click_link "Palestras"
+      visit talks_path
       click_link "Minhas palestras"
       click_link "Ruby praticamente falando"
     end

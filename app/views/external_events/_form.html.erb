@@ -1,39 +1,29 @@
 <%= form_for(@external_event, url: url, html: {class: 'form-horizontal'}) do |f| %>
   <%= render "shared/error_messages", record: @external_event %>
 
-  <div class="form-group">
-    <%= f.label :name, t("labels.external_event.name"), :class => 'control-label col-md-3' %>
-    <div class="col-md-5">
-      <%= f.text_field :name, class: "form-control" %>
-    </div>
+  <div class="md-form">
+    <%= f.text_field :name, class: "form-control" %>
+    <%= f.label :name, t("labels.external_event.name") %>
+  </div>
+
+  <div class="md-form">
+    <%= f.text_field :date, class: "form-control date col-md-2" %>
+    <%= f.label :date, t("labels.external_event.date") %>
+  </div>
+
+  <div class="md-form">
+    <%= f.text_field :place, class: "form-control" %>
+    <%= f.label :place, t("labels.external_event.place") %>
+  </div>
+
+  <div class="md-form">
+    <%= f.url_field :url, class: "form-control" %>
+    <%= f.label :url, t("labels.external_event.url") %>
   </div>
 
   <div class="form-group">
-    <%= f.label :date, t("labels.external_event.date"), :class => 'control-label col-md-3' %>
-    <div class="col-md-2">
-      <%= f.text_field :date, class: "form-control date" %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :place, t("labels.external_event.place"), :class => 'control-label col-md-3' %>
-    <div class="col-md-5">
-      <%= f.text_field :place, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :url, t("labels.external_event.url"), :class => 'control-label col-md-3' %>
-    <div class="col-md-5">
-      <%= f.url_field :url, class: "form-control" %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :active, class: 'control-label col-md-3' %>
-    <div class="col-md-6">
-      <%= f.check_box :active %>
-    </div>
+    <%= f.check_box :active %>
+    <%= f.label :active %>
   </div>
 
   <div class="container">

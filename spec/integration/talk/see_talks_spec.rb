@@ -7,8 +7,8 @@ describe "See talks", :type => :request do
   context "with two talks" do
     before do
       login_as(user)
-      visit root_path
-      click_link "Palestras"
+
+      find(".link-talk").click
     end
 
     it "redirects to the home page" do

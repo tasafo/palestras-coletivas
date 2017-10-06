@@ -1,7 +1,8 @@
-<%= render "shared/title", title: t("titles.events.index") %>
+<%= render "shared/header", index: :event %>
+<%= render "shared/title", title: t("titles.events.index"), index: :event %>
 
 <div class="container-fluid">
-  <div class="row-fluid">
+  <div class="row-fluid events-actions">
     <% if logged_in? %>
       <div class="col-md-12">
         <center>

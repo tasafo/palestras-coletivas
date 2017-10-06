@@ -1,79 +1,90 @@
-    <!-- begin intro section -->
+  <!-- Hero Section
+  ================================================== -->
 
-    <section class="intro" id="intro">
-      <div class="blur"></div>
-      <div class="container intro-container">
-        <div class="row-fluid flexslider">
-          <ul class="slides">
-            <% @events.each do |event| %>
-              <li>
-                <div class="event">
-                  <h1><%= event.name %> - <%= event.edition %></h1>
-
-                  <p><%= l event.start_date, format: :long %> - <%= event.place %></p>
-
-                  <%= link_to 'Saiba mais', event_path(event), class: 'btn btn-start' %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
+  <header id="landioCarousel" class="carousel carousel-header slide bg-inverse" data-ride="carousel" data-interval="0" role="banner">
+    <ol class="carousel-indicators">
+      <li data-target="#landioCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#landioCarousel" data-slide-to="1"></li>
+      <li data-target="#landioCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <% @events.each do |event| %>
+      <div class="carousel-item <%= 'active' if event == @events.first %>">
+        <div class="carousel-caption">
+          <h1 class="display-3"><%= event.name %> - <%= event.edition %></h1>
+          <h2 class="m-b-3 hidden-sm-down"><em><%= l event.start_date, format: :long %></em> - <%= event.place %></h2>
+          <%= link_to 'Saiba Mais', event_path(event), class: 'btn btn-secondary-outline m-b-2', role:"button" %>
         </div>
       </div>
-    </section>
+      <% end %>
+    </div>
+  </header>
 
-    <section id="about">
-      <div class="container">
-        <h3 class="wow zoomInUp">Sobre o Palestras Coletivas</h3>
+  <section class="section-intro bg-faded text-xs-center">
+    <div class="container">
+      <h3 class="wp wp-1">Encontre palestras incríveis</h3>
+      <p class="lead wp wp-2">Slides de palestras apresentadas por profissionais renomados de todo o Brasil.</p>
+      <img src="assets/video-poster.jpg" alt="plateia" class="img-fluid wp wp-3">
+    </div>
+  </section>
 
-        <div class="row">
-          <div class="col-md-4 caption wow fadeInUp" data-wow-offset="200">
-            <i class="fa fa-comments fa-4x"></i>
-            <h4>Mostre seus trabalhos</h4>
-            <p>Crie seu portfólio de palestras, cursos e workshops para que possam ser consultados por pessoas que desejam ver trabalhos de sua área. Com isso, os organizadores dos eventos podem lhe convidar e adicioná-las na grade de programação.</p>
-          </div>
-
-          <div class="col-md-4 caption wow fadeInUp" data-wow-delay=".4s" data-wow-offset="200">
-            <i class="fa fa-ticket fa-4x"></i>
-            <h4>Organize seus eventos</h4>
-            <p>De uma maneira bem simples, você pode lançar informações de eventos acadêmicos, seminários ou encontros de diversas áreas. E, ainda com a opção de adicionar organizadores, grupos envolvidos e a grade de programação dos dias do evento. Os usuários cadastrados podem se inscrever no evento com apenas poucos cliques.</p>
-          </div>
-
-          <div class="col-md-4 caption wow fadeInUp" data-wow-delay=".6s" data-wow-offset="200">
-            <i class="fa fa-users fa-4x"></i>
-            <h4>Conheça mais pessoas</h4>
-            <p>O espaço que estamos dispondo aqui é apenas para provocar o encontro entre pessoas do mesmo interesse em suas áreas. Ele serve para promover a socialização do conhecimento.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end intro section -->
-
-    <section id="calltoaction">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="col-md-6 wow fadeInLeft" data-wow-offset="100">"A melhor forma de prever o futuro é criá-lo." Peter Drucker</div>
-
-          <div class="col-md-6 wow fadeInRight" data-wow-offset="100">
-            <%= link_to 'Cadastre um evento', new_event_path, class: 'btn btn-call' %>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tops-presentations">
-      <div class="blur-presentation"></div>
-      <div class="container presentations-container">
-        <h3 class="wow zoomInUp" data-wow-offset="150">Top speakers</h3>
-
-        <div class="row-fluid row-talkers">
-          <% @talkers.each do |talker| %>
-            <div class="talker col-md-4 wow fadeInUp" data-wow-offset="200" data-wow-delay="">
-              <a href="<%= user_path(talker) %>" title="<%= talker.name %>">
-                <%= thumbnail(talker, "100x100") %>
-                <p><%= talker.name %></p>
-              </a>
+  <section class="section-features text-xs-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-block">
+              <span class="icon-pen display-1"></span>
+              <h4 class="card-title">Mostre seus trabalhos</h4>
+              <p class="card-text">Crie seu portfólio de palestras, cursos e workshops para que possam ser consultados por pessoas que desejam ver trabalhos de sua área. Com isso, os organizadores dos eventos podem lhe convidar e adicioná-las na grade de programação.</p>
             </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-block">
+              <span class="icon-thunderbolt display-1"></span>
+              <h4 class="card-title">Organize seus eventos</h4>
+              <p class="card-text">De uma maneira bem simples, você pode lançar informações de eventos acadêmicos, seminários ou encontros de diversas áreas. E, ainda com a opção de adicionar organizadores, grupos envolvidos e a grade de programação dos dias do evento. Os usuários cadastrados podem se inscrever no evento com apenas poucos cliques.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card m-b-0">
+            <div class="card-block">
+              <span class="icon-heart display-1"></span>
+              <h4 class="card-title">Conheça mais pessoas</h4>
+              <p class="card-text">O espaço que estamos dispondo aqui é apenas para provocar o encontro entre pessoas do mesmo interesse em suas áreas. Ele serve para promover a socialização do conhecimento.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-testimonials text-xs-center bg-inverse">
+    <div class="container">
+      <h3 class="sr-only">Testimonials</h3>
+      <div id="carousel-testimonials" class="carousel slide" data-ride="carousel" data-interval="0">
+        <div class="carousel-inner" role="listbox">
+          <% @talkers.each do |talker| %>
+          <div class="carousel-item active">
+            <blockquote class="blockquote">
+              <%= thumbnail(talker, "80x80", "img-circle") %>
+              <footer>
+                <a href="<%= user_path(talker) %>" title="<%= talker.name %>">
+                  <%= talker.name %>
+                </a>
+              </footer>
+            </blockquote>
+          </div>
           <% end %>
         </div>
+        <ol class="carousel-indicators">
+          <% @talkers.each_with_index do |talker, index| %>
+            <li class="active"><%= thumbnail(talker, "80x80", "img-fluid img-circle", { target: "#carousel-testimonials", "slide-to": index.to_s } ) %></li>
+          <% end %>
+        </ol>
       </div>
-    </section>
+    </div>
+  </section>

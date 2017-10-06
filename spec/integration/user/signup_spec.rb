@@ -19,10 +19,6 @@ describe "Signup", :type => :request do
     it "redirects to the the login page" do
       expect(current_path).to eql(login_path)
     end
-
-    it "displays success message" do
-      expect(page).to have_content("Seu cadastro foi realizado com sucesso")
-    end
   end
 
   context "with invalid data" do

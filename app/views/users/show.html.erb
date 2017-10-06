@@ -1,4 +1,5 @@
-<%= render "shared/title", title: t("titles.users.profile") %>
+<%= render "shared/header", index: :ranking %>
+<%= render "shared/title", title: t("titles.users.profile"), index: :ranking %>
 
 <% if logged_in? %>
   <div class="container">

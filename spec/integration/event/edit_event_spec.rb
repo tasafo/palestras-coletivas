@@ -19,7 +19,7 @@ describe "Edit event", :type => :request, js: true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
       click_link "Editar evento"
 
@@ -45,7 +45,7 @@ describe "Edit event", :type => :request, js: true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
       click_link "Editar evento"
 

@@ -8,7 +8,7 @@ describe "Logout", :type => :request do
       login_as user
 
       visit root_path
-      click_link "Sair"
+      first(".link-logout").click
     end
 
     it "redirects to home page" do

@@ -10,8 +10,7 @@ describe "Show public talk", :type => :request do
   context "of slideshare" do
     before do
       login_as(user)
-      visit root_path
-      click_link "Palestras"
+      visit talks_path
       click_link "Compartilhe"
     end
 
@@ -28,7 +27,7 @@ describe "Show public talk", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Ruby - praticamente falando"
     end
 
@@ -45,7 +44,7 @@ describe "Show public talk", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "SOA - Introdução"
     end
 
@@ -62,7 +61,7 @@ describe "Show public talk", :type => :request do
     before do
       login_as(user)
       visit root_path
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "A história da informática"
     end
 

@@ -9,7 +9,7 @@ describe "Edit external event of talk", :type => :request do
   context "when valid data" do
     before do
       login_as user
-      click_link "Palestras"
+      visit talks_path
       click_link "Compartilhe"
       click_link "external_event_id_#{fisl.id}"
 
@@ -30,7 +30,7 @@ describe "Edit external event of talk", :type => :request do
   context "when invalid data" do
     before do
       login_as user
-      click_link "Palestras"
+      visit talks_path
       click_link "Compartilhe"
       click_link "external_event_id_#{fisl.id}"
 

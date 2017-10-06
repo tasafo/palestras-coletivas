@@ -1,4 +1,5 @@
-<%= render "shared/title", title: t("titles.users.reset_password") %>
+<%= render "shared/header", index: :talk %>
+<%= render "shared/title", title: t("titles.users.reset_password"), index: :talk %>
 
 <%= form_tag password_resets_path, method: :post, class: 'form-horizontal' do %>
   <div class="form-group">

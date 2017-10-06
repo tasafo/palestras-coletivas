@@ -7,12 +7,12 @@ describe "Edit user", :type => :request do
   context "with valid data" do
     before do
       login_as user
-      visit root_path
+      visit events_path
       click_link "Meus dados"
 
       fill_in "Seu nome", :with => "Carl Simon"
 
-      click_button "Atualizar dados"
+      click_button "Cadastre-me"
     end
 
     it "redirects to the user show page" do
@@ -27,12 +27,12 @@ describe "Edit user", :type => :request do
   context "with invalid data" do
     before do
       login_as user
-      visit root_path
+      visit events_path
       click_link "Meus dados"
 
       fill_in "Seu nome", :with => ""
 
-      click_button "Atualizar dados"
+      click_button "Cadastre-me"
     end
 
     it "renders form page" do
@@ -62,13 +62,13 @@ describe "Edit user", :type => :request do
   context "with valid password" do
     before do
       login_as user
-      visit root_path
+      visit events_path
       click_link "Meus dados"
 
       fill_in "Sua senha", :with => "newpassword"
       fill_in "Confirme sua senha", :with => "newpassword"
 
-      click_button "Atualizar dados"
+      click_button "Cadastre-me"
     end
 
     it "redirects to the user show page" do
@@ -83,13 +83,13 @@ describe "Edit user", :type => :request do
   context "with invalid password" do
     before do
       login_as user
-      visit root_path
+      visit events_path
       click_link "Meus dados"
 
       fill_in "Sua senha", :with => "newpassword"
       fill_in "Confirme sua senha", :with => "otherpassword"
 
-      click_button "Atualizar dados"
+      click_button "Cadastre-me"
     end
 
     it "renders form page" do

@@ -1,4 +1,5 @@
-<%= render "shared/title", title: t("titles.talks.show") %>
+<%= render "shared/header", index: :talk %>
+<%= render "shared/title", title: t("titles.talks.show"), index: :talk %>
 
 <% if @talk %>
   <div class="container">

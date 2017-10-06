@@ -12,7 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.flexslider
-//= require wow
-//= require home-common
-//= require bootstrap.min
+//= require util
+//= require carousel
+//= require dropdown
+//= require button
+//= require alert
+//= require modal
+//= require scrollspy
+//= require tab
+//= require collapse
+//= require plugins/jquery.waypoints
+//= require plugins/jquery.placeholder
+//= require plugins/chart
+//= require landio

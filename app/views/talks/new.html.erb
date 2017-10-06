@@ -1,3 +1,14 @@
-<%= render "shared/title", title: t("titles.talks.new") %>
+<%= render "shared/header", index: :talk %>
+<%= render "shared/title", title: t("titles.talks.new"), index: :talk %>
 
-<%= render 'form', url: talks_path %>
+<div class="container">
+  <div class="card">
+    <div class="card-body mx-4">
+      <!--Header-->
+      <div class="text-center">
+          <h3 class="dark-grey-text mb-5"><strong>Nova Palestra</strong></h3>
+      </div>
+      <%= render 'form', url: talks_path %>
+    </div>
+  </div>
+</div>

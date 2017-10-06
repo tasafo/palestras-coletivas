@@ -12,7 +12,7 @@ describe "Create enrollment", :type => :request, js: true do
   context "when logged" do
     before do
       login_as(other_user)
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
       click_link "Quero participar!"
       click_button "Quero participar"
@@ -30,7 +30,7 @@ describe "Create enrollment", :type => :request, js: true do
   context "when unlogged" do
     before do
       visit root_path
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
       click_link "Quero participar!"
     end
@@ -40,13 +40,13 @@ describe "Create enrollment", :type => :request, js: true do
     end
 
     it "displays login message" do
-      expect(page).to have_content("Você precisa estar logado para acessar esta página.")
+      expect(page).to have_content(" Log in")
     end
 
     context 'when user do log in' do
       before do
         visit root_path
-        click_link "Eventos"
+        find(".event-link").click
         click_link "Tá Safo Conf"
         click_link "Quero participar!"
         fill_in "Seu e-mail", :with => other_user.email
@@ -62,7 +62,7 @@ describe "Create enrollment", :type => :request, js: true do
     context 'when user do log in and enrollment has held' do
       before do
         visit root_path
-        click_link "Eventos"
+        find(".event-link").click
         click_link "Tá Safo Conf"
         click_link "Quero participar!"
         fill_in "Seu e-mail", :with => another_user.email
@@ -84,7 +84,7 @@ describe "Create enrollment", :type => :request, js: true do
   context "when the user is organizer" do
     before do
       login_as(user)
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
     end
 

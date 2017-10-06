@@ -1,9 +1,5 @@
-<%= render "shared/title", title: t("titles.users.signup") %>
+<%= render "shared/header", index: :ranking %>
 
 <div class="container">
-  <p>
-    <%= t("signup.about_html", url: login_path) %>
-  </p>
-
   <%= render "form", url: new_user_path %>
 </div>

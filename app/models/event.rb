@@ -53,7 +53,7 @@ class Event
   slug :name, :edition
 
   scope :upcoming, -> {
-    where(to_public: true, :start_date.gte => Time.zone.today)
+    where(to_public: true)
     .desc(:start_date).limit(3)
   }
 

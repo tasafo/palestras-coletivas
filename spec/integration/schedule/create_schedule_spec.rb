@@ -17,7 +17,7 @@ describe "Create schedule", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
 
@@ -43,7 +43,7 @@ describe "Create schedule", :type => :request, :js => true do
     before do
       login_as(user)
       visit root_path
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
       click_button "Adicionar programação"
@@ -63,7 +63,7 @@ describe "Create schedule", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      visit events_path
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
 

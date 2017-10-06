@@ -11,7 +11,7 @@ describe "Submit talk already created", :type => :request, js: true do
     before do
       login_as user
 
-      click_link "Palestras"
+      find(".link-talk").click
       click_link "Compartilhe"
       click_link "Submeter a um evento"
 

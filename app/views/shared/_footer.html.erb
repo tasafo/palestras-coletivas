@@ -1,14 +1,25 @@
-<footer class="footer">
+<footer class="section-footer bg-inverse" role="contentinfo">
   <div class="container">
-    <div class="row-fluid copyright">
-      <div class="col-md-12 text-center">&copy; 2013 <a href="http://tasafo.org" rel="external">Tá safo!</a></div>
-      <div class="col-md-12 text-center">
-        <%= link_to "https://github.com/tasafo/palestras-coletivas" do %>
-          <i class="fa fa-github" aria-hidden="true"></i> <%= t("menu.source") %>
-        <% end %>
+    <div class="row">
+      <div class="col-md-6 col-lg-5">
+        <div class="media">
+          <div class="media-left">
+          </div>
+          <small class="media-body media-bottom">
+            &copy; Tá Safo 2017. <br>
+            Palestras Coletivas
+            </small>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-7">
+        <ul class="nav nav-inline">
+          <li class="nav-item active">
+            <a class="nav-link" href="/talks"><small>Slides</small> Incríveis<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="/ranking" target="_blank">Ranking</a></li>
+        </ul>
       </div>
     </div>
   </div>
 </footer>
-
-<%= javascript_include_tag "application" %>

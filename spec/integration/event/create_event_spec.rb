@@ -10,7 +10,7 @@ describe "Create event", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Adicionar evento"
 
       fill_in "Nome", :with => "Tá Safo Conf"
@@ -58,7 +58,7 @@ describe "Create event", :type => :request, :js => true do
     before do
       login_as(user)
       visit root_path
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Adicionar evento"
       click_button "Adicionar evento"
     end
@@ -77,7 +77,7 @@ describe "Create event", :type => :request, :js => true do
       login_as(user)
       visit root_path
 
-      click_link "Eventos"
+      find(".event-link").click
       click_link "Adicionar evento"
 
       fill_in "Nome", :with => "Tá Safo Conf"

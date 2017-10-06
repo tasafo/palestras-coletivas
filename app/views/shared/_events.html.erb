@@ -1,26 +1,34 @@
+<div class="container">
   <%= render "shared/paginate", list: events %>
 
   <div class="row">
-    <% events.each do |event| %>
-      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-        <div class="box-event">
-          <% if event.thumbnail.blank? %>
-            <%= link_to image_tag("without_event.jpg"), event_path(event) %>
-          <% else %>
-            <div class="icon">
-              <%= fa_icon event.thumbnail %>
-            </div>
-          <% end %>
+    <% events.each_with_index do |event, index| %>
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card">
+          <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
+            <% if event.thumbnail.blank? %>
+              <%= image_tag("without_event.jpg", class: "img-fluid") %>
+            <% end %>
+            <%= link_to event_path(event) do %>
+              <div class="mask"></div>
+            <% end %>
+          </div>
 
-          <h6><%= link_to suspension_points("#{event.name} - #{event.edition}", 50), event_path(event) %></h6>
+          <div class="card-body">
+              <!--Title-->
+              <h4 class="card-title"><%= link_to suspension_points("#{event.name} - #{event.edition}", 50), event_path(event) %></h4>
+              <% if event.start_date == event.end_date %>
+                <p><%= l event.start_date %></p>
+              <% else %>
+                <p><%= l event.start_date %> - <%= l event.end_date %></p>
+              <% end %>
+              <p class="card-text"> <%=  suspension_points(event.description.html_safe, 100) %> </p>
+          </div>
 
-          <% if event.start_date == event.end_date %>
-            <p><b><%= l event.start_date %></b></p>
-          <% else %>
-            <p><b><%= l event.start_date %> - <%= l event.end_date %></b></p>
-          <% end %>
+          <div class="card-footer">
+            <span><%= t("event.created_time", time: time_ago_in_words(event.created_at)) %></span>
+          </div>
 
-          <span><%= t("event.created_time", time: time_ago_in_words(event.created_at)) %></span>
         </div>
       </div>
     <% end %>
@@ -29,3 +37,4 @@
   <hr/>
 
   <%= render "shared/paginate", list: events %>
+</div>

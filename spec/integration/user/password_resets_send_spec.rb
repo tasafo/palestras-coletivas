@@ -6,8 +6,7 @@ describe "Send password resets", :type => :request do
   context "when valid data" do
     before do
       visit root_path
-      click_link "Acesso"
-      click_link "Minha conta"
+      click_link "Entrar"
       click_link "Esqueceu a senha?"
 
       fill_in "Seu e-mail", :with => user.email
@@ -27,8 +26,7 @@ describe "Send password resets", :type => :request do
   context "when invalid data" do
     before do
       visit root_path
-      click_link "Acesso"
-      click_link "Minha conta"
+      click_link "Entrar"
       click_link "Esqueceu a senha?"
 
       fill_in "Seu e-mail", :with => "notfound@mail.com"

@@ -1,8 +1,8 @@
 #:nodoc:
 module ApplicationHelper
-  def thumbnail(user, size = '80x80', klass = 'img-circle')
+  def thumbnail(user, size = '80x80', klass = 'img-circle', data = {})
     image_tag(https(user.thumbnail), alt: user.username, size: size,
-                                     class: klass)
+                                     class: klass, data: data)
   end
 
   def suspension_points(text, max)
