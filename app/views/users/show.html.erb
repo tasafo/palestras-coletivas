@@ -24,7 +24,7 @@
     <p class="lead">
       <%= @presenter.gravatar.about_me.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.about_me}<br/>").html_safe %>
       <%= @presenter.gravatar.current_location.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.current_location}<br/>").html_safe %>
-      <%= t("show.user.profile") %> <%= link_to https(@presenter.gravatar.profile_url), https(@presenter.gravatar.profile_url) %>
+      <%= t("show.user.profile") %> <%= link_to 'gravatar', https(@presenter.gravatar.profile_url) %>
     </p>
   <% end %>
 

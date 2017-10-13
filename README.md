@@ -4,7 +4,7 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ## Status do código
 
-[![Code Climate](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/gpa.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Test Coverage](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/coverage.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Build Status](https://travis-ci.org/tasafo/palestras-coletivas.svg?branch=master)](https://travis-ci.org/tasafo/palestras-coletivas)
+[![Code Climate](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/gpa.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Test Coverage](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/coverage.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Build Status](https://travis-ci.org/tasafo/palestras-coletivas.svg?branch=master)](https://travis-ci.org/tasafo/palestras-coletivas) [![security](https://hakiri.io/github/tasafo/palestras-coletivas/master.svg)](https://hakiri.io/github/tasafo/palestras-coletivas/master)
 
 ## E como eu instalo isso no meu Ubuntu?
 
@@ -14,7 +14,7 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
 ### Vamos usar a versão 2 do Ruby
 
-    rvm install 2.4.1
+    rvm install 2.4.2
 
 ### Usamos o MongoDB, então instala ele lá!
 
@@ -54,7 +54,7 @@ Agora espera...
 
 ### Depois roda esse comando para adicionar uns dados no banco
 
-    rake db:seed
+    rails db:seed
 
 ### Em um terminal, execute o sidekiq para executar as tarefas de segundo plano
 
@@ -82,11 +82,11 @@ Agora espera...
 
 ### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
 
-    rake spec:coverage
+    rails spec:coverage
 
 ### Em produção, você deve gerar o token de segurança da aplicação
 
-    echo "SECRET_KEY_BASE=`bundle exec rake secret`" > .env
+    echo "SECRET_KEY_BASE=`bundle exec rails secret`" > .env
 
 ## Licença
 

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-brakeman -f html > tmp/brakeman-report.html
+brakeman --no-exit-on-warn --no-exit-on-error -f html > tmp/brakeman-report.html
