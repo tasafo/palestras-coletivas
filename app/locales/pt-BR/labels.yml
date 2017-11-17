@@ -2,7 +2,7 @@ pt-BR:
   labels:
     user:
       name: "Seu nome"
-      name_explanaition: "Será usado no seu endereço. Ex.: palestrascoletivas.com.br/users/fulano-de-tal"
+      name_explanaition: "Será usado no seu endereço. Ex.: palestrascoletivas.tasafo.org/users/fulano-de-tal"
       username: "Seu apelido"
       username_explanaition: "Será usado para te encontrar na criação de palestras e eventos."
       email: "Seu e-mail"

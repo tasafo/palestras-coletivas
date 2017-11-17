@@ -1,6 +1,6 @@
 #:nodoc:
 class UserMailer < ActionMailer::Base
-  default from: 'Palestras Coletivas <no-reply@palestrascoletivas.com.br>'
+  default from: 'Palestras Coletivas <no-reply@palestrascoletivas.tasafo.org>'
 
   def password_reset(user_id)
     @user = User.find(user_id)
