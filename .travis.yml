@@ -10,6 +10,7 @@ env:
   global:
     - MONGODB_HOST=localhost:27017
     - REDIS_URL=redis://localhost:6379
+    - WEB_CONCURRENCY=0
 services:
   - mongodb
   - redis-server
