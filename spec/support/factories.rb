@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     password "testdrive"
     password_confirmation "testdrive"

@@ -32,8 +32,9 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'popper_js', '~> 1.11', '>= 1.11.1'
 
+gem 'puma'
+
 group :development do
-  gem 'puma'
   gem 'web-console'
   gem 'spring'
   gem 'spring-watcher-listen'
@@ -42,7 +43,7 @@ end
 group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
 end
 
@@ -59,8 +60,6 @@ group :test do
 end
 
 group :production do
-  gem 'unicorn'
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
   gem 'scout_apm'
 end
