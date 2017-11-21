@@ -36,6 +36,10 @@ class Talk
 
   index({ presentation_url: 1 }, { background: true })
 
+  scope :publics, -> { where(to_public: true) }
+  scope :with_users, -> { includes(:users) }
+  scope :with_schedules, -> { includes(:schedules) }
+
   def url?
     !presentation_url.blank?
   end

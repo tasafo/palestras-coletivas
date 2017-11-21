@@ -38,6 +38,7 @@ group :development do
   gem 'web-console'
   gem 'spring'
   gem 'spring-watcher-listen'
+  gem 'bullet'
 end
 
 group :development, :test do
@@ -45,6 +46,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
+  gem 'faker'
 end
 
 group :test do

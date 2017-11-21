@@ -13,4 +13,5 @@ class Enrollment
 
   scope :actives, -> { where(active: true) }
   scope :presents, -> { where(present: true) }
+  scope :with_user, -> { includes(:user) }
 end

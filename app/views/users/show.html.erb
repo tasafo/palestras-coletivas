@@ -34,18 +34,18 @@
     <% event = t("show.user.events") %>
     <h3><%= event[@user.events.count > 1 ? :other : :one] %></h3>
 
-    <% @user.events.where(to_public: true).order(updated_at: :desc).each do |event| %>
-      <h5><%= link_to "#{event.name} - #{event.edition}", event_path(event) %></h5>
+    <% @user.events.publics.order(updated_at: :desc).each do |event| %>
+      <h5><%= link_to event.name_edition, event_path(event) %></h5>
     <% end %>
   <% end %>
 
   <% presentations = "" %>
 
   <% if @user.talks? %>
-    <% @user.talks.where(to_public: true).each do |talk| %>
+    <% @user.talks.publics.each do |talk| %>
       <% if talk.schedules? %>
-        <% talk.schedules.where(was_presented: true).each do |schedule| %>
-          <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name} - #{schedule.event.edition} )", event_path(schedule.event)) + '</h5>' %>
+        <% talk.schedules.presenteds.each do |schedule| %>
+          <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name_edition} )", event_path(schedule.event)) + '</h5>' %>
         <% end %>
       <% end %>
     <% end %>
@@ -62,7 +62,7 @@
     <h3><%= participation[@participations.count > 1 ? :other : :one] %></h3>
 
     <% @participations.each do |participation| %>
-      <h5><%= link_to "#{participation.event.name} - #{participation.event.edition}", event_path(participation.event) %></h5>
+      <h5><%= link_to participation.event.name_edition, event_path(participation.event) %></h5>
     <% end %>
   <% end %>
 
@@ -73,5 +73,4 @@
 
     <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
   <% end %>
-
 </div>

@@ -52,9 +52,9 @@ class Event
 
   slug :name, :edition
 
+  scope :publics, -> { where(to_public: true) }
   scope :upcoming, -> {
-    where(to_public: true)
-    .desc(:start_date).limit(3)
+    publics.desc(:start_date).limit(3)
   }
 
   before_save do
@@ -66,5 +66,9 @@ class Event
         results[0].geometry['location']['lat']
       ]
     end
+  end
+
+  def name_edition
+    "#{self.name} - #{self.edition}"
   end
 end

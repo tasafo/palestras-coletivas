@@ -2,7 +2,7 @@
 <%= render "shared/title", title: t("titles.enrollments.title"), index: :event %>
 
 <div class="container">
-  <h2><%= t("titles.enrollments.edit") %> <b><%= "#{@event.name} - #{@event.edition}" %></b></h2>
+  <h2><%= t("titles.enrollments.edit") %> <b><%= @event.name_edition %></b></h2>
 
   <%= render 'form', :url => event_enrollment_path %>
 </div>

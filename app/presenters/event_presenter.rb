@@ -70,7 +70,7 @@ class EventPresenter
   def prepare_users_present(event)
     users_present = []
 
-    event.enrollments.presents.each do |enrollment|
+    event.enrollments.with_user.presents.each do |enrollment|
       users_present << enrollment.user
     end
 
@@ -105,7 +105,7 @@ class EventPresenter
   def speaker?(event, user_logged_in)
     is_speaker = false
 
-    event.schedules.each do |schedule|
+    event.schedules.with_includes.each do |schedule|
       next unless schedule.talk?
 
       schedule.talk.users.each do |user|

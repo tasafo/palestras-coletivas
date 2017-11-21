@@ -20,6 +20,8 @@ class Schedule
   before_validation :talk_presence
 
   scope :by_day, ->(day) { where(day: day).asc(:time).desc(:counter_votes) }
+  scope :presenteds, -> { where(was_presented: true) }
+  scope :with_includes, -> { includes(:event, :talk, :activity) }
 
   def find_vote(user)
     votes.find_by(user: user) ? true : false

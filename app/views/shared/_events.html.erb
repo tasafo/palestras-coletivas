@@ -16,7 +16,7 @@
 
           <div class="card-body">
               <!--Title-->
-              <h4 class="card-title"><%= link_to suspension_points("#{event.name} - #{event.edition}", 50), event_path(event) %></h4>
+              <h4 class="card-title"><%= link_to suspension_points(event.name_edition, 50), event_path(event) %></h4>
               <% if event.start_date == event.end_date %>
                 <p><%= l event.start_date %></p>
               <% else %>

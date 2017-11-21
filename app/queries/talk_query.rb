@@ -10,14 +10,14 @@ class TalkQuery
   end
 
   def search(search)
-    @relation.where(to_public: true).full_text_search(search).asc(:title)
+    @relation.with_users.where(to_public: true).full_text_search(search).asc(:title)
   end
 
   def publics
-    @relation.where(to_public: true).desc(:created_at)
+    @relation.with_users.publics.desc(:created_at)
   end
 
   def owner(user)
-    @relation.where(owner: user).desc(:created_at)
+    @relation.with_users.where(owner: user).desc(:created_at)
   end
 end

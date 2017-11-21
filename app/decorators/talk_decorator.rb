@@ -48,7 +48,7 @@ class TalkDecorator
   def update_user_counters
     @talk.users.each do |author|
       user = User.find(author)
-      user.counter_public_talks = user.talks.where(to_public: true).count
+      user.counter_public_talks = user.talks.publics.count
       user.save
     end
   end
