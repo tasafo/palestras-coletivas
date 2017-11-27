@@ -12,7 +12,6 @@ class Event
   field :name, type: String
   field :edition, type: String
   field :description, type: String
-  field :thumbnail, type: String
   field :stocking, type: Integer, default: 0
   field :tags, type: String
   field :start_date, type: Date
@@ -33,6 +32,9 @@ class Event
   field :block_presence, type: Boolean, default: false
   field :workload, type: Integer, default: 0
   field :issue_certificates, type: Boolean, default: false
+  field :image, type: String
+
+  mount_uploader :image, ImageUploader
 
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable

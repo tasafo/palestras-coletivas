@@ -27,6 +27,7 @@ describe "Create event", :type => :request, :js => true do
       fill_in "Cidade", :with => "Belém"
       fill_in "Estado", :with => "Pará"
       fill_in "País", :with => "Brasil"
+      attach_file('Imagem', File.absolute_path("#{Rails.root}/app/assets/images/video-poster.jpg"))
       check("Quero publicar")
 
       fill_autocomplete('invitee_username', with: '@us', select: "Luis XIV (@username_luis)")

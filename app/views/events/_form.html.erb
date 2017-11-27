@@ -17,12 +17,6 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :thumbnail %>
-          <%= f.select(:thumbnail, event_icons_select, class: "form-control") %>
-          <div id="event_thumbnail_icon" class="col-md-1"></div>
-        </div>
-
-        <div class="form-group">
           <%= f.label :stocking %>
           <%= f.text_field :stocking, class: "form-control" %>
         </div>
@@ -80,6 +74,17 @@
         <div class="form-group">
           <%= f.label :tags %>
           <%= f.text_field :tags, placeholder: t("placeholder.events.tags"), class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :image %>
+          <div class="col-sm-8">
+            <%= image_tag(@event.image.url, size: '100x100') if @event.image? %>
+            <%= f.file_field :image %>
+
+            <%= f.check_box :remove_image %>
+            <%= "#{t('actions.delete.label')} #{t('mongoid.attributes.event.image')}" %>
+          </div>
         </div>
 
         <div class="form-group">

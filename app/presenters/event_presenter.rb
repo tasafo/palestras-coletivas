@@ -3,7 +3,7 @@ class EventPresenter
   attr_reader :event, :dates, :authorized, :open_enrollment,
               :can_record_presence, :show_users_present, :users_present,
               :users_active, :crowded, :new_subscription, :the_user_is_speaker,
-              :enrollment, :image_top, :can_vote, :view_certificates
+              :enrollment, :can_vote, :view_certificates
 
   def initialize(event, authorized, user_logged_in = nil)
     prepare_event event, authorized, user_logged_in
@@ -33,7 +33,6 @@ class EventPresenter
     @users_active = prepare_users_active event
     @crowded = @users_active.count >= event.stocking
     logged event, user_logged_in
-    @image_top = ('01'..'12').to_a.sample
     @can_vote = prepare_can_vote(event)
     prepare_authorized(event, authorized)
   end

@@ -21,10 +21,10 @@
 
     <%= render "shared/footer" %>
     <%= javascript_include_tag "application" %>
-    <% if @presenter.image_top %>
+    <% if @event && @event.image? %>
       <script type="text/javascript">
         $.backstretch([
-          "/tops/<%= @presenter.image_top %>.jpg"
+          "<%= @event.image.url %>"
           ], {
             fade: 1000,
             duration: 3000
