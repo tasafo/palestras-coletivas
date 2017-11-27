@@ -21,6 +21,8 @@ class User
   field :gravatar_photo, type: String
   field :avatar, type: String
 
+  mount_uploader :avatar, AvatarUploader
+
   has_and_belongs_to_many :talks, inverse_of: :talks
   has_and_belongs_to_many :watched_talks, class_name: 'Talk',
                                           inverse_of: :watched_user
@@ -133,10 +135,10 @@ class User
   end
 
   def thumbnail
-    if gravatar_photo?
-      gravatar_photo
-    elsif avatar?
+    if avatar?
       avatar.url
+    elsif gravatar_photo?
+      gravatar_photo
     else
       'without_avatar.jpg'
     end

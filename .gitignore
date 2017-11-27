@@ -16,6 +16,7 @@
 /coverage
 /vendor
 public/assets
+public/uploads
 .env
 .rvmrc
 .DS_Store

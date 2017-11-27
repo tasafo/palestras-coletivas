@@ -28,9 +28,12 @@ Um ambiente para você organizar suas palestras, eventos e compartilhar conhecim
 
     sudo apt-get install redis-server
 
-### Instala também a biblioteca webkit, que é uma dependência do capybara-webkit
+### Instala também a biblioteca webkit, que é uma dependência do capybara-webkit (https://github.com/thoughtbot/capybara-webkit)
 
     sudo apt-get install qt5-default libqt5webkit5-dev
+
+### Instala bibliotecas para testes de upload de imagens (https://github.com/rmagick/rmagick)
+    sudo apt-get install libmagickwand-dev
 
 ### MailCatcher (http://mailcatcher.me)
 

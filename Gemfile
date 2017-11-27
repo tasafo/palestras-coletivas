@@ -33,6 +33,9 @@ gem 'sinatra', require: false
 
 gem 'puma'
 
+gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
+gem 'cloudinary'
+
 group :development do
   gem 'web-console'
   gem 'spring'
@@ -46,6 +49,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'rmagick'
 end
 
 group :test do

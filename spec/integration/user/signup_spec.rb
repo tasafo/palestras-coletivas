@@ -12,6 +12,7 @@ describe "Signup", :type => :request do
       fill_in "Seu e-mail", :with => "paul@example.org"
       fill_in "Sua senha", :with => "testdrive"
       fill_in "Confirme sua senha", :with => "testdrive"
+      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
       click_button "Cadastre-me"
     end

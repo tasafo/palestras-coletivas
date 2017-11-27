@@ -40,6 +40,19 @@
             <%= f.label :password_confirmation, t("labels.user.password_confirmation") %>
           </div>
 
+          <div class="md-form">
+            <%= f.label :avatar, class: "control-label col-sm-2" %>
+            <div class="col-sm-8">
+              <%= thumbnail(@user) %>
+              <%= f.file_field :avatar %>
+
+              <% if @user.name? %>
+                <%= f.check_box :remove_avatar %>
+                <%= "#{t('actions.delete.label')} #{t('mongoid.attributes.user.avatar')}" %>
+              <% end %>
+            </div>
+          </div>
+
           <div class="text-center mt-2">
             <button class="btn btn-info waves-effect waves-light"><%= t('helpers.submit.user.create') %> <i class="fa fa-sign-in ml-1"></i></button>
           </div>

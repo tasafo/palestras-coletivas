@@ -13,6 +13,7 @@ pt-BR:
         username: "Apelido"
         email: "E-mail"
         password: "Senha"
+        avatar: "Foto"
         password_confirmation: "Confirmação da senha"
         counter_organizing_events: "Número de eventos organizados"
         counter_presentation_events: "Número de apresentações em eventos"
