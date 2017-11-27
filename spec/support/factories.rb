@@ -18,7 +18,6 @@ FactoryBot.define do
       email "billy@example.org"
       password_reset_token SecureRandom.urlsafe_base64
       password_reset_sent_at 5.hours.ago
-      facebook_photo "/assets/without_avatar.jpg"
     end
 
     trait :luis do
@@ -26,7 +25,6 @@ FactoryBot.define do
       username "@lmiguel"
       email "luiz@example.org"
       gravatar_photo nil
-      facebook_photo nil
     end
 
     trait :random do

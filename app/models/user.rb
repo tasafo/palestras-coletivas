@@ -18,9 +18,8 @@ class User
   field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
   field :counter_public_talks, type: Integer, default: 0
-  field :facebook_url, type: String
-  field :facebook_photo, type: String
   field :gravatar_photo, type: String
+  field :avatar, type: String
 
   has_and_belongs_to_many :talks, inverse_of: :talks
   has_and_belongs_to_many :watched_talks, class_name: 'Talk',
@@ -134,10 +133,10 @@ class User
   end
 
   def thumbnail
-    if !gravatar_photo.blank?
+    if gravatar_photo?
       gravatar_photo
-    elsif !facebook_photo.blank?
-      facebook_photo
+    elsif avatar?
+      avatar.url
     else
       'without_avatar.jpg'
     end
@@ -167,9 +166,5 @@ class User
 
   def update_thumbnail
     self.gravatar_photo = Gravatar.new(email).fields.thumbnail_url
-
-    if facebook_url.blank?
-      self.facebook_photo = Facebook.thumbnail(facebook_url)
-    end
   end
 end

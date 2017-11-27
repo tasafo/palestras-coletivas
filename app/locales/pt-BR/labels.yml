@@ -6,8 +6,6 @@ pt-BR:
       username: "Seu apelido"
       username_explanaition: "Será usado para te encontrar na criação de palestras e eventos."
       email: "Seu e-mail"
-      facebook_url: "Endereço do Facebook"
-      facebook_url_explanaition: "Será usado para obtermos o seu avatar"
       password: "Sua senha"
       password_confirmation: "Confirme sua senha"
 

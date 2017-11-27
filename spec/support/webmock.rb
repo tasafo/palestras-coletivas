@@ -66,13 +66,5 @@ RSpec.configure do |config|
         :body => '{"title": "Titulo", "html": "<iframe src=\"/\assets\/without_presentation.jpg\"><\/iframe>"}',
         :headers => {'Content-Type' => 'application/json; charset=utf-8'}
       )
-
-    stub_request(:get, /graph.facebook.com/).
-      with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-      to_return(
-        :status => 200,
-        :body => '/assets/without_avatar.jpg',
-        :headers => {}
-      )
   end
 end
