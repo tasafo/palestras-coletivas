@@ -32,7 +32,6 @@ class Event
   field :block_presence, type: Boolean, default: false
   field :workload, type: Integer, default: 0
   field :issue_certificates, type: Boolean, default: false
-  field :image, type: String
 
   mount_uploader :image, ImageUploader
 

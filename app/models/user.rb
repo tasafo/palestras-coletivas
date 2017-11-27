@@ -19,7 +19,6 @@ class User
   field :counter_participation_events, type: Integer, default: 0
   field :counter_public_talks, type: Integer, default: 0
   field :gravatar_photo, type: String
-  field :avatar, type: String
 
   mount_uploader :avatar, AvatarUploader
 
