@@ -15,11 +15,10 @@
 //= require jquery-ui/jquery-ui.min
 //= require jquery-ui/i18n/jquery.ui.datepicker-pt-BR.min
 //= require popper
-//= require bootstrap
-//= require mdb/mdb
+//= require bootstrap.min
+//= require mdb/mdb.min
 //= require schedule
 //= require jquery.rating.pack
-//= require jquery.flexslider
 //= require jquery.maskedinput.min
 //= require jquery.backstretch.min
 //= require custom

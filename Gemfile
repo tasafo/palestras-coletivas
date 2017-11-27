@@ -19,8 +19,9 @@ gem 'mongoid_search'
 gem 'geocoder'
 
 gem 'sprockets'
-gem 'sass-rails'
-gem 'bootstrap-sass'
+gem 'popper_js'
+gem 'material_components_web-sass'
+
 gem 'uglifier'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
@@ -29,8 +30,6 @@ gem 'tinymce-rails-langs'
 
 gem 'sidekiq'
 gem 'sinatra', require: false
-gem 'slim'
-gem 'popper_js', '~> 1.11', '>= 1.11.1'
 
 gem 'puma'
 

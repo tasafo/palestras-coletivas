@@ -12,16 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require util
-//= require carousel
-//= require dropdown
-//= require button
-//= require alert
-//= require modal
-//= require scrollspy
-//= require tab
-//= require collapse
+//= require material-components-web
 //= require plugins/jquery.waypoints
 //= require plugins/jquery.placeholder
 //= require plugins/chart
-//= require landio
+//= require landio.min
