@@ -16,7 +16,7 @@
 
           <p><%= link_to suspension_points(talk.title, 60), talk_path(talk) %></p>
 
-          <span><%= t("talk.created_time", time: time_ago_in_words(talk.created_at)) %></span>
+          <span><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></span>
         </div>
       </div>
     <% end %>

@@ -26,11 +26,7 @@ describe "Show user profile", :type => :request do
     end
 
     it "redirects to the home page" do
-      expect(current_path).to eql(users_path)
-    end
-
-    it "displays error message" do
-      expect(page).to have_content("Usuário não cadastrado.")
+      expect(current_path).to eql(root_path)
     end
   end
 

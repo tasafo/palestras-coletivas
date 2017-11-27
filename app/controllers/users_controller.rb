@@ -18,17 +18,13 @@ class UsersController < ApplicationController
   end
 
   def show
-    if !@user.nil?
-      @presenter = UserPresenter.new(@user, params[:page])
-    else
-      redirect_to users_path, notice: t('flash.user_not_found')
-    end
+    redirect_to root_path and return if @user.nil?
+
+    @presenter = UserPresenter.new(@user, params[:page])
   end
 
   def edit
-    if @user != current_user
-      redirect_to users_path, notice: t('flash.unauthorized_access')
-    end
+    redirect_to root_path and return if @user != current_user
   end
 
   def update

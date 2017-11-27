@@ -1,65 +1,56 @@
-<%= form_for @user, url: url, html: {class: 'form-horizontal' } do |f| %>
-<%= render "shared/error_messages", record: @user %>
-<div class=" fade show" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
-  <div class="modal-dialog cascading-modal" role="document">
-      <!--Content-->
+<%= form_for @user, url: url, html: { class: 'form-horizontal' } do |f| %>
+  <%= render "shared/error_messages", record: @user %>
+
+  <div class="fade show" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
+    <div class="modal-dialog cascading-modal" role="document">
       <div class="modal-content">
 
-          <!--Header-->
-          <div class="modal-header light-blue darken-3 white-text">
-              <h4 class="title"><i class="fa fa-user-plus"></i> Registro</h4>
+        <div class="modal-header light-blue darken-3 white-text">
+          <h4 class="title"><i class="fa fa-user-plus"></i> <%= t('titles.users.signup') %></h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="md-form form-sm">
+            <i class="fa fa-book prefix"></i>
+            <%= f.text_field :name, :placeholder => t("placeholder.users.name"), class: "form-control" %>
+            <%= f.label :name, t("labels.user.name") %>
           </div>
-          <!--Body-->
-          <div class="modal-body">
-              <div class="md-form form-sm">
-                  <i class="fa fa-envelope prefix"></i>
-                  <%= f.text_field :name, :placeholder => t("placeholder.users.name"), class: "form-control" %>
-                  <%= f.label :name, t("labels.user.name") %>
-              </div>
 
-              <div class="md-form form-sm">
-                  <i class="fa fa-lock prefix"></i>
-                  <%= f.text_field :username, :placeholder => t("placeholder.users.username"), class: "form-control" %>
-                  <%= f.label :username, t("labels.user.username") %>
-              </div>
-
-              <div class="md-form form-sm">
-                  <i class="fa fa-lock prefix"></i>
-                  <%= f.email_field :email, :placeholder => t("placeholder.users.email"), class: "form-control" %>
-                  <%= f.label :email, t("labels.user.email") %>
-              </div>
-
-              <div class="md-form form-sm">
-                  <i class="fa fa-lock prefix"></i>
-                  <%= f.text_field :facebook_url, :placeholder => t("placeholder.users.facebook_url"), class: "form-control" %>
-                  <%= f.label :facebook_url, t("labels.user.facebook_url") %>
-              </div>
-
-              <div class="md-form form-sm">
-                  <i class="fa fa-lock prefix"></i>
-                  <%= f.password_field :password, class: "form-control" %>
-                  <%= f.label :password, t("labels.user.password") %>
-              </div>
-
-              <div class="md-form form-sm">
-                  <i class="fa fa-lock prefix"></i>
-                  <%= f.password_field :password_confirmation, class: "form-control" %>
-                  <%= f.label :password_confirmation, t("labels.user.password_confirmation") %>
-              </div>
-
-              <div class="text-center mt-2">
-                  <button class="btn btn-info waves-effect waves-light">Cadastre-me <i class="fa fa-sign-in ml-1"></i></button>
-              </div>
-
+          <div class="md-form form-sm">
+            <i class="fa fa-credit-card prefix"></i>
+            <%= f.text_field :username, :placeholder => t("placeholder.users.username"), class: "form-control" %>
+            <%= f.label :username, t("labels.user.username") %>
           </div>
-          <!--Footer-->
-          <div class="modal-footer">
-              <div class="options text-center text-md-right mt-1">
-                  <p>Already have an account? <a href="/login">Log In</a></p>
-              </div>
+
+          <div class="md-form form-sm">
+            <i class="fa fa-envelope prefix"></i>
+            <%= f.email_field :email, :placeholder => t("placeholder.users.email"), class: "form-control" %>
+            <%= f.label :email, t("labels.user.email") %>
           </div>
+
+          <div class="md-form form-sm">
+            <i class="fa fa-facebook prefix"></i>
+            <%= f.text_field :facebook_url, :placeholder => t("placeholder.users.facebook_url"), class: "form-control" %>
+            <%= f.label :facebook_url, t("labels.user.facebook_url") %>
+          </div>
+
+          <div class="md-form form-sm">
+            <i class="fa fa-lock prefix"></i>
+            <%= f.password_field :password, class: "form-control" %>
+            <%= f.label :password, t("labels.user.password") %>
+          </div>
+
+          <div class="md-form form-sm">
+            <i class="fa fa-lock prefix"></i>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
+            <%= f.label :password_confirmation, t("labels.user.password_confirmation") %>
+          </div>
+
+          <div class="text-center mt-2">
+            <button class="btn btn-info waves-effect waves-light"><%= t('helpers.submit.user.create') %> <i class="fa fa-sign-in ml-1"></i></button>
+          </div>
+        </div>
       </div>
-      <!--/.Content-->
+    </div>
   </div>
-</div>
 <% end %>

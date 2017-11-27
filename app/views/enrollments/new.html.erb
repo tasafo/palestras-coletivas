@@ -2,6 +2,11 @@
 <%= render "shared/title", title: t("titles.enrollments.title"), index: :event %>
 
 <div class="container">
-  <h2><%= t("titles.enrollments.new") %> <b><%= @event.name_edition %></b></h2>
-  <%= render 'form', url: event_enrollments_path %>
+  <div class="card">
+    <div class="card-body mx-4">
+      <h2><%= t("titles.enrollments.new") %> <b><%= @event.name_edition %></b></h2>
+
+      <%= render 'form', url: event_enrollments_path %>
+    </div>
+  </div>
 </div>

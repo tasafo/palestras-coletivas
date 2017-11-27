@@ -1,6 +1,0 @@
-pt-BR:
-  talk:
-    created_time: "criado há %{time}"
-
-  event:
-    created_time: "criado há %{time}"

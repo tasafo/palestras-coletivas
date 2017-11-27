@@ -10,6 +10,6 @@ class EventPolicy
   end
 
   def in_progress?
-    (@event.start_date..@event.end_date).cover?(Time.zone.today)
+    (@event.start_date..@event.end_date).cover?(Date.today)
   end
 end

@@ -24,17 +24,56 @@ user = User.create(
   username: 'fulano',
   email: 'fulano@mail.com',
   password: '123456',
-  counter_organizing_events: 1,
+  counter_organizing_events: 2,
   counter_presentation_events: 1,
   counter_public_talks: 2
 )
 
 user.talks.create([
-  {owner: user, presentation_url: '', title: 'As novas tecnologias', description: 'Um pouco sobre as tecnologias do futuro', tags: 'tecnologias', to_public: true},
-  {owner: user, presentation_url: '', title: 'Ruby praticamente falando', description: 'A linguagem Ruby', tags: 'ruby', to_public: true}
+  {
+    owner: user,
+    users: [user],
+    presentation_url: '',
+    title: 'As novas tecnologias',
+    description: 'Um pouco sobre as tecnologias do futuro',
+    tags: 'tecnologias',
+    to_public: true,
+    counter_presentation_events: 1
+  },
+  {
+    owner: user,
+    users: [user],
+    presentation_url: '',
+    title: 'Ruby praticamente falando',
+    description: 'A linguagem Ruby',
+    tags: 'ruby',
+    to_public: true
+  }
 ])
 
 talk = Talk.first
+
+Event.create(
+  name: 'Evento de Relações Humanas',
+  edition: Date.today.year,
+  description: 'Sobre o futuro da humanidade',
+  stocking: 50,
+  workload: 16,
+  thumbnail: 'apple',
+  tags: 'humanos',
+  start_date: Date.today,
+  end_date: Date.today + 1.day,
+  deadline_date_enrollment: Date.today + 1.day,
+  to_public: true,
+  place: 'Praça de Encontro',
+  street: 'Rua dos Pariquis, 300',
+  district: 'Jurunas',
+  city: 'Belém',
+  state: 'Pará',
+  country: 'Brasil',
+  owner: user,
+  users: [user]
+)
 
 event = Event.create(
   name: 'Evento de Tecnologia',
@@ -55,7 +94,9 @@ event = Event.create(
   state: 'Pará',
   country: 'Brasil',
   owner: user,
-  users: [user]
+  users: [user],
+  counter_registered_users: records,
+  counter_present_users: records
 )
 
 event.schedules.create([

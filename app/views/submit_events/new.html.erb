@@ -1,6 +1,12 @@
 <%= render "shared/header", index: :talk %>
 <%= render "shared/title", title: t("titles.submit_event.title"), index: :talk %>
 
-<h2><%= t("titles.submit_event.new") %> <b><%= @talk.title %></b></h2>
+<div class="container">
+  <div class="card">
+    <div class="card-body mx-4">
+      <h2><%= t("titles.submit_event.new") %> <b><%= @talk.title %></b></h2>
 
-<%= render 'form', url: talk_submit_events_path(@talk) %>
+      <%= render 'form', url: talk_submit_events_path(@talk) %>
+    </div>
+  </div>
+</div>

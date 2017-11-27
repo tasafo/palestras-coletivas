@@ -50,12 +50,8 @@ describe "Edit user", :type => :request do
       visit edit_user_path(user)
     end
 
-    it "redirects to the talks page" do
-      expect(current_path).to eql(users_path)
-    end
-
-    it "displays error messages" do
-      expect(page).to have_content("Você não tem permissão para acessar esta página.")
+    it "redirects to the home page" do
+      expect(current_path).to eql(root_path)
     end
   end
 

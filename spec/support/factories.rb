@@ -3,7 +3,7 @@ FactoryBot.define do
     password "testdrive"
     password_confirmation "testdrive"
     password_reset_token SecureRandom.urlsafe_base64
-    password_reset_sent_at Time.zone.now
+    password_reset_sent_at Time.now
 
     trait :paul do
       name "Paul Young"

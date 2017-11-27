@@ -11,7 +11,7 @@
       <% @events.each do |event| %>
       <div class="carousel-item <%= 'active' if event == @events.first %>">
         <div class="carousel-caption">
-          <h1 class="display-3"><%= event.name %> - <%= event.edition %></h1>
+          <h1 class="display-3"><%= event.name_edition %></h1>
           <h2 class="m-b-3 hidden-sm-down"><em><%= l event.start_date, format: :long %></em> - <%= event.place %></h2>
           <%= link_to 'Saiba Mais', event_path(event), class: 'btn btn-secondary-outline m-b-2', role:"button" %>
         </div>

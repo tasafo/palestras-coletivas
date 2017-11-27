@@ -10,7 +10,7 @@ describe "View ranking", :type => :request do
     expect(current_path).to eql(ranking_path)
   end
 
-  it "displays the Top 5 title" do
-    expect(page).to have_content("Top 5")
+  it "displays the Ranking title" do
+    expect(page).to have_content("Ranking")
   end
 end

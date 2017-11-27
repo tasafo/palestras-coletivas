@@ -1,0 +1,6 @@
+pt-BR:
+  created_time: "criado há %{time}"
+
+  date:
+    formats:
+      custom: ! '%A, %d de %B de %Y'

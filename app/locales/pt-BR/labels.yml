@@ -59,12 +59,6 @@ pt-BR:
       person: "Pessoa"
       people: "Pessoas"
 
-    external_event:
-      name: "Nome do evento"
-      place: "Local"
-      date: "Data"
-      url: "Link"
-
     rating:
       vote!: "Dê um feedback!"
       vote: "Voto"

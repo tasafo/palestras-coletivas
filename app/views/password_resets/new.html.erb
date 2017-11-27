@@ -1,15 +1,17 @@
 <%= render "shared/header", index: :talk %>
 <%= render "shared/title", title: t("titles.users.reset_password"), index: :talk %>
 
-<%= form_tag password_resets_path, method: :post, class: 'form-horizontal' do %>
-  <div class="form-group">
-    <%= label_tag :email, t("labels.user.email"), class: 'control-label col-md-2' %>
-    <div class="col-md-4">
-      <%= email_field_tag :email, params[:email], class: "form-control" %>
+<div class="container">
+  <%= form_tag password_resets_path, method: :post, class: 'form-horizontal' do %>
+    <div class="form-group">
+      <%= label_tag :email, t("labels.user.email"), class: 'control-label col-md-2' %>
+      <div class="col-md-4">
+        <%= email_field_tag :email, params[:email], class: "form-control" %>
+      </div>
     </div>
-  </div>
 
-  <div class="container">
-    <%= submit_tag t("form.submit.reset_password"), class: 'btn btn-primary' %>
-  </div>
-<% end %>
+    <div class="container">
+      <%= submit_tag t("form.submit.reset_password"), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

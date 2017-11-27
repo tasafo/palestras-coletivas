@@ -83,7 +83,7 @@ class User
 
   def send_password_reset
     generate_token(:password_reset_token)
-    self.password_reset_sent_at = Time.zone.now
+    self.password_reset_sent_at = Time.now
     save!
     UserMailer.password_reset(id.to_s).deliver_later
   end

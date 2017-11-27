@@ -11,7 +11,7 @@ class EventPresenter
 
   def show_checkin
     !@event.block_presence && @enrollment && @enrollment.active? &&
-      Time.zone.today >= @event.start_date
+      Date.today >= @event.start_date
   end
 
   def address
@@ -28,7 +28,7 @@ class EventPresenter
     return unless event
 
     @dates = (event.start_date..event.end_date).to_a
-    @open_enrollment = event.deadline_date_enrollment >= Time.zone.today
+    @open_enrollment = event.deadline_date_enrollment >= Date.today
     @users_present = prepare_users_present event
     @users_active = prepare_users_active event
     @crowded = @users_active.count >= event.stocking

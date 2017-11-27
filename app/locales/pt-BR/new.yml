@@ -12,13 +12,6 @@ pt-BR:
         video_link_html: "Se quiser, informe o link do vídeo de sua palestra. Exemplos:<br>http://www.youtube.com/watch?v=xptoabc<br>https://vimeo.com/00101100"
         to_public: "Marque para que as pessoas vejam sua palestra"
 
-    event:
-      help:
-        to_public: "Marque para que as pessoas vejam o evento"
-        accepts_submissions: "Marque para que as pessoas possam submeter suas palestras ao evento"
-        block_presence: "Marque para que os inscritos não registrem sua presença na página do evento"
-        issue_certificates_html: "Marque para realizar a integração com o <b><a href='http://certifico.tasafo.org' target='_blank'>certifico.tasafo.org</a></b>"
-
     schedule:
       you_must_enter_a_talk: "Você deve informar uma palestra."
       table:
