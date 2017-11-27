@@ -11,6 +11,7 @@ describe "Edit user", :type => :request do
       click_link "Meus dados"
 
       fill_in "Seu nome", :with => "Carl Simon"
+      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
       click_button "Cadastre-me"
     end
@@ -31,6 +32,7 @@ describe "Edit user", :type => :request do
       click_link "Meus dados"
 
       fill_in "Seu nome", :with => ""
+      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
       click_button "Cadastre-me"
     end
@@ -63,6 +65,7 @@ describe "Edit user", :type => :request do
 
       fill_in "Sua senha", :with => "newpassword"
       fill_in "Confirme sua senha", :with => "newpassword"
+      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
       click_button "Cadastre-me"
     end
@@ -84,6 +87,7 @@ describe "Edit user", :type => :request do
 
       fill_in "Sua senha", :with => "newpassword"
       fill_in "Confirme sua senha", :with => "otherpassword"
+      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
       click_button "Cadastre-me"
     end

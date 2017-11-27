@@ -26,6 +26,9 @@ describe "Signup", :type => :request do
     before do
       visit root_path
       click_link "Cadastre-se"
+
+      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
+
       click_button "Cadastre-me"
     end
 
