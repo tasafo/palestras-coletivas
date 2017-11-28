@@ -1,95 +1,86 @@
 # Palestras coletivas
 
-Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento.
-
-## Status do código
-
 [![Code Climate](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/gpa.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Test Coverage](https://codeclimate.com/github/tasafo/palestras-coletivas/badges/coverage.svg)](https://codeclimate.com/github/tasafo/palestras-coletivas) [![Build Status](https://travis-ci.org/tasafo/palestras-coletivas.svg?branch=master)](https://travis-ci.org/tasafo/palestras-coletivas) [![security](https://hakiri.io/github/tasafo/palestras-coletivas/master.svg)](https://hakiri.io/github/tasafo/palestras-coletivas/master)
 
-## E como eu instalo isso no meu Ubuntu?
+Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento
 
-### Aconselhamos você a usar o gerenciador de versões Ruby (http://rvm.io)
+## Sistemas Operacionais [Debian](https://www.debian.org/) ou [Ubuntu](https://www.ubuntu.com/) Linux
+
+### Ambiente de desenvolvimento
+
+#### Instalação
+
+Linguagem Ruby com [RVM](http://rvm.io)
 
     curl -sSL https://get.rvm.io | bash -s stable
 
-### Vamos usar a versão 2 do Ruby
-
     rvm install 2.4.2
 
-### Usamos o MongoDB, então instala ele lá!
+Bancos de dados [MongoDB](https://www.mongodb.com/) e [Redis](https://redis.io/)
 
-    sudo apt-get install mongodb
+    sudo apt-get install mongodb redis-server
 
-### Aproveita e instala a biblioteca para gerenciar o mongo (http://genghisapp.com/)
-
-    gem install genghisapp
-
-### Usamos o Redis-Server, então instala ele lá!
-
-    sudo apt-get install redis-server
-
-### Instala também a biblioteca webkit, que é uma dependência do capybara-webkit (https://github.com/thoughtbot/capybara-webkit)
+Bibliotecas para executar testes de aceitação com [Capybara](https://github.com/thoughtbot/capybara-webkit)
 
     sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
-### Instala bibliotecas para testes de upload de imagens (https://github.com/rmagick/rmagick)
+Bibliotecas para executar testes de upload de imagens com [RMagick](https://github.com/rmagick/rmagick)
+
     sudo apt-get install libmagickwand-dev
 
-### MailCatcher (http://mailcatcher.me)
+O [Genghisapp](http://genghisapp.com/) gerencia os bancos do MongoDB
 
-#### Instale o MailCatcher para testar o envio de e-mails localmente.
+    gem install genghisapp
+
+O [MailCatcher](http://mailcatcher.me) visualiza o envio de e-mails locais
 
     gem install mailcatcher
 
-#### Execute ele para ficar recebendo seus e-mails locais
+O [Foreman](https://github.com/ddollar/foreman) gerencia a aplicação
 
-    mailcatcher
+    gem install foreman
 
-### Baixa as dependências do projeto
+#### Configuração
+
+Faz o download das bibliotecas requeridas pelo projeto
 
     bundle install
 
-Agora espera...
-
-### Copiar as configurações de conexão de banco de dados
+Copie o exemplo e depois edite o arquivo de configurações
 
     cp .env.example .env
 
-### Depois roda esse comando para adicionar uns dados no banco
+Insere registros do arquivo db/seed.rb no banco de dados
 
     rails db:seed
 
-### Em um terminal, execute o sidekiq para executar as tarefas de segundo plano
+#### Execução
 
-    sidekiq
+Permite visualizar os e-mails locais em http://localhost:1080
 
-### Se você estiver executando outra aplicação que utilize o sidekiq, é melhor rodar o comando
+    mailcatcher
+
+Executa a aplicação no endereço http://localhost:5000
+
+    foreman start
+
+Para visualizar as tarefas do sidekiq, acesse http://localhost:5000/sidekiq e informe as credenciais de acesso
+
+Se você estiver executando outra aplicação que utilize o sidekiq, é melhor executar
 
     redis-cli flushall
 
-### Agora é só rodar e brincar!
+### Ambiente de teste
 
-    rails server
-
-### Em seu navegador, abra o endereço abaixo para testar a aplicação
-
-    localhost:3000
-
-### Em seu navegador, abra o endereço abaixo para analisar as tarefas em segundo plano
-
-    localhost:3000/sidekiq
-
-### Em seu navegador, abra o endereço abaixo para analisar os e-mails recebidos localmente
-
-    localhost:1080
-
-### Executar os testes com a geração do relatório de cobertura, que será gravado na pasta coverage.
+Executa a bateria de testes com a geração do relatório de cobertura, gravado na pasta coverage
 
     rails spec:coverage
 
-### Em produção, você deve gerar o token de segurança da aplicação
+### Ambiente de produção
 
-    echo "SECRET_KEY_BASE=`bundle exec rails secret`" > .env
+Deve ser gerado o token de segurança
+
+    echo "SECRET_KEY_BASE=`bundle exec rails secret`" >> .env
 
 ## Licença
 
