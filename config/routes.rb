@@ -1,7 +1,15 @@
 require 'sidekiq/web'
 
+Sidekiq::Web.use Rack::Auth::Basic do |username, password|
+  ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(username),
+                                              ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_USERNAME"])) &
+    ActiveSupport::SecurityUtils.secure_compare(::Digest::SHA256.hexdigest(password),
+                                                ::Digest::SHA256.hexdigest(ENV["SIDEKIQ_PASSWORD"]))
+end
+
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  mount Sidekiq::Web, at: '/sidekiq'
+
   root :to => "home#index"
 
   get "/signup", :to => "users#new", :as => :new_user
@@ -56,6 +64,4 @@ Rails.application.routes.draw do
     get ':id/organizers',                  to: 'event_certificates#organizers',    as: :certificates_organizers
     get ':id/participants/:kind/:user_id', to: 'event_certificates#participants',  as: :certificates_participants
   end
-
-  mount Sidekiq::Web, at: "/sidekiq"
 end
