@@ -24,7 +24,7 @@
     <% if @event && @event.image? %>
       <script type="text/javascript">
         $.backstretch([
-          "<%= @event.image.url %>"
+          "<%= https(@event.image.url) %>"
           ], {
             fade: 1000,
             duration: 3000

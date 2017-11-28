@@ -8,7 +8,7 @@
           <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
             <%= link_to event_path(event) do %>
               <% if event.image? %>
-                <%= image_tag(event.image.url, size: '350x200') %>
+                <%= image_tag(https(event.image.url), size: '350x200') %>
               <% else %>
                 <div class="mask"></div>
               <% end %>

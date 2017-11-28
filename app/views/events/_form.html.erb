@@ -79,7 +79,7 @@
         <div class="form-group">
           <%= f.label :image %>
           <div class="col-sm-8">
-            <%= image_tag(@event.image.url, size: '100x100') if @event.image? %>
+            <%= image_tag(https(@event.image.url), size: '100x100') if @event.image? %>
             <%= f.file_field :image %>
 
             <%= f.check_box :remove_image %>
