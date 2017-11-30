@@ -24,10 +24,6 @@ Bibliotecas para executar testes de aceitação com [Capybara](https://github.co
 
     sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
-Bibliotecas para executar testes de upload de imagens com [RMagick](https://github.com/rmagick/rmagick)
-
-    sudo apt-get install libmagickwand-dev
-
 O [Genghisapp](http://genghisapp.com/) gerencia os bancos do MongoDB
 
     gem install genghisapp

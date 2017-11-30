@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.debug = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = false
+  config.assets.quiet = true
 
   ActionMailer::Base.delivery_method = :smtp
 
