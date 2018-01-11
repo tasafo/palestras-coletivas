@@ -261,6 +261,8 @@ GEM
     selenium-webdriver (3.7.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    serviceworker-rails (0.5.5)
+      railties (>= 3.1)
     sidekiq (5.0.5)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -359,6 +361,7 @@ DEPENDENCIES
   rspec-rails
   scout_apm
   selenium-webdriver
+  serviceworker-rails
   sidekiq
   simplecov
   sinatra
