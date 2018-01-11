@@ -36,6 +36,8 @@ gem 'puma'
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'cloudinary'
 
+gem "serviceworker-rails"
+
 group :development do
   gem 'web-console'
   gem 'spring'
