@@ -38,6 +38,8 @@ gem 'cloudinary'
 
 gem "serviceworker-rails"
 
+gem 'meta-tags'
+
 group :development do
   gem 'web-console'
   gem 'spring'
