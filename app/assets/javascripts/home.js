@@ -16,5 +16,6 @@
 //= require plugins/jquery.waypoints
 //= require plugins/jquery.placeholder
 //= require plugins/chart
+//= require plugins/video
+//= require landio.min
 //= require serviceworker-companion
-// = require landio.min
