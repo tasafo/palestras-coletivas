@@ -72,8 +72,4 @@ class Event
   def name_edition
     "#{self.name} - #{self.edition}"
   end
-
-  def image_url
-    image.url if image.present?
-  end
 end
