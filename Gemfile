@@ -63,7 +63,7 @@ group :test do
   gem 'capybara'
   gem 'capybara-webkit', '1.15.0'
   gem 'selenium-webdriver'
-  gem 'simplecov', require: false
+  gem 'simplecov', '0.16.1', require: false
   gem 'codeclimate-test-reporter'
 end
 
