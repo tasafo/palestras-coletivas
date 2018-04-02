@@ -31,7 +31,6 @@ class Event
   field :accepts_submissions, type: Boolean, default: false
   field :block_presence, type: Boolean, default: false
   field :workload, type: Integer, default: 0
-  field :issue_certificates, type: Boolean, default: false
 
   mount_uploader :image, ImageUploader
 

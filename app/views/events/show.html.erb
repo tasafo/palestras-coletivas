@@ -1,6 +1,5 @@
 <% if @presenter.event %>
   <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>" />
-  <input type="hidden" name="certifico_url" id="certifico_url" value="<%= @certifico_url %>" />
 
   <%= render "events/show/header" %>
 
@@ -71,10 +70,6 @@
       <% end %>
     </div>
   </section>
-
-  <% if @presenter.view_certificates %>
-    <%= render "events/show/certificates" %>
-  <% end %>
 
   <section class="section">
     <div class="container">

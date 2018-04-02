@@ -54,13 +54,3 @@ pt-BR:
         email: "E-mail"
         presence: "Presença"
       export_subscribers: Exportar inscritos
-      certificates: "Certificados"
-      issue_certificates_html: Os certificados serão enviados para o
-        <b><a href='http://certifico.tasafo.org' target='_blank'>certifico.tasafo.org</a></b>
-        e depois adicionados em uma fila de e-mails para envio aos destinatários
-      issuing_certificates: Enviando certificados...
-      issue_certificates:
-        speakers: Palestrantes
-        organizers: Organizadores
-        attendees: Participantes presentes
-        all_participants: Todos os participantes

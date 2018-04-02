@@ -55,7 +55,6 @@ pt-BR:
         counter_present_users: "Número de usuários presentes"
         block_presence: "Bloquear presença"
         workload: "Carga horária"
-        issue_certificates: "Emitir certificados"
 
       schedule:
         day: "Dia"

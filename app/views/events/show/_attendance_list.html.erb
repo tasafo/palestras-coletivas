@@ -32,10 +32,6 @@
                     <% if @presenter.can_record_presence %>
                       <%= link_to message_button, edit_event_enrollment_path(@event, :present, user[:enrollment]), class: "btn #{button_type}", id: "user_id_#{user[:enrollment].user.id}" %>
                       <% end %>
-
-                      <% if user[:enrollment].present? && @presenter.event.issue_certificates && @certifico_url %>
-                        <button user-id='<%= user[:enrollment].user.id.to_s %>' class="btn btn-primary issue-certificate">Emitir certificado</button>
-                      <% end %>
                   </td>
                 </tr>
               <% end %>

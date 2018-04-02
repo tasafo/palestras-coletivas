@@ -59,10 +59,4 @@ Rails.application.routes.draw do
   get "/schedules/search-talks/:search", :to => "schedules#search_talks"
 
   resources :activities, only: [:create]
-
-  scope '/event_certificates/' do
-    get ':id/speakers',                    to: 'event_certificates#speakers',      as: :certificates_speakers
-    get ':id/organizers',                  to: 'event_certificates#organizers',    as: :certificates_organizers
-    get ':id/participants/:kind/:user_id', to: 'event_certificates#participants',  as: :certificates_participants
-  end
 end
