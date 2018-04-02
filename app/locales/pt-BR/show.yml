@@ -53,6 +53,7 @@ pt-BR:
         name: "Nome"
         email: "E-mail"
         presence: "Presença"
+      export_subscribers: Exportar inscritos
       certificates: "Certificados"
       issue_certificates_html: Os certificados serão enviados para o
         <b><a href='http://certifico.tasafo.org' target='_blank'>certifico.tasafo.org</a></b>

@@ -3,6 +3,7 @@ pt-BR:
     back: "Voltar"
     edit: "Editar"
     new: "Criar"
+    export: Exportar
     comment: "Comentar"
     answer: "Responder"
     delete:

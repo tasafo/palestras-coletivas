@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       resources :votes, only: [:create, :destroy]
       resource :was_presented, only: [:create]
     end
+    resources :export_subscribers, only: [:new, :create]
     resources :enrollments, only: [:new, :create, :edit, :update], path: ":option_type"
   end
 

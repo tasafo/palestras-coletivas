@@ -52,3 +52,12 @@ pt-BR:
     submit_event:
       title: "Submeter"
       new: "Palestra:"
+
+    export_subscribers:
+      index: Exportação dos inscritos
+      new: Exportar inscritos, em arquivo .csv, de
+      profile: Perfil
+      profiles:
+        speakers: Palestrantes
+        organizers: Organização
+        participants: Participantes

@@ -26,7 +26,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost:5000' }
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
 
@@ -50,7 +50,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  #Mongoid.logger.level = Logger::DEBUG
+  Mongoid.logger.level = Logger::DEBUG
 
   config.after_initialize do
     Bullet.enable = true

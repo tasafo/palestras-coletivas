@@ -27,3 +27,4 @@
 //= require external_events
 //= require invite_user
 //= require talk
+//= require export_subscribers

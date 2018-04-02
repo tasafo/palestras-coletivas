@@ -15,7 +15,7 @@ describe "Create event", :type => :request, :js => true do
 
       fill_in "Nome", :with => "Tá Safo Conf"
       fill_in "Edição", :with => "2012"
-      page.execute_script('$(tinymce.editors[0].setContent("Evento de tecnologia que vem com sua 1ª edição na região"))')
+      page.execute_script("$('tinymce').html('Evento de tecnologia que vem com sua 1ª edição na região')")
       fill_in "Lotação", :with => 100
       fill_in "Tags", :with => "tecnologia, agilidade, gestão"
       fill_in_inputmask "Data de início", :with => "05/06/2012"
@@ -83,7 +83,7 @@ describe "Create event", :type => :request, :js => true do
 
       fill_in "Nome", :with => "Tá Safo Conf"
       fill_in "Edição", :with => "2012"
-      page.execute_script('$(tinymce.editors[0].setContent("Evento de tecnologia que vem com sua 1ª edição na região"))')
+      page.execute_script("$('tinymce').html('Evento de tecnologia que vem com sua 1ª edição na região')")
       fill_in "Lotação", :with => 100
       fill_in "Tags", :with => "tecnologia, agilidade, gestão"
       fill_in_inputmask "Data de início", :with => "05/06/2012"
