@@ -5,7 +5,7 @@ class EventQuery
   end
 
   def all_public
-    @relation.publics.desc(:start_date).desc(:created_at)
+    @relation.publics.desc(:start_date)
   end
 
   def present_users

@@ -1,20 +1,20 @@
 <%= render "shared/header", index: :event %>
+
 <%= render "shared/title", title: t("titles.events.index"), index: :event %>
 
-<div class="container-fluid">
-  <div class="row-fluid events-actions">
+<div class="container">
+  <div class="row events-actions">
     <% if logged_in? %>
       <div class="col-md-12">
-        <center>
-          <div class="btn-group" role="group">
-            <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
-            <% if @my %>
-              <%= link_to t("titles.events.all"), events_path, class: "btn btn-primary" %>
-            <% else %>
-              <%= link_to t("titles.events.my"), "/events?my=true", class: "btn btn-primary" %>
-            <% end %>
-          </div>
-        </center>
+        <div class="btn-group pull-right" role="group">
+          <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>&nbsp;
+
+          <% if @my %>
+            <%= link_to t("titles.events.all"), events_path, class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to t("titles.events.my"), "/events?my=true", class: "btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

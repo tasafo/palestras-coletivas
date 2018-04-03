@@ -38,8 +38,7 @@
           <%= render "shared/invite_user", model: @talk, users: @authors, key: "author" %>
 
           <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-                talks_path, class: 'btn btn-default' %>
+          <%= link_to t('helpers.links.cancel'), talks_path, class: 'btn btn-default' %>
         </div>
 
         <%= f.hidden_field :thumbnail %>
