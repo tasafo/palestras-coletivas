@@ -1,0 +1,15 @@
+pt-BR:
+  notice:
+    created: "%{model} foi criado(a) com sucesso."
+    updated: "%{model} foi atualizado(a) com sucesso."
+    destroyed: "%{model} foi removido(a) com sucesso."
+    not_saved:
+      one: "Não foi possível salvar %{resource}: 1 erro"
+      other: "Não foi possível salvar %{resource}: %{count} erros."
+    delete:
+      restriction:
+        talk: Não é possível remover a palestra por estar adicionada em programações de eventos.
+        event: Não é possível remover o evento por existirem programações ou inscrições vinculadas a ele.
+        user: Não é possível remover o usuário por existirem palestras, eventos ou inscrições vinculadas a ele.
+        activity: Não é possível remover a atividade por estar adicionada em programações de eventos.
+    not_found: "%{model} não foi encontrado(a)."

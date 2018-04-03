@@ -6,6 +6,6 @@
   </div>
 
   <% if logged_in? && answer.commented_by?(current_user) %>
-    <%= link_to t("actions.delete.label"), comment_path(comment.commentable.class, comment.commentable, answer), method: :delete, class: "delete", confirm: t("actions.delete.confirm") %>
+    <%= link_to t("actions.delete.label"), comment_path(comment.commentable.class, comment.commentable, answer), method: :delete, class: "delete", data: { confirm: t("actions.delete.confirm") } %>
   <% end %>
 </article>

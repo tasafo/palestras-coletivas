@@ -23,14 +23,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update]
 
-  resources :talks, except: :destroy do
+  resources :talks do
     get :watch
     get :unwatch
     resources :external_events, only: [:new, :create, :edit, :update]
     resources :submit_events, only: [:new, :create]
   end
 
-  resources :events, except: :destroy do
+  resources :events do
     resources :schedules, only: [:new, :create, :edit, :update, :destroy] do
       resources :votes, only: [:create, :destroy]
       resource :was_presented, only: [:create]

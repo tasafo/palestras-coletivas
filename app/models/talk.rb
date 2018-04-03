@@ -21,7 +21,7 @@ class Talk
   has_and_belongs_to_many :users, inverse_of: :talks
   has_and_belongs_to_many :watched_users, class_name: 'User',
                                           inverse_of: :watched_talk
-  has_many :schedules
+  has_many :schedules, dependent: :restrict
   embeds_many :external_events
   embeds_many :comments, as: :commentable
   belongs_to :owner, class_name: 'User', inverse_of: :owner_talks

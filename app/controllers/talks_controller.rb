@@ -1,7 +1,7 @@
 #:nodoc:
 class TalksController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_talk, only: [:show, :edit, :update]
+  before_action :set_talk, only: [:show, :edit, :update, :destroy]
   before_action :set_authors, only: [:new, :create, :edit, :update]
 
   def index
@@ -62,6 +62,19 @@ class TalksController < PersistenceController
 
   def update
     save_object(@talk, params[:users], params: talk_params)
+  end
+
+  def destroy
+    redirect_to root_path,
+      notice: t('flash.unauthorized_access') unless authorized_access?(@talk)
+
+    begin
+      @talk.destroy
+
+      redirect_to talks_path, notice: t('notice.destroyed', model: t('mongoid.models.talk'))
+    rescue Mongoid::Errors::DeleteRestriction
+      redirect_to talk_path(@talk), notice: t('notice.delete.restriction.talk')
+    end
   end
 
   def watch

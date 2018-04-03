@@ -1,14 +1,14 @@
 #:nodoc:
 class EventsController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_event, only: [:show, :edit, :update]
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_organizers, only: [:new, :create, :edit, :update]
 
   def index
     @my = !params[:my].nil?
 
     @events = if logged_in? && @my
-                current_user.events.desc(:created_at)
+                current_user.events.desc(:start_date)
               else
                 EventQuery.new.all_public
               end
@@ -41,6 +41,19 @@ class EventsController < PersistenceController
 
   def update
     save_object(@event, params[:users], params: event_params)
+  end
+
+  def destroy
+    redirect_to root_path,
+      notice: t('flash.unauthorized_access') unless authorized_access?(@event)
+
+    begin
+      @event.destroy
+
+      redirect_to events_path, notice: t('notice.destroyed', model: t('mongoid.models.event'))
+    rescue Mongoid::Errors::DeleteRestriction
+      redirect_to event_path(@event), notice: t('notice.delete.restriction.event')
+    end
   end
 
   def presence
