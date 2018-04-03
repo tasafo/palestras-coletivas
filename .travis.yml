@@ -36,6 +36,3 @@ deploy:
   app: palestrascoletivas
   api_key:
     secure: Ywt596AjohWjOtt14gpnzG9kyLTp+fiOY6Z1i07PHhaiOyoIhv41u5r+yTDhJCjcDw8R+2yOzWBa8igoL+lgJDaw4nTUV+GnFVcW/noFB65LDyjIbvUXGvWdYIN1Y9SpVsm4D9l2WkSUJsyHvFVQOQ1kIJj4zEdxB6LVtnsJeic=
-notifications:
-  slack:
-    secure: Gvi2l8TIyg0cw8DIW7QCd4sKdFAeRmyrAILwV7K+ge0Y8ljRACHDwDONjURMHJfkgTZnqkh8wdJHjZ9GG2269q2UiRTdciGLoABiHSXqrQj0MmYTYygqTumCoSlxg+s5uzJMVYodnXZqYlRfnme58uqrqJgtIjabGGKtbGksM9o=
