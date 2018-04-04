@@ -33,8 +33,7 @@ describe ExportSubscribersController, type: :controller do
     let(:csv_options) { { filename: 'certifico_ta-safo-conf-2012_palestrantes.csv', type: 'text/csv' } }
 
     before do
-      expect(@controller).to receive(:send_data)
-        .with(csv_string, csv_options) { @controller.render nothing: true }
+      expect(@controller).to receive(:send_data).with(csv_string, csv_options)
     end
 
     it "streams the result as a csv file" do
@@ -51,8 +50,7 @@ describe ExportSubscribersController, type: :controller do
     let(:csv_options) { { filename: 'certifico_ta-safo-conf-2012_organizacao.csv', type: 'text/csv' } }
 
     before do
-      expect(@controller).to receive(:send_data)
-        .with(csv_string, csv_options) { @controller.render nothing: true }
+      expect(@controller).to receive(:send_data).with(csv_string, csv_options)
     end
 
     it "streams the result as a csv file" do
@@ -69,8 +67,7 @@ describe ExportSubscribersController, type: :controller do
     let(:csv_options) { { filename: 'certifico_ta-safo-conf-2012_participantes.csv', type: 'text/csv' } }
 
     before do
-      expect(@controller).to receive(:send_data)
-        .with(csv_string, csv_options) { @controller.render nothing: true }
+      expect(@controller).to receive(:send_data).with(csv_string, csv_options)
     end
 
     it "streams the result as a csv file" do
