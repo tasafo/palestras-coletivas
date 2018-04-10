@@ -68,13 +68,9 @@ class TalksController < PersistenceController
     redirect_to root_path,
       notice: t('flash.unauthorized_access') unless authorized_access?(@talk)
 
-    begin
-      @talk.destroy
+    @talk.destroy
 
-      redirect_to talks_path, notice: t('notice.destroyed', model: t('mongoid.models.talk'))
-    rescue Mongoid::Errors::DeleteRestriction
-      redirect_to talk_path(@talk), notice: t('notice.delete.restriction.talk')
-    end
+    redirect_to talks_path, notice: t('notice.destroyed', model: t('mongoid.models.talk'))
   end
 
   def watch

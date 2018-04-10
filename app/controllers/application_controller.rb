@@ -4,12 +4,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
 
   rescue_from Mongoid::Errors::InvalidFind, with: :record_not_found
+  rescue_from Mongoid::Errors::DeleteRestriction, with: :delete_restriction
 
   private
 
   def record_not_found
     redirect_to root_path
   end
+
+  def delete_restriction
+    path = "/#{controller_name}"
+
+    redirect_to path, notice: t("notice.delete.restriction.#{controller_name}")
+  end
+
 
   def require_logged_user
     redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",

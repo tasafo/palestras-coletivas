@@ -8,8 +8,8 @@ pt-BR:
       other: "Não foi possível salvar %{resource}: %{count} erros."
     delete:
       restriction:
-        talk: Não é possível remover a palestra por estar adicionada em programações de eventos.
-        event: Não é possível remover o evento por existirem programações ou inscrições vinculadas a ele.
-        user: Não é possível remover o usuário por existirem palestras, eventos ou inscrições vinculadas a ele.
-        activity: Não é possível remover a atividade por estar adicionada em programações de eventos.
+        talks: Não é possível remover a palestra por estar adicionada em programações de eventos.
+        events: Não é possível remover o evento por existirem programações ou inscrições vinculadas a ele.
+        users: Não é possível remover o usuário por existirem palestras, eventos ou inscrições vinculadas a ele.
+        activities: Não é possível remover a atividade por estar adicionada em programações de eventos.
     not_found: "%{model} não foi encontrado(a)."

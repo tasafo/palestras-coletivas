@@ -47,13 +47,9 @@ class EventsController < PersistenceController
     redirect_to root_path,
       notice: t('flash.unauthorized_access') unless authorized_access?(@event)
 
-    begin
-      @event.destroy
+    @event.destroy
 
-      redirect_to events_path, notice: t('notice.destroyed', model: t('mongoid.models.event'))
-    rescue Mongoid::Errors::DeleteRestriction
-      redirect_to event_path(@event), notice: t('notice.delete.restriction.event')
-    end
+    redirect_to events_path, notice: t('notice.destroyed', model: t('mongoid.models.event'))
   end
 
   def presence
