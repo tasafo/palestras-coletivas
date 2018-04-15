@@ -26,12 +26,11 @@ $(function() {
 });
 
 var addPresence = function(obj) {
+  event_id = $("#event_id").val()
+
   $.ajax({
-    url: "/event/presence",
-    data: {
-      event_id: $("#event_id").val()
-    },
-    type: "put",
+    url: "/events/" + event_id + "/presences",
+    type: "post",
     dataType: "json",
     success: function(res) {
       $(obj).addClass("btn-info disabled");

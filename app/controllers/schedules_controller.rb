@@ -41,10 +41,6 @@ class SchedulesController < ApplicationController
     redirect_to event_path(@event), notice: message if @schedule.destroy
   end
 
-  def search_talks
-    @talks = TalkQuery.new.search(params[:search]) unless params[:search].blank?
-  end
-
   private
 
   def set_schedule

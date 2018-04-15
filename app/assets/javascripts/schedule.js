@@ -9,7 +9,7 @@ $(function() {
                 data : {
                     id : activity_id
                 },
-                async : false,
+                async : true,
                 type : "post",
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
@@ -66,8 +66,18 @@ function search_talk() {
     talks = "";
 
     if (search_text.length > 0) {
-        $.getJSON('/schedules/search-talks/' + search_text, function(json) {
-            if (json) {
+        $.ajax({
+            url : "/talk_search",
+            data : {
+                search : search_text
+            },
+            async : true,
+            type : "post",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+            },
+            dataType : "json",
+            success : function(json) {
                 for (var i in json) {
                     thumb = json[i].thumbnail ? json[i].thumbnail : '/without_presentation.jpg';
 

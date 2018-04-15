@@ -6,7 +6,7 @@
         <% if @presenter.authorized %>
           <%= link_to t("titles.events.edit"), edit_event_path(@event), class: "btn btn-primary" %>&nbsp;
 
-          <%= link_to t("actions.delete.label"), event_path(@event), class: "btn btn-danger", id: "delete_event_id_#{@event.id}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
+          <%= link_to t("actions.delete.label"), event_path(@event), class: "btn btn-danger", id: "delete_event_id_#{@event._slugs.first}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
 
           <%= link_to t("titles.schedules.btn_new"), new_event_schedule_path(@event), class: "btn btn-primary" %>&nbsp;
 

@@ -3,6 +3,7 @@ class TalksController < PersistenceController
   before_action :require_logged_user, only: [:new, :create, :edit, :update]
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
   before_action :set_authors, only: [:new, :create, :edit, :update]
+  before_action :check_authorization, only: [:edit, :destroy]
 
   def index
     @search = params[:search]
@@ -24,8 +25,6 @@ class TalksController < PersistenceController
   end
 
   def show
-    redirect_to root_path and return if @talk.nil?
-
     @authorized = authorized_access? @talk
     @owns = owner? @talk
 
@@ -39,25 +38,7 @@ class TalksController < PersistenceController
     @talk = nil unless @authorized
   end
 
-  def info_url
-    oembed = Oembed.new(params[:link]).open_presentation
-
-    hash = if oembed
-             { error: false, title: oembed.title, code: oembed.code,
-               thumbnail: oembed.thumbnail, description: oembed.description }
-           else
-             { error: true }
-           end
-
-    respond_to do |format|
-      format.json { render json: hash }
-    end
-  end
-
   def edit
-    message = t('flash.unauthorized_access')
-
-    redirect_to talks_path, notice: message unless authorized_access?(@talk)
   end
 
   def update
@@ -65,52 +46,43 @@ class TalksController < PersistenceController
   end
 
   def destroy
-    redirect_to root_path,
-      notice: t('flash.unauthorized_access') unless authorized_access?(@talk)
-
     @talk.destroy
 
     redirect_to talks_path, notice: t('notice.destroyed', model: t('mongoid.models.talk'))
   end
 
-  def watch
-    @talk = Talk.find(params[:talk_id])
-
-    current_user.watch_talk! @talk
-
-    redirect_to talk_path(@talk)
-  end
-
-  def unwatch
-    @talk = Talk.find(params[:talk_id])
-
-    current_user.unwatch_talk! @talk
-
-    redirect_to talk_path(@talk)
-  end
-
   private
 
   def search_talks(search, my, page)
-    if logged_in? && my
-      talks = TalkQuery.new.owner(current_user)
-    else
-      talks = if search.blank?
+    talks = if logged_in? && my
+              TalkQuery.new.owner(current_user)
+            else
+              if search.blank?
                 TalkQuery.new.publics
               else
                 Kaminari.paginate_array(TalkQuery.new.search(search))
               end
-    end
+            end
 
     talks.page(page).per(12)
   end
 
   def set_talk
     @talk = Talk.find(params[:id])
+
+    found = !@talk.nil? && (@talk.owner == current_user || @talk.to_public)
+
+    redirect_to talks_path, notice: t("notice.not_found",
+              model: t("mongoid.models.talk")) if !found
   end
 
   def set_authors
     @authors = UserQuery.new.without_the_owner current_user
+  end
+
+  def check_authorization
+    redirect_to talks_path,
+      notice: t('flash.unauthorized_access') unless authorized_access?(@talk)
   end
 
   def talk_params

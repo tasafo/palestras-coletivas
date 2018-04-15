@@ -20,14 +20,12 @@ Rails.application.routes.draw do
   get "/ranking", :to => "ranking#index"
 
   resources :password_resets
-
   resources :users, only: [:show, :edit, :update]
 
   resources :talks do
-    get :watch
-    get :unwatch
     resources :external_events, only: [:new, :create, :edit, :update]
     resources :submit_events, only: [:new, :create]
+    resources :watches, only: [:create]
   end
 
   resources :events do
@@ -36,16 +34,13 @@ Rails.application.routes.draw do
       resource :was_presented, only: [:create]
     end
     resources :export_subscribers, only: [:new, :create]
+    resources :presences, only: [:create]
     resources :enrollments, only: [:new, :create, :edit, :update], path: ":option_type"
   end
 
-  resource :talks do
-    post :info_url
-  end
-
-  resource :event do
-    put :presence
-  end
+  resources :talk_info, only: [:create]
+  resources :talk_search, only: [:create]
+  resources :activities, only: [:create]
 
   scope "/ratings/:rateable_type/:rateable_id" do
     post "/ratings", :to => "ratings#create", :as => :ratings
@@ -55,8 +50,4 @@ Rails.application.routes.draw do
     post   "/comments",     :to => "comments#create",  :as => :comments
     delete "/comments/:id", :to => "comments#destroy", :as => :comment
   end
-
-  get "/schedules/search-talks/:search", :to => "schedules#search_talks"
-
-  resources :activities, only: [:create]
 end

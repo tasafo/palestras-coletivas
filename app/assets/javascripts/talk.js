@@ -6,11 +6,11 @@ $(function() {
             $("#searching_talk").show();
 
             $.ajax({
-                url : "/talks/info_url",
+                url : "/talk_info",
                 data : {
                     link : link
                 },
-                async : false,
+                async : true,
                 type : "post",
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
