@@ -1,9 +1,9 @@
         <% unless @presenter.users_active.blank? %>
-          <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.count %>)</h2>
+          <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
           <hr />
 
           <% if @presenter.authorized %>
-            <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.count %>)</h4>
+            <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h4>
             <table class="table">
               <thead>
                 <tr>
@@ -18,19 +18,19 @@
               </thead>
               <tbody>
               <% counter = 0 %>
-              <% @presenter.users_active.each do |user| %>
-                <% message_button = user[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
+              <% @presenter.users_active.each do |record| %>
+                <% message_button = record[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
-                <% button_type = user[:enrollment].present? ? "btn-danger" : "btn-primary" %>
+                <% button_type = record[:enrollment].present? ? "btn-danger" : "btn-primary" %>
 
                 <tr>
                   <td><%= counter += 1 %></td>
-                  <td><%= render "shared/user_thumb", user: user[:enrollment].user %></td>
-                  <td><%= user[:enrollment].user.name %></td>
-                  <td><%= user[:enrollment].user.email %></td>
+                  <td><%= render "shared/user_thumb", user: record[:user] %></td>
+                  <td><%= record[:user].name %></td>
+                  <td><%= record[:user].email %></td>
                   <td>
                     <% if @presenter.can_record_presence %>
-                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, user[:enrollment]), class: "btn #{button_type}", id: "user_id_#{user[:enrollment].user.id}" %>
+                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, record[:enrollment]), class: "btn #{button_type}", id: "user_id_#{record[:user].id}" %>
                       <% end %>
                   </td>
                 </tr>
@@ -38,8 +38,8 @@
               </tbody>
             </table>
           <% else %>
-            <% @presenter.users_active.each do |user| %>
-              <%= render "shared/user_event", user: user[:enrollment].user %>
+            <% @presenter.users_active.each do |record| %>
+              <%= render "shared/user_event", user: record[:user] %>
             <% end %>
           <% end %>
         <% end %>

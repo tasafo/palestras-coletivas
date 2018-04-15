@@ -6,8 +6,7 @@ describe "Edit schedule", :type => :request, :js => true do
 
   let!(:talk) { create(:talk, :users => [ user ], :owner => user) }
   let!(:another_talk) { create(:another_talk, :users => [ user ], :owner => user) }
-
-  let!(:activity_lanche) { create(:activity, :lanche) }
+  let!(:ruby_talk) { create(:speakerdeck_talk, :users => [ user ], :owner => user) }
 
   let!(:schedule_abertura) { create(:schedule, :abertura, :event => event) }
   let!(:schedule_intervalo) { create(:schedule, :intervalo, :event => event) }
@@ -27,17 +26,17 @@ describe "Edit schedule", :type => :request, :js => true do
 
       fill_in_inputmask "Horário", :with => "08:00"
 
-      fill_in :search_text, :with => "tecnologia"
+      fill_in :search_text, :with => "Ruby"
 
       click_button "Buscar"
 
-      click_button another_talk.id
+      click_button ruby_talk.id
 
       click_button "Atualizar programação"
     end
 
     it "redirects to the event page" do
-      expect(current_path).to match(%r[/events/\w+])
+      expect(current_path).to eq(event_path(event))
     end
 
     it "displays success message" do
@@ -48,12 +47,12 @@ describe "Edit schedule", :type => :request, :js => true do
   context "with invalid data" do
     before do
       login_as(user)
-      visit root_path
-      find(".event-link").click
+      visit events_path
+
       click_link "Tá Safo Conf"
       click_link "edit_schedule_id_#{schedule_palestra2.id}"
 
-      fill_in "Horário", :with => "24:00"
+      fill_in_inputmask "Horário", :with => "24:00"
 
       click_button "Atualizar programação"
     end
@@ -63,7 +62,7 @@ describe "Edit schedule", :type => :request, :js => true do
     end
 
     it "displays error messages" do
-      expect(page).to have_content("Verifique o formulário antes de continuar:")
+      expect(page).to have_content("Horário não é válido")
     end
   end
 end

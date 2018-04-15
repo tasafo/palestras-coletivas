@@ -5,12 +5,10 @@
   <div class="container">
     <div class="row-fluid">
       <div class="col-md-12">
-        <center>
-          <div class="btn-group" role="group">
-            <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>
-            <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
-          </div>
-        </center>
+        <div class="btn-group pull-right" role="group">
+          <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>&nbsp;
+          <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
+        </div>
       </div>
     </div>
   </div>
@@ -28,9 +26,8 @@
     </p>
   <% end %>
 
-  <hr />
-
   <% if @user.events? %>
+    <hr />
     <% event = t("show.user.events") %>
     <h3><%= event[@user.events.count > 1 ? :other : :one] %></h3>
 
@@ -66,9 +63,8 @@
     <% end %>
   <% end %>
 
-  <hr />
-
   <% unless @presenter.talks.empty? %>
+    <hr />
     <h3><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
 
     <%= render "shared/talks", show_user: false, talks: @presenter.talks %>

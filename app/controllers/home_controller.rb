@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def index
     @events = Event.upcoming
+
     @talkers = UserQuery.new.ranking(:presentation_events)
   end
 end

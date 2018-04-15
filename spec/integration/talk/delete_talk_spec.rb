@@ -14,7 +14,7 @@ describe "Delete talk", type: :request, js: true do
 
       click_link "Compartilhe"
 
-      click_with_alert "delete_talk_id_#{talk.id}"
+      click_with_alert "delete_talk_id_#{talk._slugs.first}"
     end
 
     it 'redirects to the talks page' do
@@ -40,7 +40,7 @@ describe "Delete talk", type: :request, js: true do
 
       click_link "Compartilhe"
 
-      click_with_alert "delete_talk_id_#{talk.id}"
+      click_with_alert "delete_talk_id_#{talk._slugs.first}"
     end
 
     it 'redirects to the talks page' do

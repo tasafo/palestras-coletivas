@@ -17,4 +17,8 @@ class EventQuery
     @relation.where(to_public: true, accepts_submissions: true,
                     :end_date.gte => Date.today).desc(:start_date)
   end
+
+  def owner(user)
+    @relation.with_relations.where(owner: user).desc(:created_at)
+  end
 end

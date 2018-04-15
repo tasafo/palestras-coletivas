@@ -5,7 +5,7 @@ pt-BR:
       talk: "Palestra"
       event: "Evento"
       schedule: "Programação"
-      external_event: "Eventos externos"
+      external_event: "Evento externo"
 
     attributes:
       user:
@@ -62,6 +62,7 @@ pt-BR:
         environment: "Ambiente"
         activity: "Atividade"
         talk: "Palestra"
+        talk_id: Palestra
 
       external_event:
         name: "Nome do evento"

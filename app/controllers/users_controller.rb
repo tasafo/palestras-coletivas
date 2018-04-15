@@ -18,8 +18,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to root_path and return if @user.nil?
-
     @presenter = UserPresenter.new(@user, params[:page])
   end
 
@@ -38,7 +36,9 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.with_relations.find(params[:id])
+
+    redirect_to root_path unless @user
   end
 
   def user_params

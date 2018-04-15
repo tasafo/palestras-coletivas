@@ -2,7 +2,6 @@ pt-BR:
   flash:
     must_be_logged: "Você precisa estar logado para acessar esta página."
     unauthorized_access: "Você não tem permissão para acessar esta página."
-    user_not_found: "Usuário não cadastrado."
 
     signup:
       create:

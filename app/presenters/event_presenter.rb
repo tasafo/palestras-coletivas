@@ -29,9 +29,10 @@ class EventPresenter
 
     @dates = (event.start_date..event.end_date).to_a
     @open_enrollment = event.deadline_date_enrollment >= Date.today
-    @users_present = prepare_users_present event
-    @users_active = prepare_users_active event
-    @crowded = @users_active.count >= event.stocking
+    users = prepare_users(event)
+    @users_present = users[:presents]
+    @users_active = users[:actives]
+    @crowded = @users_active.size >= event.stocking
     logged event, user_logged_in
     @can_vote = prepare_can_vote(event)
     prepare_authorized(event, authorized)
@@ -61,25 +62,20 @@ class EventPresenter
     event && event.accepts_submissions && event.end_date >= Date.today
   end
 
-  def prepare_users_present(event)
-    users_present = []
+  def prepare_users(event)
+    presents, actives = [], []
 
-    event.enrollments.with_user.presents.each do |enrollment|
-      users_present << enrollment.user
+    event.enrollments.with_user.each do |enrollment|
+      presents << enrollment.user if enrollment.present?
+
+      actives << { user: enrollment.user, enrollment: enrollment } if enrollment.active?
     end
 
-    users_present.sort_by! { |user| user._slugs[0] }
-  end
+    presents.sort_by! { |user| user._slugs[0] }
 
-  def prepare_users_active(event)
-    users_active = []
+    actives.sort_by! { |user| user[:user]._slugs[0] }
 
-    event.enrollments.actives.each do |enrollment|
-      name = enrollment.user._slugs[0]
-      users_active << { name: name, enrollment: enrollment }
-    end
-
-    users_active.sort_by! { |user| user[:name] }
+    { presents: presents, actives: actives }
   end
 
   def logged(event, user_logged_in = nil)

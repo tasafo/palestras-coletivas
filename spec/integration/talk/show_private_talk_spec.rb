@@ -28,12 +28,12 @@ describe "Show private talk", :type => :request, :js => true do
       visit talk_path(other_talk)
     end
 
-    it "redirects to the show page" do
-      expect(current_path).to eql(talk_path(other_talk))
+    it "redirects to the talks page" do
+      expect(current_path).to eql(talks_path)
     end
 
     it "displays error message" do
-      expect(page).to have_content("A palestra ainda não está publicada")
+      expect(page).to have_content("Palestra não foi encontrado(a)")
     end
   end
 end

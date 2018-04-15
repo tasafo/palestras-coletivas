@@ -18,10 +18,15 @@ class Schedule
   validates_presence_of :day, :time
   validates_format_of :time, with: /\A(2[0-3]|1[0-9]|0[0-9]|[^0-9][0-9]):([0-5][0-9]|[0-9])\z/
   before_validation :talk_presence
+  validates_uniqueness_of :talk, scope: :event, if: :talk?
 
   scope :by_day, ->(day) { where(day: day).asc(:time).desc(:counter_votes) }
   scope :presenteds, -> { where(was_presented: true) }
   scope :with_includes, -> { includes(:event, :talk, :activity) }
+
+  def talk?
+    !talk_id.blank?
+  end
 
   def find_vote(user)
     votes.find_by(user: user) ? true : false

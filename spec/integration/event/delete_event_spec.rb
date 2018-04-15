@@ -14,7 +14,7 @@ describe "Delete event", type: :request, js: true do
 
       click_link "Tá Safo Conf"
 
-      click_with_alert "delete_event_id_#{event.id}"
+      click_with_alert "delete_event_id_#{event._slugs.first}"
     end
 
     it 'redirects to the events page' do
@@ -40,7 +40,7 @@ describe "Delete event", type: :request, js: true do
 
       click_link "Tá Safo Conf"
 
-      click_with_alert "delete_event_id_#{event.id}"
+      click_with_alert "delete_event_id_#{event._slugs.first}"
     end
 
     it 'redirects to the events page' do

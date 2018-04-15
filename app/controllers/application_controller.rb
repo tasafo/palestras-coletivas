@@ -3,21 +3,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?
 
-  rescue_from Mongoid::Errors::InvalidFind, with: :record_not_found
   rescue_from Mongoid::Errors::DeleteRestriction, with: :delete_restriction
 
   private
 
-  def record_not_found
-    redirect_to root_path
-  end
-
   def delete_restriction
-    path = "/#{controller_name}"
-
-    redirect_to path, notice: t("notice.delete.restriction.#{controller_name}")
+    redirect_to "/#{controller_name}",
+                notice: t("notice.delete.restriction.#{controller_name}")
   end
-
 
   def require_logged_user
     redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",
@@ -25,9 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    user = User.find(session[:user_id]) if session[:user_id]
-
-    @current_user ||= user ? user : nil
+    @current_user ||= session[:user_id] &&
+      User.find(session[:user_id])
   end
 
   def logged_in?
@@ -35,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorized_access?(model)
-    return false unless logged_in?
+    return false if !logged_in? || model.nil?
 
     authorized = false
     model.users.each do |user|
@@ -46,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def owner?(model)
-    return false unless logged_in?
+    return false if !logged_in? || model.nil?
 
     owner = false
     model.users.each do |user|

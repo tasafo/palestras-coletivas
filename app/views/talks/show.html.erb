@@ -1,7 +1,6 @@
 <%= render "shared/header", index: :talk %>
 <%= render "shared/title", title: t("titles.talks.show"), index: :talk %>
 
-<% if @talk %>
   <div class="container">
     <%= render "talks/show/actions" %>
     <br />
@@ -27,6 +26,3 @@
   </div>
 
   <%= render "comments/index", commentable: @talk %>
-<% else %>
-  <h1><%= t("show.talk.not_public") %></h1>
-<% end %>

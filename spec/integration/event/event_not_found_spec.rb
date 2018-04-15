@@ -19,8 +19,12 @@ describe "Event not found", :type => :request do
       visit "/events/00000111111000000111111"
     end
 
-    it "redirects to the home page" do
-      expect(current_path).to eql("/events/00000111111000000111111")
+    it "redirects to the events page" do
+      expect(current_path).to eql(events_path)
+    end
+
+    it "displays error message" do
+      page.has_content? "Evento não encontrado(a)"
     end
   end
 
@@ -30,12 +34,12 @@ describe "Event not found", :type => :request do
       visit event_path(event)
     end
 
-    it "redirects to the home page" do
-      expect(current_path).to eql(event_path(event))
+    it "redirects to the events page" do
+      expect(current_path).to eql(events_path)
     end
 
     it "displays error message" do
-      page.has_content? "Evento não encontrado"
+      page.has_content? "Evento não encontrado(a)"
     end
   end
 
@@ -44,23 +48,12 @@ describe "Event not found", :type => :request do
       visit event_path(event)
     end
 
-    it "redirects to the home page" do
-      expect(current_path).to eql(event_path(event))
+    it "redirects to the events page" do
+      expect(current_path).to eql(events_path)
     end
 
     it "displays error message" do
-      page.has_content? "Evento não encontrado"
-    end
-  end
-
-  context "when event is nil" do
-    before do
-      visit root_path
-      visit "/event"
-    end
-
-    it "redirects to the root path" do
-      expect(current_path).to eql(root_path)
+      page.has_content? "Evento não encontrado(a)"
     end
   end
 end

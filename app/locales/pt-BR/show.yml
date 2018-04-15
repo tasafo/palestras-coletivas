@@ -8,7 +8,6 @@ pt-BR:
       to_public: "Público"
       _yes: "Sim"
       _no: "Não"
-      not_public: "A palestra ainda não está publicada"
       without_presentation: "O material ainda não está publicado"
       my_talks_published: "Minhas palestras publicadas"
       external_event: "Adicionar evento externo"
@@ -30,7 +29,6 @@ pt-BR:
       organizers: Organização
       enrolled: Quem se inscreveu
       presents: Quem participou
-      not_found: "Evento não encontrado"
       of: "De"
       to: "até"
       participate: "Quero participar!"

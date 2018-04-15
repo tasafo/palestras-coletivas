@@ -52,6 +52,7 @@ class User
   before_validation :check_username
 
   scope :by_name, -> { asc(:_slugs) }
+  scope :with_relations, -> { includes(:talks, :events) }
 
   def oid
     _id.to_s

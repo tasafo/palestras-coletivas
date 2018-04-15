@@ -53,9 +53,10 @@ class Event
   slug :name, :edition
 
   scope :publics, -> { where(to_public: true) }
-  scope :upcoming, -> {
-    publics.desc(:start_date).limit(3)
-  }
+  scope :upcoming, -> { publics.desc(:start_date).limit(3) }
+  scope :with_relations, -> do
+    includes(:users, :schedules, :enrollments)
+  end
 
   before_save do
     results = Geocoder.search(EventPolicy.new(self).address)
