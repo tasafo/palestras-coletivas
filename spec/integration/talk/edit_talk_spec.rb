@@ -9,9 +9,8 @@ describe "Edit talk", :type => :request, :js => true do
   context "with valid data" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Compartilhe"
       click_link "Editar palestra"
 
@@ -44,9 +43,8 @@ describe "Edit talk", :type => :request, :js => true do
   context "with invalid data" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Compartilhe"
       click_link "Editar palestra"
 

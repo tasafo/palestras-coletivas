@@ -1,4 +1,4 @@
-<footer class="section-footer bg-inverse" role="contentinfo">
+<footer class="footer section-footer bg-inverse" role="contentinfo">
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-lg-5">
@@ -6,17 +6,13 @@
           <div class="media-left">
           </div>
           <small class="media-body media-bottom">
-            <span class="copy-left">&copy;</span> Tá safo! 2013. <strong><a href="https://github.com/tasafo/palestras-coletivas">Palestras Coletivas</a></strong>
+            <span class="copy-left">&copy;</span> Tá safo! 2013. <strong><%= link_to t('app.name'), 'https://github.com/tasafo/palestras-coletivas' %></strong>
           </small>
         </div>
       </div>
       <div class="col-md-6 col-lg-7">
         <ul class="nav nav-inline">
-          <li class="nav-item active">
-            <a class="nav-link" href="/talks"><small>Slides</small> Incríveis<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item"><a class="nav-link" href="/events">Eventos</a></li>
-          <li class="nav-item"><a class="nav-link" href="/ranking" target="_blank">Ranking</a></li>
+          <%= render 'shared/menu' %>
         </ul>
       </div>
     </div>

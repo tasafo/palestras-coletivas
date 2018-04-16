@@ -24,7 +24,7 @@ describe "Register presence", :type => :request do
     before do
       login_as(user)
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "user_id_#{other_user.id}"
       click_button "Alterar participação"
@@ -43,7 +43,7 @@ describe "Register presence", :type => :request do
     before do
       login_as(user)
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "user_id_#{another_user.id}"
       click_button "Alterar participação"
@@ -62,7 +62,7 @@ describe "Register presence", :type => :request do
     before do
       login_as(other_user)
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       visit edit_event_enrollment_path(event, :present, enrollment_luis)
     end

@@ -1,42 +1,28 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark <%= index %>-color">
-      <div class="container">
-          <a class="navbar-brand" href="/"><strong>Palestras Coletivas</strong></a>
-          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
-              <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                      <a class="nav-link waves-effect waves-light" href="/talks">Palestras <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link waves-effect waves-light" href="/events">Eventos</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link waves-effect waves-light" href="/ranking">Ranking</a>
-                  </li>
-                  <% if logged_in? %>
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <%= thumbnail(current_user, "40x40", "rounded-circle img-responsive") %>
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-right dropdown-unique" aria-labelledby="navbarDropdownMenuLink" style="position: absolute;">
-                          <%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item waves-effect waves-light" %>
-                          <%= link_to t("menu.user_data"), edit_user_path(current_user), class: "dropdown-item waves-effect waves-light" %>
-                          <%= link_to t("menu.logout"), logout_path, class: "dropdown-item waves-effect waves-light" %>
-                      </div>
-                  </li>
-                  <% else %>
-                  <li class="nav-item">
-                      <a class="btn btn-primary waves-effect waves-light" href="/login">Entrar</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="btn btn-default waves-effect waves-light" href="/signup">Cadastre-se</a>
-                  </li>
-                  <% end %>
-              </ul>
-          </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-inverse bg-inverse-custom <%= index %>-color">
+    <div class="container">
+      <strong><%= link_to t('app.name'), root_path, class: 'navbar-brand' %></strong>
+
+      <a class="navbar-toggler hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingNavbarInside" aria-expanded="false" aria-controls="collapsingNavbar">&#9776;</a>
+
+      <div id="collapsingNavbarInside" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav ml-auto">
+          <%= render 'shared/menu' %>
+
+          <% if logged_in? %>
+            <li class="nav-item dropdown hidden-sm-down textselect-off">
+              <a class="menu nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= thumbnail(current_user, "40x40", "rounded-circle img-responsive") %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right change">
+                <%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item" %>
+                <%= link_to t("menu.user_data"), edit_user_path(current_user), class: "dropdown-item" %>
+                <%= link_to t("menu.logout"), logout_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
       </div>
+    </div>
   </nav>
 </header>

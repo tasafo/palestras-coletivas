@@ -25,7 +25,9 @@
     <%= yield %>
 
     <%= render "shared/footer" %>
+
     <%= javascript_include_tag "application" %>
+
     <% if @event && @event.image? %>
       <script type="text/javascript">
         $.backstretch([

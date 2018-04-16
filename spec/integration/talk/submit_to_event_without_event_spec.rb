@@ -7,8 +7,8 @@ describe "Submit talk without event", :type => :request, js: true do
   context "when valid data" do
     before do
       login_as user
-      
-      find(".link-talk").click
+
+      click_link("Palestras", match: :first)
       click_link "#{talk.title}"
       click_link "Submeter a um evento"
     end

@@ -19,8 +19,7 @@ describe "The talk was presented", :type => :request, :js => true do
     before do
       login_as(user)
 
-      visit events_path
-
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_on "was_presented_schedule_id_#{schedule_palestra.id}"
     end

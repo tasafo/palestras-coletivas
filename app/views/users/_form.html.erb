@@ -6,7 +6,7 @@
       <div class="modal-content">
 
         <div class="modal-header light-blue darken-3 white-text">
-          <h4 class="title"><i class="fa fa-user-plus"></i> <%= t('titles.users.signup') %></h4>
+          <h4 class="title"><i class="fa fa-user-plus"></i> <%= title %></h4>
         </div>
 
         <div class="modal-body">
@@ -54,7 +54,8 @@
           </div>
 
           <div class="text-center mt-2">
-            <button class="btn btn-info waves-effect waves-light"><%= t('helpers.submit.user.create') %> <i class="fa fa-sign-in ml-1"></i></button>
+            <% option = @user.name.nil? ? 'create' : 'update' %>
+            <button class="btn btn-info"><%= t("helpers.submit.user.#{option}") %> <i class="fa fa-sign-in ml-1"></i></button>
           </div>
         </div>
       </div>

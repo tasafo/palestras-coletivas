@@ -5,7 +5,7 @@ describe "Signup", :type => :request do
     before do
       visit root_path
 
-      click_link "Cadastre-se"
+      click_link("Cadastre-se", match: :first)
 
       fill_in "Seu nome", :with => "Paul Young"
       fill_in "Seu apelido", :with => "@pyoung"
@@ -25,7 +25,8 @@ describe "Signup", :type => :request do
   context "with invalid data" do
     before do
       visit root_path
-      click_link "Cadastre-se"
+
+      click_link("Cadastre-se", match: :first)
 
       attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 

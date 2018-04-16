@@ -15,8 +15,8 @@ describe "Show private event", :type => :request, :js => true do
   context "when logged" do
     before do
       login_as(user)
-      visit root_path
-      visit events_path
+
+      click_link("Eventos", match: :first)
       click_link "Meus eventos"
       click_link "Tá Safo Conf"
     end

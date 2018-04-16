@@ -59,8 +59,6 @@ Rails.application.configure do
     port: 1025
   }
 
-  Mongoid.logger.level = Logger::DEBUG
-
   config.after_initialize do
     Bullet.enable = true
     #Bullet.alert = true

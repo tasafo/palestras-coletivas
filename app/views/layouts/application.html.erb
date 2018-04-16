@@ -21,7 +21,10 @@
   <body>
     <div class="main" style="margin-bottom: 50px">
       <%= yield %>
+
+      <%= render "shared/footer" %>
     </div>
+
     <%= javascript_include_tag "application" %>
     <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js"></script>-->
   </body>

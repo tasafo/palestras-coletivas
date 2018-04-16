@@ -8,9 +8,7 @@ describe "Delete talk", type: :request, js: true do
     before do
       login_as(user)
 
-      visit root_path
-
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
 
       click_link "Compartilhe"
 
@@ -34,9 +32,7 @@ describe "Delete talk", type: :request, js: true do
     before do
       login_as user
 
-      visit root_path
-
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
 
       click_link "Compartilhe"
 

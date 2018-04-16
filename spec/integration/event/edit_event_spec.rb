@@ -17,9 +17,8 @@ describe "Edit event", :type => :request, js: true do
   context "with valid data" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Editar evento"
 
@@ -43,9 +42,8 @@ describe "Edit event", :type => :request, js: true do
   context "with invalid data" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Editar evento"
 

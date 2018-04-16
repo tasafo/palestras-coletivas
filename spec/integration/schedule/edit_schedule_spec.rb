@@ -17,8 +17,8 @@ describe "Edit schedule", :type => :request, :js => true do
   context "with valid data" do
     before do
       login_as(user)
-      visit events_path
 
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "edit_schedule_id_#{schedule_palestra.id}"
 
@@ -47,8 +47,8 @@ describe "Edit schedule", :type => :request, :js => true do
   context "with invalid data" do
     before do
       login_as(user)
-      visit events_path
 
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "edit_schedule_id_#{schedule_palestra2.id}"
 

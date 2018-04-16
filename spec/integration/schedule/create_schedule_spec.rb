@@ -15,9 +15,8 @@ describe "Create schedule", :type => :request, :js => true do
   context "with valid interval" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
 
@@ -42,8 +41,8 @@ describe "Create schedule", :type => :request, :js => true do
   context "with invalid interval" do
     before do
       login_as(user)
-      visit root_path
-      find(".event-link").click
+
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
       click_button "Adicionar programação"
@@ -61,9 +60,8 @@ describe "Create schedule", :type => :request, :js => true do
   context "with valid talk" do
     before do
       login_as(user)
-      visit root_path
 
-      visit events_path
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Adicionar programação"
 

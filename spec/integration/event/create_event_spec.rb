@@ -8,9 +8,8 @@ describe "Create event", :type => :request, :js => true do
   context "with valid data" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Adicionar evento"
 
       fill_in "Nome", :with => "Tá Safo Conf"
@@ -58,8 +57,8 @@ describe "Create event", :type => :request, :js => true do
   context "with invalid data" do
     before do
       login_as(user)
-      visit root_path
-      find(".event-link").click
+
+      click_link("Eventos", match: :first)
       click_link "Adicionar evento"
       click_button "Adicionar evento"
     end
@@ -76,9 +75,8 @@ describe "Create event", :type => :request, :js => true do
   context "with valid data but without address" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Adicionar evento"
 
       fill_in "Nome", :with => "Tá Safo Conf"

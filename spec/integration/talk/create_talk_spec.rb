@@ -9,9 +9,8 @@ describe "Create talk", :type => :request, :js => true do
   context "with valid data from slideshare" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup"
@@ -43,9 +42,8 @@ describe "Create talk", :type => :request, :js => true do
   context "with valid data from speakerdeck" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "https://speakerdeck.com/luizsanches/ruby-praticamente-falando"
@@ -69,9 +67,8 @@ describe "Create talk", :type => :request, :js => true do
   context "with valid data from prezi" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "https://prezi.com/7uq1mhqnclzn/quero-uma-apresentacao-em-prezi/"
@@ -94,9 +91,8 @@ describe "Create talk", :type => :request, :js => true do
   context "with valid data but no link" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       fill_in "Título", :with => "A linguagem C"
@@ -120,9 +116,8 @@ describe "Create talk", :type => :request, :js => true do
   context "with invalid data" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       click_button "Adicionar palestra"
@@ -148,9 +143,8 @@ describe "Create talk", :type => :request, :js => true do
         )
 
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "http://www.slideshare.net/luizsanches/invalid"
@@ -165,9 +159,8 @@ describe "Create talk", :type => :request, :js => true do
   context "with repeated talk" do
     before do
       login_as(user)
-      visit root_path
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       click_link "Adicionar palestra"
 
       fill_in "Link da palestra", :with => "http://www.slideshare.net/luizsanches/compartilhe"

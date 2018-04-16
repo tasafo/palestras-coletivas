@@ -6,8 +6,7 @@ describe "Login", :type => :request do
 
     before do
       visit root_path
-
-      click_link "Entrar"
+      click_link("Entrar", match: :first)
 
       fill_in "Seu e-mail", :with => user.email
       fill_in "Sua senha", :with => "testdrive"
@@ -23,7 +22,7 @@ describe "Login", :type => :request do
   context "with invalid credentials" do
     before do
       visit root_path
-      click_link "Entrar"
+      click_link("Entrar", match: :first)
       click_button "Acessar minha conta"
     end
 

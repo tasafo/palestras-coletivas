@@ -7,13 +7,12 @@ describe "Edit user", :type => :request do
   context "with valid data" do
     before do
       login_as user
-      visit events_path
-      click_link "Meus dados"
+      visit edit_user_path(user)
 
       fill_in "Seu nome", :with => "Carl Simon"
       attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
-      click_button "Cadastre-me"
+      click_button "Atualizar dados"
     end
 
     it "redirects to the user show page" do
@@ -28,13 +27,12 @@ describe "Edit user", :type => :request do
   context "with invalid data" do
     before do
       login_as user
-      visit events_path
-      click_link "Meus dados"
+      visit edit_user_path(user)
 
       fill_in "Seu nome", :with => ""
       attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
-      click_button "Cadastre-me"
+      click_button "Atualizar dados"
     end
 
     it "renders form page" do
@@ -60,14 +58,13 @@ describe "Edit user", :type => :request do
   context "with valid password" do
     before do
       login_as user
-      visit events_path
-      click_link "Meus dados"
+      visit edit_user_path(user)
 
       fill_in "Sua senha", :with => "newpassword"
       fill_in "Confirme sua senha", :with => "newpassword"
       attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
-      click_button "Cadastre-me"
+      click_button "Atualizar dados"
     end
 
     it "redirects to the user show page" do
@@ -82,14 +79,13 @@ describe "Edit user", :type => :request do
   context "with invalid password" do
     before do
       login_as user
-      visit events_path
-      click_link "Meus dados"
+      visit edit_user_path(user)
 
       fill_in "Sua senha", :with => "newpassword"
       fill_in "Confirme sua senha", :with => "otherpassword"
       attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
 
-      click_button "Cadastre-me"
+      click_button "Atualizar dados"
     end
 
     it "renders form page" do

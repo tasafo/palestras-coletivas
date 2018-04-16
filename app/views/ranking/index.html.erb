@@ -1,5 +1,5 @@
 <%= render "shared/header", index: :ranking %>
-<%= render "shared/title", title: t("ranking.title"), index: :ranking %>
+<%= render "shared/title", title: t("titles.ranking.index"), index: :ranking %>
 
 <div class="container">
   <div class="row-fluid">
@@ -7,7 +7,7 @@
       <table class="table table-condensed">
         <% unless @users_public_talks.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.public_talks") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.public_talks") %></h4></td>
           </tr>
           <% @users_public_talks.each do |user| %>
             <tr>
@@ -19,7 +19,7 @@
 
         <% unless @talks.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.talks") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.talks") %></h4></td>
           </tr>
           <% @talks.each do |talk| %>
             <tr>
@@ -31,7 +31,7 @@
 
         <% unless @events.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.events") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.events") %></h4></td>
           </tr>
           <% @events.each do |event| %>
             <tr>
@@ -43,7 +43,7 @@
 
         <% unless @watched_talks.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.watchers") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.watchers") %></h4></td>
           </tr>
           <% @watched_talks.each do |user| %>
             <tr>
@@ -55,7 +55,7 @@
 
         <% unless @organizers.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.organizers") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.organizers") %></h4></td>
           </tr>
           <% @organizers.each do |user| %>
             <tr>
@@ -67,7 +67,7 @@
 
         <% unless @talkers.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.speakers") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.speakers") %></h4></td>
           </tr>
           <% @talkers.each do |user| %>
             <tr>
@@ -79,7 +79,7 @@
 
         <% unless @participations.blank? %>
           <tr>
-            <td colspan="2"><h4><%= t("ranking.participants") %></h4></td>
+            <td colspan="2"><h4><%= t("titles.ranking.participants") %></h4></td>
           </tr>
           <% @participations.each do |user| %>
             <tr>

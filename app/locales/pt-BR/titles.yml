@@ -61,3 +61,13 @@ pt-BR:
         speakers: Palestrantes
         organizers: Organização
         participants: Participantes
+
+    ranking:
+      index: Ranking
+      public_talks: Palestras publicadas
+      talks: Palestras realizadas em eventos
+      events: Público em eventos
+      watchers: Assistiram mais palestras
+      organizers: Eventos organizados
+      speakers: Palestras realizadas
+      participants: Participação em eventos

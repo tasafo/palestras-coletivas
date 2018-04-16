@@ -1,10 +1,7 @@
 pt-BR:
   menu:
-    access: "Acesso"
+    signin: "Entrar"
     signup: "Cadastre-se"
-    login: "Minha conta"
     user_profile: "Perfil"
     user_data: "Meus dados"
     logout: "Sair"
-    talks: "Palestras"
-    events: "Eventos"

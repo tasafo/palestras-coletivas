@@ -26,8 +26,8 @@ describe "Show public talk", :type => :request do
   context "of speakerdeck" do
     before do
       login_as(user)
-      visit root_path
-      find(".link-talk").click
+
+      click_link("Palestras", match: :first)
       click_link "Ruby - praticamente falando"
     end
 
@@ -43,8 +43,8 @@ describe "Show public talk", :type => :request do
   context "of prezi" do
     before do
       login_as(user)
-      visit root_path
-      find(".link-talk").click
+
+      click_link("Palestras", match: :first)
       click_link "SOA - Introdução"
     end
 
@@ -60,8 +60,8 @@ describe "Show public talk", :type => :request do
   context "no slides" do
     before do
       login_as(user)
-      visit root_path
-      find(".link-talk").click
+
+      click_link("Palestras", match: :first)
       click_link "A história da informática"
     end
 

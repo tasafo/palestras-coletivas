@@ -8,7 +8,7 @@ describe "See talks", :type => :request do
     before do
       login_as(user)
 
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
     end
 
     it "redirects to the home page" do

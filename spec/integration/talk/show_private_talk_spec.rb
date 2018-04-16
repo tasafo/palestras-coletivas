@@ -7,7 +7,7 @@ describe "Show private talk", :type => :request, :js => true do
   context "when logged" do
     before do
       login_as(user)
-      visit root_path
+
       visit talks_path
       click_link "Minhas palestras"
       click_link "Ruby praticamente falando"

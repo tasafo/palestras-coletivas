@@ -21,7 +21,7 @@ describe "Search talk", :type => :request do
   context "with empty search" do
     before do
       visit root_path
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       fill_in :search, :with => ""
       click_button "Buscar"
     end
@@ -38,7 +38,7 @@ describe "Search talk", :type => :request do
   context "when the search is successful" do
     before do
       visit root_path
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       fill_in :search, :with => "compartilhe"
       click_button "Buscar"
     end
@@ -55,7 +55,7 @@ describe "Search talk", :type => :request do
   context "when the search is not successful" do
     before do
       visit root_path
-      find(".link-talk").click
+      click_link("Palestras", match: :first)
       fill_in :search, :with => "noob"
       click_button "Buscar"
     end

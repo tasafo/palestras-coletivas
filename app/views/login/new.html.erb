@@ -5,10 +5,9 @@
         <div class="modal-dialog cascading-modal" role="document">
             <!--Content-->
             <div class="modal-content">
-
                 <!--Header-->
                 <div class="modal-header light-blue darken-3 white-text">
-                    <h4 class="title"><i class="fa fa-user"></i> Log in</h4>
+                    <h4 class="title"><i class="fa fa-user"></i> <%= t('menu.signin') %></h4>
                 </div>
                 <!--Body-->
                 <div class="modal-body">
@@ -26,7 +25,7 @@
                     </div>
 
                     <div class="text-center mt-2">
-                        <button class="btn btn-info waves-effect waves-light"> <%= t("form.submit.login") %> <i class="fa fa-sign-in ml-1"></i></button>
+                        <button class="btn btn-info"> <%= t("form.submit.login") %> <i class="fa fa-sign-in ml-1"></i></button>
                     </div>
                     <%= hidden_field_tag 'redirect', @redirect %>
                     <% end %>

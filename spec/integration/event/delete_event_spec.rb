@@ -8,9 +8,7 @@ describe "Delete event", type: :request, js: true do
     before do
       login_as(user)
 
-      visit root_path
-
-      find(".event-link").click
+      click_link("Eventos", match: :first)
 
       click_link "Tá Safo Conf"
 
@@ -34,9 +32,7 @@ describe "Delete event", type: :request, js: true do
     before do
       login_as user
 
-      visit root_path
-
-      find(".event-link").click
+      click_link("Eventos", match: :first)
 
       click_link "Tá Safo Conf"
 

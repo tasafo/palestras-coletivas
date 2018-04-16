@@ -13,7 +13,7 @@ describe "Edit enrollment", :type => :request, js: true do
   context "when the enrollment is active" do
     before do
       login_as(other_user)
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Cancelar minha participação"
       click_button "Alterar participação"
@@ -31,7 +31,7 @@ describe "Edit enrollment", :type => :request, js: true do
   context "when the enrollment is inactive" do
     before do
       login_as(another_user)
-      find(".event-link").click
+      click_link("Eventos", match: :first)
       click_link "Tá Safo Conf"
       click_link "Quero participar!"
       click_button "Alterar participação"
