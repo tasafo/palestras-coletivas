@@ -1,10 +1,20 @@
 require_relative 'boot'
 
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'sprockets/railtie'
-require 'active_job/railtie'
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+# require "active_record/railtie"
+# require "active_storage/engine"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+# require "action_cable/engine"
+require "sprockets/railtie"
+# require "rails/test_unit/railtie"
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Palestrascoletivas
@@ -12,19 +22,9 @@ module Palestrascoletivas
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
-    config.time_zone = 'Brasilia'
-    config.i18n.load_path += Dir['app/locales/**/*.yml']
-    config.i18n.default_locale = 'pt-BR'
-    config.i18n.available_locales = ['pt-BR', 'en']
-    config.encoding = 'utf-8'
-    config.filter_parameters += [:password]
-    config.active_support.escape_html_entities_in_json = true
-    config.assets.enabled = true
-    config.assets.initialize_on_precompile = false
-    I18n.enforce_available_locales = true
-    config.active_job.queue_adapter = :sidekiq
-
-    Mongoid.logger.level = Logger::INFO
-    Mongo::Logger.logger.level = Logger::INFO
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
   end
 end

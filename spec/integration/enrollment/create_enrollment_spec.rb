@@ -40,7 +40,7 @@ describe "Create enrollment", :type => :request, js: true do
     end
 
     it "displays login message" do
-      expect(page).to have_content(" Log in")
+      expect(page).to have_content("Log in")
     end
 
     context 'when user do log in' do

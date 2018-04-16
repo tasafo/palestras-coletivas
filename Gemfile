@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.0'
 
-gem 'rails', '~> 5.1'
+gem 'rails', '~> 5.2'
 gem 'rails-i18n'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
@@ -40,6 +41,8 @@ gem "serviceworker-rails"
 
 gem 'meta-tags'
 
+gem 'bootsnap'
+
 group :development do
   gem 'web-console'
   gem 'spring'
@@ -61,7 +64,7 @@ group :test do
   gem 'rake'
   gem 'launchy'
   gem 'capybara'
-  gem 'capybara-webkit', '1.15.0'
+  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', '0.16.1', require: false
   gem 'codeclimate-test-reporter'

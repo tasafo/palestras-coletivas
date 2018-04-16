@@ -8,6 +8,7 @@ Sidekiq::Web.use Rack::Auth::Basic do |username, password|
 end
 
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   mount Sidekiq::Web, at: '/sidekiq'
 
   root :to => "home#index"
