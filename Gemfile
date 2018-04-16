@@ -35,6 +35,7 @@ gem 'sinatra', require: false
 gem 'puma'
 
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
+gem 'carrierwave-i18n'
 gem 'cloudinary'
 
 gem "serviceworker-rails"
