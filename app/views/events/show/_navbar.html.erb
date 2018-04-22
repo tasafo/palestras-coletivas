@@ -4,9 +4,12 @@
         <a class="navbar-toggler hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingNavbarEvent" aria-expanded="false" aria-controls="collapsingNavbar">&#9776;</a>
 
         <div id="collapsingNavbarEvent" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="navbar-brand">
+              <%= link_to t("app.name"), root_path %>
+            </li>
             <li class="nav-item">
-              <%= link_to t("app.name"), root_path, class: "nav-link" %>
+              <%= link_to t("labels.event.top"), "#", class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to t("labels.event.about"), "#about", class: "nav-link" %>

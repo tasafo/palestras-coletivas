@@ -9,8 +9,10 @@ describe "Edit event", :type => :request, js: true do
     create(
       :event,
       :tasafoconf,
-      :users => [ user, other_user ],
-      :owner => user
+      users: [ user, other_user ],
+      owner: user,
+      start_date: Date.today,
+      end_date: Date.today + 1.month
     )
   }
 

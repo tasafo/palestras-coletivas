@@ -8,7 +8,9 @@ describe "Show private event", :type => :request, :js => true do
       :tasafoconf,
       users: [ user ],
       owner: user,
-      to_public: false
+      to_public: false,
+      start_date: Date.today,
+      end_date: Date.today + 1.year
     )
   end
 

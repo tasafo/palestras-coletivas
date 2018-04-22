@@ -39,14 +39,13 @@
 
         <tbody>
           <% @presenter.grids.each do |grid| %>
-            <tr class="success">
-              <% unless @presenter.authorized %>
-                <td></td>
-              <% end %>
-              <td colspan="6">
-                <h4><p class="text-center"><%= l grid[:date], format: :custom %></p></h4>
-              </td>
-            </tr>
+            <thead class="thead-light">
+              <tr>
+                <th colspan="5">
+                  <p class="text-center"><%= l grid[:date], format: :custom %></p>
+                </th>
+              </tr>
+            </thead>
 
             <% grid[:schedules].each do |schedule| %>
               <tr id="row_<%= schedule.id %>">

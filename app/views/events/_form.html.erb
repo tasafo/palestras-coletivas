@@ -3,12 +3,12 @@
 
         <div class="form-group">
           <%= f.label :name %>
-          <%= f.text_field :name, placeholder: t("placeholder.events.name"), class: "form-control" %>
+          <%= f.text_field :name, placeholder: t("placeholder.events.name"), class: "form-control", maxlength: 50 %>
         </div>
 
         <div class="form-group">
           <%= f.label :edition %>
-          <%= f.text_field :edition, placeholder: t("placeholder.events.edition"), class: "form-control" %>
+          <%= f.text_field :edition, placeholder: t("placeholder.events.edition"), class: "form-control", maxlength: 10 %>
         </div>
 
         <div class="form-group">

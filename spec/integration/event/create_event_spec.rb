@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe "Create event", :type => :request, :js => true do
-  let!(:user)        { create(:user, :paul) }
-  let!(:billy)       { create(:user, :billy, username: "@username_billy", name: "Billy Boy") }
-  let!(:luis)        { create(:user, :luis, username: "@username_luis", name: "Luis XIV") }
+  let!(:user)  { create(:user, :paul) }
+  let!(:billy) { create(:user, :billy, username: "@username_billy", name: "Billy Boy") }
+  let!(:luis)  { create(:user, :luis, username: "@username_luis", name: "Luis XIV") }
 
   context "with valid data" do
     before do

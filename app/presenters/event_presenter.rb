@@ -96,7 +96,8 @@ class EventPresenter
     schedules = event.schedules.includes(:talk).not_in(talk_id: nil)
 
     schedules.each do |schedule|
-      schedule.talk.users.each do |user|
+      talk = Talk.with_users.find(schedule.talk)
+      talk.users.each do |user|
         is_speaker = (user.id == user_logged_in.id)
       end
     end
@@ -108,7 +109,7 @@ class EventPresenter
     grids = []
     dates = (event.start_date..event.end_date).to_a
 
-    schedules = event.schedules.asc(:day).asc(:time).desc(:counter_votes)
+    schedules = event.schedules.with_relations.asc(:day).asc(:time).desc(:counter_votes)
 
     dates.each_with_index do |date, index|
       selects = schedules.select { |schedule| schedule.day == index + 1 }

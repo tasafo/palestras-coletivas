@@ -12,20 +12,12 @@
     <div id="page-content" class="row-fluid">
       <h2><%= @event.name_edition %></h2>
 
-      <% if @event.start_date == @event.end_date %>
-        <h4><%= l @event.start_date, format: :long %> - <%= @event.place %></h4>
-      <% else %>
-        <h4>
-          <%= t("show.event.of") %> <%= l @event.start_date, format: :long %>
-          <%= t("show.event.to") %> <%= l @event.end_date, format: :long %>
-          - <%= @event.place %>
-        </h4>
-      <% end %>
+      <h4><%= @event.long_date %></h4>
+
+      <h4><%= @event.place %></h4>
 
       <h4 class="text-danger"><%= t("labels.event.stocking") %>: <%= @event.stocking %></h4>
 
-      <% if @presenter.open_enrollment %>
-        <h4 class="text-danger"><%= t("labels.event.deadline_date_enrollment") %>: <%= l @event.deadline_date_enrollment, format: :long %></h4>
-      <% end %>
+      <h4 class="text-danger"><%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}" if @presenter.open_enrollment %>&nbsp;</h4>
     </div>
   </section>

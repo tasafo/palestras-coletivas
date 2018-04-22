@@ -32,6 +32,10 @@ pt-BR:
       my: "Meus eventos"
       all: "Todos os eventos"
       no_events: "Nenhum evento adicionado"
+      date:
+        'on': dia
+        of: de
+        to: a
 
     schedules:
       index: "Programação"

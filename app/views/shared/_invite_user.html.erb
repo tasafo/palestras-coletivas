@@ -15,11 +15,11 @@
   </div>
 
   <div id="users">
-    <table id="table_users" class="table table-striped">
-      <thead>
+    <table id="table_users" class="table table-hover table-responsive">
+      <thead class="thead-dark">
         <tr>
-          <th width="50%"><%= t("new.invite.table.#{key}") %></th>
-          <th width="50%"><%= t("new.invite.table.operation") %></th>
+          <th width="50%"><p class="text-center"><%= t("new.invite.table.#{key}") %></p></th>
+          <th width="50%"><p class="text-center"><%= t("new.invite.table.operation") %></p></th>
         </tr>
       </thead>
       <tbody>
@@ -31,9 +31,9 @@
                   <%= user.name %> <%= "(#{user.username})" %><input type="hidden" name="users[]" value="<%= user.oid %>" />
                 </td>
                 <td>
-                  <button type="button" id="user_id_<%= user.oid %>" class="btn btn-danger" onclick="remove_user('<%= user.oid %>')">
+                  <center><button type="button" id="user_id_<%= user.oid %>" class="btn btn-danger" onclick="remove_user('<%= user.oid %>')">
                     <%= t("new.invite.js.remove") %>
-                  </button>
+                  </button></center>
                 </td>
               </tr>
             <% end %>

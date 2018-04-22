@@ -44,8 +44,8 @@ class Event
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
                         :deadline_date_enrollment, :place, :street, :district,
                         :city, :state, :country, :workload
-  validates_length_of :name, maximum: 100
-  validates_length_of :edition, maximum: 50
+  validates_length_of :name, maximum: 50
+  validates_length_of :edition, maximum: 10
   validates_length_of :description, maximum: 2000
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
   validates_numericality_of :workload, greater_than_or_equal_to: 0
@@ -71,5 +71,37 @@ class Event
 
   def name_edition
     "#{self.name} - #{self.edition}"
+  end
+
+  def long_date
+    date1 = start_date
+    date2 = end_date
+
+    date_between = I18n.t('titles.events.date.between')
+    date_of = I18n.t('titles.events.date.of')
+    date_to = I18n.t('titles.events.date.to')
+    date_format = "%B #{date_of} %Y"
+    day_one = zero_fill(date1.day)
+    day_two = zero_fill(date2.day)
+
+    if date1 == date2
+      "#{I18n.t('titles.events.date.on')} #{locale(date1, :long)}"
+    elsif date1.year != date2.year
+      "#{date_of} #{locale(date1, :long)} #{date_to} #{locale(date2, :long)}"
+    elsif date1.month == date2.month
+      "#{date_of} #{day_one} #{date_to} #{day_two} #{date_of} #{locale(date1, date_format)}"
+    else
+      "#{date_of} #{day_one} #{date_of} #{locale(date1, '%B')} #{date_to} #{day_two} #{date_of} #{locale(date2, date_format)}"
+    end
+  end
+
+  private
+
+  def locale(date, format)
+    I18n.l(date, format: format)
+  end
+
+  def zero_fill(field, size = 2)
+    field.to_s.rjust(size, '0')
   end
 end

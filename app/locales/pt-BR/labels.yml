@@ -45,6 +45,7 @@ pt-BR:
       to_public: "Quero publicar"
       accepts_submissions: "Aceita submissão de palestras"
       about: "Sobre o evento"
+      top: "Topo"
 
     schedule:
       day: "Dia"
