@@ -12,7 +12,7 @@
           <% if logged_in? %>
             <li class="nav-item dropdown hidden-sm-down textselect-off">
               <a class="menu nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= thumbnail(current_user, "40x40", "rounded-circle img-responsive") %>
+                <%= thumbnail(current_user, "40x40", 'rounded-circle img-responsive') %>
               </a>
               <div class="dropdown-menu dropdown-menu-right change">
                 <%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item" %>

@@ -20,7 +20,6 @@
 //= require schedule
 //= require jquery.rating.pack
 //= require jquery.maskedinput.min
-//= require jquery.backstretch.min
 //= require custom
 //= require comments
 //= require event

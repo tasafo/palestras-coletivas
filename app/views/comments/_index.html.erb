@@ -1,6 +1,6 @@
 <section class="comments">
   <div class="container">
-    <h2 class="title"><%= I18n.t("titles.comments.index") %></h2>
+    <h2 class="text-primary""><%= I18n.t("titles.comments.index") %></h2>
 
     <% if logged_in? %>
       <%= render "comments/form", commentable: commentable %>

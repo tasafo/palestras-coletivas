@@ -1,11 +1,10 @@
         <% unless @presenter.users_active.blank? %>
           <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
-          <hr />
 
           <% if @presenter.authorized %>
             <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h4>
-            <table class="table">
-              <thead>
+            <table class="table table-hover table-responsive">
+              <thead class="thead-dark">
                 <tr>
                   <th><%= t("show.event.attendance_table.number") %></th>
                   <th><%= t("show.event.attendance_table.photo") %></th>
@@ -17,8 +16,7 @@
                 </tr>
               </thead>
               <tbody>
-              <% counter = 0 %>
-              <% @presenter.users_active.each do |record| %>
+              <% @presenter.users_active.each_with_index do |record, counter| %>
                 <% message_button = record[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
 
                 <% button_type = record[:enrollment].present? ? "btn-danger" : "btn-primary" %>
@@ -38,8 +36,12 @@
               </tbody>
             </table>
           <% else %>
-            <% @presenter.users_active.each do |record| %>
-              <%= render "shared/user_event", user: record[:user] %>
-            <% end %>
+            <div class="content">
+              <div class="row justify-content-left">
+                <% @presenter.users_active.each do |record| %>
+                  <%= render "shared/user_event", user: record[:user] %>
+                <% end %>
+              </div>
+            </div>
           <% end %>
         <% end %>

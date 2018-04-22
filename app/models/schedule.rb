@@ -20,9 +20,8 @@ class Schedule
   before_validation :talk_presence
   validates_uniqueness_of :talk, scope: :event, if: :talk?
 
-  scope :by_day, ->(day) { where(day: day).asc(:time).desc(:counter_votes) }
   scope :presenteds, -> { where(was_presented: true) }
-  scope :with_includes, -> { includes(:event, :talk, :activity) }
+  scope :with_relations, -> { includes(:event, :talk, :activity) }
 
   def talk?
     !talk_id.blank?

@@ -1,9 +1,9 @@
 #:nodoc:
 class EventPresenter
-  attr_reader :event, :dates, :authorized, :open_enrollment,
+  attr_reader :event, :grids, :authorized, :open_enrollment,
               :can_record_presence, :show_users_present, :users_present,
-              :users_active, :crowded, :new_subscription, :the_user_is_speaker,
-              :enrollment, :can_vote
+              :users_active, :crowded, :new_subscription, :enrollment,
+              :can_vote
 
   def initialize(event, authorized, user_logged_in = nil)
     prepare_event event, authorized, user_logged_in
@@ -27,7 +27,7 @@ class EventPresenter
   def prepare_event(event, authorized, user_logged_in = nil)
     return unless event
 
-    @dates = (event.start_date..event.end_date).to_a
+    @grids = mount_grid(event)
     @open_enrollment = event.deadline_date_enrollment >= Date.today
     users = prepare_users(event)
     @users_present = users[:presents]
@@ -87,22 +87,35 @@ class EventPresenter
 
     @new_subscription = false if @enrollment
 
-    @the_user_is_speaker = speaker?(event, user_logged_in)
-
-    @open_enrollment = false if @the_user_is_speaker || @authorized
+    @open_enrollment = false if speaker?(event, user_logged_in) || @authorized
   end
 
   def speaker?(event, user_logged_in)
     is_speaker = false
 
-    event.schedules.with_includes.each do |schedule|
-      next unless schedule.talk?
+    schedules = event.schedules.includes(:talk).not_in(talk_id: nil)
 
+    schedules.each do |schedule|
       schedule.talk.users.each do |user|
-        is_speaker = true if user.id == user_logged_in.id
+        is_speaker = (user.id == user_logged_in.id)
       end
     end
 
     is_speaker
+  end
+
+  def mount_grid(event)
+    grids = []
+    dates = (event.start_date..event.end_date).to_a
+
+    schedules = event.schedules.asc(:day).asc(:time).desc(:counter_votes)
+
+    dates.each_with_index do |date, index|
+      selects = schedules.select { |schedule| schedule.day == index + 1 }
+
+      grids << { date: date, schedules: selects } unless selects.blank?
+    end
+
+    grids
   end
 end

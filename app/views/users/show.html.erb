@@ -15,7 +15,7 @@
 <% end %>
 
 <div class="container">
-  <%= thumbnail(@user) %>
+  <%= thumbnail(@user, '80x80', 'rounded-circle img-responsive') %>
   <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
 
   <% if @presenter.gravatar.has_profile %>

@@ -1,5 +1,4 @@
     <h2 class="text-primary"><%= t("titles.schedules.index") %></h2>
-    <hr />
 
     <% if @presenter.can_vote %>
       <div class="text">
@@ -13,52 +12,51 @@
     <% end %>
 
     <div id="schedules">
-      <table id="table_schedules" class="table table-striped">
-        <thead>
+      <table class="table table-bordered table-hover table-responsive">
+        <thead class="thead-dark">
           <tr>
             <th width="10%">
-              <p class="text-center schedule-font"><%= t("new.schedule.table.time") %></p>
+              <p class="text-center"><%= t("new.schedule.table.time") %></p>
             </th>
             <th width="70%">
-              <p class="text-center schedule-font"><%= t("new.schedule.table.activity") %></p>
+              <p class="text-center"><%= t("new.schedule.table.activity") %></p>
             </th>
             <% if @presenter.authorized %>
               <th colspan="2" width="10%">
-                <p class="text-center schedule-font"><%= t("new.schedule.table.operations") %></p>
+                <p class="text-center"><%= t("new.schedule.table.operations") %></p>
               </th>
             <% end %>
             <th width="20%">
-              <p class="text-center schedule-font"><%= t("new.schedule.table.status") %></p>
+              <p class="text-center"><%= t("new.schedule.table.status") %></p>
             </th>
             <% if @presenter.can_vote %>
               <th width="10%">
-                <p class="text-left schedule-font"><%= t("new.schedule.table.votes") %></p>
+                <p class="text-left"><%= t("new.schedule.table.votes") %></p>
               </th>
             <% end %>
           </tr>
         </thead>
 
         <tbody>
-        <% day = 1 %>
-        <% @presenter.dates.each do |date| %>
-          <% if @event.schedules.by_day(day).count > 0 %>
-            <tr class="info">
+          <% @presenter.grids.each do |grid| %>
+            <tr class="success">
               <% unless @presenter.authorized %>
                 <td></td>
               <% end %>
               <td colspan="6">
-                <h4><p class="text-center schedule-font"><%= l date, format: :custom %></h4></p>
+                <h4><p class="text-center"><%= l grid[:date], format: :custom %></p></h4>
               </td>
             </tr>
-            <% @event.schedules.with_includes.by_day(day).each do |schedule| %>
+
+            <% grid[:schedules].each do |schedule| %>
               <tr id="row_<%= schedule.id %>">
                 <td>
-                  <p class="text-center schedule-font"><%= schedule.show_time %></p>
+                  <p class="text-center"><%= schedule.show_time %></p>
                 </td>
 
                 <% if schedule.talk? %>
                   <td>
-                    <p class="text-center schedule-font">
+                    <p class="text-center">
                       <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
                       <% schedule.talk.users.each do |user| %>
                         ( <%= link_to user.name, user_path(user) %>
@@ -68,7 +66,7 @@
                   </td>
                 <% else %>
                   <td>
-                    <p class="text-center schedule-font"><%= schedule.activity.description %></p>
+                    <p class="text-center"><%= schedule.activity.description %></p>
                   </td>
                 <% end %>
 
@@ -80,46 +78,42 @@
                     <%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %>
                   </td>
                   <% if !schedule.talk_id.nil? %>
-                  <td>
-                    <%= link_to t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}"), event_schedule_was_presented_path(@event, schedule), method: :post, class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}", id: "was_presented_schedule_id_#{schedule.id}" %>
-                  </td>
+                    <td>
+                      <%= link_to t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}"), event_schedule_was_presented_path(@event, schedule), method: :post, class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}", id: "was_presented_schedule_id_#{schedule.id}" %>
+                    </td>
                   <% else %>
-                  <td></td>
+                    <td></td>
                   <% end %>
                 <% else %>
                   <% if !schedule.talk_id.nil? %>
-                  <td>
-                    <p class="text-center"><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
-                  </td>
+                    <td>
+                      <p class="text-center"><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
+                    </td>
                   <% else %>
-                  <td></td>
+                    <td></td>
                   <% end %>
                 <% end %>
 
-                <% if @presenter.can_vote && schedule.talk_id.nil? %>
-                  <td colspan="2"></td>
-                <% end %>
-
-                <% if @presenter.can_vote && !schedule.talk_id.nil? %>
-                  <td>
-                    <% if logged_in? %>
-                      <% if schedule.votes? && schedule.find_vote(current_user) %>
-                        <%= link_to schedule.counter_votes, event_schedule_vote_path(@event, schedule, 1), method: :delete, class: "btn btn-danger", id: "remove_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_remove_vote") %>
+                <% if @presenter.can_vote %>
+                  <% if schedule.talk_id.nil? %>
+                    <td colspan="2"></td>
+                  <% else %>
+                    <td>
+                      <% if logged_in? %>
+                        <% if schedule.votes? && schedule.find_vote(current_user) %>
+                          <%= link_to schedule.counter_votes, event_schedule_vote_path(@event, schedule, 1), method: :delete, class: "btn btn-danger", id: "remove_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_remove_vote") %>
+                        <% else %>
+                          <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, class: "btn btn-success", id: "add_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_add_vote") %>
+                        <% end %>
                       <% else %>
-                        <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, class: "btn btn-success", id: "add_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_add_vote") %>
+                        <%= link_to schedule.counter_votes, "#schedules", class: "btn btn-primary disabled" %>
                       <% end %>
-                    <% else %>
-                      <%= link_to schedule.counter_votes, "#schedules", class: "btn btn-primary disabled" %>
-                    <% end %>
-                  </td>
+                    </td>
+                  <% end %>
                 <% end %>
               </tr>
             <% end %>
           <% end %>
-          <% day += 1 %>
-        <% end %>
         </tbody>
       </table>
     </div>
-
-    <hr />

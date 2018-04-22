@@ -15,7 +15,6 @@
   <section id="location">
     <div class="container">
       <h2 class="text-primary"><%= t("labels.event.place") %></h2>
-      <hr />
 
       <div class="text">
         <p><%= @event.place %></p>
@@ -32,11 +31,12 @@
     <section id="organizers">
       <div class="container">
         <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
-        <hr />
 
-        <% @event.users.by_name.each do |user| %>
-          <%= render "shared/user_event", user: user %>
-        <% end %>
+        <div class="row justify-content-left">
+          <% @event.users.by_name.each do |user| %>
+            <%= render "shared/user_event", user: user %>
+          <% end %>
+        </div>
       </div>
     </section>
   <% end %>
@@ -47,21 +47,24 @@
         <% unless @presenter.users_active.blank? %>
           <div class="container">
             <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
-            <hr />
-            <% @presenter.users_active.each do |record| %>
-              <%= render "shared/user_event", user: record[:user] %>
-            <% end %>
+
+            <div class="row justify-content-left">
+              <% @presenter.users_active.each do |record| %>
+                <%= render "shared/user_event", user: record[:user] %>
+              <% end %>
+            </div>
           </div>
         <% end %>
 
         <% unless @presenter.users_present.blank? %>
           <div class="container">
             <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h2>
-            <hr />
 
-            <% @presenter.users_present.each do |user| %>
-              <%= render "shared/user_event", user: user %>
-            <% end %>
+            <div class="row justify-content-left">
+              <% @presenter.users_present.each do |user| %>
+                <%= render "shared/user_event", user: user %>
+              <% end %>
+            </div>
           </div>
         <% end %>
       <% else %>

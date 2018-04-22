@@ -29,7 +29,7 @@ class ExportSubscriber
   def self.speakers(event)
     users = []
 
-    event.schedules.with_includes.each do |schedule|
+    event.schedules.with_relations.each do |schedule|
       next unless schedule.talk?
 
       talk = schedule.talk

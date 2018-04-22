@@ -55,7 +55,6 @@ h5 {
 }
 
 p {
-  color: #A5ACAF;
   font-size: 14px;
 }
 
@@ -258,7 +257,6 @@ iframe {
 }
 
 #page-header h2 {
-  margin-top: 15%;
   color: #fff;
   line-height: 1.5em;
   font-size: 38px;
@@ -266,6 +264,15 @@ iframe {
 
 #page-header h4 {
   color: #fff;
+}
+
+#page-content {
+  background-color: #000000;
+  border: 1px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+  padding-top: 15%;
+  padding-bottom: 15%;
 }
 
 .hero-text {
