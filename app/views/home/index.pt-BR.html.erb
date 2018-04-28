@@ -58,30 +58,3 @@
       </div>
     </div>
   </section>
-
-  <section class="section-testimonials text-xs-center bg-inverse">
-    <div class="container">
-      <h3 class="sr-only">Testimonials</h3>
-      <div id="carousel-testimonials" class="carousel slide" data-ride="carousel" data-interval="0">
-        <div class="carousel-inner" role="listbox">
-          <% @talkers.each do |talker| %>
-          <div class="carousel-item active">
-            <blockquote class="blockquote">
-              <%= thumbnail(talker, "80x80", 'img-circle') %>
-              <footer>
-                <a href="<%= user_path(talker) %>" title="<%= talker.name %>">
-                  <%= talker.name %>
-                </a>
-              </footer>
-            </blockquote>
-          </div>
-          <% end %>
-        </div>
-        <ol class="carousel-indicators">
-          <% @talkers.each_with_index do |talker, index| %>
-            <li class="active"><%= thumbnail(talker, "80x80", 'img-circle', { target: "#carousel-testimonials", "slide-to": index.to_s } ) %></li>
-          <% end %>
-        </ol>
-      </div>
-    </div>
-  </section>
