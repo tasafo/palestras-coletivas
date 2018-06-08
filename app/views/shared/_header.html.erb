@@ -17,6 +17,7 @@
               <div class="dropdown-menu dropdown-menu-right change">
                 <%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item" %>
                 <%= link_to t("menu.user_data"), edit_user_path(current_user), class: "dropdown-item" %>
+                <div class="dropdown-divider"></div>
                 <%= link_to t("menu.logout"), logout_path, class: "dropdown-item" %>
               </div>
             </li>
