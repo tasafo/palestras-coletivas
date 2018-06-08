@@ -97,3 +97,8 @@ section {
 .footer a:hover {
   color: #FFFF00;
 }
+
+/* Fix dropdown menu item on hover not showing text */
+.dropdown .dropdown-menu .dropdown-item:hover {
+  color: #1d1e1f !important;
+}
