@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   resources :talk_search, only: [:create]
   resources :activities, only: [:create]
   resources :events_ajax, only: :index
+  resources :talks_ajax, only: :index
 
   scope "/ratings/:rateable_type/:rateable_id" do
     post "/ratings", :to => "ratings#create", :as => :ratings

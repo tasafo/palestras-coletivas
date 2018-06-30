@@ -20,3 +20,22 @@
     <%= render "shared/events", events: @events, show_user: true %>
   <% end %>
 </div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+    const container = document.querySelector('#main-container')
+    let page = 2;
+
+    container.addEventListener('scroll', () => {
+      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+        $.ajax({
+          url: '/events_ajax?page=' + page,
+          success: function(res){
+            $('.container').append(res);
+            page = ++page;
+          }
+        })
+      }
+    })
+  </script>
+<% end %>

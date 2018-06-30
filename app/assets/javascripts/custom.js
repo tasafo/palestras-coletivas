@@ -16,22 +16,6 @@ $.each(document.querySelectorAll('.my-surface'), function(i, el){
 let drawer = new mdc.drawer.MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
 document.querySelector('.menu-button').addEventListener('click', () => drawer.open = true);
 
-const container = document.querySelector('#main-container')
-
-let page = 1;
-
-container.addEventListener('scroll', () => {
-  if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-    $.ajax({
-      url: '/events_ajax?page=' + page,
-      success: function(res){
-        $('.container').append(res);
-        page = ++page;
-      }
-    })
-  }
-})
-
 $('#main-container').on('click', '.custom-card', function(){
   $('#main-container').addClass('animated fadeOutDown');
   $('.mdc-linear-progress').show();

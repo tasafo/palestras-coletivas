@@ -43,10 +43,72 @@
   animation-fill-mode: both;
 }
 
+.user-thumb{
+  position: absolute;
+  border-radius: 100px;
+  border-top-left-radius: 100px;
+  -webkit-border-top-left-radius: 100px;
+  -moz-border-top-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  -webkit-border-bottom-right-radius: 100px;
+  -moz-border-bottom-right-radius: 100px;
+}
+
 @media (min-width: 1025px) and (max-width: 1280px) {
 
   .container{
     padding: 100px 80px 0 80px;
+  }
+
+  .user-thumb{
+    position: absolute;
+    top: 120px;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .user-thumb{
+    position: absolute;
+    top: 80px;
+  }
+
+  .container{
+    height: 1100px;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  .user-thumb{
+    position: absolute;
+    top: 110px;
+  }
+
+  .container{
+    height: 1100px;
+  }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .user-thumb{
+    top: 60px;
+  }
+
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .user-thumb{
+    top: 80px;
   }
 
 }

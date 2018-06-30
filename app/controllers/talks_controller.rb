@@ -64,7 +64,7 @@ class TalksController < PersistenceController
               end
             end
 
-    talks.page(page).per(12)
+    talks.page(page).per(16)
   end
 
   def set_talk
