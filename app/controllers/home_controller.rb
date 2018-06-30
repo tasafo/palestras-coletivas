@@ -1,10 +1,8 @@
 #:nodoc:
 class HomeController < ApplicationController
-  layout 'home'
+  # layout 'home'
 
   def index
-    @events = Event.upcoming
-
-    @talkers = UserQuery.new.ranking(:presentation_events)
+    redirect_to events_path
   end
 end

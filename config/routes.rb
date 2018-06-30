@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post "/login", :to => "login#create"
   get "/logout", :to => "login#destroy"
   get "/ranking", :to => "ranking#index"
+  get "/events/ajax", :to => "events#ajax"
 
   resources :password_resets
   resources :users, only: [:show, :edit, :update]
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
   resources :talk_info, only: [:create]
   resources :talk_search, only: [:create]
   resources :activities, only: [:create]
+  resources :events_ajax, only: :index
 
   scope "/ratings/:rateable_type/:rateable_id" do
     post "/ratings", :to => "ratings#create", :as => :ratings

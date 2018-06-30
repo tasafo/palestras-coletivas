@@ -12,14 +12,55 @@
     <!--[if lt IE 9]>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
     <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <%= stylesheet_link_tag "application", media: "all" %>
     <link rel="manifest" href="/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes">
   </head>
-  <body>
-    <%= yield %>
+  <body class="mdc-typography">
+    <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate" style="display: none">
+      <div class="mdc-linear-progress__buffering-dots">
+      </div>
+      <div class="mdc-linear-progress__buffer">
+      </div>
+      <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar"><span class="mdc-linear-progress__bar-inner"></span>
+      </div>
+      <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar"><span class="mdc-linear-progress__bar-inner"></span>
+      </div>
+    </div>
+    <header class="mdc-top-app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="menu-button material-icons mdc-toolbar__menu-icon">menu</button>
+          <span class="mdc-top-app-bar__title animated fadeInDown">Palestras Coletivas</span>
+        </section>
+      </div>
+    </header>
 
-    <%= render "shared/footer" %>
+
+    <aside class="mdc-drawer mdc-drawer--temporary mdc-typography">
+      <nav class="mdc-drawer__drawer">
+        <header class="mdc-drawer__header">
+          <div class="mdc-drawer__header-content">
+            Header here
+          </div>
+        </header>
+        <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
+          <a class="mdc-list-item mdc-list-item--activated" href="<%= events_path %>">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i><%= t('titles.events.index') %>
+          </a>
+          <a class="mdc-list-item" href="<%= talks_path %>">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t('titles.talks.index') %>
+          </a>
+          <a class="mdc-list-item" href="<%= ranking_path %>">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t('titles.ranking.index') %>
+          </a>
+        </nav>
+      </nav>
+    </aside>
+
+    <%= yield %>
 
     <%= javascript_include_tag "application" %>
   </body>

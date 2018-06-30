@@ -15,4 +15,12 @@ module ApplicationHelper
 
     url.gsub(change, 'https://')
   end
+
+  def event_image(event)
+    if event.image?
+      https(event.image.url)
+    else
+      image_url('01.jpg')
+    end
+  end
 end

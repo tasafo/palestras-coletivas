@@ -1,0 +1,5 @@
+<% if @events.blank? %>
+  <h2><%= t("titles.events.no_events") %></h2>
+<% else %>
+  <%= render "shared/events", events: @events, show_user: true %>
+<% end %>

@@ -1,38 +1,41 @@
-<div class="container">
-  <%= render "shared/paginate", list: events %>
-
-  <div class="row">
-    <% events.each_with_index do |event, index| %>
-      <div class="col-lg-4 mb-r">
-        <div class="card">
-          <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
-            <%= link_to event_path(event) do %>
-              <% if event.image? %>
-                <%= image_tag(https(event.image.url), size: '350x200') %>
+  <div class="mdc-layout-grid__inner">
+<% events.each_with_index do |event, index| %>
+    <div class="mdc-layout-grid__cell">
+      <div class="mdc-card custom-card custom-card--hero">
+        <div class="mdc-card__primary-action my-surface" onclick="location.href='<%= event_path(event) %>'">
+          <div class="mdc-card__media mdc-card__media--16-9 custom-card__media" style="background-image: url('<%= event_image(event) %>');">
+          </div>
+          <div class="custom-card__primary">
+            <h2 class="custom-card__title mdc-typography--headline6"><%= suspension_points(event.name_edition, 50) %></h2>
+            <h3 class="custom-card__subtitle mdc-typography--subtitle2">
+              <% if event.start_date == event.end_date %>
+                <p><%= l event.start_date %></p>
               <% else %>
-                <div class="mask"></div>
+                <p><%= l event.start_date %> - <%= l event.end_date %></p>
               <% end %>
-            <% end %>
+            </h3>
           </div>
-
-          <div class="card-body">
-            <h4 class="card-title"><%= link_to suspension_points(event.name_edition, 50), event_path(event) %></h4>
-            <% if event.start_date == event.end_date %>
-              <p><%= l event.start_date %></p>
-            <% else %>
-              <p><%= l event.start_date %> - <%= l event.end_date %></p>
-            <% end %>
-            <div class="card-text"> <%=  suspension_points(strip_tags(event.description), 100) %> </div>
+          <div class="custom-card__secondary mdc-typography--body2">
+            <%=  suspension_points(strip_tags(event.description), 100) %>
           </div>
+        </div>
+        <!--
+        <div class="mdc-card__actions">
+          <%#= t("created_time", time: time_ago_in_words(event.created_at)) %>
+         <div class="mdc-card__action-buttons">
+            <button class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Read</button>
+            <button class="mdc-button mdc-card__action mdc-card__action--button mdc-ripple-upgraded">Bookmark</button>
+          </div>
+          <div class="mdc-card__action-icons">
+              <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-pressed="false" aria-label="Add to favorites" title="Add to favorites" data-toggle-on-content="favorite" data-toggle-on-label="Remove from favorites" data-toggle-off-content="favorite_border" data-toggle-off-label="Add to favorites" style="--mdc-ripple-fg-size:28.8px; --mdc-ripple-fg-scale:1.66667; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">favorite_border</button>
+            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" title="Share" data-mdc-ripple-is-unbounded="true" style="--mdc-ripple-fg-size:28.8px; --mdc-ripple-fg-scale:1.66667; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">share</button><button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" title="More options" data-mdc-ripple-is-unbounded="true" style="--mdc-ripple-fg-size:28.8px; --mdc-ripple-fg-scale:1.66667; --mdc-ripple-left:10px; --mdc-ripple-top:10px;">more_vert</button>
 
-          <div class="card-footer">
-            <span><%= t("created_time", time: time_ago_in_words(event.created_at)) %></span>
           </div>
 
         </div>
+        -->
       </div>
-    <% end %>
-  </div>
 
-  <%= render "shared/paginate", list: events %>
-</div>
+  </div>
+<% end %>
+  </div>

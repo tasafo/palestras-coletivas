@@ -20,10 +20,11 @@
 //= require schedule
 //= require jquery.rating.pack
 //= require jquery.maskedinput.min
-//= require custom
 //= require comments
 //= require event
 //= require external_events
 //= require invite_user
 //= require talk
 //= require export_subscribers
+//= require material-components-web.min
+//= require custom
