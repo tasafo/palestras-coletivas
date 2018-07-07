@@ -3,8 +3,8 @@
   <% talks.each do |talk| %>
     <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : https(talk.thumbnail) %>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-phone mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet">
-      <div class="mdc-card custom-card custom-card--hero"  style="height: 300px">
-        <div class="mdc-card__primary-action my-surface" onclick="location.href='<%= talk_path(talk) %>'">
+      <div class="mdc-card custom-card custom-card--hero">
+        <div class="mdc-card__primary-action my-surface" onclick="location.href='<%= talk_path(talk) %>'" style="height: 300px">
           <div class="mdc-card__media mdc-card__media--16-9 custom-card__media" style="background-image: url('<%= image_url thumb %>');">
           </div>
           <div class="custom-card__primary">

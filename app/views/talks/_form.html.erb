@@ -1,44 +1,49 @@
-      <%= form_for(@talk, url: url, html: {class: 'form-horizontal'}) do |f| %>
+      <%= form_for(@talk, url: url, html: {class: 'form-horizontal', id: 'form-talk'}) do |f| %>
         <%= render "shared/error_messages", record: @talk %>
 
-        <div class="form-group">
-          <%= f.label :presentation_url %>
-          <%= f.url_field :presentation_url, class: "form-control" %>
-          <span id="searching_talk" style="display:none; color: green;"><b><%= t("new.talk.searching") %></b></span>
-          <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
-          <span id="talk_not_found" style="display:none; color: red;"><%= t("new.talk.not_found") %></span>
+        <div class="text-field-container">
+          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--upgraded">
+            <%= f.url_field :presentation_url, class: "mdc-text-field__input", required: true %>
+            <%= f.label :presentation_url, class: 'mdc-floating-label' %>
+            <div class="mdc-line-ripple"></div>
+          </div>
+          <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg" id="pw-validation-msg">slideshare, speakerdeck, prezi</p>
         </div>
 
-        <div class="form-group">
-          <%= f.label :title %>
-          <%= f.text_field :title, class: "form-control" %>
+        <div class="text-field-container">
+          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--upgraded">
+            <%= f.text_field :title, class: "mdc-text-field__input", required: true %>
+            <%= f.label :title, class: 'mdc-floating-label' %>
+            <div class="mdc-line-ripple"></div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <%= f.label :description %>
-          <%= f.text_area :description, rows: 5, class: "md-textarea" %>
+        <div class="text-field-container">
+          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--textarea mdc-text-field--upgraded">
+            <%= f.text_area :description, rows: 4, class: "mdc-text-field__input", required: true %>
+            <%= f.label :description, class: 'mdc-floating-label' %>
+          </div>
         </div>
 
-        <div class="form-group">
-          <%= f.label :tags %>
-          <%= f.text_field :tags, class: "form-control col-md-4" %>
+        <div class="text-field-container">
+          <div class="mdc-text-field text-field mdc-text-field--upgraded">
+            <%= f.text_field :tags, class: "mdc-text-field__input", required: true %>
+            <%= f.label :tags, class: 'mdc-floating-label' %>
+            <div class="mdc-line-ripple"></div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <%= f.label :video_link %>
-          <%= f.url_field :video_link, class: "form-control" %>
+        <div class="text-field-container">
+          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--upgraded">
+            <%= f.url_field :video_link, class: "mdc-text-field__input" %>
+            <%= f.label :video_link, class: 'mdc-floating-label' %>
+            <div class="mdc-line-ripple"></div>
+          </div>
         </div>
 
         <div class="form-group">
           <%= f.label :to_public %>
           <%= f.check_box :to_public %>
-        </div>
-
-        <div class="container">
-          <%= render "shared/invite_user", model: @talk, users: @authors, key: "author" %>
-
-          <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('helpers.links.cancel'), talks_path, class: 'btn btn-default' %>
         </div>
 
         <%= f.hidden_field :thumbnail %>

@@ -1,28 +1,58 @@
-<%= render "shared/header", index: :talk %>
-<%= render "shared/title", title: t("titles.talks.show"), index: :talk %>
+<%#= render "shared/title", title: t("titles.talks.show"), index: :talk %>
 
-  <div class="container">
-    <%= render "talks/show/actions" %>
-    <br />
-    <div class="row">
-      <div class="col-md-4">
-        <%= render "talks/show/details" %>
-        <%= render "talks/show/tags" %>
-        <%= render "talks/show/creators" %>
-        <%= render "talks/show/public_label" %>
-        <%= render "talks/show/watch_button" %>
-        <%= render "talks/show/schedules" %>
-        <%= render "talks/show/external_events" %>
-        <%= render "talks/show/watched_users" %>
-      </div>
-
-      <div class="col-md-8">
-        <% unless @presentation.frame.include?("without_presentation") %>
-          <%= render 'talks/show/presentation' %>
-          <%= render 'talks/show/video' %>
-        <% end %>
-      </div>
-    </div>
+<div class="container">
+  <% unless @presentation.frame.include?("without_presentation") %>
+    <%= render 'talks/show/presentation' %>
+    <%= render 'talks/show/video' %>
+  <% end %>
+  <div class="talk-details">
+    <%= render "talks/show/details" %>
   </div>
+  <%= render "talks/show/creators" %>
+  <%#= render "talks/show/watch_button" %>
+  <%#= render "talks/show/public_label" %>
+  <%#= render "talks/show/schedules" %>
+  <%#= render "talks/show/external_events" %>
+  <%#= render "talks/show/watched_users" %>
+  <%= render "shared/talks", talks: @talks, show_user: true %>
+  <%= render 'dialog', url: talk_path %>
+</div>
 
-  <%= render "comments/index", commentable: @talk %>
+<%#= render "talks/show/actions" %>
+<%#= render "comments/index", commentable: @talk %>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  var menuEl = document.querySelector('#talk-menu');
+  var menu = new mdc.menu.MDCMenu(menuEl);
+  var menuButtonEl = document.querySelector('#talk-menu-button');
+
+  // Toggle menu open
+  menuButtonEl.addEventListener('click', function() {
+    menu.open = !menu.open;
+  });
+
+  // Listen for selected item
+  menuEl.addEventListener('MDCMenu:selected', function(evt) {
+     var detail = evt.detail;
+  });
+
+  // Turn off menu open animations
+  menu.quickOpen = true;
+
+  var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
+
+  $('#open-dialog').click(function(){
+    dialog.show();
+  });
+
+  $('.btn-close-dialog').click(function(){
+    dialog.close();
+  });
+
+  $('.btn-apply-dialog').click(function(){
+    $('#form-talk').submit();
+    dialog.close();
+  })
+  </script>
+<% end %>

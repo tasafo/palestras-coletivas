@@ -5,7 +5,12 @@
 
 .container{
   padding: 75px 0;
-  height: 600px;
+  /* height: 600px; */
+  overflow: auto;
+}
+
+.container-grid{
+  padding: 75px 0;
   overflow: auto;
 }
 
@@ -54,6 +59,46 @@
   -moz-border-bottom-right-radius: 100px;
 }
 
+.embed-responsive-item{
+  width: 100%;
+  height: 600px;
+}
+
+.talk-details{
+  margin: 0 20px 0 20px;
+}
+
+.edit-talk-dialog{
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.mdc-dialog__body--scrollable{
+  max-height: 100%;
+}
+
+.btn-apply-dialog{
+  position: absolute;
+  right: 20px;
+}
+
+.btn-close-dialog{
+  position: absolute;
+}
+
+.fixed-fab {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  z-index: 1;
+}
+
+.fixed-fab {
+  position: fixed;
+}
+
 @media (min-width: 1025px) and (max-width: 1280px) {
 
   .container{
@@ -77,6 +122,8 @@
   .container{
     height: 1100px;
   }
+
+
 
 }
 

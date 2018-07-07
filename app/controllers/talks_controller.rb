@@ -8,7 +8,7 @@ class TalksController < PersistenceController
   def index
     @search = params[:search]
     @my = !params[:my].nil?
-
+    @talk = Talk.new
     @talks = search_talks @search, @my, params[:page]
 
     render nothing: true, status: 404 if params[:page] && @talks.blank?
@@ -32,6 +32,8 @@ class TalksController < PersistenceController
                           .show_presentation
 
     @video = Oembed.new(@talk.video_link).show_video
+
+    @talks = Talk.all.limit(8)
 
     return if @talk.to_public
 

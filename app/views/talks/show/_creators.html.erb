@@ -1,5 +1,15 @@
-<h5><%= t("show.talk.created_by") %></h5>
-
 <% @talk.users.by_name.each do |user| %>
-  <%= render "shared/user", user: user %>
+  <ul class="mdc-list demo-list mdc-list--two-line mdc-list--avatar-list">
+    <li class="mdc-list-item mdc-ripple-upgraded">
+      <span class="mdc-list-item__graphic material-icons" aria-hidden="true"><%= link_to thumbnail(user, "30x30", 'rounded-circle img-responsive'), user_path(user), title: user.show_name %></span>
+      <span class="mdc-list-item__text">
+        <%= link_to user.name, user_path(user) %>
+      </span>
+    </li>
+    <li class="mdc-list-item mdc-ripple-upgraded">
+      <span class="mdc-list-item__text"><%= t("labels.talk.tags") %>
+        <span class="mdc-list-item__secondary-text"><%= @talk.tags %></span>
+      </span>
+    </li>
+  </ul>
 <% end %>

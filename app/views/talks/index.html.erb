@@ -1,22 +1,9 @@
 <%#= render "shared/title", title: t("titles.talks.index"), index: :talk %>
-
-<div id="main-container" class="container animated fadeInUp">
-  <div class="row">
-    <% if logged_in? %>
-      <div class="col-md-6">
-        <div class="btn-group pull-right" role="group">
-          <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>&nbsp;
-
-          <% if @my %>
-            <%= link_to t("titles.talks.all"), talks_path, class: "btn btn-primary" %>
-          <% else %>
-            <%= link_to t("titles.talks.my"), "/talks?my=true", class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
+<%= render 'dialog', url: talks_path %>
+<div id="main-container" class="container-grid animated fadeInUp">
+  <% if logged_in? %>
+    <button class="fixed-fab btn-new-talk mdc-fab material-icons mdc-ripple-upgraded"><span class="mdc-fab__icon">add</span></button>
+  <% end %>
   <%= render "shared/talks", talks: @talks, show_user: true %>
 </div>
 
@@ -24,6 +11,21 @@
   <script type="text/javascript">
     const container = document.querySelector('#main-container')
     let page = 2;
+    var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
+
+    $('.btn-new-talk').click(function(e){
+      e.preventDefault();
+      dialog.show();
+    });
+
+    $('.btn-close-dialog').click(function(){
+      dialog.close();
+    });
+
+    $('.btn-apply-dialog').click(function(){
+      $('#form-talk').submit();
+      // dialog.close();
+    })
 
     container.addEventListener('scroll', () => {
       if (container.scrollTop + container.clientHeight >= container.scrollHeight) {

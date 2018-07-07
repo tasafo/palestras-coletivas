@@ -13,10 +13,16 @@ $.each(document.querySelectorAll('.my-surface'), function(i, el){
   mdc.ripple.MDCRipple.attachTo(el);
 });
 
+$.each(document.querySelectorAll('.mdc-text-field'), function(i, el){
+  const textField = new mdc.textField.MDCTextField(el);
+});
+
 let drawer = new mdc.drawer.MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
 document.querySelector('.menu-button').addEventListener('click', () => drawer.open = true);
 
 $('#main-container').on('click', '.custom-card', function(){
   $('#main-container').addClass('animated fadeOutDown');
   $('.mdc-linear-progress').show();
-})
+});
+
+$(".container-grid").height( $(window).height() );
