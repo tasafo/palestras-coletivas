@@ -3,12 +3,6 @@ var event_id;
 $(function() {
   event_id = $('#event_id').val();
 
-  $("#event_start_date").datepicker();
-
-  $("#event_end_date").datepicker();
-
-  $("#event_deadline_date_enrollment").datepicker();
-
   $(".btn-present").on("click", function(e) {
     e.preventDefault();
     addPresence(this)

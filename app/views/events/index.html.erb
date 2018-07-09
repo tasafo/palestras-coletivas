@@ -1,16 +1,11 @@
 <%#= render "shared/header", index: :event %>
 
 <%#= render "shared/title", title: t("titles.events.index"), index: :event %>
-<div id="main-container" class="container-grid animated fadeInUp">
-  <div class="row events-actions">
-    <% if logged_in? %>
-      <div class="col-md-12">
-        <div class="btn-group pull-right" role="group">
-          <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>&nbsp;
-
-          <%= link_to t("titles.events.#{@my ? 'all' : 'my'}"), "/events#{@my ? '' : '?my=true'}", class: "btn btn-primary" %>
-        </div>
-      </div>
+<div id="main-container" class="container animated fadeInUp">
+  <div class="row">
+    <h1 class="mdc-typography--subtitle1" style="width: 60px; display: block; float: left">Eventos</h1>
+    <%= link_to new_event_path, class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
+      <i class="material-icons mdc-button__icon">add</i>  <%= t("titles.events.new") %>
     <% end %>
   </div>
 

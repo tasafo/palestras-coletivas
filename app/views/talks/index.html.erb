@@ -1,6 +1,10 @@
 <%#= render "shared/title", title: t("titles.talks.index"), index: :talk %>
 <%= render 'dialog', url: talks_path %>
-<div id="main-container" class="container-grid animated fadeInUp">
+<div id="main-container" class="container animated fadeInUp">
+  <div class="" style="display: flow-root; padding: 10px 0 10px 0">
+    <h1 class="mdc-typography--subtitle1"> <%= t("titles.talks.index") %></h1>
+  </div>
+
   <% if logged_in? %>
     <button class="fixed-fab btn-new-talk mdc-fab material-icons mdc-ripple-upgraded"><span class="mdc-fab__icon">add</span></button>
   <% end %>

@@ -1,7 +1,6 @@
 jQuery(function($) {
    $('.dropdown-toggle').dropdown();
 
-   $(".date").mask("99/99/9999");
    $(".fone").mask("(99) 99999999?9");
    $(".cep").mask("99999-999");
    $(".hour").mask("99:99");
@@ -20,7 +19,7 @@ $.each(document.querySelectorAll('.mdc-text-field'), function(i, el){
 let drawer = new mdc.drawer.MDCTemporaryDrawer(document.querySelector('.mdc-drawer--temporary'));
 document.querySelector('.menu-button').addEventListener('click', () => drawer.open = true);
 
-$('#main-container').on('click', '.custom-card', function(){
+$('#main-container').on('click', '.custom-card, .link-effect', function(){
   $('#main-container').addClass('animated fadeOutDown');
   $('.mdc-linear-progress').show();
 });

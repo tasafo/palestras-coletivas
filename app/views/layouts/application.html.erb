@@ -36,6 +36,10 @@
           <span class="mdc-top-app-bar__title animated fadeInDown">Palestras Coletivas</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <% if @event.present? %>
+            <button type="submit" form="form-event" class="mdc-button mdc-button--outlined mdc-ripple-upgraded mdc-theme--on-secondary mdc-theme--secondary-bg btn-top-save">Salvar</button>
+          <% end %>
+
           <% if logged_in? and @talk.present? and @talk.persisted? %>
             <button id="talk-menu-button" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Add to favorites" >more_vert</button>
             <div class="mdc-menu-anchor" style="transform-origin: center bottom 10px; right: 160px; bottom: 0px;">
