@@ -1,6 +1,6 @@
 <%#= render "shared/title", title: t("titles.talks.index"), index: :talk %>
 <%= render 'dialog', url: talks_path %>
-<div id="main-container" class="container animated fadeInUp">
+<div id="main-container" class="container">
   <div class="" style="display: flow-root; padding: 10px 0 10px 0">
     <h1 class="mdc-typography--subtitle1"> <%= t("titles.talks.index") %></h1>
   </div>
@@ -11,10 +11,17 @@
   <%= render "shared/talks", talks: @talks, show_user: true %>
 </div>
 
+<div class="page-load-status">
+  <div class="infinite-scroll-request">
+    carregando...
+  </div>
+  <p class="infinite-scroll-last">End of content</p>
+  <p class="infinite-scroll-error">No more pages to load</p>
+</div>
+
 <% content_for :javascript do %>
   <script type="text/javascript">
     const container = document.querySelector('#main-container')
-    let page = 2;
     var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
 
     $('.btn-new-talk').click(function(e){
@@ -28,19 +35,16 @@
 
     $('.btn-apply-dialog').click(function(){
       $('#form-talk').submit();
-      // dialog.close();
     })
 
-    container.addEventListener('scroll', () => {
-      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-        $.ajax({
-          url: '/talks_ajax?page=' + page,
-          success: function(res){
-            $('.container').append(res);
-            page = ++page;
-          }
-        })
-      }
-    })
+    $('.container').infiniteScroll({
+      path: function(){
+        let pageNumber = this.loadCount + 1;
+        return '/talks_ajax?page=' + pageNumber;
+      },
+      append: '.mdc-layout-grid__inner',
+      history: false,
+      status: '.page-load-status'
+    });
   </script>
 <% end %>

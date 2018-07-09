@@ -26,5 +26,6 @@
 //= require invite_user
 //= require talk
 //= require export_subscribers
+//= require infinite-scroll.pkgd.min
 //= require material-components-web.min
 //= require custom

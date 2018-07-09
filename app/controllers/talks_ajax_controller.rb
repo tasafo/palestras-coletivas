@@ -23,6 +23,6 @@ class TalksAjaxController < PersistenceController
               end
             end
 
-    talks.page(page).per(16)
+    talks.page(page).per(8)
   end
 end

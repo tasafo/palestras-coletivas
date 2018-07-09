@@ -6,7 +6,6 @@
 .container{
   padding: 75px 0;
   /* height: 600px; */
-  overflow: auto;
 }
 
 .container-grid{
@@ -123,6 +122,14 @@
   padding: 10px 0 10px 0;
 }
 
+.page-load-status {
+  display: none; /* hidden by default */
+  padding-top: 20px;
+  border-top: 1px solid #DDD;
+  text-align: center;
+  color: #777;
+}
+
 @media (min-width: 1025px) and (max-width: 1280px) {
 
   .container{
@@ -147,10 +154,6 @@
     top: 80px;
   }
 
-  .container{
-    height: 1100px;
-  }
-
   .btn-top-save{
     margin-right: 70px;
   }
@@ -162,10 +165,6 @@
   .user-thumb{
     position: absolute;
     top: 110px;
-  }
-
-  .container{
-    height: 1100px;
   }
 
 }

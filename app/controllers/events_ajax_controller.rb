@@ -9,7 +9,7 @@ class EventsAjaxController < PersistenceController
               else
                 EventQuery.new.all_public
               end
-    @events = @events.page(params[:page]).per(3)
+    @events = @events.page(params[:page]).per(9)
 
     render nothing: true, status: 404 if params[:page] && @events.blank?
   end

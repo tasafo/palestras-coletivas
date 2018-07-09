@@ -1,7 +1,7 @@
 <%#= render "shared/header", index: :event %>
 
 <%#= render "shared/title", title: t("titles.events.index"), index: :event %>
-<div id="main-container" class="container animated fadeInUp">
+<div id="main-container" class="container">
   <div class="row">
     <h1 class="mdc-typography--subtitle1" style="width: 60px; display: block; float: left">Eventos</h1>
     <%= link_to new_event_path, class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
@@ -16,21 +16,25 @@
   <% end %>
 </div>
 
+<div class="page-load-status">
+  <div class="infinite-scroll-request">
+    carregando...
+  </div>
+  <p class="infinite-scroll-last">End of content</p>
+  <p class="infinite-scroll-error">No more pages to load</p>
+</div>
+
 <% content_for :javascript do %>
   <script type="text/javascript">
-    const container = document.querySelector('#main-container')
-    let page = 2;
 
-    container.addEventListener('scroll', () => {
-      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-        $.ajax({
-          url: '/events_ajax?page=' + page,
-          success: function(res){
-            $('.container').append(res);
-            page = ++page;
-          }
-        })
-      }
-    })
+    $('.container').infiniteScroll({
+      path: function(){
+        let pageNumber = this.loadCount + 1;
+        return '/events_ajax?page=' + pageNumber;
+      },
+      append: '.mdc-layout-grid__inner',
+      history: false,
+      status: '.page-load-status'
+    });
   </script>
 <% end %>
