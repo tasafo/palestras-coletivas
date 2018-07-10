@@ -1,94 +1,93 @@
-<%= render "shared/header", index: :ranking %>
-<%= render "shared/title", title: t("titles.ranking.index"), index: :ranking %>
+<%#= render "shared/title", title: t("titles.ranking.index"), index: :ranking %>
 
 <div class="container">
-  <div class="row-fluid">
-    <div class="col-md-12">
-      <table class="table table-condensed">
-        <% unless @users_public_talks.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.public_talks") %></h4></td>
-          </tr>
-          <% @users_public_talks.each do |user| %>
-            <tr>
-              <td><%= render "shared/user", :user => user %></td>
-              <td><span class="badge badge-secondary"><%= user.counter_public_talks %></span></td>
-            </tr>
-          <% end %>
+  <div class="mdc-list-group">
+    <% unless @users_public_talks.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.public_talks") %></h3>
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @users_public_talks.each do |user| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= render "shared/user", :user => user %></span>
+            <span class="mdc-list-item__meta"><%= user.counter_public_talks %></span>
+          </li>
         <% end %>
+      </ul>
+    <% end %>
 
-        <% unless @talks.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.talks") %></h4></td>
-          </tr>
-          <% @talks.each do |talk| %>
-            <tr>
-              <td><%= link_to talk.title, talk_path(talk) %></td>
-              <td><span class="badge badge-secondary"><%= talk.counter_presentation_events %></span></td>
-            </tr>
-          <% end %>
+    <% unless @talks.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.talks") %></h3>
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @talks.each do |talk| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= link_to talk.title, talk_path(talk) %></span>
+            <span class="mdc-list-item__meta"><%= talk.counter_presentation_events %></span>
+          </li>
         <% end %>
+      </ul>
+    <% end %>
 
-        <% unless @events.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.events") %></h4></td>
-          </tr>
-          <% @events.each do |event| %>
-            <tr>
-              <td><%= link_to event.name_edition, event_path(event) %></td>
-              <td><span class="badge badge-secondary"><%= event.counter_present_users %></span></td>
-            </tr>
-          <% end %>
+    <% unless @events.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.events") %></h3>
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @events.each do |event| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= link_to event.name_edition, event_path(event) %></span>
+            <span class="mdc-list-item__meta"><%= event.counter_present_users %></span>
+          </li>
         <% end %>
+      </ul>
+    <% end %>
 
-        <% unless @watched_talks.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.watchers") %></h4></td>
-          </tr>
-          <% @watched_talks.each do |user| %>
-            <tr>
-              <td><%= render "shared/user", :user => user %></td>
-              <td><span class="badge badge-secondary"><%= user.counter_watched_talks %></span></td>
-            </tr>
-          <% end %>
-        <% end %>
+    <% unless @watched_talks.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.watchers") %></h3>
 
-        <% unless @organizers.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.organizers") %></h4></td>
-          </tr>
-          <% @organizers.each do |user| %>
-            <tr>
-              <td><%= render "shared/user", :user => user %></td>
-              <td><span class="badge badge-secondary"><%= user.counter_organizing_events %></span></td>
-            </tr>
-          <% end %>
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @watched_talks.each do |user| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= render "shared/user", :user => user %></span>
+            <span class="mdc-list-item__meta"><%= user.counter_watched_talks %></span>
+          </li>
         <% end %>
+      </ul>
+    <% end %>
 
-        <% unless @talkers.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.speakers") %></h4></td>
-          </tr>
-          <% @talkers.each do |user| %>
-            <tr>
-              <td><%= render "shared/user", :user => user %></td>
-              <td><span class="badge badge-secondary"><%= user.counter_presentation_events %></span></td>
-            </tr>
-          <% end %>
-        <% end %>
+    <% unless @organizers.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.organizers") %></h3>
 
-        <% unless @participations.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.participants") %></h4></td>
-          </tr>
-          <% @participations.each do |user| %>
-            <tr>
-              <td><%= render "shared/user", :user => user %></td>
-              <td><span class="badge badge-secondary"><%= user.counter_participation_events %></span></td>
-            </tr>
-          <% end %>
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @organizers.each do |user| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= render "shared/user", :user => user %></span>
+            <span class="mdc-list-item__meta"><%= user.counter_organizing_events %></span>
+          </li>
         <% end %>
-      </table>
-    </div>
+      </ul>
+    <% end %>
+
+    <% unless @talkers.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.speakers") %></h3>
+
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @talkers.each do |user| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= render "shared/user", :user => user %></span>
+            <span class="mdc-list-item__meta"><%= user.counter_presentation_events %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% unless @participations.blank? %>
+      <h3 class="mdc-list-group__subheader"><%= t("titles.ranking.participants") %></h3>
+
+      <ul class="mdc-list" aria-orientation="vertical">
+        <% @participations.each do |user| %>
+          <li class="mdc-list-item">
+            <span class="mdc-list-item__text"><%= render "shared/user", :user => user %></span>
+            <span class="mdc-list-item__meta"><%= user.counter_participation_events %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>

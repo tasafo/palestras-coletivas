@@ -144,6 +144,10 @@
   margin: 20px 0 30px 0;
 }
 
+.mdc-list{
+  border: .1px solid gray;
+}
+
 @media (min-width: 1025px) and (max-width: 1280px) {
 
   .container{
