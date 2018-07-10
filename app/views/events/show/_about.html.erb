@@ -1,9 +1,12 @@
-  <section id="about">
-    <%= render "events/show/actions" %>
-
-    <div class="container">
-      <h2 class="text-primary"><%= t("labels.event.about") %></h2>
-
-      <div class="text"><%= sanitize(@event.description) %></div>
+<section id="about" class="about">
+  <%#= render "events/show/actions" %>
+  <div class="container mdc-typography--body2" style="text-align: ">
+    <div class=""  style="margin: auto; width: 50px">
+      <span class="stocking-event"><%= @event.stocking %></span>
+      <span style="display: block; margin: 0 0 20px 0; font-size: 18px">Vagas</span>
     </div>
-  </section>
+    <div class="about-text" style="font-size: 18px;">
+      <%= sanitize(@event.description) %>
+    </div>
+  </div>
+</section>

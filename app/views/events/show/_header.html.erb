@@ -1,23 +1,32 @@
-  <style type="text/css">
-    #page-header {
-      background-image: url(<%= https(@event.image.url) %>);
+<style media="screen">
+    section#page-header{
+      background:
+        linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.4)
+        ),
+        linear-gradient(
+          to left,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.4)
+        ),
+          url("<%= event_image @event %>") no-repeat center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
       background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
+      width: 100%;
+      min-height: 450px;
+      background-color: #607D8B;
       background-attachment: fixed;
     }
   </style>
 
   <section id="page-header">
-    <div id="page-content" class="row-fluid">
-      <h2><%= @event.name_edition %></h2>
+    <div class="header-content">
+      <h1 class="mdc-typography--headline4"><%= @event.name_edition %></h1>
 
-      <h4><%= @event.long_date %></h4>
-
-      <h4><%= @event.place %></h4>
-
-      <h4 class="text-danger"><%= t("labels.event.stocking") %>: <%= @event.stocking %></h4>
-
-      <h4 class="text-danger"><%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}" if @presenter.open_enrollment %>&nbsp;</h4>
+      <h2 class="mdc-typography--subtitle1"><%= @event.long_date %></h2>
     </div>
   </section>

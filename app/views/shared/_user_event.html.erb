@@ -1,6 +1,11 @@
-<div class="col-md-2">
-  <a href="<%= user_path(user) %>" title="<%= user.show_name %>">
-    <%= thumbnail(user, "80x80", 'rounded-circle img-responsive') %>
-    <p><%= user.show_name %></p>
-  </a>
-</div>
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop">
+  <div class="mdc-card custom-card custom-card--hero">
+    <div class="mdc-card__primary-action mdc-ripple-upgraded" tabindex="0">
+      <div class="custom-card__primary" style="text-align: center; height: 150px">
+        <a href="<%= user_path(user) %>" title="<%= user.show_name %>">
+          <%= thumbnail(user, "80x80", 'rounded-circle') %>
+          <p><%= user.show_name %></p>
+        </a>
+      </div>
+    </div>
+  </div>

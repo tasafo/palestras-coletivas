@@ -29,65 +29,10 @@
       <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar"><span class="mdc-linear-progress__bar-inner"></span>
       </div>
     </div>
-    <header class="mdc-top-app-bar">
-      <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-          <button class="menu-button material-icons mdc-toolbar__menu-icon">menu</button>
-          <span class="mdc-top-app-bar__title animated fadeInDown">Palestras Coletivas</span>
-        </section>
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-          <% unless logged_in? %>
-            <span class="mdc-top-app-bar__title animated fadeInDown"><a href="/login" class="link-login">Login</a></span>
-          <% end %>
 
-          <% if @event.present? %>
-            <button type="submit" form="form-event" class="mdc-button mdc-button--outlined mdc-ripple-upgraded mdc-theme--on-secondary mdc-theme--secondary-bg btn-top-save">Salvar</button>
-          <% end %>
+    <%= render 'shared/header' %>
 
-          <% if logged_in? and @talk.present? and @talk.persisted? %>
-            <button id="talk-menu-button" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Add to favorites" >more_vert</button>
-            <div class="mdc-menu-anchor" style="transform-origin: center bottom 10px; right: 160px; bottom: 0px;">
-              <div id="talk-menu" class="mdc-menu" tabindex="-1">
-                <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                  <li id="open-dialog" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="0"><%= t("titles.talks.edit") %></li>
-                </ul>
-              </div>
-            </div>
-          <% end %>
-        </section>
-      </div>
-    </header>
-
-
-    <aside class="mdc-drawer mdc-drawer--temporary mdc-typography">
-      <nav class="mdc-drawer__drawer">
-        <header class="mdc-drawer__header">
-          <div class="mdc-drawer__header-content">
-            Palestras Coletivas
-          </div>
-        </header>
-        <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
-          <a class="mdc-list-item mdc-list-item--activated" href="<%= events_path %>">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i><%= t('titles.events.index') %>
-          </a>
-          <a class="mdc-list-item" href="<%= talks_path %>">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t('titles.talks.index') %>
-          </a>
-          <a class="mdc-list-item" href="<%= ranking_path %>">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t('titles.ranking.index') %>
-          </a>
-          <% if logged_in? %>
-            <a class="mdc-list-item" href="<%= user_path(current_user) %>">
-              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t("menu.user_profile") %>
-            </a>
-
-            <a class="mdc-list-item" href="<%= logout_path %>">
-              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t("menu.logout") %>
-            </a>
-          <% end %>
-        </nav>
-      </nav>
-    </aside>
+    <%= render 'shared/menu' %>
 
     <%= yield %>
 
