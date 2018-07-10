@@ -148,6 +148,11 @@
   border: .1px solid gray;
 }
 
+.link-login{
+  color: #fff;
+  font-size: 18px;
+}
+
 @media (min-width: 1025px) and (max-width: 1280px) {
 
   .container{

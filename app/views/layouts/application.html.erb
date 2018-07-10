@@ -36,6 +36,10 @@
           <span class="mdc-top-app-bar__title animated fadeInDown">Palestras Coletivas</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <% unless logged_in? %>
+            <span class="mdc-top-app-bar__title animated fadeInDown"><a href="/login" class="link-login">Login</a></span>
+          <% end %>
+
           <% if @event.present? %>
             <button type="submit" form="form-event" class="mdc-button mdc-button--outlined mdc-ripple-upgraded mdc-theme--on-secondary mdc-theme--secondary-bg btn-top-save">Salvar</button>
           <% end %>
@@ -59,7 +63,7 @@
       <nav class="mdc-drawer__drawer">
         <header class="mdc-drawer__header">
           <div class="mdc-drawer__header-content">
-            Header here
+            Palestras Coletivas
           </div>
         </header>
         <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
@@ -75,6 +79,10 @@
           <% if logged_in? %>
             <a class="mdc-list-item" href="<%= user_path(current_user) %>">
               <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t("menu.user_profile") %>
+            </a>
+
+            <a class="mdc-list-item" href="<%= logout_path %>">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t("menu.logout") %>
             </a>
           <% end %>
         </nav>
