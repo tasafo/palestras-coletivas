@@ -1,4 +1,13 @@
 <%#= render "shared/title", title: t("titles.talks.show"), index: :talk %>
+<div class="mdc-snackbar mdc-snackbar--align-start"
+     aria-live="assertive"
+     aria-atomic="true"
+     aria-hidden="true" style="z-index: 90000">
+  <div class="mdc-snackbar__text"></div>
+  <div class="mdc-snackbar__action-wrapper">
+    <button type="button" class="mdc-snackbar__action-button"></button>
+  </div>
+</div>
 
 <div class="container">
   <% unless @presentation.frame.include?("without_presentation") %>
@@ -26,6 +35,16 @@
   var menuEl = document.querySelector('#talk-menu');
   var menu = new mdc.menu.MDCMenu(menuEl);
   var menuButtonEl = document.querySelector('#talk-menu-button');
+  var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
+  var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+  var dataObj = {
+    message: 'Processando...',
+    timeout: 50000
+  };
+
+  $('#form-talk').on('submit', function(){
+    snackbar.show(dataObj);
+  });
 
   // Toggle menu open
   menuButtonEl.addEventListener('click', function() {
@@ -40,8 +59,6 @@
   // Turn off menu open animations
   menu.quickOpen = true;
 
-  var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
-
   $('#open-dialog').click(function(){
     dialog.show();
   });
@@ -49,10 +66,5 @@
   $('.btn-close-dialog').click(function(){
     dialog.close();
   });
-
-  $('.btn-apply-dialog').click(function(){
-    $('#form-talk').submit();
-    dialog.close();
-  })
   </script>
 <% end %>

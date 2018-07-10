@@ -72,6 +72,11 @@
           <a class="mdc-list-item" href="<%= ranking_path %>">
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t('titles.ranking.index') %>
           </a>
+          <% if logged_in? %>
+            <a class="mdc-list-item" href="<%= user_path(current_user) %>">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i><%= t("menu.user_profile") %>
+            </a>
+          <% end %>
         </nav>
       </nav>
     </aside>

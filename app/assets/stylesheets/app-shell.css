@@ -58,6 +58,16 @@
   -moz-border-bottom-right-radius: 100px;
 }
 
+.rounded-circle{
+  border-radius: 100px;
+  border-top-left-radius: 100px;
+  -webkit-border-top-left-radius: 100px;
+  -moz-border-top-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  -webkit-border-bottom-right-radius: 100px;
+  -moz-border-bottom-right-radius: 100px;
+}
+
 .embed-responsive-item{
   width: 100%;
   height: 600px;
@@ -128,6 +138,10 @@
   border-top: 1px solid #DDD;
   text-align: center;
   color: #777;
+}
+
+.btn-edit-user{
+  margin: 20px 0 30px 0;
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {

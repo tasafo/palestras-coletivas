@@ -9,7 +9,7 @@ pt-BR:
       _yes: "Sim"
       _no: "Não"
       without_presentation: "O material ainda não está publicado"
-      my_talks_published: "Minhas palestras publicadas"
+      my_talks_published: "Minhas palestras"
       external_event: "Adicionar evento externo"
       external_events: "Apresentado em outros eventos"
       submit_event: "Submeter a um evento"

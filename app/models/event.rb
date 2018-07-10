@@ -8,6 +8,7 @@ class Event
   include UpdateCounter
   include Commentable
   include Rateable
+  attr_accessor :static_cover
 
   field :name, type: String
   field :edition, type: String
@@ -101,7 +102,7 @@ class Event
   end
 
   def static_cover
-    cover_id || rand(1..6)
+    self.cover_id = self.cover_id || rand(1..6)
   end
 
   private

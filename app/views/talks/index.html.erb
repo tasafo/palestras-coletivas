@@ -1,5 +1,14 @@
 <%#= render "shared/title", title: t("titles.talks.index"), index: :talk %>
 <%= render 'dialog', url: talks_path %>
+<div class="mdc-snackbar mdc-snackbar--align-start"
+     aria-live="assertive"
+     aria-atomic="true"
+     aria-hidden="true" style="z-index: 90000">
+  <div class="mdc-snackbar__text"></div>
+  <div class="mdc-snackbar__action-wrapper">
+    <button type="button" class="mdc-snackbar__action-button"></button>
+  </div>
+</div>
 <div id="main-container" class="container">
   <div class="" style="display: flow-root; padding: 10px 0 10px 0">
     <h1 class="mdc-typography--subtitle1"> <%= t("titles.talks.index") %></h1>
@@ -23,6 +32,15 @@
   <script type="text/javascript">
     const container = document.querySelector('#main-container')
     var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
+    const snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+    const dataObj = {
+      message: 'Processando...',
+      timeout: 50000
+    };
+
+    $('#form-talk').on('submit', function(){
+      snackbar.show(dataObj);
+    });
 
     $('.btn-new-talk').click(function(e){
       e.preventDefault();
@@ -40,7 +58,7 @@
     $('.container').infiniteScroll({
       path: function(){
         let pageNumber = this.loadCount + 1;
-        return '/talks_ajax?page=' + pageNumber;
+        return '/talks_ajax?<%= "my=" + @my.to_s + "&" if @my %>page=' + pageNumber;
       },
       append: '.mdc-layout-grid__inner',
       history: false,

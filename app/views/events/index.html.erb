@@ -30,7 +30,7 @@
     $('.container').infiniteScroll({
       path: function(){
         let pageNumber = this.loadCount + 1;
-        return '/events_ajax?page=' + pageNumber;
+        return '/events_ajax?<%= "my=" + @my.to_s + "&" if @my %>page=' + pageNumber;
       },
       append: '.mdc-layout-grid__inner',
       history: false,
