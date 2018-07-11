@@ -25,25 +25,7 @@
           <% end %>
         <% end %>
 
-        <% if @presenter.open_enrollment %>
-          <% if @presenter.new_subscription %>
-            <% if @presenter.crowded %>
-              <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
-            <% else %>
-              <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), class: "btn btn-primary" %>
-            <% end %>
-          <% else %>
-            <% message_button = @presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
-
-            <% button_type = @presenter.enrollment.active? ? "btn-danger" : "btn-warning" %>
-
-            <% if @presenter.crowded && !@presenter.enrollment.active? %>
-              <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
-            <% else %>
-              <%= link_to message_button, edit_event_enrollment_path(@event, :active, @presenter.enrollment), class: "btn #{button_type}" %>
-            <% end %>
-          <% end %>
-        <% end %>
+        
       </div>
     </div>
   </section>

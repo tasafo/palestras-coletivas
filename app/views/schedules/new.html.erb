@@ -1,12 +1,26 @@
-<%= render "shared/header", index: :talk %>
-<%= render "shared/title", title:  t("titles.schedules.index"), index: :talk %>
+<%= render 'dialog' %>
 
 <div class="container">
-  <div class="card">
-    <div class="card-body mx-4">
-      <h2><%= t("titles.schedules.new") %> <b><%= @event.name_edition %></b></h2>
+  <h1><%= @event.name_edition %></h1>
 
-      <%= render 'form', url: event_schedules_path(@event) %>
+  <button id="btn-new-schedule" class="fixed-fab mdc-fab material-icons mdc-ripple-upgraded"><span class="mdc-fab__icon">add</span></button>
+
+  <section id="dynamic-demo-toolbar">
+    <nav id="dynamic-tab-bar" class="mdc-tab-bar nav-schedule" role="tablist">
+      <% @presenter.event_dates.each_with_index do |date, index| %>
+      <a role="tab" aria-controls="panel-<%= index  = index  + 1 %> "
+         class="mdc-tab mdc-tab--active" href="#panel-<%= index %>"><%= date %></a>
+      <% end %>
+      <span class="mdc-tab-bar__indicator"></span>
+    </nav>
+  </section>
+  <section>
+    <div class="panels">
+      <%= render 'shared/event_schedule', presenter: @event_presenter %>
     </div>
-  </div>
+    <div class="dots">
+      <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
+      <a class="dot" data-trigger="panel-2" href="#panel-2"></a>
+    </div>
+  </section>
 </div>

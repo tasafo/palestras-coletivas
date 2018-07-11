@@ -7,7 +7,7 @@
   <% if @event.schedules? %>
     <section id="schedule" class="schedule">
       <div class="container">
-        <%= render "shared/event_schedule" %>
+        <%= render "shared/event_schedule", presenter: @presenter %>
       </div>
     </section>
   <% end %>

@@ -1,0 +1,16 @@
+<aside id="mdc-dialog-with-list"
+ class="mdc-dialog"
+ role="alertdialog"
+ aria-labelledby="mdc-dialog-with-list-label"
+ aria-describedby="mdc-dialog-with-list-description">
+ <div class="edit-talk-dialog mdc-dialog__surface">
+   <header class="mdc-dialog__header">
+     <button type="button" class="btn-close-dialog material-icons mdc-toolbar__menu-icon">close</button>
+     <button type="submit" id="btn-save-schedule" class="btn-apply-dialog hero-button mdc-button mdc-ripple-upgraded">Salvar</button>
+   </header>
+   <section class="mdc-dialog__body mdc-dialog__body--scrollable">
+     <%= render 'form', url: event_schedules_path(@event) %>
+   </section>
+ </div>
+ <div class="mdc-dialog__backdrop"></div>
+</aside>

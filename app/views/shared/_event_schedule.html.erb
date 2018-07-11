@@ -1,6 +1,7 @@
-<% @presenter.grids.each do |grid| %>
-
-    <h2 class="mdc-typography--subtitle1 schedule-title"><%= l grid[:date], format: :custom %></h2>
+<% panel_id = 1 %>
+<% presenter.grids.each_with_index do |grid, index| %>
+    <% panel_id += index %>
+    <div class="panel <%= 'active' if  panel_id == 1 %>" id="panel-<%= panel_id %>" role="tabpanel" aria-hidden="false">
 
     <% grid[:schedules_time].each do |schedules| %>
 
@@ -28,5 +29,6 @@
       </div>
 
     <% end %>
+    </div>
 
 <% end %>
