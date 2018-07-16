@@ -1,27 +1,27 @@
 <% panel_id = 1 %>
-<% presenter.grids.each_with_index do |grid, index| %>
+<% event_presenter.grids.each_with_index do |grid, index| %>
     <% panel_id += index %>
     <div class="panel <%= 'active' if  panel_id == 1 %>" id="panel-<%= panel_id %>" role="tabpanel" aria-hidden="false">
 
     <% grid[:schedules_time].each do |schedules| %>
 
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-8-tablet">
           <span class="schedule-time"><%= schedules.first %></span>
         </div>
 
         <% schedules.second.each do |schedule| %>
           <% if schedule.talk? %>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop">
-              <%= render 'events/show/talk_card', talk: schedule.talk %>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet">
+              <%= render 'events/show/talk_card', schedule: schedule, event_presenter: event_presenter %>
             </div>
           <% elsif schedule.activity.description == 'A definir' %>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop">
-              <%= render 'events/show/no_talk_card', activity: schedule.activity %>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet">
+              <%= render 'events/show/no_talk_card', schedule: schedule, event_presenter: event_presenter %>
             </div>
           <% else %>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-11-desktop">
-              <%= render 'events/show/interval_card', activity: schedule.activity %>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-11-desktop mdc-layout-grid__cell--span-8-tablet">
+              <%= render 'events/show/interval_card', schedule: schedule, event_presenter: event_presenter %>
             </div>
           <% end %>
         <% end %>

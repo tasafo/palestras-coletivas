@@ -29,22 +29,22 @@
 
       <h2 class="mdc-typography--subtitle1"><%= @event.long_date %></h2>
 
-      <% if @presenter.open_enrollment %>
-        <% if @presenter.new_subscription %>
-          <% if @presenter.crowded %>
+      <% if @event_presenter.open_enrollment %>
+        <% if @event_presenter.new_subscription %>
+          <% if @event_presenter.crowded %>
             <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
           <% else %>
             <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded" %>
           <% end %>
         <% else %>
-          <% message_button = @presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
+          <% message_button = @event_presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
-          <% button_type = @presenter.enrollment.active? ? "btn-danger" : "btn-warning" %>
+          <% button_type = @event_presenter.enrollment.active? ? "btn-danger" : "btn-warning" %>
 
-          <% if @presenter.crowded && !@presenter.enrollment.active? %>
+          <% if @event_presenter.crowded && !@event_presenter.enrollment.active? %>
             <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
           <% else %>
-            <%= link_to message_button, edit_event_enrollment_path(@event, :active, @presenter.enrollment), class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded #{button_type}" %>
+            <%= link_to message_button, edit_event_enrollment_path(@event, :active, @event_presenter.enrollment), class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded #{button_type}" %>
           <% end %>
         <% end %>
       <% end %>

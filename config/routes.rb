@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   end
 
   resources :talk_info, only: [:create]
-  resources :talk_search, only: [:create]
+  resources :talk_search, only: [:index]
   resources :activities, only: [:create]
   resources :events_ajax, only: :index
   resources :talks_ajax, only: :index

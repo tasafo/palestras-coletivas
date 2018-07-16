@@ -1,0 +1,3 @@
+<%= link_to event_schedule_path(@event, schedule), method: 'delete', class: 'mdc-icon-button material-icons btn-delete-talk' do %>
+  delete
+<% end if event_presenter.authorized %>

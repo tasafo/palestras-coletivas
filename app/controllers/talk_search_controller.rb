@@ -1,6 +1,6 @@
 #:nodoc:
 class TalkSearchController < ApplicationController
-  def create
+  def index
     @talks = TalkQuery.new.search(params[:search]).limit(10) unless params[:search].blank?
 
     respond_to do |format|

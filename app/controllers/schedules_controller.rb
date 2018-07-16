@@ -39,7 +39,7 @@ class SchedulesController < ApplicationController
 
     message = t('flash.schedules.destroy.notice')
 
-    redirect_to event_path(@event), notice: message if @schedule.destroy
+    redirect_to new_event_schedule_path(@event, @schedule), notice: message if @schedule.destroy
   end
 
   private
@@ -53,7 +53,7 @@ class SchedulesController < ApplicationController
   def set_presenter
     @event = Event.find(params[:event_id])
 
-    @presenter = SchedulePresenter.new(@schedule, @event)
+    @schedule_presenter = SchedulePresenter.new(@schedule, @event)
   end
 
   def schedule_params

@@ -3,6 +3,10 @@
   margin: 0;
 }
 
+body{
+  color: #424242
+}
+
 .container{
   padding: 75px 0;
   /* height: 600px; */
@@ -201,8 +205,13 @@ section#location .text{
   margin: 0 0 50px 0;
 }
 
+section.panels{
+  padding: 50px 0 0 0;
+}
+
 .panels .panel{
   display: none;
+  padding-top: 40px
 }
 
 .panels .active{
@@ -228,6 +237,10 @@ section#location .text{
     margin-right: 70px;
   }
 
+  .hero-description{
+    padding: 180px 0 0 80px;
+  }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -241,6 +254,13 @@ section#location .text{
     margin-right: 70px;
   }
 
+
+  .schedule-time{
+    display: block;
+    font-size: 34px;
+    padding: 20px 0 0 15px;
+  }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
@@ -249,6 +269,12 @@ section#location .text{
     position: absolute;
     top: 110px;
   }
+
+
+    .schedule-time{
+      display: block;
+      font-size: 34px;
+    }
 
 }
 
@@ -274,7 +300,7 @@ section#location .text{
   }
 
   .schedule-time{
-    margin: 0 0 0 20px;
+    margin: 20px 0 0 20px;
   }
 
   .schedule-title{
@@ -319,8 +345,10 @@ section#location .text{
 
   .schedule-time{
     margin: 0 0 0 20px;
-    font-size: 54px;
+    padding: 20px 0 0 0;
+    font-size: 34px;
     color: #9e9e9e;
+    display: block;
   }
 
   .schedule-title{
@@ -356,6 +384,10 @@ section#location .text{
   .mdc-form-field--custom{
     width: 100%;
     margin: 10px 0 0 0;
+  }
+
+  .hero-description{
+    padding: 120px 0 0 14px;
   }
 
 }

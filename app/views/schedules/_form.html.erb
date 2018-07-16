@@ -3,7 +3,7 @@
 
   <div class="mdc-form-field  mdc-form-field--custom">
     <div class="mdc-select mdc-form-field--custom">
-      <%= select_tag("schedule[day]", @presenter.dates.html_safe, class: "mdc-select__native-control") %>
+      <%= select_tag("schedule[day]", @schedule_presenter.dates.html_safe, class: "mdc-select__native-control") %>
       <%= f.label :day, class: 'mdc-floating-label' %>
     </div>
   </div>
@@ -19,7 +19,7 @@
   <div class="mdc-form-field  mdc-form-field--custom">
     <div class="mdc-select mdc-form-field--custom">
       <select id="schedule_activity_id" name="schedule[activity_id]" class="mdc-select__native-control">
-        <% @presenter.activities.each do |activity| %>
+        <% @schedule_presenter.activities.each do |activity| %>
           <option data-activity-type="<%= activity.type %>" value="<%= activity._id %>"> <%= activity.description %> </option>
         <% end %>
       </select>

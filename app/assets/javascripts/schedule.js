@@ -1,20 +1,30 @@
 $(function() {
     var activity_id = $("#schedule_activity_id").val();
-    var activityType  = $(this).find(':selected').data('activity-type');
+    var activityType  = $('#schedule_activity_id').find(':selected').data('activity-type');
     var dialog = new mdc.dialog.MDCDialog(document.querySelector('#mdc-dialog-with-list'));
     var dynamicTabBar = window.dynamicTabBar = new mdc.tabs.MDCTabBar(document.querySelector('#dynamic-tab-bar'));
     var dots = document.querySelector('.dots');
     var panels = document.querySelector('.panels');
+    var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+    var dataObj = {
+      message: 'É necessário selecionar uma palestra'
+    };
+
+    if (activityType === 'talk'){
+      $("#container-search-talks").show()
+    }
 
     $("#schedule_activity_id").change(function() {
-        if (activityType === 'talk'){
-          $("#container-search-talks").show()
-        }
-        else{
-          $("#container-search-talks").hide()
-          $('#schedule_talk_id').val( "" )
-          $("#container-selected-talk").html("")
-        }
+      activityType  = $('#schedule_activity_id').find(':selected').data('activity-type');
+
+      if (activityType === 'talk'){
+        $("#container-search-talks").show()
+      }
+      else{
+        $("#container-search-talks").hide()
+        $('#schedule_talk_id').val("")
+        $("#container-selected-talk").html("")
+      }
     });
 
     $("#search_talk").on('keyup', search_talk);
@@ -28,12 +38,6 @@ $(function() {
 
     $("#schedule_activity_id").trigger("change");
 
-    var snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
-
-    const dataObj = {
-      message: 'É necessário selecionar uma palestra'
-    };
-
     $('#btn-save-schedule').on('click', function(e){
       e.preventDefault();
       if ( $('#schedule_talk_id').val() === ''  && activityType  === 'talk' ){
@@ -43,7 +47,11 @@ $(function() {
       $('#form-schedule').submit();
     });
 
-    // dialog.show();
+    $('#form-schedule').on('submit', function(){
+      dataObj.message = 'Enviando...';
+      snackbar.show(dataObj);
+      dialog.close();
+    });
 
     document.getElementById('btn-new-schedule').addEventListener('click', function(){
       dialog.show();
@@ -96,8 +104,6 @@ $(function() {
 
       var dotIndex = [].slice.call(dots.querySelectorAll('.dot')).indexOf(evt.target);
 
-      console.log(dotIndex);
-
       if (dotIndex >= 0) {
         dynamicTabBar.activeTabIndex = dotIndex;
       }
@@ -105,45 +111,45 @@ $(function() {
       updatePanel(dotIndex);
       updateDot(dotIndex);
     })
-});
 
-function updateDay(index){
-  var day = index +  1;
-  $('#schedule_day').val(day);
-}
-
-function search_talk() {
-    search_text = $("#search_talk").val();
-
-    talks = "";
-
-    if (search_text.length > 3) {
-        $.ajax({
-            url : "/talk_search",
-            data : {
-                search : search_text
-            },
-            async : true,
-            type : "post",
-            beforeSend: function(xhr) {
-                xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-            },
-            dataType : "json",
-            success : function(json) {
-                for (var i in json) {
-                    thumb = json[i].thumbnail ? json[i].thumbnail : '/without_presentation.jpg';
-
-                    talks += '<li class="mdc-list-item" data-talk-id="' + json[i]._id['$oid'] + '">';
-                    talks += '<span class="mdc-list-item__graphic"><img src="' + thumb + '" width="80", height="50" /></span>';
-                    talks += '<span class="mdc-list-item__text">'+ json[i].title +'</span>';
-                    talks += '</li>';
-                }
-
-                $("#result-talks-search").html(talks);
-            }
-        });
-
-    } else {
-        $("#result-talks-search").html(talks);
+    function updateDay(index){
+      var day = index +  1;
+      $('#schedule_day').val(day);
     }
-}
+
+    function search_talk() {
+        search_text = $("#search_talk").val();
+
+        talks = "";
+
+        if (search_text.length > 3) {
+            $.ajax({
+                url : "/talk_search",
+                data : {
+                    search : search_text
+                },
+                async : true,
+                type : "get",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+                },
+                dataType : "json",
+                success : function(json) {
+                    for (var i in json) {
+                        thumb = json[i].thumbnail ? json[i].thumbnail : '/without_presentation.jpg';
+
+                        talks += '<li class="mdc-list-item" data-talk-id="' + json[i]._id['$oid'] + '">';
+                        talks += '<span class="mdc-list-item__graphic"><img src="' + thumb + '" width="80", height="50" /></span>';
+                        talks += '<span class="mdc-list-item__text">'+ json[i].title +'</span>';
+                        talks += '</li>';
+                    }
+
+                    $("#result-talks-search").html(talks);
+                }
+            });
+
+        } else {
+            $("#result-talks-search").html(talks);
+        }
+    }
+});

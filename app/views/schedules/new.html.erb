@@ -1,13 +1,16 @@
 <%= render 'dialog' %>
 
-<div class="container">
-  <h1><%= @event.name_edition %></h1>
+<div class="hero-description">
+  <h1 class="mdc-typography--headline4">Programação</h1>
+</div>
 
+<div class="container">
   <button id="btn-new-schedule" class="fixed-fab mdc-fab material-icons mdc-ripple-upgraded"><span class="mdc-fab__icon">add</span></button>
+  <input type="hidden" name="event_id" id="event_id" value="<%= @event.id %>">
 
   <section id="dynamic-demo-toolbar">
     <nav id="dynamic-tab-bar" class="mdc-tab-bar nav-schedule" role="tablist">
-      <% @presenter.event_dates.each_with_index do |date, index| %>
+      <% @schedule_presenter.event_dates.each_with_index do |date, index| %>
       <a role="tab" aria-controls="panel-<%= index  = index  + 1 %> "
          class="mdc-tab mdc-tab--active" href="#panel-<%= index %>"><%= date %></a>
       <% end %>
@@ -16,7 +19,7 @@
   </section>
   <section>
     <div class="panels">
-      <%= render 'shared/event_schedule', presenter: @event_presenter %>
+      <%= render 'shared/event_schedule', event_presenter: @event_presenter %>
     </div>
     <div class="dots">
       <a class="dot active" data-trigger="panel-1" href="#panel-1"></a>
@@ -24,3 +27,7 @@
     </div>
   </section>
 </div>
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'schedule' %>
+<% end %>

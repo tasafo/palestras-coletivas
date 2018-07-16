@@ -7,7 +7,7 @@
   <% if @event.schedules? %>
     <section id="schedule" class="schedule">
       <div class="container">
-        <%= render "shared/event_schedule", presenter: @presenter %>
+        <%= render "shared/event_schedule", event_presenter: @event_presenter %>
       </div>
     </section>
   <% end %>
@@ -17,7 +17,7 @@
       <div id="location-map" class="location-map">
         <div class="text mdc-elevation--z14">
           <h1 class="mdc-typography--subtitle1"><%= @event.place %></h1>
-          <p><%= @presenter.address %></p>
+          <p><%= @event_presenter.address %></p>
         </div>
       </div>
     <% end %>
@@ -35,6 +35,10 @@
         </div>
       </div>
     </section>
+  <% end %>
+
+  <% content_for :javascript do %>
+    <%= javascript_include_tag 'event' %>
   <% end %>
 
   <%= render "events/show/map" %>

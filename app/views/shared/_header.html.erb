@@ -9,8 +9,24 @@
         <span class="mdc-top-app-bar__title animated fadeInDown"><a href="/login" class="link-login">Login</a></span>
       <% end %>
 
-      <% if @event.present? %>
+      <% if logged_in? and @event.present? and action_name == 'edit' %>
         <button type="submit" form="form-event" class="mdc-button mdc-button--outlined mdc-ripple-upgraded mdc-theme--on-secondary mdc-theme--secondary-bg btn-top-save">Salvar</button>
+      <% end %>
+
+      <% if logged_in? and @event.present? and action_name == 'show' and @event_presenter.authorized %>
+        <button id="event-menu-button" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Add to favorites" >more_vert</button>
+        <div class="mdc-menu-anchor" style="transform-origin: center bottom 10px; right: 200px; bottom: 0px;">
+          <div id="event-menu" class="mdc-menu" tabindex="-1">
+            <nav class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+              <%= link_to t("titles.events.edit"), edit_event_path(@event), class: "mdc-list-item" %>
+              <%= link_to t("titles.schedules.btn_new"), new_event_schedule_path(@event), class: "mdc-list-item" %>
+              <%= link_to t("show.event.export_subscribers"), new_event_export_subscriber_path(@event), class: "mdc-list-item" %>
+              <%= link_to t("actions.delete.label"), event_path(@event),
+                class: "mdc-list-item",
+                method: :delete, data: { confirm: t("actions.delete.confirm") } %>
+            </nav>
+          </div>
+        </div>
       <% end %>
 
       <% if logged_in? and @talk.present? and @talk.persisted? and @talk.belongs_to?(current_user) %>

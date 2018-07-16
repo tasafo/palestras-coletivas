@@ -12,20 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/jquery-ui.min
-//= require jquery-ui/i18n/jquery.ui.datepicker-pt-BR.min
-//= require popper
-//= require bootstrap.min
-//= require mdb/mdb.min
-//= require schedule
-//= require jquery.rating.pack
-//= require jquery.maskedinput.min
-//= require comments
-//= require event
-//= require external_events
-//= require invite_user
+//= require material-components-web.min
 //= require talk
 //= require export_subscribers
 //= require infinite-scroll.pkgd.min
-//= require material-components-web.min
 //= require custom
