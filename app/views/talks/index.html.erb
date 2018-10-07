@@ -49,7 +49,7 @@
 
     $('.container').infiniteScroll({
       path: function(){
-        let pageNumber = this.loadCount + 1;
+        let pageNumber = this.loadCount + 2;
         return '/talks_ajax?<%= "my=" + @my.to_s + "&" if @my %>page=' + pageNumber;
       },
       append: '.mdc-layout-grid__inner',
