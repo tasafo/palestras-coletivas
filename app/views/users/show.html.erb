@@ -5,15 +5,16 @@
   <h1 class="mdc-typography--headline4"><%= @user.name %> <small><%= @user.username %> </small></h1>
 
   <% if @presenter.gravatar.has_profile %>
-    <p class="lead">
+    <div class="user-info">
       <%= @presenter.gravatar.about_me.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.about_me}<br/>").html_safe %>
       <%= @presenter.gravatar.current_location.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.current_location}<br/>").html_safe %>
       <%= t("show.user.profile") %> <%= link_to 'gravatar', https(@presenter.gravatar.profile_url) %>
-    </p>
+    </div>
   <% end %>
 
-  <%= link_to t("menu.user_data"), edit_user_path(current_user), class: 'mdc-button mdc-button--outlined mdc-ripple-upgraded btn-edit-user' %>
-
+  <% if current_user == @user %>
+    <%= link_to t("menu.user_data"), edit_user_path(current_user), class: 'mdc-button mdc-button--outlined mdc-ripple-upgraded btn-edit-user' %>
+  <% end %>
   <hr />
 </div>
 
@@ -21,8 +22,11 @@
   <% unless @presenter.talks.empty? %>
     <div class="row">
       <h3 class="mdc-typography--subtitle1" style="width: 180px; display: block; float: left"><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
-      <%= link_to "/talks?my=true", class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
-        Ver mais
+      
+      <% if current_user == @user %>
+        <%= link_to "/talks?my=true", class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
+          Ver mais
+        <% end %>
       <% end %>
     </div>
     <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
@@ -33,33 +37,13 @@
   <% if @user.events? %>
     <div class="row">
       <h1 class="mdc-typography--subtitle1" style="width: 160px; display: block; float: left">Meus Eventos</h1>
-      <%= link_to "/events?my=true", class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
-        ver mais
+      
+      <% if current_user == @user %>
+        <%= link_to "/events?my=true", class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
+          ver mais
+        <% end %>
       <% end %>
     </div>
     <%= render "shared/events", events: @user.events.publics.limit(6).order(updated_at: :desc), show_user: true %>
   <% end %>
 </div>
-
-<div class="page-load-status">
-  <div class="infinite-scroll-request">
-    carregando...
-  </div>
-  <p class="infinite-scroll-last">End of content</p>
-  <p class="infinite-scroll-error">No more pages to load</p>
-</div>
-
-<% content_for :javascript do %>
-  <script type="text/javascript">
-
-    $('.container-events').infiniteScroll({
-      path: function(){
-        let pageNumber = this.loadCount + 1;
-        return '/events_ajax?my=true&page=' + pageNumber;
-      },
-      append: '.mdc-layout-grid__inner',
-      history: false,
-      status: '.page-load-status'
-    });
-  </script>
-<% end %>
