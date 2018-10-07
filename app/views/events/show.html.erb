@@ -20,6 +20,12 @@
           <p><%= @event_presenter.address %></p>
         </div>
       </div>
+    <% else %>
+      <div class="container">
+        <h1 class="mdc-typography--headline6"><%= t("show.event.place") %></h1>
+        <h2 class="mdc-typography--subtitle1"><%= @event.place %></h2>
+        <p><%= @event_presenter.address %></p>
+      </div>
     <% end %>
   </section>
 
