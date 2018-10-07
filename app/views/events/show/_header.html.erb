@@ -34,7 +34,7 @@
           <% if @event_presenter.crowded %>
             <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
           <% else %>
-            <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded" %>
+            <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), id: '', class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded" %>
           <% end %>
         <% else %>
           <% message_button = @event_presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
@@ -44,7 +44,7 @@
           <% if @event_presenter.crowded && !@event_presenter.enrollment.active? %>
             <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
           <% else %>
-            <%= link_to message_button, edit_event_enrollment_path(@event, :active, @event_presenter.enrollment), class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded #{button_type}" %>
+            <%= link_to message_button, edit_event_enrollment_path(@event, :active, @event_presenter.enrollment), id: 'subscription-button', class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded" %>
           <% end %>
         <% end %>
       <% end %>

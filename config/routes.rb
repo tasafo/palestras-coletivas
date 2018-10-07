@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
     resources :export_subscribers, only: [:new, :create]
     resources :presences, only: [:create]
-    resources :enrollments, only: [:new, :create, :edit, :update], path: ":option_type"
+    resources :enrollments, only: [:new, :create, :edit, :update]
   end
 
   resources :talk_info, only: [:create]
