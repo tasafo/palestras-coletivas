@@ -30,6 +30,7 @@
       <h2 class="mdc-typography--subtitle1"><%= @event.long_date %></h2>
 
       <% if @event_presenter.open_enrollment %>
+        <h3 class="mdc-typography--subtitle1"><%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}"%></h3>
         <% if @event_presenter.new_subscription %>
           <% if @event_presenter.crowded %>
             <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
