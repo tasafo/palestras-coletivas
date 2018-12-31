@@ -9,7 +9,7 @@ development:
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - <%= ENV['MONGODB_HOST'] %>
+        - localhost:27017
       options:
         # Change whether the session persists in safe mode by default.
         # (default: false)
@@ -71,7 +71,7 @@ test:
     default:
       database: palestrascoletivas_test
       hosts:
-        - <%= ENV['MONGODB_HOST'] %>
+        - localhost:27017
       options:
   options:
     raise_not_found_error: false

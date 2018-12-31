@@ -14,7 +14,7 @@ gem 'kaminari-mongoid'
 gem 'airbrake', '~> 6.1'
 gem 'jbuilder'
 
-gem 'mongoid', '~> 6.1'
+gem 'mongoid', '~> 7.0'
 gem 'mongoid-slug'
 gem 'mongoid_search'
 gem 'geocoder'

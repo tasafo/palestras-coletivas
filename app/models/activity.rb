@@ -6,7 +6,7 @@ class Activity
   field :description, type: String, localize: true
   field :order, type: Integer
 
-  has_many :schedules, dependent: :restrict
+  has_many :schedules, dependent: :restrict_with_error
 
   validates_presence_of :type, :description, :order
 end

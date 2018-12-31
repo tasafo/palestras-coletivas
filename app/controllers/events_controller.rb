@@ -45,8 +45,13 @@ class EventsController < PersistenceController
   def destroy
     @event.destroy
 
-    redirect_to events_path,
-      notice: t('notice.destroyed', model: t('mongoid.models.event'))
+    if @event.errors.blank?
+      redirect_to events_path,
+        notice: t('notice.destroyed', model: t('mongoid.models.event'))
+    else
+      redirect_to event_path(@event),
+        notice: t('notice.delete.restriction.events')
+    end
   end
 
   private
