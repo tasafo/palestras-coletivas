@@ -87,7 +87,7 @@ event = Event.create(
   end_date: Date.today - 1.day,
   deadline_date_enrollment: Date.today - 1.day,
   to_public: true,
-  place: 'Praça de Conveções',
+  place: 'Praça de Convenções',
   street: 'Rua dos Mundurucus, 500',
   district: 'Jurunas',
   city: 'Belém',

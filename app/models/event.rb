@@ -37,8 +37,8 @@ class Event
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable
   has_and_belongs_to_many :users, inverse_of: :events
-  has_many :schedules, dependent: :restrict
-  has_many :enrollments, dependent: :restrict
+  has_many :schedules, dependent: :restrict_with_error
+  has_many :enrollments, dependent: :restrict_with_error
   belongs_to :owner, class_name: 'User', inverse_of: :owner_events
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
@@ -58,19 +58,15 @@ class Event
     includes(:users, :schedules, :enrollments)
   end
 
-  before_save do
-    results = Geocoder.search(EventPolicy.new(self).address)
-
-    unless results.blank?
-      self.coordinates = [
-        results[0].geometry['location']['lng'],
-        results[0].geometry['location']['lat']
-      ]
-    end
-  end
+  geocoded_by :address
+  after_validation :geocode
 
   def name_edition
     "#{self.name} - #{self.edition}"
+  end
+
+  def address
+    EventPolicy.new(self).address
   end
 
   def long_date

@@ -39,8 +39,8 @@ describe "Delete talk", type: :request, js: true do
       click_with_alert "delete_talk_id_#{talk._slugs.first}"
     end
 
-    it 'redirects to the talks page' do
-      expect(current_path).to eql(talks_path)
+    it 'redirects to the talk page' do
+      expect(current_path).to eql(talk_path(talk))
     end
 
     it 'displays error message' do

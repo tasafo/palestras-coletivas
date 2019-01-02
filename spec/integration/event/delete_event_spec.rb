@@ -39,8 +39,8 @@ describe "Delete event", type: :request, js: true do
       click_with_alert "delete_event_id_#{event._slugs.first}"
     end
 
-    it 'redirects to the events page' do
-      expect(current_path).to eql(events_path)
+    it 'redirects to the event page' do
+      expect(current_path).to eql(event_path(event))
     end
 
     it 'displays error message' do

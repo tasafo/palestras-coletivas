@@ -48,7 +48,13 @@ class TalksController < PersistenceController
   def destroy
     @talk.destroy
 
-    redirect_to talks_path, notice: t('notice.destroyed', model: t('mongoid.models.talk'))
+    if @talk.errors.blank?
+      redirect_to talks_path,
+        notice: t('notice.destroyed', model: t('mongoid.models.talk'))
+    else
+      redirect_to talk_path(@talk),
+        notice: t('notice.delete.restriction.talks')
+    end
   end
 
   private
