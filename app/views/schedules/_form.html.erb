@@ -1,64 +1,55 @@
-<%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
+<%= form_for(@schedule, url: url, html: {id: 'form-schedule'}) do |f| %>
   <%= render "shared/error_messages", :record => @schedule %>
 
-  <div class="form-group">
-    <%= f.label :day, class: 'control-label col-md-2' %>
-    <div class="col-md-2">
-      <%= select_tag("schedule[day]", @presenter.dates.html_safe, class: "form-control") %>
+  <div class="mdc-form-field  mdc-form-field--custom">
+    <div class="mdc-select mdc-form-field--custom">
+      <%= select_tag("schedule[day]", @schedule_presenter.dates.html_safe, class: "mdc-select__native-control") %>
+      <%= f.label :day, class: 'mdc-floating-label' %>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :time, class: 'control-label col-md-2' %>
-    <div class="col-md-2">
-      <%= f.text_field :time, class: "form-control hour" %>
+  <div class="mdc-form-field mdc-form-field--custom">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded mdc-form-field--custom">
+      <%= f.text_field :time, class: "mdc-text-field__input hour", required: true %>
+      <%= f.label :time, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple"></div>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :activity, class: 'control-label col-md-2' %>
-    <div class="col-md-2">
-      <%= collection_select(:schedule, :activity_id, @presenter.activities, :id, :description, {}, class: "form-control") %>
+  <div class="mdc-form-field  mdc-form-field--custom">
+    <div class="mdc-select mdc-form-field--custom">
+      <select id="schedule_activity_id" name="schedule[activity_id]" class="mdc-select__native-control">
+        <% @schedule_presenter.activities.each do |activity| %>
+          <option data-activity-type="<%= activity.type %>" value="<%= activity._id %>"> <%= activity.description %> </option>
+        <% end %>
+      </select>
+      <%= f.label :activity, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple"></div>
     </div>
   </div>
 
-  <div id="div_talk" class="form-group" style="display:<%= @presenter.display %>">
-    <label class="control-label col-md-2"><%= t("labels.talk.title") %></label>
-    <div class="col-md-6">
-      <input id="talk_title" class="form-control" value="<%= @presenter.talk_title %>" disabled>
+  <div class="" style="min-height: 50px">
+    <ul class="mdc-list" aria-orientation="vertical">
+      <li id="container-selected-talk" class="mdc-list-item"></li>
+    </ul>
+  </div>
+
+  <div id="container-search-talks" style="display: none">
+    <div class="mdc-form-field mdc-form-field--custom">
+      <div class="mdc-text-field text-field mdc-text-field--upgraded mdc-form-field--custom">
+        <input type="text" autocomplete="off" class="mdc-text-field__input" id="search_talk" name="search_talk" value="" />
+        <label for="search_talk" class="mdc-floating-label">Pesquisar palestra</label>
+      </div>
+    </div>
+
+    <div class="mdc-list-group">
+      <ul id="result-talks-search" class="mdc-list" aria-orientation="vertical">
+
+      </ul>
     </div>
   </div>
 
   <%= f.hidden_field :event_id, value: @event.id %>
   <%= f.hidden_field :talk_id, value: @schedule.talk_id %>
   <%= f.hidden_field :schedule_id, value: @schedule.id %>
-
-  <input id="old_talk_id" name="old_talk_id" type="hidden" value="<%= @schedule.talk_id %>" />
-
-  <input id="titles_talks_select" name="titles_talks_select" type="hidden" value="<%= t("titles.talks.select") %>" />
-
-  <input id="alert_enter_talks" name="alert_enter_talks" type="hidden" value="<%= t("new.schedule.you_must_enter_a_talk") %>" />
-
-  <div class="container">
-    <%= f.submit class: 'btn btn-primary' %>
-    <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-          event_path(@event), class: 'btn btn-default' %>
-  </div>
-
-  <hr />
-
-  <div class="form-group" id="search_talks" style="display:block">
-    <h3 class="text-info"><%= t("titles.talks.search") %></h3>
-
-    <div class="col-md-4">
-      <div class="input-group">
-        <input class="form-control search-query" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
-        <span class="input-group-btn">
-          <button id="search_button" class="btn btn-success" type="button"><%= t("form.submit.search") %></button>
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div id="search_result"></div>
 <% end %>

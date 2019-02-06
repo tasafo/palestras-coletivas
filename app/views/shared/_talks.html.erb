@@ -1,25 +1,8 @@
-  <%= render "shared/paginate", list: talks %>
 
-  <div class="row">
-    <% talks.each do |talk| %>
-      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-        <div class="box-talk">
-          <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : https(talk.thumbnail) %>
-
-          <%= link_to image_tag(thumb, width: '170', height: '128'), talk_path(talk) %>
-
-          <% if show_user %>
-            <% talk.users.by_name.each do |user| %>
-              <%= render "shared/user_thumb", user: user %>
-            <% end %>
-          <% end %>
-
-          <p><%= link_to suspension_points(talk.title, 60), talk_path(talk) %></p>
-
-          <span><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></span>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <%= render "shared/paginate", list: talks %>
+<div class="mdc-layout-grid__inner">
+  <% talks.each do |talk| %>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-phone mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet">
+      <%= render 'shared/talk_card', talk: talk, show_user: show_user %>
+    </div>
+  <% end %>
+</div>

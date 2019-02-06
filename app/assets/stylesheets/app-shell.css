@@ -1,0 +1,397 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  color: #424242
+}
+
+.container{
+  padding: 75px 0;
+  /* height: 600px; */
+}
+
+.container-grid{
+  padding: 75px 0;
+  overflow: auto;
+}
+
+.custom-card{
+  margin:48px 0;
+}
+
+.custom-card--hero{
+  margin:0 0 20px 0;
+}
+
+.custom-card__primary{
+  padding:1rem
+}
+
+.custom-card__title{
+  margin:0
+}
+
+.custom-card__subtitle{
+  margin:0
+}
+
+.custom-card__secondary,.custom-card__subtitle{
+  color:rgba(0,0,0,.54);
+  color:var(--mdc-theme-text-secondary-on-background,rgba(0,0,0,.54))
+}
+
+.custom-card__secondary{
+  padding:0 1rem 8px
+}
+
+.animated {
+  animation-duration: .4s;
+  animation-fill-mode: both;
+}
+
+.user-thumb{
+  position: absolute;
+  border-radius: 100px;
+  border-top-left-radius: 100px;
+  -webkit-border-top-left-radius: 100px;
+  -moz-border-top-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  -webkit-border-bottom-right-radius: 100px;
+  -moz-border-bottom-right-radius: 100px;
+}
+
+.user-info{
+  padding: 20px 0 50px 0;
+}
+
+.rounded-circle{
+  border-radius: 100px;
+  border-top-left-radius: 100px;
+  -webkit-border-top-left-radius: 100px;
+  -moz-border-top-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  -webkit-border-bottom-right-radius: 100px;
+  -moz-border-bottom-right-radius: 100px;
+}
+
+.embed-responsive-item{
+  width: 100%;
+  height: 600px;
+}
+
+.talk-details{
+  margin: 0 20px 0 20px;
+}
+
+.edit-talk-dialog{
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.mdc-dialog__body--scrollable{
+  max-height: 100%;
+}
+
+.btn-apply-dialog{
+  position: absolute;
+  right: 20px;
+}
+
+.btn-close-dialog{
+  position: absolute;
+}
+
+.fixed-fab {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+  z-index: 1;
+}
+
+.fixed-fab {
+  position: fixed;
+}
+
+.cover-preview{
+  width: 100%;
+  height: 400px;
+  background-color: #607D8B;
+  cursor: pointer;
+  color: #fff;
+}
+
+.form{
+  margin-bottom: 100px;
+}
+
+.btn-add-event{
+  float: right;
+}
+
+.row{
+  content: "";
+  display: table;
+  clear: both;
+  width: 100%;
+  padding: 10px 0 10px 0;
+}
+
+.page-load-status {
+  display: none; /* hidden by default */
+  padding-top: 20px;
+  border-top: 1px solid #DDD;
+  text-align: center;
+  color: #777;
+}
+
+.btn-edit-user{
+  margin: 20px 0 30px 0;
+}
+
+.link-login{
+  color: #fff;
+  font-size: 18px;
+}
+
+.header-content{
+  width: 40%;
+  margin: 150px 0 0 100px;
+  position: absolute;
+  color: #fff;
+}
+
+section.about{
+  background: #1976d2;
+  min-height: 300px;
+  color: #fafafa;
+  padding: 0 0 40px 0;
+}
+
+.stocking-event{
+  font-size: 50px;
+  display: block;
+  margin: 0 0 10px 0;
+}
+
+.about-text{
+  line-height: 28px
+}
+
+section#location .text{
+  width: 400px;
+  padding: 40px;
+  position: absolute;
+  z-index: 99999;
+  background: #fff;
+  margin: 100px 0 0  0;
+  right: 0px;
+}
+
+.schedule-time{
+  font-size: 34px;
+  color: #9e9e9e;
+}
+
+.schedule-title{
+  margin: 0 0 20px 0;
+}
+
+.location-map{
+  width: 100%;
+  height: 800px
+}
+
+.schedule{
+  margin: 0 0 50px 0;
+}
+
+section.panels{
+  padding: 50px 0 0 0;
+}
+
+.panels .panel{
+  display: none;
+  padding-top: 40px
+}
+
+.panels .active{
+  display: block;
+}
+
+.nav-schedule{
+  margin-left: 0px;
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  .container{
+    padding: 100px 80px 0 80px;
+  }
+
+  .user-thumb{
+    position: absolute;
+    top: 120px;
+  }
+
+  .btn-top-save{
+    margin-right: 70px;
+  }
+
+  .hero-description{
+    padding: 180px 0 0 80px;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .user-thumb{
+    position: absolute;
+    top: 80px;
+  }
+
+  .btn-top-save{
+    margin-right: 70px;
+  }
+
+
+  .schedule-time{
+    display: block;
+    font-size: 34px;
+    padding: 20px 0 0 15px;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+  .user-thumb{
+    position: absolute;
+    top: 110px;
+  }
+
+
+    .schedule-time{
+      display: block;
+      font-size: 34px;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .user-thumb{
+    top: 60px;
+  }
+
+  .text-field-container{
+    margin: 0 20px 0 20px;
+  }
+
+  .header-content{
+    width: 20%;
+    margin: 100px 0 0 50px;
+    position: absolute;
+    color: #fff;
+  }
+
+  .about-text{
+    padding: 0 20px 0 20px;
+  }
+
+  .schedule-time{
+    margin: 20px 0 0 20px;
+  }
+
+  .schedule-title{
+    margin: 0 0 20px 20px;
+  }
+
+  .organizers h2{
+    text-align: center;
+  }
+
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+@media (min-width: 320px) and (max-width: 480px) {
+
+  .user-thumb{
+    top: 80px;
+  }
+
+  .text-field-container{
+    margin: 0 20px 0 20px;
+  }
+
+  .header-content{
+    width: 70%;
+    margin: 100px 0 0 50px;
+    position: absolute;
+    color: #fff;
+  }
+
+  .about-text{
+    line-height: 28px;
+    padding: 0 20px 0 20px;
+  }
+
+  section.about{
+    min-height: 200px;
+  }
+
+  .schedule-time{
+    margin: 0 0 0 20px;
+    padding: 20px 0 0 0;
+    font-size: 34px;
+    color: #9e9e9e;
+    display: block;
+  }
+
+  .schedule-title{
+    margin: 0 0 20px 20px;
+  }
+
+  .location-map{
+    width: 100%;
+    height: 400px
+  }
+
+  section#location .text{
+    width: 100%;
+    padding: 40px 0 40px 40px;
+  }
+
+  .text h1{
+    margin: 0 0 0 20px;
+  }
+
+  .text p{
+    margin: 0 0 0 20px;
+  }
+
+  .organizers{
+    padding: 20px 20px 0 20px;
+  }
+
+  .organizers h2{
+    text-align: center;
+  }
+
+  .mdc-form-field--custom{
+    width: 100%;
+    margin: 10px 0 0 0;
+  }
+
+  .hero-description{
+    padding: 120px 0 0 14px;
+  }
+
+}

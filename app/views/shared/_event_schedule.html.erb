@@ -1,118 +1,34 @@
-    <h2 class="text-primary"><%= t("titles.schedules.index") %></h2>
+<% panel_id = 1 %>
+<% event_presenter.grids.each_with_index do |grid, index| %>
+    <% panel_id += index %>
+    <div class="panel <%= 'active' if  panel_id == 1 %>" id="panel-<%= panel_id %>" role="tabpanel" aria-hidden="false">
 
-    <% if @presenter.can_vote %>
-      <div class="text">
-        <%= t("show.event.hint_add_talk_html") %>
-      </div>
-      <center>
-        <%= link_to t("show.event.btn_use_talk"), "/talks?my=true", class: "btn btn-success" %>
-        <%= link_to t("show.event.btn_add_talk"), new_talk_path, class: "btn btn-success" %>
-      </center>
-      <hr />
-    <% end %>
+    <% grid[:schedules_time].each do |schedules| %>
 
-    <div id="schedules">
-      <table class="table table-bordered table-hover table-responsive">
-        <thead class="thead-dark">
-          <tr>
-            <th width="10%">
-              <p class="text-center"><%= t("new.schedule.table.time") %></p>
-            </th>
-            <th width="70%">
-              <p class="text-center"><%= t("new.schedule.table.activity") %></p>
-            </th>
-            <% if @presenter.authorized %>
-              <th colspan="2" width="10%">
-                <p class="text-center"><%= t("new.schedule.table.operations") %></p>
-              </th>
-            <% end %>
-            <th width="20%">
-              <p class="text-center"><%= t("new.schedule.table.status") %></p>
-            </th>
-            <% if @presenter.can_vote %>
-              <th width="10%">
-                <p class="text-left"><%= t("new.schedule.table.votes") %></p>
-              </th>
-            <% end %>
-          </tr>
-        </thead>
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-8-tablet">
+          <span class="schedule-time"><%= schedules.first %></span>
+        </div>
 
-        <tbody>
-          <% @presenter.grids.each do |grid| %>
-            <thead class="thead-light">
-              <tr>
-                <th colspan="5">
-                  <p class="text-center"><%= l grid[:date], format: :custom %></p>
-                </th>
-              </tr>
-            </thead>
-
-            <% grid[:schedules].each do |schedule| %>
-              <tr id="row_<%= schedule.id %>">
-                <td>
-                  <p class="text-center"><%= schedule.show_time %></p>
-                </td>
-
-                <% if schedule.talk? %>
-                  <td>
-                    <p class="text-center">
-                      <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
-                      <% Talk.with_users.find(schedule.talk).users.each do |user| %>
-                        ( <%= link_to user.name, user_path(user) %>
-                        <%= "- #{user.email}" if @presenter.authorized %>)&nbsp;
-                      <% end %>
-                    </p>
-                  </td>
-                <% else %>
-                  <td>
-                    <p class="text-center"><%= schedule.activity.description %></p>
-                  </td>
-                <% end %>
-
-                <% if @presenter.authorized %>
-                  <td>
-                    <%= link_to t("actions.edit"), edit_event_schedule_path(@event, schedule), class: "btn btn-primary", id: "edit_schedule_id_#{schedule.id}" %>
-                  </td>
-                  <td>
-                    <%= link_to t("actions.delete.label"), event_schedule_path(@event, schedule), method: :delete, data: { confirm: t("actions.delete.confirm") }, class: "btn btn-danger", id: "delete_schedule_id_#{schedule.id}" %>
-                  </td>
-                  <% if !schedule.talk_id.nil? %>
-                    <td>
-                      <%= link_to t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}"), event_schedule_was_presented_path(@event, schedule), method: :post, class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}", id: "was_presented_schedule_id_#{schedule.id}" %>
-                    </td>
-                  <% else %>
-                    <td></td>
-                  <% end %>
-                <% else %>
-                  <% if !schedule.talk_id.nil? %>
-                    <td>
-                      <p class="text-center"><span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>"><%= t("actions.#{schedule.was_presented ? 'was_presented' : 'was_not_presented'}") %></span></p>
-                    </td>
-                  <% else %>
-                    <td></td>
-                  <% end %>
-                <% end %>
-
-                <% if @presenter.can_vote %>
-                  <% if schedule.talk_id.nil? %>
-                    <td colspan="2"></td>
-                  <% else %>
-                    <td>
-                      <% if logged_in? %>
-                        <% if schedule.votes? && schedule.find_vote(current_user) %>
-                          <%= link_to schedule.counter_votes, event_schedule_vote_path(@event, schedule, 1), method: :delete, class: "btn btn-danger", id: "remove_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_remove_vote") %>
-                        <% else %>
-                          <%= link_to schedule.counter_votes, event_schedule_votes_path(@event, schedule), method: :post, class: "btn btn-success", id: "add_vote_schedule_id_#{schedule.id}", title: t("show.event.btn_add_vote") %>
-                        <% end %>
-                      <% else %>
-                        <%= link_to schedule.counter_votes, "#schedules", class: "btn btn-primary disabled" %>
-                      <% end %>
-                    </td>
-                  <% end %>
-                <% end %>
-              </tr>
-            <% end %>
+        <% schedules.second.each do |schedule| %>
+          <% if schedule.talk? %>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet">
+              <%= render 'events/show/talk_card', schedule: schedule, event_presenter: event_presenter %>
+            </div>
+          <% elsif schedule.activity.description == 'A definir' %>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet">
+              <%= render 'events/show/no_talk_card', schedule: schedule, event_presenter: event_presenter %>
+            </div>
+          <% else %>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-11-desktop mdc-layout-grid__cell--span-8-tablet">
+              <%= render 'events/show/interval_card', schedule: schedule, event_presenter: event_presenter %>
+            </div>
           <% end %>
-        </tbody>
-      </table>
+        <% end %>
+
+      </div>
+
+    <% end %>
     </div>
+
+<% end %>

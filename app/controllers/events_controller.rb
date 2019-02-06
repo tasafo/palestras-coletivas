@@ -13,7 +13,7 @@ class EventsController < PersistenceController
               else
                 EventQuery.new.all_public
               end
-    @events = @events.page(params[:page]).per(12)
+    @events = @events.page(params[:page]).per(18)
 
     render nothing: true, status: 404 if params[:page] && @events.blank?
   end
@@ -29,7 +29,7 @@ class EventsController < PersistenceController
   end
 
   def show
-    @presenter = EventPresenter.new(@event, authorized_access?(@event),
+    @event_presenter = EventPresenter.new(@event, authorized_access?(@event),
       current_user)
 
     render layout: 'event'
@@ -52,6 +52,19 @@ class EventsController < PersistenceController
       redirect_to event_path(@event),
         notice: t('notice.delete.restriction.events')
     end
+  end
+
+  def ajax
+    @my = !params[:my].blank?
+
+    @events = if logged_in? && @my
+                EventQuery.new.owner(current_user)
+              else
+                EventQuery.new.all_public
+              end
+    @events = @events.page(params[:page]).per(12)
+
+    render nothing: true, status: 404 if params[:page] && @events.blank?
   end
 
   private
@@ -79,7 +92,7 @@ class EventsController < PersistenceController
       :name, :edition, :description, :stocking, :tags, :start_date,
       :end_date, :deadline_date_enrollment, :accepts_submissions, :to_public,
       :place, :street, :district, :city, :state, :country, :block_presence,
-      :workload, :image, :remove_image
+      :workload, :image, :cover_id
     )
   end
 end

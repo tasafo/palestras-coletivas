@@ -43,4 +43,8 @@ class Talk
   def url?
     !presentation_url.blank?
   end
+
+  def belongs_to?(user)
+    self.owner == user
+  end
 end

@@ -107,6 +107,7 @@ class EventPresenter
 
   def mount_grid(event)
     grids = []
+    schedules_time  =  []
     dates = (event.start_date..event.end_date).to_a
 
     schedules = event.schedules.with_relations.asc(:day).asc(:time).desc(:counter_votes)
@@ -114,7 +115,12 @@ class EventPresenter
     dates.each_with_index do |date, index|
       selects = schedules.select { |schedule| schedule.day == index + 1 }
 
-      grids << { date: date, schedules: selects } unless selects.blank?
+      # selects.each do |schedule|
+      #   schedule[:time] = schedule.time
+      #   schedules_time  << { time: schedule.time,  }
+      # end
+
+      grids << { date: date, schedules: selects, schedules_time: selects.group_by { |i| i[:time] } } unless selects.blank?
     end
 
     grids

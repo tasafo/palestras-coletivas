@@ -1,7 +1,8 @@
-<h2><%= @talk.title %></h2>
+<h2 class="mdc-typography--headline5"><%= @talk.title %></h2>
 
 <% if @presentation.frame.include?("without_presentation") %>
   <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
 <% end %>
-
-<%= simple_format @talk.description %>
+<p class="mdc-typography--body1	">
+  <%= simple_format @talk.description %>
+</p>

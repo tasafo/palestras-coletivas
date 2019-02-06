@@ -1,10 +1,5 @@
-<%= render "shared/header", index: :event %>
-<%= render "shared/title", title: t("titles.events.edit"), index: :event %>
+<%#= render "shared/title", title: t("titles.events.edit"), index: :event %>
 
 <div class="container">
-  <div class="card">
-    <div class="card-body mx-4">
-      <%= render 'form', url: event_path %>
-    </div>
-  </div>
+  <%= render 'form', url: event_path %>
 </div>

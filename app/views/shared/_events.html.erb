@@ -1,38 +1,25 @@
-<div class="container">
-  <%= render "shared/paginate", list: events %>
-
-  <div class="row">
-    <% events.each_with_index do |event, index| %>
-      <div class="col-lg-4 mb-r">
-        <div class="card">
-          <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
-            <%= link_to event_path(event) do %>
-              <% if event.image? %>
-                <%= image_tag(https(event.image.url), size: '350x200') %>
-              <% else %>
-                <div class="mask"></div>
-              <% end %>
-            <% end %>
-          </div>
-
-          <div class="card-body">
-            <h4 class="card-title"><%= link_to suspension_points(event.name_edition, 50), event_path(event) %></h4>
+<div class="mdc-layout-grid__inner">
+<% events.each_with_index do |event, index| %>
+  <div class="mdc-layout-grid__cell">
+    <div class="mdc-card custom-card custom-card--hero"  style="height: 400px">
+      <div class="mdc-card__primary-action my-surface" onclick="location.href='<%= event_path(event) %>'">
+        <div class="mdc-card__media mdc-card__media--16-9 custom-card__media" style="background-image: url('<%= event_image(event) %>');">
+        </div>
+        <div class="custom-card__primary">
+          <h2 class="custom-card__title mdc-typography--headline6"><%= suspension_points(event.name_edition, 50) %></h2>
+          <h3 class="custom-card__subtitle mdc-typography--subtitle2">
             <% if event.start_date == event.end_date %>
               <p><%= l event.start_date %></p>
             <% else %>
               <p><%= l event.start_date %> - <%= l event.end_date %></p>
             <% end %>
-            <div class="card-text"> <%=  suspension_points(strip_tags(event.description), 100) %> </div>
-          </div>
-
-          <div class="card-footer">
-            <span><%= t("created_time", time: time_ago_in_words(event.created_at)) %></span>
-          </div>
-
+          </h3>
+        </div>
+        <div class="custom-card__secondary mdc-typography--body2">
+          <%=  suspension_points(strip_tags(event.description), 100) %>
         </div>
       </div>
-    <% end %>
+    </div>
   </div>
-
-  <%= render "shared/paginate", list: events %>
+<% end %>
 </div>

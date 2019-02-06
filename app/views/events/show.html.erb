@@ -5,34 +5,36 @@
   <%= render "events/show/about" %>
 
   <% if @event.schedules? %>
-    <section id="schedule">
+    <section id="schedule" class="schedule">
       <div class="container">
-        <%= render "shared/event_schedule" %>
+        <%= render "shared/event_schedule", event_presenter: @event_presenter %>
       </div>
     </section>
   <% end %>
 
   <section id="location">
-    <div class="container">
-      <h2 class="text-primary"><%= t("labels.event.place") %></h2>
-
-      <div class="text">
-        <p><%= @event.place %></p>
-        <p><%= t("labels.event.address") %>: <%= @presenter.address %></p>
+    <% if @event.coordinates %>
+      <div id="location-map" class="location-map">
+        <div class="text mdc-elevation--z14">
+          <h1 class="mdc-typography--subtitle1"><%= @event.place %></h1>
+          <p><%= @event_presenter.address %></p>
+        </div>
       </div>
-
-      <% if @event.coordinates %>
-        <div id="location-map"></div>
-      <% end %>
-    </div>
+    <% else %>
+      <div class="container">
+        <h1 class="mdc-typography--headline6"><%= t("show.event.place") %></h1>
+        <h2 class="mdc-typography--subtitle1"><%= @event.place %></h2>
+        <p><%= @event_presenter.address %></p>
+      </div>
+    <% end %>
   </section>
 
   <% unless @event.users.blank? %>
-    <section id="organizers">
-      <div class="container">
-        <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
+    <section id="organizers" class="">
+      <div class="container organizers">
+        <h2 class="mdc-typography--headline6"><%= t("show.event.organizers") %></h2>
 
-        <div class="row justify-content-left">
+        <div class="mdc-layout-grid__inner"  style="margin: 20px 0 0 0">
           <% @event.users.by_name.each do |user| %>
             <%= render "shared/user_event", user: user %>
           <% end %>
@@ -41,41 +43,8 @@
     </section>
   <% end %>
 
-  <section id="presents">
-    <div class="container">
-      <% if @presenter.show_users_present %>
-        <% unless @presenter.users_active.blank? %>
-          <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
-
-          <div class="row justify-content-left">
-            <% @presenter.users_active.each do |record| %>
-              <%= render "shared/user_event", user: record[:user] %>
-            <% end %>
-          </div>
-        <% end %>
-
-        <% unless @presenter.users_present.blank? %>
-          <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h2>
-
-          <div class="row justify-content-left">
-            <% @presenter.users_present.each do |user| %>
-              <%= render "shared/user_event", user: user %>
-            <% end %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= render "events/show/attendance_list" %>
-      <% end %>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <%= render "ratings/show", rateable: @event %>
-      <%= render "ratings/rate_form", rateable: @event %>
-    </div>
-  </section>
-
-  <%= render "comments/index", commentable: @event %>
+  <% content_for :javascript do %>
+    <%= javascript_include_tag 'event' %>
+  <% end %>
 
   <%= render "events/show/map" %>

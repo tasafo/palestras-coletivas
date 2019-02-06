@@ -1,131 +1,220 @@
-      <%= form_for(@event, url: url, html: {class: 'form-horizontal'}) do |f| %>
-        <%= render "shared/error_messages", record: @event %>
+<div class="mdc-snackbar mdc-snackbar--align-start"
+     aria-live="assertive"
+     aria-atomic="true"
+     aria-hidden="true" style="z-index: 90000">
+  <div class="mdc-snackbar__text"></div>
+  <div class="mdc-snackbar__action-wrapper">
+    <button type="button" class="mdc-snackbar__action-button"></button>
+  </div>
+</div>
 
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, placeholder: t("placeholder.events.name"), class: "form-control", maxlength: 50 %>
-        </div>
+<div class="cover-preview" <%= cover_helper(@event) %> >
+  <button class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-pressed="false" aria-label="Add image">add_a_photo</button>
+</div>
 
-        <div class="form-group">
-          <%= f.label :edition %>
-          <%= f.text_field :edition, placeholder: t("placeholder.events.edition"), class: "form-control", maxlength: 10 %>
-        </div>
+<%= form_for(@event, url: url, html: { id: 'form-event', class: 'form' }) do |f| %>
+  <%= render "shared/error_messages", record: @event %>
 
-        <div class="form-group">
-          <%= f.label :description %>
-          <%= f.text_area :description, placeholder: t("placeholder.events.description"), rows: 5, class: "form-control tinymce_event_template" %>
-        </div>
+  <input type="hidden" name="event[cover_id]" value="<%= @event.static_cover %>">
 
-        <div class="form-group">
-          <%= f.label :stocking %>
-          <%= f.text_field :stocking, class: "form-control" %>
-        </div>
+  <div class="text-field-container" style="margin-bottom: 30px">
+    <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--upgraded">
+      <%= f.text_field :name, class: "mdc-text-field__input", maxlength: 50,  required: true %>
+      <%= f.label :name,  class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple"></div>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :start_date %>
-          <%= f.text_field :start_date, class: "form-control date" %>
-        </div>
+  <div class="text-field-container">
+    <%= f.label :description %>
+    <%= f.text_area :description, placeholder: t("placeholder.events.description"), rows: 5, class: "form-control tinymce_event_template" %>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :end_date %>
-          <%= f.text_field :end_date, class: "form-control date" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :edition, class: "mdc-text-field__input", maxlength: 10, required: true %>
+      <%= f.label :edition, class: 'mdc-floating-label' %>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :deadline_date_enrollment %>
-          <%= f.text_field :deadline_date_enrollment, class: "form-control date" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :stocking, class: "mdc-text-field__input" %>
+      <%= f.label :stocking, class: 'mdc-floating-label' %>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :workload %>
-          <%= f.text_field :workload, class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.date_field :start_date, class: "mdc-text-field__input" %>
+      <%= f.label :start_date, class: 'mdc-floating-label mdc-floating-label--float-above' %>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :place %>
-          <%= f.text_field :place, placeholder: t("placeholder.events.place"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.date_field :end_date, class: "mdc-text-field__input" %>
+      <%= f.label :end_date, class: 'mdc-floating-label mdc-floating-label--float-above' %>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :street %>
-          <%= f.text_field :street, placeholder: t("placeholder.events.street"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.date_field :deadline_date_enrollment, class: "mdc-text-field__input" %>
+      <%= f.label :deadline_date_enrollment, class: 'mdc-floating-label mdc-floating-label--float-above' %>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :district %>
-          <%= f.text_field :district, placeholder: t("placeholder.events.district"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :workload, class: "mdc-text-field__input" %>
+      <%= f.label :workload, class: 'mdc-floating-label' %>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :city %>
-          <%= f.text_field :city, placeholder: t("placeholder.events.city"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--upgraded">
+      <%= f.text_field :place, class: "mdc-text-field__input" %>
+      <%= f.label :place,  class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple"></div>
+      <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+        <%= t("placeholder.events.place") %>
+      </p>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :state%>
-          <%= f.text_field :state, placeholder: t("placeholder.events.state"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :street, class: "mdc-text-field__input", required: true %>
+      <%= f.label :street, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple"></div>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :country %>
-          <%= f.text_field :country, placeholder: t("placeholder.events.country"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :district, class: "mdc-text-field__input" %>
+      <%= f.label :district, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating"></div>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :tags %>
-          <%= f.text_field :tags, placeholder: t("placeholder.events.tags"), class: "form-control" %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :city, class: "mdc-text-field__input" %>
+      <%= f.label :city, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating"></div>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :image %>
-          <div class="col-sm-8">
-            <%= image_tag(https(@event.image.url), size: '100x100') if @event.image? %>
-            <%= f.file_field :image %>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :state, class: "mdc-text-field__input" %>
+      <%= f.label :state, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating"></div>
+    </div>
+  </div>
 
-            <%= f.check_box :remove_image %>
-            <%= "#{t('actions.delete.label')} #{t('mongoid.attributes.event.image')}" %>
-          </div>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :country, class: "mdc-text-field__input" %>
+      <%= f.label :country, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating"></div>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :accepts_submissions %>
-          <%= f.check_box :accepts_submissions %>
-        </div>
+  <div class="text-field-container">
+    <div class="mdc-text-field text-field mdc-text-field--upgraded">
+      <%= f.text_field :tags, class: "mdc-text-field__input" %>
+      <%= f.label :tags, class: 'mdc-floating-label' %>
+      <div class="mdc-line-ripple mdc-line-ripple--active mdc-line-ripple--deactivating"></div>
+    </div>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :to_public %>
-          <%= f.check_box :to_public %>
-        </div>
+  <div class="text-field-container" style="display: none">
+    <%= f.file_field :image %>
+  </div>
 
-        <div class="form-group">
-          <%= f.label :block_presence %>
-          <%= f.check_box :block_presence %>
-        </div>
+  <div class="text-field-container" style="margin-top: 30px">
+    <div class="mdc-switch">
+      <%= f.check_box :accepts_submissions, class: 'mdc-switch__native-control', role: 'switch' %>
+      <div class="mdc-switch__background">
+        <div class="mdc-switch__knob"></div>
+      </div>
+    </div>
+    <%= f.label :accepts_submissions %>
+  </div>
 
-        <div class="container">
-          <%= render "shared/invite_user", model: @event, users: @organizers, key: "organizer" %>
+  <div class="text-field-container" style="margin-top: 30px">
+    <div class="mdc-switch">
+      <%= f.check_box :to_public, class: 'mdc-switch__native-control', role: 'switch' %>
+      <div class="mdc-switch__background">
+        <div class="mdc-switch__knob"></div>
+      </div>
+    </div>
+    <%= f.label :to_public %>
+  </div>
 
-          <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('helpers.links.cancel'), events_path, class: 'btn btn-default' %>
-        </div>
+  <div class="text-field-container" style="margin-top: 30px">
+    <div class="mdc-switch">
+      <%= f.check_box :block_presence, class: 'mdc-switch__native-control', role: 'switch' %>
+      <div class="mdc-switch__background">
+        <div class="mdc-switch__knob"></div>
+      </div>
+    </div>
+    <%= f.label :block_presence %>
+  </div>
 
-        <span id="user_in_the_list" style="display:none"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
-        <span id="remove" style="display:none"><%= t("new.invite.js.remove") %></span>
-      <% end %>
+  <div style="margin: 20px 0 20px 0">
+    <%#= render "shared/invite_user", model: @event, users: @organizers, key: "organizer" %>
+  </div>
+
+  <span id="user_in_the_list" style="display:none"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>
+  <span id="remove" style="display:none"><%= t("new.invite.js.remove") %></span>
+
+<% end %>
 
 <%= tinymce_assets %>
+<% content_for :javascript do %>
+  <script type="text/javascript">
 
-<script>
-  tinyMCE.init({
-    selector: ".tinymce_event_template",
-      menubar: false,
-      language: "pt_BR",
-      convert_urls: false,
-      plugins: "textcolor code anchor",
-      toolbar: [
-        "undo redo | styleselect fontsizeselect forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify | cut copy paste | bullist numlist outdent indent | anchor code"
-      ]
-  });
-</script>
+    const snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar'));
+    const dataObj = {
+      message: 'Processando...',
+      timeout: 50000
+    };
 
+    $('#form-event').on('submit', function(){
+      snackbar.show(dataObj);
+    });
+
+    $(".cover-preview").click(function(e){
+      $("#event_image").click();
+    });
+
+    $("#event_image").change(function(e){
+      var reader = new FileReader();
+
+      reader.onload = function()
+      {
+        $(".cover-preview").css({
+          "background": "url("+ reader.result +") no-repeat center center",
+          "background-size": "cover"
+        });
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    });
+
+    tinyMCE.init({
+      selector: ".tinymce_event_template",
+        menubar: false,
+        language: "pt_BR",
+        convert_urls: false,
+        plugins: "textcolor code anchor",
+        toolbar: [
+          "styleselect fontsizeselect forecolor | bold italic underline | alignleft aligncenter alignright alignjustify"
+        ]
+    });
+  </script>
+<% end %>
 <%= tinymce %>

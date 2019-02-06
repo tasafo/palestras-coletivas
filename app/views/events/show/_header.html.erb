@@ -1,23 +1,53 @@
-  <style type="text/css">
-    #page-header {
-      background-image: url(<%= https(@event.image.url) %>);
+<style media="screen">
+    section#page-header{
+      background:
+        linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.4)
+        ),
+        linear-gradient(
+          to left,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.4)
+        ),
+          url("<%= event_image @event %>") no-repeat center center;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
       background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
+      width: 100%;
+      min-height: 450px;
+      background-color: #607D8B;
       background-attachment: fixed;
     }
   </style>
 
   <section id="page-header">
-    <div id="page-content" class="row-fluid">
-      <h2><%= @event.name_edition %></h2>
+    <div class="header-content">
+      <h1 class="mdc-typography--headline4"><%= @event.name_edition %></h1>
 
-      <h4><%= @event.long_date %></h4>
+      <h2 class="mdc-typography--subtitle1"><%= @event.long_date %></h2>
 
-      <h4><%= @event.place %></h4>
+      <% if @event_presenter.open_enrollment %>
+        <h3 class="mdc-typography--subtitle1"><%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}"%></h3>
+        <% if @event_presenter.new_subscription %>
+          <% if @event_presenter.crowded %>
+            <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
+          <% else %>
+            <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), id: '', class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded" %>
+          <% end %>
+        <% else %>
+          <% message_button = @event_presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
 
-      <h4 class="text-danger"><%= t("labels.event.stocking") %>: <%= @event.stocking %></h4>
+          <% button_type = @event_presenter.enrollment.active? ? "btn-danger" : "btn-warning" %>
 
-      <h4 class="text-danger"><%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}" if @presenter.open_enrollment %>&nbsp;</h4>
+          <% if @event_presenter.crowded && !@event_presenter.enrollment.active? %>
+            <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
+          <% else %>
+            <%= link_to message_button, edit_event_enrollment_path(@event, :active, @event_presenter.enrollment), id: 'subscription-button', class: "mdc-button mdc-button--raised mdc--theme-secondary mdc-ripple-upgraded" %>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
   </section>

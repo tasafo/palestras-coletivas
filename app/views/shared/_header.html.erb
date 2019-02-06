@@ -1,29 +1,44 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-inverse bg-inverse-custom <%= index %>-color">
-    <div class="container">
-      <strong><%= link_to t('app.name'), root_path, class: 'navbar-brand' %></strong>
+<header class="mdc-top-app-bar">
+  <div class="mdc-top-app-bar__row">
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+      <button class="menu-button material-icons mdc-toolbar__menu-icon">menu</button>
+      <span class="mdc-top-app-bar__title animated fadeInDown">Palestras Coletivas</span>
+    </section>
+    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+      <% unless logged_in? %>
+        <span class="mdc-top-app-bar__title animated fadeInDown"><a href="/login" class="link-login">Login</a></span>
+      <% end %>
 
-      <a class="navbar-toggler hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingNavbarInside" aria-expanded="false" aria-controls="collapsingNavbar">&#9776;</a>
+      <% if logged_in? and @event.present? and action_name == 'edit' %>
+        <button type="submit" form="form-event" class="mdc-button mdc-button--outlined mdc-ripple-upgraded mdc-theme--on-secondary mdc-theme--secondary-bg btn-top-save">Salvar</button>
+      <% end %>
 
-      <div id="collapsingNavbarInside" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav ml-auto">
-          <%= render 'shared/menu' %>
+      <% if logged_in? and @event.present? and action_name == 'show' and @event_presenter.authorized %>
+        <button id="event-menu-button" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Add to favorites" >more_vert</button>
+        <div class="mdc-menu-anchor" style="transform-origin: center bottom 10px; right: 200px; bottom: 0px;">
+          <div id="event-menu" class="mdc-menu" tabindex="-1">
+            <nav class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+              <%= link_to t("titles.events.edit"), edit_event_path(@event), class: "mdc-list-item" %>
+              <%= link_to t("titles.schedules.btn_new"), new_event_schedule_path(@event), class: "mdc-list-item" %>
+              <%= link_to t("show.event.export_subscribers"), new_event_export_subscriber_path(@event), class: "mdc-list-item" %>
+              <%= link_to t("actions.delete.label"), event_path(@event),
+                class: "mdc-list-item",
+                method: :delete, data: { confirm: t("actions.delete.confirm") } %>
+            </nav>
+          </div>
+        </div>
+      <% end %>
 
-          <% if logged_in? %>
-            <li class="nav-item dropdown hidden-sm-down textselect-off">
-              <a class="menu nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= thumbnail(current_user, "40x40", 'rounded-circle img-responsive') %>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right change">
-                <%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item" %>
-                <%= link_to t("menu.user_data"), edit_user_path(current_user), class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <%= link_to t("menu.logout"), logout_path, class: "dropdown-item" %>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </nav>
+      <% if logged_in? and @talk.present? and @talk.persisted? and @talk.belongs_to?(current_user) %>
+        <button id="talk-menu-button" class="mdc-icon-button material-icons mdc-ripple-upgraded--unbounded mdc-ripple-upgraded" aria-label="Add to favorites" >more_vert</button>
+        <div class="mdc-menu-anchor" style="transform-origin: center bottom 10px; right: 160px; bottom: 0px;">
+          <div id="talk-menu" class="mdc-menu" tabindex="-1">
+            <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+              <li id="open-dialog" class="mdc-list-item mdc-ripple-upgraded" role="menuitem" tabindex="0"><%= t("titles.talks.edit") %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </section>
+  </div>
 </header>

@@ -5,8 +5,8 @@ class SchedulesController < ApplicationController
 
   def new
     @schedule = Schedule.new
-
     set_presenter
+    @event_presenter = EventPresenter.new(@event, authorized_access?(@event), current_user)
 
     message = t('flash.unauthorized_access')
 
@@ -17,6 +17,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
 
     set_presenter
+    @event_presenter = EventPresenter.new(@event, authorized_access?(@event), current_user)
 
     save_schedule(:new, @event, @schedule, params)
   end
@@ -38,7 +39,7 @@ class SchedulesController < ApplicationController
 
     message = t('flash.schedules.destroy.notice')
 
-    redirect_to event_path(@event), notice: message if @schedule.destroy
+    redirect_to new_event_schedule_path(@event, @schedule), notice: message if @schedule.destroy
   end
 
   private
@@ -52,7 +53,7 @@ class SchedulesController < ApplicationController
   def set_presenter
     @event = Event.find(params[:event_id])
 
-    @presenter = SchedulePresenter.new(@schedule, @event)
+    @schedule_presenter = SchedulePresenter.new(@schedule, @event)
   end
 
   def schedule_params
@@ -69,7 +70,7 @@ class SchedulesController < ApplicationController
     if object.send act
       message = t("flash.schedules.#{act}.notice")
 
-      redirect_to event_path(event), notice: message
+      redirect_to new_event_schedule_path(event), notice: message
     else
       render option
     end

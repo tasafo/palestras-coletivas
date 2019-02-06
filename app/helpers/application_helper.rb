@@ -15,4 +15,22 @@ module ApplicationHelper
 
     url.gsub(change, 'https://')
   end
+
+  def event_image(event)
+    if event.image?
+      https(event.image.url)
+    else
+      image_url("covers/#{event.static_cover}-large.jpg")
+    end
+  end
+
+  def cover_helper(event)
+    if event.image.present?
+      url  = https(event.image.url)
+    else
+      url = asset_url("covers/#{event.static_cover}-large.jpg")
+    end
+
+    "style=background:url(#{url});background-repeat:no-repeat;background-position:center;background-size:cover"
+  end
 end

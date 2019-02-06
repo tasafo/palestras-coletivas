@@ -10,10 +10,21 @@ class EnrollmentsController < ApplicationController
   end
 
   def create
-    @enrollment = Enrollment.new(enrollment_params)
-    @event = Event.find(params[:enrollment][:event_id])
+    @enrollment = Enrollment.new
+    @event = Event.find(params[:event_id])
+    @enrollment.event = @event
+    @enrollment.user = current_user
 
-    save_enrollment(:create, @event, @enrollment, 'active')
+    result = EnrollmentDecorator.new(
+      @enrollment,
+      :active
+    ).create
+
+    if result
+      render json: { message: t("flash.enrollments.create.notice") }, status: :created
+    else
+      render json: { message: t("flash.enrollments.create.error") }, status: :unprocessable_entity
+    end
   end
 
   def edit

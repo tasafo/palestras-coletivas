@@ -8,6 +8,7 @@ class Event
   include UpdateCounter
   include Commentable
   include Rateable
+  attr_accessor :static_cover
 
   field :name, type: String
   field :edition, type: String
@@ -31,6 +32,7 @@ class Event
   field :accepts_submissions, type: Boolean, default: false
   field :block_presence, type: Boolean, default: false
   field :workload, type: Integer, default: 0
+  field :cover_id, type: String
 
   mount_uploader :image, ImageUploader
 
@@ -89,6 +91,14 @@ class Event
     else
       "#{date_of} #{day_one} #{date_of} #{locale(date1, '%B')} #{date_to} #{day_two} #{date_of} #{locale(date2, date_format)}"
     end
+  end
+
+  def cover
+    image || static_cover
+  end
+
+  def static_cover
+    self.cover_id = self.cover_id || rand(1..6)
   end
 
   private

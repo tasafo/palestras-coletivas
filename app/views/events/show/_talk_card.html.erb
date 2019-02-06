@@ -1,0 +1,18 @@
+<div class="mdc-card custom-card custom-card--hero">
+  <div class="mdc-card__primary-action" tabindex="0">
+    <div class="custom-card__primary">
+      <h2 class="custom-card__title mdc-typography--headline6"><%= suspension_points(schedule.talk.title, 60) %></h2>
+      <h3 class="custom-card__subtitle mdc-typography--subtitle2"></h3>
+    </div>
+    <div class="custom-card__secondary mdc-typography--body2">
+      <%= suspension_points(schedule.talk.description, 50) %>
+    </div>
+    <%= render 'events/show/delete_schedule', schedule: schedule, event_presenter: event_presenter %>
+  </div>
+  <div class="mdc-card__actions">
+    <% schedule.talk.users.by_name.each do |user| %>
+      <%= thumbnail(user, "40x40", 'rounded-circle') %>
+      <span style="margin: 0 0 0 10px;"><%= user.name %></span>
+    <% end %>
+  </div>
+</div>

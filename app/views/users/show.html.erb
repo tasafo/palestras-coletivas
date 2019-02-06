@@ -1,72 +1,49 @@
-<%= render "shared/header", index: :ranking %>
-<%= render "shared/title", title: t("titles.users.profile"), index: :ranking %>
+<%#= render "shared/title", title: t("titles.users.profile"), index: :ranking %>
 
-<% if logged_in? %>
-  <div class="container">
-    <div class="row-fluid">
-      <div class="col-md-12">
-        <div class="btn-group pull-right" role="group">
-          <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>&nbsp;
-          <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
-<div class="container">
-  <%= thumbnail(@user, '80x80', 'rounded-circle img-responsive') %>
-  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
+<div class="container" style="margin: 0 0 20px 0; text-align: center; ">
+  <%= thumbnail(@user, '80x80', 'rounded-circle') %>
+  <h1 class="mdc-typography--headline4"><%= @user.name %> <small><%= @user.username %> </small></h1>
 
   <% if @presenter.gravatar.has_profile %>
-    <p class="lead">
+    <div class="user-info">
       <%= @presenter.gravatar.about_me.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.about_me}<br/>").html_safe %>
       <%= @presenter.gravatar.current_location.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.current_location}<br/>").html_safe %>
       <%= t("show.user.profile") %> <%= link_to 'gravatar', https(@presenter.gravatar.profile_url) %>
-    </p>
+    </div>
   <% end %>
 
-  <% if @user.events? %>
-    <hr />
-    <% event = t("show.user.events") %>
-    <h3><%= event[@user.events.count > 1 ? :other : :one] %></h3>
-
-    <% @user.events.publics.order(updated_at: :desc).each do |event| %>
-      <h5><%= link_to event.name_edition, event_path(event) %></h5>
-    <% end %>
+  <% if current_user == @user %>
+    <%= link_to t("menu.user_data"), edit_user_path(current_user), class: 'mdc-button mdc-button--outlined mdc-ripple-upgraded btn-edit-user' %>
   <% end %>
+  <hr />
+</div>
 
-  <% presentations = "" %>
-
-  <% if @user.talks? %>
-    <% @user.talks.publics.each do |talk| %>
-      <% if talk.schedules? %>
-        <% talk.schedules.presenteds.each do |schedule| %>
-          <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name_edition} )", event_path(schedule.event)) + '</h5>' %>
+<div class="container" style="margin-top: -80px">
+  <% unless @presenter.talks.empty? %>
+    <div class="row">
+      <h3 class="mdc-typography--subtitle1" style="width: 180px; display: block; float: left"><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
+      
+      <% if current_user == @user %>
+        <%= link_to "/talks?my=true", class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
+          Ver mais
         <% end %>
       <% end %>
-    <% end %>
-  <% end %>
-
-  <% unless presentations.blank? %>
-    <hr />
-    <h3><%= t("show.user.presentations") %></h3>
-    <%= presentations.html_safe %>
-  <% end %>
-
-  <% unless @presenter.participations.blank? %>
-    <% participation = t("show.user.participations") %>
-    <h3><%= participation[@participations.count > 1 ? :other : :one] %></h3>
-
-    <% @participations.each do |participation| %>
-      <h5><%= link_to participation.event.name_edition, event_path(participation.event) %></h5>
-    <% end %>
-  <% end %>
-
-  <% unless @presenter.talks.empty? %>
-    <hr />
-    <h3><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
-
+    </div>
     <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
+  <% end %>
+</div>
+
+<div class="container container-events" style="margin-top: -80px">
+  <% if @user.events? %>
+    <div class="row">
+      <h1 class="mdc-typography--subtitle1" style="width: 160px; display: block; float: left">Meus Eventos</h1>
+      
+      <% if current_user == @user %>
+        <%= link_to "/events?my=true", class: "link-effect mdc-button undefined mdc-ripple-upgraded btn-add-event"  do %>
+          ver mais
+        <% end %>
+      <% end %>
+    </div>
+    <%= render "shared/events", events: @user.events.publics.limit(6).order(updated_at: :desc), show_user: true %>
   <% end %>
 </div>
