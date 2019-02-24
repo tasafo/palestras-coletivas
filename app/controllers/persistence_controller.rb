@@ -17,6 +17,21 @@ class PersistenceController < ApplicationController
     end
   end
 
+  def destroy_object(object)
+    name = object.class.name.downcase
+
+    object.destroy
+
+    if object.errors.blank?
+      redirect_to "/#{name.pluralize}",
+                  notice: t('notice.destroyed',
+                            model: t("mongoid.models.#{name}"))
+    else
+      redirect_to "/#{name.pluralize}/#{object.slug}",
+                  notice: t("notice.delete.restriction.#{name.pluralize}")
+    end
+  end
+
   private
 
   def get_decorator(object, users, args)

@@ -7,9 +7,9 @@ class TalksController < PersistenceController
 
   def index
     @search = params[:search]
-    @my = !params[:my].nil?
+    @my_talk = !params[:my].nil?
 
-    @talks = search_talks @search, @my, params[:page]
+    @talks = search_talks @search, @my_talk, params[:page]
 
     respond_to do |format|
       format.html
@@ -41,36 +41,25 @@ class TalksController < PersistenceController
     @talk = nil unless @authorized
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     save_object(@talk, params[:users], params: talk_params)
   end
 
   def destroy
-    @talk.destroy
-
-    if @talk.errors.blank?
-      redirect_to talks_path,
-        notice: t('notice.destroyed', model: t('mongoid.models.talk'))
-    else
-      redirect_to talk_path(@talk),
-        notice: t('notice.delete.restriction.talks')
-    end
+    destroy_object(@talk)
   end
 
   private
 
-  def search_talks(search, my, page)
-    talks = if logged_in? && my
+  def search_talks(search, my_talk, page)
+    talks = if logged_in? && my_talk
               TalkQuery.new.owner(current_user)
+            elsif search.blank?
+              TalkQuery.new.publics
             else
-              if search.blank?
-                TalkQuery.new.publics
-              else
-                Kaminari.paginate_array(TalkQuery.new.search(search))
-              end
+              Kaminari.paginate_array(TalkQuery.new.search(search))
             end
 
     talks.page(page).per(12)
@@ -81,8 +70,10 @@ class TalksController < PersistenceController
 
     found = !@talk.nil? && (@talk.owner == current_user || @talk.to_public)
 
-    redirect_to talks_path, notice: t("notice.not_found",
-              model: t("mongoid.models.talk")) if !found
+    return if found
+
+    redirect_to talks_path, notice: t('notice.not_found',
+                                      model: t('mongoid.models.talk'))
   end
 
   def set_authors
@@ -90,8 +81,9 @@ class TalksController < PersistenceController
   end
 
   def check_authorization
-    redirect_to talks_path,
-      notice: t('flash.unauthorized_access') unless authorized_access?(@talk)
+    return if authorized_access?(@talk)
+
+    redirect_to talks_path, notice: t('flash.unauthorized_access')
   end
 
   def talk_params

@@ -6,13 +6,9 @@ class EventsController < PersistenceController
   before_action :check_authorization, only: [:edit, :destroy]
 
   def index
-    @my = !params[:my].blank?
+    @my_event = !params[:my].blank?
 
-    @events = if logged_in? && @my
-                EventQuery.new.owner(current_user)
-              else
-                EventQuery.new.all_public
-              end
+    @events = query_event(@my_event)
     @events = @events.page(params[:page]).per(12)
 
     respond_to do |format|
@@ -32,29 +28,20 @@ class EventsController < PersistenceController
   end
 
   def show
-    @presenter = EventPresenter.new(@event, authorized_access?(@event),
-      current_user)
+    @presenter = EventPresenter.new(@event,
+                                    authorized_access?(@event), current_user)
 
     render layout: 'event'
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     save_object(@event, params[:users], params: event_params)
   end
 
   def destroy
-    @event.destroy
-
-    if @event.errors.blank?
-      redirect_to events_path,
-        notice: t('notice.destroyed', model: t('mongoid.models.event'))
-    else
-      redirect_to event_path(@event),
-        notice: t('notice.delete.restriction.events')
-    end
+    destroy_object(@event)
   end
 
   private
@@ -64,8 +51,10 @@ class EventsController < PersistenceController
 
     found = !@event.nil? && (@event.owner == current_user || @event.to_public)
 
-    redirect_to events_path, notice: t("notice.not_found",
-                  model: t("mongoid.models.event")) if !found
+    return if found
+
+    redirect_to events_path, notice: t('notice.not_found',
+                                       model: t('mongoid.models.event'))
   end
 
   def set_organizers
@@ -73,8 +62,17 @@ class EventsController < PersistenceController
   end
 
   def check_authorization
-    redirect_to events_path,
-      notice: t('flash.unauthorized_access') unless authorized_access?(@event)
+    return if authorized_access?(@event)
+
+    redirect_to events_path, notice: t('flash.unauthorized_access')
+  end
+
+  def query_event(my_event)
+    if logged_in? && my_event
+      EventQuery.new.owner(current_user)
+    else
+      EventQuery.new.all_public
+    end
   end
 
   def event_params
