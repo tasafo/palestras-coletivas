@@ -33,11 +33,9 @@ class TalkDecorator
     @talk.users = nil
     @talk.users << @owner
 
-    if @users
-      @users.each do |author|
-        user = User.find(author)
-        @talk.users << [user] if user
-      end
+    @users&.each do |author|
+      user = User.find(author)
+      @talk.users << [user] if user
     end
 
     update_user_counters

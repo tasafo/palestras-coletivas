@@ -28,17 +28,22 @@ class EnrollmentDecorator
   private
 
   def update_counter_of_events_and_users
-    enroll = @enrollment
-
-    condition = @option_type == 'active' ? enroll.active? : enroll.present?
-
-    operation = condition ? :inc : :dec
+    operation = operation_type
 
     @enrollment.user.set_counter(@options[0][@option_type.to_sym][:event],
                                  operation)
+
     @enrollment.event.set_counter(@options[0][@option_type.to_sym][:user],
                                   operation)
 
     true
+  end
+
+  def operation_type
+    enroll = @enrollment
+
+    condition = @option_type == 'active' ? enroll.active? : enroll.present?
+
+    condition ? :inc : :dec
   end
 end

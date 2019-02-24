@@ -43,13 +43,11 @@ class EventDecorator
   end
 
   def save_organizers
-    if @users
-      @users.each do |organizer|
-        user = User.find(organizer)
-        if user
-          @event.users << user
-          user.set_counter(:organizing_events, :inc)
-        end
+    @users&.each do |organizer|
+      user = User.find(organizer)
+      if user
+        @event.users << user
+        user.set_counter(:organizing_events, :inc)
       end
     end
   end
