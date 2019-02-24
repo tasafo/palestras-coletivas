@@ -18,7 +18,8 @@ class SchedulesController < ApplicationController
 
     set_presenter
 
-    save_schedule(:new, @event, @schedule, params)
+    save_schedule(operation: :new, event: @event, schedule: @schedule,
+                  fields: params, params: nil)
   end
 
   def edit
@@ -28,7 +29,8 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    save_schedule(:edit, @event, @schedule, params, schedule_params)
+    save_schedule(operation: :edit, event: @event, schedule: @schedule,
+                  fields: params, params: schedule_params)
   end
 
   def destroy
@@ -60,18 +62,24 @@ class SchedulesController < ApplicationController
                                      :day, :time, :environment)
   end
 
-  def save_schedule(option, event, schedule, fields, params = nil)
-    act = option == :new ? :create : :update
+  def save_schedule(options = {})
+    act = options[:operation] == :new ? :create : :update
 
-    object = ScheduleDecorator.new(schedule, fields['old_talk_id'],
-                                   fields['schedule']['talk_id'], params)
+    object = decorate_schedule(options)
 
     if object.send act
       message = t("flash.schedules.#{act}.notice")
 
-      redirect_to event_path(event), notice: message
+      redirect_to event_path(options[:event]), notice: message
     else
-      render option
+      render options[:operation]
     end
+  end
+
+  def decorate_schedule(options)
+    ScheduleDecorator.new(
+      options[:schedule], options[:fields]['old_talk_id'],
+      options[:fields]['schedule']['talk_id'], options[:params]
+    )
   end
 end
