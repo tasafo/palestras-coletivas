@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.0'
+ruby '2.6.1'
 
 gem 'rails', '~> 5.2'
 gem 'rails-i18n'
@@ -12,7 +12,7 @@ gem 'multi_json', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'airbrake', '~> 6.1'
-gem 'jbuilder'
+gem 'active_model_serializers'
 
 gem 'mongoid', '~> 7.0'
 gem 'mongoid-slug'

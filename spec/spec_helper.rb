@@ -8,7 +8,7 @@ require 'capybara/rspec'
 require 'webmock/rspec'
 require 'database_cleaner'
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
@@ -25,9 +25,9 @@ RSpec.configure do |config|
 
   Capybara.javascript_driver = :webkit
 
-  Capybara::Webkit.configure do |config|
-    config.debug = false
-    config.block_unknown_urls
+  Capybara::Webkit.configure do |conf|
+    conf.debug = false
+    conf.block_unknown_urls
   end
 
   config.before(:suite) do

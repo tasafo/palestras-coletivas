@@ -11,7 +11,10 @@ class TalksController < PersistenceController
 
     @talks = search_talks @search, @my, params[:page]
 
-    render nothing: true, status: 404 if params[:page] && @talks.blank?
+    respond_to do |format|
+      format.html
+      format.json { render json: @talks, meta: { total: @talks.size } }
+    end
   end
 
   def new

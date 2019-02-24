@@ -77,22 +77,23 @@ function search_talk() {
                 xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
             },
             dataType : "json",
-            success : function(json) {
-                for (var i in json) {
-                    thumb = json[i].thumbnail ? json[i].thumbnail : '/without_presentation.jpg';
+            success : function(data) {
+                for (var i in data.talks) {
+                    record = data.talks[i];
+                    thumb = record.thumbnail ? record.thumbnail : '/without_presentation.jpg';
 
                     talks += '<hr />';
-                    talks += '<div id="div_' + json[i]._id['$oid'] + '" class="talk">';
+                    talks += '<div id="div_' + record.id['$oid'] + '" class="talk">';
                     talks += '  <div class="container">';
                     talks += '    <div class="row">';
                     talks += '      <div class="col-md-2">';
                     talks += '        <img src="' + thumb + '" class="img-thumbnail" />';
-                    talks += '        <input type="button" id="' + json[i]._id['$oid'] + '" title="' + json[i].title + '" class="btn btn-success btn-select-talk" value="' + titles_talks_select + '" />';
+                    talks += '        <input type="button" id="' + record.id['$oid'] + '" title="' + record.title + '" class="btn btn-success btn-select-talk" value="' + titles_talks_select + '" />';
                     talks += '      </div>';
                     talks += '      <div class="col-md-10">';
-                    talks += '        <h4><a href="/talks/' + json[i]._slugs[0] + '">' + json[i].title +'</a></h4>';
-                    talks += '        <p>' + json[i].description + '</p>';
-                    talks += '        <p>' + json[i].tags + '</p>';
+                    talks += '        <h4><a href="/talks/' + record.slug + '" target="_blank">' + record.title +'</a></h4>';
+                    talks += '        <p>' + record.description + '</p>';
+                    talks += '        <p>' + record.tags + '</p>';
                     talks += '      </div>';
                     talks += '    </div>';
                     talks += '  </div>';

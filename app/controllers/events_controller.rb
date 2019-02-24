@@ -15,7 +15,10 @@ class EventsController < PersistenceController
               end
     @events = @events.page(params[:page]).per(12)
 
-    render nothing: true, status: 404 if params[:page] && @events.blank?
+    respond_to do |format|
+      format.html
+      format.json { render json: @events, meta: { total: @events.size } }
+    end
   end
 
   def new

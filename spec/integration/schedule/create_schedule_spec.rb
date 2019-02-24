@@ -75,7 +75,7 @@ describe "Create schedule", :type => :request, :js => true do
 
       click_button "Buscar"
 
-      click_button talk.id
+      click_button talk.id.to_s
 
       click_button "Adicionar programação"
     end

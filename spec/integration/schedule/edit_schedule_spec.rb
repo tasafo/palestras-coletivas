@@ -30,7 +30,7 @@ describe "Edit schedule", :type => :request, :js => true do
 
       click_button "Buscar"
 
-      click_button ruby_talk.id
+      click_button ruby_talk.id.to_s
 
       click_button "Atualizar programação"
     end

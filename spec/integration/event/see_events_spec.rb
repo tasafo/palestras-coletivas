@@ -35,4 +35,18 @@ describe "See events", :type => :request do
       expect(page).to have_content("Tá Safo Conf")
     end
   end
+
+  context "public events in json format" do
+    before do
+      visit "/events.json"
+    end
+
+    it "redirects to the home page" do
+      expect(current_path).to eql("/events.json")
+    end
+
+    it "displays at least one event" do
+      expect(page).to have_content("Tá Safo Conf")
+    end
+  end
 end
