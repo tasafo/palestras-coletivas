@@ -1,6 +1,6 @@
 #:nodoc:
 class VotesController < ApplicationController
-  before_action :set_objects, only: [:create, :destroy]
+  before_action :set_objects, only: %i[create destroy]
 
   def create
     unless @vote
@@ -34,6 +34,7 @@ class VotesController < ApplicationController
   end
 
   def redirect_to_event
-    redirect_to event_path(@event, anchor: 'schedule'), notice: t("flash.schedules.vote.#{@notice}")
+    redirect_to event_path(@event, anchor: 'schedule'),
+                notice: t("flash.schedules.vote.#{@notice}")
   end
 end

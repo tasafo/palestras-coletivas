@@ -9,6 +9,7 @@
         <div class="modal-header light-blue darken-3 white-text">
           <h4 class="title"><i class="fa fa-user"></i> <%= t('menu.signin') %></h4>
         </div>
+        <%= render 'shared/flash_messages' %>
         <!--Body-->
         <div class="modal-body">
           <%= form_tag login_path do %>

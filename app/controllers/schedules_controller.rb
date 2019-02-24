@@ -1,7 +1,7 @@
 #:nodoc:
 class SchedulesController < ApplicationController
-  before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_schedule, only: [:edit, :update, :destroy]
+  before_action :require_logged_user, only: %i[new create edit update]
+  before_action :set_schedule, only: %i[edit update destroy]
 
   def new
     @schedule = Schedule.new

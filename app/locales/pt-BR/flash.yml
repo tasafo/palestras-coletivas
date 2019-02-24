@@ -70,6 +70,7 @@ pt-BR:
     submit_event:
       create:
         notice: "A palestra foi submetida ao evento!"
+        error: "Erro ao tentar submeter a palestra no evento"
         alert: "A palestra já está submetida no evento"
       new:
         alert: "Não existem eventos disponíveis para essa operação"

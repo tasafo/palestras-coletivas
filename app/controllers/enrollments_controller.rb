@@ -1,8 +1,8 @@
 #:nodoc:
 class EnrollmentsController < ApplicationController
-  before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_enrollment, only: [:edit, :update]
-  before_action :set_event, only: [:new, :edit, :update]
+  before_action :require_logged_user, only: %i[new create edit update]
+  before_action :set_enrollment, only: %i[edit update]
+  before_action :set_event, only: %i[new edit update]
 
   def new
     @enrollment = Enrollment.new

@@ -1,9 +1,8 @@
 #:nodoc:
 class PasswordResetsController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: %i[edit update]
 
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:email])
@@ -19,8 +18,7 @@ class PasswordResetsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.password_reset_sent_at < 2.hours.ago

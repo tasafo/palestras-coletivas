@@ -28,18 +28,22 @@ class CommentsController < ApplicationController
   private
 
   def find_commentable
-    commentable_class = [Event, Talk].find { |x| x.name == params[:commentable_type].classify }
+    commentable_class = [Event, Talk].find do |x|
+      x.name == params[:commentable_type].classify
+    end
 
     @commentable = commentable_class.find(params[:commentable_id])
   end
 
   def find_parent_comment
-    parent = @commentable.comments.find(params[:comment_id]) if params[:comment_id]
+    comment_id = params[:comment_id]
+
+    parent = @commentable.comments.find(comment_id) if comment_id
 
     parent || @commentable
   end
 
   def _commentable_path
-    "/#{@commentable.class.name.pluralize.downcase}/#{@commentable._slugs[0]}"
+    "/#{@commentable.class.name.pluralize.downcase}/#{@commentable.slug}"
   end
 end

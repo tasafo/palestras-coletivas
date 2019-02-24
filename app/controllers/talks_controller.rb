@@ -1,9 +1,9 @@
 #:nodoc:
 class TalksController < PersistenceController
-  before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_talk, only: [:show, :edit, :update, :destroy]
-  before_action :set_authors, only: [:new, :create, :edit, :update]
-  before_action :check_authorization, only: [:edit, :destroy]
+  before_action :require_logged_user, only: %i[new create edit update]
+  before_action :set_talk, only: %i[show edit update destroy]
+  before_action :set_authors, only: %i[new create edit update]
+  before_action :check_authorization, only: %i[edit destroy]
 
   def index
     @search = params[:search]

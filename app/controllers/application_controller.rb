@@ -13,13 +13,14 @@ class ApplicationController < ActionController::Base
   end
 
   def require_logged_user
+    return if logged_in?
+
     redirect_to "#{login_path}?redirect=#{request.env['REQUEST_URI']}",
-                alert: t('flash.must_be_logged') unless logged_in?
+                alert: t('flash.must_be_logged')
   end
 
   def current_user
-    @current_user ||= session[:user_id] &&
-      User.find(session[:user_id])
+    @current_user ||= session[:user_id] && User.find(session[:user_id])
   end
 
   def logged_in?

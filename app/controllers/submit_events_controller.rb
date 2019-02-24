@@ -1,43 +1,44 @@
 #:nodoc:
 class SubmitEventsController < ApplicationController
-  before_action :require_logged_user, only: [:new, :create]
+  before_action :require_logged_user, only: %i[new create]
 
   def new
     @schedule = Schedule.new
     @talk = Talk.find(params[:talk_id])
     @events = EventQuery.new.accepts_submissions
 
-    redirect_to talk_path(@talk),
-                alert: t('flash.submit_event.new.alert') if @events.count <= 0
+    return unless @events.size <= 0
+
+    redirect_to talk_path(@talk), alert: t('flash.submit_event.new.alert')
   end
 
   def create
-    @error = false
-
-    @event = Event.find(params[:submit_event]['event_id'])
-    @talk = Talk.find_by(_slugs: params[:talk_id])
-    @activity = Activity.find_by(type: 'talk')
-    @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
+    prepare_objects(params)
 
     if @_schedule.nil?
       @schedule = Schedule.new(activity: @activity, event: @event,
-                               talk: @talk, day: 1, time: get_time(@event))
+                               talk: @talk, day: 1, time: time(@event))
 
-      if @schedule.save
-        @error = true
-        @message = t('flash.submit_event.create.notice')
-      end
+      type = @schedule.save ? 'notice' : 'error'
+
+      message = t("flash.submit_event.create.#{type}")
     else
-      @error = true
-      @message = t('flash.submit_event.create.alert')
+      message = t('flash.submit_event.create.alert')
     end
 
-    redirect_to talk_path(@talk), notice: @message if @error
+    redirect_to talk_path(@talk), notice: message if message
   end
 
   private
 
-  def get_time(event)
+  def prepare_objects(params)
+    @event = Event.find(params[:submit_event]['event_id'])
+    @talk = Talk.find_by(_slugs: params[:talk_id])
+    @activity = Activity.find_by(type: 'talk')
+    @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
+  end
+
+  def time(event)
     schedules = event.schedules.asc(:time)
 
     time = schedules.empty? ? '00:00' : schedules.first.time
@@ -45,7 +46,7 @@ class SubmitEventsController < ApplicationController
     if time != '00:00'
       hours = time.split(':')[0]
       minutes = time.split(':')[1].to_i + 1
-      time = "#{hours}:%02d" % minutes.to_s
+      time = format("#{hours}:%02d", minutes.to_s)
     end
 
     time

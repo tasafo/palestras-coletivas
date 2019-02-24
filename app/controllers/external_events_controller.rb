@@ -1,7 +1,7 @@
 #:nodoc:
 class ExternalEventsController < ApplicationController
-  before_action :require_logged_user, only: [:new, :create, :edit, :update]
-  before_action :set_talk, only: [:new, :create, :edit, :update]
+  before_action :require_logged_user, only: %i[new create edit update]
+  before_action :set_talk, only: %i[new create edit update]
 
   def new
     @external_event = ExternalEvent.new

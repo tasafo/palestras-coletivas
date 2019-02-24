@@ -2,9 +2,8 @@
 class PersistenceController < ApplicationController
   def save_object(object, users, args = {})
     name = object.class.name.downcase.pluralize
-    option = args[:owner] ? :new : :edit
-    operation = args[:owner] ? :create : :update
-
+    option = option_type(args[:owner])
+    operation = operation_type(args[:owner])
     decorator = decorate(object, users, args)
 
     if decorator.send operation
@@ -34,6 +33,14 @@ class PersistenceController < ApplicationController
     klass = "#{object.class.name}Decorator".constantize
 
     klass.new(object, users, args)
+  end
+
+  def option_type(owner)
+    owner ? :new : :edit
+  end
+
+  def operation_type(owner)
+    owner ? :create : :update
   end
 
   def text_notice(name, error)

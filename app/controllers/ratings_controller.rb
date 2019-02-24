@@ -15,7 +15,9 @@ class RatingsController < ApplicationController
   private
 
   def find_rateable
-    rateable_class = [Event].find { |x| x.name == params[:rateable_type].classify }
+    rateable_class = [Event].find do |x|
+      x.name == params[:rateable_type].classify
+    end
 
     rateable_class.find(params[:rateable_id])
   end
