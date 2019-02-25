@@ -22,10 +22,12 @@ class User
 
   mount_uploader :avatar, AvatarUploader
 
-  has_and_belongs_to_many :talks, inverse_of: :talks, dependent: :restrict_with_error
+  has_and_belongs_to_many :talks, inverse_of: :talks,
+                                  dependent: :restrict_with_error
   has_and_belongs_to_many :watched_talks, class_name: 'Talk',
                                           inverse_of: :watched_user
-  has_and_belongs_to_many :events, inverse_of: :users, dependent: :restrict_with_error
+  has_and_belongs_to_many :events, inverse_of: :users,
+                                   dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
   has_many :votes
   has_many :owner_events, class_name: 'User', inverse_of: :owner
@@ -59,7 +61,7 @@ class User
   end
 
   def check_username
-    self.username = '@' << self.username if !self.username.blank? && self.username[0] != '@'
+    self.username = '@' << username if !username.blank? && username[0] != '@'
   end
 
   def show_name
@@ -97,6 +99,7 @@ class User
                  end
 
     enrollment.present = true
+
     EnrollmentDecorator.new(enrollment, 'present').update
   end
 
@@ -122,11 +125,13 @@ class User
     return if watched_talk? talk
 
     watched_talks << talk
+
     set_counter :watched_talks, :inc
   end
 
   def unwatch_talk!(talk)
     watched_talks.delete talk
+
     set_counter :watched_talks, :dec
   end
 

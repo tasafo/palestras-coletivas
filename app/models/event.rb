@@ -62,7 +62,7 @@ class Event
   after_validation :geocode
 
   def name_edition
-    "#{self.name} - #{self.edition}"
+    "#{name} - #{edition}"
   end
 
   def address
@@ -73,7 +73,6 @@ class Event
     date1 = start_date
     date2 = end_date
 
-    date_between = I18n.t('titles.events.date.between')
     date_of = I18n.t('titles.events.date.of')
     date_to = I18n.t('titles.events.date.to')
     date_format = "%B #{date_of} %Y"

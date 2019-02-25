@@ -32,16 +32,16 @@ class Schedule
   end
 
   def show_time
-    if self.event && self.event.accepts_submissions && !self.talk_id.nil?
+    if event&.accepts_submissions && !talk_id.nil?
       ''
     else
-      self.time
+      time
     end
   end
 
   def talk_presence
-    if self.activity && self.activity.type == 'talk' && self.talk_id.blank?
-      errors.add(:talk, 'não pode ficar em branco')
-    end
+    return unless activity&.type == 'talk' && talk_id.blank?
+
+    errors.add(:talk, I18n.t('flash.schedules.talk.presence'))
   end
 end
