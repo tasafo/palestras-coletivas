@@ -2,7 +2,9 @@
 module Rateable
   def rate_by(user, rank)
     rating = ratings.find_or_create_by user: user
+
     rating.update rank: rank
+
     rating
   end
 
@@ -12,7 +14,9 @@ module Rateable
 
   def rating
     return 0 if ratings.empty?
+
     rating = average(ratings.map(&:rank))
+
     round_by_point_5(rating)
   end
 

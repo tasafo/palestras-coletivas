@@ -54,9 +54,7 @@ class Event
 
   scope :publics, -> { where(to_public: true) }
   scope :upcoming, -> { publics.desc(:start_date).limit(3) }
-  scope :with_relations, -> do
-    includes(:users, :schedules, :enrollments)
-  end
+  scope :with_relations, -> { includes(:users, :schedules, :enrollments) }
 
   geocoded_by :address
   after_validation :geocode
@@ -72,29 +70,18 @@ class Event
   def long_date
     date1 = start_date
     date2 = end_date
-
     date_of = I18n.t('titles.events.date.of')
     date_to = I18n.t('titles.events.date.to')
     date_format = "%B #{date_of} %Y"
     day_one = zero_fill(date1.day)
     day_two = zero_fill(date2.day)
 
-    if date1 == date2
-      "#{I18n.t('titles.events.date.on')} #{locale(date1, :long)}"
-    elsif date1.year != date2.year
-      "#{date_of} #{locale(date1, :long)} #{date_to} #{locale(date2, :long)}"
-    elsif date1.month == date2.month
-      "#{date_of} #{day_one} #{date_to} #{day_two} #{date_of} #{locale(date1, date_format)}"
-    else
-      "#{date_of} #{day_one} #{date_of} #{locale(date1, '%B')} #{date_to} #{day_two} #{date_of} #{locale(date2, date_format)}"
-    end
+    FullDate.new(date1: date1, date2: date2, date_of: date_of,
+                 date_to: date_to, date_format: date_format, day_one: day_one,
+                 day_two: day_two).convert
   end
 
   private
-
-  def locale(date, format)
-    I18n.l(date, format: format)
-  end
 
   def zero_fill(field, size = 2)
     field.to_s.rjust(size, '0')
