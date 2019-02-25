@@ -15,7 +15,7 @@ class Speakerdeck
   def self.extract(url)
     begin
       record = MultiJson.load(
-        open("https://speakerdeck.com/oembed.json?url=#{url}")
+        URI.open("https://speakerdeck.com/oembed.json?url=#{url}")
       )
     rescue OpenURI::HTTPError
       record = nil
@@ -25,13 +25,14 @@ class Speakerdeck
   end
 
   def self.fields(record)
-    unless record.nil?
-      html_field = record['html']
-      title = record['title']
-      code = html_field.match(%r{player\/(.*)\" style})[1]
-      thumbnail = "https://speakerd.s3.amazonaws.com/presentations/#{code}/thumb_slide_0.jpg"
+    return if record.nil?
 
-      { title: title, code: code, thumbnail: thumbnail, description: '' }
-    end
+    html_field = record['html']
+    title = record['title']
+    code = html_field.match(%r{player\/(.*)\" style})[1]
+    url = 'https://speakerd.s3.amazonaws.com'
+    thumbnail = "#{url}/presentations/#{code}/thumb_slide_0.jpg"
+
+    { title: title, code: code, thumbnail: thumbnail, description: '' }
   end
 end

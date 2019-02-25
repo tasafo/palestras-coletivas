@@ -22,14 +22,14 @@ class Oembed
   end
 
   def fill(fields)
-    unless fields.blank?
-      @title = fields[:title]
-      @code = fields[:code]
-      @thumbnail = fields[:thumbnail]
-      @description = fields[:description]
+    return if fields.blank?
 
-      self
-    end
+    @title = fields[:title]
+    @code = fields[:code]
+    @thumbnail = fields[:thumbnail]
+    @description = fields[:description]
+
+    self
   end
 
   def show_presentation
@@ -48,18 +48,18 @@ class Oembed
   def show_video
     record = open_url
 
-    unless record.nil?
-      @title = record['title']
-      @frame = record['html']
+    return if record.nil?
 
-      self
-    end
+    @title = record['title']
+    @frame = record['html']
+
+    self
   end
 
   def open_url
     url = video_url
     begin
-      MultiJson.load(open(url)) if url
+      MultiJson.load(URI.open(url)) if url
     rescue OpenURI::HTTPError
       nil
     end

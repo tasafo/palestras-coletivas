@@ -25,14 +25,13 @@ class Prezi
   end
 
   def self.fields(record)
-    if !record.nil? && record['error_code'].nil?
-      title = record['presentation']['title']
-      code = record['presentation']['oid']
-      thumbnail = record['presentation']['thumb_url']
-      description = record['presentation']['description']
+    return unless !record.nil? && record['error_code'].nil?
 
-      { title: title, code: code, thumbnail: thumbnail,
-        description: description }
-    end
+    title = record['presentation']['title']
+    code = record['presentation']['oid']
+    thumbnail = record['presentation']['thumb_url']
+    description = record['presentation']['description']
+
+    { title: title, code: code, thumbnail: thumbnail, description: description }
   end
 end

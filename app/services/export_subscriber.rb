@@ -4,9 +4,12 @@ require 'csv'
 class ExportSubscriber
   def self.profiles
     [
-      [ I18n.t('titles.export_subscribers.profiles.speakers'), 'speakers' ],
-      [ I18n.t('titles.export_subscribers.profiles.organizers'), 'organizers' ],
-      [ I18n.t('titles.export_subscribers.profiles.participants'), 'participants' ]
+      [I18n.t('titles.export_subscribers.profiles.speakers'), 'speakers'],
+      [I18n.t('titles.export_subscribers.profiles.organizers'), 'organizers'],
+      [
+        I18n.t('titles.export_subscribers.profiles.participants'),
+        'participants'
+      ]
     ]
   end
 
@@ -24,8 +27,6 @@ class ExportSubscriber
     end
   end
 
-  private
-
   def self.speakers(event)
     users = []
 
@@ -35,7 +36,7 @@ class ExportSubscriber
       talk = schedule.talk
 
       talk.users.each do |user|
-        users << [ user.email, user.name, talk.title ]
+        users << [user.email, user.name, talk.title]
       end
     end
 
@@ -46,7 +47,7 @@ class ExportSubscriber
     users = []
 
     event.users.each do |user|
-      users << [ user.email, user.name ]
+      users << [user.email, user.name]
     end
 
     users
@@ -56,7 +57,7 @@ class ExportSubscriber
     users = []
 
     event.enrollments.with_user.each do |enrollment|
-      users << [ enrollment.user.email, enrollment.user.name ]
+      users << [enrollment.user.email, enrollment.user.name]
     end
 
     users

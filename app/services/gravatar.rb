@@ -33,9 +33,10 @@ class Gravatar
 
   def extract(profile)
     url = "#{profile}.xml"
+
     begin
-      Nokogiri::XML(open(url))
-    rescue
+      Nokogiri::XML(URI.open(url))
+    rescue OpenURI::HTTPError
       nil
     end
   end
