@@ -6,8 +6,10 @@ class EnrollmentPresenter
   def initialize(args = {})
     @user_id = args[:user].id if args.size == 1
 
+    return unless args.size > 1
+
     prepare_message args[:enrollment], args[:option_type],
-                    args[:authorized_edit], args[:user] if args.size > 1
+                    args[:authorized_edit], args[:user]
   end
 
   private
@@ -40,17 +42,17 @@ class EnrollmentPresenter
   end
 
   def option_present(enrollment)
-    if @can_record_presence
-      @user_id = enrollment.user.id
-      @user_name = enrollment.user.name
+    return unless @can_record_presence
 
-      if enrollment.present?
-        @button_message = I18n.t('show.event.undo_presence')
-      else
-        @type_message = 'text-success'
-        @option_value = true
-        @button_message = I18n.t('show.event.record_presence')
-      end
+    @user_id = enrollment.user.id
+    @user_name = enrollment.user.name
+
+    if enrollment.present?
+      @button_message = I18n.t('show.event.undo_presence')
+    else
+      @type_message = 'text-success'
+      @option_value = true
+      @button_message = I18n.t('show.event.record_presence')
     end
   end
 end

@@ -2,8 +2,7 @@
 class EventPresenter
   attr_reader :event, :grids, :authorized, :open_enrollment,
               :can_record_presence, :show_users_present, :users_present,
-              :users_active, :crowded, :new_subscription, :enrollment,
-              :can_vote
+              :users_active, :crowded, :new_subscription, :enrollment, :can_vote
 
   def initialize(event, authorized, user_logged_in = nil)
     prepare_event event, authorized, user_logged_in
@@ -59,22 +58,37 @@ class EventPresenter
   end
 
   def prepare_can_vote(event)
-    event && event.accepts_submissions && event.end_date >= Date.today
+    event&.accepts_submissions && event.end_date >= Date.today
   end
 
   def prepare_users(event)
-    presents, actives = [], []
+    hash = add_in_hash(event)
+    presents = hash[:presents]
+    actives = hash[:actives]
+
+    presents.sort_by!(&:slug)
+
+    actives.sort_by! { |user| user[:user].slug }
+
+    fields_hash(presents, actives)
+  end
+
+  def add_in_hash(event)
+    presents = []
+    actives = []
 
     event.enrollments.with_user.each do |enrollment|
       presents << enrollment.user if enrollment.present?
 
-      actives << { user: enrollment.user, enrollment: enrollment } if enrollment.active?
+      if enrollment.active?
+        actives << { user: enrollment.user, enrollment: enrollment }
+      end
     end
 
-    presents.sort_by! { |user| user._slugs[0] }
+    fields_hash(presents, actives)
+  end
 
-    actives.sort_by! { |user| user[:user]._slugs[0] }
-
+  def fields_hash(presents, actives)
     { presents: presents, actives: actives }
   end
 
@@ -106,10 +120,16 @@ class EventPresenter
   end
 
   def mount_grid(event)
-    grids = []
     dates = (event.start_date..event.end_date).to_a
 
-    schedules = event.schedules.with_relations.asc(:day).asc(:time).desc(:counter_votes)
+    schedules = event.schedules.with_relations.asc(:day).asc(:time)
+                     .desc(:counter_votes)
+
+    add_in_grid(dates, schedules)
+  end
+
+  def add_in_grid(dates, schedules)
+    grids = []
 
     dates.each_with_index do |date, index|
       selects = schedules.select { |schedule| schedule.day == index + 1 }
