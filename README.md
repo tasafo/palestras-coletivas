@@ -14,7 +14,7 @@ Linguagem Ruby com [RVM](http://rvm.io)
 
     curl -sSL https://get.rvm.io | bash -s stable
 
-    rvm install 2.5.0
+    rvm install 2.6.1
 
 Bancos de dados [MongoDB](https://www.mongodb.com/) e [Redis](https://redis.io/)
 
