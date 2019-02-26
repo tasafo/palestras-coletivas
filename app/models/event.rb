@@ -77,8 +77,8 @@ class Event
     day_two = zero_fill(date2.day)
 
     FullDate.new(date1: date1, date2: date2, date_of: date_of,
-                 date_to: date_to, date_format: date_format, day_one: day_one,
-                 day_two: day_two).convert
+                 date_to: date_to, date_format: date_format,
+                 day_one: day_one, day_two: day_two).convert
   end
 
   private
