@@ -2,36 +2,36 @@ dist: trusty
 sudo: false
 language: ruby
 rvm:
-  - 2.6.2
+- 2.6.2
 branches:
   only:
-    - master
+  - master
 env:
   global:
-    - MONGODB_HOST=localhost:27017
-    - REDIS_URL=redis://localhost:6379
+  - MONGODB_HOST=localhost:27017
+  - REDIS_URL=redis://localhost:6379
 services:
-  - mongodb
-  - redis-server
+- mongodb
+- redis-server
 addons:
   apt:
     packages:
-      - qt5-default
-      - libqt5webkit5-dev
-      - gstreamer1.0-plugins-base
-      - gstreamer1.0-tools
-      - gstreamer1.0-x
-      - xvfb
-      - libmagickwand-dev
+    - qt5-default
+    - libqt5webkit5-dev
+    - gstreamer1.0-plugins-base
+    - gstreamer1.0-tools
+    - gstreamer1.0-x
+    - xvfb
+    - libmagickwand-dev
   code_climate:
     repo_token: 6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493
 script:
-  - sudo sh -c "dbus-uuidgen > /etc/machine-id"
-  - xvfb-run -a bundle exec rails spec:coverage
+- sudo sh -c "dbus-uuidgen > /etc/machine-id"
+- xvfb-run -a bundle exec rails spec:coverage
 after_success:
-  - bundle exec codeclimate-test-reporter
+- bundle exec codeclimate-test-reporter
 deploy:
   provider: heroku
   app: palestrascoletivas
   api_key:
-    secure: Ywt596AjohWjOtt14gpnzG9kyLTp+fiOY6Z1i07PHhaiOyoIhv41u5r+yTDhJCjcDw8R+2yOzWBa8igoL+lgJDaw4nTUV+GnFVcW/noFB65LDyjIbvUXGvWdYIN1Y9SpVsm4D9l2WkSUJsyHvFVQOQ1kIJj4zEdxB6LVtnsJeic=
+    secure: D4u/2YKMuSvVrKFNbEWJjOqVTMuuDILS8GPjEVXiqQVjH3Tehz1tMY9hflsp3NzgVUYBPLRyZm0eLskzrVyrcitSX6qhKhf7f8G1f7vmS6eTtSIPFJkU1ysX/rBzJsK8qR3AIqsA4B0HTVPp13dP4cP1DN3WDPxvIDUaXzrD7Qo=
