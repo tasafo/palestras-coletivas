@@ -68,7 +68,6 @@ group :test do
   gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
   gem 'selenium-webdriver'
   gem 'simplecov', '0.16.1', require: false
-  gem 'codeclimate-test-reporter'
 end
 
 group :production do

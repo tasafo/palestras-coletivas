@@ -10,6 +10,7 @@ env:
   global:
   - MONGODB_HOST=localhost:27017
   - REDIS_URL=redis://localhost:6379
+  - CC_TEST_REPORTER_ID=6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493
 services:
 - mongodb
 - redis-server
@@ -23,13 +24,15 @@ addons:
     - gstreamer1.0-x
     - xvfb
     - libmagickwand-dev
-  code_climate:
-    repo_token: 6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493
+before_script:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- ./cc-test-reporter before-build
 script:
 - sudo sh -c "dbus-uuidgen > /etc/machine-id"
 - xvfb-run -a bundle exec rails spec:coverage
-after_success:
-- bundle exec codeclimate-test-reporter
+after_script:
+- ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
   provider: heroku
   app: palestrascoletivas
