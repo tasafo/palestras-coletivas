@@ -10,7 +10,6 @@ env:
   global:
   - MONGODB_HOST=localhost:27017
   - REDIS_URL=redis://localhost:6379
-  - CC_TEST_REPORTER_ID=6dc582455b3529d44dde0bf265ef5903a05cbbeb20341f4c6825bfaa7a111493
 services:
 - mongodb
 - redis-server
@@ -33,6 +32,7 @@ script:
 - xvfb-run -a bundle exec rails spec:coverage
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+- rm cc-test-reporter
 deploy:
   provider: heroku
   app: palestrascoletivas
