@@ -1,24 +1,22 @@
-# Palestras coletivas
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/cf2793af7e6bceef3b92/maintainability)](https://codeclimate.com/github/tasafo/palestras-coletivas/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/cf2793af7e6bceef3b92/test_coverage)](https://codeclimate.com/github/tasafo/palestras-coletivas/test_coverage) [![Build Status](https://travis-ci.org/tasafo/palestras-coletivas.svg?branch=master)](https://travis-ci.org/tasafo/palestras-coletivas) [![security](https://hakiri.io/github/tasafo/palestras-coletivas/master.svg)](https://hakiri.io/github/tasafo/palestras-coletivas/master)
+
+# Palestras coletivas
 
 Um ambiente para você organizar suas palestras, eventos e compartilhar conhecimento
 
-## Sistemas Operacionais [Debian](https://www.debian.org/) ou [Ubuntu](https://www.ubuntu.com/) Linux
-
 ### Ambiente de desenvolvimento
 
-#### Instalação
+#### Instalação (Sistemas Operacionais [Debian](https://www.debian.org/) ou [Ubuntu](https://www.ubuntu.com/) Linux)
 
-Linguagem Ruby com [RVM](http://rvm.io)
+Linguagem Ruby via [RVM](http://rvm.io)
 
     curl -sSL https://get.rvm.io | bash -s stable
 
-    rvm install 2.6.1
+    rvm install 2.6.3
 
-Bancos de dados [MongoDB](https://www.mongodb.com/) e [Redis](https://redis.io/)
+Inicia os bancos de dados [MongoDB](https://www.mongodb.com/) e [Redis](https://redis.io/) instalados via [Docker compose](https://docs.docker.com/compose/)
 
-    sudo apt-get install mongodb redis-server
+    docker-compose up
 
 Bibliotecas para executar testes de aceitação com [Capybara](https://github.com/thoughtbot/capybara-webkit)
 
@@ -44,7 +42,7 @@ Faz o download das bibliotecas requeridas pelo projeto
 
 Copie o exemplo e depois edite o arquivo de configurações
 
-    cp .env.example .env
+    cp .env-development .env
 
 Insere registros do arquivo db/seed.rb no banco de dados
 
@@ -73,6 +71,8 @@ Executa a bateria de testes com a geração do relatório de cobertura, gravado 
     rails spec:coverage
 
 ### Ambiente de produção
+
+Configurar as variáveis de ambiente baseadas no arquivo `.env-production`
 
 Deve ser gerado o token de segurança
 
