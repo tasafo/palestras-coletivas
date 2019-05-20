@@ -23,6 +23,9 @@ addons:
     - gstreamer1.0-x
     - xvfb
     - libmagickwand-dev
+before_install:
+- "echo 'gem: --no-document' > ~/.gemrc"
+- "echo '--colour' > ~/.rspec"
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
@@ -32,7 +35,6 @@ script:
 - xvfb-run -a bundle exec rails spec:coverage
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-- rm cc-test-reporter
 deploy:
   provider: heroku
   app: palestrascoletivas

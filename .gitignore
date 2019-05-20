@@ -22,4 +22,5 @@ public/uploads
 .DS_Store
 .ruby-version
 .ruby-gemset
-start-servers.sh
+start.sh
+cc-test-reporter
