@@ -18,9 +18,9 @@ Inicia os bancos de dados [MongoDB](https://www.mongodb.com/) e [Redis](https://
 
     docker-compose up
 
-Bibliotecas para executar testes de aceitação com [Capybara](https://github.com/thoughtbot/capybara-webkit)
+Para executar testes de aceitação com [Capybara](https://github.com/thoughtbot/capybara-webkit)
 
-    sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+    sudo apt-get install chromium-browser
 
 O [Genghisapp](http://genghisapp.com/) gerencia os bancos do MongoDB
 

@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/thoughtbot/capybara-webkit.git
-  revision: 77fdac424cd6fdb5aa266b229a888cc58da8e95e
-  specs:
-    capybara-webkit (1.15.1)
-      capybara (>= 2.3, < 4.0)
-      json
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -92,8 +84,7 @@ GEM
       mongoid-grid_fs (>= 1.3, < 3.0)
     case_transform (0.2)
       activesupport
-    childprocess (1.0.1)
-      rake (< 13.0)
+    cliver (0.3.2)
     cloudinary (1.9.1)
       aws_cf_signer
       rest-client
@@ -103,6 +94,10 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
+    cuprite (0.6.0)
+      capybara (>= 2.1, < 4)
+      cliver (~> 0.3)
+      websocket-driver (>= 0.6, < 0.8)
     database_cleaner (1.7.0)
     diff-lcs (1.3)
     docile (1.3.1)
@@ -274,7 +269,6 @@ GEM
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
     ruby_dep (1.5.0)
-    rubyzip (1.2.2)
     safe_yaml (1.0.5)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -282,9 +276,6 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     scout_apm (2.4.24)
-    selenium-webdriver (3.142.2)
-      childprocess (>= 0.5, < 2.0)
-      rubyzip (~> 1.2, >= 1.2.2)
     serviceworker-rails (0.5.5)
       railties (>= 3.1)
     sidekiq (5.2.7)
@@ -355,10 +346,10 @@ DEPENDENCIES
   bootsnap
   bullet
   capybara
-  capybara-webkit!
   carrierwave-i18n
   carrierwave-mongoid
   cloudinary (= 1.9.1)
+  cuprite
   database_cleaner
   dotenv-rails
   factory_bot_rails
@@ -386,7 +377,6 @@ DEPENDENCIES
   rspec-mocks
   rspec-rails
   scout_apm
-  selenium-webdriver
   serviceworker-rails
   sidekiq
   simplecov (= 0.16.1)

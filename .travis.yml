@@ -1,4 +1,4 @@
-dist: trusty
+dist: xenial
 sudo: false
 language: ruby
 rvm:
@@ -16,13 +16,8 @@ services:
 addons:
   apt:
     packages:
-    - qt5-default
-    - libqt5webkit5-dev
-    - gstreamer1.0-plugins-base
-    - gstreamer1.0-tools
-    - gstreamer1.0-x
-    - xvfb
     - libmagickwand-dev
+    - google-chrome-stable
 before_install:
 - "echo 'gem: --no-document' > ~/.gemrc"
 - "echo '--colour' > ~/.rspec"
@@ -31,8 +26,7 @@ before_script:
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
 script:
-- sudo sh -c "dbus-uuidgen > /etc/machine-id"
-- xvfb-run -a bundle exec rails spec:coverage
+- bundle exec rails spec:coverage
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:

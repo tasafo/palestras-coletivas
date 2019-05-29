@@ -65,8 +65,7 @@ group :test do
   gem 'rake'
   gem 'launchy'
   gem 'capybara'
-  gem 'capybara-webkit', github: 'thoughtbot/capybara-webkit'
-  gem 'selenium-webdriver'
+  gem 'cuprite'
   gem 'simplecov', '0.16.1', require: false
 end
 

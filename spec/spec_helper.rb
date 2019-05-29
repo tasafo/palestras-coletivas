@@ -5,6 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 require 'rspec/rails'
 require 'capybara/rspec'
+require 'capybara/cuprite'
 require 'webmock/rspec'
 require 'database_cleaner'
 
@@ -23,12 +24,11 @@ RSpec.configure do |config|
 
   Capybara.default_max_wait_time = 5
 
-  Capybara.javascript_driver = :webkit
-
-  Capybara::Webkit.configure do |conf|
-    conf.debug = false
-    conf.block_unknown_urls
+  Capybara.register_driver :cuprite do |app|
+    Capybara::Cuprite::Driver.new(app, headless: true)
   end
+
+  Capybara.javascript_driver = :cuprite
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
