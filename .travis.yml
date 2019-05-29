@@ -13,11 +13,6 @@ env:
 services:
 - mongodb
 - redis-server
-addons:
-  apt:
-    packages:
-    - libmagickwand-dev
-    - google-chrome-stable
 before_install:
 - "echo 'gem: --no-document' > ~/.gemrc"
 - "echo '--colour' > ~/.rspec"
