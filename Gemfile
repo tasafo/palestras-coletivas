@@ -11,7 +11,7 @@ gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'kaminari'
 gem 'kaminari-mongoid'
-gem 'airbrake', '~> 6.1'
+gem 'airbrake', '~> 9.2'
 gem 'active_model_serializers'
 
 gem 'mongoid', '~> 7.0'

@@ -49,9 +49,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (6.3.0)
-      airbrake-ruby (~> 2.4)
-    airbrake-ruby (2.12.0)
+    airbrake (9.2.2)
+      airbrake-ruby (~> 4.4)
+    airbrake-ruby (4.4.0)
+      rbtree3 (~> 0.5)
     arel (9.0.0)
     autoprefixer-rails (9.5.1.1)
       execjs
@@ -245,6 +246,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    rbtree3 (0.5.0)
     redis (4.1.1)
     regexp_parser (1.5.0)
     rest-client (2.0.2)
@@ -341,7 +343,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  airbrake (~> 6.1)
+  airbrake (~> 9.2)
   bcrypt
   bootsnap
   bullet
