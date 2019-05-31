@@ -85,7 +85,7 @@ GEM
     case_transform (0.2)
       activesupport
     cliver (0.3.2)
-    cloudinary (1.9.1)
+    cloudinary (1.11.1)
       aws_cf_signer
       rest-client
     coderay (1.1.2)
@@ -348,7 +348,7 @@ DEPENDENCIES
   capybara
   carrierwave-i18n
   carrierwave-mongoid
-  cloudinary (= 1.9.1)
+  cloudinary (= 1.11.1)
   cuprite
   database_cleaner
   dotenv-rails
