@@ -2,10 +2,6 @@ dist: bionic
 sudo: false
 language: ruby
 rvm: 2.6.3
-env:
-  global:
-  - MONGODB_HOST=localhost:27017
-  - REDIS_URL=redis://localhost:6379
 services:
 - mongodb
 - redis-server
