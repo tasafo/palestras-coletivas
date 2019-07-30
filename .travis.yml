@@ -1,11 +1,7 @@
-dist: xenial
+dist: bionic
 sudo: false
 language: ruby
-rvm:
-- 2.6.3
-branches:
-  only:
-  - master
+rvm: 2.6.3
 env:
   global:
   - MONGODB_HOST=localhost:27017
@@ -13,19 +9,22 @@ env:
 services:
 - mongodb
 - redis-server
-before_install:
-- "echo 'gem: --no-document' > ~/.gemrc"
-- "echo '--colour' > ~/.rspec"
+cache:
+  bundler: true
+bundler_args: --without production
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
 script:
 - bundle exec rails spec:coverage
-after_script:
+after_success:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:
   provider: heroku
   app: palestrascoletivas
+  skip_cleanup: true
+  on:
+    branch: master
   api_key:
     secure: D4u/2YKMuSvVrKFNbEWJjOqVTMuuDILS8GPjEVXiqQVjH3Tehz1tMY9hflsp3NzgVUYBPLRyZm0eLskzrVyrcitSX6qhKhf7f8G1f7vmS6eTtSIPFJkU1ysX/rBzJsK8qR3AIqsA4B0HTVPp13dP4cP1DN3WDPxvIDUaXzrD7Qo=
