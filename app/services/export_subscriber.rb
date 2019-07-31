@@ -44,22 +44,12 @@ class ExportSubscriber
   end
 
   def self.organizers(event)
-    users = []
-
-    event.users.each do |user|
-      users << [user.email, user.name]
-    end
-
-    users
+    event.users.map { |user| [user.email, user.name] }
   end
 
   def self.participants(event)
-    users = []
-
-    event.enrollments.with_user.each do |enrollment|
-      users << [enrollment.user.email, enrollment.user.name]
+    event.enrollments.with_user.map do |enrollment|
+      [enrollment.user.email, enrollment.user.name]
     end
-
-    users
   end
 end

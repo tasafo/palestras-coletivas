@@ -1,17 +1,17 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe "Logout", :type => :request do
-  context "when logged in" do
+describe 'Logout', type: :request do
+  context 'when logged in' do
     let!(:user) { create(:user, :paul) }
 
     before do
       login_as user
 
       visit root_path
-      first(".link-logout").click
+      first('.link-logout').click
     end
 
-    it "redirects to home page" do
+    it 'redirects to home page' do
       expect(current_path).to eql(root_path)
     end
 
@@ -20,12 +20,12 @@ describe "Logout", :type => :request do
     end
   end
 
-  context "when unlogged" do
+  context 'when unlogged' do
     before do
       visit logout_path
     end
 
-    it "redirects to home page" do
+    it 'redirects to home page' do
       expect(current_path).to eql(root_path)
     end
   end

@@ -1,16 +1,16 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe "Delete event", type: :request, js: true do
+describe 'Delete event', type: :request, js: true do
   let!(:user) { create(:user, :paul) }
-  let!(:event) { create(:event, :tasafoconf, owner: user, users: [ user ]) }
+  let!(:event) { create(:event, :tasafoconf, owner: user, users: [user]) }
 
-  context "without restriction" do
+  context 'without restriction' do
     before do
       login_as(user)
 
-      click_link("Eventos", match: :first)
+      visit events_path
 
-      click_link "Tá Safo Conf"
+      click_link 'Tá Safo Conf'
 
       click_with_alert "delete_event_id_#{event._slugs.first}"
     end
@@ -25,16 +25,16 @@ describe "Delete event", type: :request, js: true do
   end
 
   context 'with restriction' do
-    let!(:event) { create(:event, :tasafoconf, owner: user, users: [ user ]) }
-    let!(:talk) { create(:talk, users: [ user ], owner: user) }
+    let!(:event) { create(:event, :tasafoconf, owner: user, users: [user]) }
+    let!(:talk) { create(:talk, users: [user], owner: user) }
     let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
 
     before do
-      login_as user
+      login_as(user)
 
-      click_link("Eventos", match: :first)
+      visit events_path
 
-      click_link "Tá Safo Conf"
+      click_link 'Tá Safo Conf'
 
       click_with_alert "delete_event_id_#{event._slugs.first}"
     end

@@ -1,4 +1,4 @@
-shared_examples "a rateable" do
+shared_examples 'a rateable' do
   let!(:user) { create(:user, :paul) }
   let!(:guest) { create(:user, :billy) }
 
@@ -7,8 +7,8 @@ shared_examples "a rateable" do
     visit rateable_path
   end
 
-  context "when a user add a rating" do
-    it "calculates rating for rateable" do
+  context 'when a user add a rating' do
+    it 'calculates rating for rateable' do
       add_rating(2.5)
       rateable.reload
       expect(rateable.ratings.size).to be == 1
@@ -27,19 +27,19 @@ shared_examples "a rateable" do
       assert_rating (3 + 4) / 2.0
     end
 
-    def assert_rating rating
+    def assert_rating(rating)
       expect(rateable.rating).to be == rating
-      #expect(page).to have_selector(".rating .readonly[checked='checked'][value='#{rating}']")
+      # expect(page).to have_selector(".rating .readonly[checked='checked'][value='#{rating}']")
       expect(page.has_checked_field?("rate_my_rating_#{(rating * 10).to_i}"))
     end
 
-    def add_rating rating
+    def add_rating(rating)
       find(".rating_form .star-rating a[title='#{rating}']").click
       visit rateable_path
     end
 
-    def login_as_other_user user
-      visit("/logout")
+    def login_as_other_user(user)
+      visit('/logout')
       login_as(user)
       visit rateable_path
     end

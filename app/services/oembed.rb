@@ -1,3 +1,5 @@
+require 'multi_json'
+
 #:nodoc:
 class Oembed
   attr_reader :url, :title, :code, :thumbnail, :frame, :description
