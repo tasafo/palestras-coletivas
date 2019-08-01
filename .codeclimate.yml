@@ -24,7 +24,6 @@ exclude_paths:
 - doc/**/*
 - lib/**/*
 - public/**/*
-- spec/**/*
 - vendor/**/*
 - .codeclimate.yml
 - .env-*
