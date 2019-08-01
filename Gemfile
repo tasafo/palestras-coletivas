@@ -38,7 +38,7 @@ gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'carrierwave-i18n'
 gem 'cloudinary', '1.9.1'
 
-gem "serviceworker-rails"
+gem 'serviceworker-rails'
 
 gem 'meta-tags'
 
@@ -64,8 +64,8 @@ group :test do
   gem 'webmock'
   gem 'rake'
   gem 'launchy'
-  gem 'capybara'
-  gem 'cuprite'
+  gem 'capybara', '3.27.0'
+  gem 'cuprite', '0.6.0'
   gem 'simplecov', '0.16.1', require: false
 end
 
