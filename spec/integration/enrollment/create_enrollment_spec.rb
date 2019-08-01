@@ -18,9 +18,8 @@ describe 'Create enrollment', type: :request, js: true do
 
   context 'when logged' do
     before do
-      login_as other_user, events_path
+      login_as other_user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link 'Quero participar!'
       click_button 'Quero participar'
     end
@@ -36,9 +35,8 @@ describe 'Create enrollment', type: :request, js: true do
 
   context 'when unlogged' do
     before do
-      visit events_path
+      visit event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link 'Quero participar!'
     end
 
@@ -52,9 +50,8 @@ describe 'Create enrollment', type: :request, js: true do
 
     context 'when user do log in' do
       before do
-        visit events_path
+        visit event_path(event)
 
-        click_link 'Tá Safo Conf'
         click_link 'Quero participar!'
 
         fill_in 'Seu e-mail', with: other_user.email
@@ -70,9 +67,8 @@ describe 'Create enrollment', type: :request, js: true do
 
     context 'when user do log in and enrollment has held' do
       before do
-        visit events_path
+        visit event_path(event)
 
-        click_link 'Tá Safo Conf'
         click_link 'Quero participar!'
 
         fill_in 'Seu e-mail', with: another_user.email
@@ -94,9 +90,7 @@ describe 'Create enrollment', type: :request, js: true do
 
   context 'when the user is organizer' do
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
+      login_as user, event_path(event)
     end
 
     it 'redirects to the event page' do

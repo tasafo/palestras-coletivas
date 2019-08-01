@@ -15,9 +15,8 @@ describe 'Submit talk already created', type: :request, js: true do
 
   context 'when valid data' do
     before do
-      login_as user, talks_path
+      login_as user, talk_path(talk)
 
-      click_link 'Compartilhe'
       click_link 'Submeter a um evento'
 
       select event.name, from: 'submit_event_event_id'

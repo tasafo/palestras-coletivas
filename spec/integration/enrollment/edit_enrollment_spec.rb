@@ -21,9 +21,8 @@ describe 'Edit enrollment', type: :request, js: true do
 
   context 'when the enrollment is active' do
     before do
-      login_as other_user, events_path
+      login_as other_user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link 'Cancelar minha participação'
 
       click_button 'Alterar participação'
@@ -40,9 +39,8 @@ describe 'Edit enrollment', type: :request, js: true do
 
   context 'when the enrollment is inactive' do
     before do
-      login_as another_user, events_path
+      login_as another_user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link 'Quero participar!'
 
       click_button 'Alterar participação'

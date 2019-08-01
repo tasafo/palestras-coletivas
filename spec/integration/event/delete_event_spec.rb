@@ -23,16 +23,13 @@ describe 'Delete event', type: :request, js: true do
   end
 
   context 'with restriction' do
-    let!(:event) { create(:event, :tasafoconf, owner: user, users: [user]) }
     let!(:talk) { create(:talk, users: [user], owner: user) }
     let!(:schedule_palestra) do
       create(:schedule, :palestra, event: event, talk: talk)
     end
 
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
+      login_as user, event_path(event)
 
       click_with_alert "delete_event_id_#{event._slugs.first}"
     end

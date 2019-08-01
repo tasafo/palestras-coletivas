@@ -28,9 +28,8 @@ describe 'Remove vote in schedule', type: :request, js: true do
 
   context 'with valid data' do
     before do
-      login_as user, events_path
+      login_as user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link "remove_vote_schedule_id_#{schedule_palestra.id}"
     end
 

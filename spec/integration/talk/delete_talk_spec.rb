@@ -6,9 +6,7 @@ describe 'Delete talk', type: :request, js: true do
 
   context 'without restriction' do
     before do
-      login_as user, talks_path
-
-      click_link 'Compartilhe'
+      login_as user, talk_path(talk)
 
       click_with_alert "delete_talk_id_#{talk._slugs.first}"
     end
@@ -30,9 +28,7 @@ describe 'Delete talk', type: :request, js: true do
     end
 
     before do
-      login_as user, talks_path
-
-      click_link 'Compartilhe'
+      login_as user, talk_path(talk)
 
       click_with_alert "delete_talk_id_#{talk._slugs.first}"
     end

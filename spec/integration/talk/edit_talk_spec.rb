@@ -12,9 +12,8 @@ describe 'Edit talk', type: :request, js: true do
 
   context 'with valid data' do
     before do
-      login_as user, talks_path
+      login_as user, talk_path(talk)
 
-      click_link 'Compartilhe'
       click_link 'Editar palestra'
 
       fill_in 'Título', with: 'Ruby praticamente falando'
@@ -47,9 +46,8 @@ describe 'Edit talk', type: :request, js: true do
 
   context 'with invalid data' do
     before do
-      login_as user, talks_path
+      login_as user, talk_path(talk)
 
-      click_link 'Compartilhe'
       click_link 'Editar palestra'
 
       fill_in 'Título', with: ''
