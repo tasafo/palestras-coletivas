@@ -6,9 +6,7 @@ describe 'Delete event', type: :request, js: true do
 
   context 'without restriction' do
     before do
-      login_as(user)
-
-      visit events_path
+      login_as user, events_path
 
       click_link 'Tá Safo Conf'
 
@@ -27,12 +25,12 @@ describe 'Delete event', type: :request, js: true do
   context 'with restriction' do
     let!(:event) { create(:event, :tasafoconf, owner: user, users: [user]) }
     let!(:talk) { create(:talk, users: [user], owner: user) }
-    let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
+    let!(:schedule_palestra) do
+      create(:schedule, :palestra, event: event, talk: talk)
+    end
 
     before do
-      login_as(user)
-
-      visit events_path
+      login_as user, events_path
 
       click_link 'Tá Safo Conf'
 

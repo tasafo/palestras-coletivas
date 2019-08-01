@@ -6,6 +6,7 @@ describe 'Send password resets', type: :request do
   context 'when valid data' do
     before do
       visit login_path
+
       click_link 'Esqueceu a senha?'
 
       fill_in 'Seu e-mail', with: user.email
@@ -18,13 +19,15 @@ describe 'Send password resets', type: :request do
     end
 
     it 'displays success message' do
-      expect(page).to have_content('E-mail enviado com as instruções de redefinição de senha.')
+      expect(page)
+        .to have_content('E-mail enviado com as instruções de redefinição')
     end
   end
 
   context 'when invalid data' do
     before do
       visit login_path
+
       click_link 'Esqueceu a senha?'
 
       fill_in 'Seu e-mail', with: 'notfound@mail.com'

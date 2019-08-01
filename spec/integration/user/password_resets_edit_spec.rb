@@ -6,7 +6,6 @@ describe 'Edit password resets', type: :request do
 
   context 'when valid data' do
     before do
-      visit root_path
       visit edit_password_reset_url(user.password_reset_token)
 
       fill_in 'Sua senha', with: 'newpassword'
@@ -26,7 +25,6 @@ describe 'Edit password resets', type: :request do
 
   context 'when invalid data' do
     before do
-      visit root_path
       visit edit_password_reset_url(user.password_reset_token)
 
       fill_in 'Sua senha', with: 'newpassword'
@@ -36,13 +34,13 @@ describe 'Edit password resets', type: :request do
     end
 
     it 'renders to the edit page' do
-      expect(current_path).to eql(password_reset_path(user.password_reset_token))
+      expect(current_path)
+        .to eql(password_reset_path(user.password_reset_token))
     end
   end
 
   context 'when the password has expired' do
     before do
-      visit root_path
       visit edit_password_reset_url(other_user.password_reset_token)
 
       fill_in 'Sua senha', with: 'newpassword'

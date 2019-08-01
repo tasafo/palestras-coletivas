@@ -6,9 +6,7 @@ describe 'See talks', type: :request do
 
   context 'with two talks' do
     before do
-      login_as(user)
-
-      visit talks_path
+      login_as user, talks_path
     end
 
     it 'redirects to the home page' do

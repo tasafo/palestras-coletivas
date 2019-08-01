@@ -16,9 +16,8 @@ describe 'Show private event', type: :request, js: true do
 
   context 'when logged' do
     before do
-      login_as(user)
+      login_as user, events_path
 
-      visit events_path
       click_link 'Meus eventos'
       click_link 'Tá Safo Conf'
     end
@@ -34,7 +33,6 @@ describe 'Show private event', type: :request, js: true do
 
   context 'when unlogged' do
     before do
-      visit root_path
       visit event_path(event)
     end
 

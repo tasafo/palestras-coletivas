@@ -4,15 +4,17 @@ describe 'Submit talk', type: :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:activity_palestra) { create(:activity, :palestra) }
-  let!(:event) { create(:event, :tasafoconf, owner: user, start_date: Date.today, end_date: Date.today + 5.days, accepts_submissions: true) }
+  let!(:event) do
+    create(:event, :tasafoconf, owner: user, start_date: Date.today,
+                                end_date: Date.today + 5.days,
+                                accepts_submissions: true)
+  end
   let!(:schedule_abertura) { create(:schedule, :abertura, event: event) }
 
   context 'when valid data' do
     before do
-      login_as user
+      login_as user, talk_path(talk)
 
-      visit talks_path
-      click_link 'Compartilhe'
       click_link 'Submeter a um evento'
 
       select event.name, from: 'submit_event_event_id'

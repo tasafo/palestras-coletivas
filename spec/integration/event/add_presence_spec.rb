@@ -3,7 +3,10 @@ require 'spec_helper'
 describe 'add presence', type: :request, js: true do
   let(:user) { create(:user, :paul) }
   let(:billy) { create(:user, :billy) }
-  let(:event) { create(:event, :tasafoconf, owner: billy, start_date: Date.today, end_date: Date.today) }
+  let(:event) do
+    create(:event, :tasafoconf, owner: billy, start_date: Date.today,
+                                end_date: Date.today)
+  end
 
   before do
     login_as(user)
@@ -15,14 +18,20 @@ describe 'add presence', type: :request, js: true do
     end
 
     it 'does not show button' do
-      expect(page).not_to have_content(I18n.t('show.event.btn_presence_checkin'))
+      expect(page)
+        .not_to have_content(I18n.t('show.event.btn_presence_checkin'))
     end
   end
 
   context 'when user is present' do
+    let!(:enrollment) do
+      create(:enrollment, user: user, event: event, active: true,
+                          present: false)
+    end
+
     before do
-      Enrollment.create!(user: user, event: event, active: true, present: false)
       visit event_path(event)
+
       click_link 'Registrar entrada'
     end
 

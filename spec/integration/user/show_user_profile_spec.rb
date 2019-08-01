@@ -6,7 +6,6 @@ describe 'Show user profile', type: :request do
 
   context 'when user valid' do
     before do
-      visit root_path
       visit user_path(user)
     end
 
@@ -21,7 +20,6 @@ describe 'Show user profile', type: :request do
 
   context 'when user invalid' do
     before do
-      visit root_path
       visit '/users/00000111111000000111111'
     end
 
@@ -32,7 +30,6 @@ describe 'Show user profile', type: :request do
 
   context 'when the user does not have e-mail at Gravatar' do
     before do
-      visit root_path
       visit user_path(other_user)
     end
 

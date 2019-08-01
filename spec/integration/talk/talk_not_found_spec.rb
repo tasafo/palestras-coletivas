@@ -3,18 +3,10 @@ require 'spec_helper'
 describe 'Talk not found', type: :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
-  let!(:talk) do
-    create(
-      :talk,
-      to_public: false,
-      users: [user],
-      owner: user
-    )
-  end
+  let!(:talk) { create(:talk, to_public: false, users: [user], owner: user) }
 
   context 'when talk does not exist' do
     before do
-      visit root_path
       visit '/talks/00000111111000000111111'
     end
 
@@ -29,8 +21,7 @@ describe 'Talk not found', type: :request do
 
   context 'when the user is logged and the talk is not public' do
     before do
-      login_as other_user
-      visit talk_path(talk)
+      login_as other_user, talk_path(talk)
     end
 
     it 'redirects to the talks page' do

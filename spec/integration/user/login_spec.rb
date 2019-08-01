@@ -21,6 +21,7 @@ describe 'Login', type: :request do
   context 'with invalid credentials' do
     before do
       visit login_path
+
       click_button 'Acessar minha conta'
     end
 

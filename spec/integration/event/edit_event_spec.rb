@@ -18,16 +18,15 @@ describe 'Edit event', type: :request, js: true do
 
   context 'with valid data' do
     before do
-      login_as(user)
+      login_as user, events_path
 
-      visit events_path
       click_link 'Tá Safo Conf'
       click_link 'Editar evento'
 
       fill_in 'Nome', with: 'Confraternização do Tá safo!'
       fill_in 'Tags', with: 'agilidade, gestão'
 
-      click_button :"user_id_#{other_user.id}"
+      click_button "user_id_#{other_user.id}"
 
       click_button 'Atualizar evento'
     end
@@ -43,9 +42,8 @@ describe 'Edit event', type: :request, js: true do
 
   context 'with invalid data' do
     before do
-      login_as(user)
+      login_as user, events_path
 
-      visit events_path
       click_link 'Tá Safo Conf'
       click_link 'Editar evento'
 
@@ -65,8 +63,7 @@ describe 'Edit event', type: :request, js: true do
 
   context 'when the event is not user' do
     before do
-      login_as(another_user)
-      visit edit_event_path(event)
+      login_as another_user, edit_event_path(event)
     end
 
     it 'redirects to the events page' do
@@ -74,7 +71,8 @@ describe 'Edit event', type: :request, js: true do
     end
 
     it 'displays error messages' do
-      expect(page).to have_content('Você não tem permissão para acessar esta página.')
+      expect(page)
+        .to have_content('Você não tem permissão para acessar esta página.')
     end
   end
 end

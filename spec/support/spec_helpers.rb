@@ -1,9 +1,12 @@
 module SpecHelpers
-  def login_as(user)
-    visit login_path
+  def login_as(user, redirect = nil)
+    redirect = redirect.nil? ? '' : "?redirect=#{redirect}"
+
+    visit "/login#{redirect}"
 
     fill_in 'Seu e-mail', with: user.email
     fill_in 'Sua senha', with: 'testdrive'
+
     click_button 'Acessar minha conta'
   end
 

@@ -15,7 +15,6 @@ describe 'Event not found', type: :request do
 
   context 'when event does not exist' do
     before do
-      visit root_path
       visit '/events/00000111111000000111111'
     end
 
@@ -30,8 +29,7 @@ describe 'Event not found', type: :request do
 
   context 'when the user is logged and the event is not public' do
     before do
-      login_as other_user
-      visit event_path(event)
+      login_as other_user, event_path(event)
     end
 
     it 'redirects to the events page' do

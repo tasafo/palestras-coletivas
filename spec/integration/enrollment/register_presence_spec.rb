@@ -17,16 +17,20 @@ describe 'Register presence', type: :request do
     )
   end
 
-  let!(:enrollment_billy) { create(:enrollment, event: event, user: other_user) }
-  let!(:enrollment_luis) { create(:enrollment, present: true, event: event, user: another_user) }
+  let!(:enrollment_billy) do
+    create(:enrollment, event: event, user: other_user)
+  end
+  let!(:enrollment_luis) do
+    create(:enrollment, present: true, event: event, user: another_user)
+  end
 
   context 'when the user is not present' do
     before do
-      login_as(user)
+      login_as user, events_path
 
-      visit events_path
       click_link 'Tá Safo Conf'
       click_link "user_id_#{other_user.id}"
+
       click_button 'Alterar participação'
     end
 
@@ -41,11 +45,11 @@ describe 'Register presence', type: :request do
 
   context 'when the user is already present' do
     before do
-      login_as(user)
+      login_as user, events_path
 
-      visit events_path
       click_link 'Tá Safo Conf'
       click_link "user_id_#{another_user.id}"
+
       click_button 'Alterar participação'
     end
 
@@ -60,10 +64,10 @@ describe 'Register presence', type: :request do
 
   context 'when the user does not have permission' do
     before do
-      login_as(other_user)
+      login_as other_user, events_path
 
-      visit events_path
       click_link 'Tá Safo Conf'
+
       visit edit_event_enrollment_path(event, :present, enrollment_luis)
     end
 
@@ -72,7 +76,8 @@ describe 'Register presence', type: :request do
     end
 
     it 'displays error message' do
-      expect(page).to have_content('Você não tem permissão para acessar esta página.')
+      expect(page)
+        .to have_content('Você não tem permissão para acessar esta página.')
     end
   end
 end

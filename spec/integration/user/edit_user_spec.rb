@@ -3,14 +3,14 @@ require 'spec_helper'
 describe 'Edit user', type: :request do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
+  let!(:image_path) { "#{Rails.root}/app/assets/images/without_avatar.jpg" }
 
   context 'with valid data' do
     before do
-      login_as user
-      visit edit_user_path(user)
+      login_as user, edit_user_path(user)
 
       fill_in 'Seu nome', with: 'Carl Simon'
-      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
+      attach_file('Foto', File.absolute_path(image_path))
 
       click_button 'Atualizar dados'
     end
@@ -26,11 +26,10 @@ describe 'Edit user', type: :request do
 
   context 'with invalid data' do
     before do
-      login_as user
-      visit edit_user_path(user)
+      login_as user, edit_user_path(user)
 
       fill_in 'Seu nome', with: ''
-      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
+      attach_file('Foto', File.absolute_path(image_path))
 
       click_button 'Atualizar dados'
     end
@@ -46,8 +45,7 @@ describe 'Edit user', type: :request do
 
   context 'when the current user is not user' do
     before do
-      login_as(other_user)
-      visit edit_user_path(user)
+      login_as other_user, edit_user_path(user)
     end
 
     it 'redirects to the home page' do
@@ -57,12 +55,11 @@ describe 'Edit user', type: :request do
 
   context 'with valid password' do
     before do
-      login_as user
-      visit edit_user_path(user)
+      login_as user, edit_user_path(user)
 
       fill_in 'Sua senha', with: 'newpassword'
       fill_in 'Confirme sua senha', with: 'newpassword'
-      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
+      attach_file('Foto', File.absolute_path(image_path))
 
       click_button 'Atualizar dados'
     end
@@ -78,12 +75,11 @@ describe 'Edit user', type: :request do
 
   context 'with invalid password' do
     before do
-      login_as user
-      visit edit_user_path(user)
+      login_as user, edit_user_path(user)
 
       fill_in 'Sua senha', with: 'newpassword'
       fill_in 'Confirme sua senha', with: 'otherpassword'
-      attach_file('Foto', File.absolute_path("#{Rails.root}/app/assets/images/without_avatar.jpg"))
+      attach_file('Foto', File.absolute_path(image_path))
 
       click_button 'Atualizar dados'
     end

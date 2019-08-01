@@ -4,12 +4,14 @@ describe 'Edit external event of talk', type: :request do
   let!(:user) { create(:user, :paul) }
   let!(:fisl) { build(:external_event, :fisl) }
   let!(:rubyconf) { build(:external_event, :rubyconf) }
-  let!(:talk) { create(:talk, users: [user], owner: user, external_events: [fisl, rubyconf]) }
+  let!(:talk) do
+    create(:talk, users: [user], owner: user, external_events: [fisl, rubyconf])
+  end
 
   context 'when valid data' do
     before do
-      login_as user
-      visit talks_path
+      login_as user, talks_path
+
       click_link 'Compartilhe'
       click_link "external_event_id_#{fisl.id}"
 
@@ -29,8 +31,8 @@ describe 'Edit external event of talk', type: :request do
 
   context 'when invalid data' do
     before do
-      login_as user
-      visit talks_path
+      login_as user, talks_path
+
       click_link 'Compartilhe'
       click_link "external_event_id_#{fisl.id}"
 

@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe 'View ranking', type: :request do
   before do
-    visit root_path
     visit ranking_path
   end
 

@@ -1,24 +1,29 @@
 require 'spec_helper'
 
 describe 'Edit talk', type: :request, js: true do
-  let!(:user)   { create(:user, :paul) }
-  let!(:billy)  { create(:user, :billy, username: '@username_billy', name: 'Billy Boy') }
-  let!(:luis)   { create(:user, :luis, username: '@username_luis', name: 'Luis XIV') }
-  let!(:talk)   { create(:talk, users: [user, luis], owner: user) }
+  let!(:user) { create(:user, :paul) }
+  let!(:billy) do
+    create(:user, :billy, username: '@user_billy', name: 'Billy Boy')
+  end
+  let!(:luis) do
+    create(:user, :luis, username: '@user_luis', name: 'Luis XIV')
+  end
+  let!(:talk) { create(:talk, users: [user, luis], owner: user) }
 
   context 'with valid data' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Compartilhe'
       click_link 'Editar palestra'
 
       fill_in 'Título', with: 'Ruby praticamente falando'
-      fill_in 'Descrição', with: 'Palestra que fala sobre a linguagem de programação ruby'
+      fill_in 'Descrição',
+              with: 'Palestra que fala sobre a linguagem de programação ruby'
       fill_in 'Tags', with: 'ruby, programação'
 
-      fill_autocomplete('invitee_username', with: '@us', select: 'Billy Boy (@username_billy)')
+      fill_autocomplete('invitee_username', with: '@us',
+                                            select: 'Billy Boy (@user_billy)')
       click_button :add_user
 
       click_button "user_id_#{luis.id}"
@@ -35,16 +40,15 @@ describe 'Edit talk', type: :request, js: true do
     end
 
     it 'displays the right co-authors' do
-      expect(page).to     have_content('Billy Boy')
+      expect(page).to have_content('Billy Boy')
       expect(page).to_not have_content('Luis XIV')
     end
   end
 
   context 'with invalid data' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Compartilhe'
       click_link 'Editar palestra'
 
@@ -64,8 +68,7 @@ describe 'Edit talk', type: :request, js: true do
 
   context 'when the talk is not user' do
     before do
-      login_as(billy)
-      visit edit_talk_path(talk)
+      login_as billy, edit_talk_path(talk)
     end
 
     it 'redirects to the talks page' do
@@ -73,7 +76,8 @@ describe 'Edit talk', type: :request, js: true do
     end
 
     it 'displays error messages' do
-      expect(page).to have_content('Você não tem permissão para acessar esta página.')
+      expect(page)
+        .to have_content('Você não tem permissão para acessar esta página.')
     end
   end
 end

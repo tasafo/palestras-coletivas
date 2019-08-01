@@ -4,13 +4,13 @@ describe 'Show public talk', type: :request do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
-  let!(:speakerdeck_talk) { create(:speakerdeck_talk, users: [user], owner: user) }
+  let!(:spdeck_talk) { create(:speakerdeck_talk, users: [user], owner: user) }
   let!(:prezi_talk) { create(:prezi_talk, users: [user], owner: user) }
 
   context 'of slideshare' do
     before do
-      login_as(user)
-      visit talks_path
+      login_as user, talks_path
+
       click_link 'Compartilhe'
     end
 
@@ -25,14 +25,13 @@ describe 'Show public talk', type: :request do
 
   context 'of speakerdeck' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Ruby - praticamente falando'
     end
 
     it 'redirects to the show page' do
-      expect(current_path).to eql(talk_path(speakerdeck_talk))
+      expect(current_path).to eql(talk_path(spdeck_talk))
     end
 
     it 'displays detail talk' do
@@ -42,9 +41,8 @@ describe 'Show public talk', type: :request do
 
   context 'of prezi' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'SOA - Introdução'
     end
 
@@ -59,9 +57,8 @@ describe 'Show public talk', type: :request do
 
   context 'no slides' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'A história da informática'
     end
 
@@ -76,7 +73,6 @@ describe 'Show public talk', type: :request do
 
   context 'when unlogged' do
     before do
-      visit root_path
       visit talk_path(talk)
     end
 

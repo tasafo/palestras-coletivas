@@ -6,8 +6,8 @@ describe 'Create external event of talk', type: :request do
 
   context 'when valid data' do
     before do
-      login_as user
-      visit talks_path
+      login_as user, talks_path
+
       click_link 'Compartilhe'
       click_link 'Adicionar evento externo'
 
@@ -30,10 +30,11 @@ describe 'Create external event of talk', type: :request do
 
   context 'when invalid data' do
     before do
-      login_as user
-      visit talks_path
+      login_as user, talks_path
+
       click_link 'Compartilhe'
       click_link 'Adicionar evento externo'
+
       click_button 'Adicionar evento externo'
     end
 

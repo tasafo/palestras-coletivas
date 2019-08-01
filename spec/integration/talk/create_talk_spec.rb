@@ -1,16 +1,19 @@
 require 'spec_helper'
 
 describe 'Create talk', type: :request, js: true do
-  let!(:user)         { create(:user, :paul) }
-  let!(:invited_user) { create(:user, :luis, name: 'Luis XIV', username: '@username_luis') }
-  let!(:other_user)   { create(:user, :billy, name: 'Billy Boy', username: '@username_billy') }
-  let!(:talk)         { create(:talk, users: [user], owner: user) }
+  let!(:user) { create(:user, :paul) }
+  let!(:invited_user) do
+    create(:user, :luis, name: 'Luis XIV', username: '@user_luis')
+  end
+  let!(:other_user) do
+    create(:user, :billy, name: 'Billy Boy', username: '@user_billy')
+  end
+  let!(:talk) { create(:talk, users: [user], owner: user) }
 
   context 'with valid data from slideshare' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Adicionar palestra'
 
       fill_in 'Link da palestra', with: 'http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup'
@@ -19,7 +22,8 @@ describe 'Create talk', type: :request, js: true do
       fill_in 'Link do vídeo', with: 'http://www.youtube.com/watch?v=wGe5agueUwI'
       check('Quero publicar')
 
-      fill_autocomplete('invitee_username', with: '@us', select: 'Luis XIV (@username_luis)')
+      fill_autocomplete('invitee_username', with: '@us',
+                                            select: 'Luis XIV (@user_luis)')
       click_button :add_user
 
       click_button 'Adicionar palestra'
@@ -34,16 +38,15 @@ describe 'Create talk', type: :request, js: true do
     end
 
     it 'invites the right co-author' do
-      expect(page).to     have_content('Luis XIV')
+      expect(page).to have_content('Luis XIV')
       expect(page).to_not have_content('Billy Boy')
     end
   end
 
   context 'with valid data from speakerdeck' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Adicionar palestra'
 
       fill_in 'Link da palestra', with: 'https://speakerdeck.com/luizsanches/ruby-praticamente-falando'
@@ -66,9 +69,8 @@ describe 'Create talk', type: :request, js: true do
 
   context 'with valid data but no link' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Adicionar palestra'
 
       fill_in 'Título', with: 'A linguagem C'
@@ -91,9 +93,8 @@ describe 'Create talk', type: :request, js: true do
 
   context 'with invalid data' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Adicionar palestra'
 
       click_button 'Adicionar palestra'
@@ -118,9 +119,8 @@ describe 'Create talk', type: :request, js: true do
           headers: {}
         )
 
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Adicionar palestra'
 
       fill_in 'Link da palestra', with: 'http://www.slideshare.net/luizsanches/invalid'
@@ -134,9 +134,8 @@ describe 'Create talk', type: :request, js: true do
 
   context 'with repeated talk' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Adicionar palestra'
 
       fill_in 'Link da palestra', with: 'http://www.slideshare.net/luizsanches/compartilhe'

@@ -4,15 +4,22 @@ describe 'Create enrollment', type: :request, js: true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
-  let!(:event) { create(:event, :tasafoconf, deadline_date_enrollment: Date.today, users: [user], owner: user) }
+  let!(:event) do
+    create(:event, :tasafoconf, deadline_date_enrollment: Date.today,
+                                users: [user], owner: user)
+  end
   let!(:talk) { create(:talk, users: [user], owner: user) }
-  let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
-  let!(:enrollment_active) { create(:enrollment, event: event, user: another_user) }
+  let!(:schedule_palestra) do
+    create(:schedule, :palestra, event: event, talk: talk)
+  end
+  let!(:enrollment_active) do
+    create(:enrollment, event: event, user: another_user)
+  end
 
   context 'when logged' do
     before do
-      login_as(other_user)
-      visit events_path
+      login_as other_user, events_path
+
       click_link 'Tá Safo Conf'
       click_link 'Quero participar!'
       click_button 'Quero participar'
@@ -29,8 +36,8 @@ describe 'Create enrollment', type: :request, js: true do
 
   context 'when unlogged' do
     before do
-      visit root_path
       visit events_path
+
       click_link 'Tá Safo Conf'
       click_link 'Quero participar!'
     end
@@ -45,12 +52,14 @@ describe 'Create enrollment', type: :request, js: true do
 
     context 'when user do log in' do
       before do
-        visit root_path
         visit events_path
+
         click_link 'Tá Safo Conf'
         click_link 'Quero participar!'
+
         fill_in 'Seu e-mail', with: other_user.email
         fill_in 'Sua senha', with: 'testdrive'
+
         click_button 'Acessar minha conta'
       end
 
@@ -61,12 +70,14 @@ describe 'Create enrollment', type: :request, js: true do
 
     context 'when user do log in and enrollment has held' do
       before do
-        visit root_path
         visit events_path
+
         click_link 'Tá Safo Conf'
         click_link 'Quero participar!'
+
         fill_in 'Seu e-mail', with: another_user.email
         fill_in 'Sua senha', with: 'testdrive'
+
         click_button 'Acessar minha conta'
         click_button 'Quero participar!'
       end
@@ -83,8 +94,8 @@ describe 'Create enrollment', type: :request, js: true do
 
   context 'when the user is organizer' do
     before do
-      login_as(user)
-      visit events_path
+      login_as user, events_path
+
       click_link 'Tá Safo Conf'
     end
 

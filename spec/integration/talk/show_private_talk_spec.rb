@@ -6,9 +6,8 @@ describe 'Show private talk', type: :request, js: true do
 
   context 'when logged' do
     before do
-      login_as(user)
+      login_as user, talks_path
 
-      visit talks_path
       click_link 'Minhas palestras'
       click_link 'Ruby praticamente falando'
     end
@@ -24,7 +23,6 @@ describe 'Show private talk', type: :request, js: true do
 
   context 'when unlogged' do
     before do
-      visit root_path
       visit talk_path(other_talk)
     end
 

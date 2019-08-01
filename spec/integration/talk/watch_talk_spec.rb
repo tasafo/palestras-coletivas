@@ -6,8 +6,7 @@ describe 'Watch talk', type: :request do
   let!(:talk) { create(:talk, users: [user], owner: user) }
 
   before do
-    login_as(other_user)
-    visit talk_path(talk)
+    login_as other_user, talk_path(talk)
   end
 
   it 'mark and unmark talk as watched' do

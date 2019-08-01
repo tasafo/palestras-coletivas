@@ -5,9 +5,8 @@ describe 'Logout', type: :request do
     let!(:user) { create(:user, :paul) }
 
     before do
-      login_as user
+      login_as user, root_path
 
-      visit root_path
       first('.link-logout').click
     end
 

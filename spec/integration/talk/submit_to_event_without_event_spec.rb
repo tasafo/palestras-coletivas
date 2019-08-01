@@ -6,9 +6,8 @@ describe 'Submit talk without event', type: :request, js: true do
 
   context 'when valid data' do
     before do
-      login_as user
+      login_as user, talks_path
 
-      visit talks_path
       click_link talk.title.to_s
       click_link 'Submeter a um evento'
     end
@@ -18,7 +17,8 @@ describe 'Submit talk without event', type: :request, js: true do
     end
 
     it 'displays success message' do
-      expect(page).to have_content('Não existem eventos disponíveis para essa operação')
+      expect(page)
+        .to have_content('Não existem eventos disponíveis para essa operação')
     end
   end
 end
