@@ -18,11 +18,8 @@ describe 'Event not found', type: :request do
       visit '/events/00000111111000000111111'
     end
 
-    it 'redirects to the events page' do
-      expect(current_path).to eql(events_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(events_path)
       page.has_content? 'Evento não encontrado(a)'
     end
   end
@@ -32,11 +29,8 @@ describe 'Event not found', type: :request do
       login_as other_user, event_path(event)
     end
 
-    it 'redirects to the events page' do
-      expect(current_path).to eql(events_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(events_path)
       page.has_content? 'Evento não encontrado(a)'
     end
   end
@@ -46,11 +40,8 @@ describe 'Event not found', type: :request do
       visit event_path(event)
     end
 
-    it 'redirects to the events page' do
-      expect(current_path).to eql(events_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(events_path)
       page.has_content? 'Evento não encontrado(a)'
     end
   end

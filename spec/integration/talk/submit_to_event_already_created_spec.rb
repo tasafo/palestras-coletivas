@@ -24,11 +24,8 @@ describe 'Submit talk already created', type: :request, js: true do
       click_button 'Adicionar programação'
     end
 
-    it 'redirects to the talk page' do
-      expect(current_path).to eql(talk_path(talk))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(talk_path(talk))
       expect(page).to have_content('A palestra já está submetida no evento')
     end
   end

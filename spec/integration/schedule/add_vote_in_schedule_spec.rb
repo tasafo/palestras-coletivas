@@ -26,17 +26,13 @@ describe 'Add vote in schedule', type: :request, js: true do
 
   context 'with valid data' do
     before do
-      login_as user, events_path
+      login_as user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link "add_vote_schedule_id_#{schedule_palestra.id}"
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to match(%r{/events/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/events/\w+})
       expect(page).to have_content('Voto adicionado com sucesso!')
     end
   end

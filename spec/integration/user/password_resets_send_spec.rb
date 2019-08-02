@@ -3,22 +3,21 @@ require 'spec_helper'
 describe 'Send password resets', type: :request do
   let!(:user) { create(:user, :paul) }
 
+  before do
+    visit login_path
+
+    click_link 'Esqueceu a senha?'
+  end
+
   context 'when valid data' do
     before do
-      visit login_path
-
-      click_link 'Esqueceu a senha?'
-
       fill_in 'Seu e-mail', with: user.email
 
       click_button 'Redefinir senha'
     end
 
-    it 'redirects to the home page' do
-      expect(current_path).to eql(new_password_reset_path)
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(new_password_reset_path)
       expect(page)
         .to have_content('E-mail enviado com as instruções de redefinição')
     end
@@ -26,20 +25,13 @@ describe 'Send password resets', type: :request do
 
   context 'when invalid data' do
     before do
-      visit login_path
-
-      click_link 'Esqueceu a senha?'
-
       fill_in 'Seu e-mail', with: 'notfound@mail.com'
 
       click_button 'Redefinir senha'
     end
 
-    it 'renders form page' do
-      expect(current_path).to eql(new_password_reset_path)
-    end
-
     it 'displays error messages' do
+      expect(current_path).to eql(new_password_reset_path)
       expect(page).to have_content('E-mail não encontrado.')
     end
   end

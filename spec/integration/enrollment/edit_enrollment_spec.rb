@@ -28,11 +28,8 @@ describe 'Edit enrollment', type: :request, js: true do
       click_button 'Alterar participação'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(event_path(event))
       expect(page).to have_content('A inscrição foi alterada!')
     end
   end
@@ -46,11 +43,8 @@ describe 'Edit enrollment', type: :request, js: true do
       click_button 'Alterar participação'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(event_path(event))
       expect(page).to have_content('A inscrição foi alterada!')
     end
   end

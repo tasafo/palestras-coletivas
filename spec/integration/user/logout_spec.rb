@@ -10,11 +10,8 @@ describe 'Logout', type: :request do
       first('.link-logout').click
     end
 
-    it 'redirects to home page' do
-      expect(current_path).to eql(root_path)
-    end
-
     it "doesn't render name" do
+      expect(current_path).to eql(root_path)
       expect(page).not_to have_content("Olá, #{user.name}")
     end
   end
@@ -24,8 +21,6 @@ describe 'Logout', type: :request do
       visit logout_path
     end
 
-    it 'redirects to home page' do
-      expect(current_path).to eql(root_path)
-    end
+    it { expect(current_path).to eql(root_path) }
   end
 end

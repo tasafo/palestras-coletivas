@@ -10,12 +10,12 @@ describe 'Create talk', type: :request, js: true do
   end
   let!(:talk) { create(:talk, users: [user], owner: user) }
 
+  before do
+    login_as user, new_talk_path
+  end
+
   context 'with valid data from slideshare' do
     before do
-      login_as user, talks_path
-
-      click_link 'Adicionar palestra'
-
       fill_in 'Link da palestra', with: 'http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup'
       fill_in 'Descrição', with: 'Palestra sobre processos e ferramentas para manter um bom negócio digital'
       fill_in 'Tags', with: 'tecnologia, empreendedorismo'
@@ -29,15 +29,9 @@ describe 'Create talk', type: :request, js: true do
       click_button 'Adicionar palestra'
     end
 
-    it 'redirects to the talk page' do
-      expect(current_path).to match(%r{/talks/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
-    end
-
-    it 'invites the right co-author' do
       expect(page).to have_content('Luis XIV')
       expect(page).to_not have_content('Billy Boy')
     end
@@ -45,10 +39,6 @@ describe 'Create talk', type: :request, js: true do
 
   context 'with valid data from speakerdeck' do
     before do
-      login_as user, talks_path
-
-      click_link 'Adicionar palestra'
-
       fill_in 'Link da palestra', with: 'https://speakerdeck.com/luizsanches/ruby-praticamente-falando'
       fill_in 'Descrição', with: 'Indrodução à linguagem Ruby'
       fill_in 'Tags', with: 'ruby, programação'
@@ -58,21 +48,14 @@ describe 'Create talk', type: :request, js: true do
       click_button 'Adicionar palestra'
     end
 
-    it 'redirects to the talk page' do
-      expect(current_path).to match(%r{/talks/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
     end
   end
 
   context 'with valid data but no link' do
     before do
-      login_as user, talks_path
-
-      click_link 'Adicionar palestra'
-
       fill_in 'Título', with: 'A linguagem C'
       fill_in 'Descrição', with: 'Indrodução à linguagem C'
       fill_in 'Tags', with: 'C, programação'
@@ -82,29 +65,19 @@ describe 'Create talk', type: :request, js: true do
       click_button 'Adicionar palestra'
     end
 
-    it 'redirects to the talk page' do
-      expect(current_path).to match(%r{/talks/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
     end
   end
 
   context 'with invalid data' do
     before do
-      login_as user, talks_path
-
-      click_link 'Adicionar palestra'
-
       click_button 'Adicionar palestra'
     end
 
-    it 'renders form page' do
-      expect(current_path).to eql(talks_path)
-    end
-
     it 'displays error messages' do
+      expect(current_path).to eql(talks_path)
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end
@@ -113,31 +86,17 @@ describe 'Create talk', type: :request, js: true do
     before do
       stub_request(:get, /slideshare.net/)
         .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
-        .to_return(
-          status: 404,
-          body: '',
-          headers: {}
-        )
-
-      login_as user, talks_path
-
-      click_link 'Adicionar palestra'
+        .to_return(status: 404, body: '', headers: {})
 
       fill_in 'Link da palestra', with: 'http://www.slideshare.net/luizsanches/invalid'
       fill_in 'Título', with: 'Compartilhe!'
     end
 
-    it 'displays error message' do
-      expect(page).to have_content('Palestra não encontrada')
-    end
+    it { expect(page).to have_content('Palestra não encontrada') }
   end
 
   context 'with repeated talk' do
     before do
-      login_as user, talks_path
-
-      click_link 'Adicionar palestra'
-
       fill_in 'Link da palestra', with: 'http://www.slideshare.net/luizsanches/compartilhe'
       fill_in 'Descrição', with: 'Palestra duplicada'
       fill_in 'Tags', with: 'duplicada'
@@ -145,11 +104,8 @@ describe 'Create talk', type: :request, js: true do
       click_button 'Adicionar palestra'
     end
 
-    it 'renders form page' do
-      expect(current_path).to eql(talks_path)
-    end
-
     it 'displays error messages' do
+      expect(current_path).to eql(talks_path)
       expect(page).to have_content('Link da palestra já está em uso')
     end
   end
