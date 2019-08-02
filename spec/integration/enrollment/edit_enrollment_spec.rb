@@ -21,38 +21,30 @@ describe 'Edit enrollment', type: :request, js: true do
 
   context 'when the enrollment is active' do
     before do
-      login_as other_user, events_path
+      login_as other_user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link 'Cancelar minha participação'
 
       click_button 'Alterar participação'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(event_path(event))
       expect(page).to have_content('A inscrição foi alterada!')
     end
   end
 
   context 'when the enrollment is inactive' do
     before do
-      login_as another_user, events_path
+      login_as another_user, event_path(event)
 
-      click_link 'Tá Safo Conf'
       click_link 'Quero participar!'
 
       click_button 'Alterar participação'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(event_path(event))
       expect(page).to have_content('A inscrição foi alterada!')
     end
   end

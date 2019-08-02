@@ -12,13 +12,14 @@ describe 'Create schedule', type: :request, js: true do
   let!(:activity_palestra) { create(:activity, :palestra) }
   let!(:activity_intervalo) { create(:activity, :intervalo) }
 
+  before do
+    login_as user, event_path(event)
+
+    click_link 'Adicionar programação'
+  end
+
   context 'with valid interval' do
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
-      click_link 'Adicionar programação'
-
       select '05/06/2012', from: 'schedule_day'
 
       fill_in_inputmask 'Horário', with: '08:00'
@@ -28,41 +29,25 @@ describe 'Create schedule', type: :request, js: true do
       click_button 'Adicionar programação'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to match(%r{/events/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/events/\w+})
       expect(page).to have_content('A programação foi adicionada!')
     end
   end
 
   context 'with invalid interval' do
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
-      click_link 'Adicionar programação'
-
       click_button 'Adicionar programação'
     end
 
-    it 'renders form page' do
-      expect(current_path).to eql(event_schedules_path(event))
-    end
-
     it 'displays error messages' do
+      expect(current_path).to eql(event_schedules_path(event))
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end
 
   context 'with valid talk' do
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
-      click_link 'Adicionar programação'
-
       select '05/06/2012', from: 'schedule_day'
 
       fill_in_inputmask 'Horário', with: '08:00'
@@ -78,11 +63,8 @@ describe 'Create schedule', type: :request, js: true do
       click_button 'Adicionar programação'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to match(%r{/events/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/events/\w+})
       expect(page).to have_content('A programação foi adicionada!')
     end
   end

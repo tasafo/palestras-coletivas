@@ -4,11 +4,12 @@ describe 'Create external event of talk', type: :request do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
 
+  before do
+    login_as user, talk_path(talk)
+  end
+
   context 'when valid data' do
     before do
-      login_as user, talks_path
-
-      click_link 'Compartilhe'
       click_link 'Adicionar evento externo'
 
       fill_in 'Nome do evento', with: 'Ruby Conf 2011'
@@ -19,30 +20,21 @@ describe 'Create external event of talk', type: :request do
       click_button 'Adicionar evento externo'
     end
 
-    it 'redirects to the talk page' do
-      expect(current_path).to eql(talk_path(talk))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(talk_path(talk))
       expect(page).to have_content('O evento externo foi adicionado!')
     end
   end
 
   context 'when invalid data' do
     before do
-      login_as user, talks_path
-
-      click_link 'Compartilhe'
       click_link 'Adicionar evento externo'
 
       click_button 'Adicionar evento externo'
     end
 
-    it 'renders form page' do
-      expect(current_path).to eql(talk_external_events_path(talk))
-    end
-
     it 'displays error messages' do
+      expect(current_path).to eql(talk_external_events_path(talk))
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end

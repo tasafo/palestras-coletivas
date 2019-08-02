@@ -22,11 +22,8 @@ describe 'Show private event', type: :request, js: true do
       click_link 'Tá Safo Conf'
     end
 
-    it 'redirects to the show page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
     it 'displays detail event' do
+      expect(current_path).to eql(event_path(event))
       expect(page).to have_content('Tá Safo Conf')
     end
   end
@@ -36,11 +33,8 @@ describe 'Show private event', type: :request, js: true do
       visit event_path(event)
     end
 
-    it 'redirects to the events page' do
-      expect(current_path).to eql(events_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(events_path)
       expect(page).to have_content('Evento não foi encontrado(a)')
     end
   end

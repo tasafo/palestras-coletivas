@@ -21,18 +21,13 @@ describe 'Delete schedule', type: :request, js: true do
 
   context 'with valid data' do
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
+      login_as user, event_path(event)
 
       click_with_alert "delete_schedule_id_#{schedule_palestra.id}"
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to match(%r{/events/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/events/\w+})
       expect(page).to have_content('A programação foi excluída!')
     end
   end

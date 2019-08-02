@@ -24,58 +24,47 @@ describe 'Register presence', type: :request do
     create(:enrollment, present: true, event: event, user: another_user)
   end
 
-  context 'when the user is not present' do
+  context 'when the user is' do
     before do
-      login_as user, events_path
-
-      click_link 'Tá Safo Conf'
-      click_link "user_id_#{other_user.id}"
-
-      click_button 'Alterar participação'
+      login_as user, event_path(event)
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
+    context 'not present' do
+      before do
+        click_link "user_id_#{other_user.id}"
+
+        click_button 'Alterar participação'
+      end
+
+      it 'displays success message' do
+        expect(current_path).to eql(event_path(event))
+        expect(page).to have_content('A inscrição foi alterada!')
+      end
     end
 
-    it 'displays success message' do
-      expect(page).to have_content('A inscrição foi alterada!')
-    end
-  end
+    context 'already present' do
+      before do
+        click_link "user_id_#{another_user.id}"
 
-  context 'when the user is already present' do
-    before do
-      login_as user, events_path
+        click_button 'Alterar participação'
+      end
 
-      click_link 'Tá Safo Conf'
-      click_link "user_id_#{another_user.id}"
-
-      click_button 'Alterar participação'
-    end
-
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
-    it 'displays success message' do
-      expect(page).to have_content('A inscrição foi alterada!')
+      it 'displays success message' do
+        expect(current_path).to eql(event_path(event))
+        expect(page).to have_content('A inscrição foi alterada!')
+      end
     end
   end
 
   context 'when the user does not have permission' do
     before do
-      login_as other_user, events_path
-
-      click_link 'Tá Safo Conf'
+      login_as other_user, event_path(event)
 
       visit edit_event_enrollment_path(event, :present, enrollment_luis)
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to eql(event_path(event))
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(event_path(event))
       expect(page)
         .to have_content('Você não tem permissão para acessar esta página.')
     end

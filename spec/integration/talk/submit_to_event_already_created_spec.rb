@@ -15,9 +15,8 @@ describe 'Submit talk already created', type: :request, js: true do
 
   context 'when valid data' do
     before do
-      login_as user, talks_path
+      login_as user, talk_path(talk)
 
-      click_link 'Compartilhe'
       click_link 'Submeter a um evento'
 
       select event.name, from: 'submit_event_event_id'
@@ -25,11 +24,8 @@ describe 'Submit talk already created', type: :request, js: true do
       click_button 'Adicionar programação'
     end
 
-    it 'redirects to the talk page' do
-      expect(current_path).to eql(talk_path(talk))
-    end
-
     it 'displays success message' do
+      expect(current_path).to eql(talk_path(talk))
       expect(page).to have_content('A palestra já está submetida no evento')
     end
   end

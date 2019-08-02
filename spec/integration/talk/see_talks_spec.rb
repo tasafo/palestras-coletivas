@@ -9,11 +9,8 @@ describe 'See talks', type: :request do
       login_as user, talks_path
     end
 
-    it 'redirects to the home page' do
-      expect(current_path).to eql(talks_path)
-    end
-
     it 'displays at least one talk' do
+      expect(current_path).to eql(talks_path)
       expect(page).to have_content('Compartilhe')
     end
   end

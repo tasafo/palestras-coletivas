@@ -10,11 +10,8 @@ describe 'Talk not found', type: :request do
       visit '/talks/00000111111000000111111'
     end
 
-    it 'redirects to the talks page' do
-      expect(current_path).to eql(talks_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(talks_path)
       page.has_content? 'Palestra não encontrado(a)'
     end
   end
@@ -24,11 +21,8 @@ describe 'Talk not found', type: :request do
       login_as other_user, talk_path(talk)
     end
 
-    it 'redirects to the talks page' do
-      expect(current_path).to eql(talks_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(talks_path)
       page.has_content? 'Palestra não encontrado(a)'
     end
   end
@@ -38,11 +32,8 @@ describe 'Talk not found', type: :request do
       visit talk_path(talk)
     end
 
-    it 'redirects to the talks page' do
-      expect(current_path).to eql(talks_path)
-    end
-
     it 'displays error message' do
+      expect(current_path).to eql(talks_path)
       page.has_content? 'Palestra não encontrado(a)'
     end
   end

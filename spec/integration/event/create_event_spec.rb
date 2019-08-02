@@ -13,12 +13,12 @@ describe 'Create event', type: :request, js: true do
   end
   let!(:image_path) { "#{Rails.root}/app/assets/images/video-poster.jpg" }
 
+  before do
+    login_as user, new_event_path
+  end
+
   context 'with valid data' do
     before do
-      login_as user, events_path
-
-      click_link 'Adicionar evento'
-
       fill_in 'Nome', with: 'Tá Safo Conf'
       fill_in 'Edição', with: '2012'
       page.execute_script(script)
@@ -49,15 +49,9 @@ describe 'Create event', type: :request, js: true do
       click_button 'Adicionar evento'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to match(%r{/events/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/events/\w+})
       expect(page).to have_content('O evento foi adicionado!')
-    end
-
-    it 'invites the right organizers' do
       expect(page).to have_content('Billy Boy')
       expect(page).to_not have_content('Luis XIV')
     end
@@ -65,27 +59,17 @@ describe 'Create event', type: :request, js: true do
 
   context 'with invalid data' do
     before do
-      login_as user, events_path
-
-      click_link 'Adicionar evento'
       click_button 'Adicionar evento'
     end
 
-    it 'renders form page' do
-      expect(current_path).to eql(events_path)
-    end
-
     it 'displays error messages' do
+      expect(current_path).to eql(events_path)
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end
 
   context 'with valid data but without address' do
     before do
-      login_as user, events_path
-
-      click_link 'Adicionar evento'
-
       fill_in 'Nome', with: 'Tá Safo Conf'
       fill_in 'Edição', with: '2012'
       page.execute_script(script)
@@ -105,11 +89,8 @@ describe 'Create event', type: :request, js: true do
       click_button 'Adicionar evento'
     end
 
-    it 'redirects to the event page' do
-      expect(current_path).to match(%r{/events/\w+})
-    end
-
     it 'displays success message' do
+      expect(current_path).to match(%r{/events/\w+})
       expect(page).to have_content('O evento foi adicionado!')
     end
   end
