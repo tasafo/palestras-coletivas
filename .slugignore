@@ -3,3 +3,5 @@
 /doc
 .bundle/
 vendor/bundle
+node_modules
+yarn.lock

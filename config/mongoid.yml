@@ -69,7 +69,7 @@ development:
 test:
   clients:
     default:
-      database: palestrascoletivas_test
+      database: palestrascoletivas_test<%= ENV['TEST_ENV_NUMBER'] %>
       hosts:
         - localhost:27017
       options:

@@ -57,6 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'parallel_tests', '2.29.1'
 end
 
 group :test do
@@ -65,8 +66,9 @@ group :test do
   gem 'rake'
   gem 'launchy'
   gem 'capybara', '3.27.0'
-  gem 'cuprite', '0.6.0'
+  gem 'cuprite', github: 'caifara/cuprite', branch: 'missing-context-2'
   gem 'simplecov', '0.16.1', require: false
+  gem 'simplecov-console', require: false
 end
 
 group :production do
