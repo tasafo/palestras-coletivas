@@ -10,7 +10,7 @@ describe 'Show user profile' do
     end
 
     it 'displays user profile' do
-      expect(current_path).to eql(user_path(user))
+      expect(page).to have_current_path(user_path(user))
       expect(page).to have_content('Luis Miguel')
     end
   end
@@ -20,7 +20,7 @@ describe 'Show user profile' do
       visit '/users/00000111111000000111111'
     end
 
-    it { expect(current_path).to eql(root_path) }
+    it { expect(page).to have_current_path(root_path) }
   end
 
   context 'when the user does not have e-mail at Gravatar' do
@@ -29,7 +29,7 @@ describe 'Show user profile' do
     end
 
     it 'displays user profile' do
-      expect(current_path).to eql(user_path(other_user))
+      expect(page).to have_current_path(user_path(other_user))
       expect(page).to have_content('Billy')
     end
   end

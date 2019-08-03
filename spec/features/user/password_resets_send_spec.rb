@@ -17,7 +17,7 @@ describe 'Send password resets' do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(new_password_reset_path)
+      expect(page).to have_current_path(new_password_reset_path)
       expect(page)
         .to have_content('E-mail enviado com as instruções de redefinição')
     end
@@ -31,7 +31,7 @@ describe 'Send password resets' do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(new_password_reset_path)
+      expect(page).to have_current_path(new_password_reset_path)
       expect(page).to have_content('E-mail não encontrado.')
     end
   end

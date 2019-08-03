@@ -30,7 +30,7 @@ describe 'Create schedule', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/events/\w+})
+      expect(page).to have_current_path(%r{/events/\w+})
       expect(page).to have_content('A programação foi adicionada!')
     end
   end
@@ -41,7 +41,7 @@ describe 'Create schedule', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(event_schedules_path(event))
+      expect(page).to have_current_path(event_schedules_path(event))
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end
@@ -64,7 +64,7 @@ describe 'Create schedule', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/events/\w+})
+      expect(page).to have_current_path(%r{/events/\w+})
       expect(page).to have_content('A programação foi adicionada!')
     end
   end

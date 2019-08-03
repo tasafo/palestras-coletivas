@@ -18,7 +18,7 @@ describe 'Show public talk' do
       end
 
       it 'displays detail talk' do
-        expect(current_path).to eql(talk_path(talk))
+        expect(page).to have_current_path(talk_path(talk))
         expect(page).to have_content('Compartilhe')
       end
     end
@@ -29,7 +29,7 @@ describe 'Show public talk' do
       end
 
       it 'displays detail talk' do
-        expect(current_path).to eql(talk_path(spdeck_talk))
+        expect(page).to have_current_path(talk_path(spdeck_talk))
         expect(page).to have_content('Ruby - praticamente falando')
       end
     end
@@ -40,7 +40,7 @@ describe 'Show public talk' do
       end
 
       it 'displays detail talk' do
-        expect(current_path).to eql(talk_path(prezi_talk))
+        expect(page).to have_current_path(talk_path(prezi_talk))
         expect(page).to have_content('SOA - Introdução')
       end
     end
@@ -51,7 +51,7 @@ describe 'Show public talk' do
       end
 
       it 'displays detail talk' do
-        expect(current_path).to eql(talk_path(another_talk))
+        expect(page).to have_current_path(talk_path(another_talk))
         expect(page).to have_content('A história da informática')
       end
     end
@@ -63,7 +63,7 @@ describe 'Show public talk' do
     end
 
     it 'displays detail talk' do
-      expect(current_path).to eql(talk_path(talk))
+      expect(page).to have_current_path(talk_path(talk))
       expect(page).to have_content('Compartilhe')
     end
   end

@@ -29,7 +29,7 @@ describe 'Edit enrollment', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('A inscrição foi alterada!')
     end
   end
@@ -44,7 +44,7 @@ describe 'Edit enrollment', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('A inscrição foi alterada!')
     end
   end

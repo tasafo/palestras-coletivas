@@ -19,7 +19,7 @@ describe 'Event not found' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       page.has_content? 'Evento não encontrado(a)'
     end
   end
@@ -30,7 +30,7 @@ describe 'Event not found' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       page.has_content? 'Evento não encontrado(a)'
     end
   end
@@ -41,7 +41,7 @@ describe 'Event not found' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       page.has_content? 'Evento não encontrado(a)'
     end
   end

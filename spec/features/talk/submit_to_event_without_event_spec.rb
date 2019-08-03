@@ -13,7 +13,7 @@ describe 'Submit talk without event', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(talk_path(talk))
+      expect(page).to have_current_path(talk_path(talk))
       expect(page)
         .to have_content('Não existem eventos disponíveis para essa operação')
     end

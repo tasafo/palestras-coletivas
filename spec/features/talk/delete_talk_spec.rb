@@ -14,7 +14,7 @@ describe 'Delete talk', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       expect(page).to have_content('Palestra foi removido(a) com sucesso.')
     end
   end
@@ -31,7 +31,7 @@ describe 'Delete talk', js: true do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(talk_path(talk))
+      expect(page).to have_current_path(talk_path(talk))
       expect(page).to have_content('Não é possível remover a palestra')
     end
   end

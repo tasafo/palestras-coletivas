@@ -15,7 +15,7 @@ describe 'Login' do
       click_button 'Acessar minha conta'
     end
 
-    it { expect(current_path).to eql(root_path) }
+    it { expect(page).to have_current_path(root_path) }
   end
 
   context 'with invalid credentials' do
@@ -23,6 +23,6 @@ describe 'Login' do
       click_button 'Acessar minha conta'
     end
 
-    it { expect(current_path).to eql(login_path) }
+    it { expect(page).to have_current_path(login_path) }
   end
 end

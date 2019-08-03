@@ -21,7 +21,7 @@ describe 'Create external event of talk' do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(talk_path(talk))
+      expect(page).to have_current_path(talk_path(talk))
       expect(page).to have_content('O evento externo foi adicionado!')
     end
   end
@@ -34,7 +34,7 @@ describe 'Create external event of talk' do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(talk_external_events_path(talk))
+      expect(page).to have_current_path(talk_external_events_path(talk))
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end

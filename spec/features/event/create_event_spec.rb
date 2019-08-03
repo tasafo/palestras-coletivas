@@ -50,7 +50,7 @@ describe 'Create event', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/events/\w+})
+      expect(page).to have_current_path(%r{/events/\w+})
       expect(page).to have_content('O evento foi adicionado!')
       expect(page).to have_content('Billy Boy')
       expect(page).to_not have_content('Luis XIV')
@@ -63,7 +63,7 @@ describe 'Create event', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end
@@ -90,7 +90,7 @@ describe 'Create event', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/events/\w+})
+      expect(page).to have_current_path(%r{/events/\w+})
       expect(page).to have_content('O evento foi adicionado!')
     end
   end

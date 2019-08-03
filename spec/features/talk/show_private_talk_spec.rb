@@ -13,7 +13,7 @@ describe 'Show private talk', js: true do
     end
 
     it 'displays detail talk' do
-      expect(current_path).to eql(talk_path(other_talk))
+      expect(page).to have_current_path(talk_path(other_talk))
       expect(page).to have_content('Ruby praticamente falando')
     end
   end
@@ -24,7 +24,7 @@ describe 'Show private talk', js: true do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       expect(page).to have_content('Palestra não foi encontrado(a)')
     end
   end

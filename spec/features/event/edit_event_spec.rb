@@ -31,7 +31,7 @@ describe 'Edit event', js: true do
       end
 
       it 'displays success message' do
-        expect(current_path).to match(%r{/events/\w+})
+        expect(page).to have_current_path(%r{/events/\w+})
         expect(page).to have_content('O evento foi atualizado!')
       end
     end
@@ -44,7 +44,7 @@ describe 'Edit event', js: true do
       end
 
       it 'displays error messages' do
-        expect(current_path).to eql(event_path(event))
+        expect(page).to have_current_path(event_path(event))
         expect(page).to have_content('Verifique o formulário antes de continuar:')
       end
     end
@@ -56,7 +56,7 @@ describe 'Edit event', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       expect(page).to have_content('Você não tem permissão para acessar esta página.')
     end
   end

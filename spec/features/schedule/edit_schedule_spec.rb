@@ -40,7 +40,7 @@ describe 'Edit schedule', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eq(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('A programação foi atualizada!')
     end
   end
@@ -55,8 +55,8 @@ describe 'Edit schedule', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path)
-        .to eql(event_schedule_path(event, schedule_palestra2))
+      expect(page)
+        .to have_current_path(event_schedule_path(event, schedule_palestra2))
       expect(page).to have_content('Horário não é válido')
     end
   end

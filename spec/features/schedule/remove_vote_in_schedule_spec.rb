@@ -34,7 +34,7 @@ describe 'Remove vote in schedule', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/events/\w+})
+      expect(page).to have_current_path(%r{/events/\w+})
       expect(page).to have_content('Voto retirado com sucesso!')
     end
   end

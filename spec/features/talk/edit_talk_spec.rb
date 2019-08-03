@@ -31,8 +31,8 @@ describe 'Edit talk', js: true do
         click_button 'Atualizar palestra'
       end
 
-      it 'rdisplays success message' do
-        expect(current_path).to match(%r{/talks/\w+})
+      it 'displays success message' do
+        expect(page).to have_current_path(%r{/talks/\w+})
         expect(page).to have_content('A palestra foi atualizada!')
         expect(page).to have_content('Billy Boy')
         expect(page).to_not have_content('Luis XIV')
@@ -47,8 +47,9 @@ describe 'Edit talk', js: true do
       end
 
       it 'displays error messages' do
-        expect(current_path).to eql(talk_path(talk))
-        expect(page).to have_content('Verifique o formulário antes de continuar:')
+        expect(page).to have_current_path(talk_path(talk))
+        expect(page)
+          .to have_content('Verifique o formulário antes de continuar:')
       end
     end
   end
@@ -59,7 +60,7 @@ describe 'Edit talk', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       expect(page)
         .to have_content('Você não tem permissão para acessar esta página.')
     end

@@ -23,7 +23,7 @@ describe 'Show private event', js: true do
     end
 
     it 'displays detail event' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('Tá Safo Conf')
     end
   end
@@ -34,7 +34,7 @@ describe 'Show private event', js: true do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       expect(page).to have_content('Evento não foi encontrado(a)')
     end
   end

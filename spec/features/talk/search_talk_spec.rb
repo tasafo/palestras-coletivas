@@ -16,7 +16,7 @@ describe 'Search talk' do
     end
 
     it 'displays access my account' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(%r{/talks.})
       expect(page).to have_content('Palestras')
     end
   end
@@ -29,7 +29,7 @@ describe 'Search talk' do
     end
 
     it 'shows talks found' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(%r{/talks.})
       expect(page).to have_content('Compartilhe')
     end
   end
@@ -42,7 +42,7 @@ describe 'Search talk' do
     end
 
     it 'not show talks' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(%r{/talks.})
       expect(page).not_to have_content('Compartilhe')
     end
   end

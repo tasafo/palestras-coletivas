@@ -10,7 +10,7 @@ describe 'See talks' do
     end
 
     it 'displays at least one talk' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       expect(page).to have_content('Compartilhe')
     end
   end

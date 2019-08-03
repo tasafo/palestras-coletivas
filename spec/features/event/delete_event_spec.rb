@@ -14,7 +14,7 @@ describe 'Delete event', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       expect(page).to have_content('Evento foi removido(a) com sucesso.')
     end
   end
@@ -30,7 +30,7 @@ describe 'Delete event', js: true do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('Não é possível remover o evento')
     end
   end

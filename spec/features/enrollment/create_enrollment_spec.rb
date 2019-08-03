@@ -25,7 +25,7 @@ describe 'Create enrollment', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('A inscrição foi realizada!')
     end
   end
@@ -38,11 +38,8 @@ describe 'Create enrollment', js: true do
     end
 
     context 'unlogged' do
-      it 'redirects to the login page' do
-        expect(current_path).to eql(login_path)
-      end
-
       it 'displays login message' do
+        expect(page).to have_current_path(%r{/login.})
         expect(page).to have_content('Entrar')
       end
     end
@@ -55,9 +52,10 @@ describe 'Create enrollment', js: true do
         click_button 'Acessar minha conta'
       end
 
-      it {
-        expect(current_path).to eql new_event_enrollment_path(event, :active)
-      }
+      it do
+        expect(page)
+          .to have_current_path(new_event_enrollment_path(event, :active))
+      end
     end
 
     context 'user do log in and enrollment has held' do
@@ -70,7 +68,7 @@ describe 'Create enrollment', js: true do
       end
 
       it 'displays error message' do
-        expect(current_path).to eql(event_path(event))
+        expect(page).to have_current_path(event_path(event))
         expect(page).to have_content('A inscrição já havia sido realizada!')
       end
     end
@@ -82,7 +80,7 @@ describe 'Create enrollment', js: true do
     end
 
     it 'not show button I want to participate' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page).not_to have_content('Quero participar!')
     end
   end

@@ -25,7 +25,7 @@ describe 'Submit talk already created', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to eql(talk_path(talk))
+      expect(page).to have_current_path(talk_path(talk))
       expect(page).to have_content('A palestra já está submetida no evento')
     end
   end

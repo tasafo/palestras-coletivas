@@ -27,7 +27,7 @@ describe 'Delete schedule', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/events/\w+})
+      expect(page).to have_current_path(%r{/events/\w+})
       expect(page).to have_content('A programação foi excluída!')
     end
   end

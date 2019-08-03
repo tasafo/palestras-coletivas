@@ -13,7 +13,7 @@ describe 'See events' do
     end
 
     it 'displays at least one event' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(events_path)
       expect(page).to have_content('Tá Safo Conf')
     end
   end
@@ -26,7 +26,7 @@ describe 'See events' do
     end
 
     it 'displays at least one event' do
-      expect(current_path).to eql(events_path)
+      expect(page).to have_current_path(%r{/events.})
       expect(page).to have_content('Tá Safo Conf')
     end
   end
@@ -37,7 +37,7 @@ describe 'See events' do
     end
 
     it 'displays at least one event' do
-      expect(current_path).to eql('/events.json')
+      expect(page).to have_current_path('/events.json')
       expect(page).to have_content('Tá Safo Conf')
     end
   end

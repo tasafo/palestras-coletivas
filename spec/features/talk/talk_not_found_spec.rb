@@ -11,7 +11,7 @@ describe 'Talk not found' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       page.has_content? 'Palestra não encontrado(a)'
     end
   end
@@ -22,7 +22,7 @@ describe 'Talk not found' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       page.has_content? 'Palestra não encontrado(a)'
     end
   end
@@ -33,7 +33,7 @@ describe 'Talk not found' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       page.has_content? 'Palestra não encontrado(a)'
     end
   end

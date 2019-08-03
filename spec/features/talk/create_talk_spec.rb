@@ -30,7 +30,7 @@ describe 'Create talk', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/talks/\w+})
+      expect(page).to have_current_path(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
       expect(page).to have_content('Luis XIV')
       expect(page).to_not have_content('Billy Boy')
@@ -49,7 +49,7 @@ describe 'Create talk', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/talks/\w+})
+      expect(page).to have_current_path(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
     end
   end
@@ -66,7 +66,7 @@ describe 'Create talk', js: true do
     end
 
     it 'displays success message' do
-      expect(current_path).to match(%r{/talks/\w+})
+      expect(page).to have_current_path(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
     end
   end
@@ -77,7 +77,7 @@ describe 'Create talk', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       expect(page).to have_content('Verifique o formulário antes de continuar:')
     end
   end
@@ -105,7 +105,7 @@ describe 'Create talk', js: true do
     end
 
     it 'displays error messages' do
-      expect(current_path).to eql(talks_path)
+      expect(page).to have_current_path(talks_path)
       expect(page).to have_content('Link da palestra já está em uso')
     end
   end

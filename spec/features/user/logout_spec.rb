@@ -11,7 +11,7 @@ describe 'Logout' do
     end
 
     it "doesn't render name" do
-      expect(current_path).to eql(root_path)
+      expect(page).to have_current_path(root_path)
       expect(page).not_to have_content("Olá, #{user.name}")
     end
   end
@@ -21,6 +21,6 @@ describe 'Logout' do
       visit logout_path
     end
 
-    it { expect(current_path).to eql(root_path) }
+    it { expect(page).to have_current_path(root_path) }
   end
 end

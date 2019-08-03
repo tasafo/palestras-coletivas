@@ -19,7 +19,7 @@ describe 'Edit user' do
       end
 
       it 'displays success message' do
-        expect(current_path).to match(%r{/users/\w+})
+        expect(page).to have_current_path(%r{/users/\w+})
         expect(page).to have_content('Seus dados foram atualizados!')
       end
     end
@@ -33,7 +33,7 @@ describe 'Edit user' do
       end
 
       it 'displays error messages' do
-        expect(current_path).to eql(user_path(user))
+        expect(page).to have_current_path(user_path(user))
         expect(page).to have_content('Verifique o formulário antes de continuar:')
       end
     end
@@ -48,7 +48,7 @@ describe 'Edit user' do
       end
 
       it 'displays success message' do
-        expect(current_path).to match(%r{/users/\w+})
+        expect(page).to have_current_path(%r{/users/\w+})
         expect(page).to have_content('Seus dados foram atualizados!')
       end
     end
@@ -63,7 +63,7 @@ describe 'Edit user' do
       end
 
       it 'displays error messages' do
-        expect(current_path).to eql(user_path(user))
+        expect(page).to have_current_path(user_path(user))
         expect(page).to have_content('Verifique o formulário antes de continuar:')
       end
     end
@@ -74,6 +74,6 @@ describe 'Edit user' do
       login_as other_user, edit_user_path(user)
     end
 
-    it { expect(current_path).to eql(root_path) }
+    it { expect(page).to have_current_path(root_path) }
   end
 end

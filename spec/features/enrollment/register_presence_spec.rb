@@ -37,7 +37,7 @@ describe 'Register presence' do
       end
 
       it 'displays success message' do
-        expect(current_path).to eql(event_path(event))
+        expect(page).to have_current_path(event_path(event))
         expect(page).to have_content('A inscrição foi alterada!')
       end
     end
@@ -50,7 +50,7 @@ describe 'Register presence' do
       end
 
       it 'displays success message' do
-        expect(current_path).to eql(event_path(event))
+        expect(page).to have_current_path(event_path(event))
         expect(page).to have_content('A inscrição foi alterada!')
       end
     end
@@ -64,7 +64,7 @@ describe 'Register presence' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(event_path(event))
+      expect(page).to have_current_path(event_path(event))
       expect(page)
         .to have_content('Você não tem permissão para acessar esta página.')
     end

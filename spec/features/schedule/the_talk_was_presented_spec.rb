@@ -31,6 +31,6 @@ describe 'The talk was presented', js: true do
       click_on "was_presented_schedule_id_#{schedule_palestra.id}"
     end
 
-    it { expect(current_path).to match(%r{/events/\w+}) }
+    it { expect(page).to have_current_path(%r{/events/\w+}) }
   end
 end

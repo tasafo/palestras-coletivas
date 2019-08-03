@@ -18,7 +18,7 @@ describe 'Edit password resets' do
       end
 
       it 'displays success message' do
-        expect(current_path).to eql(new_password_reset_path)
+        expect(page).to have_current_path(new_password_reset_path)
         expect(page).to have_content('A senha foi redefinida.')
       end
     end
@@ -32,8 +32,8 @@ describe 'Edit password resets' do
       end
 
       it {
-        expect(current_path)
-          .to eql(password_reset_path(user.password_reset_token))
+        expect(page)
+          .to have_current_path(password_reset_path(user.password_reset_token))
       }
     end
   end
@@ -49,7 +49,7 @@ describe 'Edit password resets' do
     end
 
     it 'displays error message' do
-      expect(current_path).to eql(new_password_reset_path)
+      expect(page).to have_current_path(new_password_reset_path)
       expect(page).to have_content('A redefinição de senha expirou.')
     end
   end

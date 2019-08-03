@@ -19,7 +19,7 @@ describe 'Signup' do
       click_button 'Cadastre-me'
     end
 
-    it { expect(current_path).to eql(login_path) }
+    it { expect(page).to have_current_path(login_path) }
   end
 
   context 'with invalid data' do
