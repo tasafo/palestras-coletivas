@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Create talk', type: :request, js: true do
+describe 'Create talk', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:invited_user) do
     create(:user, :luis, name: 'Luis XIV', username: '@user_luis')

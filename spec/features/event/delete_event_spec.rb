@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Delete event', type: :request, js: true do
+describe 'Delete event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:event) { create(:event, :tasafoconf, owner: user, users: [user]) }
 

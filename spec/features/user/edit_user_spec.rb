@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Edit user', type: :request do
+describe 'Edit user' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:image_path) { "#{Rails.root}/app/assets/images/without_avatar.jpg" }

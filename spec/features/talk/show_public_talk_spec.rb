@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Show public talk', type: :request do
+describe 'Show public talk' do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }

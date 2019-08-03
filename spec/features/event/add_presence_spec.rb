@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'add presence', type: :request, js: true do
+describe 'add presence', js: true do
   let(:user) { create(:user, :paul) }
   let(:billy) { create(:user, :billy) }
   let(:event) do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Send password resets', type: :request do
+describe 'Send password resets' do
   let!(:user) { create(:user, :paul) }
 
   before do

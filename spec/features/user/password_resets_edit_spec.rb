@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Edit password resets', type: :request do
+describe 'Edit password resets' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
 

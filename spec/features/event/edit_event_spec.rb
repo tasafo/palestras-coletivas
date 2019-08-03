@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Edit event', type: :request, js: true do
+describe 'Edit event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }

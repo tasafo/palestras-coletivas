@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Submit talk', type: :request, js: true do
+describe 'Submit talk', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:activity_palestra) { create(:activity, :palestra) }

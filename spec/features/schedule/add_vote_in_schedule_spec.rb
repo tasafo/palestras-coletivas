@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add vote in schedule', type: :request, js: true do
+describe 'Add vote in schedule', js: true do
   let!(:user) { create(:user, :paul) }
 
   let!(:event) do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'The talk was presented', type: :request, js: true do
+describe 'The talk was presented', js: true do
   let!(:user) { create(:user, :paul) }
 
   let!(:event) do

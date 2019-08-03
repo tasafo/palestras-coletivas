@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Schedule, 'validations', type: :model do
+describe Schedule, 'validations' do
   context 'when valid data' do
     let!(:user) { create(:user, :paul) }
     let!(:event) { create(:event, :tasafoconf, users: [user], owner: user) }

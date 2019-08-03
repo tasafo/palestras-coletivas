@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Watch talk', type: :request do
+describe 'Watch talk' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:talk) { create(:talk, users: [user], owner: user) }

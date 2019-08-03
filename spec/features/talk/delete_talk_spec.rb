@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Delete talk', type: :request, js: true do
+describe 'Delete talk', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
 

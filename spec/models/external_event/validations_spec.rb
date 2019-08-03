@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExternalEvent, 'validations', type: :model do
+describe ExternalEvent, 'validations' do
   context 'when valid data' do
     let(:external_event) { build(:external_event, :fisl) }
 

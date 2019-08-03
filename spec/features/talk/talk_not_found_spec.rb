@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Talk not found', type: :request do
+describe 'Talk not found' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:talk) { create(:talk, to_public: false, users: [user], owner: user) }

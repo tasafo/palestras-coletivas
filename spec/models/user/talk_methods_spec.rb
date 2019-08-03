@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe User, 'talk methods', type: :model do
-  let!(:user)         { create(:user, :paul) }
-  let!(:talk)         { create(:talk, users: [user], owner: user) }
+describe User, 'talk methods' do
+  let!(:user) { create(:user, :paul) }
+  let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:regular_user) { create(:user, :luis) }
 
   describe 'watch_talk!' do
@@ -13,7 +13,8 @@ describe User, 'talk methods', type: :model do
 
       it 'do not mark talk as watched twice' do
         regular_user.watch_talk! talk
-        expect(regular_user.watched_talks.select { |w_talk| w_talk == talk }.size).to be_eql 1
+        expect(regular_user.watched_talks
+                           .select { |w_talk| w_talk == talk }.size).to be_eql 1
       end
     end
 

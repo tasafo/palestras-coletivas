@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Login', type: :request do
+describe 'Login' do
   before do
     visit login_path
   end

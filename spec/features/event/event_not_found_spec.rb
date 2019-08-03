@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Event not found', type: :request do
+describe 'Event not found' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:event) do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User, 'validations', type: :model do
+describe User, 'validations' do
   let!(:user) { create(:user, :paul) }
 
   context 'when valid data' do
@@ -16,12 +16,13 @@ describe User, 'validations', type: :model do
   end
 
   it 'requires username' do
-    expect { user.username = nil }.to change { user.valid? }
+    expect { user.username = nil }.to(change { user.valid? })
   end
 
   it 'uniquiness of username' do
     duplicated_user = create(:user, :random)
-    expect { duplicated_user.username = user.username }.to change { duplicated_user.valid? }
+    expect { duplicated_user.username = user.username }
+      .to(change { duplicated_user.valid? })
   end
 
   it 'format of username is valid if it looks like twitter username' do
@@ -55,7 +56,7 @@ describe User, 'validations', type: :model do
     user.username = '@user name'
     expect(user).to be_invalid
 
-    user.username = '@use' # 3 digits
+    user.username = '@use'
     expect(user).to be_invalid
   end
 

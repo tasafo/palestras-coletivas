@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Show private event', type: :request, js: true do
+describe 'Show private event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:event) do
     create(

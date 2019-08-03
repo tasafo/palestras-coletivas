@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'See events', type: :request do
+describe 'See events' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:event) do

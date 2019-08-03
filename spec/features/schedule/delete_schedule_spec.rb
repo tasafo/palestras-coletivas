@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Delete schedule', type: :request, js: true do
+describe 'Delete schedule', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:event) { create(:event, :tasafoconf, users: [user], owner: user) }
 

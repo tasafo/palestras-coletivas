@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Submit talk without event', type: :request, js: true do
+describe 'Submit talk without event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
 

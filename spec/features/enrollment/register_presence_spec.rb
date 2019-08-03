@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Register presence', type: :request do
+describe 'Register presence' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }

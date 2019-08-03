@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Event, 'validations', type: :model do
+describe Event, 'validations' do
   context 'when valid data' do
     let!(:user) { create(:user, :paul) }
     let!(:other_user) { create(:user, :billy) }

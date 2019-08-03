@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User, 'password', type: :model do
+describe User, 'password' do
   subject(:user) { create(:user, :paul) }
 
   it 'cleans password after saving user' do

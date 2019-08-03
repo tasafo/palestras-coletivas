@@ -1,15 +1,17 @@
 require 'spec_helper'
 
-describe Comment, type: :model do
+describe Comment do
   let!(:talk_owner) { create(:user, :random) }
-  let!(:commentable)  { create(:talk, users: [talk_owner], owner: talk_owner.id.to_s) }
+  let!(:commentable) do
+    create(:talk, users: [talk_owner], owner: talk_owner.id.to_s)
+  end
 
   let(:commentor) { create :user, :paul }
 
   context 'when commenting on commentable' do
-    let(:new_comment)   { Comment.new }
-    let(:body)          { 'Go reds!' }
-    let(:params)        { { commentable: commentable, user: commentor, body: body } }
+    let(:new_comment) { Comment.new }
+    let(:body) { 'Go reds!' }
+    let(:params) { { commentable: commentable, user: commentor, body: body } }
 
     it 'comments on commentable' do
       expect(commentable.comments.count).to be_eql 0

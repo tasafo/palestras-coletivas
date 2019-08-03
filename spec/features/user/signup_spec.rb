@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Signup', type: :request do
+describe 'Signup' do
   let!(:image_path) { "#{Rails.root}/app/assets/images/without_avatar.jpg" }
 
   before do

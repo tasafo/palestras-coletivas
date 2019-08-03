@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Create event', type: :request, js: true do
+describe 'Create event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:billy) do
     create(:user, :billy, username: '@user_billy', name: 'Billy Boy')

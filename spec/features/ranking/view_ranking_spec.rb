@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'View ranking', type: :request do
+describe 'View ranking' do
   before do
     visit ranking_path
   end

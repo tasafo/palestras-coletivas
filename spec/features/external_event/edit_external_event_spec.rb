@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Edit external event of talk', type: :request do
+describe 'Edit external event of talk' do
   let!(:user) { create(:user, :paul) }
   let!(:fisl) { build(:external_event, :fisl) }
   let!(:rubyconf) { build(:external_event, :rubyconf) }
