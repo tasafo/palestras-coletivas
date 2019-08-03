@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplicationHelper, type: :helper do
+describe ApplicationHelper do
   describe '#thumbnail' do
     let(:user) { create(:user, :paul) }
     let(:image) { helper.thumbnail(user) }

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserMailer, type: :mailer do
+describe UserMailer do
   let!(:user) { create(:user, :paul) }
   let(:mail) { UserMailer.password_reset(user.id.to_s) }
   let(:body) { mail.body }

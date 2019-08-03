@@ -38,7 +38,7 @@ gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'carrierwave-i18n'
 gem 'cloudinary', '1.9.1'
 
-gem "serviceworker-rails"
+gem 'serviceworker-rails'
 
 gem 'meta-tags'
 
@@ -57,6 +57,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'faker'
+  gem 'parallel_tests', '2.29.1'
 end
 
 group :test do
@@ -64,9 +65,10 @@ group :test do
   gem 'webmock'
   gem 'rake'
   gem 'launchy'
-  gem 'capybara'
-  gem 'cuprite'
+  gem 'capybara', '3.27.0'
+  gem 'cuprite', github: 'caifara/cuprite', branch: 'missing-context-2'
   gem 'simplecov', '0.16.1', require: false
+  gem 'simplecov-console', require: false
 end
 
 group :production do

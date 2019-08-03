@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User, '.arrived_at', type: :model do
+describe User, '.arrived_at' do
   subject(:user) { create(:user, :paul) }
   let(:billy) { create :user, :billy }
   let(:event) { create(:event, :tasafoconf, owner: billy.id) }

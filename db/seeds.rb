@@ -2,17 +2,19 @@ records = 10
 
 I18n.locale = 'pt-BR'
 
-Activity.create([
-  {type: 'talk', description: 'Palestra', order: 1},
-  {type: 'interval', description: 'A definir', order: 2},
-  {type: 'interval', description: 'Credenciamento', order: 3},
-  {type: 'interval', description: 'Abertura', order: 4},
-  {type: 'interval', description: 'Intervalo', order: 5},
-  {type: 'interval', description: 'Lanche', order: 6},
-  {type: 'interval', description: 'Almoço', order: 7},
-  {type: 'interval', description: 'Fishbowl', order: 8},
-  {type: 'interval', description: 'Encerramento', order: 9}
-])
+Activity.create(
+  [
+    { type: 'talk', description: 'Palestra', order: 1 },
+    { type: 'interval', description: 'A definir', order: 2 },
+    { type: 'interval', description: 'Credenciamento', order: 3 },
+    { type: 'interval', description: 'Abertura', order: 4 },
+    { type: 'interval', description: 'Intervalo', order: 5 },
+    { type: 'interval', description: 'Lanche', order: 6 },
+    { type: 'interval', description: 'Almoço', order: 7 },
+    { type: 'interval', description: 'Fishbowl', order: 8 },
+    { type: 'interval', description: 'Encerramento', order: 9 }
+  ]
+)
 
 activity_open = Activity.find_by(order: 4)
 activity_talk = Activity.find_by(order: 1)
@@ -29,27 +31,29 @@ user = User.create(
   counter_public_talks: 2
 )
 
-user.talks.create([
-  {
-    owner: user,
-    users: [user],
-    presentation_url: '',
-    title: 'As novas tecnologias',
-    description: 'Um pouco sobre as tecnologias do futuro',
-    tags: 'tecnologias',
-    to_public: true,
-    counter_presentation_events: 1
-  },
-  {
-    owner: user,
-    users: [user],
-    presentation_url: '',
-    title: 'Ruby praticamente falando',
-    description: 'A linguagem Ruby',
-    tags: 'ruby',
-    to_public: true
-  }
-])
+user.talks.create(
+  [
+    {
+      owner: user,
+      users: [user],
+      presentation_url: '',
+      title: 'As novas tecnologias',
+      description: 'Um pouco sobre as tecnologias do futuro',
+      tags: 'tecnologias',
+      to_public: true,
+      counter_presentation_events: 1
+    },
+    {
+      owner: user,
+      users: [user],
+      presentation_url: '',
+      title: 'Ruby praticamente falando',
+      description: 'A linguagem Ruby',
+      tags: 'ruby',
+      to_public: true
+    }
+  ]
+)
 
 talk = Talk.first
 
@@ -99,19 +103,22 @@ event = Event.create(
   counter_present_users: records
 )
 
-event.schedules.create([
-  {day: 1, time: '09:00', activity: activity_open},
-  {day: 1, time: '10:00', activity: activity_talk, talk: talk, was_presented: true},
-  {day: 1, time: '11:30', activity: activity_lunch},
-  {day: 1, time: '12:00', activity: activity_finish}
-])
+event.schedules.create(
+  [
+    { day: 1, time: '09:00', activity: activity_open },
+    { day: 1, time: '10:00', activity: activity_talk, talk: talk,
+      was_presented: true },
+    { day: 1, time: '11:30', activity: activity_lunch },
+    { day: 1, time: '12:00', activity: activity_finish }
+  ]
+)
 
 1.upto(records) do
   name = Faker::Name.name
 
   user1 = User.create(
     name: name,
-    username: name.parameterize.gsub('-', ''),
+    username: name.parameterize.delete('-'),
     email: Faker::Internet.email,
     password: '123456',
     counter_enrollment_events: 1,

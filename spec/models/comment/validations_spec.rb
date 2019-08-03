@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Talk, 'validations', type: :model do
+describe Talk, 'validations' do
   let!(:comment) { create(:comment, :talk) }
 
   context 'when valid data' do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Talk, 'validations', type: :model do
+describe Talk, 'validations' do
   context 'when valid data' do
     let!(:user) { create(:user, :paul) }
     let!(:talk) { create(:talk, users: [user], owner: user) }

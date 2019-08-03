@@ -70,6 +70,10 @@ Executa a bateria de testes com a geração do relatório de cobertura, gravado 
 
     rails spec:coverage
 
+Executa a bateria de testes em paralelo
+
+    rails parallel:spec
+
 ### Ambiente de produção
 
 Configurar as variáveis de ambiente baseadas no arquivo `.env-production`

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Activity, 'validations', type: :model do
+describe Activity, 'validations' do
   context 'when valid data' do
     let!(:activity) { create(:activity, :palestra) }
 

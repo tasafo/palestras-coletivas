@@ -7,13 +7,19 @@ services:
 - redis-server
 cache:
   bundler: true
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+    - public/assets
+    - tmp/cache/assets
 bundler_args: --without production
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
+- bundle exec rails assets:precompile
 script:
-- bundle exec rails spec:coverage
+- COVERAGE=true bundle exec rails parallel:spec
 after_success:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 deploy:

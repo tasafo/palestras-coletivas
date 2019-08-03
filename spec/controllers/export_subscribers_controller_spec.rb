@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ExportSubscribersController, type: :controller do
+describe ExportSubscribersController do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
@@ -10,11 +10,19 @@ describe ExportSubscribersController, type: :controller do
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
 
-  let!(:schedule_palestra_1) { create(:schedule, :palestra, event: event, talk: talk) }
-  let!(:schedule_palestra_2) { create(:schedule, :palestra, event: event, talk: another_talk) }
+  let!(:schedule_palestra_1) do
+    create(:schedule, :palestra, event: event, talk: talk)
+  end
+  let!(:schedule_palestra_2) do
+    create(:schedule, :palestra, event: event, talk: another_talk)
+  end
 
-  let!(:enrollment_active) { create(:enrollment, event: event, user: other_user) }
-  let!(:enrollment_inactive) { create(:enrollment, active: false, event: event, user: another_user) }
+  let!(:enrollment_active) do
+    create(:enrollment, event: event, user: other_user)
+  end
+  let!(:enrollment_inactive) do
+    create(:enrollment, active: false, event: event, user: another_user)
+  end
 
   context 'GET: profiles' do
     it 'should to be success' do
