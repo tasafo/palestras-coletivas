@@ -7,6 +7,11 @@ services:
 - redis-server
 cache:
   bundler: true
+  directories:
+    - $HOME/.cache/yarn
+    - node_modules
+    - public/assets
+    - tmp/cache/assets
 bundler_args: --without production
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
