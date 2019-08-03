@@ -17,7 +17,7 @@ describe 'Create talk', js: true do
   context 'with valid data from slideshare' do
     before do
       fill_in 'Link da palestra', with: 'http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup'
-      fill_in 'Descrição', with: 'Palestra sobre processos e ferramentas para manter um bom negócio digital'
+      fill_in 'Descrição', with: 'Palestra sobre processos e ferramentas'
       fill_in 'Tags', with: 'tecnologia, empreendedorismo'
       fill_in 'Link do vídeo', with: 'http://www.youtube.com/watch?v=wGe5agueUwI'
       check('Quero publicar')

@@ -45,7 +45,7 @@ describe 'Edit event', js: true do
 
       it 'displays error messages' do
         expect(page).to have_current_path(event_path(event))
-        expect(page).to have_content('Verifique o formulário antes de continuar:')
+        expect(page).to have_content('Verifique o formulário antes')
       end
     end
   end
@@ -57,7 +57,7 @@ describe 'Edit event', js: true do
 
     it 'displays error messages' do
       expect(page).to have_current_path(events_path)
-      expect(page).to have_content('Você não tem permissão para acessar esta página.')
+      expect(page).to have_content('Você não tem permissão para acessar')
     end
   end
 end

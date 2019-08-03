@@ -34,7 +34,7 @@ describe 'Edit user' do
 
       it 'displays error messages' do
         expect(page).to have_current_path(user_path(user))
-        expect(page).to have_content('Verifique o formulário antes de continuar:')
+        expect(page).to have_content('Verifique o formulário antes')
       end
     end
 
@@ -64,7 +64,7 @@ describe 'Edit user' do
 
       it 'displays error messages' do
         expect(page).to have_current_path(user_path(user))
-        expect(page).to have_content('Verifique o formulário antes de continuar:')
+        expect(page).to have_content('Verifique o formulário antes')
       end
     end
   end
