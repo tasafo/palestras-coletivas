@@ -291,7 +291,6 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    scout_apm (2.5.2)
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
     sidekiq (5.2.7)
@@ -397,7 +396,6 @@ DEPENDENCIES
   rake
   rspec-mocks
   rspec-rails
-  scout_apm
   serviceworker-rails
   sidekiq
   simplecov (= 0.16.1)

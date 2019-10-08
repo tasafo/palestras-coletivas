@@ -69,7 +69,3 @@ group :test do
   gem 'simplecov', '0.16.1', require: false
   gem 'simplecov-console', require: false
 end
-
-group :production do
-  gem 'scout_apm'
-end
