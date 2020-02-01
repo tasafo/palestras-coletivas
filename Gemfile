@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.5'
 
 gem 'rails', '~> 5.2'
 gem 'rails-i18n'
@@ -18,7 +18,7 @@ gem 'mongoid-slug'
 gem 'mongoid_search'
 gem 'geocoder'
 
-gem 'sprockets'
+gem 'sprockets', '3.7.2'
 gem 'popper_js'
 gem 'material_components_web-sass'
 
@@ -54,7 +54,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'database_cleaner'
+  gem 'database_cleaner', '1.7.0'
   gem 'faker'
   gem 'parallel_tests', '2.29.1'
 end
