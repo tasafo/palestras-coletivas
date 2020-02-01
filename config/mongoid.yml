@@ -80,5 +80,6 @@ production:
     default:
       uri: <%= ENV['MONGODB_URI'] %>
       options:
+        retry_writes: false
   options:
     raise_not_found_error: false
