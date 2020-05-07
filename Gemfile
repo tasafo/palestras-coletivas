@@ -43,6 +43,8 @@ gem 'meta-tags'
 
 gem 'bootsnap'
 
+gem 'webpacker'
+
 group :development do
   gem 'web-console'
   gem 'spring'
