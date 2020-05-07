@@ -1,8 +1,8 @@
 Rails.application.config.time_zone = 'Brasilia'
 
-Rails.application.config.i18n.load_path += Dir['app/locales/**/*.yml']
+Rails.application.config.i18n.load_path += Dir['config/locales/**/*.yml']
 
-Rails.application.config.i18n.available_locales = ['pt-BR', 'en']
+Rails.application.config.i18n.available_locales = %w[pt-BR en]
 
 Rails.application.config.i18n.default_locale = 'pt-BR'
 
