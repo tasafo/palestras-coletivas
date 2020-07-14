@@ -81,19 +81,21 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    :address => ENV['EMAIL_ADDRESS'],
-    :enable_starttls_auto => true,
-    :port => ENV['EMAIL_PORT'],
-    :authentication => :plain,
-    :user_name => ENV['EMAIL_USERNAME'],
-    :password => ENV['EMAIL_PASSWORD'],
-    :domain => ENV['EMAIL_DOMAIN']
+    address: ENV['EMAIL_ADDRESS'],
+    enable_starttls_auto: true,
+    port: ENV['EMAIL_PORT'],
+    authentication: :plain,
+    user_name: ENV['EMAIL_USERNAME'],
+    password: ENV['EMAIL_PASSWORD'],
+    domain: ENV['EMAIL_DOMAIN']
   }
 
-  config.action_mailer.default_url_options = { :host => ENV['DEFAULT_URL'] }
+  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
 
   Mongoid::QueryCache.enabled = true
 end

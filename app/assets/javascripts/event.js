@@ -22,7 +22,7 @@ $(function() {
     half:     true
   });
 
-  $(".rating.readonly").rating({required: true,readOnly: true, half: true});
+  $(".rating.readonly").rating({required: true, readOnly: true, half: true});
 });
 
 var addPresence = function(obj) {
