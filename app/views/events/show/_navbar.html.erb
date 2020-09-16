@@ -17,9 +17,11 @@
             <li class="nav-item">
               <%= link_to t("titles.schedules.index"), "#schedule", class: "nav-link" %>
             </li>
-            <li class="nav-item">
-              <%= link_to t("show.event.place"), "#location", class: "nav-link" %>
-            </li>
+            <% unless @event.online? %>
+              <li class="nav-item">
+                <%= link_to t("show.event.place"), "#location", class: "nav-link" %>
+              </li>
+            <% end %>
 
             <% if @event && !@event.users.blank? %>
               <li class="nav-item">

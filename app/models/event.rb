@@ -31,6 +31,7 @@ class Event
   field :accepts_submissions, type: Boolean, default: false
   field :block_presence, type: Boolean, default: false
   field :workload, type: Integer, default: 0
+  field :online, type: Boolean, default: false
 
   mount_uploader :image, ImageUploader
 
@@ -42,8 +43,7 @@ class Event
   belongs_to :owner, class_name: 'User', inverse_of: :owner_events
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
-                        :deadline_date_enrollment, :place, :street, :district,
-                        :city, :state, :country, :workload
+                        :deadline_date_enrollment, :workload
   validates_length_of :name, maximum: 50
   validates_length_of :edition, maximum: 10
   validates_length_of :description, maximum: 2000
@@ -67,16 +67,18 @@ class Event
     EventPolicy.new(self).address
   end
 
+  def location
+    online? ? 'online' : place
+  end
+
   def long_date
-    date1 = start_date
-    date2 = end_date
     date_of = I18n.t('titles.events.date.of')
     date_to = I18n.t('titles.events.date.to')
     date_format = "%B #{date_of} %Y"
-    day_one = zero_fill(date1.day)
-    day_two = zero_fill(date2.day)
+    day_one = zero_fill(start_date.day)
+    day_two = zero_fill(end_date.day)
 
-    FullDate.new(date1: date1, date2: date2, date_of: date_of,
+    FullDate.new(date1: start_date, date2: end_date, date_of: date_of,
                  date_to: date_to, date_format: date_format,
                  day_one: day_one, day_two: day_two).convert
   end

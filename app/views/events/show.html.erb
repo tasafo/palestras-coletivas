@@ -12,20 +12,22 @@
     </section>
   <% end %>
 
-  <section id="location">
-    <div class="container">
-      <h2 class="text-primary"><%= t("labels.event.place") %></h2>
+  <% unless @event.online? %>
+    <section id="location">
+      <div class="container">
+        <h2 class="text-primary"><%= t("labels.event.place") %></h2>
 
-      <div class="text">
-        <p><%= @event.place %></p>
-        <p><%= t("labels.event.address") %>: <%= @presenter.address %></p>
+        <div class="text">
+          <p><%= @event.place %></p>
+          <p><%= t("labels.event.address") %>: <%= @presenter.address %></p>
+        </div>
+
+        <% if @event.coordinates %>
+          <div id="location-map"></div>
+        <% end %>
       </div>
-
-      <% if @event.coordinates %>
-        <div id="location-map"></div>
-      <% end %>
-    </div>
-  </section>
+    </section>
+  <% end %>
 
   <% unless @event.users.blank? %>
     <section id="organizers">

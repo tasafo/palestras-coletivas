@@ -17,11 +17,6 @@
         </div>
 
         <div class="form-group">
-          <%= f.label :stocking %>
-          <%= f.text_field :stocking, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
           <%= f.label :start_date %>
           <%= f.text_field :start_date, class: "form-control date" %>
         </div>
@@ -37,38 +32,50 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :stocking %>
+          <%= f.text_field :stocking, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
           <%= f.label :workload %>
           <%= f.text_field :workload, class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :place %>
-          <%= f.text_field :place, placeholder: t("placeholder.events.place"), class: "form-control" %>
+          <%= f.label :online %>
+          <%= f.check_box :online %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :street %>
-          <%= f.text_field :street, placeholder: t("placeholder.events.street"), class: "form-control" %>
-        </div>
+        <div id="event-address">
+          <div class="form-group">
+            <%= f.label :place %>
+            <%= f.text_field :place, placeholder: t("placeholder.events.place"), class: "form-control" %>
+          </div>
 
-        <div class="form-group">
-          <%= f.label :district %>
-          <%= f.text_field :district, placeholder: t("placeholder.events.district"), class: "form-control" %>
-        </div>
+          <div class="form-group">
+            <%= f.label :street %>
+            <%= f.text_field :street, placeholder: t("placeholder.events.street"), class: "form-control" %>
+          </div>
 
-        <div class="form-group">
-          <%= f.label :city %>
-          <%= f.text_field :city, placeholder: t("placeholder.events.city"), class: "form-control" %>
-        </div>
+          <div class="form-group">
+            <%= f.label :district %>
+            <%= f.text_field :district, placeholder: t("placeholder.events.district"), class: "form-control" %>
+          </div>
 
-        <div class="form-group">
-          <%= f.label :state%>
-          <%= f.text_field :state, placeholder: t("placeholder.events.state"), class: "form-control" %>
-        </div>
+          <div class="form-group">
+            <%= f.label :city %>
+            <%= f.text_field :city, placeholder: t("placeholder.events.city"), class: "form-control" %>
+          </div>
 
-        <div class="form-group">
-          <%= f.label :country %>
-          <%= f.text_field :country, placeholder: t("placeholder.events.country"), class: "form-control" %>
+          <div class="form-group">
+            <%= f.label :state%>
+            <%= f.text_field :state, placeholder: t("placeholder.events.state"), class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :country %>
+            <%= f.text_field :country, placeholder: t("placeholder.events.country"), class: "form-control" %>
+          </div>
         </div>
 
         <div class="form-group">
@@ -117,14 +124,13 @@
 
 <script>
   tinyMCE.init({
-    selector: ".tinymce_event_template",
+    selector: '.tinymce_event_template',
       menubar: false,
-      language: "pt_BR",
+      language: 'pt_BR',
       convert_urls: false,
-      plugins: "textcolor code anchor",
-      toolbar: [
-        "undo redo | styleselect fontsizeselect forecolor backcolor | bold italic underline | alignleft aligncenter alignright alignjustify | cut copy paste | bullist numlist outdent indent | anchor code"
-      ]
+      toolbar: 'undo redo | styleselect fontsizeselect forecolor backcolor ' +
+        '| bold italic underline | alignleft aligncenter alignright alignjustify ' +
+        '| cut copy paste | bullist numlist outdent indent'
   });
 </script>
 

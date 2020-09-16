@@ -54,42 +54,6 @@ describe Event, 'validations' do
     expect(event.errors[:deadline_date_enrollment].size).to eq(1)
   end
 
-  it 'requires place' do
-    event = Event.create(place: nil)
-
-    expect(event.errors[:place].size).to eq(1)
-  end
-
-  it 'requires street' do
-    event = Event.create(street: nil)
-
-    expect(event.errors[:street].size).to eq(1)
-  end
-
-  it 'requires district' do
-    event = Event.create(district: nil)
-
-    expect(event.errors[:district].size).to eq(1)
-  end
-
-  it 'requires city' do
-    event = Event.create(city: nil)
-
-    expect(event.errors[:city].size).to eq(1)
-  end
-
-  it 'requires state' do
-    event = Event.create(state: nil)
-
-    expect(event.errors[:state].size).to eq(1)
-  end
-
-  it 'requires country' do
-    event = Event.create(country: nil)
-
-    expect(event.errors[:country].size).to eq(1)
-  end
-
   it 'requires owner' do
     event = Event.create(owner: nil)
 

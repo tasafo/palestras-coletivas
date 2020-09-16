@@ -3,6 +3,10 @@ var event_id;
 $(function() {
   event_id = $('#event_id').val();
 
+  if ($("#event_online").is(":checked")) {
+    $("#event-address").hide();
+  }
+
   $("#event_start_date").datepicker();
 
   $("#event_end_date").datepicker();
@@ -12,6 +16,14 @@ $(function() {
   $(".btn-present").on("click", function(e) {
     e.preventDefault();
     addPresence(this)
+  });
+
+  $("#event_online").on("click", function(e) {
+    if ($("#event-address").is(":visible")) {
+      $("#event-address").hide();
+    } else {
+      $("#event-address").show();
+    }
   });
 
   $("form.rating .rating").rating({

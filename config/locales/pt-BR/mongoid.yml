@@ -55,6 +55,7 @@ pt-BR:
         counter_present_users: "Número de usuários presentes"
         block_presence: "Bloquear presença"
         workload: "Carga horária"
+        online: "Evento online"
 
       schedule:
         day: "Dia"
