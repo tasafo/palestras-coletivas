@@ -1,10 +1,10 @@
-dist: bionic
+dist: focal
 sudo: false
 language: ruby
 rvm: 2.6.6
 services:
 - mongodb
-- redis-server
+- redis
 cache:
   bundler: true
   directories:
