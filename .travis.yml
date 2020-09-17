@@ -17,6 +17,7 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
+- nvm install 10.22.0
 - nvm use 10.22.0
 - bundle exec rails assets:precompile
 script:
