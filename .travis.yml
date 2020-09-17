@@ -2,8 +2,6 @@ dist: focal
 sudo: false
 language: ruby
 rvm: 2.6.6
-node_js:
-- 10.22.0
 services:
 - mongodb
 - redis
@@ -19,6 +17,7 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
+- nvm use 10.22.0
 - bundle exec rails assets:precompile
 script:
 - COVERAGE=true bundle exec rails parallel:spec
