@@ -35,7 +35,7 @@ gem 'puma'
 
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'carrierwave-i18n'
-gem 'cloudinary', '1.9.1'
+gem 'cloudinary', '1.17.1'
 
 gem 'serviceworker-rails'
 
