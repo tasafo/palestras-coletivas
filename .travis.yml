@@ -1,5 +1,5 @@
+os: linux
 dist: focal
-sudo: false
 language: ruby
 rvm: 2.6.6
 services:
@@ -27,7 +27,8 @@ after_success:
 deploy:
   provider: heroku
   app: palestrascoletivas
-  skip_cleanup: true
+  cleanup: true
+  strategy: api
   on:
     branch: master
   api_key:

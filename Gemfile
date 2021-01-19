@@ -35,7 +35,7 @@ gem 'puma'
 
 gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'carrierwave-i18n'
-gem 'cloudinary', '1.17.1'
+gem 'cloudinary', '1.18.1'
 
 gem 'serviceworker-rails'
 
@@ -58,7 +58,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner', '1.7.0'
   gem 'faker'
-  gem 'parallel_tests', '2.29.1'
+  gem 'parallel_tests', '3.4.0'
 end
 
 group :test do
@@ -66,8 +66,8 @@ group :test do
   gem 'webmock'
   gem 'rake'
   gem 'launchy'
-  gem 'capybara', '3.27.0'
-  gem 'cuprite', github: 'caifara/cuprite', branch: 'missing-context-2'
+  gem 'capybara', '3.34.0'
+  gem 'cuprite', '0.11'
   gem 'simplecov', '0.16.1', require: false
   gem 'simplecov-console', require: false
 end
