@@ -1,5 +1,4 @@
 require 'nokogiri'
-require 'open-uri'
 
 #:nodoc:
 class Slideshare
@@ -29,7 +28,7 @@ class Slideshare
   end
 
   def self.fields(record)
-    return if record.nil?
+    return unless record
 
     title = record.xpath('//title').text
     code = record.xpath('//slideshow-id').text

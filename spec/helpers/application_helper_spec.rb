@@ -27,7 +27,7 @@ describe ApplicationHelper do
       end
 
       it 'sets url' do
-        expect(html['src']).to eql('/assets/without_avatar.jpg')
+        expect(html['src']).to match(/without_avatar/)
       end
 
       it 'sets alternative text' do

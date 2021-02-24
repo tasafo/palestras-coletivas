@@ -1,6 +1,3 @@
-require 'multi_json'
-require 'open-uri'
-
 #:nodoc:
 class Prezi
   def self.frame(code)
@@ -15,7 +12,7 @@ class Prezi
     begin
       code = url.split('/')[3]
       record = MultiJson.load(
-        open("https://prezi.com/api/embed/?id=#{code}")
+        URI.open("https://prezi.com/api/embed/?id=#{code}")
       )
     rescue OpenURI::HTTPError
       record = nil
@@ -25,13 +22,13 @@ class Prezi
   end
 
   def self.fields(record)
-    return unless !record.nil? && record['error_code'].nil?
+    return unless record
+    return if record['error_code']
 
-    title = record['presentation']['title']
-    code = record['presentation']['oid']
-    thumbnail = record['presentation']['thumb_url']
-    description = record['presentation']['description']
+    presentation = record['presentation']
 
-    { title: title, code: code, thumbnail: thumbnail, description: description }
+    { title: presentation['title'], code: presentation['oid'],
+      thumbnail: presentation['thumb_url'],
+      description: presentation['description'] }
   end
 end

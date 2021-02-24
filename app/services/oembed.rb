@@ -50,7 +50,7 @@ class Oembed
   def show_video
     record = open_url
 
-    return if record.nil?
+    return unless record
 
     @title = record['title']
     @frame = record['html']

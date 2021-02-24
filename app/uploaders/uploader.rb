@@ -4,7 +4,7 @@ class Uploader < CarrierWave::Uploader::Base
 
   process convert: 'jpg' if ENV['CLOUDINARY_URL'].present?
 
-  def extension_whitelist
+  def extension_allowlist
     %w[jpg jpeg png]
   end
 

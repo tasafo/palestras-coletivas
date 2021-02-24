@@ -1,6 +1,3 @@
-require 'multi_json'
-require 'open-uri'
-
 #:nodoc:
 class Speakerdeck
   def self.frame(code)
@@ -25,11 +22,11 @@ class Speakerdeck
   end
 
   def self.fields(record)
-    return if record.nil?
+    return unless record
 
     html_field = record['html']
     title = record['title']
-    code = html_field.match(%r{player\/(.*)\" style})[1]
+    code = html_field.match(%r{player/(.*)" style})[1]
     url = 'https://speakerd.s3.amazonaws.com'
     thumbnail = "#{url}/presentations/#{code}/thumb_slide_0.jpg"
 

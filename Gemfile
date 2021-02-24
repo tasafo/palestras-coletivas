@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.6'
+ruby '2.7.2'
 
-gem 'rails', '~> 6.0'
+gem 'rails', '~> 6.1'
 gem 'rails-i18n'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
@@ -13,7 +13,7 @@ gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'active_model_serializers'
 
-gem 'mongoid', '~> 7.0'
+gem 'mongoid', '7.2.1'
 gem 'mongoid-slug'
 gem 'mongoid_search'
 gem 'geocoder'

@@ -1,7 +1,7 @@
 os: linux
 dist: focal
 language: ruby
-rvm: 2.6.6
+rvm: 2.7.2
 services:
 - mongodb
 - redis
