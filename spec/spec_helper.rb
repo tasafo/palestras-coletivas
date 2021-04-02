@@ -20,7 +20,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/cuprite'
 require 'webmock/rspec'
-require 'database_cleaner'
+require 'database_cleaner-mongoid'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
@@ -50,12 +50,11 @@ RSpec.configure do |config|
   Capybara.server_port = 9887 + ENV['TEST_ENV_NUMBER'].to_i
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.orm = :mongoid
+    DatabaseCleaner[:mongoid].strategy = :deletion
   end
 
   config.before(:each) do
-    DatabaseCleaner.clean
+    DatabaseCleaner[:mongoid].clean
   end
 
   config.after(:suite) do

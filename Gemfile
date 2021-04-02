@@ -56,9 +56,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
-  gem 'database_cleaner', '1.7.0'
+  gem 'database_cleaner-mongoid', '2.0.1'
   gem 'faker'
-  gem 'parallel_tests', '3.4.0'
+  gem 'parallel_tests', '3.6.0'
 end
 
 group :test do
@@ -66,8 +66,8 @@ group :test do
   gem 'webmock'
   gem 'rake'
   gem 'launchy'
-  gem 'capybara', '3.34.0'
-  gem 'cuprite', '0.11'
-  gem 'simplecov', '0.16.1', require: false
+  gem 'capybara', '3.35.3'
+  gem 'cuprite', '0.13'
+  gem 'simplecov', '0.21.2', require: false
   gem 'simplecov-console', require: false
 end

@@ -2,14 +2,14 @@ version: '3.7'
 
 services:
   mongo:
-    image: mvertes/alpine-mongo
+    image: sounerd/alpine-mongo
     ports:
       - 27017:27017
     volumes:
       - mongo-data:/data/db
 
   redis:
-    image: redis:4.0.10-alpine
+    image: redis:6.0.12-alpine
     ports:
       - 6379:6379
     volumes:
