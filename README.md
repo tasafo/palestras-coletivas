@@ -12,7 +12,7 @@ Linguagem Ruby via [RVM](http://rvm.io)
 
     curl -sSL https://get.rvm.io | bash -s stable
 
-    rvm install 2.7.2
+    rvm install 2.7.3
 
 Inicia os bancos de dados [MongoDB](https://www.mongodb.com/) e [Redis](https://redis.io/) instalados via [Docker compose](https://docs.docker.com/compose/)
 
