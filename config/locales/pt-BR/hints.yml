@@ -1,0 +1,4 @@
+pt-BR:
+  hints:
+    event:
+      image: "- Formatos permitidos: (.jpg, .jpeg, .png). A imagem será redimensionada para 1024px de largura e 768px de altura."
