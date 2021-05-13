@@ -11,7 +11,6 @@ pt-BR:
     events:
       name: "Conferência de Tecnologia"
       edition: "2013"
-      description: "Evento que trata sobre a Tecnologia no mundo atual"
       tags: "tecnologia, programação"
       place: "Centro de Convenções do Universo"
       street: "Rua das Laranjeiras, 574"

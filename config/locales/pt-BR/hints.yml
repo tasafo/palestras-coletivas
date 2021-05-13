@@ -1,4 +1,5 @@
 pt-BR:
   hints:
     event:
+      description: "- Tamanho máximo de 2000 caracteres."
       image: "- Formatos permitidos: (.jpg, .jpeg, .png). A imagem será redimensionada para 1024px de largura e 768px de altura."

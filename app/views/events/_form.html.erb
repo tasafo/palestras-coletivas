@@ -13,7 +13,8 @@
 
         <div class="form-group">
           <%= f.label :description %>
-          <%= f.text_area :description, placeholder: t("placeholder.events.description"), rows: 10, class: "form-control tinymce_event_template" %>
+          <span style="color: green;"><%= t('hints.event.description') %></span>
+          <%= f.text_area :description, class: "form-control tinymce_event_template" %>
         </div>
 
         <div class="form-group">
@@ -129,9 +130,12 @@
       menubar: true,
       language: 'pt_BR',
       convert_urls: false,
-      toolbar: 'undo redo | styleselect fontsizeselect forecolor backcolor ' +
+      toolbar: [
+        '| styleselect fontsizeselect forecolor backcolor ' +
         '| bold italic underline | alignleft aligncenter alignright alignjustify ' +
-        '| cut copy paste | bullist numlist outdent indent | emoticons image link code wordcount',
+        '| bullist numlist outdent indent',
+        '| undo redo | cut copy paste | emoticons image link code wordcount visualblocks visualchars hr'
+      ],
       plugins: 'emoticons image link code lists autolink autoresize visualblocks visualchars wordcount hr',
       default_link_target: '_blank'
   });
