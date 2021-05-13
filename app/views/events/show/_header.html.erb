@@ -1,23 +1,19 @@
-  <style type="text/css">
-    #page-header {
-      background-image: url(<%= https(@event.image.url) %>);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
-    }
-  </style>
-
   <section id="page-header">
+    <img src="<%= https(@event.image.url) %>" class="img-fluid">
+
     <div id="page-content" class="row-fluid">
-      <h2><%= @event.name_edition %></h2>
+      <p class="page-header-title"><%= @event.name_edition %></p>
 
-      <h4><%= @event.long_date %></h4>
+      <p class="page-header-text"><%= @event.long_date %></p>
 
-      <h4><%= @event.location %></h4>
+      <p class="page-header-text"><%= @event.location %></p>
 
-      <h4 class="text-danger"><%= t("labels.event.stocking") %>: <%= @event.stocking %></h4>
+      <p class="page-header-text"><%= t("labels.event.stocking") %>: <%= @event.stocking %></p>
 
-      <h4 class="text-danger"><%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}" if @presenter.open_enrollment %>&nbsp;</h4>
+      <% if @presenter.open_enrollment %>
+        <p class="page-header-text">
+          <%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}" %>
+        </p>
+      <% end %>
     </div>
   </section>

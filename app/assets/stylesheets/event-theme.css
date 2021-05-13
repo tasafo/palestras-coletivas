@@ -249,29 +249,23 @@ iframe {
    ========================================================================== */
 
 #page-header {
-  width: 100%;
-  height: 600px;
-  background: rgba(30,30,30,0.9);
+  font-weight: bold;
   text-align: center;
 }
 
-#page-header h2 {
-  color: #fff;
+.page-header-title {
+  padding-top: 2%;
   line-height: 1.5em;
-  font-size: 36px;
+  font-size: 46px;
 }
 
-#page-header h4 {
-  color: #fff;
+.page-header-text {
+  font-size: 20px;
 }
 
 #page-content {
-  background-color: #000000;
-  border: 1px solid black;
-  opacity: 0.8;
-  filter: alpha(opacity=60); /* For IE8 and earlier */
-  padding-top: 15%;
-  padding-bottom: 16%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 }
 
 .hero-text {
@@ -286,8 +280,8 @@ iframe {
 }
 
 section {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 .section {
@@ -305,7 +299,6 @@ section {
 #about h4 {
   text-align: center;
   font-weight: bold;
-  padding: 10px
 }
 
 #about p {
