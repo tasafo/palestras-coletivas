@@ -249,6 +249,7 @@ iframe {
    ========================================================================== */
 
 #page-header {
+  padding-top: 4%;
   font-weight: bold;
   text-align: center;
 }
