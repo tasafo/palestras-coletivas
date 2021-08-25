@@ -14,10 +14,12 @@ cache:
     - tmp/cache/assets
 before_install:
 - bundle config set without 'production'
+- bundle config set deployment 'true'
 before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
+- nvm install 12.22.2
 - nvm use 12.22.2
 - bundle exec rails assets:precompile
 script:
