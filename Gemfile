@@ -13,7 +13,7 @@ gem 'kaminari'
 gem 'kaminari-mongoid'
 gem 'active_model_serializers'
 
-gem 'mongoid', '7.3.2'
+gem 'mongoid', '7.3.3'
 gem 'mongoid-slug'
 gem 'mongoid_search'
 gem 'geocoder'
