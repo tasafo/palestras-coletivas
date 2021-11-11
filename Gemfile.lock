@@ -240,7 +240,7 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (5.4.0)
+    puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -283,7 +283,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.4.0)
+    redis (4.5.1)
     regexp_parser (2.1.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -319,7 +319,7 @@ GEM
     semantic_range (3.0.0)
     serviceworker-rails (0.6.0)
       railties (>= 3.1)
-    sidekiq (6.2.2)
+    sidekiq (6.3.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -327,6 +327,8 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
+    simplecov-cobertura (1.4.2)
+      simplecov (~> 0.8)
     simplecov-console (0.9.1)
       ansi
       simplecov
@@ -431,6 +433,7 @@ DEPENDENCIES
   serviceworker-rails
   sidekiq
   simplecov (= 0.21.2)
+  simplecov-cobertura
   simplecov-console
   sinatra
   spring

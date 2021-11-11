@@ -70,4 +70,5 @@ group :test do
   gem 'cuprite', '0.13'
   gem 'simplecov', '0.21.2', require: false
   gem 'simplecov-console', require: false
+  gem 'simplecov-cobertura', require: false
 end

@@ -1,4 +1,7 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/cf2793af7e6bceef3b92/maintainability)](https://codeclimate.com/github/tasafo/palestras-coletivas/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/cf2793af7e6bceef3b92/test_coverage)](https://codeclimate.com/github/tasafo/palestras-coletivas/test_coverage) [![Build Status](https://app.travis-ci.com/tasafo/palestras-coletivas.svg?branch=master)](https://app.travis-ci.com/tasafo/palestras-coletivas) [![security](https://hakiri.io/github/tasafo/palestras-coletivas/master.svg)](https://hakiri.io/github/tasafo/palestras-coletivas/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cf2793af7e6bceef3b92/maintainability)](https://codeclimate.com/github/tasafo/palestras-coletivas/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/cf2793af7e6bceef3b92/test_coverage)](https://codeclimate.com/github/tasafo/palestras-coletivas/test_coverage)
+[![Build](https://github.com/tasafo/palestras-coletivas/actions/workflows/build.yml/badge.svg)](https://github.com/tasafo/palestras-coletivas/actions/workflows/build.yml)
+[![security](https://hakiri.io/github/tasafo/palestras-coletivas/master.svg)](https://hakiri.io/github/tasafo/palestras-coletivas/master)
 
 # Palestras coletivas
 

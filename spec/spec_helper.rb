@@ -12,6 +12,11 @@ if ENV['COVERAGE']
       result.format! if ParallelTests.number_of_running_processes <= 1
     end
   end
+
+  if ENV['CI']
+    require 'simplecov-cobertura'
+    SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+  end
 end
 
 ENV['RAILS_ENV'] ||= 'test'
