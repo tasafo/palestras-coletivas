@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby RUBY_VERSION
 
 gem 'rails', '~> 6.1'
 gem 'rails-i18n'

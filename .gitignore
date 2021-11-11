@@ -14,10 +14,8 @@ public/uploads
 .env
 .rvmrc
 .DS_Store
-.ruby-version
 .ruby-gemset
 start.sh
-cc-test-reporter
 node_modules
 yarn.lock
 
