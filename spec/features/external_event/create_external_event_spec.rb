@@ -14,7 +14,7 @@ describe 'Create external event of talk' do
 
       fill_in 'Nome do evento', with: 'Ruby Conf 2011'
       fill_in 'Local', with: 'São Paulo, SP'
-      fill_in_inputmask 'Data', with: '01/01/2011'
+      fill_in_inputmask 'Data', '01/01/2011'
       fill_in 'Link', with: 'http://rubyconf.com/2011'
 
       click_button 'Adicionar evento externo'

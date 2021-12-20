@@ -24,9 +24,9 @@ describe 'Create event', js: true do
       page.execute_script(script)
       fill_in 'Lotação', with: 100
       fill_in 'Tags', with: 'tecnologia, agilidade, gestão'
-      fill_in_inputmask 'Data de início', with: '05/06/2012'
-      fill_in_inputmask 'Data de término', with: '06/06/2012'
-      fill_in_inputmask 'Prazo para inscrição', with: '06/06/2012'
+      fill_in_inputmask 'Data de início', '05/06/2012'
+      fill_in_inputmask 'Data de término', '06/06/2012'
+      fill_in_inputmask 'Prazo para inscrição', '06/06/2012'
       fill_in 'Local', with: 'Centro de Convenções do Jurunas'
       fill_in 'Endereço', with: 'Rua dos Caripunas, 800'
       fill_in 'Bairro', with: 'Jurunas'
@@ -75,9 +75,9 @@ describe 'Create event', js: true do
       page.execute_script(script)
       fill_in 'Lotação', with: 100
       fill_in 'Tags', with: 'tecnologia, agilidade, gestão'
-      fill_in_inputmask 'Data de início', with: '05/06/2012'
-      fill_in_inputmask 'Data de término', with: '06/06/2012'
-      fill_in_inputmask 'Prazo para inscrição', with: '06/06/2012'
+      fill_in_inputmask 'Data de início', '05/06/2012'
+      fill_in_inputmask 'Data de término', '06/06/2012'
+      fill_in_inputmask 'Prazo para inscrição', '06/06/2012'
       fill_in 'Local', with: 'Centro de Convenções do Jurunas'
       fill_in 'Endereço', with: '.'
       fill_in 'Bairro', with: '.'

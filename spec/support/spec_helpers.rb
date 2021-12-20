@@ -10,12 +10,12 @@ module SpecHelpers
     click_button 'Acessar minha conta'
   end
 
-  def fill_in_inputmask(location, options = {})
-    len = options[:with].to_s.length - 1
+  def fill_in_inputmask(location, text)
+    len = text.to_s.length - 1
     len.times do
       fill_in location, with: '1'
     end
-    fill_in location, options
+    fill_in location, with: text
   end
 
   def click_with_alert(target)

@@ -28,7 +28,7 @@ describe 'Edit schedule', js: true do
 
       select '06/06/2012', from: 'schedule_day'
 
-      fill_in_inputmask 'Horário', with: '08:00'
+      fill_in_inputmask 'Horário', '08:00'
 
       fill_in :search_text, with: 'Ruby'
 
@@ -49,7 +49,7 @@ describe 'Edit schedule', js: true do
     before do
       click_link "edit_schedule_id_#{schedule_palestra2.id}"
 
-      fill_in_inputmask 'Horário', with: '24:00'
+      fill_in_inputmask 'Horário', '24:00'
 
       click_button 'Atualizar programação'
     end

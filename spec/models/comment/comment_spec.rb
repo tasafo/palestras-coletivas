@@ -15,23 +15,23 @@ describe Comment do
 
     it 'comments on commentable' do
       expect(commentable.comments.count).to be_eql 0
-      new_comment.comment_on! params
+      new_comment.comment_on!(**params)
       expect(commentable.comments.count).to be_eql 1
     end
 
     it 'sets user' do
-      new_comment.comment_on! params
+      new_comment.comment_on!(**params)
       expect(new_comment.user).to be_eql commentor
     end
 
     it 'sets body' do
-      new_comment.comment_on! params
+      new_comment.comment_on!(**params)
       expect(new_comment.body).to be_eql body
     end
 
     it 'persists comment' do
       expect(new_comment).to_not be_persisted
-      new_comment.comment_on! params
+      new_comment.comment_on!(**params)
       expect(new_comment).to be_persisted
     end
   end

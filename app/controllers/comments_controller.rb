@@ -4,11 +4,11 @@ class CommentsController < ApplicationController
 
   def create
     comment_params = {
-      user: current_user,
       commentable: find_parent_comment,
+      user: current_user,
       body: params[:comment][:body]
     }
-    @new_comment = Comment.new.comment_on! comment_params
+    @new_comment = Comment.new.comment_on!(**comment_params)
 
     result = @new_comment.persisted? ? 'notice' : 'alert'
 
