@@ -27,5 +27,7 @@ module Palestrascoletivas
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.time_zone = 'Brasilia'
+
+    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
   end
 end
