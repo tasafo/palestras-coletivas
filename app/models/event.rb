@@ -77,10 +77,10 @@ class Event
     date_format = "%B #{date_of} %Y"
     day_one = zero_fill(start_date.day)
     day_two = zero_fill(end_date.day)
-
-    FullDate.new(date1: start_date, date2: end_date, date_of: date_of,
-                 date_to: date_to, date_format: date_format,
-                 day_one: day_one, day_two: day_two).convert
+    fields = { start_date: start_date, end_date: end_date, date_of: date_of,
+               date_to: date_to, date_format: date_format, day_one: day_one,
+               day_two: day_two }
+    FullDate.new(**fields).convert
   end
 
   private

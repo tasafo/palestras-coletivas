@@ -10,10 +10,10 @@ describe ExportSubscribersController do
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
 
-  let!(:schedule_palestra_1) do
+  let!(:schedule_palestra1) do
     create(:schedule, :palestra, event: event, talk: talk)
   end
-  let!(:schedule_palestra_2) do
+  let!(:schedule_palestra2) do
     create(:schedule, :palestra, event: event, talk: another_talk)
   end
 
@@ -25,84 +25,19 @@ describe ExportSubscribersController do
   end
 
   context 'GET: profiles' do
-    it 'should to be success' do
-      session[:user_id] = user.id
-
-      params = { event_id: event.slug }
-
-      get :new, params: params.merge(format: 'html')
-
-      expect(response.status).to eql(200)
-    end
-
-    it 'unauthorized access' do
-      session[:user_id] = other_user.id
-
-      params = { event_id: event.slug }
-
-      get :new, params: params.merge(format: 'html')
-
-      expect(response.status).to eql(302)
-    end
+    include_examples 'get profiles', 'paul', 'paul', 'should to be success', 200
+    include_examples 'get profiles', 'paul', 'billy', 'unauthorized access', 302
   end
 
   context 'Export data with speakers profile' do
-    let(:csv_string)  { ExportSubscriber.as_csv(event, 'speakers') }
-    let(:csv_options) do
-      { filename: 'certifico_ta-safo-conf-2012_palestrantes.csv',
-        type: 'text/csv' }
-    end
-
-    before do
-      expect(@controller).to receive(:send_data).with(csv_string, csv_options)
-    end
-
-    it 'streams the result as a csv file' do
-      session[:user_id] = user.id
-
-      params = { event_id: event.slug, profile: 'speakers' }
-
-      post :create, params: params.merge(format: 'html')
-    end
+    include_examples 'csv params', 'speakers', 'palestrantes'
   end
 
   context 'Export data with organizers profile' do
-    let(:csv_string)  { ExportSubscriber.as_csv(event, 'organizers') }
-    let(:csv_options) do
-      { filename: 'certifico_ta-safo-conf-2012_organizacao.csv',
-        type: 'text/csv' }
-    end
-
-    before do
-      expect(@controller).to receive(:send_data).with(csv_string, csv_options)
-    end
-
-    it 'streams the result as a csv file' do
-      session[:user_id] = user.id
-
-      params = { event_id: event.slug, profile: 'organizers' }
-
-      post :create, params: params.merge(format: 'html')
-    end
+    include_examples 'csv params', 'organizers', 'organizacao'
   end
 
   context 'Export data with participants profile' do
-    let(:csv_string)  { ExportSubscriber.as_csv(event, 'participants') }
-    let(:csv_options) do
-      { filename: 'certifico_ta-safo-conf-2012_participantes.csv',
-        type: 'text/csv' }
-    end
-
-    before do
-      expect(@controller).to receive(:send_data).with(csv_string, csv_options)
-    end
-
-    it 'streams the result as a csv file' do
-      session[:user_id] = user.id
-
-      params = { event_id: event.slug, profile: 'participants' }
-
-      post :create, params: params.merge(format: 'html')
-    end
+    include_examples 'csv params', 'participants', 'participantes'
   end
 end

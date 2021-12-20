@@ -62,13 +62,13 @@ shared_examples 'a commentable' do
 
       find("#answer_#{answer.id} a.delete").click
       expect(page.current_path).to eql commentable_path
-      expect(page).to              have_content I18n.t('flash.comments.destroy.notice')
-      expect(page).to_not          have_content answer.body
+      expect(page).to have_content I18n.t('flash.comments.destroy.notice')
+      expect(page).to_not have_content answer.body
 
       find("#comment_#{comment.id} a.delete").click
       expect(page.current_path).to eql commentable_path
-      expect(page).to              have_content I18n.t('flash.comments.destroy.notice')
-      expect(page).to_not          have_content comment.body
+      expect(page).to have_content I18n.t('flash.comments.destroy.notice')
+      expect(page).to_not have_content comment.body
     end
   end
 

@@ -29,7 +29,7 @@ describe User, '.arrived_at' do
     before do
       2.times do
         enrollment = Enrollment.new(user: subject, event: event, active: true)
-        enrollment = EnrollmentDecorator.new(enrollment, 'active').create
+        EnrollmentDecorator.new(enrollment, 'active').create
       end
     end
 

@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe 'Show private event', js: true do
+describe 'Show public event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:event) do
     create(
       :event, :tasafoconf,
-      users: [user], owner: user, to_public: false, start_date: Date.today,
-      end_date: Date.today + 1.year
+      users: [user], owner: user, to_public: true, start_date: '2021-01-25',
+      end_date: '2021-02-01'
     )
   end
 
@@ -21,17 +21,6 @@ describe 'Show private event', js: true do
     it 'displays detail event' do
       expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('Tá Safo Conf')
-    end
-  end
-
-  context 'when unlogged' do
-    before do
-      visit event_path(event)
-    end
-
-    it 'displays error message' do
-      expect(page).to have_current_path(events_path)
-      expect(page).to have_content('Evento não foi encontrado(a)')
     end
   end
 end

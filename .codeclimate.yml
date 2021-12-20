@@ -25,12 +25,13 @@ exclude_paths:
 - lib/**/*
 - public/**/*
 - vendor/**/*
-- .codeclimate.yml
+- **/*.yml
+- **/*.js
+- **/*.json
 - .env-*
 - .gitattributes
 - .gitignore
 - .rspec
-- .rubocop.yml
 - .slugignore
 - LICENSE
 - Gemfile
@@ -39,4 +40,3 @@ exclude_paths:
 - README.md
 - Rakefile
 - config.ru
-- docker-compose.yml
