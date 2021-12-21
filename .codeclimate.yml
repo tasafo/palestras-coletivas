@@ -6,6 +6,7 @@ plugins:
     enabled: true
   rubocop:
     enabled: true
+    channel: rubocop-1-23-0
   duplication:
     enabled: true
     config:
