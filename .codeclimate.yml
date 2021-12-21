@@ -12,9 +12,9 @@ plugins:
       languages:
       - ruby
 exclude_patterns:
-- **/*.yml
-- **/*.js
-- **/*.json
+- "**/*.yml"
+- "**/*.js"
+- "**/*.json"
 - app/assets/**/*
 - app/locales/**/*
 - app/views/**/*
