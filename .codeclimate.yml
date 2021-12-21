@@ -25,6 +25,7 @@ exclude_patterns:
 - doc/**/*
 - lib/**/*
 - public/**/*
+- spec/**/*
 - vendor/**/*
 - .env-*
 - .gitattributes

@@ -12,7 +12,7 @@ class Prezi
     begin
       code = url.split('/')[3]
       record = MultiJson.load(
-        URI.open("https://prezi.com/api/embed/?id=#{code}")
+        URI.parse("https://prezi.com/api/embed/?id=#{code}").open
       )
     rescue OpenURI::HTTPError
       record = nil

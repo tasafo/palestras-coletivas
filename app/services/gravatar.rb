@@ -34,7 +34,7 @@ class Gravatar
     url = "#{profile}.xml"
 
     begin
-      Nokogiri::XML(URI.open(url))
+      Nokogiri::XML(URI.parse(url).open)
     rescue OpenURI::HTTPError
       nil
     end

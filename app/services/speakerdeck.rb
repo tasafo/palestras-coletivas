@@ -12,7 +12,7 @@ class Speakerdeck
   def self.extract(url)
     begin
       record = MultiJson.load(
-        URI.open("https://speakerdeck.com/oembed.json?url=#{url}")
+        URI.parse("https://speakerdeck.com/oembed.json?url=#{url}").open
       )
     rescue OpenURI::HTTPError
       record = nil

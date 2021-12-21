@@ -18,7 +18,7 @@ class Slideshare
   def self.extract(url)
     begin
       record = Nokogiri::XML(
-        URI.open("#{site}/api/oembed/2?url=#{url}&format=xml")
+        URI.parse("#{site}/api/oembed/2?url=#{url}&format=xml").open
       )
     rescue OpenURI::HTTPError
       record = nil
