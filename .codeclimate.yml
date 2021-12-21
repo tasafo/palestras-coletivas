@@ -1,4 +1,5 @@
-engines:
+version: "2"
+plugins:
   brakeman:
     enabled: true
   bundler-audit:
@@ -10,15 +11,10 @@ engines:
     config:
       languages:
       - ruby
-ratings:
-  paths:
-  - "app/**/*"
-  - "**.rb"
 exclude_patterns:
-- "**/*.yml"
-- "**/*.js"
-- "**/*.json"
-exclude_paths:
+- **/*.yml
+- **/*.js
+- **/*.json
 - app/assets/**/*
 - app/locales/**/*
 - app/views/**/*
