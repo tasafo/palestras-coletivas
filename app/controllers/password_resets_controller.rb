@@ -1,4 +1,3 @@
-#:nodoc:
 class PasswordResetsController < ApplicationController
   before_action :set_user, only: %i[edit update]
 
@@ -10,11 +9,9 @@ class PasswordResetsController < ApplicationController
     if user
       user.send_password_reset
 
-      message = t('flash.reset_password.create.notice')
-      redirect_to new_password_reset_path, notice: message
+      redirect_to new_password_reset_path, notice: t('flash.reset_password.create.notice')
     else
-      message = t('flash.reset_password.create.alert')
-      redirect_to new_password_reset_path, alert: message
+      redirect_to new_password_reset_path, alert: t('flash.reset_password.create.alert')
     end
   end
 
@@ -22,13 +19,9 @@ class PasswordResetsController < ApplicationController
 
   def update
     if @user.password_reset_sent_at < 2.hours.ago
-      message = t('flash.reset_password.update.alert')
-
-      redirect_to new_password_reset_path, alert: message
+      redirect_to new_password_reset_path, alert: t('flash.reset_password.update.alert')
     elsif @user.update(user_params)
-      message = t('flash.reset_password.update.notice')
-
-      redirect_to new_password_reset_path, notice: message
+      redirect_to new_password_reset_path, notice: t('flash.reset_password.update.notice')
     else
       render :edit
     end

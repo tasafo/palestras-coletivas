@@ -1,14 +1,13 @@
-#:nodoc:
 class PersistenceController < ApplicationController
   def save_object(object, users, args = {})
     name = object.class.name.downcase.pluralize
-    option = option_type(args[:owner])
-    operation = operation_type(args[:owner])
+    owner = args[:owner]
+    option = option_type(owner)
+    operation = operation_type(owner)
     decorator = decorate(object, users, args)
 
-    if decorator.send operation
-      redirect_to "/#{name}/#{object.slug}",
-                  notice: t("flash.#{name}.#{operation}.notice")
+    if decorator.send(operation)
+      redirect_to "/#{name}/#{object.slug}", notice: t("flash.#{name}.#{operation}.notice")
     else
       render option
     end
@@ -16,14 +15,14 @@ class PersistenceController < ApplicationController
 
   def destroy_object(object)
     name = object.class.name.downcase
+    plural_name = name.pluralize
 
     object.destroy
 
     if object.errors.blank?
-      redirect_to "/#{name.pluralize}", notice: text_notice(name, true)
+      redirect_to "/#{plural_name}", notice: error_text(name)
     else
-      redirect_to "/#{name.pluralize}/#{object.slug}",
-                  notice: text_notice(name, false)
+      redirect_to "/#{plural_name}/#{object.slug}", notice: notice_text(name)
     end
   end
 
@@ -43,11 +42,11 @@ class PersistenceController < ApplicationController
     owner ? :create : :update
   end
 
-  def text_notice(name, error)
-    if error
-      t('notice.destroyed', model: t("mongoid.models.#{name}"))
-    else
-      t("notice.delete.restriction.#{name.pluralize}")
-    end
+  def error_text(name)
+    t('notice.destroyed', model: t("mongoid.models.#{name}"))
+  end
+
+  def notice_text(name)
+    t("notice.delete.restriction.#{name.pluralize}")
   end
 end

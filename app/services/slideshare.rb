@@ -1,6 +1,5 @@
 require 'nokogiri'
 
-#:nodoc:
 class Slideshare
   def self.site
     'https://www.slideshare.net'

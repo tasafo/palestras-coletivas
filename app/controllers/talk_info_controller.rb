@@ -1,4 +1,3 @@
-#:nodoc:
 class TalkInfoController < ApplicationController
   def create
     oembed = Oembed.new(params[:link]).open_presentation

@@ -1,4 +1,3 @@
-#:nodoc:
 class TalkQuery
   def initialize(relation = Talk.scoped)
     @relation = relation

@@ -1,4 +1,3 @@
-#:nodoc:
 class Prezi
   def self.frame(code)
     "<iframe class=\"embed-responsive-item\"

@@ -1,4 +1,3 @@
-#:nodoc:
 class TalksController < PersistenceController
   before_action :require_logged_user, only: %i[new create edit update]
   before_action :set_talk, only: %i[show edit update destroy]
@@ -68,7 +67,7 @@ class TalksController < PersistenceController
   def set_talk
     @talk = Talk.find(params[:id])
 
-    found = !@talk.nil? && (@talk.owner == current_user || @talk.to_public)
+    found = @talk && (@talk.owner == current_user || @talk.to_public)
 
     return if found
 

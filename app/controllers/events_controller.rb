@@ -1,4 +1,3 @@
-#:nodoc:
 class EventsController < PersistenceController
   before_action :require_logged_user, only: %i[new create edit update]
   before_action :set_event, only: %i[show edit update destroy]
@@ -7,9 +6,7 @@ class EventsController < PersistenceController
 
   def index
     @my_event = !params[:my].blank?
-
-    @events = query_event(@my_event)
-    @events = @events.page(params[:page]).per(12)
+    @events = query_event(@my_event).page(params[:page]).per(12)
 
     respond_to do |format|
       format.html
@@ -49,7 +46,7 @@ class EventsController < PersistenceController
   def set_event
     @event = Event.with_relations.find(params[:id])
 
-    found = !@event.nil? && (@event.owner == current_user || @event.to_public)
+    found = @event && (@event.owner == current_user || @event.to_public)
 
     return if found
 

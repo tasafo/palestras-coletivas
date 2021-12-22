@@ -1,6 +1,5 @@
 require 'nokogiri'
 
-#:nodoc:
 class Gravatar
   attr_reader :url, :profile, :profile_url, :about_me, :current_location,
               :has_profile, :email, :thumbnail_url

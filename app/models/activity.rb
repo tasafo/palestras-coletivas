@@ -1,4 +1,3 @@
-#:nodoc:
 class Activity
   include Mongoid::Document
 

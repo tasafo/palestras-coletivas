@@ -1,4 +1,3 @@
-#:nodoc:
 class EnrollmentDecorator
   def initialize(enrollment, option_type, params = nil)
     @enrollment = enrollment
@@ -29,12 +28,10 @@ class EnrollmentDecorator
 
   def update_counter_of_events_and_users
     operation = operation_type
+    option_type = @options[0][@option_type.to_sym]
 
-    @enrollment.user.set_counter(@options[0][@option_type.to_sym][:event],
-                                 operation)
-
-    @enrollment.event.set_counter(@options[0][@option_type.to_sym][:user],
-                                  operation)
+    @enrollment.user.set_counter(option_type[:event], operation)
+    @enrollment.event.set_counter(option_type[:user], operation)
 
     true
   end

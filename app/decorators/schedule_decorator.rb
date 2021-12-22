@@ -1,4 +1,3 @@
-#:nodoc:
 class ScheduleDecorator
   def initialize(schedule, old_talk_id, talk_id, params = nil)
     @schedule = schedule
@@ -26,9 +25,7 @@ class ScheduleDecorator
   end
 
   def counter_dec
-    return if @old_talk_id.blank?
-
-    return if @old_talk_id == @talk_id
+    return if @old_talk_id.blank? || @old_talk_id == @talk_id
 
     old_talk = Talk.find(@old_talk_id)
 

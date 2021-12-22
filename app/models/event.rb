@@ -1,4 +1,3 @@
-#:nodoc:
 class Event
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -81,6 +80,19 @@ class Event
                date_to: date_to, date_format: date_format, day_one: day_one,
                day_two: day_two }
     FullDate.new(**fields).convert
+  end
+
+  def first_time
+    schedules = schedules&.asc(:time)
+    time = schedules ? schedules.first.time : '00:00'
+
+    return time if time == '00:00'
+
+    time_split = time.split(':')
+    hours = time_split[0]
+    minutes = time_split[1].to_i + 1
+
+    format("#{hours}:%02d", minutes.to_s)
   end
 
   private

@@ -1,7 +1,7 @@
-#:nodoc:
 class TalkSearchController < ApplicationController
   def create
-    @talks = TalkQuery.new.search(params[:search]) unless params[:search].blank?
+    search = params[:search]
+    @talks = TalkQuery.new.search(search) unless search.blank?
 
     respond_to do |format|
       format.json { render json: @talks }

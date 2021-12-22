@@ -1,4 +1,3 @@
-#:nodoc:
 class SubmitEventsController < ApplicationController
   before_action :require_logged_user, only: %i[new create]
 
@@ -16,12 +15,12 @@ class SubmitEventsController < ApplicationController
   def create
     prepare_objects(params)
 
-    if @_schedule.nil?
+    if @_schedule
+      message = t('flash.submit_event.create.alert')
+    else
       new_schedule
 
       message = t("flash.submit_event.create.#{save_schedule}")
-    else
-      message = t('flash.submit_event.create.alert')
     end
 
     redirect_to talk_path(@talk), notice: message if message
@@ -38,24 +37,10 @@ class SubmitEventsController < ApplicationController
 
   def new_schedule
     @schedule = Schedule.new(activity: @activity, event: @event, talk: @talk,
-                             day: 1, time: time(@event))
+                             day: 1, time: @event.first_time)
   end
 
   def save_schedule
     @schedule.save ? 'notice' : 'error'
-  end
-
-  def time(event)
-    schedules = event.schedules.asc(:time)
-
-    time = schedules.empty? ? '00:00' : schedules.first.time
-
-    if time != '00:00'
-      hours = time.split(':')[0]
-      minutes = time.split(':')[1].to_i + 1
-      time = format("#{hours}:%02d", minutes.to_s)
-    end
-
-    time
   end
 end

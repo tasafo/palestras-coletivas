@@ -1,4 +1,3 @@
-#:nodoc:
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -79,9 +78,7 @@ class User
   end
 
   def generate_token(column)
-    while User.where(column => self[column]).exists?
-      self[column] = SecureRandom.urlsafe_base64
-    end
+    self[column] = SecureRandom.urlsafe_base64 while User.where(column => self[column]).exists?
   end
 
   def send_password_reset
@@ -104,7 +101,7 @@ class User
   end
 
   def enrolled_at?(event)
-    enrollment = Enrollment.find_by user: self, event: event
+    enrollment = Enrollment.find_by(user: self, event: event)
 
     !enrollment.nil?
   end
@@ -116,7 +113,7 @@ class User
   end
 
   def present_at?(event)
-    enrollment = Enrollment.find_by user: self, event: event
+    enrollment = Enrollment.find_by(user: self, event: event)
 
     enrollment.nil? ? false : enrollment.present
   end
@@ -152,12 +149,14 @@ class User
   private
 
   def until_two_names(name)
-    name_array = name.split(' ')
+    name_array = name.split
+    name_size = name_array.size
+    name_one = name_array[0]
 
-    if name_array.size > 1
-      "#{name_array[0]} #{name_array[name_array.size - 1]}".titleize
+    if name_size > 1
+      "#{name_one} #{name_array[name_size - 1]}".titleize
     else
-      name_array[0].titleize
+      name_one.titleize
     end
   end
 

@@ -1,4 +1,3 @@
-#:nodoc:
 module Rateable
   def rate_by(user, rank)
     rating = ratings.find_or_create_by user: user
@@ -17,16 +16,16 @@ module Rateable
 
     rating = average(ratings.map(&:rank))
 
-    round_by_point_5(rating)
+    round_by_point(rating)
   end
 
   private
 
   def average(ratings)
-    ratings.inject { |a, e| a + e } / ratings.size
+    ratings.inject { |lin, col| lin + col } / ratings.size
   end
 
-  def round_by_point_5(rating)
+  def round_by_point(rating)
     (2 * rating).round / 2.0
   end
 end

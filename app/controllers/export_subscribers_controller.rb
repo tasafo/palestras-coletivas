@@ -1,4 +1,3 @@
-#:nodoc:
 class ExportSubscribersController < ApplicationController
   before_action :require_logged_user, only: %i[new create]
   before_action :set_event, only: %i[new create]

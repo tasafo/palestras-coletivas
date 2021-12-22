@@ -1,4 +1,3 @@
-#:nodoc:
 class Schedule
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -32,7 +31,7 @@ class Schedule
   end
 
   def show_time
-    if event&.accepts_submissions && !talk_id.nil?
+    if event&.accepts_submissions && talk_id
       ''
     else
       time

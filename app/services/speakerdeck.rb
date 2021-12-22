@@ -1,4 +1,3 @@
-#:nodoc:
 class Speakerdeck
   def self.frame(code)
     "<iframe class=\"embed-responsive-item\"

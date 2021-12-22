@@ -1,4 +1,3 @@
-#:nodoc:
 class HomeController < ApplicationController
   layout 'home'
 

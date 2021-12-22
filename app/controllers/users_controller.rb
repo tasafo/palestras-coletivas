@@ -1,4 +1,3 @@
-#:nodoc:
 class UsersController < ApplicationController
   before_action :require_logged_user, only: %i[edit update]
   before_action :set_user, only: %i[show edit update]

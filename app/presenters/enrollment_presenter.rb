@@ -1,12 +1,12 @@
-#:nodoc:
 class EnrollmentPresenter
   attr_reader :user_id, :user_name, :type_message, :button_message,
               :option_value, :can_record_presence
 
   def initialize(args = {})
-    @user_id = args[:user].id if args.size == 1
+    args_size = args.size
+    @user_id = args[:user].id if args_size == 1
 
-    return unless args.size > 1
+    return unless args_size > 1
 
     prepare_message args[:enrollment], args[:option_type],
                     args[:authorized_edit], args[:user]
@@ -44,8 +44,9 @@ class EnrollmentPresenter
   def option_present(enrollment)
     return unless @can_record_presence
 
-    @user_id = enrollment.user.id
-    @user_name = enrollment.user.name
+    user = enrollment.user
+    @user_id = user.id
+    @user_name = user.name
 
     if enrollment.present?
       @button_message = I18n.t('show.event.undo_presence')

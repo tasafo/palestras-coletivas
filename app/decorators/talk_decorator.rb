@@ -1,4 +1,3 @@
-#:nodoc:
 class TalkDecorator
   def initialize(talk, users, args = {})
     @talk = talk
@@ -28,7 +27,7 @@ class TalkDecorator
   def add_authors
     clean_presentation_data
 
-    @owner = @talk.owner if @talk.owner
+    @owner = @talk&.owner
 
     @talk.users = nil
     @talk.users << @owner
@@ -46,8 +45,7 @@ class TalkDecorator
   def update_user_counters
     @talk.users.each do |author|
       user = User.find(author)
-      user.counter_public_talks = user.talks.publics.count
-      user.save
+      user.update(counter_public_talks: user.talks.publics.count)
     end
   end
 end

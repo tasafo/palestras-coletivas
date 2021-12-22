@@ -1,4 +1,3 @@
-#:nodoc:
 class CommentsController < ApplicationController
   before_action :find_commentable
 
@@ -8,13 +7,13 @@ class CommentsController < ApplicationController
       user: current_user,
       body: params[:comment][:body]
     }
-    @new_comment = Comment.new.comment_on!(**comment_params)
+    @new_comment = Comment.new.comment_on(**comment_params)
 
     result = @new_comment.persisted? ? 'notice' : 'alert'
 
     flash[result.to_sym] = I18n.t("flash.comments.create.#{result}")
 
-    redirect_to _commentable_path
+    redirect_to slug_commentable_path
   end
 
   def destroy
@@ -22,14 +21,14 @@ class CommentsController < ApplicationController
 
     @comment.destroy
 
-    redirect_to _commentable_path, notice: t('flash.comments.destroy.notice')
+    redirect_to slug_commentable_path, notice: t('flash.comments.destroy.notice')
   end
 
   private
 
   def find_commentable
-    commentable_class = [Event, Talk].find do |x|
-      x.name == params[:commentable_type].classify
+    commentable_class = [Event, Talk].find do |klass|
+      klass.name == params[:commentable_type].classify
     end
 
     @commentable = commentable_class.find(params[:commentable_id])
@@ -43,7 +42,7 @@ class CommentsController < ApplicationController
     parent || @commentable
   end
 
-  def _commentable_path
+  def slug_commentable_path
     "/#{@commentable.class.name.pluralize.downcase}/#{@commentable.slug}"
   end
 end

@@ -1,4 +1,3 @@
-#:nodoc:
 class PasswordEncryptor
   def self.encryptor
     BCrypt::Password

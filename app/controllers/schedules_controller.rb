@@ -1,4 +1,3 @@
-#:nodoc:
 class SchedulesController < ApplicationController
   before_action :require_logged_user, only: %i[new create edit update]
   before_action :set_schedule, only: %i[edit update destroy]
@@ -8,9 +7,7 @@ class SchedulesController < ApplicationController
 
     set_presenter
 
-    message = t('flash.unauthorized_access')
-
-    redirect_to root_path, notice: message unless authorized_access?(@event)
+    redirect_to_root_path(t('flash.unauthorized_access'))
   end
 
   def create
@@ -23,9 +20,7 @@ class SchedulesController < ApplicationController
   end
 
   def edit
-    message = t('flash.unauthorized_access')
-
-    redirect_to root_path, notice: message unless authorized_access?(@event)
+    redirect_to_root_path(t('flash.unauthorized_access'))
   end
 
   def update
@@ -34,9 +29,7 @@ class SchedulesController < ApplicationController
   end
 
   def destroy
-    message = t('flash.unauthorized_access')
-
-    redirect_to root_path, notice: message unless authorized_access?(@event)
+    redirect_to_root_path(t('flash.unauthorized_access'))
 
     message = t('flash.schedules.destroy.notice')
 
@@ -62,8 +55,13 @@ class SchedulesController < ApplicationController
                                      :day, :time, :environment)
   end
 
+  def redirect_to_root_path(message)
+    redirect_to root_path, notice: message unless authorized_access?(@event)
+  end
+
   def save_schedule(options = {})
-    act = options[:operation] == :new ? :create : :update
+    operation = options[:operation]
+    act = operation == :new ? :create : :update
 
     object = decorate_schedule(options)
 
@@ -72,14 +70,16 @@ class SchedulesController < ApplicationController
 
       redirect_to event_path(options[:event]), notice: message
     else
-      render options[:operation]
+      render operation
     end
   end
 
   def decorate_schedule(options)
+    fields = options[:fields]
+
     ScheduleDecorator.new(
-      options[:schedule], options[:fields]['old_talk_id'],
-      options[:fields]['schedule']['talk_id'], options[:params]
+      options[:schedule], fields['old_talk_id'],
+      fields['schedule']['talk_id'], options[:params]
     )
   end
 end

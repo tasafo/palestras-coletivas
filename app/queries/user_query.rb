@@ -1,4 +1,3 @@
-#:nodoc:
 class UserQuery
   def initialize(relation = User.scoped)
     @relation = relation

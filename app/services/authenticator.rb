@@ -1,4 +1,3 @@
-#:nodoc:
 class Authenticator
   def self.encryptor
     PasswordEncryptor

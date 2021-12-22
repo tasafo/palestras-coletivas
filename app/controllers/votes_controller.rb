@@ -1,4 +1,3 @@
-#:nodoc:
 class VotesController < ApplicationController
   before_action :set_objects, only: %i[create destroy]
 

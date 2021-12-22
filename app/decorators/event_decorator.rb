@@ -1,4 +1,3 @@
-#:nodoc:
 class EventDecorator
   def initialize(event, users, args = {})
     @event = event
@@ -19,7 +18,7 @@ class EventDecorator
   private
 
   def update_list_organizers
-    @owner = @event.owner if @event.owner
+    @owner = @event&.owner
 
     save_owner
     save_organizers

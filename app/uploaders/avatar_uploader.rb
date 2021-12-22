@@ -1,4 +1,3 @@
-#:nodoc:
 class AvatarUploader < Uploader
   if ENV['CLOUDINARY_URL'].present?
     cloudinary_transformation transformation: [

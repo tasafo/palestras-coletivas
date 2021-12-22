@@ -1,4 +1,3 @@
-#:nodoc:
 module Commentable
   def find_comment_by_id(id)
     search = Comment.criteria

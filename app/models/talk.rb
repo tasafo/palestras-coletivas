@@ -1,4 +1,3 @@
-#:nodoc:
 class Talk
   include Mongoid::Document
   include Mongoid::Search

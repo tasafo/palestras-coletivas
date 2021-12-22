@@ -1,4 +1,3 @@
-#:nodoc:
 class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -11,7 +10,7 @@ class Comment
 
   validates_presence_of :body
 
-  def comment_on!(commentable: nil, user: nil, body: '')
+  def comment_on(commentable: nil, user: nil, body: '')
     self.user = user
     self.commentable = commentable
     self.body = body

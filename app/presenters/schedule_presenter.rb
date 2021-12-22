@@ -1,4 +1,3 @@
-#:nodoc:
 class SchedulePresenter
   attr_reader :activities, :dates, :talk_title, :display
 

@@ -1,6 +1,5 @@
 require 'csv'
 
-#:nodoc:
 class ExportSubscriber
   def self.profiles
     [

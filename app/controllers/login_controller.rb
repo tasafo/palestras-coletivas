@@ -1,4 +1,3 @@
-#:nodoc:
 class LoginController < ApplicationController
   def new
     @redirect = params[:redirect]

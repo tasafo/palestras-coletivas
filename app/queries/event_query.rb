@@ -1,4 +1,3 @@
-#:nodoc:
 class EventQuery
   def initialize(relation = Event.scoped)
     @relation = relation

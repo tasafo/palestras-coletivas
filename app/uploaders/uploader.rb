@@ -1,4 +1,3 @@
-#:nodoc:
 class Uploader < CarrierWave::Uploader::Base
   include Cloudinary::CarrierWave if ENV['CLOUDINARY_URL'].present?
 

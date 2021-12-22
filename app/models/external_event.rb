@@ -1,4 +1,3 @@
-#:nodoc:
 class ExternalEvent
   include Mongoid::Document
 

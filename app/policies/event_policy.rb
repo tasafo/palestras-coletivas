@@ -1,4 +1,3 @@
-#:nodoc:
 class EventPolicy
   def initialize(event)
     @event = event

@@ -1,4 +1,3 @@
-#:nodoc:
 class ActivitiesController < ApplicationController
   def create
     activity = Activity.find(params[:id])

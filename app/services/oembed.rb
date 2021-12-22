@@ -1,6 +1,5 @@
 require 'multi_json'
 
-#:nodoc:
 class Oembed
   attr_reader :url, :title, :code, :thumbnail, :frame, :description
 
@@ -68,7 +67,7 @@ class Oembed
   end
 
   def video_url
-    return if @url.nil?
+    return unless @url
 
     if @url.include? 'youtube.com'
       "https://www.youtube.com/oembed?url=#{@url}&format=json"

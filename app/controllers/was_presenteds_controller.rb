@@ -1,4 +1,3 @@
-#:nodoc:
 class WasPresentedsController < ApplicationController
   def create
     @event = Event.find(params.merge(only_path: true)[:event_id])

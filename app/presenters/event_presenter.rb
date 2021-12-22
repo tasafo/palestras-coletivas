@@ -1,4 +1,3 @@
-#:nodoc:
 class EventPresenter
   attr_reader :event, :grids, :authorized, :open_enrollment,
               :can_record_presence, :show_users_present, :users_present,
@@ -78,11 +77,11 @@ class EventPresenter
     actives = []
 
     event.enrollments.with_user.each do |enrollment|
-      presents << enrollment.user if enrollment.present?
+      user = enrollment.user
 
-      if enrollment.active?
-        actives << { user: enrollment.user, enrollment: enrollment }
-      end
+      presents << user if enrollment.present?
+
+      actives << { user: user, enrollment: enrollment } if enrollment.active?
     end
 
     fields_hash(presents, actives)

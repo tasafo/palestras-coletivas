@@ -1,4 +1,3 @@
-#:nodoc:
 class Rating
   include Mongoid::Document
 
