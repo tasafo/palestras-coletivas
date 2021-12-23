@@ -83,16 +83,13 @@ class Event
   end
 
   def first_time
-    schedules = schedules&.asc(:time)
-    time = schedules ? schedules.first.time : '00:00'
+    event_schedules = schedules&.asc(:time)&.limit(1)
 
-    return time if time == '00:00'
+    return '00:00' unless event_schedules
 
-    time_split = time.split(':')
-    hours = time_split[0]
-    minutes = time_split[1].to_i + 1
+    time = event_schedules.first.time.split(':')
 
-    format("#{hours}:%02d", minutes.to_s)
+    format("#{time[0]}:%02d", (time[1].to_i + 1).to_s)
   end
 
   def destroy_image

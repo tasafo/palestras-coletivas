@@ -4,13 +4,13 @@ describe Speakerdeck do
   context 'returns' do
     context 'speakerdeck presentation' do
       it 'valid' do
-        oembed = Oembed.new 'https://speakerdeck.com/luizsanches/ruby-praticamente-falando'
+        oembed = Oembed.new "#{Speakerdeck::URL}/luizsanches/ruby-praticamente-falando"
 
         expect(oembed.open_presentation).to be_truthy
       end
 
       it 'invalid' do
-        stub_request(:get, /speakerdeck.com/)
+        stub_request(:get, /#{Speakerdeck::DOMAIN}/)
           .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
           .to_return(
             status: 404,
@@ -18,7 +18,7 @@ describe Speakerdeck do
             headers: {}
           )
 
-        oembed = Oembed.new 'https://speakerdeck.com/luizsanches/nononono'
+        oembed = Oembed.new "#{Speakerdeck::URL}/luizsanches/nononono"
 
         expect(oembed.open_presentation).to be_falsey
       end

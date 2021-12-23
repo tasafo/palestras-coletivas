@@ -5,10 +5,7 @@ class ExportSubscriber
     [
       [I18n.t('titles.export_subscribers.profiles.speakers'), 'speakers'],
       [I18n.t('titles.export_subscribers.profiles.organizers'), 'organizers'],
-      [
-        I18n.t('titles.export_subscribers.profiles.participants'),
-        'participants'
-      ]
+      [I18n.t('titles.export_subscribers.profiles.participants'), 'participants']
     ]
   end
 
@@ -19,6 +16,10 @@ class ExportSubscriber
             when 'participants' then participants(event)
             end
 
+    export_csv(users)
+  end
+
+  def self.export_csv(users)
     CSV.generate do |csv|
       users.each do |user|
         csv << user

@@ -177,6 +177,6 @@ class User
   end
 
   def update_thumbnail
-    self.gravatar_photo = Gravatar.new(email).fields.thumbnail_url
+    self.gravatar_photo = Gravatar.new(email).thumbnail_url
   end
 end

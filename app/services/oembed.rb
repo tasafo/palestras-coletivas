@@ -1,6 +1,9 @@
 require 'multi_json'
 
 class Oembed
+  YOUTUBE_DOMAIN = 'youtube.com'.freeze
+  VIMEO_DOMAIN = 'vimeo.com'.freeze
+
   attr_reader :url, :title, :code, :thumbnail, :frame, :description
 
   def initialize(url, code = 0)
@@ -11,11 +14,12 @@ class Oembed
   end
 
   def open_presentation
-    fields = if @url.include? 'slideshare.net'
+    fields = case @url
+             when /#{Slideshare::DOMAIN}/
                Slideshare.extract(@url)
-             elsif @url.include? 'speakerdeck.com'
+             when /#{Speakerdeck::DOMAIN}/
                Speakerdeck.extract(@url)
-             elsif @url.include? 'prezi.com'
+             when /#{Prezi::DOMAIN}/
                Prezi.extract(@url)
              end
 
@@ -34,11 +38,12 @@ class Oembed
   end
 
   def show_presentation
-    @frame = if @url.include? 'slideshare.net'
+    @frame = case @url
+             when /#{Slideshare::DOMAIN}/
                Slideshare.frame(@code)
-             elsif @url.include? 'speakerdeck.com'
+             when /#{Speakerdeck::DOMAIN}/
                Speakerdeck.frame(@code)
-             elsif @url.include? 'prezi.com'
+             when /#{Prezi::DOMAIN}/
                Prezi.frame(@code)
              else
                @without_presentation
@@ -67,12 +72,11 @@ class Oembed
   end
 
   def video_url
-    return unless @url
-
-    if @url.include? 'youtube.com'
-      "https://www.youtube.com/oembed?url=#{@url}&format=json"
-    elsif @url.include? 'vimeo.com'
-      "https://vimeo.com/api/oembed.json?url=#{@url}"
+    case @url
+    when /#{YOUTUBE_DOMAIN}/
+      "https://#{YOUTUBE_DOMAIN}/oembed?url=#{@url}&format=json"
+    when /#{VIMEO_DOMAIN}/
+      "https://#{VIMEO_DOMAIN}/api/oembed.json?url=#{@url}"
     end
   end
 end

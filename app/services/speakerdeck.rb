@@ -1,7 +1,11 @@
 class Speakerdeck
+  DOMAIN = 'speakerdeck.com'.freeze
+  URL = "https://#{DOMAIN}".freeze
+  FILES_URL = "https://files.#{DOMAIN}".freeze
+
   def self.frame(code)
     "<iframe class=\"embed-responsive-item\"
-    src=\"https://speakerdeck.com/player/#{code}\"
+    src=\"#{URL}/player/#{code}\"
     allowfullscreen=\"true\"
     allowtransparency=\"true\" mozallowfullscreen=\"true\"
     style=\"border:0; padding:0; margin:0; background:transparent;\"
@@ -11,7 +15,7 @@ class Speakerdeck
   def self.extract(url)
     begin
       record = MultiJson.load(
-        URI.parse("https://speakerdeck.com/oembed.json?url=#{url}").open
+        URI.parse("#{URL}/oembed.json?url=#{url}").open
       )
     rescue OpenURI::HTTPError
       record = nil
@@ -23,12 +27,9 @@ class Speakerdeck
   def self.fields(record)
     return unless record
 
-    html_field = record['html']
-    title = record['title']
-    code = html_field.match(%r{player/(.*)"})[1].split('"')[0]
-    url = 'https://files.speakerdeck.com'
-    thumbnail = "#{url}/presentations/#{code}/preview_slide_0.jpg"
+    code = record['html'].match(%r{player/(.*)"})[1].split('"')[0]
+    thumbnail = "#{FILES_URL}/presentations/#{code}/preview_slide_0.jpg"
 
-    { title: title, code: code, thumbnail: thumbnail, description: '' }
+    { title: record['title'], code: code, thumbnail: thumbnail, description: '' }
   end
 end

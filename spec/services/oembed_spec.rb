@@ -4,13 +4,13 @@ describe Oembed do
   context 'returns' do
     context 'youtube video' do
       it 'valid' do
-        oembed = Oembed.new 'http://www.youtube.com/watch?v=wGe5agueUwI'
+        oembed = Oembed.new "http://#{Oembed::YOUTUBE_DOMAIN}/watch?v=wGe5agueUwI"
 
         expect(oembed.show_video).to be_truthy
       end
 
       it 'invalid' do
-        stub_request(:get, /youtube.com/)
+        stub_request(:get, /#{Oembed::YOUTUBE_DOMAIN}/)
           .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
           .to_return(
             status: 404,
@@ -18,7 +18,7 @@ describe Oembed do
             headers: {}
           )
 
-        oembed = Oembed.new 'http://www.youtube.com/invalid'
+        oembed = Oembed.new "http://#{Oembed::YOUTUBE_DOMAIN}/invalid"
 
         expect(oembed.show_video).to be_falsey
       end
@@ -26,13 +26,13 @@ describe Oembed do
 
     context 'vimeo video' do
       it 'valid' do
-        oembed = Oembed.new 'https://vimeo.com/46879129'
+        oembed = Oembed.new "https://#{Oembed::VIMEO_DOMAIN}/46879129/"
 
         expect(oembed.show_video).to be_truthy
       end
 
       it 'invalid' do
-        stub_request(:get, /vimeo.com/)
+        stub_request(:get, /#{Oembed::VIMEO_DOMAIN}/)
           .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
           .to_return(
             status: 404,
@@ -40,7 +40,7 @@ describe Oembed do
             headers: {}
           )
 
-        oembed = Oembed.new 'https://vimeo.com/invalid'
+        oembed = Oembed.new "https://#{Oembed::VIMEO_DOMAIN}/invalid"
 
         expect(oembed.show_video).to be_falsey
       end

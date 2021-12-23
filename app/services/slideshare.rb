@@ -1,13 +1,12 @@
 require 'nokogiri'
 
 class Slideshare
-  def self.site
-    'https://www.slideshare.net'
-  end
+  DOMAIN = 'slideshare.net'.freeze
+  URL = "https://www.#{DOMAIN}".freeze
 
   def self.frame(code)
     "<iframe class=\"embed-responsive-item\"
-    src=\"#{site}/slideshow/embed_code/#{code}\"
+    src=\"#{URL}/slideshow/embed_code/#{code}\"
     marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\"
     style=\"border:1px solid #CCC;border-width:1px 1px 0;
     margin-bottom:5px\"
@@ -17,7 +16,7 @@ class Slideshare
   def self.extract(url)
     begin
       record = Nokogiri::XML(
-        URI.parse("#{site}/api/oembed/2?url=#{url}&format=xml").open
+        URI.parse("#{URL}/api/oembed/2?url=#{url}&format=xml").open
       )
     rescue OpenURI::HTTPError
       record = nil
