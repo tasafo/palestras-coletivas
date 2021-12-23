@@ -1,4 +1,4 @@
-<% if Rails.env != 'test' %>
+<% unless Rails.env.test? %>
   <div class="row">
     <div class="col-md-12">
       <div class="embed-responsive embed-responsive-4by3">
