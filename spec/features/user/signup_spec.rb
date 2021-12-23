@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Signup' do
-  let!(:image_path) { "#{Rails.root}/app/assets/images/without_avatar.jpg" }
+  let!(:image_path) { asset_file('without_avatar.jpg') }
 
   before do
     visit new_user_path
@@ -14,7 +14,7 @@ describe 'Signup' do
       fill_in 'Seu e-mail', with: 'paul@example.org'
       fill_in 'Sua senha', with: 'testdrive'
       fill_in 'Confirme sua senha', with: 'testdrive'
-      attach_file('Foto', File.absolute_path(image_path))
+      attach_file('Foto', image_path)
 
       click_button 'Cadastre-me'
     end
@@ -24,7 +24,7 @@ describe 'Signup' do
 
   context 'with invalid data' do
     before do
-      attach_file('Foto', File.absolute_path(image_path))
+      attach_file('Foto', image_path)
 
       click_button 'Cadastre-me'
     end

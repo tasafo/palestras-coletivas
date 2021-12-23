@@ -34,10 +34,14 @@ class EventsController < PersistenceController
   def edit; end
 
   def update
+    @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
+
     save_object(@event, params[:users], params: event_params)
   end
 
   def destroy
+    @event.destroy_image
+
     destroy_object(@event)
   end
 

@@ -146,6 +146,12 @@ class User
     end
   end
 
+  def destroy_avatar
+    image_file = avatar.file
+
+    ImageFile.remove(image_file) if image_file
+  end
+
   private
 
   def until_two_names(name)

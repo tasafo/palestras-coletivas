@@ -28,6 +28,6 @@ module Palestrascoletivas
     # the framework and any gems in your application.
     config.time_zone = 'Brasilia'
 
-    config.action_mailer.preview_path = "#{Rails.root}/lib/mailer_previews"
+    config.action_mailer.preview_path = Rails.root.join('lib', 'mailer_previews')
   end
 end

@@ -25,6 +25,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user.destroy_avatar if user_params[:avatar] || user_params[:remove_avatar] == '1'
+
     if @user.update(user_params)
       redirect_to user_path(@user), notice: t('flash.users.update.notice')
     else

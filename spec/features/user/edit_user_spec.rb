@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Edit user' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
-  let!(:image_path) { "#{Rails.root}/app/assets/images/without_avatar.jpg" }
+  let!(:image_path) { asset_file('without_avatar.jpg') }
 
   context 'when the current user owns the account' do
     before do
@@ -13,7 +13,7 @@ describe 'Edit user' do
     context 'with valid data' do
       before do
         fill_in 'Seu nome', with: 'Carl Simon'
-        attach_file('Foto', File.absolute_path(image_path))
+        attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
       end
@@ -27,7 +27,7 @@ describe 'Edit user' do
     context 'with invalid data' do
       before do
         fill_in 'Seu nome', with: ''
-        attach_file('Foto', File.absolute_path(image_path))
+        attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
       end
@@ -42,7 +42,7 @@ describe 'Edit user' do
       before do
         fill_in 'Sua senha', with: 'newpassword'
         fill_in 'Confirme sua senha', with: 'newpassword'
-        attach_file('Foto', File.absolute_path(image_path))
+        attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
       end
@@ -57,7 +57,7 @@ describe 'Edit user' do
       before do
         fill_in 'Sua senha', with: 'newpassword'
         fill_in 'Confirme sua senha', with: 'otherpassword'
-        attach_file('Foto', File.absolute_path(image_path))
+        attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
       end

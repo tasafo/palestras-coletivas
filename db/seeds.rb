@@ -106,8 +106,7 @@ event = Event.create(
 event.schedules.create(
   [
     { day: 1, time: '09:00', activity: activity_open },
-    { day: 1, time: '10:00', activity: activity_talk, talk: talk,
-      was_presented: true },
+    { day: 1, time: '10:00', activity: activity_talk, talk: talk, was_presented: true },
     { day: 1, time: '11:30', activity: activity_lunch },
     { day: 1, time: '12:00', activity: activity_finish }
   ]

@@ -3,7 +3,7 @@ if ENV['COVERAGE']
   require 'simplecov-console'
 
   SimpleCov.start 'rails'
-  SimpleCov.command_name 'specs' + (ENV['TEST_ENV_NUMBER'] || '')
+  SimpleCov.command_name "specs#{ENV['TEST_ENV_NUMBER'] || ''}"
   SimpleCov.merge_timeout 1800
 
   if ENV['TEST_ENV_NUMBER'] # parallel specs
@@ -63,7 +63,7 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    FileUtils.rm_rf(Rails.root.join('public', 'uploads', 'tmp'))
+    FileUtils.rm_rf(Rails.root.join('public', 'tmp'))
   end
 
   Mongoid.logger.level = Logger::INFO

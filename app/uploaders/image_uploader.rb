@@ -1,5 +1,5 @@
 class ImageUploader < Uploader
-  if ENV['CLOUDINARY_URL'].present?
+  if CloudinaryReady.up?
     cloudinary_transformation transformation: [
       { width: 1920, height: 1080, crop: :limit }
     ]

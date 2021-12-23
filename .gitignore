@@ -18,7 +18,6 @@ public/uploads
 start.sh
 node_modules
 yarn.lock
-
 /public/packs
 /public/packs-test
 /node_modules

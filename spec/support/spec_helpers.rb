@@ -1,6 +1,6 @@
 module SpecHelpers
   def login_as(user, redirect = nil)
-    redirect = redirect.nil? ? '' : "?redirect=#{redirect}"
+    redirect = redirect ? "?redirect=#{redirect}" : ''
 
     visit "/login#{redirect}"
 
@@ -22,5 +22,9 @@ module SpecHelpers
     page.accept_alert do
       page.click_link target
     end
+  end
+
+  def asset_file(file)
+    Rails.root.join('app', 'assets', 'images', file)
   end
 end

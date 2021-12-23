@@ -95,6 +95,12 @@ class Event
     format("#{hours}:%02d", minutes.to_s)
   end
 
+  def destroy_image
+    image_file = image.file
+
+    ImageFile.remove(image_file) if image_file
+  end
+
   private
 
   def zero_fill(field, size = 2)

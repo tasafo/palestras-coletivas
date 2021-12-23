@@ -109,6 +109,7 @@ FactoryBot.define do
       country { 'Brasil' }
       to_public { true }
       coordinates { [-48.4945471, -1.4714916] }
+      image { File.new(Rails.root.join('app', 'assets', 'images', 'video-poster.jpg')) }
     end
   end
 

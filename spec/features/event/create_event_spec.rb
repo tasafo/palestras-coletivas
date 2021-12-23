@@ -11,7 +11,7 @@ describe 'Create event', js: true do
   let!(:script) do
     "$('tinymce').html('Evento de tecnologia com sua 1ª edição na região')"
   end
-  let!(:image_path) { "#{Rails.root}/app/assets/images/video-poster.jpg" }
+  let!(:image_path) { asset_file('video-poster.jpg') }
 
   before do
     login_as user, new_event_path
@@ -33,7 +33,7 @@ describe 'Create event', js: true do
       fill_in 'Cidade', with: 'Belém'
       fill_in 'Estado', with: 'Pará'
       fill_in 'País', with: 'Brasil'
-      attach_file('Imagem', File.absolute_path(image_path))
+      attach_file('Imagem', image_path)
       check('Quero publicar')
 
       fill_autocomplete('invitee_username', with: '@us',
