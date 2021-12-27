@@ -10,7 +10,7 @@ gem 'bcrypt', require: 'bcrypt'
 gem 'nokogiri', require: false
 gem 'multi_json', require: false
 gem 'pagy'
-gem 'active_model_serializers'
+gem 'jsonapi-rails'
 
 gem 'mongoid', '7.3.3'
 gem 'mongoid-slug'

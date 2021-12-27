@@ -77,9 +77,10 @@ function search_talk() {
                 xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
             },
             dataType : "json",
-            success : function(data) {
-                for (var i in data.talks) {
-                    record = data.talks[i];
+            success : function(result) {
+                for (var i = 0; i < result.meta.total; i++) {
+                    record = result.data[i].attributes;
+
                     thumb = record.thumbnail ? record.thumbnail : '/without_presentation.jpg';
 
                     talks += '<hr />';

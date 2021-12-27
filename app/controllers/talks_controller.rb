@@ -12,7 +12,7 @@ class TalksController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @records, meta: { total: @records.size } }
+      format.json { render jsonapi: @records, meta: { total: @records.size } }
     end
   end
 

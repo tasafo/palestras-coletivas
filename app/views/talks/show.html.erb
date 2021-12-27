@@ -19,8 +19,8 @@
       <div class="col-md-8">
         <% unless @presentation.frame.include?("without_presentation") %>
           <%= render 'talks/show/presentation' %>
-          <%= render 'talks/show/video' %>
         <% end %>
+        <%= render 'talks/show/video' %>
       </div>
     </div>
   </div>

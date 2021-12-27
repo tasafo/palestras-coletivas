@@ -1,13 +1,13 @@
 version: "2"
 plugins:
-  brakeman:
-    enabled: true
   bundler-audit:
     enabled: true
   rubocop:
     enabled: true
     channel: rubocop-1-23-0
   reek:
+    enabled: true
+  flog:
     enabled: true
   duplication:
     enabled: true

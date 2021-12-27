@@ -64,6 +64,7 @@ class Oembed
 
   def open_url
     url = video_url
+
     begin
       MultiJson.load(URI.parse(url).open) if url
     rescue OpenURI::HTTPError
