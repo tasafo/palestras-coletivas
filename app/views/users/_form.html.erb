@@ -12,19 +12,19 @@
         <div class="modal-body">
           <div class="md-form form-sm">
             <i class="fa fa-book prefix"></i>
-            <%= f.text_field :name, :placeholder => t("placeholder.users.name"), class: "form-control" %>
+            <%= f.text_field :name, placeholder: t("placeholder.users.name"), class: "form-control" %>
             <%= f.label :name, t("labels.user.name") %>
           </div>
 
           <div class="md-form form-sm">
             <i class="fa fa-credit-card prefix"></i>
-            <%= f.text_field :username, :placeholder => t("placeholder.users.username"), class: "form-control" %>
+            <%= f.text_field :username, placeholder: t("placeholder.users.username"), class: "form-control" %>
             <%= f.label :username, t("labels.user.username") %>
           </div>
 
           <div class="md-form form-sm">
             <i class="fa fa-envelope prefix"></i>
-            <%= f.email_field :email, :placeholder => t("placeholder.users.email"), class: "form-control" %>
+            <%= f.email_field :email, placeholder: t("placeholder.users.email"), class: "form-control" %>
             <%= f.label :email, t("labels.user.email") %>
           </div>
 

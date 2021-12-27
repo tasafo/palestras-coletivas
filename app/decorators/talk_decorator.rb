@@ -8,11 +8,13 @@ class TalkDecorator
 
   def create
     @talk.owner = @owner
-    @talk.save && add_authors
+    add_authors
+    @talk.save
   end
 
   def update
-    @talk.update(@params) && add_authors
+    add_authors
+    @talk.update(@params)
   end
 
   private
@@ -35,17 +37,6 @@ class TalkDecorator
     @users&.each do |author|
       user = User.find(author)
       @talk.users << [user] if user
-    end
-
-    update_user_counters
-
-    true
-  end
-
-  def update_user_counters
-    @talk.users.each do |author|
-      user = User.find(author)
-      user.update(counter_public_talks: user.talks.publics.count)
     end
   end
 end

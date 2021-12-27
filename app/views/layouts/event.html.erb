@@ -8,7 +8,7 @@
     <% if @event.present? %>
     <%= display_meta_tags description: sanitize(@event.description) %>
     <%= display_meta_tags keywords: @event.tags %>
-    <%= display_meta_tags image_src:(https(@event.image.url)) %>
+    <%= display_meta_tags image_src:(@event.image_path) %>
     <%= favicon_link_tag 'logo_palestras_pMW_icon.ico' %>
     <% end %>
     <title><%= @event.name_edition if @event.present? %></title>

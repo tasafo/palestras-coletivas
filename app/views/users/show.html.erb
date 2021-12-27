@@ -18,11 +18,11 @@
   <%= thumbnail(@user, '80x80', 'rounded-circle img-responsive') %>
   <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
 
-  <% if @presenter.gravatar.has_profile %>
+  <% if @gravatar.has_profile %>
     <p class="lead">
-      <%= @presenter.gravatar.about_me.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.about_me}<br/>").html_safe %>
-      <%= @presenter.gravatar.current_location.blank? ? "" : CGI.unescapeHTML("#{@presenter.gravatar.current_location}<br/>").html_safe %>
-      <%= t("show.user.profile") %> <%= link_to 'gravatar', https(@presenter.gravatar.profile_url) %>
+      <%= @gravatar.about_me.blank? ? "" : CGI.unescapeHTML("#{@gravatar.about_me}<br/>").html_safe %>
+      <%= @gravatar.current_location.blank? ? "" : CGI.unescapeHTML("#{@gravatar.current_location}<br/>").html_safe %>
+      <%= t("show.user.profile") %> <%= link_to 'gravatar', @gravatar.profile_url %>
     </p>
   <% end %>
 
@@ -54,7 +54,7 @@
     <%= presentations.html_safe %>
   <% end %>
 
-  <% unless @presenter.participations.blank? %>
+  <% unless @participations.blank? %>
     <% participation = t("show.user.participations") %>
     <h3><%= participation[@participations.count > 1 ? :other : :one] %></h3>
 

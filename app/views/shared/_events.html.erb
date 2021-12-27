@@ -8,7 +8,7 @@
           <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
             <%= link_to event_path(event) do %>
               <% if event.image? %>
-                <%= image_tag(https(event.image.url), size: '350x200') %>
+                <%= image_tag(event.image_path, size: '350x200') %>
               <% else %>
                 <div class="mask"></div>
               <% end %>
@@ -16,13 +16,13 @@
           </div>
 
           <div class="card-body">
-            <h4 class="card-title"><%= link_to suspension_points(event.name_edition, 50), event_path(event) %></h4>
+            <h4 class="card-title"><%= link_to Utility.suspension_points(event.name_edition, 50), event_path(event) %></h4>
             <% if event.start_date == event.end_date %>
               <p><%= l event.start_date %></p>
             <% else %>
               <p><%= l event.start_date %> - <%= l event.end_date %></p>
             <% end %>
-            <div class="card-text"> <%=  suspension_points(strip_tags(event.description), 100) %> </div>
+            <div class="card-text"> <%= Utility.suspension_points(strip_tags(event.description), 100) %> </div>
           </div>
 
           <div class="card-footer">

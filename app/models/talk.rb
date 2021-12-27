@@ -4,7 +4,6 @@ class Talk
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Attributes::Dynamic
-  include UpdateCounter
   include Commentable
 
   field :presentation_url, type: String
@@ -39,7 +38,29 @@ class Talk
   scope :with_users, -> { includes(:users) }
   scope :with_schedules, -> { includes(:schedules) }
 
+  after_create do
+    public_talks_inc(users, 1)
+  end
+
+  before_destroy do
+    public_talks_inc(users, -1)
+  end
+
+  after_update do
+    users.each do |user|
+      user.update(counter_public_talks: user.talks.publics.count)
+    end
+  end
+
+  def public_talks_inc(users, inc)
+    users.each { |user| user.inc(counter_public_talks: inc) }
+  end
+
   def url?
     !presentation_url.blank?
+  end
+
+  def thumbnail_image
+    thumbnail.blank? ? 'without_presentation.jpg' : Utility.https(thumbnail)
   end
 end

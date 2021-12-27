@@ -4,7 +4,6 @@ class VotesController < ApplicationController
   def create
     unless @vote
       @vote = current_user.votes.create(schedule: @schedule)
-      @schedule.set_counter(:votes, :inc)
       @notice = 'add'
     end
 
@@ -14,7 +13,6 @@ class VotesController < ApplicationController
   def destroy
     if @vote
       @vote.destroy
-      @schedule.set_counter(:votes, :dec)
       @notice = 'remove'
     end
 

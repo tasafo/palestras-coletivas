@@ -1,7 +1,6 @@
 class Schedule
   include Mongoid::Document
   include Mongoid::Timestamps
-  include UpdateCounter
 
   field :day, type: Integer
   field :time, type: String
@@ -22,12 +21,37 @@ class Schedule
   scope :presenteds, -> { where(was_presented: true) }
   scope :with_relations, -> { includes(:event, :talk, :activity) }
 
+  after_create do
+    presentation_events_inc(talk, 1) if talk?
+  end
+
+  after_update do
+    if talk_id_changed? && talk?
+      if talk_id_was
+        old_talk = Talk.find(talk_id_was)
+        presentation_events_inc(old_talk, -1)
+      end
+      presentation_events_inc(talk, 1)
+    end
+  end
+
+  before_destroy do
+    presentation_events_inc(talk, -1) if talk?
+  end
+
+  def presentation_events_inc(talky, inc)
+    talky.users.each do |user|
+      user.inc(counter_presentation_events: inc)
+    end
+    talky.inc(counter_presentation_events: inc)
+  end
+
   def talk?
     !talk_id.blank?
   end
 
   def find_vote(user)
-    votes.find_by(user: user) ? true : false
+    votes.find_by(user: user)
   end
 
   def show_time

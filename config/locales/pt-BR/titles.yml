@@ -71,7 +71,7 @@ pt-BR:
       public_talks: Palestras publicadas
       talks: Palestras realizadas em eventos
       events: Público em eventos
-      watchers: Assistiram mais palestras
-      organizers: Eventos organizados
-      speakers: Palestras realizadas
-      participants: Participação em eventos
+      watched_talks: Assistiram mais palestras
+      organizing_events: Eventos organizados
+      presentation_events: Palestras realizadas
+      participation_events: Participação em eventos

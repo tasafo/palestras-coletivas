@@ -4,4 +4,12 @@ class Vote
 
   belongs_to :schedule
   belongs_to :user
+
+  after_create do
+    schedule.inc(counter_votes: 1)
+  end
+
+  before_destroy do
+    schedule.inc(counter_votes: -1)
+  end
 end

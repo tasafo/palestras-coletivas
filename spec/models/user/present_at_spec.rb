@@ -7,10 +7,7 @@ describe User, '.present_at? event' do
 
   context 'when user does not have enrollment' do
     it 'search for enrollment' do
-      expect(Enrollment)
-        .to receive(:find_by)
-        .with(user: user, event: event)
-        .and_return(nil)
+      expect(Enrollment).to receive(:find_by).with(event: event).and_return(nil)
       user.present_at? event
     end
 
@@ -26,10 +23,7 @@ describe User, '.present_at? event' do
 
     context 'when user is not present at event' do
       it 'search for enrollment' do
-        expect(Enrollment)
-          .to receive(:find_by)
-          .with(user: user, event: event)
-          .and_return(enrollment)
+        expect(Enrollment).to receive(:find_by).with(event: event).and_return(enrollment)
 
         user.present_at? event
       end
@@ -41,8 +35,7 @@ describe User, '.present_at? event' do
 
     context 'when user is present at event' do
       before do
-        enrollment.present = true
-        enrollment.save
+        enrollment.update(present: true)
       end
 
       it 'returns true' do

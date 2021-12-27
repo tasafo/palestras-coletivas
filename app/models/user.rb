@@ -2,7 +2,6 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
-  include UpdateCounter
 
   field :name, type: String
   field :username, type: String
@@ -21,12 +20,9 @@ class User
 
   mount_uploader :avatar, AvatarUploader
 
-  has_and_belongs_to_many :talks, inverse_of: :talks,
-                                  dependent: :restrict_with_error
-  has_and_belongs_to_many :watched_talks, class_name: 'Talk',
-                                          inverse_of: :watched_user
-  has_and_belongs_to_many :events, inverse_of: :users,
-                                   dependent: :restrict_with_error
+  has_and_belongs_to_many :talks, inverse_of: :talks, dependent: :restrict_with_error
+  has_and_belongs_to_many :watched_talks, class_name: 'Talk', inverse_of: :watched_user
+  has_and_belongs_to_many :events, inverse_of: :users, dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
   has_many :votes
   has_many :owner_events, class_name: 'User', inverse_of: :owner
@@ -47,24 +43,33 @@ class User
   index({ email: 1 }, { unique: true, background: true })
   index({ username: 1 }, { unique: true, background: true })
 
-  after_save :erase_password
-  before_create { generate_token(:auth_token) }
-  before_save :update_thumbnail
-  before_validation :check_username
-
   scope :by_name, -> { asc(:_slugs) }
   scope :with_relations, -> { includes(:talks, :events) }
+
+  after_save do
+    @password = nil
+    @password_confirmation = nil
+    @validate_password = false
+  end
+
+  before_create do
+    generate_token(:auth_token)
+  end
+
+  before_save do
+    self.gravatar_photo = Gravatar.new(email).thumbnail_url
+  end
+
+  before_validation do
+    self.username = '@' << username if !username.blank? && username[0] != '@'
+  end
 
   def oid
     _id.to_s
   end
 
-  def check_username
-    self.username = '@' << username if !username.blank? && username[0] != '@'
-  end
-
   def show_name
-    until_two_names(name) unless name.blank?
+    Utility.until_two_names(name) unless name.blank?
   end
 
   def password=(password)
@@ -89,47 +94,37 @@ class User
   end
 
   def arrived_at(event)
-    enrollment = if enrolled_at? event
-                   Enrollment.find_by user: self, event: event
-                 else
-                   enroll_at event
-                 end
-
+    enrollment = enrollments.find_by(event: event)
+    enrollment ||= enroll_at(event)
     enrollment.present = true
 
     EnrollmentDecorator.new(enrollment, 'present').update
   end
 
-  def enrolled_at?(event)
-    enrollment = Enrollment.find_by(user: self, event: event)
-
-    !enrollment.nil?
-  end
-
   def enroll_at(event)
-    enrollment = Enrollment.new(user: self, event: event, active: true)
+    enrollment = enrollments.new(event: event, active: true)
 
     EnrollmentDecorator.new(enrollment, 'active').create
   end
 
   def present_at?(event)
-    enrollment = Enrollment.find_by(user: self, event: event)
+    enrollment = enrollments.find_by(event: event)
 
-    enrollment.nil? ? false : enrollment.present
+    enrollment ? enrollment.present : false
   end
 
-  def watch_talk!(talk)
+  def watch_talk(talk)
     return if watched_talk? talk
 
     watched_talks << talk
 
-    set_counter :watched_talks, :inc
+    inc(counter_watched_talks: 1)
   end
 
-  def unwatch_talk!(talk)
+  def unwatch_talk(talk)
     watched_talks.delete talk
 
-    set_counter :watched_talks, :dec
+    inc(counter_watched_talks: -1)
   end
 
   def watched_talk?(talk)
@@ -138,9 +133,9 @@ class User
 
   def thumbnail
     if avatar?
-      avatar.url
+      Utility.https(avatar.url)
     elsif gravatar_photo?
-      gravatar_photo
+      Utility.https(gravatar_photo)
     else
       'without_avatar.jpg'
     end
@@ -154,29 +149,7 @@ class User
 
   private
 
-  def until_two_names(name)
-    name_array = name.split
-    name_size = name_array.size
-    name_one = name_array[0]
-
-    if name_size > 1
-      "#{name_one} #{name_array[name_size - 1]}".titleize
-    else
-      name_one.titleize
-    end
-  end
-
-  def erase_password
-    @password = nil
-    @password_confirmation = nil
-    @validate_password = false
-  end
-
   def require_password?
     new_record? || @validate_password
-  end
-
-  def update_thumbnail
-    self.gravatar_photo = Gravatar.new(email).thumbnail_url
   end
 end

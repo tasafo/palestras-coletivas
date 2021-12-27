@@ -14,7 +14,7 @@
         <% end %>
 
         <% if logged_in? && @presenter.in_progress? %>
-          <% if current_user.present_at? @event %>
+          <% if current_user.present_at?(@event) %>
             <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-info btn-present disabled">
               <%= t("show.event.btn_presence_checkin") %>
             </a>

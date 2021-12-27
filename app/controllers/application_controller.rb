@@ -4,14 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?
 
-  rescue_from Mongoid::Errors::DeleteRestriction, with: :delete_restriction
-
   private
-
-  def delete_restriction
-    redirect_to "/#{controller_name}",
-                notice: t("notice.delete.restriction.#{controller_name}")
-  end
 
   def require_logged_user
     return if logged_in?

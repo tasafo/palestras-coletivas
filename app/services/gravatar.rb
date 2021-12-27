@@ -23,7 +23,7 @@ class Gravatar
 
     return unless record
 
-    @profile_url = record.xpath('//profileUrl').text
+    @profile_url = Utility.https(record.xpath('//profileUrl').text)
     @about_me = record.xpath('//aboutMe').text
     @current_location = record.xpath('//currentLocation').text
     @thumbnail_url = record.xpath('//thumbnailUrl').text

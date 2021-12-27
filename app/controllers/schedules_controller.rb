@@ -16,7 +16,7 @@ class SchedulesController < ApplicationController
     set_presenter
 
     save_schedule(operation: :new, event: @event, schedule: @schedule,
-                  fields: params, params: nil)
+                  params: nil)
   end
 
   def edit
@@ -25,7 +25,7 @@ class SchedulesController < ApplicationController
 
   def update
     save_schedule(operation: :edit, event: @event, schedule: @schedule,
-                  fields: params, params: schedule_params)
+                  params: schedule_params)
   end
 
   def destroy
@@ -75,11 +75,6 @@ class SchedulesController < ApplicationController
   end
 
   def decorate_schedule(options)
-    fields = options[:fields]
-
-    ScheduleDecorator.new(
-      options[:schedule], fields['old_talk_id'],
-      fields['schedule']['talk_id'], options[:params]
-    )
+    ScheduleDecorator.new(options[:schedule], options[:params])
   end
 end

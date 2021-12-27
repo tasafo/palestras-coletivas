@@ -88,7 +88,7 @@
           <%= f.label :image %>
           <span style="color: green;"><%= t('hints.event.image') %></span>
           <div class="col-sm-8">
-            <%= image_tag(https(@event.image.url), size: '100x100') if @event.image? %>
+            <%= image_tag(@event.image_path, size: '100x100') if @event.image? %>
             <%= f.file_field :image %>
 
             <%= f.check_box :remove_image %>

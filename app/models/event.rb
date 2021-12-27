@@ -4,7 +4,6 @@ class Event
   include Mongoid::Slug
   include Geocoder::Model::Mongoid
   include Mongoid::Attributes::Dynamic
-  include UpdateCounter
   include Commentable
   include Rateable
 
@@ -58,6 +57,24 @@ class Event
   geocoded_by :address
   after_validation :geocode
 
+  after_create do
+    organizing_events_inc(users, 1)
+  end
+
+  before_destroy do
+    organizing_events_inc(users, -1)
+  end
+
+  after_update do
+    users.each do |user|
+      user.update(counter_organizing_events: user.events.publics.count)
+    end
+  end
+
+  def organizing_events_inc(users, inc)
+    users.each { |user| user.inc(counter_organizing_events: inc) }
+  end
+
   def name_edition
     "#{name} - #{edition}"
   end
@@ -70,15 +87,19 @@ class Event
     online? ? 'online' : place
   end
 
+  def image_path
+    Utility.https(image.url)
+  end
+
   def long_date
     date_of = I18n.t('titles.events.date.of')
-    date_to = I18n.t('titles.events.date.to')
-    date_format = "%B #{date_of} %Y"
-    day_one = zero_fill(start_date.day)
-    day_two = zero_fill(end_date.day)
-    fields = { start_date: start_date, end_date: end_date, date_of: date_of,
-               date_to: date_to, date_format: date_format, day_one: day_one,
-               day_two: day_two }
+    fields = {
+      start_date: start_date, end_date: end_date, date_of: date_of,
+      date_to: I18n.t('titles.events.date.to'), date_format: "%B #{date_of} %Y",
+      day_one: Utility.zero_fill(start_date.day),
+      day_two: Utility.zero_fill(end_date.day)
+    }
+
     FullDate.new(**fields).convert
   end
 
@@ -96,11 +117,5 @@ class Event
     image_file = image.file
 
     ImageFile.remove(image_file) if image_file
-  end
-
-  private
-
-  def zero_fill(field, size = 2)
-    field.to_s.rjust(size, '0')
   end
 end

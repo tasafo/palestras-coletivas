@@ -13,8 +13,8 @@
     <% end %>
   <% end %>
 
-  <%= f.hidden_field :event_id, :value => @event.id %>
-  <%= f.hidden_field :user_id, :value => @presenter.user_id %>
+  <%= f.hidden_field :event_id, value: @event.id %>
+  <%= f.hidden_field :user_id, value: @presenter.user_id %>
 
   <div class="container">
     <%= f.submit class: "btn btn-primary" %>

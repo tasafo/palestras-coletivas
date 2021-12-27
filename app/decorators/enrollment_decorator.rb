@@ -3,11 +3,6 @@ class EnrollmentDecorator
     @enrollment = enrollment
     @option_type = option_type
     @params = params
-
-    @options = [
-      active: { event: :enrollment_events, user: :registered_users },
-      present: { event: :participation_events, user: :present_users }
-    ]
   end
 
   def create
@@ -16,31 +11,11 @@ class EnrollmentDecorator
 
     return false if enrollment
 
-    @enrollment.save && update_counter_of_events_and_users
+    @enrollment.save
     @enrollment
   end
 
   def update
-    @enrollment.update(@params) && update_counter_of_events_and_users
-  end
-
-  private
-
-  def update_counter_of_events_and_users
-    operation = operation_type
-    option_type = @options[0][@option_type.to_sym]
-
-    @enrollment.user.set_counter(option_type[:event], operation)
-    @enrollment.event.set_counter(option_type[:user], operation)
-
-    true
-  end
-
-  def operation_type
-    enroll = @enrollment
-
-    condition = @option_type == 'active' ? enroll.active? : enroll.present?
-
-    condition ? :inc : :dec
+    @enrollment.update(@params)
   end
 end

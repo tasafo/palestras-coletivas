@@ -1,4 +1,4 @@
-class TalksController < PersistenceController
+class TalksController < ApplicationController
   before_action :require_logged_user, only: %i[new create edit update]
   before_action :set_talk, only: %i[show edit update destroy]
   before_action :set_authors, only: %i[new create edit update]
@@ -23,7 +23,13 @@ class TalksController < PersistenceController
   def create
     @talk = Talk.new(talk_params)
 
-    save_object(@talk, params[:users], owner: current_user)
+    talk_decorator = TalkDecorator.new(@talk, params[:users], owner: current_user)
+
+    if talk_decorator.create
+      redirect_to talk_path(@talk), notice: t('flash.talks.create.notice')
+    else
+      render :new
+    end
   end
 
   def show
@@ -43,25 +49,33 @@ class TalksController < PersistenceController
   def edit; end
 
   def update
-    save_object(@talk, params[:users], params: talk_params)
+    talk_decorator = TalkDecorator.new(@talk, params[:users], params: talk_params)
+
+    if talk_decorator.update
+      redirect_to talk_path(@talk), notice: t('flash.talks.update.notice')
+    else
+      render :edit
+    end
   end
 
   def destroy
-    destroy_object(@talk)
+    if @talk.destroy
+      redirect_to talks_path, notice: t('notice.destroyed', model: t('mongoid.models.talk'))
+    else
+      redirect_to talk_path(@talk), notice: t('notice.delete.restriction.talks')
+    end
   end
 
   private
 
-  def search_talks(search, my_talk, page)
-    talks = if logged_in? && my_talk
-              TalkQuery.new.owner(current_user)
-            elsif search.blank?
-              TalkQuery.new.publics
-            else
-              Kaminari.paginate_array(TalkQuery.new.search(search))
-            end
-
-    talks.page(page).per(12)
+  def search_talks(search, my_talks)
+    if logged_in? && !my_talks.blank?
+      TalkQuery.new.owner(current_user)
+    elsif search.blank?
+      TalkQuery.new.publics
+    else
+      TalkQuery.new.search(search)
+    end
   end
 
   def set_talk

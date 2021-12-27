@@ -1,0 +1,11 @@
+<% unless users.blank? %>
+  <tr>
+    <td colspan="2"><h4><%= t("titles.ranking.#{field}") %></h4></td>
+  </tr>
+  <% users.each do |user| %>
+    <tr>
+      <td><%= render 'shared/user', user: user %></td>
+      <td><span class="badge badge-secondary"><%= user.send("counter_#{field}") %></span></td>
+    </tr>
+  <% end %>
+<% end %>

@@ -4,9 +4,7 @@
     <% talks.each do |talk| %>
       <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
         <div class="box-talk">
-          <% thumb = talk.thumbnail.blank? ? "without_presentation.jpg" : https(talk.thumbnail) %>
-
-          <%= link_to image_tag(thumb, width: '170', height: '128'), talk_path(talk) %>
+          <%= link_to image_tag(talk.thumbnail_image, width: '170', height: '128'), talk_path(talk) %>
 
           <% if show_user %>
             <% talk.users.by_name.each do |user| %>
@@ -14,7 +12,7 @@
             <% end %>
           <% end %>
 
-          <p><%= link_to suspension_points(talk.title, 60), talk_path(talk) %></p>
+          <p><%= link_to Utility.suspension_points(talk.title, 60), talk_path(talk) %></p>
 
           <span><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></span>
         </div>

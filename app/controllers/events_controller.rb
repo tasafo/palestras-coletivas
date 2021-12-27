@@ -1,4 +1,4 @@
-class EventsController < PersistenceController
+class EventsController < ApplicationController
   before_action :require_logged_user, only: %i[new create edit update]
   before_action :set_event, only: %i[show edit update destroy]
   before_action :set_organizers, only: %i[new create edit update]
@@ -22,7 +22,13 @@ class EventsController < PersistenceController
   def create
     @event = Event.new(event_params)
 
-    save_object(@event, params[:users], owner: current_user)
+    event_decorator = EventDecorator.new(@event, params[:users], owner: current_user)
+
+    if event_decorator.create
+      redirect_to event_path(@event), notice: t('flash.events.create.notice')
+    else
+      render :new
+    end
   end
 
   def show
@@ -37,13 +43,23 @@ class EventsController < PersistenceController
   def update
     @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
 
-    save_object(@event, params[:users], params: event_params)
+    event_decorator = EventDecorator.new(@event, params[:users], params: event_params)
+
+    if event_decorator.update
+      redirect_to event_path(@event), notice: t('flash.events.update.notice')
+    else
+      render :edit
+    end
   end
 
   def destroy
     @event.destroy_image
 
-    destroy_object(@event)
+    if @event.destroy
+      redirect_to events_path, notice: t('notice.destroyed', model: t('mongoid.models.event'))
+    else
+      redirect_to event_path(@event), notice: t('notice.delete.restriction.events')
+    end
   end
 
   private
@@ -69,8 +85,8 @@ class EventsController < PersistenceController
     redirect_to events_path, notice: t('flash.unauthorized_access')
   end
 
-  def query_event(my_event)
-    if logged_in? && my_event
+  def query_event(my_events)
+    if logged_in? && !my_events.blank?
       EventQuery.new.owner(current_user)
     else
       EventQuery.new.all_public

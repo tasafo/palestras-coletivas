@@ -1,5 +1,5 @@
 <%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
-  <%= render "shared/error_messages", :record => @schedule %>
+  <%= render "shared/error_messages", record: @schedule %>
 
   <div class="form-group">
     <%= f.label :day, class: 'control-label col-md-2' %>
