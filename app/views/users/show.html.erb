@@ -63,10 +63,10 @@
     <% end %>
   <% end %>
 
-  <% unless @presenter.talks.empty? %>
+  <% unless @records.empty? %>
     <hr />
-    <h3><%= t("show.talk.my_talks_published") %> (<%= @presenter.talks.count %>)</h3>
+    <h3><%= t("show.talk.my_talks_published") %> (<%= @records.count %>)</h3>
 
-    <%= render "shared/talks", show_user: false, talks: @presenter.talks %>
+    <%= render "shared/talks", show_user: false, pagy: @pagy, talks: @records %>
   <% end %>
 </div>

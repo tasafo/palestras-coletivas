@@ -17,7 +17,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    @presenter = UserPresenter.new(@user, params[:page])
+    query = @user.talks.publics.desc(:created_at)
+    @pagy, @records = pagy(query, count: query.count)
+    @participations = @user.enrollments.where(present: true).asc(:updated_at)
+    @gravatar = Gravatar.new(@user.email)
   end
 
   def edit

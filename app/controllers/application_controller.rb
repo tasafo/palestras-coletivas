@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?
 

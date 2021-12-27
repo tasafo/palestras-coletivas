@@ -1,5 +1,5 @@
 <div class="container">
-  <%= render "shared/paginate", list: events %>
+  <%= render "shared/paginate", list: pagy %>
 
   <div class="row">
     <% events.each_with_index do |event, index| %>
@@ -34,5 +34,5 @@
     <% end %>
   </div>
 
-  <%= render "shared/paginate", list: events %>
+  <%= render "shared/paginate", list: pagy %>
 </div>

@@ -4,13 +4,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby RUBY_VERSION
 
 gem 'rails', '~> 6.1'
-gem 'rails-i18n'
+gem 'rails-i18n', '~> 6.0'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
 gem 'nokogiri', require: false
 gem 'multi_json', require: false
-gem 'kaminari'
-gem 'kaminari-mongoid'
+gem 'pagy'
 gem 'active_model_serializers'
 
 gem 'mongoid', '7.3.3'
@@ -53,7 +52,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'pry-rails'
+  gem 'byebug'
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'database_cleaner-mongoid', '2.0.1'

@@ -1,36 +1,24 @@
 <%= render "shared/header", index: :talk %>
-
 <%= render "shared/title", title: t("titles.talks.index"), index: :talk %>
-
 <div class="container">
-
   <div class="row">
-
     <div class="col-md-6">
       <div class="input-group">
         <%= form_tag talks_path, method: "get", class: "form-inline" do |f| %>
           <%= text_field_tag :search, @search, class: "form-control", autocomplete: "off", placeholder: t('placeholder.talks.search')  %>
-
           <%= submit_tag t('form.submit.search'), class: "btn btn-success" %>
         <% end %>
       </div>
     </div>
-
     <% if logged_in? %>
       <div class="col-md-6">
         <div class="btn-group pull-right" role="group">
           <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>&nbsp;
 
-          <% if @my %>
-            <%= link_to t("titles.talks.all"), talks_path, class: "btn btn-primary" %>
-          <% else %>
-            <%= link_to t("titles.talks.my"), "/talks?my=true", class: "btn btn-primary" %>
-          <% end %>
+          <%= link_to t("titles.talks.#{@my_talks ? 'all' : 'my'}"), "/talks#{@my_talks ? '' : '?my=true'}", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>
-
   </div>
-
-  <%= render "shared/talks", talks: @talks, show_user: true %>
+  <%= render "shared/talks", talks: @records, pagy: @pagy, show_user: true %>
 </div>

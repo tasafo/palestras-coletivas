@@ -9,15 +9,15 @@
         <div class="btn-group pull-right" role="group">
           <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>&nbsp;
 
-          <%= link_to t("titles.events.#{@my ? 'all' : 'my'}"), "/events#{@my ? '' : '?my=true'}", class: "btn btn-primary" %>
+          <%= link_to t("titles.events.#{@my_events ? 'all' : 'my'}"), "/events#{@my_events ? '' : '?my=true'}", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>
   </div>
 
-  <% if @events.blank? %>
+  <% if @records.blank? %>
     <h2><%= t("titles.events.no_events") %></h2>
   <% else %>
-    <%= render "shared/events", events: @events, show_user: true %>
+    <%= render "shared/events", events: @records, pagy: @pagy, show_user: true %>
   <% end %>
 </div>

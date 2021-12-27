@@ -6,13 +6,13 @@ class TalksController < PersistenceController
 
   def index
     @search = params[:search]
-    @my_talk = !params[:my].nil?
-
-    @talks = search_talks @search, @my_talk, params[:page]
+    @my_talks = params[:my]
+    query = search_talks(@search, @my_talks)
+    @pagy, @records = pagy(query, count: query.count)
 
     respond_to do |format|
       format.html
-      format.json { render json: @talks, meta: { total: @talks.size } }
+      format.json { render json: @records, meta: { total: @records.size } }
     end
   end
 

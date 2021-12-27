@@ -1,6 +1,6 @@
-records = 10
-
+records = 20
 I18n.locale = 'pt-BR'
+Faker::Config.locale = I18n.locale
 
 Activity.create(
   [
@@ -21,65 +21,22 @@ activity_talk = Activity.find_by(order: 1)
 activity_lunch = Activity.find_by(order: 6)
 activity_finish = Activity.find_by(order: 9)
 
-user = User.create(
-  name: 'Fulano de Tal',
-  username: 'fulano',
-  email: 'fulano@mail.com',
-  password: '123456',
-  counter_organizing_events: 2,
-  counter_presentation_events: 1,
-  counter_public_talks: 2
-)
+user = User.create(name: 'Fulano de Tal', username: 'fulano',
+                   email: 'fulano@mail.com', password: '123456')
 
-user.talks.create(
-  [
-    {
-      owner: user,
-      users: [user],
-      presentation_url: '',
-      title: 'As novas tecnologias',
-      description: 'Um pouco sobre as tecnologias do futuro',
-      tags: 'tecnologias',
-      to_public: true,
-      counter_presentation_events: 1
-    },
-    {
-      owner: user,
-      users: [user],
-      presentation_url: '',
-      title: 'Ruby praticamente falando',
-      description: 'A linguagem Ruby',
-      tags: 'ruby',
-      to_public: true
-    }
-  ]
-)
+talker = User.create(name: 'Erasmo Carlos', username: 'erasmos',
+                     email: 'erasmo@mail.com', password: '123456')
 
-talk = Talk.first
+organizer = User.create(name: 'Alberto Roberto', username: 'alberto',
+                        email: 'alberto@mail.com', password: '123456')
 
-Event.create(
-  name: 'Evento de Relações Humanas',
-  edition: Date.today.year,
-  description: 'Sobre o futuro da humanidade',
-  stocking: 50,
-  workload: 16,
-  thumbnail: 'apple',
-  tags: 'humanos',
-  start_date: Date.today,
-  end_date: Date.today + 1.day,
-  deadline_date_enrollment: Date.today + 1.day,
-  to_public: true,
-  place: 'Praça de Encontro',
-  street: 'Rua dos Pariquis, 300',
-  district: 'Jurunas',
-  city: 'Belém',
-  state: 'Pará',
-  country: 'Brasil',
-  owner: user,
-  users: [user]
-)
+1.upto(records) do
+  Talk.create(title: Faker::ProgrammingLanguage.name,
+              description: Faker::ProgrammingLanguage.creator,
+              owner: user, users: [user, talker], tags: 'tech', to_public: true)
+end
 
-event = Event.create(
+user.events.create(
   name: 'Evento de Tecnologia',
   edition: Date.today.year,
   description: 'Um evento muito legal de participar',
@@ -87,9 +44,9 @@ event = Event.create(
   workload: 16,
   thumbnail: 'apple',
   tags: 'tecnologia, diversão',
-  start_date: Date.today - 2.days,
-  end_date: Date.today - 1.day,
-  deadline_date_enrollment: Date.today - 1.day,
+  start_date: Date.today,
+  end_date: Date.today + 1.day,
+  deadline_date_enrollment: Date.today,
   to_public: true,
   place: 'Praça de Convenções',
   street: 'Rua dos Mundurucus, 500',
@@ -98,10 +55,30 @@ event = Event.create(
   state: 'Pará',
   country: 'Brasil',
   owner: user,
-  users: [user],
-  counter_registered_users: records,
-  counter_present_users: records
+  users: [user]
 )
+
+1.upto(records) do
+  user.events.create(
+    name: Faker::Company.industry,
+    edition: Date.today.year,
+    description: Faker::Company.catch_phrase,
+    stocking: 50,
+    workload: 16,
+    thumbnail: 'apple',
+    tags: 'tech',
+    start_date: Date.today,
+    end_date: Date.today + 1.day,
+    deadline_date_enrollment: Date.today + 1.day,
+    to_public: true,
+    online: true,
+    owner: user,
+    users: [user, organizer]
+  )
+end
+
+event = Event.first
+talk = Talk.first
 
 event.schedules.create(
   [
@@ -115,14 +92,14 @@ event.schedules.create(
 1.upto(records) do
   name = Faker::Name.name
 
-  user1 = User.create(
-    name: name,
-    username: name.parameterize.delete('-'),
-    email: Faker::Internet.email,
-    password: '123456',
-    counter_enrollment_events: 1,
-    counter_participation_events: 1
-  )
+  user = User.create(name: name, username: name.parameterize.delete('-'),
+                     email: Faker::Internet.email, password: '123456')
 
-  Enrollment.create(event: event, user: user1, present: true)
+  enrollment = user.enrollments.create(event: event)
+  enrollment.update(present: true)
+
+  user.watch_talk(talk)
+
+  comment_params = { commentable: event, user: user, body: Faker::Lorem.paragraph }
+  Comment.new.comment_on(**comment_params)
 end

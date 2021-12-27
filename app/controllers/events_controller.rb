@@ -5,12 +5,13 @@ class EventsController < PersistenceController
   before_action :check_authorization, only: %i[edit destroy]
 
   def index
-    @my_event = !params[:my].blank?
-    @events = query_event(@my_event).page(params[:page]).per(12)
+    @my_events = params[:my]
+    query = query_event(@my_events)
+    @pagy, @records = pagy(query, count: query.count)
 
     respond_to do |format|
       format.html
-      format.json { render json: @events, meta: { total: @events.size } }
+      format.json { render json: @records, meta: { total: @records.size } }
     end
   end
 

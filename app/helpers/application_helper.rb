@@ -6,6 +6,7 @@ module ApplicationHelper
   def suspension_points(text, max)
     text.size > max ? "#{text[0, max]}..." : text
   end
+  include Pagy::Frontend
 
   def https(url)
     return '' unless url
