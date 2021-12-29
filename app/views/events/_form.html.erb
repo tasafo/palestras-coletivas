@@ -3,11 +3,13 @@
 
         <div class="form-group">
           <%= f.label :name %>
+          <span style="color: green;"><%= t('hints.event.name') %></span>
           <%= f.text_field :name, placeholder: t("placeholder.events.name"), class: "form-control", maxlength: 50 %>
         </div>
 
         <div class="form-group">
           <%= f.label :edition %>
+          <span style="color: green;"><%= t('hints.event.edition') %></span>
           <%= f.text_field :edition, placeholder: t("placeholder.events.edition"), class: "form-control", maxlength: 10 %>
         </div>
 

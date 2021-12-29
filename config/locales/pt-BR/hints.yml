@@ -1,5 +1,11 @@
 pt-BR:
   hints:
+    talk:
+      title: "(Tamanho máximo de 100 caracteres)"
+      description: "(Tamanho máximo de 2000 caracteres)"
+      tags: "(Tamanho máximo de 60 caracteres)"
     event:
-      description: "- Tamanho máximo de 2000 caracteres."
+      name: "(Tamanho máximo de 50 caracteres)"
+      edition: "(Tamanho máximo de 10 caracteres)"
+      description: "(Tamanho máximo de 2000 caracteres)"
       image: "- Formatos permitidos: (.jpg, .jpeg, .png). A imagem será redimensionada para 1920px de largura e 1080px de altura."

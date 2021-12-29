@@ -1,6 +1,6 @@
 <div class="container">
+  <hr/>
   <%= render "shared/paginate", list: pagy %>
-
   <div class="row">
     <% events.each_with_index do |event, index| %>
       <div class="col-lg-4 mb-r">
@@ -28,11 +28,10 @@
           <div class="card-footer">
             <span><%= t("created_time", time: time_ago_in_words(event.created_at)) %></span>
           </div>
-
         </div>
       </div>
     <% end %>
   </div>
-
+  <hr/>
   <%= render "shared/paginate", list: pagy %>
 </div>

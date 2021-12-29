@@ -25,10 +25,6 @@ Para executar testes de aceitação com [Capybara](https://github.com/thoughtbot
 
     sudo apt-get install chromium-browser
 
-O [Genghisapp](http://genghisapp.com/) gerencia os bancos do MongoDB
-
-    gem install genghisapp
-
 O [MailCatcher](http://mailcatcher.me) visualiza o envio de e-mails locais
 
     gem install mailcatcher

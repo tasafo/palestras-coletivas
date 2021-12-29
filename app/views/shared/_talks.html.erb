@@ -1,10 +1,10 @@
+  <hr/>
   <%= render "shared/paginate", list: pagy %>
-
   <div class="row">
     <% talks.each do |talk| %>
       <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
         <div class="box-talk">
-          <%= link_to image_tag(talk.thumbnail_image, width: '170', height: '128'), talk_path(talk) %>
+          <%= link_to(image_tag(talk.thumbnail_image, width: '170', height: '128'), talk_path(talk), title: talk.title) %>
 
           <% if show_user %>
             <% talk.users.each do |user| %>
@@ -12,12 +12,14 @@
             <% end %>
           <% end %>
 
-          <p><%= link_to Utility.suspension_points(talk.title, 60), talk_path(talk) %></p>
+          <p><%= link_to(Utility.suspension_points(talk.title, 45), talk_path(talk), title: talk.title) %></p>
+
+          <%= render 'shared/tags', object: talk %>
 
           <span><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></span>
         </div>
       </div>
     <% end %>
   </div>
-
+  <hr/>
   <%= render "shared/paginate", list: pagy %>
