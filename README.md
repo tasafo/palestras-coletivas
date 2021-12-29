@@ -43,7 +43,9 @@ Copie o exemplo e depois edite o arquivo de configurações
 
     cp .env-development .env
 
-Insere registros do arquivo db/seed.rb no banco de dados
+Cria os índices e insere registros do arquivo db/seed.rb no banco de dados
+
+    rails db:mongoid:create_indexes
 
     rails db:seed
 

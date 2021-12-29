@@ -56,6 +56,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner[:mongoid].strategy = :deletion
+    system 'RAILS_ENV=test bundle exec rails db:mongoid:create_indexes'
   end
 
   config.before(:each) do

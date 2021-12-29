@@ -9,7 +9,7 @@ describe 'Show private talk', js: true do
       login_as user, talks_path
 
       click_link 'Minhas palestras'
-      click_link 'Ruby praticamente falando'
+      first(:link, 'Ruby praticamente falando').click
     end
 
     it 'displays detail talk' do

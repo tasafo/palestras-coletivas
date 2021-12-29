@@ -14,7 +14,7 @@ describe 'Show public talk' do
 
     context 'of slideshare' do
       before do
-        click_link 'Compartilhe'
+        first(:link, 'Compartilhe').click
       end
 
       it 'displays detail talk' do
@@ -25,7 +25,7 @@ describe 'Show public talk' do
 
     context 'of speakerdeck' do
       before do
-        click_link 'Ruby - praticamente falando'
+        first(:link, 'Ruby - praticamente falando').click
       end
 
       it 'displays detail talk' do
@@ -36,7 +36,7 @@ describe 'Show public talk' do
 
     context 'of prezi' do
       before do
-        click_link 'SOA - Introdução'
+        first(:link, 'SOA - Introdução').click
       end
 
       it 'displays detail talk' do
@@ -47,7 +47,7 @@ describe 'Show public talk' do
 
     context 'no slides' do
       before do
-        click_link 'A história da informática'
+        first(:link, 'A história da informática').click
       end
 
       it 'displays detail talk' do

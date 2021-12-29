@@ -8,14 +8,13 @@ describe 'Submit talk without event', js: true do
     before do
       login_as user, talks_path
 
-      click_link talk.title.to_s
+      first(:link, talk.title).click
       click_link 'Submeter a um evento'
     end
 
     it 'displays success message' do
       expect(page).to have_current_path(talk_path(talk))
-      expect(page)
-        .to have_content('Não existem eventos disponíveis para essa operação')
+      expect(page).to have_content('Não existem eventos disponíveis para essa operação')
     end
   end
 end

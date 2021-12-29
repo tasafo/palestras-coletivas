@@ -11,6 +11,9 @@
 /vendor
 public/assets
 public/uploads
+public/tmp
+public/packs
+public/packs-test
 .env
 .rvmrc
 .DS_Store
@@ -19,9 +22,7 @@ public/uploads
 start.sh
 node_modules
 yarn.lock
-/public/packs
-/public/packs-test
-/node_modules
-/yarn-error.log
+node_modules
+yarn-error.log
 yarn-debug.log*
 .yarn-integrity
