@@ -1,6 +1,5 @@
 class Talk
   include Mongoid::Document
-  include Mongoid::Search
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Attributes::Dynamic
@@ -26,14 +25,15 @@ class Talk
   belongs_to :owner, class_name: 'User', inverse_of: :owner_talks
 
   slug :title
-  search_in :title, :tags
 
   validates_presence_of :title, :description, :tags
   validates_uniqueness_of :presentation_url, if: :url?
   validates_length_of :title, maximum: 100
+  validates_length_of :tags, maximum: 60
   validates_length_of :description, maximum: 2000
 
   index({ presentation_url: 1 }, { background: true })
+  index({ title: 'text', tags: 'text' }, { background: true })
 
   scope :publics, -> { where(to_public: true) }
   scope :with_users, -> { includes(:users) }

@@ -131,7 +131,6 @@ GEM
       railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
-    fast-stemmer (1.0.2)
     ferrum (0.11)
       addressable (~> 2.5)
       cliver (~> 0.3)
@@ -208,9 +207,6 @@ GEM
       mongoid (>= 3.0)
       mongoid-compatibility
       stringex (~> 2.0)
-    mongoid_search (0.4.0)
-      fast-stemmer (~> 1.0.0)
-      mongoid (>= 5.0.0)
     msgpack (1.4.2)
     multi_json (1.15.0)
     mustermann (1.1.1)
@@ -404,7 +400,6 @@ DEPENDENCIES
   meta-tags
   mongoid (= 7.3.3)
   mongoid-slug
-  mongoid_search
   multi_json
   nokogiri
   pagy

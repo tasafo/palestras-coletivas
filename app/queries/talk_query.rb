@@ -9,8 +9,8 @@ class TalkQuery
   end
 
   def search(search)
-    @relation.with_users.where(to_public: true).full_text_search(search)
-             .order(title: :asc)
+    @relation.with_users.where(to_public: true)
+             .where('$text' => { '$search' => search }).order(title: :asc)
   end
 
   def publics

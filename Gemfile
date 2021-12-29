@@ -14,7 +14,6 @@ gem 'jsonapi-rails'
 
 gem 'mongoid', '7.3.3'
 gem 'mongoid-slug'
-gem 'mongoid_search'
 gem 'geocoder'
 
 gem 'sprockets', '3.7.2'
