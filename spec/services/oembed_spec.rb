@@ -4,7 +4,7 @@ describe Oembed do
   context 'returns' do
     context 'youtube video' do
       it 'valid' do
-        oembed = Oembed.new "http://#{Oembed::YOUTUBE_DOMAIN}/watch?v=wGe5agueUwI"
+        oembed = Oembed.new "https://#{Oembed::YOUTUBE_DOMAIN}/watch?v=wGe5agueUwI"
 
         expect(oembed.show_video).to be_truthy
       end
@@ -18,7 +18,7 @@ describe Oembed do
             headers: {}
           )
 
-        oembed = Oembed.new "http://#{Oembed::YOUTUBE_DOMAIN}/invalid"
+        oembed = Oembed.new "https://#{Oembed::YOUTUBE_DOMAIN}/invalid"
 
         expect(oembed.show_video).to be_falsey
       end

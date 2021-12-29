@@ -10,7 +10,7 @@ describe 'Delete event', js: true do
 
   context 'without restriction' do
     before do
-      click_with_alert "delete_event_id_#{event._slugs.first}"
+      click_with_alert "delete_event_id_#{event.slug}"
     end
 
     it 'displays success message' do
@@ -26,7 +26,7 @@ describe 'Delete event', js: true do
     end
 
     before do
-      click_with_alert "delete_event_id_#{event._slugs.first}"
+      click_with_alert "delete_event_id_#{event.slug}"
     end
 
     it 'displays error message' do

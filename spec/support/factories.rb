@@ -45,7 +45,7 @@ FactoryBot.define do
   end
 
   factory :talk do
-    presentation_url { 'http://www.slideshare.net/luizsanches/compartilhe' }
+    presentation_url { 'https://slideshare.net/luizsanches/compartilhe' }
     title { 'Compartilhe' }
     description { 'Essa palestra fala sobre compartilhamento de informações' }
     tags { 'tecnologia, compartilhamento, informação' }
@@ -54,7 +54,7 @@ FactoryBot.define do
     code { '16635025' }
 
     factory :other_talk do
-      presentation_url { 'http://www.slideshare.net/luizsanches/ruby-praticamente-falando' }
+      presentation_url { 'https://slideshare.net/luizsanches/ruby-praticamente-falando' }
       title { 'Ruby praticamente falando' }
       description { 'Fala sobre ruby e rails' }
       code { '8521445' }
@@ -165,14 +165,14 @@ FactoryBot.define do
       name { 'Ruby Conf 2011' }
       place { 'São Paulo, SP' }
       date { '01/01/2011' }
-      url { 'http://rubyconf.com' }
+      url { 'https://rubyconf.com' }
     end
 
     trait :fisl do
       name { 'FISL 12' }
       place { 'Porto Alegre, RS' }
       date { '02/02/2012' }
-      url { 'http://fisl.org.br' }
+      url { 'https://fisl.org.br' }
     end
   end
 

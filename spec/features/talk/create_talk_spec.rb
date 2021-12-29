@@ -8,7 +8,6 @@ describe 'Create talk', js: true do
   let!(:other_user) do
     create(:user, :billy, name: 'Billy Boy', username: '@user_billy')
   end
-  let!(:talk) { create(:talk, users: [user], owner: user) }
 
   before do
     login_as user, new_talk_path
@@ -16,10 +15,10 @@ describe 'Create talk', js: true do
 
   context 'with valid data from slideshare' do
     before do
-      fill_in 'Link da palestra', with: 'http://pt.slideshare.net/luizsanches/ferrramentas-e-tcnicas-para-manter-a-sanidade-em-uma-startup'
-      fill_in 'Descrição', with: 'Palestra sobre processos e ferramentas'
-      fill_in 'Tags', with: 'tecnologia, empreendedorismo'
-      fill_in 'Link do vídeo', with: 'http://www.youtube.com/watch?v=wGe5agueUwI'
+      fill_in 'Link da palestra', with: 'https://slideshare.net/luizsanches/ruby-praticamente-falando'
+      fill_in 'Descrição', with: 'Palestra sobre a linguagem de programação Ruby'
+      fill_in 'Tags', with: 'tecnologia, programação'
+      fill_in 'Link do vídeo', with: 'https://youtube.com/watch?v=PcqUTGFgHa4'
       check('Quero publicar')
 
       fill_autocomplete('invitee_username', with: '@us',
@@ -59,7 +58,7 @@ describe 'Create talk', js: true do
       fill_in 'Título', with: 'A linguagem C'
       fill_in 'Descrição', with: 'Indrodução à linguagem C'
       fill_in 'Tags', with: 'C, programação'
-      fill_in 'Link do vídeo', with: 'http://www.youtube.com/invalid'
+      fill_in 'Link do vídeo', with: 'https://www.youtube.com/invalid'
       check('Quero publicar')
 
       click_button 'Adicionar palestra'
@@ -88,7 +87,7 @@ describe 'Create talk', js: true do
         .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
         .to_return(status: 404, body: '', headers: {})
 
-      fill_in 'Link da palestra', with: 'http://www.slideshare.net/luizsanches/invalid'
+      fill_in 'Link da palestra', with: 'https://slideshare.net/luizsanches/invalid'
       fill_in 'Título', with: 'Compartilhe!'
     end
 
@@ -96,8 +95,10 @@ describe 'Create talk', js: true do
   end
 
   context 'with repeated talk' do
+    let!(:talk) { create(:talk, users: [user], owner: user) }
+
     before do
-      fill_in 'Link da palestra', with: 'http://www.slideshare.net/luizsanches/compartilhe'
+      fill_in 'Link da palestra', with: 'https://slideshare.net/luizsanches/compartilhe'
       fill_in 'Descrição', with: 'Palestra duplicada'
       fill_in 'Tags', with: 'duplicada'
 

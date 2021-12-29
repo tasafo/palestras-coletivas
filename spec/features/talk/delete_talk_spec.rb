@@ -10,7 +10,7 @@ describe 'Delete talk', js: true do
 
   context 'without restriction' do
     before do
-      click_with_alert "delete_talk_id_#{talk._slugs.first}"
+      click_with_alert "delete_talk_id_#{talk.slug}"
     end
 
     it 'displays success message' do
@@ -27,7 +27,7 @@ describe 'Delete talk', js: true do
     end
 
     before do
-      click_with_alert "delete_talk_id_#{talk._slugs.first}"
+      click_with_alert "delete_talk_id_#{talk.slug}"
     end
 
     it 'displays error message' do

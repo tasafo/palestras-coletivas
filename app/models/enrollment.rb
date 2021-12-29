@@ -32,4 +32,12 @@ class Enrollment
     user.inc(counter_enrollment_events: inc)
     event.inc(counter_registered_users: inc)
   end
+
+  def upsert(operation:, option_type:, params:)
+    result = EnrollmentDecorator.new(self, option_type, params).send(operation)
+
+    message_type = result ? 'notice' : 'error'
+
+    "flash.enrollments.#{operation}.#{message_type}"
+  end
 end

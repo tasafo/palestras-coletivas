@@ -2,7 +2,7 @@
   <h5>
     <%= t("labels.talk.who_watched") %>
     <small>
-      (<%= pluralize(@talk.watched_users.size, t("labels.general.person").downcase) %>)
+      (<%= @talk.watched_users.size %> <%= t('labels.watched', count: @talk.watched_users.size).downcase %>)
     </small>
   </h5>
   <% @talk.watched_users.each do |user| %>

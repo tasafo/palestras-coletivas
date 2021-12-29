@@ -24,16 +24,18 @@
       </thead>
       <tbody>
         <% if model.users %>
-          <% model.users.by_name.each do |user| %>
+          <% model.users.each do |user| %>
             <% if user != model.owner %>
               <tr id="row_<%= user.id %>">
                 <td>
                   <%= user.name %> <%= "(#{user.username})" %><input type="hidden" name="users[]" value="<%= user.oid %>" />
                 </td>
                 <td>
-                  <center><button type="button" id="user_id_<%= user.oid %>" class="btn btn-danger" onclick="remove_user('<%= user.oid %>')">
-                    <%= t("new.invite.js.remove") %>
-                  </button></center>
+                  <center>
+                    <button type="button" id="remove_user_id_<%= user.oid %>" class="btn btn-danger" onclick="remove_user('<%= user.oid %>')">
+                      <%= t("new.invite.js.remove") %>
+                    </button>
+                  </center>
                 </td>
               </tr>
             <% end %>

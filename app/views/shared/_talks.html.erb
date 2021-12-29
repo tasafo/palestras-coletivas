@@ -7,7 +7,7 @@
           <%= link_to image_tag(talk.thumbnail_image, width: '170', height: '128'), talk_path(talk) %>
 
           <% if show_user %>
-            <% talk.users.by_name.each do |user| %>
+            <% talk.users.each do |user| %>
               <%= render "shared/user_thumb", user: user %>
             <% end %>
           <% end %>

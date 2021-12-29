@@ -14,7 +14,7 @@ RSpec.configure do |config|
         status: 200,
         body: '<response>
                     <entry>
-                      <profileUrl>http://gravatar.com/luizsanches</profileUrl>
+                      <profileUrl>https://gravatar.com/luizsanches</profileUrl>
                       <thumbnailUrl>/assets/without_avatar.jpg</thumbnailUrl>
                       <aboutMe>about me</aboutMe>
                       <currentLocation>Belém - Pará - Brasil</currentLocation>

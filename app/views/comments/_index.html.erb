@@ -1,6 +1,6 @@
 <section class="comments">
   <div class="container">
-    <h2 class="text-primary""><%= I18n.t("titles.comments.index") %></h2>
+    <h2 class="text-primary"><%= I18n.t("titles.comments.index") %></h2>
 
     <% if logged_in? %>
       <%= render "comments/form", commentable: commentable %>
@@ -10,7 +10,7 @@
       <h4><%= I18n.t("labels.comments.empty") %></h4>
     <% end %>
 
-    <% commentable.comments.each do |comment| %>
+    <% commentable.comments.with_user.each do |comment| %>
       <%= render "comments/show", commentable: commentable, comment: comment %>
     <% end %>
   </div>

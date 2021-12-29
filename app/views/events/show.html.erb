@@ -1,7 +1,6 @@
-  <input type="hidden" name="event_id" id="event_id" value="<%= @event._slugs.first %>" />
+  <input type="hidden" name="event_id" id="event_id" value="<%= @event.slug %>" />
 
   <%= render "events/show/header" %>
-
   <%= render "events/show/about" %>
 
   <% if @event.schedules? %>
@@ -29,13 +28,13 @@
     </section>
   <% end %>
 
-  <% unless @event.users.blank? %>
+  <% if @event.users? %>
     <section id="organizers">
       <div class="container">
         <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
 
         <div class="row justify-content-left">
-          <% @event.users.by_name.each do |user| %>
+          <% @event.users.each do |user| %>
             <%= render "shared/user_event", user: user %>
           <% end %>
         </div>
@@ -79,5 +78,4 @@
   </section>
 
   <%= render "comments/index", commentable: @event %>
-
   <%= render "events/show/map" %>

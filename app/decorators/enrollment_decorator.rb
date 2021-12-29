@@ -6,8 +6,7 @@ class EnrollmentDecorator
   end
 
   def create
-    enrollment = Enrollment.find_by(event: @enrollment.event,
-                                    user: @enrollment.user)
+    enrollment = Enrollment.find_by(event: @enrollment.event, user: @enrollment.user)
 
     return false if enrollment
 

@@ -10,12 +10,12 @@ class User
   field :auth_token, type: String
   field :password_reset_token, type: String
   field :password_reset_sent_at, type: DateTime
+  field :counter_public_talks, type: Integer, default: 0
   field :counter_watched_talks, type: Integer, default: 0
   field :counter_organizing_events, type: Integer, default: 0
   field :counter_presentation_events, type: Integer, default: 0
   field :counter_enrollment_events, type: Integer, default: 0
   field :counter_participation_events, type: Integer, default: 0
-  field :counter_public_talks, type: Integer, default: 0
   field :gravatar_photo, type: String
 
   mount_uploader :avatar, AvatarUploader
@@ -43,7 +43,6 @@ class User
   index({ email: 1 }, { unique: true, background: true })
   index({ username: 1 }, { unique: true, background: true })
 
-  scope :by_name, -> { asc(:_slugs) }
   scope :with_relations, -> { includes(:talks, :events) }
 
   after_save do

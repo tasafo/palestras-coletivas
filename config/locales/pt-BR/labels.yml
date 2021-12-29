@@ -54,14 +54,16 @@ pt-BR:
       activity: "Atividade"
       talk: "Palestra"
 
-    general:
-      person: "Pessoa"
-      people: "Pessoas"
+    watched:
+      one: "Pessoa"
+      other: "Pessoas"
 
     rating:
-      vote!: "Dê um feedback!"
-      vote: "Voto"
-      votes: "Votos"
+      liked: Foi legal?
+      vote!: Dê um feedback! Clique nas estrelas aqui embaixo :)
+      vote:
+        one: "Voto"
+        other: "Votos"
 
     submit_event:
       event: "Evento"

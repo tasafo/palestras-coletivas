@@ -12,8 +12,9 @@ class EnrollmentsController < ApplicationController
     @enrollment = Enrollment.new(enrollment_params)
     @event = Event.find(params[:enrollment][:event_id])
 
-    save_enrollment(operation: :create, event: @event, enrollment: @enrollment,
-                    option_type: 'active', params: nil)
+    message = @enrollment.upsert(operation: :create, option_type: 'active', params: nil)
+
+    redirect_to event_path(@event), notice: t(message)
   end
 
   def edit
@@ -32,8 +33,10 @@ class EnrollmentsController < ApplicationController
   def update
     @option_type = params[:option_type]
 
-    save_enrollment(operation: :update, event: @event, enrollment: @enrollment,
-                    option_type: @option_type, params: enrollment_params)
+    message = @enrollment.upsert(operation: :update, option_type: @option_type,
+                                 params: enrollment_params)
+
+    redirect_to event_path(@event), notice: t(message)
   end
 
   private
@@ -48,19 +51,5 @@ class EnrollmentsController < ApplicationController
 
   def enrollment_params
     params.require(:enrollment).permit(:event_id, :user_id, :active, :present)
-  end
-
-  def save_enrollment(options = {})
-    result = EnrollmentDecorator.new(
-      options[:enrollment],
-      options[:option_type],
-      options[:params]
-    ).send options[:operation]
-
-    message_type = result ? 'notice' : 'error'
-
-    notice = "flash.enrollments.#{options[:operation]}.#{message_type}"
-
-    redirect_to event_path(options[:event]), notice: t(notice)
   end
 end

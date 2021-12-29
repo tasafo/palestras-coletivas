@@ -9,5 +9,6 @@ pt-BR:
     delete:
       label: "Apagar"
       confirm: "Você tem certeza?"
-    was_presented: "foi apresentada"
-    was_not_presented: "não foi apresentada"
+    presented:
+      'yes': Sim
+      'no': Não

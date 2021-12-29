@@ -2,16 +2,17 @@
           <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
 
           <% if @presenter.authorized %>
-            <h4><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h4>
+            <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h2>
+
             <table class="table table-hover table-responsive">
               <thead class="thead-dark">
                 <tr>
-                  <th><%= t("show.event.attendance_table.number") %></th>
-                  <th><%= t("show.event.attendance_table.photo") %></th>
-                  <th><%= t("show.event.attendance_table.name") %></th>
-                  <th><%= t("show.event.attendance_table.email") %></th>
+                  <th width="10%"><%= t("show.event.attendance_table.number") %></th>
+                  <th width="10%"><%= t("show.event.attendance_table.photo") %></th>
+                  <th width="40%"><%= t("show.event.attendance_table.name") %></th>
+                  <th width="30%"><%= t("show.event.attendance_table.email") %></th>
                   <% if @presenter.can_record_presence %>
-                    <th><%= t("show.event.attendance_table.presence") %></th>
+                    <th width="10%"><%= t("show.event.attendance_table.presence") %></th>
                   <% end %>
                 </tr>
               </thead>
@@ -22,14 +23,16 @@
                 <% button_type = record[:enrollment].present? ? "btn-danger" : "btn-primary" %>
 
                 <tr>
-                  <td><%= counter += 1 %></td>
-                  <td><%= render "shared/user_thumb", user: record[:user] %></td>
+                  <td align="center"><%= counter += 1 %></td>
+                  <td align="center"><%= render "shared/user_thumb", user: record[:user] %></td>
                   <td><%= record[:user].name %></td>
                   <td><%= record[:user].email %></td>
                   <td>
                     <% if @presenter.can_record_presence %>
-                      <%= link_to message_button, edit_event_enrollment_path(@event, :present, record[:enrollment]), class: "btn #{button_type}", id: "user_id_#{record[:user].id}" %>
-                      <% end %>
+                      <%= link_to message_button,
+                                  edit_event_enrollment_path(@event, :present, record[:enrollment]),
+                                  class: "btn #{button_type}", id: "user_id_#{record[:user].id}" %>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>

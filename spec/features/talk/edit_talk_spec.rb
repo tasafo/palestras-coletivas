@@ -26,7 +26,7 @@ describe 'Edit talk', js: true do
                                               select: 'Billy Boy (@user_billy)')
         click_button :add_user
 
-        click_button "user_id_#{luis.id}"
+        click_button "remove_user_id_#{luis.id}"
 
         click_button 'Atualizar palestra'
       end

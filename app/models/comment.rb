@@ -10,6 +10,8 @@ class Comment
 
   validates_presence_of :body
 
+  scope :with_user, -> { includes(:user) }
+
   def comment_on(commentable: nil, user: nil, body: '')
     self.user = user
     self.commentable = commentable
