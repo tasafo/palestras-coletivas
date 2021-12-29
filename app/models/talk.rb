@@ -16,9 +16,10 @@ class Talk
   field :video_link, type: String
   field :counter_presentation_events, type: Integer, default: 0
 
-  has_and_belongs_to_many :users, inverse_of: :talks
-  has_and_belongs_to_many :watched_users, class_name: 'User',
-                                          inverse_of: :watched_talk
+  has_and_belongs_to_many :users, inverse_of: :talks,
+                                  before_remove: :public_talks_dec,
+                                  after_add: :public_talks_inc
+  has_and_belongs_to_many :watched_users, class_name: 'User', inverse_of: :watched_talk
   has_many :schedules, dependent: :restrict_with_error
   embeds_many :external_events
   embeds_many :comments, as: :commentable
@@ -38,22 +39,24 @@ class Talk
   scope :with_users, -> { includes(:users) }
   scope :with_schedules, -> { includes(:schedules) }
 
-  after_create do
-    public_talks_inc(users, 1)
-  end
-
   before_destroy do
-    public_talks_inc(users, -1)
+    users_public_talks_inc(-1)
   end
 
-  after_update do
-    users.each do |user|
-      user.update(counter_public_talks: user.talks.publics.count)
-    end
+  def public_talks_dec(user)
+    user_public_talks_inc(user, -1)
   end
 
-  def public_talks_inc(users, inc)
-    users.each { |user| user.inc(counter_public_talks: inc) }
+  def public_talks_inc(user)
+    user_public_talks_inc(user, 1)
+  end
+
+  def users_public_talks_inc(inc)
+    users.each { |user| user_public_talks_inc(user, inc) }
+  end
+
+  def user_public_talks_inc(user, inc)
+    user.inc(counter_public_talks: inc) if to_public
   end
 
   def url?

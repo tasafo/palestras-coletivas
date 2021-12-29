@@ -25,6 +25,6 @@ module SpecHelpers
   end
 
   def asset_file(file)
-    Rails.root.join('app', 'assets', 'images', file)
+    "#{Rails.root}/app/assets/images/#{file}"
   end
 end

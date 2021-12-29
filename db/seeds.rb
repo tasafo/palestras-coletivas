@@ -32,7 +32,7 @@ organizer = User.create(name: 'Alberto Roberto', username: 'alberto',
 
 1.upto(records) do
   Talk.create(title: Faker::ProgrammingLanguage.name,
-              description: Faker::ProgrammingLanguage.creator,
+              description: Faker::Lorem.sentence,
               owner: user, users: [user, talker], tags: 'tech', to_public: true)
 end
 
@@ -58,18 +58,20 @@ user.events.create(
   users: [user]
 )
 
-1.upto(records) do
+1.upto(records) do |number|
+  date = Date.today - (number + 1).day
+
   user.events.create(
     name: Faker::Company.industry,
     edition: Date.today.year,
     description: Faker::Company.catch_phrase,
     stocking: 50,
-    workload: 16,
+    workload: 8,
     thumbnail: 'apple',
     tags: 'tech',
-    start_date: Date.today,
-    end_date: Date.today + 1.day,
-    deadline_date_enrollment: Date.today + 1.day,
+    start_date: date,
+    end_date: date,
+    deadline_date_enrollment: date,
     to_public: true,
     online: true,
     owner: user,
@@ -90,10 +92,11 @@ event.schedules.create(
 )
 
 1.upto(records) do
-  name = Faker::Name.name
+  name = "#{Faker::Name.first_name} #{Faker::Name.last_name}"
+  username = "#{name.split.first.parameterize}#{name.split.last.parameterize}"
+  email = "#{username}@mail.com"
 
-  user = User.create(name: name, username: name.parameterize.delete('-'),
-                     email: Faker::Internet.email, password: '123456')
+  user = User.create(name: name, username: username, email: email, password: '123456')
 
   enrollment = user.enrollments.create(event: event)
   enrollment.update(present: true)

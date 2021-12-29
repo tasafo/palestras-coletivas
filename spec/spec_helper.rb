@@ -45,7 +45,7 @@ RSpec.configure do |config|
   Capybara.default_max_wait_time = 5
 
   Capybara.register_driver :cuprite do |app|
-    Capybara::Cuprite::Driver.new(app, headless: true)
+    Capybara::Cuprite::Driver.new(app, headless: (ENV['TEST_SHOW_BROWSER'] ? false : true))
   end
 
   Capybara.javascript_driver = :cuprite

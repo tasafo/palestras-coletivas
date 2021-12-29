@@ -35,7 +35,9 @@ class Event
 
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable
-  has_and_belongs_to_many :users, inverse_of: :events
+  has_and_belongs_to_many :users, inverse_of: :events,
+                                  before_remove: :organizing_events_dec,
+                                  after_add: :organizing_events_inc
   has_many :schedules, dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
   belongs_to :owner, class_name: 'User', inverse_of: :owner_events
@@ -51,28 +53,30 @@ class Event
   slug :name, :edition
 
   scope :publics, -> { where(to_public: true) }
-  scope :upcoming, -> { publics.desc(:start_date).limit(3) }
+  scope :upcoming, -> { publics.order(start_date: :desc).limit(3) }
   scope :with_relations, -> { includes(:users, :schedules, :enrollments) }
 
   geocoded_by :address
-  after_validation :geocode
-
-  after_create do
-    organizing_events_inc(users, 1)
-  end
+  after_validation :geocode, if: ->(obj) { !obj.online? }
 
   before_destroy do
-    organizing_events_inc(users, -1)
+    users_organizing_events_inc(-1)
   end
 
-  after_update do
-    users.each do |user|
-      user.update(counter_organizing_events: user.events.publics.count)
-    end
+  def organizing_events_dec(user)
+    user_organizing_events_inc(user, -1)
   end
 
-  def organizing_events_inc(users, inc)
-    users.each { |user| user.inc(counter_organizing_events: inc) }
+  def organizing_events_inc(user)
+    user_organizing_events_inc(user, 1)
+  end
+
+  def users_organizing_events_inc(inc)
+    users.each { |user| user_organizing_events_inc(user, inc) }
+  end
+
+  def user_organizing_events_inc(user, inc)
+    user.inc(counter_organizing_events: inc)
   end
 
   def name_edition
