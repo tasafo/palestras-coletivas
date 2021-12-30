@@ -86,3 +86,29 @@ section#top h1 {
   font-size: 4em;
   text-align: center
 }
+
+.card-talk .card {
+  width: 10rem;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+.card-talk .card .card-body {
+  padding: 0.5rem;
+  overflow: auto;
+}
+
+.card-talk .card .card-body .card-title {
+  font-size: 12px;
+  margin-bottom: 0.2rem;
+}
+
+.card-talk .card .card-body .card-text {
+  font-size: 11px;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.card-talk .card .view {
+  min-height: 120px;
+}

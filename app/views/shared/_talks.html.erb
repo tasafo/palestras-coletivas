@@ -1,22 +1,32 @@
   <hr/>
   <%= render "shared/paginate", list: pagy %>
   <div class="row">
-    <% talks.each do |talk| %>
-      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-        <div class="box-talk">
-          <%= link_to(image_tag(talk.thumbnail_image, width: '170', height: '128'), talk_path(talk), title: talk.title) %>
-
-          <% if show_user %>
-            <% talk.users.each do |user| %>
-              <%= render "shared/user_thumb", user: user %>
+    <% talks.each_with_index do |talk, index| %>
+      <div class="ol-xs-12 col-sm-4 col-md-3 col-lg-3 col-xl-2 card-talk">
+        <div class="card">
+          <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
+            <%= link_to talk_path(talk) do %>
+              <% if talk.thumbnail.blank? %>
+                <div class="mask"></div>
+              <% else %>
+                <%= image_tag(talk.thumbnail_image, class: 'card-img-top', title: talk.title) %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
 
-          <p><%= link_to(Utility.suspension_points(talk.title, 45), talk_path(talk), title: talk.title) %></p>
+          <div class="card-body">
+            <% if show_user %>
+              <% talk.users.each do |user| %>
+                <%= render "shared/user_thumb", user: user %>
+              <% end %>
+            <% end %>
 
-          <%= render 'shared/tags', object: talk %>
+            <p class="card-title"><%= link_to(talk.title, talk_path(talk)) %></p>
 
-          <span><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></span>
+            <p class="card-text"><%= render 'shared/tags', object: talk %></p>
+
+            <p class="card-text"><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></p>
+          </div>
         </div>
       </div>
     <% end %>
