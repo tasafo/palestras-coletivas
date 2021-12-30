@@ -26,13 +26,4 @@ class Utility
   def self.zero_fill(field, size = 2)
     field.to_s.rjust(size, '0')
   end
-
-  def self.generate_tags(object)
-    tags = object.tags
-    tags = tags.include?(',') ? tags.split(', ') : tags.split
-
-    tags.map do |tag|
-      "<a href=\"\/#{object.class.name.pluralize.downcase}?search=#{tag}\"><span class=\"badge\">#{tag}</span></a>"
-    end.join
-  end
 end
