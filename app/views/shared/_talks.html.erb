@@ -9,7 +9,7 @@
               <% if talk.thumbnail.blank? %>
                 <div class="mask"></div>
               <% else %>
-                <%= image_tag(talk.thumbnail_image, class: 'card-img-top', title: talk.title) %>
+                <%= image_tag(talk.thumbnail_image, size: '170x128', class: 'card-img-top', title: talk.title) %>
               <% end %>
             <% end %>
           </div>
