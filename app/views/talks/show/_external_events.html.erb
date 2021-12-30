@@ -1,20 +1,25 @@
 <% if @talk.external_events? %>
-  <h3><%= t("show.talk.external_events") %></h3>
+  <h4><%= t("show.talk.external_events") %></h4>
 
   <table class="table">
     <tbody>
-    <% @talk.external_events.list(@owns).each do |external_event| %>
+    <% @talk.external_events.list(@user_owns).each do |external_event| %>
       <% event_date = l external_event.date, format: :long %>
       <tr>
         <td>
-          <h5><%= link_to "#{external_event.name}, #{external_event.place}, #{event_date}.", external_event.url %></h5>
+          <h6>
+            <%= link_to "#{external_event.name}, #{external_event.place}, #{event_date}.", external_event.url %>
+          </h6>
         </td>
-        <% if @owns %>
+        <% if @user_owns %>
           <td>
-            <%= external_event.active ? 'ativo' : 'inativo' %>
+            <%= external_event.active ? t('actions.active') : t('actions.inactive') %>
           </td>
           <td>
-            <%= link_to t("actions.edit"), edit_talk_external_event_path(@talk, external_event), class: "btn btn-success", id: "external_event_id_#{external_event.id}" %>
+            <%= link_to t("actions.edit"),
+                        edit_talk_external_event_path(@talk, external_event),
+                        class: "btn btn-success",
+                        id: "external_event_id_#{external_event.id}" %>
           </td>
         <% end %>
       </tr>

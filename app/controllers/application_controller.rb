@@ -26,22 +26,16 @@ class ApplicationController < ActionController::Base
   def authorized_access?(model)
     return false if !logged_in? || model.nil?
 
-    authorized = false
-    model.users.each do |user|
-      authorized = true if current_user == user
-    end
+    found = model.users.select { |user| current_user == user }
 
-    authorized
+    found.any?
   end
 
-  def owner?(model)
+  def user_owner?(model)
     return false if !logged_in? || model.nil?
 
-    owner = false
-    model.users.each do |user|
-      owner = true if current_user == user && model.owner == user
-    end
+    found = model.users.select { |user| current_user == user && model.owner == user }
 
-    owner
+    found.any?
   end
 end

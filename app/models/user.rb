@@ -67,10 +67,6 @@ class User
     _id.to_s
   end
 
-  def show_name
-    Utility.until_two_names(name) unless name.blank?
-  end
-
   def password=(password)
     if password.blank?
       @validate_password = false

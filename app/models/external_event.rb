@@ -11,7 +11,7 @@ class ExternalEvent
 
   validates_presence_of :name, :place, :date
 
-  scope :by_date, -> { order_by(date: :desc) }
+  scope :by_date, -> { order(date: :desc) }
   scope :only_active, -> { where(active: true) }
 
   def self.list(owns)

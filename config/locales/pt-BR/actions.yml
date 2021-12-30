@@ -12,3 +12,5 @@ pt-BR:
     presented:
       'yes': Sim
       'no': Não
+    active: Ativo
+    inactive: Inativo

@@ -34,10 +34,9 @@ class TalksController < ApplicationController
 
   def show
     @authorized = authorized_access? @talk
-    @owns = owner? @talk
+    @user_owns = user_owner? @talk
 
-    @presentation = Oembed.new(@talk.presentation_url, @talk.code)
-                          .show_presentation
+    @presentation = Oembed.new(@talk.presentation_url, @talk.code).show_presentation
 
     @video = Oembed.new(@talk.video_link).show_video
 
@@ -85,8 +84,7 @@ class TalksController < ApplicationController
 
     return if found
 
-    redirect_to talks_path, notice: t('notice.not_found',
-                                      model: t('mongoid.models.talk'))
+    redirect_to talks_path, notice: t('notice.not_found', model: t('mongoid.models.talk'))
   end
 
   def set_authors

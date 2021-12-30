@@ -67,6 +67,6 @@
     <hr />
     <h3><%= t("show.talk.my_talks_published") %> (<%= @records.count %>)</h3>
 
-    <%= render "shared/talks", show_user: false, pagy: @pagy, talks: @records %>
+    <%= render "shared/talks", pagy: @pagy, talks: @records, show_user: false %>
   <% end %>
 </div>
