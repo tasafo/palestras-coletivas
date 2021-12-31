@@ -1,6 +1,8 @@
 $(function() {
     $("#talk_presentation_url").focusout(function() {
         var link = $("#talk_presentation_url").val();
+        $("#talk_code").val("");
+        $("#talk_thumbnail").val("");
 
         if (link) {
             $("#searching_talk").show();
