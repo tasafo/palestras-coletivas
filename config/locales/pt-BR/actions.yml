@@ -9,8 +9,3 @@ pt-BR:
     delete:
       label: "Apagar"
       confirm: "Você tem certeza?"
-    presented:
-      'yes': Sim
-      'no': Não
-    active: Ativo
-    inactive: Inativo

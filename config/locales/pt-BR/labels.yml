@@ -1,5 +1,11 @@
 pt-BR:
   labels:
+    status:
+      'yes': Sim
+      'no': Não
+      active: Ativo
+      inactive: Inativo
+
     user:
       name: "Seu nome"
       name_explanaition: "Será usado no seu endereço. Ex.: palestrascoletivas.tasafo.org/users/fulano-de-tal"

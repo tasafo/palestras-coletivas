@@ -69,9 +69,9 @@ pt-BR:
     ranking:
       index: Ranking
       public_talks: Palestras publicadas
-      talks: Palestras realizadas em eventos
+      talks: Palestras apresentadas em eventos
       events: Público em eventos
       watched_talks: Assistiram mais palestras
       organizing_events: Eventos organizados
-      presentation_events: Palestras realizadas
+      presentation_events: Apresentação em eventos
       participation_events: Participação em eventos

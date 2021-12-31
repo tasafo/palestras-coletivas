@@ -1,17 +1,15 @@
 pt-BR:
   show:
     talk:
-      created_by: Criado por
+      created_by: Criada por
       events:
-        one: Apresentado no evento
-        other: Apresentado nos eventos
+        one: Apresentada no evento
+        other: Apresentada nos eventos
       to_public: "Público"
-      _yes: "Sim"
-      _no: "Não"
       without_presentation: "O material ainda não está publicado"
       my_talks_published: "Minhas palestras publicadas"
       external_event: "Adicionar evento externo"
-      external_events: "Apresentado em outros eventos"
+      external_events: "Apresentada em outros eventos"
       submit_event: "Submeter a um evento"
 
     user:

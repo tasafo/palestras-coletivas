@@ -13,7 +13,7 @@
         </td>
         <% if @user_owns %>
           <td>
-            <%= external_event.active ? t('actions.active') : t('actions.inactive') %>
+            <%= external_event.active ? t('labels.status.active') : t('labels.status.inactive') %>
           </td>
           <td>
             <%= link_to t("actions.edit"),
