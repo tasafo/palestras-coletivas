@@ -9,7 +9,7 @@
               <% if talk.thumbnail.blank? %>
                 <div class="mask"></div>
               <% else %>
-                <%= image_tag(talk.thumbnail_image, size: '160x120', class: 'card-img-top', title: talk.title) %>
+                <%= image_tag(talk.thumbnail_image, size: '160x120', class: 'card-img-top') %>
               <% end %>
             <% end %>
           </div>
@@ -25,7 +25,11 @@
 
             <p class="card-text"><%= render 'shared/tags', object: talk %></p>
 
-            <p class="card-text"><%= t("created_time", time: time_ago_in_words(talk.created_at)) %></p>
+            <p class="card-text">
+              <small class="text-muted">
+                <%= t("created_time", time: time_ago_in_words(talk.created_at)) %>
+              </small>
+            </p>
           </div>
         </div>
       </div>
