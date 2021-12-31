@@ -25,8 +25,6 @@ class User
   has_and_belongs_to_many :events, inverse_of: :users, dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
   has_many :votes
-  has_many :owner_events, class_name: 'User', inverse_of: :owner
-  has_many :owner_talks, class_name: 'User', inverse_of: :owner
 
   slug :name
 

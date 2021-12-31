@@ -22,7 +22,7 @@ class Talk
   has_many :schedules, dependent: :restrict_with_error
   embeds_many :external_events
   embeds_many :comments, as: :commentable
-  belongs_to :owner, class_name: 'User', inverse_of: :owner_talks
+  belongs_to :owner, class_name: 'User'
 
   slug :title
 

@@ -40,7 +40,7 @@ class Event
                                   after_add: :organizing_events_inc
   has_many :schedules, dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
-  belongs_to :owner, class_name: 'User', inverse_of: :owner_events
+  belongs_to :owner, class_name: 'User'
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
                         :deadline_date_enrollment, :workload
