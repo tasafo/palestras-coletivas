@@ -22,21 +22,24 @@ class Schedule
   scope :with_relations, -> { includes(:event, :talk, :activity) }
 
   after_create do
-    presentation_events_inc(talk, 1) if talk?
+    presentation_events_inc(talk, 1) if talk? && was_presented
   end
 
   after_update do
-    if talk_id_changed? && talk?
-      if talk_id_was
-        old_talk = Talk.find(talk_id_was)
-        presentation_events_inc(old_talk, -1)
+    if talk?
+      if talk_id_changed?
+        if talk_id_was
+          old_talk = Talk.find(talk_id_was)
+          presentation_events_inc(old_talk, -1) && was_presented
+        end
+      elsif was_presented_changed?
+        presentation_events_inc(talk, was_presented ? 1 : -1)
       end
-      presentation_events_inc(talk, 1)
     end
   end
 
   before_destroy do
-    presentation_events_inc(talk, -1) if talk?
+    presentation_events_inc(talk, -1) if talk? && was_presented
   end
 
   def presentation_events_inc(talky, inc)
@@ -44,10 +47,6 @@ class Schedule
       user.inc(counter_presentation_events: inc)
     end
     talky.inc(counter_presentation_events: inc)
-  end
-
-  def talk?
-    !talk_id.blank?
   end
 
   def find_vote(user)

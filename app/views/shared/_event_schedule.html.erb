@@ -86,7 +86,7 @@
                   </td>
                   <% if schedule.talk? %>
                     <td>
-                      <%= link_to t("actions.presented.#{schedule.was_presented ? 'yes' : 'no'}"),
+                      <%= link_to t("labels.status.#{schedule.was_presented ? 'yes' : 'no'}"),
                                   event_schedule_was_presented_path(@event, schedule),
                                   method: :post,
                                   class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}",
@@ -100,7 +100,7 @@
                     <td>
                       <p class="text-center">
                         <span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>">
-                          <%= t("actions.presented.#{schedule.was_presented ? 'yes' : 'no'}") %>
+                          <%= t("labels.status.#{schedule.was_presented ? 'yes' : 'no'}") %>
                         </span>
                       </p>
                     </td>

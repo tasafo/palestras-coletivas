@@ -28,22 +28,20 @@
 
   <% if @user.events? %>
     <hr />
-    <% event = t("show.user.events") %>
-    <h3><%= event[@user.events.count > 1 ? :other : :one] %></h3>
-
-    <% @user.events.publics.order(updated_at: :desc).each do |event| %>
-      <h5><%= link_to event.name_edition, event_path(event) %></h5>
+    <h3><%= t('show.user.events', count: @user.events.count) %> (<%= @user.events.count %>)</h3>
+    <ul>
+    <% @user.events.publics.order(start_date: :desc).each do |event| %>
+      <li><%= link_to event.name_edition, event_path(event) %></li>
     <% end %>
+    </ul>
   <% end %>
 
   <% presentations = "" %>
 
   <% if @user.talks? %>
     <% @user.talks.publics.each do |talk| %>
-      <% if talk.schedules? %>
-        <% talk.schedules.presenteds.each do |schedule| %>
-          <% presentations << '<h5>' + (link_to "#{schedule.talk.title} ( #{schedule.event.name_edition} )", event_path(schedule.event)) + '</h5>' %>
-        <% end %>
+      <% talk.schedules.presenteds.each do |schedule| %>
+        <% presentations << '<li>' << link_to(schedule.talk.title, talk_path(talk)) << ' - ' << link_to(schedule.event.name_edition, event_path(schedule.event)) << '</li>' %>
       <% end %>
     <% end %>
   <% end %>
@@ -51,12 +49,11 @@
   <% unless presentations.blank? %>
     <hr />
     <h3><%= t("show.user.presentations") %></h3>
-    <%= presentations.html_safe %>
+    <ul><%= presentations.html_safe %></ul>
   <% end %>
 
   <% unless @participations.blank? %>
-    <% participation = t("show.user.participations") %>
-    <h3><%= participation[@participations.count > 1 ? :other : :one] %></h3>
+    <h3><%= t('show.user.participations', count: @participations.count) %></h3>
 
     <% @participations.each do |participation| %>
       <h5><%= link_to participation.event.name_edition, event_path(participation.event) %></h5>

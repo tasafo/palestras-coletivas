@@ -1,8 +1,9 @@
-<% if @talk.schedules.presenteds.count > 0 %>
-  <% event = t("show.talk.events") %>
-  <h5><%= event[@talk.schedules.count > 1 ? :other : :one] %></h5>
+<% if @talk.schedules.presenteds.count.positive? %>
+  <h5><%= t('show.talk.events', count: @talk.schedules.count) %></h5>
 
+  <ul>
   <% @talk.schedules.presenteds.each do |schedule| %>
-    <h5><%= link_to schedule.event.name_edition, event_path(schedule.event) %></h5>
+    <li><%= link_to schedule.event.name_edition, event_path(schedule.event) %></li>
   <% end %>
+  </ul>
 <% end %>

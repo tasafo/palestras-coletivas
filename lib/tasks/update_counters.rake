@@ -8,7 +8,8 @@ namespace :db do
         user.counter_public_talks = user.talks.where(to_public: true).count
         user.counter_watched_talks = user.watched_talks.count
         user.counter_organizing_events = user.events.publics.count
-        user.counter_presentation_events = user.talks.select(&:schedules?).sum { |talk| talk.schedules.count }
+        user.counter_presentation_events = user.talks.select(&:schedules?)
+                                               .sum { |talk| talk.schedules.presenteds.count }
         user.counter_enrollment_events = user.enrollments.actives.count
         user.counter_participation_events = user.enrollments.presents.count
         user.save
@@ -17,7 +18,7 @@ namespace :db do
       puts 'Updating talks counters...'
 
       Talk.all.each do |talk|
-        talk.update(counter_presentation_events: talk.schedules.count)
+        talk.update(counter_presentation_events: talk.schedules.presenteds.count)
       end
 
       puts 'Updating events counters...'

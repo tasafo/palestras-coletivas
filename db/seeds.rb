@@ -30,16 +30,10 @@ talker = User.create(name: 'Erasmo Carlos', username: 'erasmos',
 organizer = User.create(name: 'Alberto Roberto', username: 'alberto',
                         email: 'alberto@mail.com', password: '123456')
 
-1.upto(records) do
-  Talk.create(title: Faker::ProgrammingLanguage.name,
-              description: Faker::Lorem.sentence,
-              owner: user, users: [user, talker], tags: 'tech', to_public: true)
-end
-
-user.events.create(
+Event.create(
   name: 'Evento de Tecnologia',
   edition: Date.today.year,
-  description: 'Um evento muito legal de participar',
+  description: '<p>Um evento muito legal de participar</p>',
   stocking: 100,
   workload: 16,
   thumbnail: 'apple',
@@ -58,13 +52,23 @@ user.events.create(
   users: [user]
 )
 
+Talk.create(title: Faker::ProgrammingLanguage.name,
+            description: Faker::Lorem.sentence,
+            owner: user, users: [user], tags: 'informática, ensino', to_public: true)
+
+1.upto(records) do
+  Talk.create(title: Faker::ProgrammingLanguage.name,
+              description: Faker::Lorem.sentence,
+              owner: user, users: [user, talker], tags: 'programação, tecnologia', to_public: true)
+end
+
 1.upto(records) do |number|
   date = Date.today - (number + 1).day
 
-  user.events.create(
+  Event.create(
     name: Faker::Company.industry,
     edition: Date.today.year,
-    description: Faker::Company.catch_phrase,
+    description: "<p>#{Faker::Company.catch_phrase}</p>",
     stocking: 50,
     workload: 8,
     thumbnail: 'apple',
@@ -81,13 +85,15 @@ end
 
 event = Event.first
 talk = Talk.first
+talk2 = Talk.last
 
 event.schedules.create(
   [
     { day: 1, time: '09:00', activity: activity_open },
     { day: 1, time: '10:00', activity: activity_talk, talk: talk, was_presented: true },
-    { day: 1, time: '11:30', activity: activity_lunch },
-    { day: 1, time: '12:00', activity: activity_finish }
+    { day: 1, time: '11:00', activity: activity_talk, talk: talk2 },
+    { day: 1, time: '12:00', activity: activity_lunch },
+    { day: 1, time: '18:00', activity: activity_finish }
   ]
 )
 
