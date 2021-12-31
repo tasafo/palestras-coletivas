@@ -7,4 +7,8 @@ class ImageFile
       File.delete(file_path) if File.exist?(file_path)
     end
   end
+
+  def self.asset(file)
+    Rails.root.join('spec', 'support', 'assets', 'images', file)
+  end
 end

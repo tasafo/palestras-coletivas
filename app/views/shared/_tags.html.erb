@@ -1,4 +1,4 @@
-<% tags = tags_from(object) %>
+<% tags = Utility.tags_from(object) %>
 
 <% tags.map do |tag| %>
   <%= link_to(tag, "/#{object.class.name.pluralize.downcase}?search=#{tag}", class: 'badge badge-dark') %>

@@ -23,8 +23,4 @@ module SpecHelpers
       page.click_link target
     end
   end
-
-  def asset_file(file)
-    "#{Rails.root}/app/assets/images/#{file}"
-  end
 end

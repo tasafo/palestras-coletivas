@@ -57,14 +57,11 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner[:mongoid].strategy = :deletion
     system 'RAILS_ENV=test bundle exec rails db:mongoid:create_indexes'
+    FileUtils.rm_rf(Rails.root.join('public', 'tmp'))
   end
 
   config.before(:each) do
     DatabaseCleaner[:mongoid].clean
-  end
-
-  config.after(:suite) do
-    FileUtils.rm_rf(Rails.root.join('public', 'tmp'))
   end
 
   Mongoid.logger.level = Logger::INFO

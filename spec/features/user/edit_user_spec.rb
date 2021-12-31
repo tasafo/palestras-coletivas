@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Edit user' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
-  let!(:image_path) { asset_file('without_avatar.jpg') }
+  let!(:image_path) { ImageFile.asset('without_avatar.jpg') }
 
   context 'when the current user owns the account' do
     before do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Signup' do
-  let!(:image_path) { asset_file('without_avatar.jpg') }
+  let!(:image_path) { ImageFile.asset('without_avatar.jpg') }
 
   before do
     visit new_user_path

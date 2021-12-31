@@ -58,7 +58,7 @@ FactoryBot.define do
       title { 'Ruby praticamente falando' }
       description { 'Fala sobre ruby e rails' }
       code { '8521445' }
-      tags { 'ruby, rails' }
+      tags { 'ruby rails' }
       to_public { false }
     end
 
@@ -77,7 +77,7 @@ FactoryBot.define do
       title { 'Ruby - praticamente falando' }
       description { 'Indrodução à linguagem Ruby' }
       code { '920aa870aa9d0130a293521e21bc27c7' }
-      tags { 'ruby, programação' }
+      tags { 'ruby,programação' }
       to_public { true }
     end
 
@@ -109,6 +109,7 @@ FactoryBot.define do
       country { 'Brasil' }
       to_public { true }
       coordinates { [-48.4945471, -1.4714916] }
+      image { File.new(ImageFile.asset('video-poster.jpg')) }
     end
   end
 

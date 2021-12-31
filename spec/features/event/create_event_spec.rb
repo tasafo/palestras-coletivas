@@ -11,7 +11,7 @@ describe 'Create event', js: true do
   let!(:script) do
     "$('tinymce').html('Evento de tecnologia com sua 1ª edição na região')"
   end
-  let!(:image_path) { asset_file('video-poster.jpg') }
+  let!(:image_path) { ImageFile.asset('video-poster.jpg') }
 
   before do
     login_as user, new_event_path

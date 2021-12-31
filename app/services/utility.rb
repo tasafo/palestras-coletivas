@@ -1,16 +1,4 @@
 class Utility
-  def self.until_two_names(name)
-    name_array = name.split
-    name_size = name_array.size
-    name_one = name_array[0]
-
-    if name_size > 1
-      "#{name_one} #{name_array[name_size - 1]}".titleize
-    else
-      name_one.titleize
-    end
-  end
-
   def self.suspension_points(text, max)
     text.size > max ? "#{text[0, max]}..." : text
   end
@@ -25,5 +13,17 @@ class Utility
 
   def self.zero_fill(field, size = 2)
     field.to_s.rjust(size, '0')
+  end
+
+  def self.tags_from(object)
+    tags = object.tags
+
+    if tags.include?(', ')
+      tags.split(', ')
+    elsif tags.include?(',')
+      tags.split(',')
+    else
+      tags.split
+    end
   end
 end
