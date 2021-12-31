@@ -4,20 +4,20 @@ class EventQuery
   end
 
   def all_public
-    @relation.publics.desc(:start_date)
+    @relation.publics.order(start_date: :desc)
   end
 
   def present_users
     @relation.where(:counter_present_users.gt => 0)
-             .desc(:counter_present_users).asc(:_slugs).asc(:edition).limit(5)
+             .order(counter_present_users: :desc, slugs: :asc, edition: :asc).limit(5)
   end
 
   def accepts_submissions
     @relation.where(to_public: true, accepts_submissions: true,
-                    :end_date.gte => Date.today).desc(:start_date)
+                    :end_date.gte => Date.today).order(start_date: :desc)
   end
 
   def owner(user)
-    @relation.with_relations.where(owner: user).desc(:created_at)
+    @relation.with_relations.where(owner: user).order(created_at: :desc)
   end
 end

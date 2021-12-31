@@ -121,8 +121,7 @@ class EventPresenter
   def mount_grid(event)
     dates = (event.start_date..event.end_date).to_a
 
-    schedules = event.schedules.with_relations.asc(:day).asc(:time)
-                     .desc(:counter_votes)
+    schedules = event.schedules.with_relations.order(day: :asc, time: :asc, counter_votes: :desc)
 
     add_in_grid(dates, schedules)
   end

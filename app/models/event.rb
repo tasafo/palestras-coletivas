@@ -108,7 +108,7 @@ class Event
   end
 
   def first_time
-    event_schedules = schedules&.asc(:time)&.limit(1)
+    event_schedules = schedules&.order(time: :asc)&.limit(1)
 
     return '00:00' unless event_schedules
 

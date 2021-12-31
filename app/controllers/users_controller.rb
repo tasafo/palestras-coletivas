@@ -17,9 +17,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    query = @user.talks.publics.desc(:created_at)
+    query = @user.talks.publics.order(created_at: :desc)
     @pagy, @records = pagy(query, count: query.count)
-    @participations = @user.enrollments.where(present: true).asc(:updated_at)
+    @participations = @user.enrollments.where(present: true).order(updated_at: :asc)
     @gravatar = Gravatar.new(@user.email)
   end
 

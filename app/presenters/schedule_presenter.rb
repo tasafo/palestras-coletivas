@@ -2,7 +2,7 @@ class SchedulePresenter
   attr_reader :activities, :dates, :talk_title, :display
 
   def initialize(schedule, event)
-    @activities = Activity.all.asc(:order)
+    @activities = Activity.all.order(order: :asc)
 
     event_dates = (event.start_date..event.end_date).to_a
 
