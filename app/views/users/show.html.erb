@@ -16,7 +16,7 @@
 
 <div class="container">
   <%= thumbnail(@user, '80x80', 'rounded-circle img-responsive') %>
-  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %> </small></h3>
+  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %></small></h3>
 
   <% if @gravatar.has_profile %>
     <p class="lead">
@@ -26,9 +26,11 @@
     </p>
   <% end %>
 
-  <% if @user.events? %>
+  <% events_count = @user.events.publics.count %>
+
+  <% if events_count.positive? %>
     <hr />
-    <h3><%= t('show.user.events', count: @user.events.count) %> (<%= @user.events.count %>)</h3>
+    <h3><%= t('show.user.events', count: events_count) %> (<%= events_count %>)</h3>
     <ul>
     <% @user.events.publics.order(start_date: :desc).each do |event| %>
       <li><%= link_to event.name_edition, event_path(event) %></li>
@@ -37,10 +39,12 @@
   <% end %>
 
   <% presentations = "" %>
+  <% presentations_count = 0 %>
 
   <% if @user.talks? %>
     <% @user.talks.publics.each do |talk| %>
       <% talk.schedules.presenteds.each do |schedule| %>
+        <% presentations_count += 1 %>
         <% presentations << '<li>' << link_to(schedule.talk.title, talk_path(talk)) << ' - ' << link_to(schedule.event.name_edition, event_path(schedule.event)) << '</li>' %>
       <% end %>
     <% end %>
@@ -48,16 +52,19 @@
 
   <% unless presentations.blank? %>
     <hr />
-    <h3><%= t("show.user.presentations") %></h3>
+    <h3><%= t("show.user.presentations") %> (<%= presentations_count %>)</h3>
     <ul><%= presentations.html_safe %></ul>
   <% end %>
 
-  <% unless @participations.blank? %>
-    <h3><%= t('show.user.participations', count: @participations.count) %></h3>
+  <% participations_count = @participations.count %>
 
+  <% if participations_count.positive? %>
+    <h3><%= t('show.user.participations', count: participations_count) %> (<%= participations_count %>)</h3>
+    <ul>
     <% @participations.each do |participation| %>
-      <h5><%= link_to participation.event.name_edition, event_path(participation.event) %></h5>
+      <li><%= link_to participation.event.name_edition, event_path(participation.event) %></li>
     <% end %>
+    </ul>
   <% end %>
 
   <% unless @records.empty? %>
