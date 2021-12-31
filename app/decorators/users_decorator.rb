@@ -24,8 +24,6 @@ class UsersDecorator
   private
 
   def update_users
-    clean_attributes
-
     if @users
       @form_users = User.find(@users)
 
