@@ -3,7 +3,7 @@ class EventQuery
     @relation = relation
   end
 
-  def all_public
+  def publics
     @relation.publics.order(start_date: :desc)
   end
 
@@ -19,5 +19,15 @@ class EventQuery
 
   def owner(user)
     @relation.with_relations.where(owner: user).order(created_at: :desc)
+  end
+
+  def select(user, search, my_events)
+    if user && !my_events.blank?
+      owner(user)
+    elsif search.blank?
+      publics
+    else
+      search(search)
+    end
   end
 end

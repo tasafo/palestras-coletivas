@@ -20,4 +20,14 @@ class TalkQuery
   def owner(user)
     @relation.with_users.where(owner: user).order(created_at: :desc)
   end
+
+  def select(user, search, my_talks)
+    if user && !my_talks.blank?
+      owner(user)
+    elsif search.blank?
+      publics
+    else
+      search(search)
+    end
+  end
 end

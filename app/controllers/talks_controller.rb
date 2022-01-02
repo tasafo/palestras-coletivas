@@ -5,9 +5,7 @@ class TalksController < ApplicationController
   before_action :check_authorization, only: %i[edit destroy]
 
   def index
-    @search = params[:search]
-    @my_talks = params[:my]
-    query = search_talks(@search, @my_talks)
+    query = TalkQuery.new.select(current_user, params[:search], params[:my])
     @pagy, @records = pagy(query, count: query.count)
 
     respond_to do |format|
@@ -67,16 +65,6 @@ class TalksController < ApplicationController
 
   private
 
-  def search_talks(search, my_talks)
-    if logged_in? && !my_talks.blank?
-      TalkQuery.new.owner(current_user)
-    elsif search.blank?
-      TalkQuery.new.publics
-    else
-      TalkQuery.new.search(search)
-    end
-  end
-
   def set_talk
     @talk = Talk.find(params[:id])
 
@@ -99,7 +87,6 @@ class TalksController < ApplicationController
 
   def talk_params
     params.require(:talk).permit(:presentation_url, :title, :description,
-                                 :tags, :video_link, :to_public, :thumbnail,
-                                 :code)
+                                 :tags, :video_link, :to_public, :thumbnail, :code)
   end
 end

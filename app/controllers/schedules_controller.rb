@@ -51,8 +51,7 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:event_id, :activity_id, :talk_id,
-                                     :day, :time, :environment)
+    params.require(:schedule).permit(:event_id, :activity_id, :talk_id, :day, :time)
   end
 
   def redirect_to_root_path(message)

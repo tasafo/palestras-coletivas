@@ -5,8 +5,7 @@ class EventsController < ApplicationController
   before_action :check_authorization, only: %i[edit destroy]
 
   def index
-    @my_events = params[:my]
-    query = query_event(@my_events)
+    query = EventQuery.new.select(current_user, params[:search], params[:my])
     @pagy, @records = pagy(query, count: query.count)
 
     respond_to do |format|
@@ -82,14 +81,6 @@ class EventsController < ApplicationController
     return if authorized_access?(@event)
 
     redirect_to events_path, notice: t('flash.unauthorized_access')
-  end
-
-  def query_event(my_events)
-    if logged_in? && !my_events.blank?
-      EventQuery.new.owner(current_user)
-    else
-      EventQuery.new.all_public
-    end
   end
 
   def event_params
