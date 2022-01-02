@@ -14,16 +14,4 @@ class Utility
   def self.zero_fill(field, size = 2)
     field.to_s.rjust(size, '0')
   end
-
-  def self.tags_from(object)
-    tags = object.tags
-
-    if tags.include?(', ')
-      tags.split(', ')
-    elsif tags.include?(',')
-      tags.split(',')
-    else
-      tags.split
-    end
-  end
 end

@@ -22,7 +22,8 @@
             <% else %>
               <p><%= l event.start_date %> - <%= l event.end_date %></p>
             <% end %>
-            <div class="card-text"><%= Utility.suspension_points(strip_tags(event.description), 200) %></div>
+            <p class="card-text"><%= render 'shared/tags', object: event %></p>
+            <p class="card-text"><%= Utility.suspension_points(strip_tags(event.description), 200) %></p>
           </div>
 
           <div class="card-footer">

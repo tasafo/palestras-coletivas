@@ -36,7 +36,6 @@ Event.create(
   description: '<p>Um evento muito legal de participar</p>',
   stocking: 100,
   workload: 16,
-  thumbnail: 'apple',
   tags: 'tecnologia, diversão',
   start_date: Date.today,
   end_date: Date.today + 1.day,
@@ -59,7 +58,8 @@ Talk.create(title: Faker::ProgrammingLanguage.name,
 1.upto(records) do
   Talk.create(title: Faker::ProgrammingLanguage.name,
               description: Faker::Lorem.sentence,
-              owner: user, users: [user, talker], tags: 'programação, tecnologia', to_public: true)
+              owner: user, users: [user, talker], to_public: true,
+              tags: Faker::Lorem.words.join(' '))
 end
 
 1.upto(records) do |number|
@@ -68,11 +68,10 @@ end
   Event.create(
     name: Faker::Company.industry,
     edition: Date.today.year,
-    description: "<p>#{Faker::Company.catch_phrase}</p>",
+    description: "<p>#{Faker::Lorem.paragraph_by_chars}</p>",
     stocking: 50,
     workload: 8,
-    thumbnail: 'apple',
-    tags: 'tech',
+    tags: Faker::Lorem.words.join(' '),
     start_date: date,
     end_date: date,
     deadline_date_enrollment: date,

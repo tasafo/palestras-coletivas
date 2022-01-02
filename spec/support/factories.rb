@@ -58,7 +58,7 @@ FactoryBot.define do
       title { 'Ruby praticamente falando' }
       description { 'Fala sobre ruby e rails' }
       code { '8521445' }
-      tags { 'ruby rails' }
+      tags { 'ruby,rails' }
       to_public { false }
     end
 
@@ -66,7 +66,7 @@ FactoryBot.define do
       presentation_url { '' }
       title { 'A história da informática' }
       description { 'Um história comovente da era da informática' }
-      tags { 'tecnologia, informática' }
+      tags { 'tecnologia; informática' }
       thumbnail { '' }
       code { '' }
       to_public { true }
@@ -77,7 +77,7 @@ FactoryBot.define do
       title { 'Ruby - praticamente falando' }
       description { 'Indrodução à linguagem Ruby' }
       code { '920aa870aa9d0130a293521e21bc27c7' }
-      tags { 'ruby,programação' }
+      tags { 'ruby;programação' }
       to_public { true }
     end
 
@@ -86,7 +86,7 @@ FactoryBot.define do
       title { 'SOA - Introdução' }
       description { 'SOA - Introdução' }
       code { 'ggblugsq5p7h' }
-      tags { 'soa, arquitetura de sistemas' }
+      tags { 'soa arquitetura sistemas' }
       to_public { true }
     end
   end
