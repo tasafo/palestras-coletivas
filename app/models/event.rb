@@ -52,6 +52,8 @@ class Event
 
   slug :name, :edition
 
+  index({ name: 'text', edition: 'text', tags: 'text' }, { background: true })
+
   scope :publics, -> { where(to_public: true) }
   scope :upcoming, -> { publics.order(start_date: :desc).limit(3) }
   scope :with_relations, -> { includes(:users, :schedules, :enrollments) }

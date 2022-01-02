@@ -4,7 +4,7 @@ pt-BR:
       title: "Exemplo: O futuro do mundo"
       description: "Exemplo: A palestra fala sobre o futuro do mundo em que vivemos"
       tags: "Exemplo: futuro, mundo"
-      search: "informe um título ou tags"
+      search: "Informe um título ou tag"
 
     comments: "Comente aqui!"
 
@@ -18,7 +18,7 @@ pt-BR:
       city: "Belém"
       state: "Pará"
       country: "Brasil"
-      search: "por nome, edição, tags e endereço"
+      search: "Informe um nome, edição ou tag"
 
     users:
       name: "ex.: Fulano de Tal"

@@ -3,6 +3,11 @@ class EventQuery
     @relation = relation
   end
 
+  def search(search)
+    @relation.where(to_public: true)
+             .where('$text' => { '$search' => search }).order(name: :asc)
+  end
+
   def publics
     @relation.publics.order(start_date: :desc)
   end

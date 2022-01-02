@@ -9,7 +9,7 @@ pt-BR:
       all: "Todas as palestras"
       search: "Buscar palestra"
       select: "Selecionar palestra"
-      no_talks: "Nenhuma palestra adicionada"
+      none: "Nenhuma palestra adicionada"
 
     comments:
       index: "Comentários"
@@ -31,7 +31,7 @@ pt-BR:
       edit: "Editar evento"
       my: "Meus eventos"
       all: "Todos os eventos"
-      no_events: "Nenhum evento adicionado"
+      none: "Nenhum evento adicionado"
       date:
         'on': dia
         of: de

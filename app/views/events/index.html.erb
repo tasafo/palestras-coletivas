@@ -1,22 +1,29 @@
 <%= render "shared/header", index: :event %>
-
 <%= render "shared/title", title: t("titles.events.index"), index: :event %>
-
 <div class="container">
   <div class="row events-actions">
+    <div class="col-md-8">
+      <div class="input-group">
+        <%= form_tag events_path, method: "get", class: "form-inline" do |f| %>
+          <%= text_field_tag :search, params[:search], class: "form-control", size: 40, maxlength: 40,
+                             autocomplete: "off", placeholder: t('placeholder.events.search')  %>
+          <%= submit_tag t('form.submit.search'), class: "btn btn-success" %>
+        <% end %>
+      </div>
+    </div>
     <% if logged_in? %>
-      <div class="col-md-12">
+      <div class="col-md-4">
         <div class="btn-group pull-right" role="group">
           <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>&nbsp;
 
-          <%= link_to t("titles.events.#{@my_events ? 'all' : 'my'}"), "/events#{@my_events ? '' : '?my=true'}", class: "btn btn-primary" %>
+          <%= link_to t("titles.events.#{params[:my] ? 'all' : 'my'}"),
+                      "/events#{params[:my] ? '' : '?my=true'}", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>
   </div>
-
   <% if @records.blank? %>
-    <h2><%= t("titles.events.no_events") %></h2>
+    <h2><%= t("titles.events.none") %></h2>
   <% else %>
     <%= render "shared/events", events: @records, pagy: @pagy, show_user: true %>
   <% end %>
