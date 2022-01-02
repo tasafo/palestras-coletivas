@@ -11,6 +11,7 @@ development:
       hosts:
         - localhost:27017
       options:
+        truncate_logs: false
         # Change whether the session persists in safe mode by default.
         # (default: false)
         # safe: false
