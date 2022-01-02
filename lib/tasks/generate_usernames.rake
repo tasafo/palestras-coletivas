@@ -2,9 +2,10 @@ namespace :db do
   namespace :pc do
     desc 'Generates usernames to users'
     task generate_usernames: :environment do
+      batch_size = ENV.fetch('BATCH_SIZE', 50)
       saved_users = []
 
-      User.all.each do |user|
+      User.batch_size(batch_size).all.each do |user|
         if user.username.blank?
           user.username = I18n.transliterate("@#{user.name.gsub(' ', '').gsub('@', '').underscore}").downcase
           saved = user.save

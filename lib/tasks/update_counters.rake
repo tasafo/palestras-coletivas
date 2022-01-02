@@ -2,11 +2,12 @@ namespace :db do
   namespace :pc do
     desc 'Updates counters from users, talks, events and schedules'
     task update_counters: :environment do
-      batch_size = ENV['BATCH_SIZE'] || 50
+      batch_size = ENV.fetch('BATCH_SIZE', 50)
 
-      count = User.all.count
+      query = User.with_relations.batch_size(batch_size).all
+      count = query.count
 
-      User.batch_size(batch_size).all.each_with_index do |user, index|
+      query.each_with_index do |user, index|
         puts "Updating user counters #{index + 1}/#{count}"
 
         user.counter_public_talks = user.talks.publics.count
@@ -19,9 +20,10 @@ namespace :db do
         user.save
       end
 
-      count = Talk.all.count
+      query = Talk.includes(:users, :schedules).batch_size(batch_size).all
+      count = query.count
 
-      Talk.batch_size(batch_size).all.each_with_index do |talk, index|
+      query.each_with_index do |talk, index|
         puts "Updating talk counters #{index + 1}/#{count}"
 
         talk.update(counter_presentation_events: talk.schedules.presenteds.count)
