@@ -3,13 +3,16 @@ class EventPresenter
               :can_record_presence, :show_users_present, :users_present,
               :users_active, :crowded, :new_subscription, :enrollment, :can_vote
 
-  def initialize(event, authorized, user_logged_in = nil)
-    prepare_event event, authorized, user_logged_in
+  def initialize(event, authorized, user_logged = nil)
+    @event = event
+    @authorized = authorized
+    @user_logged = user_logged
+
+    prepare_event
   end
 
   def show_checkin
-    !@event.block_presence && @enrollment && @enrollment.active? &&
-      Date.today >= @event.start_date
+    !@event.block_presence && @enrollment&.active? && Date.today >= @event.start_date
   end
 
   def address
@@ -22,46 +25,42 @@ class EventPresenter
 
   private
 
-  def prepare_event(event, authorized, user_logged_in = nil)
-    return unless event
+  def prepare_event
+    return unless @event
 
-    @grids = mount_grid(event)
-    @open_enrollment = event.deadline_date_enrollment >= Date.today
-    users = prepare_users(event)
+    @grids = mount_grid
+
+    @open_enrollment = @event.deadline_date_enrollment >= Date.today
+
+    users = prepare_users
     @users_present = users[:presents]
     @users_active = users[:actives]
-    @crowded = @users_active.size >= event.stocking
-    logged event, user_logged_in
-    @can_vote = prepare_can_vote(event)
-    prepare_authorized(event, authorized)
+
+    @crowded = @users_active.size >= @event.stocking
+
+    logged
+
+    @can_vote = prepare_can_vote
+
+    prepare_authorized
   end
 
-  def prepare_authorized(event, authorized)
-    @event = event
-    @authorized = authorized
+  def prepare_authorized
+    today = Date.today
+    @can_record_presence = @authorized && today >= @event.start_date
+    @show_users_present = today > @event.end_date && !@can_record_presence
 
-    @can_record_presence = record_presence?
-    @show_users_present = users_present?
-
-    return if event.to_public
+    return if @event.to_public
 
     @event = nil unless @authorized
   end
 
-  def record_presence?
-    @authorized && Date.today >= @event.start_date
+  def prepare_can_vote
+    @event&.accepts_submissions && @event.end_date >= Date.today
   end
 
-  def users_present?
-    Date.today > @event.end_date && !@can_record_presence
-  end
-
-  def prepare_can_vote(event)
-    event&.accepts_submissions && event.end_date >= Date.today
-  end
-
-  def prepare_users(event)
-    hash = add_in_hash(event)
+  def prepare_users
+    hash = add_in_hash
     presents = hash[:presents]
     actives = hash[:actives]
 
@@ -72,11 +71,11 @@ class EventPresenter
     fields_hash(presents, actives)
   end
 
-  def add_in_hash(event)
+  def add_in_hash
     presents = []
     actives = []
 
-    event.enrollments.with_user.each do |enrollment|
+    @event.enrollments.with_user.each do |enrollment|
       user = enrollment.user
 
       presents << user if enrollment.present?
@@ -91,37 +90,36 @@ class EventPresenter
     { presents: presents, actives: actives }
   end
 
-  def logged(event, user_logged_in = nil)
+  def logged
     @new_subscription = true
 
-    return unless user_logged_in
+    return unless @user_logged
 
-    @enrollment = Enrollment.where(event: event, user: user_logged_in).first
+    @enrollment = @event.enrollments
+                        .select { |enrollment| enrollment.user_id == @user_logged.id }
+                        .first
 
     @new_subscription = false if @enrollment
 
-    @open_enrollment = false if speaker?(event, user_logged_in) || @authorized
+    @open_enrollment = false if speaker? || @authorized
   end
 
-  def speaker?(event, user_logged_in)
-    is_speaker = false
-
-    schedules = event.schedules.includes(:talk).not_in(talk_id: nil)
+  def speaker?
+    schedules = @event.schedules.with_talk.select(&:talk_id)
 
     schedules.each do |schedule|
-      talk = Talk.with_users.find(schedule.talk)
-      talk.users.each do |user|
-        is_speaker = (user.id == user_logged_in.id)
+      schedule.talk.users.each do |user|
+        return true if user == @user_logged
       end
     end
 
-    is_speaker
+    false
   end
 
-  def mount_grid(event)
-    dates = (event.start_date..event.end_date).to_a
+  def mount_grid
+    dates = (@event.start_date..@event.end_date).to_a
 
-    schedules = event.schedules.with_relations.order(day: :asc, time: :asc, counter_votes: :desc)
+    schedules = @event.schedules.with_relations.order(day: :asc, time: :asc, counter_votes: :desc)
 
     add_in_grid(dates, schedules)
   end
@@ -132,7 +130,7 @@ class EventPresenter
     dates.each_with_index do |date, index|
       selects = schedules.select { |schedule| schedule.day == index + 1 }
 
-      grids << { date: date, schedules: selects } unless selects.blank?
+      grids << { date: date, schedules: selects } if selects.any?
     end
 
     grids

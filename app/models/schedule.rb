@@ -4,7 +4,6 @@ class Schedule
 
   field :day, type: Integer
   field :time, type: String
-  field :environment, type: String
   field :counter_votes, type: Integer, default: 0
   field :was_presented, type: Boolean, default: false
 
@@ -19,7 +18,8 @@ class Schedule
   validates_uniqueness_of :talk, scope: :event, if: :talk?
 
   scope :presenteds, -> { where(was_presented: true) }
-  scope :with_relations, -> { includes(:event, :talk, :activity) }
+  scope :with_talk, -> { includes(:talk) }
+  scope :with_relations, -> { includes(:event, :talk, :activity, :votes) }
 
   after_create do
     presentation_events_inc(talk, 1) if talk? && was_presented

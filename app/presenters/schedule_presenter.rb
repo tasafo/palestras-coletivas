@@ -8,22 +8,23 @@ class SchedulePresenter
 
     @dates = prepare_dates(event_dates, schedule)
 
-    @talk_title = schedule.talk? ? schedule.talk.title : ''
+    schedule_talk = schedule.talk
 
-    @display = schedule.talk? ? 'block' : 'none'
+    @talk_title = schedule_talk ? schedule_talk.title : ''
+
+    @display = schedule_talk ? 'block' : 'none'
   end
 
   private
 
   def prepare_dates(event_dates, schedule)
     dates = ''
-    day = 1
 
-    event_dates.each do |date|
+    event_dates.each_with_index do |date, index|
+      day = index + 1
       selected = schedule.day == day ? "selected='selected'" : ''
 
       dates << "<option value='#{day}' #{selected}>#{date}</option>"
-      day += 1
     end
 
     dates
