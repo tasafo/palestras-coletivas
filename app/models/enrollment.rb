@@ -5,8 +5,8 @@ class Enrollment
   field :active, type: Boolean, default: true
   field :present, type: Boolean, default: false
 
-  belongs_to :event
-  belongs_to :user
+  belongs_to :event, index: true
+  belongs_to :user, index: true
 
   validates_uniqueness_of :user, scope: :event
 

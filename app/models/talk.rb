@@ -15,14 +15,14 @@ class Talk
   field :video_link, type: String
   field :counter_presentation_events, type: Integer, default: 0
 
-  has_and_belongs_to_many :users, inverse_of: :talks,
+  has_and_belongs_to_many :users, inverse_of: :talks, index: true,
                                   before_remove: :public_talks_dec,
                                   after_add: :public_talks_inc
-  has_and_belongs_to_many :watched_users, class_name: 'User', inverse_of: :watched_talk
+  has_and_belongs_to_many :watched_users, class_name: 'User', inverse_of: :watched_talk, index: true
   has_many :schedules, dependent: :restrict_with_error
   embeds_many :external_events
   embeds_many :comments, as: :commentable
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'User', index: true
 
   slug :title
 

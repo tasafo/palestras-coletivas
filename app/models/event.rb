@@ -35,12 +35,12 @@ class Event
 
   embeds_many :comments, as: :commentable
   embeds_many :ratings, as: :rateable
-  has_and_belongs_to_many :users, inverse_of: :events,
+  has_and_belongs_to_many :users, inverse_of: :events, index: true,
                                   before_remove: :organizing_events_dec,
                                   after_add: :organizing_events_inc
   has_many :schedules, dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
-  belongs_to :owner, class_name: 'User'
+  belongs_to :owner, class_name: 'User', index: true
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
                         :deadline_date_enrollment, :workload

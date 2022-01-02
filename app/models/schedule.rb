@@ -8,9 +8,9 @@ class Schedule
   field :counter_votes, type: Integer, default: 0
   field :was_presented, type: Boolean, default: false
 
-  belongs_to :event
-  belongs_to :activity
-  belongs_to :talk, optional: true
+  belongs_to :event, index: true
+  belongs_to :activity, index: true
+  belongs_to :talk, optional: true, index: true
   has_many :votes
 
   validates_presence_of :day, :time

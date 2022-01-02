@@ -20,9 +20,9 @@ class User
 
   mount_uploader :avatar, AvatarUploader
 
-  has_and_belongs_to_many :talks, inverse_of: :talks, dependent: :restrict_with_error
-  has_and_belongs_to_many :watched_talks, class_name: 'Talk', inverse_of: :watched_user
-  has_and_belongs_to_many :events, inverse_of: :users, dependent: :restrict_with_error
+  has_and_belongs_to_many :talks, inverse_of: :talks, index: true, dependent: :restrict_with_error
+  has_and_belongs_to_many :watched_talks, class_name: 'Talk', inverse_of: :watched_user, index: true
+  has_and_belongs_to_many :events, inverse_of: :users, index: true, dependent: :restrict_with_error
   has_many :enrollments, dependent: :restrict_with_error
   has_many :votes
 

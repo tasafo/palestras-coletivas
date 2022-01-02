@@ -6,7 +6,7 @@ class Comment
 
   embedded_in :commentable, polymorphic: true
   embeds_many :comments, as: :commentable
-  belongs_to :user
+  belongs_to :user, index: true
 
   validates_presence_of :body
 
