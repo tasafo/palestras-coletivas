@@ -42,6 +42,8 @@ gem 'serviceworker-rails'
 gem 'meta-tags'
 
 gem 'net-smtp'
+gem 'net-pop'
+
 gem 'bootsnap'
 
 gem 'webpacker'
