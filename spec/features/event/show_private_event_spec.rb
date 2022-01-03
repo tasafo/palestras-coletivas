@@ -15,12 +15,12 @@ describe 'Show private event', js: true do
       login_as user, events_path
 
       click_link 'Meus eventos'
-      click_link 'Tá Safo Conf'
+      click_link event.name_edition
     end
 
     it 'displays detail event' do
       expect(page).to have_current_path(event_path(event))
-      expect(page).to have_content('Tá Safo Conf')
+      expect(page).to have_content(event.name_edition)
     end
   end
 

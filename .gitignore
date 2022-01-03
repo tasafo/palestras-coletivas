@@ -11,7 +11,7 @@
 /vendor
 public/assets
 public/uploads
-public/tmp
+public/tmp*
 public/packs
 public/packs-test
 .env

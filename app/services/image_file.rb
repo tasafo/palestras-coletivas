@@ -9,6 +9,6 @@ class ImageFile
   end
 
   def self.asset(file)
-    "#{Rails.root}/spec/support/assets/images/#{file}"
+    Rails.root.join('spec', 'support', 'assets', 'images', file)
   end
 end

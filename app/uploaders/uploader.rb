@@ -8,7 +8,7 @@ class Uploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    folder = Rails.env.test? ? 'tmp' : 'uploads'
+    folder = Rails.env.test? ? "tmp#{ENV['TEST_ENV_NUMBER']}" : 'uploads'
 
     Rails.root.join('public', folder, model.class.name.pluralize.downcase, model.id)
   end
