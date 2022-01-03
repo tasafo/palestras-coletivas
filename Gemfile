@@ -43,6 +43,7 @@ gem 'meta-tags'
 
 gem 'net-smtp'
 gem 'net-pop'
+gem 'net-imap'
 
 gem 'bootsnap'
 
