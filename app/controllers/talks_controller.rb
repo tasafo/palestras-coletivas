@@ -23,7 +23,9 @@ class TalksController < ApplicationController
 
     render :new and return if @talk.invalid?
 
-    @talk = Talk.create(prepare_fields(talk_params))
+    attributes = prepare_attributes(current_user, :create, talk_params)
+
+    @talk = Talk.create(attributes)
 
     redirect_to talk_path(@talk), notice: t('flash.talks.create.notice') if @talk
   end
@@ -49,7 +51,9 @@ class TalksController < ApplicationController
 
     render :edit and return if @talk.invalid?
 
-    saved = @talk.update(prepare_fields(talk_params))
+    attributes = prepare_attributes(@talk.owner, :update, talk_params)
+
+    saved = @talk.update(attributes)
 
     redirect_to talk_path(@talk), notice: t('flash.talks.update.notice') if saved
   end

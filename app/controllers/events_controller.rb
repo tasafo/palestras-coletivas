@@ -23,7 +23,9 @@ class EventsController < ApplicationController
 
     render :new and return if @event.invalid?
 
-    @event = Event.create(prepare_fields(event_params))
+    attributes = prepare_attributes(current_user, :create, event_params)
+
+    @event = Event.create(attributes)
 
     redirect_to event_path(@event), notice: t('flash.events.create.notice') if @event
   end
@@ -41,9 +43,11 @@ class EventsController < ApplicationController
 
     render :edit and return if @event.invalid?
 
-    @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
+    remove_image
 
-    saved = @event.update(prepare_fields(event_params))
+    attributes = prepare_attributes(@event.owner, :update, event_params)
+
+    saved = @event.update(attributes)
 
     redirect_to event_path(@event), notice: t('flash.events.update.notice') if saved
   end
@@ -88,5 +92,9 @@ class EventsController < ApplicationController
       :place, :street, :district, :city, :state, :country, :block_presence,
       :workload, :image, :remove_image, :online
     )
+  end
+
+  def remove_image
+    @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
   end
 end

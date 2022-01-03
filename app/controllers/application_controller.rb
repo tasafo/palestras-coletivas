@@ -43,15 +43,10 @@ class ApplicationController < ActionController::Base
     found.any?
   end
 
-  def prepare_fields(object_params)
-    users = params[:users] || []
+  def prepare_attributes(owner, action, object_params)
+    arguments = { owner: owner, logged: current_user, users: params[:users],
+                  action: action, fields: object_params }
 
-    form_users = User.find(users) if users.any?
-
-    users = form_users if form_users
-
-    users.push(current_user)
-
-    object_params.to_h.merge({ owner: current_user, users: users })
+    UsersDecorator.new(**arguments).prepare
   end
 end
