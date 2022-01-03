@@ -56,9 +56,9 @@ pt-BR:
     schedule:
       day: "Dia"
       time: "Horário"
-      environment: "Ambiente"
-      activity: "Atividade"
+      description: "Descrição"
       talk: "Palestra"
+      attach_talk: Anexar uma palestra existente
 
     watched:
       one: "Pessoa"

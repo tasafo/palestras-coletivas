@@ -113,48 +113,22 @@ FactoryBot.define do
     end
   end
 
-  factory :activity do
-    trait :palestra do
-      type { 'talk' }
-      description { 'Palestra' }
-      order { 1 }
-    end
-
-    trait :abertura do
-      type { 'interval' }
-      description { 'Abertura' }
-      order { 2 }
-    end
-
-    trait :intervalo do
-      type { 'interval' }
-      description { 'Intervalo' }
-      order { 3 }
-    end
-
-    trait :lanche do
-      type { 'interval' }
-      description { 'Lanche' }
-      order { 4 }
-    end
-  end
-
   factory :schedule do
     day { 1 }
 
     trait :abertura do
       time { '08:00' }
-      activity { create(:activity, :abertura) }
+      description { 'Abertura' }
     end
 
     trait :palestra do
       time { '09:00' }
-      activity { create(:activity, :palestra) }
+      description { 'Palestra' }
     end
 
     trait :intervalo do
       time { '10:00' }
-      activity { create(:activity, :intervalo) }
+      description { 'Intervalo' }
     end
   end
 

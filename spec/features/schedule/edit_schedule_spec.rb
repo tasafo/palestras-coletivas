@@ -12,10 +12,10 @@ describe 'Edit schedule', js: true do
   let!(:schedule_intervalo) { create(:schedule, :intervalo, event: event) }
 
   let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk)
+    create(:schedule, :palestra, event: event, talk: talk, was_presented: true)
   end
   let!(:schedule_palestra2) do
-    create(:schedule, :palestra, event: event, talk: another_talk)
+    create(:schedule, :palestra, event: event, talk: another_talk, was_presented: true)
   end
 
   before do
@@ -29,6 +29,10 @@ describe 'Edit schedule', js: true do
       select '06/06/2012', from: 'schedule_day'
 
       fill_in_inputmask 'Horário', '08:00'
+
+      fill_in 'Descrição', with: 'Palestra'
+
+      check('Anexar uma palestra existente')
 
       fill_in :search_text, with: 'Ruby'
 

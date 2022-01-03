@@ -16,7 +16,7 @@ pt-BR:
       you_must_enter_a_talk: "Você deve informar uma palestra."
       table:
         time: "Horário"
-        activity: "Atividade"
+        description: "Descrição"
         operations: "Operações"
         presented: "Apresentada?"
         votes: "Votos"

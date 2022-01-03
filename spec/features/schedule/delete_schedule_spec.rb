@@ -7,8 +7,6 @@ describe 'Delete schedule', js: true do
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
 
-  let!(:activity_lanche) { create(:activity, :lanche) }
-
   let!(:schedule_abertura) { create(:schedule, :abertura, event: event) }
   let!(:schedule_intervalo) { create(:schedule, :intervalo, event: event) }
 

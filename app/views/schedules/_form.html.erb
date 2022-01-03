@@ -9,35 +9,38 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :time, class: 'control-label col-md-2' %>
-    <div class="col-md-2">
+    <%= f.label :time, class: 'control-label col-md-1' %>
+    <div class="col-md-1">
       <%= f.text_field :time, class: "form-control hour" %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :activity, class: 'control-label col-md-2' %>
-    <div class="col-md-2">
-      <%= collection_select(:schedule, :activity_id, @presenter.activities, :id, :description, {}, class: "form-control") %>
+    <%= f.label :description, class: 'control-label col-md-6' %>
+    <div class="col-md-6">
+      <%= f.text_field :description, class: "form-control", maxlength: 50 %>
     </div>
   </div>
 
   <div id="div_talk" class="form-group" style="display:<%= @presenter.display %>">
     <label class="control-label col-md-2"><%= t("labels.talk.title") %></label>
     <div class="col-md-6">
-      <input id="talk_title" class="form-control" value="<%= @presenter.talk_title %>" disabled>
+      <span id="talk_title" class="text-white bg-success"><%= @presenter.talk_title %></span>
     </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :attach_talk, t('labels.schedule.attach_talk'), class: 'control-label col-md-3' %>
+    <%= check_box_tag :attach_talk %>
   </div>
 
   <%= f.hidden_field :event_id, value: @event.id %>
   <%= f.hidden_field :talk_id, value: @schedule.talk_id %>
   <%= f.hidden_field :schedule_id, value: @schedule.id %>
 
-  <input id="old_talk_id" name="old_talk_id" type="hidden" value="<%= @schedule.talk_id %>" />
-
-  <input id="titles_talks_select" name="titles_talks_select" type="hidden" value="<%= t("titles.talks.select") %>" />
-
-  <input id="alert_enter_talks" name="alert_enter_talks" type="hidden" value="<%= t("new.schedule.you_must_enter_a_talk") %>" />
+  <%= hidden_field_tag :old_talk_id, @schedule.talk_id %>
+  <%= hidden_field_tag 'titles_talks_select', t('titles.talks.select')%>
+  <%= hidden_field_tag 'alert_enter_talks', t('new.schedule.you_must_enter_a_talk') %>
 
   <div class="container">
     <%= f.submit class: 'btn btn-primary' %>
@@ -47,12 +50,12 @@
 
   <hr />
 
-  <div class="form-group" id="search_talks" style="display:block">
+  <div class="form-group" id="search_talks" style="display:none">
     <h3 class="text-info"><%= t("titles.talks.search") %></h3>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="input-group">
-        <input class="form-control search-query" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %> ">
+        <input class="form-control search-query" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %>">
         <span class="input-group-btn">
           <button id="search_button" class="btn btn-success" type="button"><%= t("form.submit.search") %></button>
         </span>

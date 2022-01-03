@@ -13,10 +13,6 @@ describe 'Add vote in schedule', js: true do
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
 
-  let!(:activity_abertura) { create(:activity, :abertura) }
-  let!(:activity_palestra) { create(:activity, :palestra) }
-  let!(:activity_intervalo) { create(:activity, :intervalo) }
-
   let!(:schedule_palestra) do
     create(:schedule, :palestra, event: event, talk: talk)
   end

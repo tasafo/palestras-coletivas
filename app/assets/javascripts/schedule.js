@@ -1,36 +1,15 @@
 $(function() {
-    $("#schedule_activity_id").change(function() {
-        activity_id = $("#schedule_activity_id").val();
-        activity_desc = $("#schedule_activity_id").find("option:selected").text();
-
-        if (activity_id) {
-            $.ajax({
-                url : "/activities/",
-                data : {
-                    id : activity_id
-                },
-                async : true,
-                type : "post",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-                },
-                dataType : "json",
-                success : function(result) {
-                    if (!result.error) {
-                        if (result.type_activity == "talk") {
-                            $("#search_result").show();
-                            $("#search_talks").show();
-                            $("#search_text").focus();
-                        } else {
-                            $("#schedule_talk_id").val("");
-                            $("#talk_title").val("");
-                            $("#div_talk").hide();
-                            $("#search_talks").hide();
-                            $("#search_result").hide();
-                        }
-                    }
-                }
-            });
+    $("#attach_talk").on("click", function(e) {
+        if ($("#attach_talk").is(":checked")) {
+            $("#search_result").show();
+            $("#search_talks").show();
+            $("#search_text").focus();
+        } else {
+            $("#schedule_talk_id").val("");
+            $("#talk_title").text("");
+            $("#div_talk").hide();
+            $("#search_talks").hide();
+            $("#search_result").hide();
         }
     });
 
@@ -55,15 +34,13 @@ $(function() {
         }
     });
 
-    $("#schedule_activity_id").trigger("change");
-    $("#schedule_date").focus();
+    $("#schedule_time").focus();
 });
 
 function search_talk() {
-    search_text = $("#search_text").val();
-    titles_talks_select = $("#titles_talks_select").val();
-
-    talks = "";
+    var search_text = $("#search_text").val();
+    var titles_talks_select = $("#titles_talks_select").val();
+    var talks = "";
 
     if (search_text.length > 0) {
         $.ajax({
@@ -79,9 +56,8 @@ function search_talk() {
             dataType : "json",
             success : function(result) {
                 for (var i = 0; i < result.meta.total; i++) {
-                    record = result.data[i].attributes;
-
-                    thumb = record.thumbnail ? record.thumbnail : '/without_presentation.jpg';
+                    var record = result.data[i].attributes;
+                    var thumb = record.thumbnail ? record.thumbnail : '/without_presentation.jpg';
 
                     talks += '<hr />';
                     talks += '<div id="div_' + record.id['$oid'] + '" class="talk">';
@@ -94,7 +70,7 @@ function search_talk() {
                     talks += '      <div class="col-md-10">';
                     talks += '        <h4><a href="/talks/' + record.slug + '" target="_blank">' + record.title +'</a></h4>';
                     talks += '        <p>' + record.description + '</p>';
-                    talks += '        <p>' + record.tags + '</p>';
+                    talks += '        <p><b>Tags:</b> ' + record.tags + '</p>';
                     talks += '      </div>';
                     talks += '    </div>';
                     talks += '  </div>';
@@ -104,8 +80,8 @@ function search_talk() {
                 $("#search_result").html(talks);
 
                 $(".btn-select-talk").click(function() {
-                    talk_id = $(this).attr("id");
-                    talk_title = $(this).attr("title");
+                    var talk_id = $(this).attr("id");
+                    var talk_title = $(this).attr("title");
 
                     $(".talk").each(function(index) {
                         $(this).css("background-color", "white");
@@ -114,7 +90,7 @@ function search_talk() {
                     $("#div_" + talk_id).css("background-color", "#CCFF99");
 
                     $("#schedule_talk_id").val(talk_id);
-                    $("#talk_title").val(talk_title);
+                    $("#talk_title").text(talk_title);
                     $("#div_talk").show();
                 });
             }

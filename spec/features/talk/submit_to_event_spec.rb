@@ -3,7 +3,6 @@ require 'spec_helper'
 describe 'Submit talk', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
-  let!(:activity_palestra) { create(:activity, :palestra) }
   let!(:event) do
     create(:event, :tasafoconf, owner: user, start_date: Date.today,
                                 end_date: Date.today + 5.days,

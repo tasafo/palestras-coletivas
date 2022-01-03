@@ -8,10 +8,6 @@ describe 'Create schedule', js: true do
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
 
-  let!(:activity_abertura) { create(:activity, :abertura) }
-  let!(:activity_palestra) { create(:activity, :palestra) }
-  let!(:activity_intervalo) { create(:activity, :intervalo) }
-
   before do
     login_as user, event_path(event)
 
@@ -24,7 +20,7 @@ describe 'Create schedule', js: true do
 
       fill_in_inputmask 'Horário', '08:00'
 
-      select activity_abertura.description, from: 'schedule_activity_id'
+      fill_in 'Descrição', with: 'Abertura'
 
       click_button 'Adicionar programação'
     end
@@ -52,7 +48,9 @@ describe 'Create schedule', js: true do
 
       fill_in_inputmask 'Horário', '08:00'
 
-      select activity_palestra.description, from: 'schedule_activity_id'
+      fill_in 'Descrição', with: 'Palestra'
+
+      check('Anexar uma palestra existente')
 
       fill_in :search_text, with: 'tecnologia'
 

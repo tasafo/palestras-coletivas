@@ -41,7 +41,6 @@ Rails.application.routes.draw do
 
   resources :talk_info, only: %i[create]
   resources :talk_search, only: %i[create]
-  resources :activities, only: %i[create]
 
   scope '/ratings/:rateable_type/:rateable_id' do
     post '/ratings', to: 'ratings#create', as: :ratings

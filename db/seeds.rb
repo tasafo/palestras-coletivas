@@ -2,25 +2,6 @@ records = 20
 I18n.locale = 'pt-BR'
 Faker::Config.locale = I18n.locale
 
-Activity.create(
-  [
-    { type: 'talk', description: 'Palestra', order: 1 },
-    { type: 'interval', description: 'A definir', order: 2 },
-    { type: 'interval', description: 'Credenciamento', order: 3 },
-    { type: 'interval', description: 'Abertura', order: 4 },
-    { type: 'interval', description: 'Intervalo', order: 5 },
-    { type: 'interval', description: 'Lanche', order: 6 },
-    { type: 'interval', description: 'Almoço', order: 7 },
-    { type: 'interval', description: 'Fishbowl', order: 8 },
-    { type: 'interval', description: 'Encerramento', order: 9 }
-  ]
-)
-
-activity_open = Activity.find_by(order: 4)
-activity_talk = Activity.find_by(order: 1)
-activity_lunch = Activity.find_by(order: 6)
-activity_finish = Activity.find_by(order: 9)
-
 user = User.create(name: 'Fulano de Tal', username: 'fulano',
                    email: 'fulano@mail.com', password: '123456')
 
@@ -88,11 +69,11 @@ talk2 = Talk.last
 
 event.schedules.create(
   [
-    { day: 1, time: '09:00', activity: activity_open },
-    { day: 1, time: '10:00', activity: activity_talk, talk: talk, was_presented: true },
-    { day: 1, time: '11:00', activity: activity_talk, talk: talk2 },
-    { day: 1, time: '12:00', activity: activity_lunch },
-    { day: 1, time: '18:00', activity: activity_finish }
+    { day: 1, time: '09:00', description: 'Abertura' },
+    { day: 1, time: '10:00', description: 'Palestra', talk: talk, was_presented: true },
+    { day: 1, time: '11:00', description: 'Palestra', talk: talk2 },
+    { day: 1, time: '12:00', description: 'Lanche' },
+    { day: 1, time: '18:00', description: 'Encerramento' }
   ]
 )
 

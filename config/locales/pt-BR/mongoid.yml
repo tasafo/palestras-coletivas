@@ -60,8 +60,7 @@ pt-BR:
       schedule:
         day: "Dia"
         time: "Horário"
-        environment: "Ambiente"
-        activity: "Atividade"
+        description: "Descrição"
         talk: "Palestra"
         talk_id: Palestra
 

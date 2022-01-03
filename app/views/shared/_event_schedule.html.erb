@@ -19,7 +19,7 @@
               <p class="text-center"><%= t("new.schedule.table.time") %></p>
             </th>
             <th width="80%">
-              <p class="text-center"><%= t("new.schedule.table.activity") %></p>
+              <p class="text-center"><%= t("new.schedule.table.description") %></p>
             </th>
             <% if @presenter.authorized %>
               <th colspan="2" width="10%">
@@ -42,31 +42,27 @@
             <thead class="thead-light">
               <tr>
                 <th colspan="6">
-                  <p class="text-center"><%= l grid[:date], format: :custom %></p>
+                  <h4 class="text-center"><%= l grid[:date], format: :custom %></h4>
                 </th>
               </tr>
             </thead>
 
             <% grid[:schedules].each do |schedule| %>
               <tr id="row_<%= schedule.id %>">
-                <td>
-                  <p class="text-center"><%= schedule.show_time %></p>
-                </td>
+                <td><p class="text-center"><%= schedule.show_time %></p></td>
 
                 <% if schedule.talk? %>
                   <td>
                     <p class="text-center">
                       <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
-                      <% Talk.with_users.find(schedule.talk).users.each do |user| %>
+                      <% schedule.talk.users.each do |user| %>
                         <%= link_to user.name, user_path(user) %>
                         <%= "- #{user.email}" if @presenter.authorized %><br/>
                       <% end %>
                     </p>
                   </td>
                 <% else %>
-                  <td>
-                    <p class="text-center"><%= schedule.activity.description %></p>
-                  </td>
+                  <td><p class="text-center"><%= schedule.description %></p></td>
                 <% end %>
 
                 <% if @presenter.authorized %>

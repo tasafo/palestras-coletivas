@@ -51,7 +51,7 @@ class SchedulesController < ApplicationController
   end
 
   def schedule_params
-    params.require(:schedule).permit(:event_id, :activity_id, :talk_id, :day, :time)
+    params.require(:schedule).permit(:event_id, :talk_id, :day, :time, :description)
   end
 
   def redirect_to_root_path(message)
@@ -62,7 +62,7 @@ class SchedulesController < ApplicationController
     operation = options[:operation]
     act = operation == :new ? :create : :update
 
-    object = decorate_schedule(options)
+    object = ScheduleDecorator.new(options[:schedule], options[:params])
 
     if object.send act
       message = t("flash.schedules.#{act}.notice")
@@ -71,9 +71,5 @@ class SchedulesController < ApplicationController
     else
       render operation
     end
-  end
-
-  def decorate_schedule(options)
-    ScheduleDecorator.new(options[:schedule], options[:params])
   end
 end

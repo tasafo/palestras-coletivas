@@ -28,10 +28,4 @@ describe Schedule, 'validations' do
 
     expect(schedule.errors[:event].size).to eq(1)
   end
-
-  it 'requires session' do
-    schedule = Schedule.create(activity: nil)
-
-    expect(schedule.errors[:activity].size).to eq(1)
-  end
 end
