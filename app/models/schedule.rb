@@ -9,7 +9,6 @@ class Schedule
   field :was_presented, type: Boolean, default: false
 
   belongs_to :event, index: true
-  belongs_to :activity, optional: true, index: true
   belongs_to :talk, optional: true, index: true
   has_many :votes
 
