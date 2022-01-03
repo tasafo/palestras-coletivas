@@ -34,6 +34,10 @@ function add_user() {
             "<tr id=\"row_" + userId + "\"><td>" + userDisplay + "<input type=\"hidden\" name=\"users[]\" value=\"" + userId + "\" /></td><td><center><input type=\"button\" class=\"btn btn-danger\" id=\"remove_user_id_" + userId + "\" onclick=\"remove_user(\'" + userId + "\')\" value=\"" + $("#remove").text() + "\" /></center></td></tr>"
         );
     }
+
+    $("#user_id").val('');
+    $("#invitee_username").val('');
+    $("#invitee_username").focus();
 }
 
 function remove_user(id) {
