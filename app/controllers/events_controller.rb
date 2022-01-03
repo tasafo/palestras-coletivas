@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :check_authorization, only: %i[edit destroy]
 
   def index
-    query = EventQuery.new.select(current_user, params[:search], params[:my])
+    query = EventQuery.new.select(current_user, params[:search], params[:my]).to_a
     @pagy, @records = pagy(query, count: query.count)
 
     respond_to do |format|
@@ -19,15 +19,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event_params.to_h.merge({ owner: current_user }))
 
-    event_decorator = EventDecorator.new(@event, params[:users], owner: current_user)
+    render :new and return if @event.invalid?
 
-    if event_decorator.create
-      redirect_to event_path(@event), notice: t('flash.events.create.notice')
-    else
-      render :new
-    end
+    @event = Event.create(prepare_fields(event_params))
+
+    redirect_to event_path(@event), notice: t('flash.events.create.notice') if @event
   end
 
   def show
@@ -39,15 +37,15 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
+    @event.refresh(event_params)
+
+    render :edit and return if @event.invalid?
+
     @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
 
-    event_decorator = EventDecorator.new(@event, params[:users], params: event_params)
+    saved = @event.update(prepare_fields(event_params))
 
-    if event_decorator.update
-      redirect_to event_path(@event), notice: t('flash.events.update.notice')
-    else
-      render :edit
-    end
+    redirect_to event_path(@event), notice: t('flash.events.update.notice') if saved
   end
 
   def destroy

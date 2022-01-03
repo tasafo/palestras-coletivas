@@ -37,6 +37,7 @@ class Talk
 
   scope :publics, -> { where(to_public: true) }
   scope :with_users, -> { includes(:users) }
+  scope :with_watched_users, -> { includes(:watched_users) }
   scope :with_schedules, -> { includes(:schedules) }
 
   before_destroy do
@@ -65,5 +66,9 @@ class Talk
 
   def thumbnail_image
     thumbnail.blank? ? 'without_presentation.jpg' : Utility.https(thumbnail)
+  end
+
+  def refresh(attributes)
+    attributes.each { |key, value| send("#{key}=", value) }
   end
 end

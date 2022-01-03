@@ -124,4 +124,8 @@ class Event
 
     ImageFile.remove(image_file) if image_file
   end
+
+  def refresh(attributes)
+    attributes.each { |key, value| send("#{key}=", value) }
+  end
 end

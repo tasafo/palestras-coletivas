@@ -26,51 +26,43 @@
     </p>
   <% end %>
 
-  <% events_count = @user.events.publics.count %>
-
-  <% if events_count.positive? %>
+  <% if @records.any? %>
     <hr />
-    <h3><%= t('show.user.events', count: events_count) %> (<%= events_count %>)</h3>
-    <ul>
-    <% @user.events.publics.order(start_date: :desc).each do |event| %>
+    <h3><%= t('show.talk.my_talks_published') %> (<%= @pagy.count %>)</h3>
+
+    <%= render 'shared/talks', pagy: @pagy, talks: @records, show_user: false %>
+  <% end %>
+
+  <% if @events.any? %>
+    <hr />
+    <h3><%= t('show.user.events', count: @events.count) %></h3>
+    <ol>
+    <% @events.each do |event| %>
       <li><%= link_to event.name_edition, event_path(event) %></li>
     <% end %>
-    </ul>
+    </ol>
   <% end %>
 
-  <% presentations = "" %>
-  <% presentations_count = 0 %>
-
-  <% if @user.talks? %>
-    <% @user.talks.publics.each do |talk| %>
-      <% talk.schedules.presenteds.each do |schedule| %>
-        <% presentations_count += 1 %>
-        <% presentations << '<li>' << link_to(schedule.talk.title, talk_path(talk)) << ' - ' << link_to(schedule.event.name_edition, event_path(schedule.event)) << '</li>' %>
+  <% if @schedules_talks.any? %>
+    <hr />
+    <h3><%= t('show.user.presentations') %></h3>
+    <ol>
+    <% @schedules_talks.each do |talk| %>
+      <% talk.schedules.presenteds.with_talk.with_event.each do |schedule| %>
+        <li><%= link_to(schedule.talk.title, talk_path(talk)) << ' - ' <<
+                link_to(schedule.event.name_edition, event_path(schedule.event)) %></li>
       <% end %>
     <% end %>
+    </ol>
   <% end %>
 
-  <% unless presentations.blank? %>
+  <% if @participations.any? %>
     <hr />
-    <h3><%= t("show.user.presentations") %> (<%= presentations_count %>)</h3>
-    <ul><%= presentations.html_safe %></ul>
-  <% end %>
-
-  <% participations_count = @participations.count %>
-
-  <% if participations_count.positive? %>
-    <h3><%= t('show.user.participations', count: participations_count) %> (<%= participations_count %>)</h3>
-    <ul>
+    <h3><%= t('show.user.participations', count: @participations.count) %></h3>
+    <ol>
     <% @participations.each do |participation| %>
       <li><%= link_to participation.event.name_edition, event_path(participation.event) %></li>
     <% end %>
-    </ul>
-  <% end %>
-
-  <% unless @records.empty? %>
-    <hr />
-    <h3><%= t("show.talk.my_talks_published") %> (<%= @records.count %>)</h3>
-
-    <%= render "shared/talks", pagy: @pagy, talks: @records, show_user: false %>
+    </ol>
   <% end %>
 </div>

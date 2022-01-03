@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?
 
+  def pagy_get_items(array, pagy)
+    array[pagy.offset, pagy.items]
+  end
+
   private
 
   def require_logged_user
@@ -37,5 +41,17 @@ class ApplicationController < ActionController::Base
     found = model.users.select { |user| current_user == user && model.owner == user }
 
     found.any?
+  end
+
+  def prepare_fields(object_params)
+    users = params[:users] || []
+
+    form_users = User.find(users) if users.any?
+
+    users = form_users if form_users
+
+    users.push(current_user)
+
+    object_params.to_h.merge({ owner: current_user, users: users })
   end
 end

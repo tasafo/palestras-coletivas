@@ -5,7 +5,7 @@ class TalksController < ApplicationController
   before_action :check_authorization, only: %i[edit destroy]
 
   def index
-    query = TalkQuery.new.select(current_user, params[:search], params[:my])
+    query = TalkQuery.new.select(current_user, params[:search], params[:my]).to_a
     @pagy, @records = pagy(query, count: query.count)
 
     respond_to do |format|
@@ -19,15 +19,13 @@ class TalksController < ApplicationController
   end
 
   def create
-    @talk = Talk.new(talk_params)
+    @talk = Talk.new(talk_params.to_h.merge({ owner: current_user }))
 
-    talk_decorator = TalkDecorator.new(@talk, params[:users], owner: current_user)
+    render :new and return if @talk.invalid?
 
-    if talk_decorator.create
-      redirect_to talk_path(@talk), notice: t('flash.talks.create.notice')
-    else
-      render :new
-    end
+    @talk = Talk.create(prepare_fields(talk_params))
+
+    redirect_to talk_path(@talk), notice: t('flash.talks.create.notice') if @talk
   end
 
   def show
@@ -35,6 +33,7 @@ class TalksController < ApplicationController
     @user_owns = user_owner? @talk
 
     @presentation = Oembed.new(@talk.presentation_url, @talk.code).show_presentation
+    @presenteds = @talk.schedules.presenteds.to_a
 
     @video = Oembed.new(@talk.video_link).show_video
 
@@ -46,13 +45,13 @@ class TalksController < ApplicationController
   def edit; end
 
   def update
-    talk_decorator = TalkDecorator.new(@talk, params[:users], params: talk_params)
+    @talk.refresh(talk_params)
 
-    if talk_decorator.update
-      redirect_to talk_path(@talk), notice: t('flash.talks.update.notice')
-    else
-      render :edit
-    end
+    render :edit and return if @talk.invalid?
+
+    saved = @talk.update(prepare_fields(talk_params))
+
+    redirect_to talk_path(@talk), notice: t('flash.talks.update.notice') if saved
   end
 
   def destroy
@@ -66,7 +65,7 @@ class TalksController < ApplicationController
   private
 
   def set_talk
-    @talk = Talk.find(params[:id])
+    @talk = Talk.with_users.with_watched_users.find(params[:id])
 
     found = @talk && (@talk.owner == current_user || @talk.to_public)
 

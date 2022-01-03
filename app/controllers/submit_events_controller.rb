@@ -5,7 +5,7 @@ class SubmitEventsController < ApplicationController
     @schedule = Schedule.new
     @talk = Talk.find(params[:talk_id])
     @events = EventQuery.new.accepts_submissions
-    @_schedule = nil
+    @schedule_found = nil
 
     return unless @events.size <= 0
 
@@ -15,32 +15,28 @@ class SubmitEventsController < ApplicationController
   def create
     prepare_objects(params)
 
-    if @_schedule
-      message = t('flash.submit_event.create.alert')
-    else
-      new_schedule
+    message = if @schedule_found
+                t('flash.submit_event.create.alert')
+              else
+                message_type = save_schedule ? 'notice' : 'error'
 
-      message = t("flash.submit_event.create.#{save_schedule}")
-    end
+                t("flash.submit_event.create.#{message_type}")
+              end
 
-    redirect_to talk_path(@talk), notice: message if message
+    redirect_to talk_path(@talk), notice: message
   end
 
   private
 
   def prepare_objects(params)
     @event = Event.find(params[:submit_event]['event_id'])
-    @talk = Talk.find_by(_slugs: params[:talk_id])
-    @activity = Activity.find_by(type: 'talk')
-    @_schedule = Schedule.find_by(event_id: @event.id, talk_id: @talk.id)
-  end
-
-  def new_schedule
-    @schedule = Schedule.new(activity: @activity, event: @event, talk: @talk,
-                             day: 1, time: @event.first_time)
+    @talk = Talk.find(params[:talk_id])
+    @schedule_found = @event.schedules.find_by(talk_id: @talk.id)
   end
 
   def save_schedule
-    @schedule.save ? 'notice' : 'error'
+    @schedule = @event.schedules.new(talk: @talk, day: 1, time: @event.first_time,
+                                     description: t('labels.schedule.talk'))
+    @schedule.save
   end
 end

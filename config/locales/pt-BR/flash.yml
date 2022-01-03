@@ -53,8 +53,6 @@ pt-BR:
         add: "Voto adicionado com sucesso!"
         remove: "Voto retirado com sucesso!"
         was_not_held: "Voto não foi realizado."
-      talk:
-        presence: 'não pode ficar em branco'
 
     enrollments:
       create:

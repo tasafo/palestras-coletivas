@@ -22,9 +22,7 @@
       </div>
     <% end %>
   </div>
-  <% if @records.blank? %>
-    <h2><%= t("titles.talks.none") %></h2>
-  <% else %>
+  <% if @records.any? %>
     <%= render "shared/talks", talks: @records, pagy: @pagy, show_user: true %>
   <% end %>
 </div>

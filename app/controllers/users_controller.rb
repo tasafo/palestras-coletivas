@@ -17,10 +17,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    query = @user.talks.publics.order(created_at: :desc)
-    @pagy, @records = pagy(query, count: query.count)
-    @participations = @user.enrollments.where(present: true).order(updated_at: :asc)
+    user_talks = @user.talks.publics
+    talks = user_talks.order(created_at: :desc).to_a
+
+    @events = @user.events.publics.order(start_date: :desc).to_a
+    @schedules_talks = user_talks.where(:counter_presentation_events.gt => 0).to_a
+    @participations = @user.enrollments.where(present: true).order(updated_at: :asc).to_a
     @gravatar = Gravatar.new(@user.email)
+
+    @pagy, @records = pagy(talks, count: talks.count)
   end
 
   def edit
@@ -40,7 +45,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.with_relations.find(params[:id])
+    @user = User.find(params[:id])
 
     redirect_to root_path unless @user
   end
