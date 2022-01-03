@@ -15,7 +15,7 @@ describe ApplicationHelper do
       end
 
       it 'sets alternative text' do
-        expect(image).to match(/alt="@pyoung"/)
+        expect(image).to match(/alt="Paul Young"/)
       end
     end
 
@@ -31,7 +31,7 @@ describe ApplicationHelper do
       end
 
       it 'sets alternative text' do
-        expect(html['alt']).to eql('@pyoung')
+        expect(html['alt']).to eql('Paul Young')
       end
     end
   end
