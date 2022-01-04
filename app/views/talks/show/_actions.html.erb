@@ -5,7 +5,7 @@
         <div class="btn-group" role="group">
           <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), class: "btn btn-primary" %>&nbsp;
 
-          <%= link_to t("actions.delete.label"), talk_path(@talk), class: "btn btn-danger", id: "delete_talk_id_#{@talk._slugs.first}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
+          <%= link_to t("actions.delete.label"), talk_path(@talk), class: "btn btn-danger", id: "delete_talk_id_#{@talk.slug}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
 
           <%= link_to t("show.talk.external_event"), new_talk_external_event_path(@talk), class: "btn btn-primary" %>&nbsp;
 

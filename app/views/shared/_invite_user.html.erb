@@ -1,15 +1,11 @@
-  <h3><%= t("new.invite.#{key}") %></h3>
+  <h3><%= t("new.invite.person", count: 2) %></h3>
 
   <div id="search-invitee" class="col-md-6 input-group">
-    <%= text_field :invitee, :username, class: "form-control",
-        placeholder: t("labels.talk.search_user"),
-        data: {
-          invitees: users.map { |user| {
-              value: user.oid, label: "#{user.name} (#{user.username})", username: user.username, name: user.name
-            }
-          }
-        } %>
-
+    <%= text_field :invitee, :username, class: "form-control", placeholder: t("labels.talk.search_user"),
+                   data: { invitees: users.map { |user| { value: user.id.to_s,
+                                                          label: "#{user.name} (#{user.username})",
+                                                          username: user.username,
+                                                          name: user.name } } } %>
     <%= hidden_field :user, :id %>
     <button type="button" id="add_user" class="btn btn-success"><%= t("new.invite.add") %></button>
   </div>
@@ -18,27 +14,25 @@
     <table id="table_users" class="table table-hover table-responsive">
       <thead class="thead-dark">
         <tr>
-          <th width="50%"><p class="text-center"><%= t("new.invite.table.#{key}") %></p></th>
-          <th width="50%"><p class="text-center"><%= t("new.invite.table.operation") %></p></th>
+          <th width="50%"><p class="text-center"><%= t("new.invite.person", count: 1) %></p></th>
+          <th width="50%"><p class="text-center"><%= t("new.invite.action") %></p></th>
         </tr>
       </thead>
       <tbody>
-        <% if model.users %>
-          <% model.users.each do |user| %>
-            <% if user != model.owner %>
-              <tr id="row_<%= user.id %>">
-                <td>
-                  <%= user.name %> <%= "(#{user.username})" %><input type="hidden" name="users[]" value="<%= user.oid %>" />
-                </td>
-                <td>
-                  <center>
-                    <button type="button" id="remove_user_id_<%= user.oid %>" class="btn btn-danger" onclick="remove_user('<%= user.oid %>')">
-                      <%= t("new.invite.js.remove") %>
-                    </button>
-                  </center>
-                </td>
-              </tr>
-            <% end %>
+        <% model.users.each do |user| %>
+          <% if user != model.owner %>
+            <tr id="row_<%= user.id.to_s %>">
+              <td>
+                <%= user.name %> (<%= user.username %>) <input type="hidden" name="users[]" value="<%= user.id.to_s %>" />
+              </td>
+              <td>
+                <center>
+                  <button type="button" id="remove_user_id_<%= user.id.to_s %>" class="btn btn-danger" onclick="remove_user('<%= user.id.to_s %>')">
+                    <%= t("new.invite.js.remove") %>
+                  </button>
+                </center>
+              </td>
+            </tr>
           <% end %>
         <% end %>
       </tbody>

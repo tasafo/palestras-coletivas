@@ -1,4 +1,4 @@
-  <input type="hidden" name="event_id" id="event_id" value="<%= @event.slug %>" />
+  <%= hidden_field_tag :event_id, @event.slug %>
 
   <%= render "events/show/header" %>
   <%= render "events/show/about" %>

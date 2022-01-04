@@ -61,4 +61,15 @@ describe 'Edit event', js: true do
       expect(page).to have_content('Você não tem permissão para acessar')
     end
   end
+
+  context 'unlogged' do
+    before do
+      visit edit_event_path(event)
+    end
+
+    it 'displays login message' do
+      expect(page).to have_current_path(%r{/login.})
+      expect(page).to have_content('Entrar')
+    end
+  end
 end

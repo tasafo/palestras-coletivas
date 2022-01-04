@@ -24,15 +24,15 @@ pt-BR:
 
     event:
       place: "Local"
-      organizers: Organização
+      organizers: Pessoas da organização
       enrolled: Quem se inscreveu
       presents: Quem participou
       of: "De"
       to: "até"
-      participate: "Quero participar!"
-      cancel_my_participation: "Cancelar minha participação"
+      btn_add_enrollment: "Quero participar!"
+      btn_cancel_enrollment: "Cancelar participação"
       sellout: "Lotação esgotada!"
-      record_presence: "Registrar presença"
+      add_presence: "Registrar presença"
       undo_presence: "Desfazer presença"
       btn_presence_checkin: "Estou aqui!"
       btn_add_vote: "Adicionar voto"

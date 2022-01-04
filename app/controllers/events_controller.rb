@@ -27,7 +27,7 @@ class EventsController < ApplicationController
 
     @event = Event.create(attributes)
 
-    redirect_to event_path(@event), notice: t('flash.events.create.notice') if @event
+    redirect_to event_path(@event, anchor: 'page-content'), notice: t('flash.events.create.notice') if @event
   end
 
   def show
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
 
     saved = @event.update(attributes)
 
-    redirect_to event_path(@event), notice: t('flash.events.update.notice') if saved
+    redirect_to event_path(@event, anchor: 'page-content'), notice: t('flash.events.update.notice') if saved
   end
 
   def destroy
@@ -58,7 +58,7 @@ class EventsController < ApplicationController
     if @event.destroy
       redirect_to events_path, notice: t('notice.destroyed', model: t('mongoid.models.event'))
     else
-      redirect_to event_path(@event), notice: t('notice.delete.restriction.events')
+      redirect_to event_path(@event, anchor: 'page-content'), notice: t('notice.delete.restriction.events')
     end
   end
 
@@ -71,8 +71,7 @@ class EventsController < ApplicationController
 
     return if found
 
-    redirect_to events_path, notice: t('notice.not_found',
-                                       model: t('mongoid.models.event'))
+    redirect_to events_path, notice: t('notice.not_found', model: t('mongoid.models.event'))
   end
 
   def set_organizers

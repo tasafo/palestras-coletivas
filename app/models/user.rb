@@ -61,10 +61,6 @@ class User
     self.username = '@' << username if !username.blank? && username[0] != '@'
   end
 
-  def oid
-    _id.to_s
-  end
-
   def password=(password)
     if password.blank?
       @validate_password = false

@@ -12,7 +12,7 @@
 
       <% if @presenter.open_enrollment %>
         <p class="page-header-text">
-          <%= "#{t('labels.event.deadline_date_enrollment')}: #{l(@event.deadline_date_enrollment, format: :long)}" %>
+          <%= t('labels.event.deadline_date_enrollment') %>: <%= l(@event.deadline_date_enrollment, format: :long) %>
         </p>
       <% end %>
     </div>

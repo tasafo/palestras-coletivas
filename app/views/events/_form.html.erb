@@ -113,11 +113,11 @@
           <%= f.check_box :block_presence %>
         </div>
 
-        <div class="container">
-          <%= render "shared/invite_user", model: @event, users: @organizers, key: "organizer" %>
+        <div class="form-group">
+          <%= render "shared/invite_user", model: @event, users: @organizers %>
 
           <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('helpers.links.cancel'), events_path, class: 'btn btn-default' %>
+          <%= link_to t('helpers.links.cancel'), (@event.new_record? ? events_path : event_path(@event, anchor: 'page-content')), class: 'btn btn-default' %>
         </div>
 
         <span id="user_in_the_list" style="display:none"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>

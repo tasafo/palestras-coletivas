@@ -22,18 +22,13 @@ pt-BR:
         votes: "Votos"
 
     invite:
-      author: "Convidar autores"
-      organizer: "Convidar organizadores"
-      member: "Convidar membros"
-      add: "Adicionar"
-
-      table:
-        author: "Autor"
-        organizer: "Organizador"
-        member: "Membro"
-        operation: "Operação"
+      person:
+        one: Pessoa convidada
+        other: Pessoas convidadas
+      action: Ação
+      add: Adicionar
 
       js:
-        user_invalid: "Este usuário não existe"
-        the_user_is_already_in_the_list: "O usuário já está adicionado"
+        user_invalid: "Esta pessoa não existe"
+        the_user_is_already_in_the_list: "A pessoa já está adicionada"
         remove: "Remover"
