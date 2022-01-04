@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_attributes(owner, action, object_params)
-    arguments = { owner: owner, logged: current_user, users: params[:users],
+    arguments = { owner: owner, logged: current_user, user_ids: params[:users],
                   action: action, fields: object_params }
 
     UsersDecorator.new(**arguments).prepare

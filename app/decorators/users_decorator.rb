@@ -1,8 +1,8 @@
 class UsersDecorator
-  def initialize(owner:, logged:, users:, action:, fields:)
+  def initialize(owner:, logged:, user_ids:, action:, fields:)
     @owner = owner
     @logged = logged
-    @users = users
+    @users = user_ids
     @action = action
     @fields = fields
   end
