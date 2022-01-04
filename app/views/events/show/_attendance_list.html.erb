@@ -18,10 +18,6 @@
               </thead>
               <tbody>
               <% @presenter.users_active.each_with_index do |record, counter| %>
-                <% message_button = record[:enrollment].present? ? t("show.event.undo_presence") : t("show.event.record_presence") %>
-
-                <% button_type = record[:enrollment].present? ? "btn-danger" : "btn-primary" %>
-
                 <tr>
                   <td align="center"><%= counter += 1 %></td>
                   <td align="center"><%= render "shared/user_thumb", user: record[:user] %></td>
@@ -29,9 +25,14 @@
                   <td><%= record[:user].email %></td>
                   <td>
                     <% if @presenter.can_record_presence %>
-                      <%= link_to message_button,
-                                  edit_event_enrollment_path(@event, :present, record[:enrollment]),
-                                  class: "btn #{button_type}", id: "user_id_#{record[:user].id}" %>
+                      <% action = record[:enrollment].present? ? 'undo_presence' : 'add_presence' %>
+                      <% button = record[:enrollment].present? ? 'danger' : 'primary' %>
+
+                      <%= link_to t("show.event.#{action}"), "",
+                                  class: "btn btn-#{button} btn-user-presence",
+                                  data_add: t('show.event.add_presence'),
+                                  data_undo: t("show.event.undo_presence"),
+                                  id: record[:user].slug %>
                     <% end %>
                   </td>
                 </tr>

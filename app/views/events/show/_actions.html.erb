@@ -6,7 +6,9 @@
         <% if @presenter.authorized %>
           <%= link_to t("titles.events.edit"), edit_event_path(@event), class: "btn btn-primary" %>&nbsp;
 
-          <%= link_to t("actions.delete.label"), event_path(@event), class: "btn btn-danger", id: "delete_event_id_#{@event._slugs.first}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
+          <%= link_to t("actions.delete.label"), event_path(@event),
+                      class: "btn btn-danger", id: "delete_event_id_#{@event.slug}",
+                      method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
 
           <%= link_to t("titles.schedules.btn_new"), new_event_schedule_path(@event), class: "btn btn-primary" %>&nbsp;
 
@@ -15,32 +17,41 @@
 
         <% if logged_in? && @presenter.in_progress? %>
           <% if current_user.present_at?(@event) %>
-            <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-info btn-present disabled">
-              <%= t("show.event.btn_presence_checkin") %>
-            </a>
+            <%= link_to t("show.event.btn_presence_checkin"), "",
+                        class: "btn btn-info btn-presence disabled",
+                        data_presence: t("show.event.btn_presence_checkin"),
+                        data_checkin: t("show.event.btn_checkin") %>
           <% else %>
             <% if @presenter.show_checkin %>
-              <a href="" data="<%= t("show.event.btn_presence_checkin") %>" class="btn btn-primary btn-present"><%= t("show.event.btn_checkin") %></a>
+              <%= link_to t("show.event.btn_checkin"), "",
+                          class: "btn btn-primary btn-presence",
+                          data_presence: t("show.event.btn_presence_checkin"),
+                          data_checkin: t("show.event.btn_checkin") %>
             <% end %>
           <% end %>
         <% end %>
 
-        <% if @presenter.open_enrollment %>
+        <% if logged_in? && @presenter.open_enrollment %>
           <% if @presenter.new_subscription %>
             <% if @presenter.crowded %>
               <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
             <% else %>
-              <%= link_to t("show.event.participate"), new_event_enrollment_path(@event, :active), class: "btn btn-primary" %>
+              <%= link_to t("show.event.btn_add_enrollment"), "",
+                          class: "btn btn-primary btn-event-enrollment",
+                          data_add: t('show.event.btn_add_enrollment'),
+                          data_cancel: t('show.event.btn_cancel_enrollment') %>
             <% end %>
           <% else %>
-            <% message_button = @presenter.enrollment.active? ? t("show.event.cancel_my_participation") : t("show.event.participate") %>
-
-            <% button_type = @presenter.enrollment.active? ? "btn-danger" : "btn-warning" %>
-
             <% if @presenter.crowded && !@presenter.enrollment.active? %>
               <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
             <% else %>
-              <%= link_to message_button, edit_event_enrollment_path(@event, :active, @presenter.enrollment), class: "btn #{button_type}" %>
+              <% action = @presenter.enrollment.active? ? 'cancel' : 'add' %>
+              <% button = @presenter.enrollment.active? ? 'danger' : 'primary' %>
+
+              <%= link_to t("show.event.btn_#{action}_enrollment"), "",
+                          class: "btn btn-#{button} btn-event-enrollment",
+                          data_add: t('show.event.btn_add_enrollment'),
+                          data_cancel: t("show.event.btn_cancel_enrollment") %>
             <% end %>
           <% end %>
         <% end %>

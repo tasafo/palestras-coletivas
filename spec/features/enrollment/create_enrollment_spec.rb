@@ -9,68 +9,18 @@ describe 'Create enrollment', js: true do
                                 users: [user], owner: user)
   end
   let!(:talk) { create(:talk, users: [user], owner: user) }
-  let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk)
-  end
-  let!(:enrollment_active) do
-    create(:enrollment, event: event, user: another_user)
-  end
+  let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
+  let!(:enrollment_active) { create(:enrollment, event: event, user: another_user) }
 
   context 'when logged' do
     before do
       login_as other_user, event_path(event)
 
       click_link 'Quero participar!'
-      click_button 'Quero participar'
     end
 
     it 'displays success message' do
-      expect(page).to have_current_path(event_path(event))
-      expect(page).to have_content('A inscrição foi realizada!')
-    end
-  end
-
-  context 'when' do
-    before do
-      visit event_path(event)
-
-      click_link 'Quero participar!'
-    end
-
-    context 'unlogged' do
-      it 'displays login message' do
-        expect(page).to have_current_path(%r{/login.})
-        expect(page).to have_content('Entrar')
-      end
-    end
-
-    context 'user do log in' do
-      before do
-        fill_in 'Seu e-mail', with: other_user.email
-        fill_in 'Sua senha', with: 'testdrive'
-
-        click_button 'Acessar minha conta'
-      end
-
-      it do
-        expect(page)
-          .to have_current_path(new_event_enrollment_path(event, :active))
-      end
-    end
-
-    context 'user do log in and enrollment has held' do
-      before do
-        fill_in 'Seu e-mail', with: another_user.email
-        fill_in 'Sua senha', with: 'testdrive'
-
-        click_button 'Acessar minha conta'
-        click_button 'Quero participar!'
-      end
-
-      it 'displays error message' do
-        expect(page).to have_current_path(event_path(event))
-        expect(page).to have_content('A inscrição já havia sido realizada!')
-      end
+      expect(page).to have_content('Cancelar participação')
     end
   end
 
@@ -80,7 +30,6 @@ describe 'Create enrollment', js: true do
     end
 
     it 'not show button I want to participate' do
-      expect(page).to have_current_path(event_path(event))
       expect(page).not_to have_content('Quero participar!')
     end
   end

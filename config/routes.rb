@@ -35,8 +35,8 @@ Rails.application.routes.draw do
       resource :was_presented, only: %i[create]
     end
     resources :export_subscribers, only: %i[new create]
-    resources :presences, only: %i[create]
-    resources :enrollments, only: %i[new create edit update], path: ':option_type'
+    resources :presences, only: %i[create update]
+    resources :enrollments, only: %i[create update]
   end
 
   resources :talk_info, only: %i[create]

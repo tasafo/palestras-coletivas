@@ -4,33 +4,21 @@ describe 'Edit enrollment', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
   let!(:another_user) { create(:user, :luis) }
-  let!(:event) do
-    create(:event, :tasafoconf, deadline_date_enrollment: Date.today,
-                                users: [user], owner: user)
-  end
+  let!(:event) { create(:event, :tasafoconf, deadline_date_enrollment: Date.today, users: [user], owner: user) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
-  let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk)
-  end
-  let!(:enrollment_active) do
-    create(:enrollment, event: event, user: other_user)
-  end
-  let!(:enrollment_inactive) do
-    create(:enrollment, active: false, event: event, user: another_user)
-  end
+  let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
+  let!(:enrollment_active) { create(:enrollment, event: event, user: other_user) }
+  let!(:enrollment_inactive) { create(:enrollment, active: false, event: event, user: another_user) }
 
   context 'when the enrollment is active' do
     before do
       login_as other_user, event_path(event)
 
-      click_link 'Cancelar minha participação'
-
-      click_button 'Alterar participação'
+      click_link 'Cancelar participação'
     end
 
     it 'displays success message' do
-      expect(page).to have_current_path(event_path(event))
-      expect(page).to have_content('A inscrição foi alterada!')
+      expect(page).to have_content('Quero participar!')
     end
   end
 
@@ -39,13 +27,10 @@ describe 'Edit enrollment', js: true do
       login_as another_user, event_path(event)
 
       click_link 'Quero participar!'
-
-      click_button 'Alterar participação'
     end
 
     it 'displays success message' do
-      expect(page).to have_current_path(event_path(event))
-      expect(page).to have_content('A inscrição foi alterada!')
+      expect(page).to have_content('Cancelar participação')
     end
   end
 end
