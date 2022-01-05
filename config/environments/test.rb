@@ -57,3 +57,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
 end
+
+JSONAPI::Rails.configure do |config|
+  config.logger = Logger.new('/dev/null')
+end
