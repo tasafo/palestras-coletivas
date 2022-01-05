@@ -17,8 +17,7 @@ pt-BR:
       table:
         time: "Horário"
         description: "Descrição"
-        operations: "Operações"
-        presented: "Apresentada?"
+        actions: "Ações"
         votes: "Votos"
 
     invite:

@@ -48,7 +48,7 @@
     <h3><%= t('show.user.presentations') %></h3>
     <ol>
     <% @schedules_talks.each do |talk| %>
-      <% talk.schedules.presenteds.with_talk.with_event.each do |schedule| %>
+      <% talk.schedules.with_talk.with_event.each do |schedule| %>
         <li><%= link_to(schedule.talk.title, talk_path(talk)) << ' - ' <<
                 link_to(schedule.event.name_edition, event_path(schedule.event)) %></li>
       <% end %>

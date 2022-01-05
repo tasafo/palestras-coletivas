@@ -1,7 +1,7 @@
-<% if @presenteds.any? %>
-  <h5><%= t('show.talk.events', count: @presenteds.count) %></h5>
+<% if @schedules.any? %>
+  <h5><%= t('show.talk.events', count: @schedules.count) %></h5>
   <ul>
-  <% @presenteds.each do |schedule| %>
+  <% @schedules.each do |schedule| %>
     <li><%= link_to schedule.event.name_edition, event_path(schedule.event) %></li>
   <% end %>
   </ul>

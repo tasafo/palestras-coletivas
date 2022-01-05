@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   resources :events do
     resources :schedules, only: %i[new create edit update destroy] do
       resources :votes, only: %i[create destroy]
-      resource :was_presented, only: %i[create]
     end
     resources :export_subscribers, only: %i[new create]
     resources :presences, only: %i[create update]

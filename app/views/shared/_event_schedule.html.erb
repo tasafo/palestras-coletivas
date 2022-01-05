@@ -13,25 +13,22 @@
 
     <div id="schedules">
       <table class="table table-bordered table-hover table-responsive">
-        <thead class="thead-dark">
-          <tr>
+        <thead>
+          <tr class="table-primary">
             <th width="10%">
-              <p class="text-center"><%= t("new.schedule.table.time") %></p>
+              <h4 class="text-center"><%= t("new.schedule.table.time") %></h4>
             </th>
-            <th width="80%">
-              <p class="text-center"><%= t("new.schedule.table.description") %></p>
+            <th width="30%">
+              <h4 class="text-center"><%= t("new.schedule.table.description") %></h4>
             </th>
             <% if @presenter.authorized %>
               <th colspan="2" width="10%">
-                <p class="text-center"><%= t("new.schedule.table.operations") %></p>
+                <h4 class="text-center"><%= t("new.schedule.table.actions") %></h4>
               </th>
             <% end %>
-            <th width="20%">
-              <p class="text-center"><%= t("new.schedule.table.presented") %></p>
-            </th>
             <% if @presenter.can_vote %>
               <th width="10%">
-                <p class="text-left"><%= t("new.schedule.table.votes") %></p>
+                <h4 class="text-left"><%= t("new.schedule.table.votes") %></h4>
               </th>
             <% end %>
           </tr>
@@ -39,30 +36,28 @@
 
         <tbody>
           <% @presenter.grids.each do |grid| %>
-            <thead class="thead-light">
-              <tr>
-                <th colspan="6">
-                  <h4 class="text-center"><%= l grid[:date], format: :custom %></h4>
-                </th>
-              </tr>
-            </thead>
+            <tr class="table-info">
+              <th colspan="5">
+                <h4 class="text-center"><%= l grid[:date], format: :custom %></h4>
+              </th>
+            </tr>
 
             <% grid[:schedules].each do |schedule| %>
               <tr id="row_<%= schedule.id %>">
-                <td><p class="text-center"><%= schedule.show_time %></p></td>
+                <td><h5 class="text-center"><%= schedule.show_time %></h5></td>
 
                 <% if schedule.talk? %>
                   <td>
-                    <p class="text-center">
+                    <h5 class="text-center">
                       <%= link_to schedule.talk.title, talk_path(schedule.talk) %><br/>
                       <% schedule.talk.users.each do |user| %>
                         <%= link_to user.name, user_path(user) %>
                         <%= "- #{user.email}" if @presenter.authorized %><br/>
                       <% end %>
-                    </p>
+                    </h5>
                   </td>
                 <% else %>
-                  <td><p class="text-center"><%= schedule.description %></p></td>
+                  <td><h5 class="text-center"><%= schedule.description %></h5></td>
                 <% end %>
 
                 <% if @presenter.authorized %>
@@ -80,29 +75,6 @@
                                 class: "btn btn-danger",
                                 id: "delete_schedule_id_#{schedule.id}" %>
                   </td>
-                  <% if schedule.talk? %>
-                    <td>
-                      <%= link_to t("labels.status.#{schedule.was_presented ? 'yes' : 'no'}"),
-                                  event_schedule_was_presented_path(@event, schedule),
-                                  method: :post,
-                                  class: "btn btn-#{schedule.was_presented ? 'success' : 'warning'}",
-                                  id: "was_presented_schedule_id_#{schedule.id}" %>
-                    </td>
-                  <% else %>
-                    <td></td>
-                  <% end %>
-                <% else %>
-                  <% if schedule.talk? %>
-                    <td>
-                      <p class="text-center">
-                        <span class="label label-<%= schedule.was_presented ? 'success' : 'warning' %>">
-                          <%= t("labels.status.#{schedule.was_presented ? 'yes' : 'no'}") %>
-                        </span>
-                      </p>
-                    </td>
-                  <% else %>
-                    <td></td>
-                  <% end %>
                 <% end %>
 
                 <% if @presenter.can_vote %>

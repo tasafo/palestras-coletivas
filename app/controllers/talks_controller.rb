@@ -35,7 +35,7 @@ class TalksController < ApplicationController
     @user_owns = user_owner? @talk
 
     @presentation = Oembed.new(@talk.presentation_url, @talk.code).show_presentation
-    @presenteds = @talk.schedules.presenteds.to_a
+    @schedules = @talk.schedules.to_a
 
     @video = Oembed.new(@talk.video_link).show_video
 

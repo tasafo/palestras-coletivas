@@ -12,10 +12,10 @@ describe 'Edit schedule', js: true do
   let!(:schedule_intervalo) { create(:schedule, :intervalo, event: event) }
 
   let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk, was_presented: true)
+    create(:schedule, :palestra, event: event, talk: talk)
   end
   let!(:schedule_palestra2) do
-    create(:schedule, :palestra, event: event, talk: another_talk, was_presented: true)
+    create(:schedule, :palestra, event: event, talk: another_talk)
   end
 
   before do

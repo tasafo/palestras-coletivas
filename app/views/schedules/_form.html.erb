@@ -44,8 +44,7 @@
 
   <div class="container">
     <%= f.submit class: 'btn btn-primary' %>
-    <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-          event_path(@event), class: 'btn btn-default' %>
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")), event_path(@event, anchor: 'page-content'), class: 'btn btn-default' %>
   </div>
 
   <hr />

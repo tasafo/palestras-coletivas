@@ -70,7 +70,7 @@ talk2 = Talk.last
 event.schedules.create(
   [
     { day: 1, time: '09:00', description: 'Abertura' },
-    { day: 1, time: '10:00', description: 'Palestra', talk: talk, was_presented: true },
+    { day: 1, time: '10:00', description: 'Palestra', talk: talk },
     { day: 1, time: '11:00', description: 'Palestra', talk: talk2 },
     { day: 1, time: '12:00', description: 'Lanche' },
     { day: 1, time: '18:00', description: 'Encerramento' }
