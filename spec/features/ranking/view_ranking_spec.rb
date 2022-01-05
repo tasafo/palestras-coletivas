@@ -7,6 +7,6 @@ describe 'View ranking' do
 
   it 'displays the Ranking title' do
     expect(page).to have_current_path(ranking_path)
-    expect(page).to have_content('Ranking')
+    expect(page).to have_content('Classificação')
   end
 end

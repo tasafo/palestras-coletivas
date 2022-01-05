@@ -1,4 +1,15 @@
-<p>
-  <%= link_to thumbnail(user, "30x30", 'rounded-circle img-responsive'), user_path(user), title: user.name %>
-  <%= link_to user.name, user_path(user) %>
-</p>
+<div class="col-md-2 text-center">
+  <a href="<%= user_path(user) %>" alt="<%= user.name %>" title="<%= user.name %>">
+    <%= thumbnail(user, "80x80", 'rounded-circle img-responsive') %>
+
+    <% if defined?(counter) %>
+      <h6 class="text-dark bg-light">
+        <span class="badge badge-light badge-custom">
+          <%= user.name %> <span class="badge badge-pill badge-dark"><%= counter %></span>
+        </span>
+      </h6>
+    <% else %>
+      <h6 class="text-dark bg-light"><%= user.name %></h6>
+    <% end %>
+  </a>
+</div>

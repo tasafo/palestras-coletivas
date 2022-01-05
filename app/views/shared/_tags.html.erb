@@ -1,3 +1,4 @@
 <% TagsGenerator.generate(object).map do |tag| %>
-  <%= link_to(tag, "/#{object.class.name.pluralize.downcase}?search=#{tag}", class: 'badge badge-dark') %>
+  <%= link_to(tag, "/#{object.class.name.pluralize.downcase}?search=#{tag}",
+              class: 'badge badge-pill badge-dark') %>
 <% end %>

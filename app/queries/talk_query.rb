@@ -3,9 +3,9 @@ class TalkQuery
     @relation = relation
   end
 
-  def presentation_events
+  def ranking_presentation_events(limit)
     @relation.where(:counter_presentation_events.gt => 0)
-             .order(counter_presentation_events: :desc, slugs: :asc).limit(5)
+             .order(counter_presentation_events: :desc, slugs: :asc).limit(limit)
   end
 
   def search(search)

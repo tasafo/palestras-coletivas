@@ -1,11 +1,12 @@
 class RankingController < ApplicationController
   def index
-    @organizers = UserQuery.new.ranking(:organizing_events)
-    @talkers = UserQuery.new.ranking(:presentation_events)
-    @participations = UserQuery.new.ranking(:participation_events)
-    @talks = TalkQuery.new.presentation_events
-    @events = EventQuery.new.present_users
-    @users_public_talks = UserQuery.new.ranking(:public_talks)
-    @watched_talks = UserQuery.new.ranking(:watched_talks)
+    limit = 10
+    @organizers = UserQuery.new.ranking(:organizing_events, limit)
+    @talkers = UserQuery.new.ranking(:presentation_events, limit)
+    @participations = UserQuery.new.ranking(:participation_events, limit)
+    @talks = TalkQuery.new.ranking_presentation_events(limit)
+    @events = EventQuery.new.ranking_present_users(limit)
+    @users_public_talks = UserQuery.new.ranking(:public_talks, limit)
+    @watched_talks = UserQuery.new.ranking(:watched_talks, limit)
   end
 end

@@ -12,9 +12,9 @@ class EventQuery
     @relation.publics.order(start_date: :desc)
   end
 
-  def present_users
+  def ranking_present_users(limit)
     @relation.where(:counter_present_users.gt => 0)
-             .order(counter_present_users: :desc, slugs: :asc, edition: :asc).limit(5)
+             .order(counter_present_users: :desc, slugs: :asc, edition: :asc).limit(limit)
   end
 
   def accepts_submissions

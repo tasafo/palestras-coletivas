@@ -1,44 +1,38 @@
 <%= render "shared/header", index: :ranking %>
 <%= render "shared/title", title: t("titles.ranking.index"), index: :ranking %>
 
-<div class="container">
-  <div class="row-fluid">
-    <div class="col-md-12">
-      <table class="table table-condensed">
-        <%= render 'shared/ranking', users: @users_public_talks, field: 'public_talks' %>
+<%= render 'shared/ranking', users: @users_public_talks, field: 'public_talks' %>
+<%= render 'shared/ranking', users: @watched_talks, field: 'watched_talks' %>
+<%= render 'shared/ranking', users: @organizers, field: 'organizing_events' %>
+<%= render 'shared/ranking', users: @talkers, field: 'presentation_events' %>
+<%= render 'shared/ranking', users: @participations, field: 'participation_events' %>
 
-        <% unless @talks.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.talks") %></h4></td>
-          </tr>
-          <% @talks.each do |talk| %>
-            <tr>
-              <td><%= link_to talk.title, talk_path(talk) %></td>
-              <td><span class="badge badge-secondary"><%= talk.counter_presentation_events %></span></td>
-            </tr>
-          <% end %>
-        <% end %>
-
-        <% unless @events.blank? %>
-          <tr>
-            <td colspan="2"><h4><%= t("titles.ranking.events") %></h4></td>
-          </tr>
-          <% @events.each do |event| %>
-            <tr>
-              <td><%= link_to event.name_edition, event_path(event) %></td>
-              <td><span class="badge badge-secondary"><%= event.counter_present_users %></span></td>
-            </tr>
-          <% end %>
-        <% end %>
-
-        <%= render 'shared/ranking', users: @watched_talks, field: 'watched_talks' %>
-
-        <%= render 'shared/ranking', users: @organizers, field: 'organizing_events' %>
-
-        <%= render 'shared/ranking', users: @talkers, field: 'presentation_events' %>
-
-        <%= render 'shared/ranking', users: @participations, field: 'participation_events' %>
-      </table>
-    </div>
+<% if @talks.any? %>
+  <div class="container">
+    <h2 class="text-primary"><%= t("titles.ranking.talks") %></h2>
+    <% @talks.each do |talk| %>
+      <h6>
+        <span class="badge badge-light badge-custom">
+          <%= link_to talk.title, talk_path(talk) %>
+          <span class="badge badge-pill badge-dark"><%= talk.counter_presentation_events %></span>
+        </span>
+      </h6>
+    <% end %>
+    <hr/>
   </div>
-</div>
+<% end %>
+
+<% if @events.any? %>
+  <div class="container">
+    <h2 class="text-primary"><%= t("titles.ranking.events") %></h2>
+    <% @events.each do |event| %>
+      <h6>
+        <span class="badge badge-light badge-custom">
+          <%= link_to event.name_edition, event_path(event) %>
+          <span class="badge badge-pill badge-dark"><%= event.counter_present_users %></span>
+        </span>
+      </h6>
+    <% end %>
+    <hr/>
+  </div>
+<% end %>
