@@ -1,12 +1,10 @@
         <% unless @presenter.users_active.blank? %>
-          <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
-
           <% if @presenter.authorized %>
             <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h2>
 
-            <table class="table table-hover table-responsive">
-              <thead class="thead-dark">
-                <tr>
+            <table class="table table-bordered table-hover table-responsive">
+              <thead>
+                <tr class="table-primary">
                   <th width="10%"><%= t("show.event.attendance_table.number") %></th>
                   <th width="10%"><%= t("show.event.attendance_table.photo") %></th>
                   <th width="40%"><%= t("show.event.attendance_table.name") %></th>
@@ -40,10 +38,12 @@
               </tbody>
             </table>
           <% else %>
+            <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
+
             <div class="content">
               <div class="row justify-content-left">
                 <% @presenter.users_active.each do |record| %>
-                  <%= render "shared/user_event", user: record[:user] %>
+                  <%= render "shared/user", user: record[:user] %>
                 <% end %>
               </div>
             </div>

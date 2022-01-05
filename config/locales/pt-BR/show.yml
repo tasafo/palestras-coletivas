@@ -23,10 +23,10 @@ pt-BR:
         other: "Eventos que participei"
 
     event:
-      place: "Local"
-      organizers: Pessoas da organização
-      enrolled: Quem se inscreveu
-      presents: Quem participou
+      place: Localização
+      organizers: Organização
+      enrolled: Inscrições
+      presents: Presenças
       of: "De"
       to: "até"
       btn_add_enrollment: "Quero participar!"

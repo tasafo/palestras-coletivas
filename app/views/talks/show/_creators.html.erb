@@ -1,5 +1,5 @@
 <h5><%= t("show.talk.created_by") %></h5>
 
 <% @talk.users.each do |user| %>
-  <%= render "shared/user", user: user %>
+  <%= render "shared/user_thumb", user: user %>
 <% end %>

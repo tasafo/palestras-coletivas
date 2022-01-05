@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe 'Create talk', js: true do
   let!(:user) { create(:user, :paul) }
-  let!(:invited_user) do
-    create(:user, :luis, name: 'Luis XIV', username: '@user_luis')
-  end
-  let!(:other_user) do
-    create(:user, :billy, name: 'Billy Boy', username: '@user_billy')
-  end
+  let!(:invited_user) { create(:user, :luis, name: 'Luis XIV', username: '@user_luis') }
+  let!(:other_user) { create(:user, :billy, name: 'Billy Boy', username: '@user_billy') }
 
   before do
     login_as user, new_talk_path
@@ -21,8 +17,7 @@ describe 'Create talk', js: true do
       fill_in 'Link do vídeo', with: 'https://youtube.com/watch?v=PcqUTGFgHa4'
       check('Quero publicar')
 
-      fill_autocomplete('invitee_username', with: '@us',
-                                            select: 'Luis XIV (@user_luis)')
+      fill_autocomplete('invitee_username', with: '@us', select: 'Luis XIV (@user_luis)')
       click_button :add_user
 
       click_button 'Adicionar palestra'
@@ -31,8 +26,8 @@ describe 'Create talk', js: true do
     it 'displays success message' do
       expect(page).to have_current_path(%r{/talks/\w+})
       expect(page).to have_content('A palestra foi adicionada!')
-      expect(page).to have_content('Luis XIV')
-      expect(page).to_not have_content('Billy Boy')
+      expect(page).to have_xpath('//a[@alt="Luis XIV"]')
+      expect(page).to_not have_xpath('//a[@alt="Billy Boy"]')
     end
   end
 

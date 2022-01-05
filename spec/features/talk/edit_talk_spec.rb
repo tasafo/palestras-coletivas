@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe 'Edit talk', js: true do
   let!(:user) { create(:user, :paul) }
-  let!(:billy) do
-    create(:user, :billy, username: '@user_billy', name: 'Billy Boy')
-  end
-  let!(:luis) do
-    create(:user, :luis, username: '@user_luis', name: 'Luis XIV')
-  end
+  let!(:billy) { create(:user, :billy, username: '@user_billy', name: 'Billy Boy') }
+  let!(:luis) { create(:user, :luis, username: '@user_luis', name: 'Luis XIV') }
   let!(:talk) { create(:talk, users: [user, luis], owner: user) }
 
   context "when it's from the user" do
@@ -18,12 +14,10 @@ describe 'Edit talk', js: true do
     context 'with valid data' do
       before do
         fill_in 'Título', with: 'Ruby praticamente falando'
-        fill_in 'Descrição',
-                with: 'Palestra que fala sobre a linguagem de programação ruby'
+        fill_in 'Descrição', with: 'Palestra que fala sobre a linguagem de programação ruby'
         fill_in 'Tags', with: 'ruby, programação'
 
-        fill_autocomplete('invitee_username', with: '@us',
-                                              select: 'Billy Boy (@user_billy)')
+        fill_autocomplete('invitee_username', with: '@us', select: 'Billy Boy (@user_billy)')
         click_button :add_user
 
         click_button "remove_user_id_#{luis.id}"
@@ -34,8 +28,8 @@ describe 'Edit talk', js: true do
       it 'displays success message' do
         expect(page).to have_current_path(%r{/talks/\w+})
         expect(page).to have_content('A palestra foi atualizada!')
-        expect(page).to have_content('Billy Boy')
-        expect(page).to_not have_content('Luis XIV')
+        expect(page).to have_xpath('//a[@alt="Billy Boy"]')
+        expect(page).to_not have_xpath('//a[@alt="Luis XIV"]')
       end
     end
 
@@ -48,8 +42,7 @@ describe 'Edit talk', js: true do
 
       it 'displays error messages' do
         expect(page).to have_current_path(talk_path(talk))
-        expect(page)
-          .to have_content('Verifique o formulário antes de continuar:')
+        expect(page).to have_content('Verifique o formulário antes de continuar:')
       end
     end
   end
@@ -61,8 +54,7 @@ describe 'Edit talk', js: true do
 
     it 'displays error messages' do
       expect(page).to have_current_path(talks_path)
-      expect(page)
-        .to have_content('Você não tem permissão para acessar esta página.')
+      expect(page).to have_content('Você não tem permissão para acessar esta página.')
     end
   end
 end

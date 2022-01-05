@@ -14,7 +14,7 @@
   <% unless @event.online? %>
     <section id="location">
       <div class="container">
-        <h2 class="text-primary"><%= t("labels.event.place") %></h2>
+        <h2 class="text-primary"><%= t("show.event.place") %></h2>
 
         <div class="text">
           <p><%= @event.place %></p>
@@ -33,9 +33,9 @@
       <div class="container">
         <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
 
-        <div class="row justify-content-left">
+        <div class="row">
           <% @event.users.each do |user| %>
-            <%= render "shared/user_event", user: user %>
+            <%= render "shared/user", user: user %>
           <% end %>
         </div>
       </div>
@@ -46,21 +46,25 @@
     <div class="container">
       <% if @presenter.show_users_present %>
         <% if @presenter.users_active.any? %>
-          <h2 class="text-primary"><%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)</h2>
+          <h2 class="text-primary">
+            <%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)
+          </h2>
 
-          <div class="row justify-content-left">
+          <div class="row">
             <% @presenter.users_active.each do |record| %>
-              <%= render "shared/user_event", user: record[:user] %>
+              <%= render "shared/user", user: record[:user] %>
             <% end %>
           </div>
         <% end %>
 
         <% if @presenter.users_present.any? %>
-          <h2 class="text-primary"><%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)</h2>
+          <h2 class="text-primary">
+            <%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)
+          </h2>
 
-          <div class="row justify-content-left">
+          <div class="row">
             <% @presenter.users_present.each do |user| %>
-              <%= render "shared/user_event", user: user %>
+              <%= render "shared/user", user: user %>
             <% end %>
           </div>
         <% end %>

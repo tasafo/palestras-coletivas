@@ -1,1 +1,2 @@
-<%= link_to thumbnail(user, "40x40", 'rounded-circle img-responsive'), user_path(user), title: user.name %>
+<%= link_to thumbnail(user, "40x40", 'rounded-circle img-responsive'),
+                      user_path(user), alt: user.name, title: user.name %>
