@@ -64,10 +64,6 @@ class Talk
     !presentation_url.blank?
   end
 
-  def thumbnail_image
-    thumbnail.blank? ? 'without_presentation.jpg' : Utility.https(thumbnail)
-  end
-
   def refresh(attributes)
     attributes.each { |key, value| send("#{key}=", value) }
   end

@@ -1,15 +1,15 @@
 <div class="col-md-2 text-center">
-  <a href="<%= user_path(user) %>" alt="<%= user.name %>" title="<%= user.name %>">
-    <%= thumbnail(user, "80x80", 'rounded-circle img-responsive') %>
+  <a href="<%= user_path(user) %>" alt="<%= user.name %>">
+    <%= thumbnail(user) %>
 
     <% if defined?(counter) %>
-      <h6 class="text-dark bg-light">
-        <span class="badge badge-light badge-custom">
+      <p>
+        <span class="text-dark badge badge-light badge-custom shadow">
           <%= user.name %> <span class="badge badge-pill badge-dark"><%= counter %></span>
         </span>
-      </h6>
+      </p>
     <% else %>
-      <h6 class="text-dark bg-light"><%= user.name %></h6>
+      <p class="text-dark"><%= user.name %></p>
     <% end %>
   </a>
 </div>

@@ -1,9 +1,11 @@
 <% unless Rails.env.test? %>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="embed-responsive embed-responsive-4by3">
-        <%= @presentation.frame.html_safe %>
+  <% if @presentation.frame %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="ratio ratio-4x3">
+          <%= @presentation.frame.html_safe %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

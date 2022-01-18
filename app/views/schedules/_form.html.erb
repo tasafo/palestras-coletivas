@@ -1,37 +1,31 @@
-<%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
+<%= form_for(@schedule, url: url, html: { class: 'row g-3' }) do |f| %>
   <%= render "shared/error_messages", record: @schedule %>
 
-  <div class="form-group">
-    <%= f.label :day, class: 'control-label col-md-2' %>
-    <div class="col-md-2">
-      <%= select_tag("schedule[day]", @presenter.dates.html_safe, class: "form-control") %>
-    </div>
+  <div class="col-md-2">
+    <%= f.label :day, class: 'form-label' %>
+    <%= select_tag("schedule[day]", @presenter.dates.html_safe, class: "form-select", autofocus: true) %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :time, class: 'control-label col-md-1' %>
-    <div class="col-md-1">
-      <%= f.text_field :time, class: "form-control hour" %>
-    </div>
+  <div class="col-md-1">
+    <%= f.label :time, class: 'form-label' %>
+    <%= f.text_field :time, class: "form-control hour", required: true %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :description, class: 'control-label col-md-6' %>
-    <div class="col-md-6">
-      <%= f.text_field :description, class: "form-control", maxlength: 50 %>
-    </div>
+  <div class="col-md-6">
+    <%= f.label :description, class: 'form-label' %>
+    <%= f.text_field :description, class: "form-control", maxlength: 50, required: true %>
   </div>
 
-  <div id="div_talk" class="form-group" style="display:<%= @presenter.display %>">
-    <label class="control-label col-md-2"><%= t("labels.talk.title") %></label>
+  <div id="div_talk" class="form-group mb-3" style="display:<%= @presenter.display %>">
+    <label class="control-label col-md-2"><%= t("mongoid.attributes.talk.title") %></label>
     <div class="col-md-6">
       <span id="talk_title" class="text-white bg-success"><%= @presenter.talk_title %></span>
     </div>
   </div>
 
-  <div class="form-group">
-    <%= label_tag :attach_talk, t('labels.schedule.attach_talk'), class: 'control-label col-md-3' %>
-    <%= check_box_tag :attach_talk %>
+  <div class="col-md-12">
+    <%= check_box_tag :attach_talk, class: "form-check-input" %>
+    <%= label_tag :attach_talk, t('labels.schedule.attach_talk'), class: 'form-check-label col-md-3' %>
   </div>
 
   <%= f.hidden_field :event_id, value: @event.id %>
@@ -42,22 +36,24 @@
   <%= hidden_field_tag 'titles_talks_select', t('titles.talks.select')%>
   <%= hidden_field_tag 'alert_enter_talks', t('new.schedule.you_must_enter_a_talk') %>
 
-  <div class="container">
-    <%= f.submit class: 'btn btn-primary' %>
-    <%= link_to t('.cancel', default: t("helpers.links.cancel")), event_path(@event, anchor: 'page-content'), class: 'btn btn-default' %>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-primary btn-submit' %>
+    <%= link_to t('.cancel', default: t("helpers.links.cancel")), event_path(@event, anchor: 'page-content'), class: 'btn btn-secondary' %>
   </div>
 
   <hr />
 
   <div class="form-group" id="search_talks" style="display:none">
-    <h3 class="text-info"><%= t("titles.talks.search") %></h3>
-
+    <h3 class="text-primary"><%= t("titles.talks.search") %></h3>
     <div class="col-md-6">
       <div class="input-group">
-        <input class="form-control search-query" id="search_text" type="text" placeholder="<%= t("placeholder.talks.search") %>">
-        <span class="input-group-btn">
-          <button id="search_button" class="btn btn-success" type="button"><%= t("form.submit.search") %></button>
-        </span>
+        <div class="form-outline">
+          <%= search_field_tag :search_text, params[:search], class: "form-control", size: 40, maxlength: 40 %>
+          <%= label_tag :search_text, t('placeholder.talks.search'), class: "form-label" %>
+        </div>
+        <button id="search_button" type="button" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
       </div>
     </div>
   </div>

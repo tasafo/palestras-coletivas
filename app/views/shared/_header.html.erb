@@ -1,29 +1,47 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-inverse bg-inverse-custom <%= index %>-color">
-    <div class="container">
-      <strong><%= link_to t('app.name'), root_path, class: 'navbar-brand' %></strong>
-
-      <a class="navbar-toggler hidden-md-up pull-xs-right" data-toggle="collapse" href="#collapsingNavbarInside" aria-expanded="false" aria-controls="collapsingNavbar">&#9776;</a>
-
-      <div id="collapsingNavbarInside" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav ml-auto">
-          <%= render 'shared/menu' %>
-
-          <% if logged_in? %>
-            <li class="nav-item dropdown hidden-sm-down textselect-off">
-              <a class="menu nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%= thumbnail(current_user, "40x40", 'rounded-circle img-responsive') %>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right change">
-                <%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item" %>
-                <%= link_to t("menu.user_data"), edit_user_path(current_user), class: "dropdown-item" %>
-                <div class="dropdown-divider"></div>
-                <%= link_to t("menu.logout"), logout_path, class: "dropdown-item" %>
-              </div>
-            </li>
-          <% end %>
-        </ul>
-      </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light <%= bg %>" style="z-index: 2000;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand nav-link" href="/">
+        <strong><%= t("app.name") %></strong>
+      </a>
+      <!-- Navbar brand -->
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><%= link_to t('titles.talks.index'), talks_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to t('titles.events.index'), events_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to t('titles.ranking.index'), ranking_path, class: 'nav-link' %></li>
+        <% unless logged_in? %>
+          <li class="nav-item"><%= link_to t('menu.signin'), login_path, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to t('menu.signup'), new_user_path, class: 'nav-link' %></li>
+        <% end %>
+      </ul>
+      <!-- Left links -->
     </div>
-  </nav>
-</header>
+    <!-- Collapsible wrapper -->
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      <% if logged_in? %>
+        <div class="nav-item dropdown">
+          <a class="menu nav-link dropdown-toggle text-dark" id="navbarDropdownMenuLink" data-mdb-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= thumbnail(current_user, "25x25") %>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><%= link_to t("menu.user_profile"), user_path(current_user), class: "dropdown-item" %></li>
+            <li><%= link_to t("menu.user_data"), edit_user_path(current_user), class: "dropdown-item" %></li>
+            <div class="dropdown-divider"></div>
+            <li><%= link_to t("menu.logout"), logout_path, class: "dropdown-item" %></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <!-- Right elements -->
+  </div>
+</nav>
+<!-- Navbar -->

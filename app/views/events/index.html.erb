@@ -1,24 +1,24 @@
-<%= render "shared/header", index: :event %>
-<%= render "shared/title", title: t("titles.events.index"), index: :event %>
+<%= render "shared/title", title: t("titles.events.index") %>
 <div class="container">
-  <div class="row events-actions">
+  <div class="row">
     <div class="col-md-8">
-      <div class="input-group">
-        <%= form_tag events_path, method: "get", class: "form-inline" do |f| %>
-          <%= text_field_tag :search, params[:search], class: "form-control", size: 40, maxlength: 40,
-                             autocomplete: "off", placeholder: t('placeholder.events.search')  %>
-          <%= submit_tag t('form.submit.search'), class: "btn btn-success" %>
-        <% end %>
-      </div>
+      <%= form_tag events_path, method: "get" do |f| %>
+        <div class="input-group">
+          <div class="form-outline">
+            <%= search_field_tag :search, params[:search], class: "form-control", size: 40, maxlength: 40 %>
+            <%= label_tag :search, t('placeholder.events.search'), class: "form-label" %>
+          </div>
+          <button id="search_button" type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      <% end %>
     </div>
     <% if logged_in? %>
-      <div class="col-md-4">
-        <div class="btn-group pull-right" role="group">
-          <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>&nbsp;
-
-          <%= link_to t("titles.events.#{params[:my] ? 'all' : 'my'}"),
-                      "/events#{params[:my] ? '' : '?my=true'}", class: "btn btn-primary" %>
-        </div>
+      <div class="col-md-4 text-end">
+        <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
+        <%= link_to t("titles.events.#{params[:my] ? 'all' : 'my'}"),
+                    "/events#{params[:my] ? '' : '?my=true'}", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

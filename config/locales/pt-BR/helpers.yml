@@ -5,22 +5,6 @@ pt-BR:
         create: "Cadastre-me"
         update: "Atualizar dados"
 
-      talk:
-        create: "Adicionar palestra"
-        update: "Atualizar palestra"
-
-      event:
-        create: "Adicionar evento"
-        update: "Atualizar evento"
-
-      schedule:
-        create: "Adicionar programação"
-        update: "Atualizar programação"
-
       enrollment:
         create: "Quero participar!"
         update: "Alterar participação"
-
-      external_event:
-        create: "Adicionar evento externo"
-        update: "Atualizar evento externo"

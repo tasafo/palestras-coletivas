@@ -1,0 +1,18 @@
+pt-BR:
+  home:
+    center:
+      talks:
+        title: Palestras incríveis
+        description: Palestras apresentadas por pessoas renomadas em suas áreas de atuação.
+      events:
+        title: Eventos inesquecíveis
+        description: Parcicipe de eventos organizados por pessoas de várias comunidades.
+    works:
+      title: Mostre seus trabalhos
+      description: Crie seu portfólio de palestras, cursos e workshops para que possam ser consultados por pessoas que desejam ver trabalhos de sua área. Com isso, os organizadores dos eventos podem lhe convidar e adicioná-las na grade de programação.
+    events:
+      title: Organize seus eventos
+      description: De uma maneira bem simples, você pode lançar informações de eventos acadêmicos, seminários ou encontros de diversas áreas. E, ainda com a opção de adicionar organizadores, grupos envolvidos e a grade de programação dos dias do evento. Os usuários cadastrados podem se inscrever no evento com apenas poucos cliques.
+    people:
+      title: Conheça mais pessoas
+      description: O espaço que estamos dispondo aqui é apenas para provocar o encontro entre pessoas do mesmo interesse em suas áreas. Ele serve para promover a socialização do conhecimento.

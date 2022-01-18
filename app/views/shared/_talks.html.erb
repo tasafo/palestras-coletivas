@@ -1,18 +1,16 @@
   <hr/>
   <%= render "shared/paginate", list: pagy %>
-  <div class="row">
-    <% talks.each_with_index do |talk, index| %>
-      <div class="ol-xs-12 col-sm-4 col-md-3 col-lg-3 col-xl-2 card-talk">
-        <div class="card">
-          <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
-            <%= link_to talk_path(talk) do %>
-              <% if talk.thumbnail.blank? %>
-                <div class="mask"></div>
-              <% else %>
-                <%= image_tag(talk.thumbnail_image, size: '160x120', class: 'card-img-top') %>
-              <% end %>
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4">
+    <% talks.each do |talk| %>
+      <div class="col">
+        <div class="card card-talk h-100 text-dark bg-light">
+          <%= link_to talk_path(talk) do %>
+            <% if talk.thumbnail.blank? %>
+              <div class="card-img-top thumb-talk"></div>
+            <% else %>
+              <%= image_tag(Utility.https(talk.thumbnail), size: '160x120', class: 'card-img-top') %>
             <% end %>
-          </div>
+          <% end %>
 
           <div class="card-body">
             <% if show_user %>

@@ -43,6 +43,6 @@ class CommentsController < ApplicationController
   end
 
   def slug_commentable_path
-    "/#{@commentable.class.name.pluralize.downcase}/#{@commentable.slug}"
+    "/#{@commentable.class.name.pluralize.downcase}/#{@commentable.slug}#comments"
   end
 end

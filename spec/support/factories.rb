@@ -9,7 +9,7 @@ FactoryBot.define do
       name { 'Paul Young' }
       username { '@pyoung' }
       email { 'paul@example.org' }
-      gravatar_photo { '/assets/without_avatar.jpg' }
+      avatar { File.new(ImageFile.asset('avatar.jpg')) }
     end
 
     trait :billy do
@@ -50,7 +50,6 @@ FactoryBot.define do
     description { 'Essa palestra fala sobre compartilhamento de informações' }
     tags { 'tecnologia, compartilhamento, informação' }
     to_public { true }
-    thumbnail { '/assets/without_presentation.jpg' }
     code { '16635025' }
 
     factory :other_talk do
@@ -101,15 +100,9 @@ FactoryBot.define do
       start_date { '05/06/2012' }
       end_date { '06/06/2012' }
       deadline_date_enrollment { '06/06/2012' }
-      place { 'Centro de Convenções do Jurunas' }
-      street { 'Rua dos Caripunas, 400' }
-      district { 'Jurunas' }
-      city { 'Belém' }
-      state { 'Pará' }
-      country { 'Brasil' }
+      online { true }
       to_public { true }
       coordinates { [-48.4945471, -1.4714916] }
-      image { File.new(ImageFile.asset('video-poster.jpg')) }
     end
   end
 

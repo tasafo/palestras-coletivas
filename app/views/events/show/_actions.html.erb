@@ -1,17 +1,14 @@
-  <section id="actions" style="text-align: center;">
+  <div id="actions" class="container">
     <%= render "shared/flash_messages" %>
 
-    <div class="row-fluid">
-      <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12 text-center">
         <% if @presenter.authorized %>
-          <%= link_to t("titles.events.edit"), edit_event_path(@event), class: "btn btn-primary" %>&nbsp;
-
+          <%= link_to t("titles.events.edit"), edit_event_path(@event), class: "btn btn-primary" %>
           <%= link_to t("actions.delete.label"), event_path(@event),
                       class: "btn btn-danger", id: "delete_event_id_#{@event.slug}",
-                      method: :delete, data: { confirm: t("actions.delete.confirm") } %>&nbsp;
-
-          <%= link_to t("titles.schedules.btn_new"), new_event_schedule_path(@event), class: "btn btn-primary" %>&nbsp;
-
+                      method: :delete, data: { confirm: t("actions.delete.confirm") } %>
+          <%= link_to t("titles.schedules.btn_new"), new_event_schedule_path(@event), class: "btn btn-primary" %>
           <%= link_to t("show.event.export_subscribers"), new_event_export_subscriber_path(@event), class: "btn btn-primary" %>
         <% end %>
 
@@ -34,7 +31,7 @@
         <% if logged_in? && @presenter.open_enrollment %>
           <% if @presenter.new_subscription %>
             <% if @presenter.crowded %>
-              <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
+              <span class="btn btn-secondary disabled"><%= t("show.event.sellout") %></span>
             <% else %>
               <%= link_to t("show.event.btn_add_enrollment"), "",
                           class: "btn btn-primary btn-event-enrollment",
@@ -43,7 +40,7 @@
             <% end %>
           <% else %>
             <% if @presenter.crowded && !@presenter.enrollment.active? %>
-              <span class="btn btn-default disabled"><%= t("show.event.sellout") %></span>
+              <span class="btn btn-secondary disabled"><%= t("show.event.sellout") %></span>
             <% else %>
               <% action = @presenter.enrollment.active? ? 'cancel' : 'add' %>
               <% button = @presenter.enrollment.active? ? 'danger' : 'primary' %>
@@ -57,4 +54,4 @@
         <% end %>
       </div>
     </div>
-  </section>
+  </div>

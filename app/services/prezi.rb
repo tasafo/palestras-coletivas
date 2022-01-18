@@ -3,8 +3,7 @@ class Prezi
   URL = "https://#{DOMAIN}".freeze
 
   def self.frame(code)
-    "<iframe class=\"embed-responsive-item\"
-    src=\"#{URL}/embed/#{code}/?bgcolor=ffffff&amp;
+    "<iframe src=\"#{URL}/embed/#{code}/?bgcolor=ffffff&amp;
     lock_to_path=0&amp;autoplay=0&amp;autohide_ctrls=0#\"
     allowfullscreen=\"\" mozallowfullscreen=\"\"
     webkitallowfullscreen=\"\"></iframe>"

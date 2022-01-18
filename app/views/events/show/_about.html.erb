@@ -1,9 +1,5 @@
-  <section id="about">
-    <%= render "events/show/actions" %>
+  <div id="about" class="container">
+    <h2 class="text-primary"><%= t("labels.event.about") %></h2>
 
-    <div class="container">
-      <h2 class="text-primary"><%= t("labels.event.about") %></h2>
-
-      <div class="text"><%= sanitize(@event.description) %></div>
-    </div>
-  </section>
+    <div class="text"><%= sanitize(@event.description) %></div>
+  </div>

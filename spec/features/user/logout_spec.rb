@@ -7,7 +7,7 @@ describe 'Logout' do
     before do
       login_as user, root_path
 
-      first('.link-logout').click
+      visit logout_path
     end
 
     it "doesn't render name" do

@@ -27,7 +27,7 @@ describe ApplicationHelper do
       end
 
       it 'sets url' do
-        expect(html['src']).to match(/without_avatar/)
+        expect(html['src']).to match(/avatar.jpg/)
       end
 
       it 'sets alternative text' do

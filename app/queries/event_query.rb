@@ -9,7 +9,7 @@ class EventQuery
   end
 
   def publics
-    @relation.publics.order(start_date: :desc)
+    @relation.publics.order(start_date: :desc, name: :asc)
   end
 
   def ranking_present_users(limit)

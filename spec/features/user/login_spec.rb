@@ -9,8 +9,8 @@ describe 'Login' do
     let!(:user) { create(:user, :paul) }
 
     before do
-      fill_in 'Seu e-mail', with: user.email
-      fill_in 'Sua senha', with: 'testdrive'
+      fill_in 'E-mail', with: user.email
+      fill_in 'Senha', with: 'testdrive'
 
       click_button 'Acessar minha conta'
     end

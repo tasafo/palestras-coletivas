@@ -15,7 +15,6 @@ RSpec.configure do |config|
         body: '<response>
                     <entry>
                       <profileUrl>https://gravatar.com/luizsanches</profileUrl>
-                      <thumbnailUrl>/assets/without_avatar.jpg</thumbnailUrl>
                       <aboutMe>about me</aboutMe>
                       <currentLocation>Belém - Pará - Brasil</currentLocation>
                     </entry>
@@ -30,7 +29,6 @@ RSpec.configure do |config|
         body: '<oembed>
                     <slideshow-id type="integer">16635025</slideshow-id>
                     <title>Compartilhe!</title>
-                    <thumbnail>/assets/without_presentation.jpg</thumbnail>
                   </oembed>',
         headers: { 'Content-Type' => 'application/xml; charset=utf-8' }
       )
@@ -47,7 +45,7 @@ RSpec.configure do |config|
       .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
       .to_return(
         status: 200,
-        body: '{"presentation": {"oid": "7uq1mhqnclzn", "title": "Titulo", "thumb_url": "/assets/without_presentation.jpg", "description": "description"}}',
+        body: '{"presentation": {"oid": "7uq1mhqnclzn", "title": "Titulo", "description": "description"}}',
         headers: { 'Content-Type' => 'application/json; charset=utf-8' }
       )
 
@@ -55,7 +53,7 @@ RSpec.configure do |config|
       .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
       .to_return(
         status: 200,
-        body: '{"title": "Titulo", "html": "<iframe src=\"\/assets\/without_presentation.jpg\"><\/iframe>"}',
+        body: '{"title": "Titulo", "html": "<iframe><\/iframe>"}',
         headers: { 'Content-Type' => 'application/json; charset=utf-8' }
       )
 
@@ -63,7 +61,7 @@ RSpec.configure do |config|
       .with(headers: { 'Accept' => '*/*', 'User-Agent' => 'Ruby' })
       .to_return(
         status: 200,
-        body: '{"title": "Titulo", "html": "<iframe src=\"/\assets\/without_presentation.jpg\"><\/iframe>"}',
+        body: '{"title": "Titulo", "html": "<iframe><\/iframe>"}',
         headers: { 'Content-Type' => 'application/json; charset=utf-8' }
       )
   end

@@ -1,11 +1,11 @@
 <% if record.errors.any? %>
-  <div class="alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div class="alert alert-danger alert-dismissible fade show">
     <h4 class="alert-heading"><%= t("form.errors") %></h4>
     <ul>
     <% record.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
     </ul>
+    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
   </div>
 <% end %>

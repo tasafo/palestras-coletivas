@@ -20,7 +20,7 @@ describe 'Create enrollment', js: true do
     end
 
     it 'displays success message' do
-      expect(page).to have_content('Cancelar participação')
+      expect(page).to have_content('Cancelar participação'.upcase)
     end
   end
 
@@ -30,7 +30,7 @@ describe 'Create enrollment', js: true do
     end
 
     it 'not show button I want to participate' do
-      expect(page).not_to have_content('Quero participar!')
+      expect(page).not_to have_content('Quero participar!'.upcase)
     end
   end
 end

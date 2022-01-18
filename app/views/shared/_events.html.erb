@@ -1,19 +1,16 @@
-<div class="container">
   <hr/>
   <%= render "shared/paginate", list: pagy %>
-  <div class="row">
-    <% events.each_with_index do |event, index| %>
-      <div class="col-lg-4 mb-r">
-        <div class="card h-100">
-          <div class="view overlay hm-white-slight view-card-event card-event-<%= index %>">
-            <%= link_to event_path(event) do %>
-              <% if event.image? %>
-                <%= image_tag(event.image_path, size: '350x200', class: 'card-img-top') %>
-              <% else %>
-                <div class="mask"></div>
-              <% end %>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <% events.each do |event| %>
+      <div class="col">
+        <div class="card h-100 text-dark bg-light">
+          <%= link_to event_path(event) do %>
+            <% if event.image? %>
+              <%= image_tag(event.image_path, size: '356x200', class: 'card-img-top') %>
+            <% else %>
+              <div class="card-img-top thumb-event"></div>
             <% end %>
-          </div>
+          <% end %>
 
           <div class="card-body">
             <h4 class="card-title"><%= link_to event.name_edition, event_path(event) %></h4>
@@ -37,4 +34,3 @@
   </div>
   <hr/>
   <%= render "shared/paginate", list: pagy %>
-</div>

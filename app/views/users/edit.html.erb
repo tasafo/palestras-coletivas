@@ -1,4 +1,17 @@
-<%= render "shared/header", index: :ranking %>
-<%= render "shared/title", title: t("titles.users.edit"), index: :ranking %>
+<div class="container">
+  <div class="fade show" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
+    <div class="modal-dialog cascading-modal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="title"><i class="fa fa-user-edit"></i> <%= t("titles.users.edit") %></h4>
+        </div>
 
-<%= render "form", url: user_path, title: t("titles.users.edit") %>
+        <%= render 'shared/flash_messages' %>
+
+        <div class="modal-body">
+          <%= render "form", url: user_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

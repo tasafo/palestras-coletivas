@@ -4,8 +4,7 @@ class Speakerdeck
   FILES_URL = "https://files.#{DOMAIN}".freeze
 
   def self.frame(code)
-    "<iframe class=\"embed-responsive-item\"
-    src=\"#{URL}/player/#{code}\"
+    "<iframe src=\"#{URL}/player/#{code}\"
     allowfullscreen=\"true\"
     allowtransparency=\"true\" mozallowfullscreen=\"true\"
     style=\"border:0; padding:0; margin:0; background:transparent;\"

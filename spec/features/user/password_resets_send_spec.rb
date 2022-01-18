@@ -11,7 +11,7 @@ describe 'Send password resets' do
 
   context 'when valid data' do
     before do
-      fill_in 'Seu e-mail', with: user.email
+      fill_in 'E-mail', with: user.email
 
       click_button 'Redefinir senha'
     end
@@ -25,7 +25,7 @@ describe 'Send password resets' do
 
   context 'when invalid data' do
     before do
-      fill_in 'Seu e-mail', with: 'notfound@mail.com'
+      fill_in 'E-mail', with: 'notfound@mail.com'
 
       click_button 'Redefinir senha'
     end

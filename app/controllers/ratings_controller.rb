@@ -7,7 +7,7 @@ class RatingsController < ApplicationController
     result = @rateable.rate_by current_user, params[:rate][:my_rating]
 
     respond_to do |format|
-      format.json { render json: { success: result } }
+      format.json { render json: { success: result.valid? } }
     end
   end
 

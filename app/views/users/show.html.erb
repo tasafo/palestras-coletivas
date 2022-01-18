@@ -1,22 +1,20 @@
-<%= render "shared/header", index: :ranking %>
-<%= render "shared/title", title: t("titles.users.profile"), index: :ranking %>
-
-<% if logged_in? %>
-  <div class="container">
-    <div class="row-fluid">
-      <div class="col-md-12">
-        <div class="btn-group pull-right" role="group">
-          <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>&nbsp;
-          <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+<%= render "shared/title", title: t("titles.users.profile") %>
 
 <div class="container">
-  <%= thumbnail(@user, '80x80', 'rounded-circle img-responsive') %>
-  <h3 class="featurette-heading"><%= @user.name %> <small><%= @user.username %></small></h3>
+  <div class="row">
+    <div class="col-md-1">
+      <%= thumbnail(@user, '80x80') %>
+    </div>
+    <div class="col-md-7">
+      <h3><%= @user.name %> <small><%= @user.username %></small></h3>
+    </div>
+    <% if logged_in? %>
+      <div class="col-md-4 text-end">
+        <%= link_to t("titles.talks.new"), new_talk_path, class: "btn btn-primary" %>
+        <%= link_to t("titles.events.new"), new_event_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 
   <% if @gravatar.has_profile %>
     <p class="lead">

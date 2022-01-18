@@ -16,33 +16,12 @@ describe 'Edit talk', js: true do
         fill_in 'Título', with: 'Ruby praticamente falando'
         fill_in 'Descrição', with: 'Palestra que fala sobre a linguagem de programação ruby'
         fill_in 'Tags', with: 'ruby, programação'
-
-        fill_autocomplete('invitee_username', with: '@us', select: 'Billy Boy (@user_billy)')
-        click_button :add_user
-
-        click_button "remove_user_id_#{luis.id}"
-
-        click_button 'Atualizar palestra'
+        find('.btn-submit').trigger('click')
       end
 
       it 'displays success message' do
         expect(page).to have_current_path(%r{/talks/\w+})
         expect(page).to have_content('A palestra foi atualizada!')
-        expect(page).to have_xpath('//a[@alt="Billy Boy"]')
-        expect(page).to_not have_xpath('//a[@alt="Luis XIV"]')
-      end
-    end
-
-    context 'with invalid data' do
-      before do
-        fill_in 'Título', with: ''
-
-        click_button 'Atualizar palestra'
-      end
-
-      it 'displays error messages' do
-        expect(page).to have_current_path(talk_path(talk))
-        expect(page).to have_content('Verifique o formulário antes de continuar:')
       end
     end
   end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Edit user' do
   let!(:user) { create(:user, :paul) }
   let!(:other_user) { create(:user, :billy) }
-  let!(:image_path) { ImageFile.asset('without_avatar.jpg') }
+  let!(:image_path) { ImageFile.asset('avatar.jpg') }
 
   context 'when the current user owns the account' do
     before do
@@ -12,7 +12,7 @@ describe 'Edit user' do
 
     context 'with valid data' do
       before do
-        fill_in 'Seu nome', with: 'Carl Simon'
+        fill_in 'Nome', with: 'Carl Simon'
         attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
@@ -26,7 +26,7 @@ describe 'Edit user' do
 
     context 'with invalid data' do
       before do
-        fill_in 'Seu nome', with: ''
+        fill_in 'Nome', with: ''
         attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
@@ -40,8 +40,8 @@ describe 'Edit user' do
 
     context 'with valid password' do
       before do
-        fill_in 'Sua senha', with: 'newpassword'
-        fill_in 'Confirme sua senha', with: 'newpassword'
+        fill_in 'Senha', with: 'newpassword'
+        fill_in 'Confirmação da senha', with: 'newpassword'
         attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'
@@ -55,8 +55,8 @@ describe 'Edit user' do
 
     context 'with invalid password' do
       before do
-        fill_in 'Sua senha', with: 'newpassword'
-        fill_in 'Confirme sua senha', with: 'otherpassword'
+        fill_in 'Senha', with: 'newpassword'
+        fill_in 'Confirmação da senha', with: 'otherpassword'
         attach_file('Foto', image_path)
 
         click_button 'Atualizar dados'

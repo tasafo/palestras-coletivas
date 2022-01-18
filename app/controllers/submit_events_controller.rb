@@ -4,7 +4,7 @@ class SubmitEventsController < ApplicationController
   def new
     @schedule = Schedule.new
     @talk = Talk.find(params[:talk_id])
-    @events = EventQuery.new.accepts_submissions
+    @events = EventQuery.new.accepts_submissions.to_a
     @schedule_found = nil
 
     return unless @events.size <= 0
@@ -36,7 +36,7 @@ class SubmitEventsController < ApplicationController
 
   def save_schedule
     @schedule = @event.schedules.new(talk: @talk, day: 1, time: @event.first_time,
-                                     description: t('labels.schedule.talk'))
+                                     description: t('mongoid.attributes.schedule.talk'))
     @schedule.save
   end
 end

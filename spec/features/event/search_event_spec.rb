@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Search event' do
+describe 'Search event', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:event) { create(:event, :tasafoconf, users: [user], owner: user) }
 
@@ -11,8 +11,7 @@ describe 'Search event' do
   context 'with empty search' do
     before do
       fill_in :search, with: ''
-
-      click_button 'Buscar'
+      find('#search_button').trigger('click')
     end
 
     it 'displays access my account' do
@@ -24,8 +23,7 @@ describe 'Search event' do
   context 'when the search is successful' do
     before do
       fill_in :search, with: 'Tá Safo Conf'
-
-      click_button 'Buscar'
+      find('#search_button').trigger('click')
     end
 
     it 'shows events found' do
@@ -37,8 +35,7 @@ describe 'Search event' do
   context 'when the search is not successful' do
     before do
       fill_in :search, with: 'noob'
-
-      click_button 'Buscar'
+      find('#search_button').trigger('click')
     end
 
     it 'not show events' do

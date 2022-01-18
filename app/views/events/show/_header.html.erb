@@ -1,19 +1,14 @@
-  <section id="page-header">
-    <img src="<%= @event.image_path %>" class="img-fluid">
+  <%= image_tag(@event.image_path, class: 'img-fluid') %>
 
-    <div id="page-content" class="row-fluid">
-      <p class="page-header-title"><%= @event.name_edition %></p>
+  <div id="page-content" class="container row-fluid">
+    <h1 class="text-center"><%= @event.name_edition %></h1>
+    <h3 class="text-center"><%= @event.long_date %></h3>
+    <h3 class="text-center"><%= @event.location %></h3>
+    <h3 class="text-center"><%= t("mongoid.attributes.event.stocking") %>: <%= @event.stocking %></h3>
 
-      <p class="page-header-text"><%= @event.long_date %></p>
-
-      <p class="page-header-text"><%= @event.location %></p>
-
-      <p class="page-header-text"><%= t("labels.event.stocking") %>: <%= @event.stocking %></p>
-
-      <% if @presenter.open_enrollment %>
-        <p class="page-header-text">
-          <%= t('labels.event.deadline_date_enrollment') %>: <%= l(@event.deadline_date_enrollment, format: :long) %>
-        </p>
-      <% end %>
-    </div>
-  </section>
+    <% if @presenter.open_enrollment %>
+      <h3 class="text-center">
+        <%= t('mongoid.attributes.event.deadline_date_enrollment') %>: <%= l(@event.deadline_date_enrollment, format: :long) %>
+      </h3>
+    <% end %>
+  </div>

@@ -1,18 +1,30 @@
-<footer class="footer section-footer bg-inverse" role="contentinfo">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-lg-5">
-        <div class="media">
-          <small class="media-body media-bottom">
-            <span class="copy-left">&copy;</span> Tá safo! 2013-<%= Time.zone.now.year %>. <%= link_to t('app.name'), 'https://github.com/tasafo/palestras-coletivas' %>
-          </small>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-7">
-        <ul class="nav nav-inline">
-          <%= render 'shared/menu' %>
-        </ul>
-      </div>
-    </div>
+<!--Footer-->
+<footer class="bg-dark text-center text-white">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.youtube.com/c/TaSafo" rel="nofollow" target="_blank">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/tasafo.comunidade" rel="nofollow" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/tasafo" rel="nofollow" target="_blank">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/tasafo" rel="nofollow" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+    </section>
+    <!-- Section: Social media -->
   </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <span class="copy-left">&copy;</span> 2013 - <%= Time.zone.now.year %>. <%= link_to('Tá safo!', 'https://tasafo.org', class: 'text-white') %>
+  </div>
+  <!-- Copyright -->
 </footer>
+<!--Footer-->

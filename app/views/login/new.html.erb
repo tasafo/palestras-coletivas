@@ -1,42 +1,36 @@
-<%= render "shared/header", index: :event %>
-
 <div class="container">
   <div class="fade show" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
     <div class="modal-dialog cascading-modal" role="document">
       <!--Content-->
       <div class="modal-content">
         <!--Header-->
-        <div class="modal-header light-blue darken-3 white-text">
-          <h4 class="title"><i class="fa fa-user"></i> <%= t('menu.signin') %></h4>
+        <div class="modal-header">
+          <h4 class="title"><i class="fa fa-door-open"></i> <%= t('menu.signin') %></h4>
         </div>
         <%= render 'shared/flash_messages' %>
         <!--Body-->
         <div class="modal-body">
           <%= form_tag login_path do %>
-            <div class="md-form form-sm">
-              <i class="fa fa-envelope prefix"></i>
-              <%= email_field_tag :email, nil, class: "form-control" %>
-              <%= label_tag :email, t("labels.user.email") %>
+            <div class="md-form form-sm mb-3">
+              <i class="fa fa-envelope"></i> <%= label_tag :email, t("mongoid.attributes.user.email") %>
+              <%= email_field_tag :email, nil, class: "form-control", autofocus: true %>
             </div>
 
-            <div class="md-form form-sm">
-              <i class="fa fa-lock prefix"></i>
+            <div class="md-form form-sm mb-3">
+              <i class="fa fa-lock"></i> <%= label_tag :password, t("mongoid.attributes.user.password") %>
               <%= password_field_tag :password, nil, class: "form-control" %>
-              <%= label_tag :password, t("labels.user.password") %>
             </div>
 
-            <div class="text-center mt-2">
-              <button class="btn btn-info"> <%= t("form.submit.login") %> <i class="fa fa-sign-in ml-1"></i></button>
+            <div class="text-center">
+              <%= submit_tag t("form.submit.login"), class: 'btn btn-primary' %>
             </div>
             <%= hidden_field_tag 'redirect', @redirect %>
           <% end %>
         </div>
         <!--Footer-->
-        <div class="modal-footer">
-          <div class="options text-center text-md-right mt-1">
-            <p><%= t("login.if_you_do_not_have_an_account_yet") %> <%= link_to t("login.register_here"), new_user_path %></p>
-            <p><%= link_to t("new.user.forgotten_password"), new_password_reset_path %></p>
-          </div>
+        <div class="modal-footer" style="justify-content: center;">
+          <p><%= t("login.if_you_do_not_have_an_account_yet") %> <%= link_to t("login.register_here"), new_user_path %></p>
+          <p><%= link_to t("new.user.forgotten_password"), new_password_reset_path %></p>
         </div>
       </div>
       <!--/.Content-->

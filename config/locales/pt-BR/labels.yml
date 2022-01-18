@@ -6,25 +6,8 @@ pt-BR:
       active: Ativo
       inactive: Inativo
 
-    user:
-      name: "Seu nome"
-      name_explanaition: "Será usado no seu endereço. Ex.: palestrascoletivas.tasafo.org/users/fulano-de-tal"
-      username: "Seu apelido"
-      username_explanaition: "Será usado para te encontrar na criação de palestras e eventos."
-      email: "Seu e-mail"
-      password: "Sua senha"
-      password_confirmation: "Confirme sua senha"
-
     talk:
-      presentation_url: "Link da palestra"
-      title: "Título"
-      description: "Descrição"
-      tags: "Tags"
-      thumbnail: "Miniatura"
-      code: "Código"
-      to_public: "Quero publicar"
       search_user: "ex: @marcos ou Marcos"
-      video_link: "Link do vídeo"
       watched: "Já assisti! (desfazer)"
       not_watched: "Já assisti!"
       who_watched: "Quem já assistiu!"
@@ -33,31 +16,9 @@ pt-BR:
       empty: "Sem comentários ainda."
 
     event:
-      name: "Nome"
-      edition: "Edição"
-      description: "Descrição"
-      stocking: "Lotação"
-      tags: "Tags"
-      start_date: "Data de início"
-      deadline_date_enrollment: "Prazo para inscrição"
-      end_date: "Data de término"
-      place: "Local"
-      address: "Endereço"
-      street: "Endereço"
-      district: "Bairro"
-      city: "Cidade"
-      state: "Estado"
-      country: "País"
-      to_public: "Quero publicar"
-      accepts_submissions: "Aceita submissão de palestras"
       about: "Sobre o evento"
-      top: "Topo"
 
     schedule:
-      day: "Dia"
-      time: "Horário"
-      description: "Descrição"
-      talk: "Palestra"
       attach_talk: Anexar uma palestra existente
 
     watched:

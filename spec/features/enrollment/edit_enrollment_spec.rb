@@ -18,7 +18,7 @@ describe 'Edit enrollment', js: true do
     end
 
     it 'displays success message' do
-      expect(page).to have_content('Quero participar!')
+      expect(page).to have_content('Quero participar!'.upcase)
     end
   end
 
@@ -30,7 +30,7 @@ describe 'Edit enrollment', js: true do
     end
 
     it 'displays success message' do
-      expect(page).to have_content('Cancelar participação')
+      expect(page).to have_content('Cancelar participação'.upcase)
     end
   end
 end

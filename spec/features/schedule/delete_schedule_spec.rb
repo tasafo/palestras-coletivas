@@ -10,12 +10,8 @@ describe 'Delete schedule', js: true do
   let!(:schedule_abertura) { create(:schedule, :abertura, event: event) }
   let!(:schedule_intervalo) { create(:schedule, :intervalo, event: event) }
 
-  let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk)
-  end
-  let!(:schedule_palestra2) do
-    create(:schedule, :palestra, event: event, talk: another_talk)
-  end
+  let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
+  let!(:schedule_palestra2) { create(:schedule, :palestra, event: event, talk: another_talk) }
 
   context 'with valid data' do
     before do

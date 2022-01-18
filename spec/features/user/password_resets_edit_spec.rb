@@ -11,8 +11,8 @@ describe 'Edit password resets' do
 
     context 'when valid data' do
       before do
-        fill_in 'Sua senha', with: 'newpassword'
-        fill_in 'Confirme sua senha', with: 'newpassword'
+        fill_in 'Senha', with: 'newpassword'
+        fill_in 'Confirmação da senha', with: 'newpassword'
 
         click_button 'Atualizar senha'
       end
@@ -25,8 +25,8 @@ describe 'Edit password resets' do
 
     context 'when invalid data' do
       before do
-        fill_in 'Sua senha', with: 'newpassword'
-        fill_in 'Confirme sua senha', with: 'otherpassword'
+        fill_in 'Senha', with: 'newpassword'
+        fill_in 'Confirmação da senha', with: 'otherpassword'
 
         click_button 'Atualizar senha'
       end
@@ -42,8 +42,8 @@ describe 'Edit password resets' do
     before do
       visit edit_password_reset_url(other_user.password_reset_token)
 
-      fill_in 'Sua senha', with: 'newpassword'
-      fill_in 'Confirme sua senha', with: 'newpassword'
+      fill_in 'Senha', with: 'newpassword'
+      fill_in 'Confirmação da senha', with: 'newpassword'
 
       click_button 'Atualizar senha'
     end

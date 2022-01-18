@@ -15,14 +15,14 @@
       <table class="table table-bordered table-hover table-responsive">
         <thead>
           <tr class="table-primary">
-            <th width="10%">
+            <th width="5%">
               <h4 class="text-center"><%= t("new.schedule.table.time") %></h4>
             </th>
-            <th width="30%">
+            <th width="80%">
               <h4 class="text-center"><%= t("new.schedule.table.description") %></h4>
             </th>
             <% if @presenter.authorized %>
-              <th colspan="2" width="10%">
+              <th colspan="2" width="5%">
                 <h4 class="text-center"><%= t("new.schedule.table.actions") %></h4>
               </th>
             <% end %>
@@ -63,13 +63,13 @@
                 <% end %>
 
                 <% if @presenter.authorized %>
-                  <td>
+                  <td class="text-center">
                     <%= link_to t("actions.edit"),
                                 edit_event_schedule_path(@event, schedule),
                                 class: "btn btn-primary",
                                 id: "edit_schedule_id_#{schedule.id}" %>
                   </td>
-                  <td>
+                  <td class="text-center">
                     <%= link_to t("actions.delete.label"),
                                 event_schedule_path(@event, schedule),
                                 method: :delete,

@@ -6,14 +6,9 @@ describe 'Edit event', js: true do
   let!(:another_user) { create(:user, :luis) }
   let!(:random_user) { create(:user, :random) }
   let!(:event) do
-    create(
-      :event,
-      :tasafoconf,
-      users: [user, other_user, another_user],
-      owner: user,
-      start_date: Date.today,
-      end_date: Date.today + 1.month
-    )
+    create(:event, :tasafoconf, users: [user, other_user, another_user],
+                                owner: user, start_date: Date.today,
+                                end_date: Date.today + 1.month)
   end
 
   context "when it's from the user" do
@@ -25,28 +20,12 @@ describe 'Edit event', js: true do
       before do
         fill_in 'Nome', with: 'Confraternização do Tá safo!'
         fill_in 'Tags', with: 'agilidade, gestão'
-
-        click_button "remove_user_id_#{other_user.id}"
-
-        click_button 'Atualizar evento'
+        find('.btn-submit').trigger('click')
       end
 
       it 'displays success message' do
         expect(page).to have_current_path(%r{/events/\w+})
         expect(page).to have_content('O evento foi atualizado!')
-      end
-    end
-
-    context 'with invalid data' do
-      before do
-        fill_in 'Nome', with: ''
-
-        click_button 'Atualizar evento'
-      end
-
-      it 'displays error messages' do
-        expect(page).to have_current_path(event_path(event))
-        expect(page).to have_content('Verifique o formulário antes')
       end
     end
   end
@@ -69,7 +48,7 @@ describe 'Edit event', js: true do
 
     it 'displays login message' do
       expect(page).to have_current_path(%r{/login.})
-      expect(page).to have_content('Entrar')
+      expect(page).to have_content('Entre')
     end
   end
 end

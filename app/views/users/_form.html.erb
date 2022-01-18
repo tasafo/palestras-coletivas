@@ -1,64 +1,48 @@
-<%= form_for @user, url: url, html: { class: 'form-horizontal' } do |f| %>
-  <%= render "shared/error_messages", record: @user %>
+        <%= form_for @user, url: url do |f| %>
+          <%= render "shared/error_messages", record: @user %>
 
-  <div class="fade show" id="modalRegister" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
-    <div class="modal-dialog cascading-modal" role="document">
-      <div class="modal-content">
-
-        <div class="modal-header light-blue darken-3 white-text">
-          <h4 class="title"><i class="fa fa-user-plus"></i> <%= title %></h4>
-        </div>
-
-        <div class="modal-body">
-          <div class="md-form form-sm">
-            <i class="fa fa-book prefix"></i>
-            <%= f.text_field :name, placeholder: t("placeholder.users.name"), class: "form-control" %>
-            <%= f.label :name, t("labels.user.name") %>
+          <div class="md-form form-sm mb-3">
+            <i class="fa fa-book prefix"></i> <%= f.label :name %>
+            <%= f.text_field :name, placeholder: t("placeholder.users.name"), class: "form-control", autofocus: true %>
           </div>
 
-          <div class="md-form form-sm">
-            <i class="fa fa-credit-card prefix"></i>
+          <div class="md-form form-sm mb-3">
+            <i class="fa fa-credit-card prefix"></i> <%= f.label :username %>
             <%= f.text_field :username, placeholder: t("placeholder.users.username"), class: "form-control" %>
-            <%= f.label :username, t("labels.user.username") %>
           </div>
 
-          <div class="md-form form-sm">
-            <i class="fa fa-envelope prefix"></i>
+          <div class="md-form form-sm mb-3">
+            <i class="fa fa-envelope prefix"></i> <%= f.label :email %>
             <%= f.email_field :email, placeholder: t("placeholder.users.email"), class: "form-control" %>
-            <%= f.label :email, t("labels.user.email") %>
           </div>
 
-          <div class="md-form form-sm">
-            <i class="fa fa-lock prefix"></i>
+          <div class="md-form form-sm mb-3">
+            <i class="fa fa-lock prefix"></i> <%= f.label :password %>
             <%= f.password_field :password, class: "form-control" %>
-            <%= f.label :password, t("labels.user.password") %>
           </div>
 
-          <div class="md-form form-sm">
-            <i class="fa fa-lock prefix"></i>
+          <div class="md-form form-sm mb-3">
+            <i class="fa fa-lock prefix"></i> <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, class: "form-control" %>
-            <%= f.label :password_confirmation, t("labels.user.password_confirmation") %>
           </div>
 
-          <div class="md-form">
+          <div class="md-form form-sm mb-3">
             <%= f.label :avatar, class: "control-label col-sm-2" %>
             <div class="col-sm-8">
               <%= thumbnail(@user) %>
               <%= f.file_field :avatar %>
+            </div>
 
+            <div class="form-check mb-3">
               <% if @user.name? %>
-                <%= f.check_box :remove_avatar %>
-                <%= "#{t('actions.delete.label')} #{t('mongoid.attributes.user.avatar')}" %>
+                <%= f.check_box :remove_avatar, class: "form-check-input" %>
+                <%= f.label :remove_avatar, "#{t('actions.delete.label')} #{t('mongoid.attributes.user.avatar')}", class: "form-check-label" %>
               <% end %>
             </div>
           </div>
 
-          <div class="text-center mt-2">
+          <div class="text-center">
             <% option = @user.name.nil? ? 'create' : 'update' %>
-            <button class="btn btn-info"><%= t("helpers.submit.user.#{option}") %> <i class="fa fa-sign-in ml-1"></i></button>
+            <button class="btn btn-primary"><%= t("helpers.submit.user.#{option}") %></button>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
+        <% end %>

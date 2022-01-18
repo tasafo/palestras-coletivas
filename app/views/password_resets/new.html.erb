@@ -1,17 +1,26 @@
-<%= render "shared/header", index: :talk %>
-<%= render "shared/title", title: t("titles.users.reset_password"), index: :talk %>
-
 <div class="container">
-  <%= form_tag password_resets_path, method: :post, class: 'form-horizontal' do %>
-    <div class="form-group">
-      <%= label_tag :email, t("labels.user.email"), class: 'control-label col-md-2' %>
-      <div class="col-md-4">
-        <%= email_field_tag :email, params[:email], class: "form-control" %>
+  <div class="fade show" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
+    <div class="modal-dialog cascading-modal" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="title"><i class="fa fa-lock"></i> <%= t("titles.users.reset_password") %></h4>
+        </div>
+
+        <%= render 'shared/flash_messages' %>
+
+        <div class="modal-body">
+          <%= form_tag password_resets_path do %>
+            <div class="md-form form-sm mb-3">
+              <i class="fa fa-envelope"></i> <%= label_tag :email, t("mongoid.attributes.user.email") %>
+              <%= email_field_tag :email, params[:email], class: "form-control", autofocus: true %>
+            </div>
+
+            <div class="text-center">
+              <%= submit_tag t("form.submit.reset_password"), class: 'btn btn-primary' %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-
-    <div class="container">
-      <%= submit_tag t("form.submit.reset_password"), class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+  </div>
 </div>

@@ -1,34 +1,34 @@
-<%= form_for(@external_event, url: url, html: {class: 'form-horizontal'}) do |f| %>
+<%= form_for(@external_event, url: url, html: { class: 'row g-3' } ) do |f| %>
   <%= render "shared/error_messages", record: @external_event %>
 
-  <div class="md-form">
-    <%= f.text_field :name, class: "form-control" %>
-    <%= f.label :name %>
+  <div class="col-md-6">
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: "form-control", required: true, autofocus: true %>
   </div>
 
-  <div class="md-form">
-    <%= f.text_field :date, class: "form-control date col-md-2" %>
-    <%= f.label :date %>
+  <div class="col-md-2">
+    <%= f.label :date, class: 'form-label' %>
+    <%= f.text_field :date, class: "form-control date datepicker", required: true %>
   </div>
 
-  <div class="md-form">
-    <%= f.text_field :place, class: "form-control" %>
-    <%= f.label :place %>
+  <div class="col-md-6">
+    <%= f.label :place, class: 'form-label' %>
+    <%= f.text_field :place, class: "form-control", required: true %>
   </div>
 
-  <div class="md-form">
+  <div class="col-md-6">
+    <%= f.label :url, class: 'form-label' %>
     <%= f.url_field :url, class: "form-control" %>
-    <%= f.label :url %>
   </div>
 
-  <div class="form-group">
-    <%= f.check_box :active %>
-    <%= f.label :active %>
+  <div class="col-md-12">
+    <%= f.check_box :active, class: "form-check-input" %>
+    <%= f.label :active, class: "form-check-label" %>
   </div>
 
-  <div class="container">
-    <%= f.submit class: 'btn btn-primary' %>
+  <div class="col-md-12">
+    <%= f.submit class: 'btn btn-primary btn-submit' %>
     <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-        talk_path(@talk), class: 'btn btn-default' %>
+        talk_path(@talk), class: 'btn btn-secondary' %>
   </div>
 <% end %>

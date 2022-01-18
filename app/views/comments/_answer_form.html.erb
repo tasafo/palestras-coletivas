@@ -1,7 +1,11 @@
-<%= form_for Comment.new, url: comments_path(commentable.class, commentable), html: {class: "answer_form"} do |f| %>
-  <%= f.text_area :body, placeholder: t("placeholder.comments"), rows: 5, class: "col-md-8" %>
+<%= form_for Comment.new, url: comments_path(commentable.class, commentable), html: { class: "row g-3 answer_form" } do |f| %>
   <%= hidden_field_tag :comment_id, comment.id %>
-  <div>
+
+  <div class="col-md-12">
+    <%= f.text_area :body, placeholder: t("placeholder.comments"), rows: 5, class: "form-control" %>
+  </div>
+
+  <div class="col-md-12">
     <%= f.submit t("actions.answer"), class: 'btn btn-primary' %>
   </div>
 <% end %>

@@ -2,13 +2,13 @@ pt-BR:
   titles:
     talks:
       index: "Palestras"
-      new: "Adicionar palestra"
-      edit: "Editar palestra"
+      new: "Criar palestra"
+      edit: "Atualizar palestra"
       show: "Palestra"
       my: "Minhas palestras"
       all: "Todas as palestras"
       search: "Buscar palestra"
-      select: "Selecionar palestra"
+      select: "Selecionar"
 
     comments:
       index: "Comentários"
@@ -26,8 +26,8 @@ pt-BR:
 
     events:
       index: "Eventos"
-      new: "Adicionar evento"
-      edit: "Editar evento"
+      new: "Criar evento"
+      edit: "Atualizar evento"
       my: "Meus eventos"
       all: "Todos os eventos"
       date:

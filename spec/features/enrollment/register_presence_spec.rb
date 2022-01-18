@@ -22,7 +22,7 @@ describe 'Register presence', js: true do
       end
 
       it 'displays success message' do
-        expect(page).to have_content('Desfazer presença')
+        expect(page).to have_content('Desfazer presença'.upcase)
       end
     end
 
@@ -32,7 +32,7 @@ describe 'Register presence', js: true do
       end
 
       it 'displays success message' do
-        expect(page).to have_content('Registrar presença')
+        expect(page).to have_content('Registrar presença'.upcase)
       end
     end
   end

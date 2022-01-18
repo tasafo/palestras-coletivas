@@ -1,85 +1,78 @@
-  <%= hidden_field_tag :event_id, @event.slug %>
-
   <%= render "events/show/header" %>
+  <%= render "events/show/actions" %>
   <%= render "events/show/about" %>
 
   <% if @event.schedules? %>
-    <section id="schedule">
-      <div class="container">
-        <%= render "shared/event_schedule" %>
-      </div>
-    </section>
+    <div class="container">
+      <%= render "shared/event_schedule" %>
+    </div>
   <% end %>
 
   <% unless @event.online? %>
-    <section id="location">
-      <div class="container">
-        <h2 class="text-primary"><%= t("show.event.place") %></h2>
+    <div id="location" class="container">
+      <h2 class="text-primary"><%= t("show.event.place") %></h2>
+      <h4><%= @event.place %></h4>
+      <h5><%= t("mongoid.attributes.event.address") %>: <%= @presenter.address %></h5>
 
-        <div class="text">
-          <p><%= @event.place %></p>
-          <p><%= t("labels.event.address") %>: <%= @presenter.address %></p>
-        </div>
-
-        <% if @event.coordinates %>
-          <div id="location-map"></div>
-        <% end %>
-      </div>
-    </section>
+      <% if @event.coordinates %>
+        <div id="location-map" class="shadow"></div>
+        <br/>
+      <% end %>
+    </div>
   <% end %>
 
   <% if @event.users? %>
-    <section id="organizers">
-      <div class="container">
-        <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
+    <div id="organizers" class="container">
+      <h2 class="text-primary"><%= t("show.event.organizers") %></h2>
+
+      <div class="row">
+        <% @event.users.each do |user| %>
+          <%= render "shared/user", user: user %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div id="presents" class="container">
+    <% if @presenter.show_users_present %>
+      <% if @presenter.users_active.any? %>
+        <h2 class="text-primary">
+          <%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)
+        </h2>
 
         <div class="row">
-          <% @event.users.each do |user| %>
+          <% @presenter.users_active.each do |record| %>
+            <%= render "shared/user", user: record[:user] %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @presenter.users_present.any? %>
+        <h2 class="text-primary">
+          <%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)
+        </h2>
+
+        <div class="row">
+          <% @presenter.users_present.each do |user| %>
             <%= render "shared/user", user: user %>
           <% end %>
         </div>
-      </div>
-    </section>
-  <% end %>
-
-  <section id="presents">
-    <div class="container">
-      <% if @presenter.show_users_present %>
-        <% if @presenter.users_active.any? %>
-          <h2 class="text-primary">
-            <%= t("show.event.enrolled") %> (<%= @presenter.users_active.size %>)
-          </h2>
-
-          <div class="row">
-            <% @presenter.users_active.each do |record| %>
-              <%= render "shared/user", user: record[:user] %>
-            <% end %>
-          </div>
-        <% end %>
-
-        <% if @presenter.users_present.any? %>
-          <h2 class="text-primary">
-            <%= t("show.event.presents") %> (<%= @presenter.users_present.size %>)
-          </h2>
-
-          <div class="row">
-            <% @presenter.users_present.each do |user| %>
-              <%= render "shared/user", user: user %>
-            <% end %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= render "events/show/attendance_list" %>
       <% end %>
-    </div>
-  </section>
+    <% else %>
+      <%= render "events/show/attendance_list" %>
+    <% end %>
+  </div>
 
-  <section class="section">
-    <div class="container">
-      <%= render "ratings/show", rateable: @event %>
-      <%= render "ratings/rate_form", rateable: @event %>
-    </div>
-  </section>
+  <div id="rating" class="container">
+    <%= render "ratings/show", rateable: @event %>
+    <%= render "ratings/rate_form", rateable: @event %>
+  </div>
 
   <%= render "comments/index", commentable: @event %>
-  <%= render "events/show/map" %>
+
+  <%= hidden_field_tag :event_id, @event.slug %>
+
+  <% if @event.coordinates %>
+  <span id="event_coordinates_0" style="display:none"><%= @event.coordinates[0] %></span>
+  <span id="event_coordinates_1" style="display:none"><%= @event.coordinates[1] %></span>
+  <% end %>

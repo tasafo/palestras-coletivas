@@ -1,6 +1,4 @@
-<%= render "shared/header", index: :ranking %>
-<%= render "shared/title", title: t("titles.ranking.index"), index: :ranking %>
-
+<%= render "shared/title", title: t("titles.ranking.index") %>
 <%= render 'shared/ranking', users: @users_public_talks, field: 'public_talks' %>
 <%= render 'shared/ranking', users: @watched_talks, field: 'watched_talks' %>
 <%= render 'shared/ranking', users: @organizers, field: 'organizing_events' %>
@@ -11,12 +9,12 @@
   <div class="container">
     <h2 class="text-primary"><%= t("titles.ranking.talks") %></h2>
     <% @talks.each do |talk| %>
-      <h6>
-        <span class="badge badge-light badge-custom">
+      <p>
+        <span class="badge badge-light badge-custom shadow">
           <%= link_to talk.title, talk_path(talk) %>
           <span class="badge badge-pill badge-dark"><%= talk.counter_presentation_events %></span>
         </span>
-      </h6>
+      </p>
     <% end %>
     <hr/>
   </div>
@@ -26,12 +24,12 @@
   <div class="container">
     <h2 class="text-primary"><%= t("titles.ranking.events") %></h2>
     <% @events.each do |event| %>
-      <h6>
-        <span class="badge badge-light badge-custom">
+      <p>
+        <span class="badge badge-light badge-custom shadow">
           <%= link_to event.name_edition, event_path(event) %>
           <span class="badge badge-pill badge-dark"><%= event.counter_present_users %></span>
         </span>
-      </h6>
+      </p>
     <% end %>
     <hr/>
   </div>

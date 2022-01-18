@@ -1,17 +1,16 @@
-<section class="comments">
-  <div class="container">
-    <h2 class="text-primary"><%= I18n.t("titles.comments.index") %></h2>
+<div id="comments" class="container">
+  <h2 class="text-primary"><%= t("titles.comments.index") %></h2>
 
-    <% if logged_in? %>
-      <%= render "comments/form", commentable: commentable %>
-    <% end %>
+  <% if logged_in? %>
+    <%= render "comments/form", commentable: commentable %>
+  <% end %>
 
-    <% if commentable.comments.empty? && !logged_in? %>
-      <h4><%= I18n.t("labels.comments.empty") %></h4>
-    <% end %>
+  <% if commentable.comments.empty? && !logged_in? %>
+    <h4><%= I18n.t("labels.comments.empty") %></h4>
+  <% end %>
 
-    <% commentable.comments.with_user.each do |comment| %>
-      <%= render "comments/show", commentable: commentable, comment: comment %>
-    <% end %>
-  </div>
-</section>
+  <% commentable.comments.with_user.each do |comment| %>
+    <%= render "comments/show", commentable: commentable, comment: comment %>
+  <% end %>
+</div>
+<hr/>

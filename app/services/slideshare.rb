@@ -5,8 +5,7 @@ class Slideshare
   URL = "https://www.#{DOMAIN}".freeze
 
   def self.frame(code)
-    "<iframe class=\"embed-responsive-item\"
-    src=\"#{URL}/slideshow/embed_code/#{code}\"
+    "<iframe src=\"#{URL}/slideshow/embed_code/#{code}\"
     marginwidth=\"0\" marginheight=\"0\" scrolling=\"no\"
     style=\"border:1px solid #CCC;border-width:1px 1px 0;
     margin-bottom:5px\"

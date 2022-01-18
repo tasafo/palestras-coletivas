@@ -20,7 +20,7 @@ describe 'Submit talk already created', js: true do
 
       select event.name, from: 'submit_event_event_id'
 
-      click_button 'Adicionar programação'
+      find('.btn-submit').trigger('click')
     end
 
     it 'displays success message' do

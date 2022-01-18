@@ -1,47 +1,50 @@
-      <%= form_for(@talk, url: url, html: {class: 'form-horizontal'}) do |f| %>
+      <%= form_for(@talk, url: url, html: { class: 'row g-3'} ) do |f| %>
         <%= render "shared/error_messages", record: @talk %>
 
-        <div class="form-group">
-          <%= f.label :presentation_url %>
-          <%= f.url_field :presentation_url, class: "form-control" %>
+        <div class="col-md-6">
+          <%= f.label :presentation_url, class: 'form-label' %>
+          <%= f.url_field :presentation_url, class: "form-control", autofocus: true %>
           <span id="searching_talk" style="display:none; color: green;"><b><%= t("new.talk.searching") %></b></span>
-          <span class="help-block"><p class="text-info"><%= t("new.talk.help.presentation_url_html") %></p></span>
+          <span class="help-block"><p class="text-info"><%= t("hints.talk.presentation_url") %></p></span>
           <span id="talk_not_found" style="display:none; color: red;"><%= t("new.talk.not_found") %></span>
         </div>
 
-        <div class="form-group">
-          <%= f.label :title %>
-          <span style="color: green;"><%= t('hints.talk.title') %></span>
-          <%= f.text_field :title, class: "form-control", maxlength: 100 %>
+        <div class="col-md-6">
+          <%= f.label :title, class: 'form-label required' %>
+          <span class="text-info"><%= t('hints.talk.title') %></span>
+          <%= f.text_field :title, class: "form-control", maxlength: 100, required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :description %>
-          <span style="color: green;"><%= t('hints.talk.description') %></span>
-          <%= f.text_area :description, rows: 5, class: "md-textarea" %>
+        <div class="col-md-12">
+          <%= f.label :description, class: 'form-label required' %>
+          <span class="text-info"><%= t('hints.talk.description') %></span>
+          <%= f.text_area :description, rows: 5, class: "form-control", required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :tags %>
-          <span style="color: green;"><%= t('hints.talk.tags') %></span>
-          <%= f.text_field :tags, class: "form-control col-md-6", maxlength: 60 %>
+        <div class="col-md-6">
+          <%= f.label :tags, class: 'form-label required' %>
+          <span class="text-info"><%= t('hints.talk.tags') %></span>
+          <%= f.text_field :tags, class: "form-control col-md-6", maxlength: 60, required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :video_link %>
+        <div class="col-md-6">
+          <%= f.label :video_link, class: 'form-label' %>
           <%= f.url_field :video_link, class: "form-control" %>
+          <span class="help-block"><p class="text-info"><%= t("hints.talk.video_link") %></p></span>
         </div>
 
-        <div class="form-group">
-          <%= f.label :to_public %>
-          <%= f.check_box :to_public %>
+        <div class="mb-3">
+          <%= f.check_box :to_public, class: "form-check-input" %>
+          <%= f.label :to_public, class: "form-check-label" %>
         </div>
 
-        <div class="form-group">
+        <div class="col-md-6">
           <%= render "shared/invite_user", model: @talk, users: @authors %>
+        </div>
 
-          <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('helpers.links.cancel'), (@talk.new_record? ? talks_path : talk_path(@talk)), class: 'btn btn-default' %>
+        <div class="col-md-12">
+          <%= f.submit class: 'btn btn-primary btn-submit', data: { disable_with: t('form.submit.saving') } %>
+          <%= link_to t('helpers.links.cancel'), (@talk.new_record? ? talks_path : talk_path(@talk)), class: 'btn btn-secondary' %>
         </div>
 
         <%= f.hidden_field :thumbnail %>

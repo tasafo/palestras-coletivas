@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Search talk' do
+describe 'Search talk', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:talk) { create(:talk, users: [user], owner: user) }
 
@@ -11,8 +11,7 @@ describe 'Search talk' do
   context 'with empty search' do
     before do
       fill_in :search, with: ''
-
-      click_button 'Buscar'
+      find('#search_button').trigger('click')
     end
 
     it 'displays access my account' do
@@ -24,8 +23,7 @@ describe 'Search talk' do
   context 'when the search is successful' do
     before do
       fill_in :search, with: 'compartilhe'
-
-      click_button 'Buscar'
+      find('#search_button').trigger('click')
     end
 
     it 'shows talks found' do
@@ -37,8 +35,7 @@ describe 'Search talk' do
   context 'when the search is not successful' do
     before do
       fill_in :search, with: 'noob'
-
-      click_button 'Buscar'
+      find('#search_button').trigger('click')
     end
 
     it 'not show talks' do

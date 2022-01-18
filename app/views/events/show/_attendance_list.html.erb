@@ -5,12 +5,12 @@
             <table class="table table-bordered table-hover table-responsive">
               <thead>
                 <tr class="table-primary">
-                  <th width="10%"><%= t("show.event.attendance_table.number") %></th>
-                  <th width="10%"><%= t("show.event.attendance_table.photo") %></th>
-                  <th width="40%"><%= t("show.event.attendance_table.name") %></th>
-                  <th width="30%"><%= t("show.event.attendance_table.email") %></th>
+                  <th width="5%"><h4 class="text-center"><%= t("show.event.attendance_table.number") %></h4></th>
+                  <th width="5%"><h4 class="text-center"><%= t("show.event.attendance_table.photo") %></h4></th>
+                  <th width="30%"><h4><%= t("show.event.attendance_table.name") %></h4></th>
+                  <th width="30%"><h4><%= t("show.event.attendance_table.email") %></h4></th>
                   <% if @presenter.can_record_presence %>
-                    <th width="10%"><%= t("show.event.attendance_table.presence") %></th>
+                    <th width="20%"><h4 class="text-center"><%= t("show.event.attendance_table.presence") %></h4></th>
                   <% end %>
                 </tr>
               </thead>

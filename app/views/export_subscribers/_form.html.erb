@@ -1,14 +1,14 @@
 <%= form_tag(event_export_subscribers_path(@event), html: { class: 'form-horizontal' }) do %>
-  <div class="form-group">
+  <div class="form-group mb-3">
     <%= label_tag(:profile, t('titles.export_subscribers.profile'), class: 'control-label col-md-2') %>
 
     <div class="col-md-2">
-      <%= select_tag(:profile, options_for_select(@profiles), class: "form-control") %>
+      <%= select_tag(:profile, options_for_select(@profiles), class: "form-select", autofocus: true) %>
     </div>
   </div>
 
-  <div class="container">
+  <div class="form-group">
     <%= submit_tag(t('actions.export'), id: 'commit', class: 'btn btn-primary') %>
-    <%= link_to t('helpers.links.cancel'), event_path(@event, anchor: 'page-content'), class: 'btn btn-default' %>
+    <%= link_to t('helpers.links.cancel'), event_path(@event, anchor: 'page-content'), class: 'btn btn-secondary' %>
   </div>
 <% end %>

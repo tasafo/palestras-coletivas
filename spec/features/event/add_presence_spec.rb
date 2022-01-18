@@ -19,7 +19,7 @@ describe 'add presence', js: true do
 
     it {
       expect(page)
-        .not_to have_content(I18n.t('show.event.btn_presence_checkin'))
+        .not_to have_content(I18n.t('show.event.btn_presence_checkin').upcase)
     }
   end
 
@@ -36,7 +36,7 @@ describe 'add presence', js: true do
     end
 
     it {
-      expect(page).to have_content(I18n.t('show.event.btn_presence_checkin'))
+      expect(page).to have_content(I18n.t('show.event.btn_presence_checkin').upcase)
     }
   end
 end

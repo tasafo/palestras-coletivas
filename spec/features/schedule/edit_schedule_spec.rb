@@ -11,12 +11,8 @@ describe 'Edit schedule', js: true do
   let!(:schedule_abertura) { create(:schedule, :abertura, event: event) }
   let!(:schedule_intervalo) { create(:schedule, :intervalo, event: event) }
 
-  let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk)
-  end
-  let!(:schedule_palestra2) do
-    create(:schedule, :palestra, event: event, talk: another_talk)
-  end
+  let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
+  let!(:schedule_palestra2) { create(:schedule, :palestra, event: event, talk: another_talk) }
 
   before do
     login_as user, event_path(event)
@@ -27,41 +23,17 @@ describe 'Edit schedule', js: true do
       click_link "edit_schedule_id_#{schedule_palestra.id}"
 
       select '06/06/2012', from: 'schedule_day'
-
-      fill_in_inputmask 'Horário', '08:00'
-
       fill_in 'Descrição', with: 'Palestra'
-
       check('Anexar uma palestra existente')
-
       fill_in :search_text, with: 'Ruby'
-
-      click_button 'Buscar'
-
-      click_button ruby_talk.id.to_s
-
-      click_button 'Atualizar programação'
+      find('#search_button').trigger('click')
+      find('.btn-select-talk').trigger('click')
+      find('.btn-submit').trigger('click')
     end
 
     it 'displays success message' do
       expect(page).to have_current_path(event_path(event))
       expect(page).to have_content('A programação foi atualizada!')
-    end
-  end
-
-  context 'with invalid data' do
-    before do
-      click_link "edit_schedule_id_#{schedule_palestra2.id}"
-
-      fill_in_inputmask 'Horário', '24:00'
-
-      click_button 'Atualizar programação'
-    end
-
-    it 'displays error messages' do
-      expect(page)
-        .to have_current_path(event_schedule_path(event, schedule_palestra2))
-      expect(page).to have_content('Horário não é válido')
     end
   end
 end

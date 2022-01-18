@@ -1,16 +1,14 @@
-<%= form_for(@schedule, url: url, html: {class: 'form-horizontal'}) do |f| %>
+<%= form_for(@schedule, url: url, html: { class: 'row g-3' }) do |f| %>
   <%= render "shared/error_messages", record: @schedule %>
 
-  <div class="form-group">
-    <%= f.label :submit_event, t("labels.submit_event.event"), class: 'control-label col-md-3' %>
-    <div class="col-md-5">
-      <%= collection_select(:submit_event, :event_id, @events, :id, :name, {}, class: "form-control") %>
-    </div>
+  <div class="col-md-6">
+    <%= f.label :submit_event, t("labels.submit_event.event"), class: 'form-label' %>
+    <%= collection_select(:submit_event, :event_id, @events, :id, :name, {}, class: "form-select") %>
   </div>
 
-  <div class="container">
-    <%= f.submit class: 'btn btn-primary' %>
+  <div class="col-md-12">
+    <%= f.submit class: 'btn btn-primary btn-submit' %>
     <%= link_to t('.cancel', default: t("helpers.links.cancel")),
-          talk_path(@talk), class: 'btn btn-default' %>
+          talk_path(@talk), class: 'btn btn-secondary' %>
   </div>
 <% end %>

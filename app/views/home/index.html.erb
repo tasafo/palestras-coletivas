@@ -1,0 +1,163 @@
+  <!--Main Navigation-->
+  <header>
+    <style>
+      /* Carousel styling */
+      #introCarousel,
+      .carousel-inner,
+      .carousel-item,
+      .carousel-item.active {
+        height: 100vh;
+      }
+
+      <% @events.each_with_index do |event, index| %>
+      .carousel-item:nth-child(<%= index + 1 %>) {
+        <% if event.image? %>
+        background-image: url('<%= "#{request.url}#{event.image_url}" %>');
+        <% end %>
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+      }
+      <% end %>
+
+      /* Height for devices larger than 576px */
+      @media (min-width: 992px) {
+        #introCarousel {
+          margin-top: -58.59px;
+        }
+      }
+
+      .navbar .nav-link {
+        color: #fff !important;
+      }
+    </style>
+
+    <!-- Carousel wrapper -->
+    <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong" data-mdb-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-mdb-target="#introCarousel" data-mdb-slide-to="0" class="active"></li>
+        <li data-mdb-target="#introCarousel" data-mdb-slide-to="1"></li>
+        <li data-mdb-target="#introCarousel" data-mdb-slide-to="2"></li>
+        <li data-mdb-target="#introCarousel" data-mdb-slide-to="3"></li>
+        <li data-mdb-target="#introCarousel" data-mdb-slide-to="4"></li>
+      </ol>
+
+      <!-- Inner -->
+      <div class="carousel-inner">
+        <% @events.each do |event| %>
+        <!-- Single item -->
+        <div class="carousel-item <%= 'active' if event == @events.first %>">
+          <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+              <div class="text-white text-center">
+                <h1 class="mb-3"><%= event.name_edition %></h1>
+                <h5 class="mb-4"><em><%= l event.start_date, format: :long %></em> - <%= event.location %></h5>
+                <a class="btn btn-outline-light btn-lg m-2" href="<%= event_path(event) %>"
+                  role="button" rel="nofollow">Saiba Mais</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <!-- Inner -->
+
+      <!-- Controls -->
+      <a class="carousel-control-prev" href="#introCarousel" role="button" data-mdb-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#introCarousel" role="button" data-mdb-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    <!-- Carousel wrapper -->
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="mt-5">
+    <div class="container">
+      <!--Section: Content-->
+      <section>
+        <div class="row">
+          <div class="col-md-6 gx-5 mb-4">
+            <div class="bg-image hover-overlay ripple shadow-2-strong" data-mdb-ripple-color="light">
+              <%= image_pack_tag "video-poster.jpg", class: "img-fluid" %>
+              <a href="#!">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-6 gx-5 mb-4">
+            <h4><strong><%= t('home.center.talks.title') %></strong></h4>
+            <p class="text-muted">
+              <%= t('home.center.talks.description') %>
+            </p>
+            <h4><strong><%= t('home.center.events.title') %></strong></h4>
+            <p class="text-muted">
+              <%= t('home.center.events.description') %>
+            </p>
+          </div>
+        </div>
+      </section>
+      <!--Section: Content-->
+
+      <hr class="my-5" />
+
+      <!--Section: Content-->
+      <section class="text-center">
+        <div class="row">
+          <div class="col-lg-4 col-md-12 mb-4">
+            <div class="card h-100">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <i class="fa fa-network-wired" style="font-size: 128px;"></i>
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= t('home.works.title') %></h5>
+                <p class="card-text"><%= t('home.works.description') %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <i class="fa fa-comments" style="font-size: 128px;"></i>
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= t('home.events.title') %></h5>
+                <p class="card-text"><%= t('home.events.description') %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <i class="fa fa-hand-holding-heart" style="font-size: 128px;"></i>
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><%= t('home.people.title') %></h5>
+                <p class="card-text"><%= t('home.people.description') %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: Content-->
+    </div>
+  </main>
+  <!--Main layout-->

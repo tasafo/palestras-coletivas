@@ -125,8 +125,6 @@ class User
       Utility.https(avatar.url)
     elsif gravatar_photo?
       Utility.https(gravatar_photo)
-    else
-      'without_avatar.jpg'
     end
   end
 

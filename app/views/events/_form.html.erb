@@ -1,123 +1,130 @@
-      <%= form_for(@event, url: url, html: {class: 'form-horizontal'}) do |f| %>
+      <%= form_for(@event, url: url, html: { class: 'row g-3'} ) do |f| %>
         <%= render "shared/error_messages", record: @event %>
 
-        <div class="form-group">
-          <%= f.label :name %>
-          <span style="color: green;"><%= t('hints.event.name') %></span>
-          <%= f.text_field :name, placeholder: t("placeholder.events.name"), class: "form-control", maxlength: 50 %>
+        <div class="col-md-8">
+          <%= f.label :name, class: 'form-label required' %>
+          <span class="text-info"><%= t('hints.event.name') %></span>
+          <%= f.text_field :name, placeholder: t("placeholder.events.name"),
+                                  class: "form-control", maxlength: 50, required: true, autofocus: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :edition %>
-          <span style="color: green;"><%= t('hints.event.edition') %></span>
-          <%= f.text_field :edition, placeholder: t("placeholder.events.edition"), class: "form-control", maxlength: 10 %>
+        <div class="col-md-4">
+          <%= f.label :edition, class: 'form-label required' %>
+          <span class="text-info"><%= t('hints.event.edition') %></span>
+          <%= f.text_field :edition, placeholder: t("placeholder.events.edition"),
+                                     class: "form-control", maxlength: 10, required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :description %>
-          <span style="color: green;"><%= t('hints.event.description') %></span>
+        <div class="col-md-12">
+          <%= f.label :description, class: 'form-label' %>
+          <span class="text-info"><%= t('hints.event.description') %></span>
           <%= f.text_area :description, class: "form-control tinymce_event_template" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :start_date %>
-          <%= f.text_field :start_date, class: "form-control date" %>
+        <div class="col-md-2">
+          <%= f.label :start_date, class: 'form-label required' %>
+          <%= f.text_field :start_date, class: "form-control date datepicker", required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :end_date %>
-          <%= f.text_field :end_date, class: "form-control date" %>
+        <div class="col-md-2">
+          <%= f.label :end_date, class: 'form-label required' %>
+          <%= f.text_field :end_date, class: "form-control date datepicker", required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :deadline_date_enrollment %>
-          <%= f.text_field :deadline_date_enrollment, class: "form-control date" %>
+        <div class="col-md-2">
+          <%= f.label :deadline_date_enrollment, class: 'form-label required' %>
+          <%= f.text_field :deadline_date_enrollment, class: "form-control date datepicker", required: true %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :stocking %>
-          <%= f.text_field :stocking, class: "form-control" %>
+        <div class="col-md-2">
+          <%= f.label :stocking, class: 'form-label' %>
+          <%= f.number_field :stocking, in: 0..100_000, class: "form-control" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :workload %>
-          <%= f.text_field :workload, class: "form-control" %>
+        <div class="col-md-2">
+          <%= f.label :workload, class: 'form-label' %>
+          <%= f.number_field :workload, in: 0..1_000, class: "form-control" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :online %>
-          <%= f.check_box :online %>
+        <div class="col-md-6">
+          <%= f.label :tags, class: 'form-label required' %>
+          <span class="text-info"><%= t('hints.event.tags') %></span>
+          <%= f.text_field :tags, placeholder: t("placeholder.events.tags"), class: "form-control", maxlength: 60, required: true %>
         </div>
 
-        <div id="event-address">
-          <div class="form-group">
-            <%= f.label :place %>
+        <div class="mb-3">
+          <%= f.check_box :online, class: "form-check-input" %>
+          <%= f.label :online, class: "form-check-label" %>
+        </div>
+
+        <div id="event-address" class="row g-3">
+          <div class="col-md-6">
+            <%= f.label :place, class: 'form-label' %>
             <%= f.text_field :place, placeholder: t("placeholder.events.place"), class: "form-control" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :street %>
+          <div class="col-md-6">
+            <%= f.label :street, class: 'form-label' %>
             <%= f.text_field :street, placeholder: t("placeholder.events.street"), class: "form-control" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :district %>
+          <div class="col-md-4">
+            <%= f.label :district, class: 'form-label' %>
             <%= f.text_field :district, placeholder: t("placeholder.events.district"), class: "form-control" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :city %>
+          <div class="col-md-4">
+            <%= f.label :city, class: 'form-label' %>
             <%= f.text_field :city, placeholder: t("placeholder.events.city"), class: "form-control" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :state%>
+          <div class="col-md-2">
+            <%= f.label :state, class: 'form-label' %>
             <%= f.text_field :state, placeholder: t("placeholder.events.state"), class: "form-control" %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :country %>
+          <div class="col-md-2">
+            <%= f.label :country, class: 'form-label' %>
             <%= f.text_field :country, placeholder: t("placeholder.events.country"), class: "form-control" %>
           </div>
         </div>
 
-        <div class="form-group">
-          <%= f.label :tags %>
-          <%= f.text_field :tags, placeholder: t("placeholder.events.tags"), class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :image %>
-          <span style="color: green;"><%= t('hints.event.image') %></span>
+        <div class="col-md-12">
+          <%= f.label :image, class: 'form-label' %>
+          <span class="text-info"><%= t('hints.event.image') %></span>
           <div class="col-sm-8">
-            <%= image_tag(@event.image_path, size: '100x100') if @event.image? %>
+            <%= image_tag(@event.image_path, size: '200x100') if @event.image? %>
             <%= f.file_field :image %>
+          </div>
 
-            <%= f.check_box :remove_image %>
-            <%= "#{t('actions.delete.label')} #{t('mongoid.attributes.event.image')}" %>
+          <div class="mb-3">
+            <%= f.check_box :remove_image, class: "form-check-input" %>
+            <%= f.label :remove_image, "#{t('actions.delete.label')} #{t('mongoid.attributes.event.image')}", class: "form-check-label" %>
           </div>
         </div>
 
-        <div class="form-group">
-          <%= f.label :accepts_submissions %>
-          <%= f.check_box :accepts_submissions %>
+        <div class="col-md-12">
+          <%= f.check_box :accepts_submissions, class: "form-check-input" %>
+          <%= f.label :accepts_submissions, class: "form-check-label" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :to_public %>
-          <%= f.check_box :to_public %>
+        <div class="col-md-12">
+          <%= f.check_box :to_public, class: "form-check-input" %>
+          <%= f.label :to_public, class: "form-check-label" %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :block_presence %>
-          <%= f.check_box :block_presence %>
+        <div class="col-md-12">
+          <%= f.check_box :block_presence, class: "form-check-input" %>
+          <%= f.label :block_presence, class: "form-check-label" %>
         </div>
 
-        <div class="form-group">
+        <div class="col-md-6">
           <%= render "shared/invite_user", model: @event, users: @organizers %>
+        </div>
 
-          <%= f.submit class: 'btn btn-primary' %>
-          <%= link_to t('helpers.links.cancel'), (@event.new_record? ? events_path : event_path(@event, anchor: 'page-content')), class: 'btn btn-default' %>
+        <div class="col-md-12">
+          <%= f.submit class: 'btn btn-primary btn-submit', data: { disable_with: t('form.submit.saving') } %>
+          <%= link_to t('helpers.links.cancel'), (@event.new_record? ? events_path : event_path(@event, anchor: 'page-content')), class: 'btn btn-secondary' %>
         </div>
 
         <span id="user_in_the_list" style="display:none"><%= t("new.invite.js.the_user_is_already_in_the_list") %></span>

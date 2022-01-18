@@ -115,18 +115,4 @@ describe User, 'validations' do
       expect(user.errors[:password].size).to eq(0)
     end
   end
-
-  context 'when you have' do
-    let!(:paul) { build(:user, :paul) }
-    let!(:billy) { build(:user, :billy) }
-    let!(:luis) { build(:user, :luis) }
-
-    it 'gravatar photo' do
-      expect(paul.thumbnail).to eq('/assets/without_avatar.jpg')
-    end
-
-    it 'no photo' do
-      expect(luis.thumbnail).to eq('without_avatar.jpg')
-    end
-  end
 end

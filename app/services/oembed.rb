@@ -9,8 +9,6 @@ class Oembed
   def initialize(url, code = 0)
     @url = url
     @code = code
-    @without_presentation = '<img src="/without_presentation.jpg"
-      width="80%" height="500" />'
   end
 
   def open_presentation
@@ -45,8 +43,6 @@ class Oembed
                Speakerdeck.frame(@code)
              when /#{Prezi::DOMAIN}/
                Prezi.frame(@code)
-             else
-               @without_presentation
              end
     self
   end

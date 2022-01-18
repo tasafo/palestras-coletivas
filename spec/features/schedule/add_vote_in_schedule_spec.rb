@@ -1,24 +1,17 @@
 require 'spec_helper'
 
-describe 'Add vote in schedule', js: true do
+describe 'Add vote in schedule' do
   let!(:user) { create(:user, :paul) }
-
   let!(:event) do
-    create(:event, :tasafoconf, users: [user], owner: user,
-                                start_date: Date.today,
-                                end_date: Date.today + 5.days,
-                                accepts_submissions: true)
+    create(:event, :tasafoconf, users: [user], owner: user, start_date: Date.today,
+                                end_date: Date.today + 5.days, accepts_submissions: true)
   end
 
   let!(:talk) { create(:talk, users: [user], owner: user) }
   let!(:another_talk) { create(:another_talk, users: [user], owner: user) }
 
-  let!(:schedule_palestra) do
-    create(:schedule, :palestra, event: event, talk: talk)
-  end
-  let!(:schedule_palestra2) do
-    create(:schedule, :palestra, event: event, talk: another_talk)
-  end
+  let!(:schedule_palestra) { create(:schedule, :palestra, event: event, talk: talk) }
+  let!(:schedule_palestra2) { create(:schedule, :palestra, event: event, talk: another_talk) }
 
   context 'with valid data' do
     before do

@@ -1,5 +1,4 @@
-<%= render "shared/header", index: :talk %>
-<%= render "shared/title", title: t("titles.talks.show"), index: :talk %>
+<%= render "shared/title", title: t("titles.talks.show") %>
 
   <div class="container">
     <%= render "talks/show/actions" %>
@@ -8,7 +7,7 @@
       <div class="col-md-4">
         <%= render "talks/show/details" %>
 
-        <h5><%= t('labels.talk.tags') %></h5>
+        <h5><%= t('mongoid.attributes.talk.tags') %></h5>
         <p><%= render 'shared/tags', object: @talk %></p>
 
         <%= render "talks/show/creators" %>
@@ -23,9 +22,7 @@
       </div>
 
       <div class="col-md-8">
-        <% unless @presentation.frame.include?("without_presentation") %>
-          <%= render 'talks/show/presentation' %>
-        <% end %>
+        <%= render 'talks/show/presentation' %>
         <%= render 'talks/show/video' %>
       </div>
     </div>
