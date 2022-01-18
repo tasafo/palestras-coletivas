@@ -44,7 +44,7 @@ jobs:
           npm-
     - name: Build and test
       run: |
-        bundle exec rails assets:precompile
+        bundle exec rails assets:precompile RAILS_ENV=test
         bundle exec rails parallel:spec
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
