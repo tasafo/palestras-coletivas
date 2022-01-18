@@ -12,7 +12,7 @@
       <% @events.each_with_index do |event, index| %>
       .carousel-item:nth-child(<%= index + 1 %>) {
         <% if event.image? %>
-        background-image: url('<%= "#{request.url}#{event.image_url}" %>');
+        background-image: url('<%= event.image_path %>');
         <% end %>
         background-repeat: no-repeat;
         background-size: cover;
