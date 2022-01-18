@@ -1,0 +1,21 @@
+.card-talk {
+  width: 160px;
+  height: 270px;
+  margin-bottom: 20px;
+}
+
+.card-talk .card-body {
+  padding: 0.5rem;
+  overflow: auto;
+}
+
+.card-talk .card-body .card-title {
+  font-size: 12px;
+  margin-bottom: 0.2rem;
+}
+
+.card-talk .card-body .card-text {
+  font-size: 12px;
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}

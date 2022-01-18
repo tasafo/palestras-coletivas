@@ -3,14 +3,6 @@ var event_id;
 $(function() {
   event_id = $('#event_id').val();
 
-  if ($("#event_online").is(":checked")) {
-    $("#event-address").hide();
-  }
-
-  $("#event_start_date").datepicker();
-  $("#event_end_date").datepicker();
-  $("#event_deadline_date_enrollment").datepicker();
-
   $(".btn-event-enrollment").on("click", function(e) {
     e.preventDefault();
     upsertEventEnrollment(this)
@@ -33,16 +25,6 @@ $(function() {
       $("#event-address").show();
     }
   });
-
-  $("form.rating .rating").rating({
-    callback: function (value, link) {
-      $(this.form).submit();
-    },
-    required: true,
-    half:     true
-  });
-
-  $(".rating.readonly").rating({required: true, readOnly: true, half: true});
 });
 
 var upsertEventEnrollment = function(obj) {

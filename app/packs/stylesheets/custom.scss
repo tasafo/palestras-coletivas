@@ -1,0 +1,46 @@
+.required:after {
+  content: " *";
+  color: red;
+}
+
+.badge-custom {
+  font-size: 100%;
+  font-weight: normal;
+  white-space: normal;
+}
+
+.badge-custom a {
+  color: black;
+}
+
+.schedule-author a {
+  color: black;
+  text-decoration: underline;
+}
+
+.thumb-talk {
+  height: 120px;
+  width: 100%;
+  background-color: gray;
+}
+
+.thumb-event {
+  height: 200px;
+  width: 100%;
+  background-color: gray;
+}
+
+#location-map {
+  background: #fff;
+  border: none;
+  height: 540px;
+  width: 100%;
+
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#location-map img {
+  max-width: initial;
+}

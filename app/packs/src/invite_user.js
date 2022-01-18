@@ -1,5 +1,16 @@
+require('jquery-ui/themes/base/core.css');
+require('jquery-ui/themes/base/menu.css');
+require('jquery-ui/themes/base/autocomplete.css');
+require('jquery-ui/themes/base/theme.css');
+var autocomplete = require('jquery-ui/ui/widgets/autocomplete');
+
 $(function() {
     $("#add_user").click(add_user);
+
+    $(".btn-remove-user").on("click", function(e) {
+      e.preventDefault();
+      remove_user($(this).attr("user-id"));
+    });
 
     $("#invitee_username").autocomplete({
         minLength: 3,
@@ -30,9 +41,12 @@ function add_user() {
     var userDisplay  = $("#invitee_username").val();
 
     if (canInvite(userDisplay, userId)) {
-        $('#table_users > tbody:last').append(
-            "<tr id=\"row_" + userId + "\"><td>" + userDisplay + "<input type=\"hidden\" name=\"users[]\" value=\"" + userId + "\" /></td><td><center><input type=\"button\" class=\"btn btn-danger\" id=\"remove_user_id_" + userId + "\" onclick=\"remove_user(\'" + userId + "\')\" value=\"" + $("#remove").text() + "\" /></center></td></tr>"
-        );
+        var tableRow = "<tr id=\"row_" + userId + "\">";
+        tableRow += "<td>" + userDisplay + "<input type=\"hidden\" name=\"users[]\" value=\"" + userId + "\" /></td>";
+        tableRow += "<td><button type=\"button\" class=\"btn btn-danger btn-remove-user\" id=\"remove_user_id_" + userId + "\" ";
+        tableRow += "user-id=\"" + userId + "\" onclick=\"$(\'#row_" + userId + "').remove();\">" + $("#remove").text() + "</button></td></tr>";
+
+        $('#table_users > tbody:last').append(tableRow);
     }
 
     $("#user_id").val('');
@@ -58,13 +72,16 @@ function inviteePresent(userId) {
 }
 
 function validInvitee(userId) {
-    var valid = false,
-        users = $("#invitee_username").data("invitees");
-    for (i = 0, x = users.length; i < x; i++) {
+    var valid = false;
+    var users = $("#invitee_username").data("invitees");
+
+    for (var i = 0, x = users.length; i < x; i++) {
         if (users[i].value === userId) {
             valid = true;
         }
     }
+
     if (!valid) { alert($("#user_invalid").text()); }
+
     return valid;
-};
+}

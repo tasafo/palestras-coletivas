@@ -33,8 +33,6 @@ $(function() {
             }
         }
     });
-
-    $("#schedule_time").focus();
 });
 
 function search_talk() {
@@ -57,14 +55,20 @@ function search_talk() {
             success : function(result) {
                 for (var i = 0; i < result.meta.total; i++) {
                     var record = result.data[i].attributes;
-                    var thumb = record.thumbnail ? record.thumbnail : '/without_presentation.jpg';
+                    var thumb;
+
+                    if (record.thumbnail) {
+                        thumb = '<img src="' + record.thumbnail + '" class="img-thumbnail" />';
+                    } else {
+                        thumb = '<div class="img-thumbnail thumb-talk"></div>';
+                    }
 
                     talks += '<hr />';
                     talks += '<div id="div_' + record.id['$oid'] + '" class="talk">';
                     talks += '  <div class="container">';
                     talks += '    <div class="row">';
-                    talks += '      <div class="col-md-2">';
-                    talks += '        <img src="' + thumb + '" class="img-thumbnail" />';
+                    talks += '      <div class="col-md-2 text-center">';
+                    talks += '        ' + thumb;
                     talks += '        <input type="button" id="' + record.id['$oid'] + '" title="' + record.title + '" class="btn btn-success btn-select-talk" value="' + titles_talks_select + '" />';
                     talks += '      </div>';
                     talks += '      <div class="col-md-10">';
@@ -87,7 +91,7 @@ function search_talk() {
                         $(this).css("background-color", "white");
                     });
 
-                    $("#div_" + talk_id).css("background-color", "#CCFF99");
+                    $("#div_" + talk_id).css("background-color", "#8ce6b8");
 
                     $("#schedule_talk_id").val(talk_id);
                     $("#talk_title").text(talk_title);
