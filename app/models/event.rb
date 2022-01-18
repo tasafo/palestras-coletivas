@@ -16,7 +16,6 @@ class Event
   field :end_date, type: Date
   field :deadline_date_enrollment, type: Date
   field :to_public, type: Boolean, default: false
-  field :rating, type: Integer, default: 0
   field :place, type: String
   field :street, type: String
   field :district, type: String
@@ -43,10 +42,11 @@ class Event
   belongs_to :owner, class_name: 'User', index: true
 
   validates_presence_of :name, :edition, :tags, :start_date, :end_date,
-                        :deadline_date_enrollment, :workload
+                        :deadline_date_enrollment
   validates_length_of :name, maximum: 50
   validates_length_of :edition, maximum: 10
   validates_length_of :description, maximum: 2000
+  validates_length_of :tags, maximum: 60
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
   validates_numericality_of :workload, greater_than_or_equal_to: 0
 
@@ -55,7 +55,7 @@ class Event
   index({ name: 'text', edition: 'text', tags: 'text' }, { background: true })
 
   scope :publics, -> { where(to_public: true) }
-  scope :upcoming, -> { publics.order(start_date: :desc).limit(3) }
+  scope :upcoming, -> { publics.order(start_date: :desc, name: :asc).limit(5) }
   scope :with_relations, -> { includes(:users, :schedules, :enrollments) }
 
   geocoded_by :address
@@ -127,5 +127,15 @@ class Event
 
   def refresh(attributes)
     attributes.each { |key, value| send("#{key}=", value) }
+  end
+
+  def address_from_ip(remote_ip)
+    result = Geocoder.search(remote_ip).first
+
+    return unless result
+
+    self.city = result.city
+    self.state = result.state
+    self.country = result.country
   end
 end

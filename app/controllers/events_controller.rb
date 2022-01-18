@@ -16,6 +16,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @event.address_from_ip(request.remote_ip)
   end
 
   def create
