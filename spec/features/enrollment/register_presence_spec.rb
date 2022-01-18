@@ -18,7 +18,7 @@ describe 'Register presence', js: true do
 
     context 'not present' do
       before do
-        find("##{other_user.slug}").click
+        find("##{other_user.slug}").trigger('click')
       end
 
       it 'displays success message' do
@@ -28,7 +28,7 @@ describe 'Register presence', js: true do
 
     context 'already present' do
       before do
-        find("##{another_user.slug}").click
+        find("##{another_user.slug}").trigger('click')
       end
 
       it 'displays success message' do
