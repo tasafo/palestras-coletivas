@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add vote in schedule' do
+describe 'Add vote in schedule', js: true do
   let!(:user) { create(:user, :paul) }
   let!(:event) do
     create(:event, :tasafoconf, users: [user], owner: user, start_date: Date.today,
@@ -17,7 +17,7 @@ describe 'Add vote in schedule' do
     before do
       login_as user, event_path(event)
 
-      click_link "add_vote_schedule_id_#{schedule_palestra.id}"
+      find("#add_vote_schedule_id_#{schedule_palestra.id}").trigger('click')
     end
 
     it 'displays success message' do

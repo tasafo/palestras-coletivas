@@ -20,7 +20,7 @@ describe 'Remove vote in schedule', js: true do
     before do
       login_as user, event_path(event)
 
-      click_link "remove_vote_schedule_id_#{schedule_palestra.id}"
+      find("#remove_vote_schedule_id_#{schedule_palestra.id}").trigger('click')
     end
 
     it 'displays success message' do
