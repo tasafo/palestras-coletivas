@@ -18,15 +18,12 @@ gem 'mongo_beautiful_logger'
 
 gem 'geocoder'
 
-gem 'sprockets', '3.7.2'
-gem 'popper_js'
-gem 'material_components_web-sass'
+gem 'serviceworker-rails'
 
-gem 'uglifier'
-gem 'font-awesome-rails'
-gem 'jquery-rails'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
+
+gem 'webpacker'
 
 gem 'sidekiq'
 gem 'sinatra', require: false
@@ -37,8 +34,6 @@ gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 gem 'carrierwave-i18n'
 gem 'cloudinary', '1.21.0'
 
-gem 'serviceworker-rails'
-
 gem 'meta-tags'
 
 gem 'net-smtp'
@@ -46,8 +41,6 @@ gem 'net-pop'
 gem 'net-imap'
 
 gem 'bootsnap'
-
-gem 'webpacker'
 
 group :development do
   gem 'web-console'
@@ -68,8 +61,6 @@ end
 group :test do
   gem 'rspec-mocks'
   gem 'webmock'
-  gem 'rake'
-  gem 'launchy'
   gem 'capybara', '3.36.0'
   gem 'cuprite', '0.13'
   gem 'simplecov', '0.21.2', require: false

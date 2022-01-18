@@ -51,15 +51,19 @@ Cria os índices e insere registros do arquivo db/seed.rb no banco de dados
 
 #### Execução
 
-Permite visualizar os e-mails locais em http://localhost:1080
+Permite visualizar os e-mails locais em <http://localhost:1080>
 
     mailcatcher
 
-Executa a aplicação no endereço http://localhost:5000
+Executa o servidor Webpack
+
+    bin/webpack-dev-server
+
+Executa a aplicação no endereço <http://localhost:5000>
 
     foreman start
 
-Para visualizar as tarefas do sidekiq, acesse http://localhost:5000/sidekiq e informe as credenciais de acesso
+Para visualizar as tarefas do sidekiq, acesse <http://localhost:5000/sidekiq> e informe as credenciais de acesso
 
 Se você estiver executando outra aplicação que utilize o sidekiq, é melhor executar
 

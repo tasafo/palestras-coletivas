@@ -19,9 +19,6 @@ public/packs-test
 .DS_Store
 .ruby-gemset
 .byebug_history
-start.sh
-node_modules
-yarn.lock
 node_modules
 yarn-error.log
 yarn-debug.log*
