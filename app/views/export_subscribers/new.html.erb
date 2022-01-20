@@ -1,8 +1,7 @@
-<%= render "shared/title", title: t("titles.export_subscribers.index") %>
-
 <div class="container">
   <div class="card">
-    <div class="card-body mx-4">
+    <%= render "shared/title", title: t("titles.export_subscribers.index") %>
+    <div class="card-body">
       <h2><%= t("titles.export_subscribers.new") %> <b><%= @event.name_edition %></b></h2>
 
       <%= render 'form' %>

@@ -1,6 +1,5 @@
-<%= render "shared/title", title: t("titles.users.profile") %>
-
 <div class="container">
+  <%= render "shared/flash_messages" %>
   <div class="row">
     <div class="col-md-1">
       <%= thumbnail(@user, '80x80') %>
@@ -17,11 +16,9 @@
   </div>
 
   <% if @gravatar.has_profile %>
-    <p class="lead">
-      <%= @gravatar.about_me.blank? ? "" : CGI.unescapeHTML("#{@gravatar.about_me}<br/>").html_safe %>
-      <%= @gravatar.current_location.blank? ? "" : CGI.unescapeHTML("#{@gravatar.current_location}<br/>").html_safe %>
-      <%= t("show.user.profile") %> <%= link_to 'gravatar', @gravatar.profile_url %>
-    </p>
+    <%= CGI.unescapeHTML("<p>#{@gravatar.about_me}</p>").html_safe unless @gravatar.about_me.blank? %>
+    <%= CGI.unescapeHTML("<p>#{@gravatar.current_location}</p>").html_safe unless @gravatar.current_location.blank? %>
+    <%= t("show.user.profile") %> <%= link_to 'gravatar', @gravatar.profile_url %>
   <% end %>
 
   <% if @records.any? %>

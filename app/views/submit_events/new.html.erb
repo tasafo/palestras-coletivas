@@ -1,8 +1,7 @@
-<%= render "shared/title", title: t("titles.submit_event.title") %>
-
 <div class="container">
   <div class="card">
-    <div class="card-body mx-4">
+    <%= render "shared/title", title: t("titles.submit_event.title") %>
+    <div class="card-body">
       <h2><%= t("titles.submit_event.new") %> <b><%= @talk.title %></b></h2>
 
       <%= render 'form', url: talk_submit_events_path(@talk) %>

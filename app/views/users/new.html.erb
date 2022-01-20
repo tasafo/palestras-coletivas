@@ -1,17 +1,9 @@
-<div class="container">
-  <div class="fade show" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
-    <div class="modal-dialog cascading-modal" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="title"><i class="fa fa-user-plus"></i> <%= t("titles.users.signup") %></h4>
-        </div>
-
-        <%= render 'shared/flash_messages' %>
-
-        <div class="modal-body">
-          <%= render "form", url: new_user_path %>
-        </div>
-      </div>
+<div class="container d-flex justify-content-center">
+  <div class="card">
+    <h4 class="card-header"><i class="fa fa-user-plus"></i> <%= t("titles.users.signup") %></h4>
+    <%= render 'shared/flash_messages' %>
+    <div class="card-body">
+      <%= render "form", url: new_user_path %>
     </div>
   </div>
 </div>

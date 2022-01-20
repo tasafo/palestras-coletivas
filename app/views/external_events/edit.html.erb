@@ -1,8 +1,7 @@
-<%= render "shared/title", title: t("titles.external_event.title") %>
-
 <div class="container">
   <div class="card">
-    <div class="card-body mx-4">
+    <%= render "shared/title", title: t("titles.external_event.title") %>
+    <div class="card-body">
       <div class="text-center">
         <h3 class="dark-grey-text mb-5">
           <strong><%= t("titles.external_event.edit") %> <%= @talk.title %></strong>

@@ -1,32 +1,32 @@
         <%= form_for @user, url: url do |f| %>
           <%= render "shared/error_messages", record: @user %>
 
-          <div class="md-form form-sm mb-3">
-            <i class="fa fa-book prefix"></i> <%= f.label :name %>
+          <div class="mb-3">
+            <i class="fa fa-file-signature prefix"></i> <%= f.label :name, class: 'form-label' %>
             <%= f.text_field :name, placeholder: t("placeholder.users.name"), class: "form-control", autofocus: true %>
           </div>
 
-          <div class="md-form form-sm mb-3">
-            <i class="fa fa-credit-card prefix"></i> <%= f.label :username %>
+          <div class="mb-3">
+            <i class="fa fa-user-circle prefix"></i> <%= f.label :username, class: 'form-label' %>
             <%= f.text_field :username, placeholder: t("placeholder.users.username"), class: "form-control" %>
           </div>
 
-          <div class="md-form form-sm mb-3">
-            <i class="fa fa-envelope prefix"></i> <%= f.label :email %>
+          <div class="mb-3">
+            <i class="fa fa-envelope prefix"></i> <%= f.label :email, class: 'form-label' %>
             <%= f.email_field :email, placeholder: t("placeholder.users.email"), class: "form-control" %>
           </div>
 
-          <div class="md-form form-sm mb-3">
-            <i class="fa fa-lock prefix"></i> <%= f.label :password %>
+          <div class="mb-3">
+            <i class="fa fa-lock prefix"></i> <%= f.label :password, class: 'form-label' %>
             <%= f.password_field :password, class: "form-control" %>
           </div>
 
-          <div class="md-form form-sm mb-3">
-            <i class="fa fa-lock prefix"></i> <%= f.label :password_confirmation %>
+          <div class="mb-3">
+            <i class="fa fa-lock prefix"></i> <%= f.label :password_confirmation, class: 'form-label' %>
             <%= f.password_field :password_confirmation, class: "form-control" %>
           </div>
 
-          <div class="md-form form-sm mb-3">
+          <div class="mb-3">
             <%= f.label :avatar, class: "control-label col-sm-2" %>
             <div class="col-sm-8">
               <%= thumbnail(@user) %>

@@ -1,3 +1,5 @@
+<%= stylesheet_pack_tag 'datepicker' %>
+
 <%= form_for(@external_event, url: url, html: { class: 'row g-3' } ) do |f| %>
   <%= render "shared/error_messages", record: @external_event %>
 
@@ -32,3 +34,5 @@
         talk_path(@talk), class: 'btn btn-secondary' %>
   </div>
 <% end %>
+
+<%= javascript_pack_tag 'datepicker', 'inputmask' %>

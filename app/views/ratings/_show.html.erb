@@ -1,8 +1,11 @@
-<h2 class="text-primary"><%= t("labels.rating.liked") %></h2>
-
 <div class="rating">
-  <% (0.5..5).step(0.5).to_a.each do |rating| %>
-    <%= radio_button_tag :rating, rating, (rateable.rating == rating), class: "rating readonly" %>
-  <% end %>
-  &nbsp;&nbsp;<b>(<%= rateable.ratings.count %> <%= t('labels.rating.vote', count: rateable.ratings.count).downcase %>)</b>
+  <h2 class="text-primary"><%= t("labels.rating.liked") %></h2>
+  <span class="text-dark badge badge-light badge-custom shadow">
+    <% (0.5..5).step(0.5).to_a.each do |rating| %>
+      <%= radio_button_tag :rating, rating, (rateable.rating == rating), class: "rating readonly" %>
+    <% end %>&nbsp;
+    <span class="badge badge-pill badge-dark">
+      <%= rateable.ratings.count %> <%= t('labels.rating.vote', count: rateable.ratings.count).downcase %>
+    </span>
+  </span>
 </div>

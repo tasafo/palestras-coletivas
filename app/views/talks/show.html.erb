@@ -1,8 +1,6 @@
-<%= render "shared/title", title: t("titles.talks.show") %>
-
+  <%= render "shared/flash_messages" %>
+  <%= render "talks/show/actions" %>
   <div class="container">
-    <%= render "talks/show/actions" %>
-    <br />
     <div class="row">
       <div class="col-md-4">
         <%= render "talks/show/details" %>

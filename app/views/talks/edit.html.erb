@@ -1,8 +1,7 @@
-<%= render "shared/title", title: t("titles.talks.edit") %>
-
 <div class="container">
   <div class="card">
-    <div class="card-body mx-4">
+    <%= render "shared/title", title: t("titles.talks.edit") %>
+    <div class="card-body">
       <%= render 'form', url: talk_path %>
     </div>
   </div>

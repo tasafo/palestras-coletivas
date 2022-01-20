@@ -1,11 +1,13 @@
 <% if logged_in? && @user_owns %>
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), class: "btn btn-primary" %>
-      <%= link_to t("actions.delete.label"), talk_path(@talk), class: "btn btn-danger",
-                  id: "delete_talk_id_#{@talk.slug}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>
-      <%= link_to t("show.talk.external_event"), new_talk_external_event_path(@talk), class: "btn btn-primary" %>
-      <%= link_to t("show.talk.submit_event"), new_talk_submit_event_path(@talk), class: "btn btn-primary" %>
+  <div id="actions" class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <%= link_to t("titles.talks.edit"), edit_talk_path(@talk), class: "btn btn-primary" %>
+        <%= link_to t("actions.delete.label"), talk_path(@talk), class: "btn btn-danger",
+                    id: "delete_talk_id_#{@talk.slug}", method: :delete, data: { confirm: t("actions.delete.confirm") } %>
+        <%= link_to t("show.talk.external_event"), new_talk_external_event_path(@talk), class: "btn btn-primary" %>
+        <%= link_to t("show.talk.submit_event"), new_talk_submit_event_path(@talk), class: "btn btn-primary" %>
+      </div>
     </div>
   </div>
 <% end %>

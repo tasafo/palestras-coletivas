@@ -51,12 +51,12 @@
                     <h5 class="text-center">
                       <%= link_to schedule.talk.title, talk_path(schedule.talk) %>
                     </h5>
-                    <h6 class="schedule-author">
-                      <% schedule.talk.users.each do |user| %>
+                    <% schedule.talk.users.each do |user| %>
+                      <h6 class="schedule-author">
                         <%= link_to user.name, user_path(user) %>
-                        <%= "- #{user.email}" if @presenter.authorized %><br/>
-                      <% end %>
-                    </h6>
+                        <%= "- #{user.email}" if @presenter.authorized %>
+                      </h6>
+                    <% end %>
                   </td>
                 <% else %>
                   <td><h5 class="text-center"><%= schedule.description %></h5></td>

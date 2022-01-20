@@ -41,11 +41,9 @@
     <%= link_to t('.cancel', default: t("helpers.links.cancel")), event_path(@event, anchor: 'page-content'), class: 'btn btn-secondary' %>
   </div>
 
-  <hr />
-
   <div class="form-group" id="search_talks" style="display:none">
     <h3 class="text-primary"><%= t("titles.talks.search") %></h3>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="input-group">
         <div class="form-outline">
           <%= search_field_tag :search_text, params[:search], class: "form-control", size: 40, maxlength: 40 %>
@@ -60,3 +58,5 @@
 
   <div id="search_result"></div>
 <% end %>
+
+<%= javascript_pack_tag 'inputmask' %>

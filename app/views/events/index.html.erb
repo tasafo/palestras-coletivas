@@ -1,11 +1,11 @@
-<%= render "shared/title", title: t("titles.events.index") %>
 <div class="container">
+  <%= render "shared/flash_messages" %>
   <div class="row">
     <div class="col-md-8">
       <%= form_tag events_path, method: "get" do |f| %>
         <div class="input-group">
           <div class="form-outline">
-            <%= search_field_tag :search, params[:search], class: "form-control", size: 40, maxlength: 40 %>
+            <%= search_field_tag :search, params[:search], class: "form-control", size: 35, maxlength: 40 %>
             <%= label_tag :search, t('placeholder.events.search'), class: "form-label" %>
           </div>
           <button id="search_button" type="submit" class="btn btn-primary">

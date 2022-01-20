@@ -1,33 +1,24 @@
-<div class="container">
-  <div class="fade show" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block;">
-    <div class="modal-dialog cascading-modal" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="title"><i class="fa fa-user-shield"></i> <%= t("titles.users.reset_password") %></h4>
+<div class="container d-flex justify-content-center">
+  <div class="card">
+    <h4 class="card-header"><i class="fa fa-user-shield"></i> <%= t("titles.users.reset_password") %></h4>
+    <%= render 'shared/flash_messages' %>
+    <div class="card-body">
+      <%= form_for @user, url: password_reset_path(params[:id])do |f| %>
+        <%= render "shared/error_messages", record: @user %>
+        <div class="mb-3">
+          <i class="fa fa-lock"></i> <%= f.label :password, class: 'form-label' %>
+          <%= f.password_field :password, class: "form-control", required: true, autofocus: true %>
         </div>
 
-        <%= render 'shared/flash_messages' %>
-
-        <div class="modal-body">
-          <%= form_for @user, url: password_reset_path(params[:id])do |f| %>
-            <%= render "shared/error_messages", record: @user %>
-
-            <div class="md-form form-sm mb-3">
-              <i class="fa fa-lock"></i> <%= f.label :password %>
-              <%= f.password_field :password, class: "form-control", required: true, autofocus: true %>
-            </div>
-
-            <div class="md-form form-sm mb-3">
-              <i class="fa fa-lock"></i> <%= f.label :password_confirmation %>
-              <%= f.password_field :password_confirmation, class: "form-control", required: true %>
-            </div>
-
-            <div class="text-center">
-              <%= f.submit t("form.submit.update_password"), class: 'btn btn-primary' %>
-            </div>
-          <% end %>
+        <div class="mb-3">
+          <i class="fa fa-lock"></i> <%= f.label :password_confirmation, class: 'form-label'  %>
+          <%= f.password_field :password_confirmation, class: "form-control", required: true %>
         </div>
-      </div>
+
+        <div class="text-center">
+          <%= f.submit t("form.submit.update_password"), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
