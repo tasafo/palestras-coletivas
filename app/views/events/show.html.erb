@@ -1,3 +1,5 @@
+  <%= stylesheet_pack_tag 'trix', 'leaflet', 'rating' %>
+
   <%= render "events/show/header" %>
   <%= render "events/show/actions" %>
   <%= render "events/show/about" %>
@@ -16,7 +18,6 @@
 
       <% if @event.coordinates %>
         <div id="location-map" class="shadow"></div>
-        <br/>
       <% end %>
     </div>
   <% end %>
@@ -76,3 +77,5 @@
   <span id="event_coordinates_0" style="display:none"><%= @event.coordinates[0] %></span>
   <span id="event_coordinates_1" style="display:none"><%= @event.coordinates[1] %></span>
   <% end %>
+
+  <%= javascript_pack_tag 'leaflet', 'rating' %>

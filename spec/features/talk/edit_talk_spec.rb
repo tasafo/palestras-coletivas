@@ -14,7 +14,6 @@ describe 'Edit talk', js: true do
     context 'with valid data' do
       before do
         fill_in 'Título', with: 'Ruby praticamente falando'
-        fill_in 'Descrição', with: 'Palestra que fala sobre a linguagem de programação ruby'
         fill_in 'Tags', with: 'ruby, programação'
         find('.btn-submit').trigger('click')
       end

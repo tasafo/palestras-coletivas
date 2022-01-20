@@ -13,7 +13,6 @@ describe 'Create talk', js: true do
     before do
       fill_in 'Link da palestra', with: 'https://slideshare.net/luizsanches/ruby-praticamente-falando'
       fill_in 'Título', with: 'Ruby praticamente falando'
-      fill_in 'Descrição', with: 'Palestra sobre a linguagem de programação Ruby'
       fill_in 'Tags', with: 'tecnologia, programação'
       fill_in 'Link do vídeo', with: 'https://youtube.com/watch?v=PcqUTGFgHa4'
       find('.btn-submit').trigger('click')
@@ -29,7 +28,6 @@ describe 'Create talk', js: true do
     before do
       fill_in 'Link da palestra', with: 'https://speakerdeck.com/luizsanches/ruby-praticamente-falando'
       fill_in 'Título', with: 'Ruby praticamente falando'
-      fill_in 'Descrição', with: 'Indrodução à linguagem Ruby'
       fill_in 'Tags', with: 'ruby, programação'
       fill_in 'Link do vídeo', with: 'https://vimeo.com/46879129'
       find('.btn-submit').trigger('click')
@@ -44,7 +42,6 @@ describe 'Create talk', js: true do
   context 'with valid data but no link' do
     before do
       fill_in 'Título', with: 'A linguagem C'
-      fill_in 'Descrição', with: 'Indrodução à linguagem C'
       fill_in 'Tags', with: 'C, programação'
       fill_in 'Link do vídeo', with: 'https://www.youtube.com/invalid'
       find('.btn-submit').trigger('click')
@@ -75,7 +72,6 @@ describe 'Create talk', js: true do
     before do
       fill_in 'Link da palestra', with: 'https://slideshare.net/luizsanches/compartilhe'
       fill_in 'Título', with: 'Compartilhe!'
-      fill_in 'Descrição', with: 'Palestra duplicada'
       fill_in 'Tags', with: 'duplicada'
       find('.btn-submit').trigger('click')
     end

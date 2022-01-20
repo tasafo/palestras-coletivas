@@ -1,3 +1,5 @@
+      <%= stylesheet_pack_tag 'datepicker', 'trix' %>
+
       <%= form_for(@event, url: url, html: { class: 'row g-3'} ) do |f| %>
         <%= render "shared/error_messages", record: @event %>
 
@@ -18,7 +20,8 @@
         <div class="col-md-12">
           <%= f.label :description, class: 'form-label' %>
           <span class="text-info"><%= t('hints.event.description') %></span>
-          <%= f.text_area :description, class: "form-control tinymce_event_template" %>
+          <%= f.hidden_field :description %>
+          <trix-editor input="event_description"></trix-editor>
         </div>
 
         <div class="col-md-2">
@@ -131,23 +134,4 @@
         <span id="remove" style="display:none"><%= t("new.invite.js.remove") %></span>
       <% end %>
 
-<%= tinymce_assets %>
-
-<script>
-  tinyMCE.init({
-    selector: '.tinymce_event_template',
-      menubar: true,
-      language: 'pt_BR',
-      convert_urls: false,
-      toolbar: [
-        '| styleselect fontsizeselect forecolor backcolor ' +
-        '| bold italic underline | alignleft aligncenter alignright alignjustify ' +
-        '| bullist numlist outdent indent',
-        '| undo redo | cut copy paste | emoticons image link code wordcount visualblocks visualchars hr'
-      ],
-      plugins: 'emoticons image link code lists autolink autoresize visualblocks visualchars wordcount hr',
-      default_link_target: '_blank'
-  });
-</script>
-
-<%= tinymce %>
+      <%= javascript_pack_tag 'datepicker', 'inputmask', 'trix' %>

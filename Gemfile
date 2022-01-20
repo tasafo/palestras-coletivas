@@ -20,9 +20,6 @@ gem 'geocoder'
 
 gem 'serviceworker-rails'
 
-gem 'tinymce-rails'
-gem 'tinymce-rails-langs'
-
 gem 'webpacker'
 
 gem 'sidekiq'

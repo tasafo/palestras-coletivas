@@ -16,12 +16,6 @@ describe Talk, 'validations' do
     expect(talk.errors[:title].size).to eq(1)
   end
 
-  it 'requires description' do
-    talk = Talk.create(description: nil)
-
-    expect(talk.errors[:description].size).to eq(1)
-  end
-
   it 'requires tags' do
     talk = Talk.create(tags: nil)
 

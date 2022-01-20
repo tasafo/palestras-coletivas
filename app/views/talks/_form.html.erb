@@ -1,3 +1,5 @@
+      <%= stylesheet_pack_tag 'trix' %>
+
       <%= form_for(@talk, url: url, html: { class: 'row g-3'} ) do |f| %>
         <%= render "shared/error_messages", record: @talk %>
 
@@ -16,9 +18,10 @@
         </div>
 
         <div class="col-md-12">
-          <%= f.label :description, class: 'form-label required' %>
+          <%= f.label :description, class: 'form-label' %>
           <span class="text-info"><%= t('hints.talk.description') %></span>
-          <%= f.text_area :description, rows: 5, class: "form-control", required: true %>
+          <%= f.hidden_field :description %>
+          <trix-editor input="talk_description"></trix-editor>
         </div>
 
         <div class="col-md-6">
@@ -54,3 +57,5 @@
         <span id="user_invalid" style="display:none"><%= t("new.invite.js.user_invalid") %></span>
         <span id="remove" style="display:none"><%= t("new.invite.js.remove") %></span>
       <% end %>
+
+      <%= javascript_pack_tag 'trix' %>

@@ -26,7 +26,7 @@ class Talk
 
   slug :title
 
-  validates_presence_of :title, :description, :tags
+  validates_presence_of :title, :tags
   validates_uniqueness_of :presentation_url, if: :url?
   validates_length_of :title, maximum: 100
   validates_length_of :tags, maximum: 60

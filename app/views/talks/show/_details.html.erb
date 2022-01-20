@@ -4,4 +4,4 @@
   <p class="text-warning"><%= t("show.talk.without_presentation") %></p>
 <% end %>
 
-<%= simple_format @talk.description %>
+<div class="trix-content"><%= sanitize(@talk.description) %></div>
