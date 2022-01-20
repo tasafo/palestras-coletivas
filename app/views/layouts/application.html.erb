@@ -9,7 +9,7 @@
     <%= favicon_pack_tag 'logo_palestras_pMW_icon.ico' %>
     <title><%= t("app.name") %></title>
     <%= csrf_meta_tags %>
-    <%= stylesheet_pack_tag "application", media: "all" %>
+    <%= stylesheet_pack_tag 'mdb', 'fontawesome', 'fontroboto', 'application', media: 'all' %>
     <link rel="manifest" href="/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes">
   </head>
@@ -20,6 +20,6 @@
 
     <%= render "shared/footer" %>
 
-    <%= javascript_pack_tag "application" %>
+    <%= javascript_pack_tag 'application', 'mdb' %>
   </body>
 </html>

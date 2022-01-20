@@ -8,7 +8,7 @@
     <meta name="author" content="Tá safo!">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
-    <%= stylesheet_pack_tag "home", media: "all" %>
+    <%= stylesheet_pack_tag 'mdb', 'fontawesome', 'fontroboto', 'home', media: "all" %>
     <%= favicon_pack_tag 'logo_palestras_pMW_icon.ico' %>
     <link rel="manifest" href="/manifest.json" />
     <title><%= t("app.name") %></title>
@@ -20,7 +20,7 @@
 
     <%= render "shared/footer" %>
 
-    <%= javascript_pack_tag "home" %>
+    <%= javascript_pack_tag 'home', 'mdb' %>
     <%= javascript_include_tag "home" %>
 
     <style>

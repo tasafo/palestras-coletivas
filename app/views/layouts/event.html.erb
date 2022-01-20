@@ -14,7 +14,7 @@
     <title><%= @event.name_edition %></title>
     <% end %>
     <%= csrf_meta_tags %>
-    <%= stylesheet_pack_tag "event", media: "all" %>
+    <%= stylesheet_pack_tag 'mdb', 'fontawesome', 'fontroboto', 'application', media: "all" %>
   </head>
   <body>
     <%= render 'shared/header', bg: 'bg-light' %>
@@ -23,6 +23,6 @@
 
     <%= render "shared/footer" %>
 
-    <%= javascript_pack_tag "event" %>
+    <%= javascript_pack_tag 'application', 'mdb' %>
   </body>
 </html>
