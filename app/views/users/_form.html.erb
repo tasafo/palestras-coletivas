@@ -43,6 +43,6 @@
 
           <div class="text-center">
             <% option = @user.name.nil? ? 'create' : 'update' %>
-            <button class="btn btn-primary"><%= t("helpers.submit.user.#{option}") %></button>
+            <button class="btn btn-primary btn-submit"><%= t("helpers.submit.user.#{option}") %></button>
           </div>
         <% end %>

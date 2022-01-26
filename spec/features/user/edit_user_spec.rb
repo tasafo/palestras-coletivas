@@ -14,8 +14,7 @@ describe 'Edit user', js: true do
       before do
         fill_in 'Nome', with: 'Carl Simon'
         attach_file('Foto', image_path)
-
-        click_button 'Atualizar dados'
+        find('.btn-submit').trigger('click')
       end
 
       it 'displays success message' do
@@ -28,8 +27,7 @@ describe 'Edit user', js: true do
       before do
         fill_in 'Nome', with: ''
         attach_file('Foto', image_path)
-
-        click_button 'Atualizar dados'
+        find('.btn-submit').trigger('click')
       end
 
       it 'displays error messages' do
@@ -43,8 +41,7 @@ describe 'Edit user', js: true do
         fill_in 'Senha', with: 'newpassword'
         fill_in 'Confirmação da senha', with: 'newpassword'
         attach_file('Foto', image_path)
-
-        click_button 'Atualizar dados'
+        find('.btn-submit').trigger('click')
       end
 
       it 'displays success message' do
@@ -58,8 +55,7 @@ describe 'Edit user', js: true do
         fill_in 'Senha', with: 'newpassword'
         fill_in 'Confirmação da senha', with: 'otherpassword'
         attach_file('Foto', image_path)
-
-        click_button 'Atualizar dados'
+        find('.btn-submit').trigger('click')
       end
 
       it 'displays error messages' do
@@ -81,7 +77,7 @@ describe 'Edit user', js: true do
     before do
       login_as other_user, edit_user_path(other_user)
       find('#user_remove_avatar').trigger('click')
-      click_button 'Atualizar dados'
+      find('.btn-submit').trigger('click')
     end
 
     it 'displays success message' do
