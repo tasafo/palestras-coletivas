@@ -95,6 +95,6 @@ class EventsController < ApplicationController
   end
 
   def remove_image
-    @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
+    @event.destroy_image if event_params[:remove_image] == '1'
   end
 end

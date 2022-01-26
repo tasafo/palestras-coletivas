@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'Edit user' do
-  let!(:user) { create(:user, :paul) }
-  let!(:other_user) { create(:user, :billy) }
+describe 'Edit user', js: true do
+  let!(:user) { create(:user, :billy) }
+  let!(:other_user) { create(:user, :paul) }
   let!(:image_path) { ImageFile.asset('avatar.jpg') }
 
   context 'when the current user owns the account' do
@@ -75,5 +75,18 @@ describe 'Edit user' do
     end
 
     it { expect(page).to have_current_path(root_path) }
+  end
+
+  context 'when removing existing image' do
+    before do
+      login_as other_user, edit_user_path(other_user)
+      find('#user_remove_avatar').trigger('click')
+      click_button 'Atualizar dados'
+    end
+
+    it 'displays success message' do
+      expect(page).to have_current_path(%r{/users/\w+})
+      expect(page).to have_content('Seus dados foram atualizados!')
+    end
   end
 end
