@@ -40,15 +40,13 @@ class EventsController < ApplicationController
   def edit; end
 
   def update
+    remove_existing_image
+
     @event.refresh(event_params)
 
     render :edit and return if @event.invalid?
 
-    remove_image
-
-    attributes = prepare_attributes(@event.owner, :update, event_params)
-
-    saved = @event.update(attributes)
+    saved = @event.update(prepare_attributes(@event.owner, :update, event_params))
 
     redirect_to event_path(@event, anchor: 'page-content'), notice: t('flash.events.update.notice') if saved
   end
@@ -94,7 +92,7 @@ class EventsController < ApplicationController
     )
   end
 
-  def remove_image
-    @event.destroy_image if event_params[:remove_image] == '1'
+  def remove_existing_image
+    @event.destroy_image if event_params[:image] || event_params[:remove_image] == '1'
   end
 end
