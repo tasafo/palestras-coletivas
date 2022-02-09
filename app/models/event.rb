@@ -48,7 +48,9 @@ class Event
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
   validates_numericality_of :workload, greater_than_or_equal_to: 0
 
-  slug :name, :edition
+  slug :name do |doc|
+    doc.name.delete('#').to_url
+  end
 
   index({ name: 'text', tags: 'text' }, { background: true })
 

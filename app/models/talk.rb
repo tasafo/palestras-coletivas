@@ -24,7 +24,9 @@ class Talk
   embeds_many :comments, as: :commentable
   belongs_to :owner, class_name: 'User', index: true
 
-  slug :title
+  slug :title do |doc|
+    doc.title.delete('#').to_url
+  end
 
   validates_presence_of :title, :tags
   validates_uniqueness_of :presentation_url, if: :url?
