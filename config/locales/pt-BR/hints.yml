@@ -8,8 +8,7 @@ pt-BR:
       video_link: "Se quiser, informe o link do vídeo de sua palestra hospedada em serviços como: Youtube ou Vimeo"
 
     event:
-      name: (Máximo de 50 caracteres)
-      edition: (Máximo de 10 caracteres)
+      name: (Máximo de 60 caracteres)
       description: (Máximo de 2.000 caracteres)
       tags: (Máximo de 60 caracteres)
       image: "- Formatos permitidos: (.jpg, .jpeg, .png). A imagem será redimensionada para 1920x1080px"

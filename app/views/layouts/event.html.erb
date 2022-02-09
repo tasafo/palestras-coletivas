@@ -11,7 +11,7 @@
     <%= display_meta_tags description: sanitize(@event.description) %>
     <%= display_meta_tags keywords: @event.tags %>
     <%= display_meta_tags image_src:(@event.image_path) %>
-    <title><%= @event.name_edition %></title>
+    <title><%= @event.name %></title>
     <% end %>
     <%= csrf_meta_tags %>
     <%= stylesheet_pack_tag 'mdb', 'fontawesome', 'fontroboto', 'application', media: "all" %>

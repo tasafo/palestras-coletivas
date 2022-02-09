@@ -25,7 +25,7 @@
     <% @events.each do |event| %>
       <p>
         <span class="badge badge-light badge-custom shadow">
-          <%= link_to event.name_edition, event_path(event) %>
+          <%= link_to event.name, event_path(event) %>
           <span class="badge badge-pill badge-dark"><%= event.counter_present_users %></span>
         </span>
       </p>

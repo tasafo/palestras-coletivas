@@ -24,12 +24,6 @@ describe Event, 'validations' do
     expect(event.errors[:name].size).to eq(1)
   end
 
-  it 'requires edition' do
-    event = Event.create(edition: nil)
-
-    expect(event.errors[:edition].size).to eq(1)
-  end
-
   it 'requires tags' do
     event = Event.create(tags: nil)
 

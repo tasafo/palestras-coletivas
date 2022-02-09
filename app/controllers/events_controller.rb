@@ -85,7 +85,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(
-      :name, :edition, :description, :stocking, :tags, :start_date,
+      :name, :description, :stocking, :tags, :start_date,
       :end_date, :deadline_date_enrollment, :accepts_submissions, :to_public,
       :place, :street, :district, :city, :state, :country, :block_presence,
       :workload, :image, :remove_image, :online

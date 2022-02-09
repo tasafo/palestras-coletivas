@@ -41,10 +41,8 @@ class Event
   has_many :enrollments, dependent: :restrict_with_error
   belongs_to :owner, class_name: 'User', index: true
 
-  validates_presence_of :name, :edition, :tags, :start_date, :end_date,
-                        :deadline_date_enrollment
-  validates_length_of :name, maximum: 50
-  validates_length_of :edition, maximum: 10
+  validates_presence_of :name, :tags, :start_date, :end_date, :deadline_date_enrollment
+  validates_length_of :name, maximum: 60
   validates_length_of :description, maximum: 2000
   validates_length_of :tags, maximum: 60
   validates_numericality_of :stocking, greater_than_or_equal_to: 0
@@ -52,7 +50,7 @@ class Event
 
   slug :name, :edition
 
-  index({ name: 'text', edition: 'text', tags: 'text' }, { background: true })
+  index({ name: 'text', tags: 'text' }, { background: true })
 
   scope :publics, -> { where(to_public: true) }
   scope :upcoming, -> { publics.order(start_date: :desc, name: :asc).limit(5) }
@@ -79,10 +77,6 @@ class Event
 
   def user_organizing_events_inc(user, inc)
     user.inc(counter_organizing_events: inc)
-  end
-
-  def name_edition
-    "#{name} - #{edition}"
   end
 
   def address

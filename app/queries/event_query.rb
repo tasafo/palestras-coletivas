@@ -14,7 +14,7 @@ class EventQuery
 
   def ranking_present_users(limit)
     @relation.where(:counter_present_users.gt => 0)
-             .order(counter_present_users: :desc, slugs: :asc, edition: :asc).limit(limit)
+             .order(counter_present_users: :desc, slugs: :asc).limit(limit)
   end
 
   def accepts_submissions

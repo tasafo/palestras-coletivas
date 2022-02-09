@@ -33,7 +33,6 @@ pt-BR:
 
       event:
         name: "Nome"
-        edition: "Edição"
         description: "Descrição"
         stocking: "Lotação"
         tags: "Tags"

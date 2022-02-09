@@ -12,8 +12,7 @@ describe 'Create event', js: true do
 
   context 'with valid data' do
     before do
-      fill_in 'Nome', with: 'Tá Safo Conf'
-      fill_in 'Edição', with: '2012'
+      fill_in 'Nome', with: 'Tá Safo Conf 2012'
       fill_in 'Tags', with: 'tecnologia, agilidade, gestão'
       fill_in 'Data de início', with: '05/06/2012'
       fill_in 'Data de término', with: '06/06/2012'
@@ -39,8 +38,7 @@ describe 'Create event', js: true do
 
   context 'with valid data but without address' do
     before do
-      fill_in 'Nome', with: 'Tá Safo Conf'
-      fill_in 'Edição', with: '2012'
+      fill_in 'Nome', with: 'Tá Safo Conf 2012'
       fill_in 'Tags', with: 'tecnologia, agilidade, gestão'
       fill_in 'Data de início', with: '05/06/2012'
       fill_in 'Data de término', with: '06/06/2012'

@@ -2,7 +2,7 @@
   <h5><%= t('show.talk.events', count: @schedules.count) %></h5>
   <ul>
   <% @schedules.each do |schedule| %>
-    <li><%= link_to schedule.event.name_edition, event_path(schedule.event) %></li>
+    <li><%= link_to schedule.event.name, event_path(schedule.event) %></li>
   <% end %>
   </ul>
 <% end %>

@@ -92,8 +92,7 @@ FactoryBot.define do
 
   factory :event do
     trait :tasafoconf do
-      name { 'Tá Safo Conf' }
-      edition { '2012' }
+      name { 'Tá Safo Conf 2012' }
       description { 'Evento de tecnologia com sua 1ª edição na região' }
       stocking { 100 }
       tags { 'tecnologia, agilidade, gestão' }

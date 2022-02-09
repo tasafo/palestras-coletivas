@@ -13,7 +13,6 @@ organizer = User.create(name: 'Alberto Roberto', username: 'alberto',
 
 Event.create(
   name: 'Evento de Tecnologia',
-  edition: Date.today.year,
   description: '<p>Um evento muito legal de participar</p>',
   stocking: 100,
   workload: 16,
@@ -48,7 +47,6 @@ end
 
   Event.create(
     name: Faker::Company.industry,
-    edition: Date.today.year,
     description: "<p>#{Faker::Lorem.paragraph_by_chars}</p>",
     stocking: 50,
     workload: 8,

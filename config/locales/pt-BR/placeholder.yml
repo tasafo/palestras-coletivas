@@ -10,7 +10,6 @@ pt-BR:
 
     events:
       name: "Conferência de Tecnologia"
-      edition: "2013"
       tags: "tecnologia, programação"
       place: "Centro de Convenções do Universo"
       street: "Rua das Laranjeiras, 574"
@@ -18,7 +17,7 @@ pt-BR:
       city: "Belém"
       state: "Pará"
       country: "Brasil"
-      search: "Informe um nome, edição ou tag"
+      search: "Informe um nome ou tag"
 
     users:
       name: "ex.: Fulano de Tal"

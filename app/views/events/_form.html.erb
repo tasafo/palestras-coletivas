@@ -3,18 +3,11 @@
       <%= form_for(@event, url: url, html: { class: 'row g-3'} ) do |f| %>
         <%= render "shared/error_messages", record: @event %>
 
-        <div class="col-md-8">
+        <div class="col-md-10">
           <%= f.label :name, class: 'form-label required' %>
           <span class="text-info"><%= t('hints.event.name') %></span>
           <%= f.text_field :name, placeholder: t("placeholder.events.name"),
-                                  class: "form-control", maxlength: 50, required: true, autofocus: true %>
-        </div>
-
-        <div class="col-md-4">
-          <%= f.label :edition, class: 'form-label required' %>
-          <span class="text-info"><%= t('hints.event.edition') %></span>
-          <%= f.text_field :edition, placeholder: t("placeholder.events.edition"),
-                                     class: "form-control", maxlength: 10, required: true %>
+                                  class: "form-control", maxlength: 60, required: true, autofocus: true %>
         </div>
 
         <div class="col-md-12">
