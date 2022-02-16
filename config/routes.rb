@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       resources :votes, only: %i[create destroy]
     end
     resources :export_subscribers, only: %i[new create]
-    resources :presences, only: %i[create update]
+    resources :presences, only: %i[new create update]
     resources :enrollments, only: %i[create update]
   end
 

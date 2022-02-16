@@ -1,5 +1,10 @@
 class PresencesController < ApplicationController
-  before_action :set_event, only: %i[create update]
+  before_action :require_logged_user, only: %i[new]
+  before_action :set_event, only: %i[new create update]
+
+  def new
+    redirect_to event_path(@event)
+  end
 
   def create
     result = current_user.arrived_at(@event)

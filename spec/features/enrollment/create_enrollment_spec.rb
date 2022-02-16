@@ -19,18 +19,23 @@ describe 'Create enrollment', js: true do
       click_link 'Quero participar!'
     end
 
-    it 'displays success message' do
+    it 'show button cancel participation' do
       expect(page).to have_content('Cancelar participação'.upcase)
     end
   end
 
-  context 'when the user is organizer' do
+  context 'when not logged' do
     before do
-      login_as user, event_path(event)
+      visit event_path(event)
     end
 
-    it 'not show button I want to participate' do
-      expect(page).not_to have_content('Quero participar!'.upcase)
+    it 'show button I want to participate' do
+      expect(page).to have_content('Quero participar!'.upcase)
+    end
+
+    it 'redirect to event page' do
+      click_link 'Quero participar!'
+      expect(page).to have_current_path(%r{/events/\w+})
     end
   end
 end

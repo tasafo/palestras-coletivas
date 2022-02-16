@@ -28,28 +28,32 @@
           <% end %>
         <% end %>
 
-        <% if logged_in? && @presenter.open_enrollment %>
-          <% if @presenter.new_subscription %>
-            <% if @presenter.crowded %>
-              <span class="btn btn-secondary disabled"><%= t("show.event.sellout") %></span>
+        <% if @presenter.open_enrollment %>
+          <% if logged_in? %>
+            <% if @presenter.new_subscription %>
+              <% if @presenter.crowded %>
+                <span class="btn btn-secondary disabled"><%= t("show.event.sellout") %></span>
+              <% else %>
+                <%= link_to t("show.event.btn_add_enrollment"), "",
+                            class: "btn btn-primary btn-event-enrollment",
+                            data_add: t('show.event.btn_add_enrollment'),
+                            data_cancel: t('show.event.btn_cancel_enrollment') %>
+              <% end %>
             <% else %>
-              <%= link_to t("show.event.btn_add_enrollment"), "",
-                          class: "btn btn-primary btn-event-enrollment",
-                          data_add: t('show.event.btn_add_enrollment'),
-                          data_cancel: t('show.event.btn_cancel_enrollment') %>
+              <% if @presenter.crowded && !@presenter.enrollment.active? %>
+                <span class="btn btn-secondary disabled"><%= t("show.event.sellout") %></span>
+              <% else %>
+                <% action = @presenter.enrollment.active? ? 'cancel' : 'add' %>
+                <% button = @presenter.enrollment.active? ? 'danger' : 'primary' %>
+
+                <%= link_to t("show.event.btn_#{action}_enrollment"), "",
+                            class: "btn btn-#{button} btn-event-enrollment",
+                            data_add: t('show.event.btn_add_enrollment'),
+                            data_cancel: t("show.event.btn_cancel_enrollment") %>
+              <% end %>
             <% end %>
           <% else %>
-            <% if @presenter.crowded && !@presenter.enrollment.active? %>
-              <span class="btn btn-secondary disabled"><%= t("show.event.sellout") %></span>
-            <% else %>
-              <% action = @presenter.enrollment.active? ? 'cancel' : 'add' %>
-              <% button = @presenter.enrollment.active? ? 'danger' : 'primary' %>
-
-              <%= link_to t("show.event.btn_#{action}_enrollment"), "",
-                          class: "btn btn-#{button} btn-event-enrollment",
-                          data_add: t('show.event.btn_add_enrollment'),
-                          data_cancel: t("show.event.btn_cancel_enrollment") %>
-            <% end %>
+            <%= link_to t("show.event.btn_add_enrollment"), new_event_presence_path(@event), class: "btn btn-primary" %>
           <% end %>
         <% end %>
       </div>
