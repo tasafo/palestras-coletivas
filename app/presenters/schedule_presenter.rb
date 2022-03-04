@@ -22,7 +22,7 @@ class SchedulePresenter
       day = index + 1
       selected = schedule.day == day ? "selected='selected'" : ''
 
-      dates << "<option value='#{day}' #{selected}>#{date}</option>"
+      dates << "<option value='#{day}' #{selected}>#{I18n.l(date)}</option>"
     end
 
     dates

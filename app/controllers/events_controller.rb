@@ -37,7 +37,11 @@ class EventsController < ApplicationController
     render layout: 'event'
   end
 
-  def edit; end
+  def edit
+    @event.start_date = I18n.l(@event.start_date)
+    @event.end_date = I18n.l(@event.end_date)
+    @event.deadline_date_enrollment = I18n.l(@event.deadline_date_enrollment)
+  end
 
   def update
     remove_existing_image

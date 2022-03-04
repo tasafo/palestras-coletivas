@@ -3,8 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby RUBY_VERSION
 
-gem 'rails', '~> 6.1'
-gem 'rails-i18n', '~> 6.0'
+gem 'rails', '~> 7.0'
+gem 'rails-i18n', '~> 7.0'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'bcrypt', require: 'bcrypt'
 gem 'nokogiri', require: false
@@ -12,12 +12,13 @@ gem 'multi_json', require: false
 gem 'pagy'
 gem 'jsonapi-rails'
 
-gem 'mongoid', '7.3.3'
+gem 'mongoid', '7.3.4'
 gem 'mongoid-slug'
 gem 'mongo_beautiful_logger'
 
 gem 'geocoder'
 
+gem 'sprockets-rails'
 gem 'serviceworker-rails'
 
 gem 'webpacker'
@@ -41,8 +42,6 @@ gem 'bootsnap'
 
 group :development do
   gem 'web-console'
-  gem 'spring'
-  gem 'spring-watcher-listen'
   gem 'bullet'
 end
 
