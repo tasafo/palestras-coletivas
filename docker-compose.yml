@@ -2,14 +2,14 @@ version: '3.7'
 
 services:
   mongo:
-    image: bitnami/mongodb:4.4.10
+    image: bitnami/mongodb:5.0.6
     ports:
       - 27017:27017
     volumes:
       - mongo-data:/data/db
 
   redis:
-    image: redis:6.0.12-alpine
+    image: redis:6.2.3-alpine
     ports:
       - 6379:6379
     volumes:
